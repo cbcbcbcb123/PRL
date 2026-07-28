@@ -1,0 +1,5 @@
+# Preserve byte-stable line endings for versioned scientific contracts and records.
+*.json text eol=lf
+*.md text eol=lf
+*.csv text eol=lf
+*.txt text eol=lf
