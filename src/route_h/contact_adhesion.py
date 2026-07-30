@@ -4,8 +4,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import math
-from typing import Iterable
-
 import numpy as np
 from numpy.polynomial import polynomial as poly
 from numpy.typing import NDArray
