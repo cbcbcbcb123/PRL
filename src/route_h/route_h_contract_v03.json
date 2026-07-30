@@ -1,0 +1,352 @@
+{
+  "contract_id": "CONTRACT-PRL-ROUTE-H-STAGE0-V03",
+  "schema_version": "3.0.0",
+  "created_at": "2026-07-30T10:00:00+08:00",
+  "status": "frozen_stage0_pending_independent_inspection",
+  "lifecycle_state": "stage0_v03_frozen",
+  "evidence_level": "preregistered_dimensionless_mechanistic_contract_no_mesh_instance_no_solver_no_results",
+  "authority": {
+    "user_instruction": "继续下一步",
+    "contextual_scope": "Proceed from the v02 revision-required inspection to create and freeze Stage 0 v03; Stage 1 remains unauthorized.",
+    "authorized": [
+      "Create standalone Stage 0 v03 artifacts",
+      "Resolve the seven findings in the v02 read-only scientific review",
+      "Run static scientific, schema, cross-reference and hash checks"
+    ],
+    "not_authorized": [
+      "Reference mesh materialization",
+      "Stage 1 implementation",
+      "Stage 2 execution",
+      "Gate A through E numerical runs",
+      "Parameter sweep",
+      "Claim-bearing figure or manuscript update",
+      "Stable memory update"
+    ]
+  },
+  "version_policy": {
+    "supersedes_for_future_work": "CONTRACT-PRL-ROUTE-H-STAGE0-V02",
+    "v01_and_v02_are_immutable_historical_records": true,
+    "prior_pass_or_result_inheritance": false,
+    "future_solver_target_if_separately_authorized": "CONTRACT-PRL-ROUTE-H-STAGE0-V03"
+  },
+  "direct_inputs": [
+    {
+      "path": "project_control/route_h_stage0_stage2_governed_plan_v01.md",
+      "sha256": "0658FD7FC3451508D08DBC421FD7F48C6654269F24E09387BFE9481819C6E9EB",
+      "role": "project scope and gate sequence"
+    },
+    {
+      "path": "project_control/project_handoff_20260728_v01.txt",
+      "sha256": "B1A85678439E6DACBB877DFD7D38E7A319C876F99717F2526F8A928156A8E426",
+      "role": "biological hierarchy and evidence boundary"
+    },
+    {
+      "path": "references/2024 - Nature Computational Science - Iber - SimuCell3D三维组织力学模拟.md",
+      "sha256": "991DB9A8FCB156EBA0F8731D9342BBFE741EED228C3867BD7A0B16AE62E23BDA",
+      "role": "independent triangulated DCM cell-surface reference"
+    },
+    {
+      "path": "project_control/route_h_stage0_v02_freeze_record.md",
+      "sha256": "6067237F996EC42F2BBC1CB7B90C4816CBF94B4819F248B37043A824D4845359",
+      "role": "immutable v02 baseline"
+    },
+    {
+      "path": "project_control/route_h_stage0_v02_readonly_scientific_review_v01.md",
+      "sha256": "66C7CAEFAC75ED6750AC73FACA478811AAA043F1A74C3639F0D03D576B754869",
+      "role": "seven required v03 corrections"
+    },
+    {
+      "path": "data/route_h/route_h_reference_geometry_spec_v03.json",
+      "sha256": "0ECE1ED6DE89453126776C449144A62B7FEC94D0FA80CCA40C538963179FD1CF",
+      "role": "deterministic geometry, material pairs, boundary owners and reference seal"
+    }
+  ],
+  "scientific_object": {
+    "name": "early embryonic ventricular-wall local patch",
+    "interpretation": "dimensionless cell-ECM-force-path mechanism model",
+    "ordered_layers_lumen_to_outer": [
+      "blood_lumen",
+      "explicit_endocardial_DCM_monolayer",
+      "independent_finite-deformation_cardiac-jelly_ECM",
+      "explicit_active_myocardial_DCM_monolayer",
+      "fixed-reference compliant surrounding myocardium"
+    ],
+    "excluded_claims": [
+      "adult fibrosis",
+      "physiological calibration",
+      "electrophysiological conduction",
+      "mature fibroblast or late cushion biology"
+    ]
+  },
+  "nondimensionalization": {
+    "base_scales": {
+      "length": "L0=reference myocardial-cell axial size",
+      "time": "T0=registered mechanical activation timescale",
+      "energy": "E0=reference passive-cell energy",
+      "ECM_areal_amount": "A_amount0",
+      "ECM_natural_thickness": "H0"
+    },
+    "derived_scales": {
+      "area": "L0^2",
+      "volume": "L0^3",
+      "force": "E0/L0",
+      "traction": "E0/L0^3",
+      "velocity": "L0/T0",
+      "power": "E0/T0"
+    },
+    "A_H_rule": "A_hat and H_ECM_hat are separate frozen variables; no density closure."
+  },
+  "reference_geometry_and_state": {
+    "geometry_spec": "data/route_h/route_h_reference_geometry_spec_v03.json",
+    "geometry_spec_sha256": "0ECE1ED6DE89453126776C449144A62B7FEC94D0FA80CCA40C538963179FD1CF",
+    "materialization_authorized": false,
+    "deterministic_identity": "Explicit icosahedron arrays, subdivision order, ECM tetra arrays, face subtypes and canonical serialization are frozen in the geometry spec.",
+    "cell_targets": {
+      "V0": "exact finalized oriented reference mesh volume",
+      "A0": "exact reference area per persistent primary identity and directional subtype",
+      "theta0": "exact reference oriented hinge angle",
+      "Lf0": "exact fixed-reference-weight anchor-centroid distance"
+    },
+    "ECM_targets": {
+      "F0": "identity",
+      "J0": 1.0,
+      "Z0": "zero symmetric traceless tensor",
+      "A_hat0": 1.0,
+      "H_ECM_hat0": 0.2
+    },
+    "material_tether_reference": {
+      "physical_natural_gap": "g0_pair is stored separately for every pair",
+      "adhesive_opening": "delta_g=g-g0_pair",
+      "reference_opening": 0.0,
+      "reference_material_slip": [0.0, 0.0]
+    },
+    "reference_prestress": false,
+    "force_free_conditions": [
+      "all passive gamma_s are zero",
+      "cell targets equal exact reference values",
+      "ECM F0=I and Z0=0",
+      "every material tether has delta_g=0 and delta_t=0",
+      "the normal cohesive derivative is zero at delta_g=0",
+      "activation alpha=0 gives Lf_star=Lf0",
+      "all fixed support references equal reference nodal positions",
+      "the assembled reference force and moment tests pass before any solver use"
+    ],
+    "reference_bundle_gate": "All geometry, identity, tether including g0_pair, support, traction-free and gauge arrays must match their SHA-256 seal before implementation or response."
+  },
+  "coordinate_and_load_convention": {
+    "basis": {
+      "e_x": "reference myocardial axial direction",
+      "e_y": "second in-plane direction",
+      "e_z": "lumen to outer myocardium"
+    },
+    "reference_apical_outward_normal": "n_a0=-e_z",
+    "current_apical_outward_normal": "n_a(x) from the current consistently oriented apical triangle",
+    "pressure_traction": "t_p=-p(t)*n_a(x)",
+    "WSS_traction": "t_tau=(I-n_a tensor n_a)*tau_w(t)",
+    "blood_owner": "endocardium.apical_lumen only",
+    "direct_ECM_blood_load": false
+  },
+  "registered_time_protocols": {
+    "base_envelope": {
+      "symbol": "b(t)",
+      "total_duration": 5.0,
+      "piecewise_definition": [
+        "b(t)=0 for t<0",
+        "b(t)=0 for 0<=t<1",
+        "b(t)=0.5*(1-cos(pi*(t-1))) for 1<=t<2",
+        "b(t)=1 for 2<=t<3",
+        "b(t)=0.5*(1+cos(pi*(t-3))) for 3<=t<4",
+        "b(t)=0 for 4<=t<=5",
+        "b(t)=0 for t>5"
+      ],
+      "continuity": "C1 at t=1,2,3,4"
+    },
+    "myocardial_activation": "alpha_i(t)=alpha_peak*b(t-delay_i)",
+    "pressure": "p(t)=pressure_amplitude*b(t)",
+    "WSS": "tau_w(t)=WSS_vector*b(t)",
+    "combined_case_synchrony": "activation, pressure and WSS use the same b(t) and zero delay",
+    "chain_delays": [0.0, 0.5, 1.0],
+    "chain_total_duration": 6.0,
+    "zero_cases": "Use the same gate duration with all registered inputs identically zero."
+  },
+  "topology_and_material_identity": {
+    "cell_representation": "one independent watertight consistently oriented closed triangulated surface per cell",
+    "shared_vertices_between_entities": false,
+    "fixed_topology": true,
+    "remeshing": false,
+    "persistent_primary_and_directional_face_identities": true,
+    "ECM_representation": "independent 12x8x2 structured six-tetra-per-brick volume mesh",
+    "current_ECM_requires_J_positive": true,
+    "interentity_transfer_requires_registered_operator": true
+  },
+  "primary_dynamics": {
+    "regime": "overdamped",
+    "balance": "0=-dPsi_total/dx-dR/dx_dot+f_pressure+f_WSS",
+    "inertia": false,
+    "support_reference_motion": "fixed",
+    "numerical_gauge": "Use only the exact global six-constraint zero-power gauge frozen in the geometry spec for otherwise unsupported cases."
+  },
+  "cell_passive_energy": {
+    "total": "Psi_cell=Psi_area+Psi_bend+Psi_vol",
+    "area": "sum_s 0.5*kA_s*A0_s*(A_s/A0_s-1)^2; gamma_s=0",
+    "bending": "sum_e 0.5*kb_e*(l_e^2/A_diamond_e)*(theta_e-theta0_e)^2",
+    "volume": "0.5*kV_i*V0_i*(V_i/V0_i-1)^2",
+    "target_changes": false,
+    "rigid_motion_invariance_required": true
+  },
+  "active_preferred_length": {
+    "primary_mechanism": true,
+    "anchor_weights": "fixed normalized reference triangle-area barycentric nodal weights",
+    "d": "c_plus-c_minus",
+    "Lf": "||d||",
+    "current_axis": "d/Lf",
+    "Lf_star": "Lf0*(1-alpha(t))",
+    "energy": "0.5*kf*(Lf-Lf_star)^2",
+    "input_power": "(dPsi_active/dLf_star)*Lf_star_dot=-kf*(Lf-Lf_star)*Lf_star_dot",
+    "net_internal_force": 0,
+    "net_internal_moment": 0,
+    "isotropic_active_gamma_forbidden": true
+  },
+  "contact_and_adhesion": {
+    "dynamic_steric": {
+      "pair_set": "deterministic symmetric vertex-triangle search recomputed at every accepted state",
+      "physical_gap": "current vertex-to-triangle signed gap g",
+      "potential": "0.5*k_rep*max(-g,0)^2 times the fixed reference vertex dual-area weight",
+      "adhesion": false,
+      "feature_switch_policy": "piecewise derivative; feature-switch states are event diagnostics and cannot silently satisfy a derivative test"
+    },
+    "material_adhesion": {
+      "pair_set": "the fully specified face-barycenter-to-fixed-slave-material-point registry from the reference geometry",
+      "coverage": "exactly one pair for every eligible master face",
+      "birth_or_death": false,
+      "current_closest_point_update": false,
+      "physical_gap": "g=(x_slave-x_master) dot n_pair",
+      "natural_gap": "stored g0_pair",
+      "opening": "delta_g=g-g0_pair",
+      "normal_potential": "-w for delta_g<0; -w*(1-3*s^2+2*s^3) for 0<=delta_g<=g_c; 0 above g_c",
+      "tangential_slip": "[r dot t1-r0 dot t10, r dot t2-r0 dot t20]",
+      "tangential_potential": "0.5*k_t*a(delta_g)*||delta_t||^2",
+      "reference_traction": 0
+    },
+    "complete_force": "Every force is the complete negative nodal gradient of the selected discrete potential, including current normals, fixed material points and tangent-basis derivatives.",
+    "same_potential_owns_both_sides": true,
+    "action_reaction_and_objectivity_required": true,
+    "friction": false,
+    "hard_contact_KKT": false
+  },
+  "ECM_constitutive_contract": {
+    "kinematics": {
+      "C": "F^T F",
+      "J": "det(F)>0",
+      "C_bar": "J^(-2/3)C"
+    },
+    "equilibrium_energy": "W_eq=0.5*mu_eq*(tr(C_bar)-3)+0.5*kappa_eq*(ln J)^2",
+    "viscoelastic_energy": "W_ve=0.25*mu_ve*||dev(C_bar)-Z||_F^2",
+    "internal_variable": {
+      "type": "symmetric traceless",
+      "evolution": "eta_ve*Z_dot=-dW_ve/dZ",
+      "dissipation": "eta_ve*||Z_dot||_F^2>=0"
+    },
+    "frozen_processes": {
+      "A_hat_turnover": false,
+      "H_ECM_remodeling": false,
+      "density_closure": false,
+      "j_myo": 0
+    }
+  },
+  "boundary_contract": {
+    "full_patch": {
+      "blood": "endocardium.apical_lumen",
+      "outer_support": "myocardium.opposite_outer",
+      "lateral_support": "directional outward faces of perimeter myocardial cells according to grid index",
+      "endocardial_perimeter": "traction_free",
+      "ECM_lateral": "traction_free"
+    },
+    "gate_C": "myocardium.opposite_outer support; ECM lumen and lateral faces traction-free",
+    "gate_D": "fixed P_FIXTURE_D on ECM.outer_facing; all lateral faces traction-free",
+    "periodic_sensitivity_registered": false,
+    "periodic_rule": "A future periodic-image/ECM-periodic specification requires a new geometry and case version."
+  },
+  "support_and_power_contract": {
+    "support_type": "fixed-reference Kelvin-Voigt",
+    "support_energy": "0.5*sum_i w_i*(x_i-y_i)^T*K*(x_i-y_i)",
+    "support_dissipation": "sum_i w_i*v_i^T*C*v_i because y_dot=0",
+    "support_base_input_power": 0,
+    "fixture_base_input_power": 0,
+    "moving_support_capability": false,
+    "moving_support_requires_new_contract": true
+  },
+  "flow_sensor": {
+    "state": "chi_E",
+    "equation": "tau_chi*chi_E_dot=G(||tau_w||)-chi_E",
+    "mechanical_feedback": false,
+    "mechanical_power": 0
+  },
+  "power_balance": {
+    "equation": "d/dt(Psi_cell+Psi_active+Psi_ECM+Psi_steric+Psi_adhesion+Psi_support)+D_cell+D_ECM+D_support=P_active+P_pressure+P_WSS",
+    "external_input_owners": {
+      "P_active": "preferred-length controller",
+      "P_pressure": "blood pressure port",
+      "P_WSS": "blood shear port"
+    },
+    "fixed_zero_ports": [
+      "P_support_base=0",
+      "P_fixture_D_base=0"
+    ],
+    "internal_not_external": [
+      "cell-cell transfer",
+      "cell-ECM transfer",
+      "steric transfer",
+      "material adhesion transfer",
+      "zero-power gauge reaction"
+    ]
+  },
+  "verification_metric_definitions": {
+    "directional_derivative_relative_error": "|D_fd-D_grad|/max(1,|D_fd|,|D_grad|)",
+    "pair_force_residual": "||f_A+f_B||_2/max(1,||f_A||_2+||f_B||_2)",
+    "pair_moment_residual": "||m_A+m_B||_2/max(1,L0*(||f_A||_2+||f_B||_2))",
+    "static_equilibrium_residual": "||R||_2/max(1,sum of the 2-norms of all assembled conservative, dissipative and external nodal-force blocks)",
+    "normal_or_tangential_leakage": "||forbidden resultant component||_2/max(1e-12,||total applied resultant||_2)",
+    "integrated_power_residual": "|DeltaPsi+Trapz(D_total)-Trapz(P_active+P_pressure+P_WSS)|/max(1,|DeltaPsi|+Trapz(D_total)+Trapz(|P_active|+|P_pressure|+|P_WSS|))",
+    "time_refinement_relative_difference": "|q_coarse-q_fine|/max(1e-8,|q_coarse|,|q_fine|); metrics whose registered exact-zero tolerance applies are checked by that absolute tolerance instead",
+    "time_quadrature": "composite trapezoidal rule on accepted time nodes including both endpoints",
+    "vector_norm": "Euclidean 2-norm",
+    "moment_origin": "reference patch origin; pair moment residual is origin invariant after the pair-force residual passes"
+  },
+  "time_refinement_observables": [
+    "peak myocardial axial shortening",
+    "peak positive transverse scale change",
+    "maximum relative cell-volume error",
+    "minimum ECM J",
+    "maximum physical penetration",
+    "peak ECM tangential traction",
+    "peak pressure and WSS resultants when enabled",
+    "integrated active work",
+    "integrated pressure work",
+    "integrated WSS work",
+    "total dissipation",
+    "integrated normalized power residual"
+  ],
+  "spatial_refinement_policy": {
+    "registered_in_v03": false,
+    "reason": "One identity-bearing base topology is frozen; no coarse/fine family exists.",
+    "required_before_stage2": true,
+    "future_action": "separately approve and freeze a discretization-verification geometry family"
+  },
+  "review_finding_resolutions": {
+    "V02-REF-TRACTION-001": "Every material tether stores g0_pair and uses delta_g=g-g0_pair; assembled reference force/moment is a seal gate.",
+    "V02-GEOM-ID-001": "Seed arrays, subdivision ID/output order and canonical array serialization are explicit.",
+    "V02-TETHER-SPEC-001": "Quadrature, neighbor enumeration, ray hit, coverage, record fields, ownership and failure rules are explicit.",
+    "V02-BOUNDARY-MAP-001": "Directional lateral subtypes and complete boundary owners are explicit; the invalid periodic sensitivity is removed.",
+    "V02-REFINEMENT-001": "Spatial refinement is removed from v03 and required as a separate pre-Stage-2 geometry-family version.",
+    "V02-PROTOCOL-METRIC-001": "Pressure/WSS envelopes, durations, synchrony, metric formulas and observables are frozen.",
+    "V02-SUPPORT-POWER-001": "Only fixed support references are allowed; support and fixture base powers are identically zero."
+  },
+  "completion_gate": {
+    "stage0_v03_contract_frozen": true,
+    "reference_geometry_materialized": false,
+    "stage1_authorized": false,
+    "stage2_authorized": false,
+    "next_required_action": "read-only scientific inspection of the frozen v03 artifacts"
+  }
+}

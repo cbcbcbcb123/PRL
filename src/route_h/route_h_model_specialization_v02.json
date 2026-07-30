@@ -1,0 +1,194 @@
+{
+  "specialization_id": "SPECIALIZATION-PRL-ROUTE-H-STAGE0-V02",
+  "schema_version": "2.0.0",
+  "contract_id": "CONTRACT-PRL-ROUTE-H-STAGE0-V02",
+  "created_at": "2026-07-29T15:10:00+08:00",
+  "status": "frozen_stage0_not_authorized_to_execute",
+  "evidence_level": "dimensionless_verification_parameters_not_physiological_calibration",
+  "parameter_change_rule": "No parameter may change after a registered response is observed. Any change requires a new specialization version and reruns all affected gates.",
+  "reference_scales": {
+    "L0": 1.0,
+    "T0": 1.0,
+    "E0": 1.0,
+    "A_amount0": 1.0,
+    "H0": 1.0
+  },
+  "geometry": {
+    "spec_path": "data/route_h/route_h_reference_geometry_spec_v02.json",
+    "spec_sha256": "88068AC58B67D194752C088EF2F17D9441172CFCD07887139072A8C77EF72285",
+    "materialization_authorized": false,
+    "reference_bundle_materialized": false,
+    "canonical_patch": {
+      "bounds_x": [0.0, 3.0],
+      "bounds_y": [0.0, 1.8],
+      "bounds_z": [-0.24, 0.76],
+      "endocardial_cell_count": 6,
+      "myocardial_cell_count": 9,
+      "ECM_structured_intervals": [12, 8, 2],
+      "ECM_thickness": 0.2
+    },
+    "surface_mesh": {
+      "generator": "subdivision-2 canonical icosahedron mapped to p=8 superellipsoid",
+      "vertices_per_cell": 162,
+      "faces_per_cell": 320,
+      "fixed_topology": true,
+      "remeshing": false,
+      "minimum_triangle_quality": 0.3
+    },
+    "reference_target_rule": {
+      "V0": "exact finalized mesh volume",
+      "A0": "exact finalized material-face area",
+      "theta0": "exact finalized oriented hinge angle",
+      "Lf0": "exact finalized anchor-centroid distance",
+      "analytic_volume_substitution_forbidden": true
+    }
+  },
+  "passive_cell_parameters": {
+    "myocardium": {
+      "k_area": 1.0,
+      "gamma_basal_ecm": 0.0,
+      "gamma_lateral": 0.0,
+      "gamma_opposite_outer": 0.0,
+      "k_bend": 0.01,
+      "k_volume": 100.0,
+      "nodal_drag": 1.0
+    },
+    "endocardium": {
+      "k_area": 1.0,
+      "gamma_apical_lumen": 0.0,
+      "gamma_basal_ecm": 0.0,
+      "gamma_lateral": 0.0,
+      "k_bend": 0.01,
+      "k_volume": 100.0,
+      "nodal_drag": 1.0
+    },
+    "reference_prestress": false,
+    "active_use_of_gamma_forbidden": true
+  },
+  "contact_and_adhesion_parameters": {
+    "cell_cell": {
+      "steric_cutoff_buffer": 0.12,
+      "repulsion_k_rep": 200.0,
+      "adhesion_cutoff_gap_g_c": 0.08,
+      "adhesion_work_w_adh": 0.02,
+      "tangential_tether_k_t": 0.5
+    },
+    "cell_ECM": {
+      "steric_cutoff_buffer": 0.12,
+      "repulsion_k_rep": 200.0,
+      "adhesion_cutoff_gap_g_c": 0.08,
+      "adhesion_work_w_adh": 0.03,
+      "tangential_tether_k_t": 2.0
+    },
+    "dynamic_steric_search_each_accepted_state": true,
+    "material_tether_registry_frozen_per_case": true,
+    "material_tether_birth_or_death": false,
+    "reference_pairing": "mutual nearest with lexicographic tie-break",
+    "reference_gap": 0.0,
+    "reference_adhesive_traction": 0.0,
+    "friction_enabled": false,
+    "maximum_penetration_fraction_of_L0": 0.01
+  },
+  "ECM_parameters": {
+    "mu_eq": 1.0,
+    "kappa_eq": 20.0,
+    "mu_ve": 0.5,
+    "eta_ve": 0.5,
+    "relaxation_time_eta_over_mu": 1.0,
+    "Z0": [[0.0,0.0,0.0],[0.0,0.0,0.0],[0.0,0.0,0.0]],
+    "A_hat": 1.0,
+    "H_ECM_hat": 0.2,
+    "A_frozen": true,
+    "H_ECM_frozen": true,
+    "density_closure_enabled": false,
+    "turnover_enabled": false,
+    "j_myo": 0.0
+  },
+  "active_parameters": {
+    "mechanism": "anchor_centroid_distance_preferred_length_with_corotating_central_axis",
+    "k_f": 10.0,
+    "alpha_peak": 0.1,
+    "alpha_bounds": [0.0, 0.2],
+    "activation_protocol": {
+      "rest_duration": 1.0,
+      "cosine_ramp_duration": 1.0,
+      "hold_duration": 1.0,
+      "cosine_release_duration": 1.0,
+      "post_rest_duration": 1.0,
+      "chain_phase_lag_per_cell": 0.5
+    },
+    "mechanical_feedback_enabled": false,
+    "electrophysiology_interpretation_forbidden": true,
+    "input_power_sign_frozen": true,
+    "axis_definition_frozen": true
+  },
+  "blood_load_parameters": {
+    "pressure_amplitude": 0.05,
+    "WSS_vector": [0.02, 0.0, 0.0],
+    "current_follower_normal": true,
+    "pressure_target": "endocardium.apical_lumen",
+    "WSS_target": "endocardium.apical_lumen",
+    "direct_ECM_target": false
+  },
+  "flow_sensor_parameters": {
+    "tau_chi": 1.0,
+    "G": "G(s)=s/(1+s)",
+    "initial_chi_E": 0.0,
+    "mechanical_feedback_enabled": false,
+    "biochemical_feedback_enabled": false
+  },
+  "support_parameters": {
+    "full_patch_outer": {
+      "owner": "myocardium.opposite_outer",
+      "K": [[0.25,0.0,0.0],[0.0,0.25,0.0],[0.0,0.0,1.0]],
+      "C": [[0.25,0.0,0.0],[0.0,0.25,0.0],[0.0,0.0,1.0]]
+    },
+    "full_patch_lateral": {
+      "owner": "perimeter_myocardium.outward_lateral",
+      "K": [[0.5,0.0,0.0],[0.0,0.5,0.0],[0.0,0.0,0.25]],
+      "C": [[0.5,0.0,0.0],[0.0,0.5,0.0],[0.0,0.0,0.25]]
+    },
+    "gate_C": {
+      "owner": "myocardium.opposite_outer",
+      "ECM_lumen_traction_free": true
+    },
+    "gate_D_fixture": {
+      "port_id": "P_FIXTURE_D",
+      "owner": "ECM.outer_facing_boundary",
+      "K": [[1.0,0.0,0.0],[0.0,1.0,0.0],[0.0,0.0,1.0]],
+      "C": [[1.0,0.0,0.0],[0.0,1.0,0.0],[0.0,0.0,1.0]],
+      "reference_motion": "fixed"
+    },
+    "fully_fixed_boundary_allowed": false
+  },
+  "numerical_preregistration": {
+    "time_integrator_family": "implicit_overdamped_to_be_selected_in_stage1_without_changing_model_equations",
+    "initial_time_step": 0.01,
+    "time_refinement_levels": [0.02, 0.01, 0.005],
+    "space_refinement_relative_edge_scales": [1.25, 1.0, 0.8],
+    "deterministic_seed": 20260728,
+    "dynamic_contact_search_deterministic": true,
+    "automatic_differentiation_allowed": true,
+    "parameter_sweep_allowed": false
+  },
+  "acceptance_thresholds": {
+    "directional_derivative_relative_error_max": 1e-5,
+    "pairwise_action_reaction_normalized_residual_max": 1e-10,
+    "static_equilibrium_normalized_residual_max": 1e-6,
+    "single_cell_relative_volume_error_max": 0.005,
+    "rigid_centroid_drift_over_L0_max": 0.0001,
+    "contact_penetration_over_L0_max": 0.01,
+    "active_axial_shortening_fraction_range": [0.01, 0.2],
+    "at_least_one_transverse_increase_fraction_min": 0.01,
+    "integrated_normalized_power_residual_max": 0.005,
+    "dissipation_numerical_floor": -1e-10,
+    "last_two_time_refinement_relative_difference_max": 0.02,
+    "last_two_space_refinement_relative_difference_max": 0.03,
+    "ECM_tetra_J_strictly_positive": true,
+    "support_owner_count_exact": 1,
+    "contact_quadrature_owner_count_exact": 1
+  },
+  "blocking_fields": [],
+  "stage1_authorized": false,
+  "stage2_authorized": false
+}
