@@ -1,0 +1,43 @@
+{
+  "evidence_id": "EVIDENCE-PRL-ROUTE-H-STAGE1-V01",
+  "contract_id": "CONTRACT-PRL-ROUTE-H-STAGE0-V05",
+  "bundle_sha256": "4A73D370162D8EBFB7B120C42881F7470D68E82D10ABD159CB65C2B73ADECC59",
+  "junit_sha256": "F3B9909E5AF1150F2D0A3BBED3272D6D0A7B8713999C93619BECC9857C60096F",
+  "pytest": {
+    "tests": 31,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reference": {
+    "cell_count": 15,
+    "vertices_per_cell": 162,
+    "faces_per_cell": 320,
+    "minimum_cell_triangle_quality": 0.3460311354261689,
+    "minimum_cell_signed_volume": 0.19285352592995667,
+    "minimum_anchor_length": 0.9821932172260959,
+    "ecm_vertices": 351,
+    "ecm_tetrahedra": 1152,
+    "minimum_ecm_J": 1.0,
+    "material_tethers": 1828,
+    "source_map_records": 504,
+    "eligible_steric_pairs": 46,
+    "steric_owner_records": 16584,
+    "minimum_steric_gap": 0.0,
+    "proper_intersections": 0,
+    "steric_energy": 0.0,
+    "maximum_tether_opening": 4.443873654474961e-16,
+    "maximum_tether_slip": 2.1942709178604383e-17,
+    "maximum_tether_force": 2.7316190538445748e-17,
+    "assembled_net_force": 7.58321556256456e-31,
+    "assembled_net_moment": 2.9111173630988677e-30,
+    "passive_total_energy": 3.8522234511744953e-32,
+    "maximum_cell_force": 4.511310855777938e-17,
+    "maximum_ecm_force": 3.3853340862194516e-18
+  },
+  "authorization": {
+    "active_enabled": false,
+    "full_patch_trajectory_run": false,
+    "stage2_authorized": false
+  }
+}
