@@ -165,17 +165,37 @@ def global_closest_feature(
 def winding_number(point: FloatArray, vertices: FloatArray, faces: IntArray) -> float:
     triangle = vertices[faces] - point
     a, b, c = triangle[:, 0], triangle[:, 1], triangle[:, 2]
-    na, nb, nc = np.linalg.norm(a, axis=1), np.linalg.norm(b, axis=1), np.linalg.norm(c, axis=1)
-    numerator = np.einsum("ij,ij->i", a, np.cross(b, c))
+    na = np.sqrt((a[:, 0] * a[:, 0] + a[:, 1] * a[:, 1]) + a[:, 2] * a[:, 2])
+    nb = np.sqrt((b[:, 0] * b[:, 0] + b[:, 1] * b[:, 1]) + b[:, 2] * b[:, 2])
+    nc = np.sqrt((c[:, 0] * c[:, 0] + c[:, 1] * c[:, 1]) + c[:, 2] * c[:, 2])
+    cross_bc = np.column_stack((
+        b[:, 1] * c[:, 2] - b[:, 2] * c[:, 1],
+        b[:, 2] * c[:, 0] - b[:, 0] * c[:, 2],
+        b[:, 0] * c[:, 1] - b[:, 1] * c[:, 0],
+    ))
+    numerator = (
+        a[:, 0] * cross_bc[:, 0] + a[:, 1] * cross_bc[:, 1]
+    ) + a[:, 2] * cross_bc[:, 2]
+    dot_ab = (a[:, 0] * b[:, 0] + a[:, 1] * b[:, 1]) + a[:, 2] * b[:, 2]
+    dot_bc = (b[:, 0] * c[:, 0] + b[:, 1] * c[:, 1]) + b[:, 2] * c[:, 2]
+    dot_ca = (c[:, 0] * a[:, 0] + c[:, 1] * a[:, 1]) + c[:, 2] * a[:, 2]
     denominator = (
         na * nb * nc
-        + np.einsum("ij,ij->i", a, b) * nc
-        + np.einsum("ij,ij->i", b, c) * na
-        + np.einsum("ij,ij->i", c, a) * nb
+        + dot_ab * nc
+        + dot_bc * na
+        + dot_ca * nb
     )
-    # np.sum preserves the ascending face-ID traversal of the input arrays.
-    total = float(np.sum(2.0 * np.arctan2(numerator, denominator)))
+    solid_angles = 2.0 * np.arctan2(numerator, denominator)
+    total = _ordered_binary64_sum(solid_angles)
     return abs(total) / (4.0 * math.pi)
+
+
+def _ordered_binary64_sum(values: FloatArray) -> float:
+    """Accumulate in array/face-ID order without a pairwise reduction."""
+    accumulator = np.float64(0.0)
+    for value in values:
+        accumulator = np.float64(accumulator + np.float64(value))
+    return float(accumulator)
 
 
 def signed_surface_distance(

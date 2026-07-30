@@ -3,6 +3,7 @@ from __future__ import annotations
 import numpy as np
 
 from route_h.contact_adhesion import (
+    _ordered_binary64_sum,
     material_tether_energy_force_with_reference,
     pair_residuals,
     proper_triangle_crossing_ccd,
@@ -173,6 +174,12 @@ def test_closed_surface_signed_distance_disjoint_and_inside():
     assert state_in == "inside" and abs(inside + 0.5) < 1e-12
 
 
+def test_winding_accumulator_is_strictly_sequential_binary64():
+    adversarial = np.asarray([1e16] + [1.0] * 1000 + [-1e16], dtype=np.float64)
+    assert _ordered_binary64_sum(adversarial) == 0.0
+    assert float(np.sum(adversarial)) == 986.0
+
+
 def test_steric_selected_piece_derivative_and_pair_balance():
     target, faces = _cube()
     source = np.array([[0.5, 0.5, 0.45]])
@@ -222,4 +229,3 @@ def test_ccd_rejects_transverse_crossing_and_allows_endpoint_tangency():
     tangent[:, 2] = 0.0
     assert proper_triangle_crossing_ccd(triangle_a, triangle_a, start, crossed)
     assert not proper_triangle_crossing_ccd(triangle_a, triangle_a, start, tangent)
-
