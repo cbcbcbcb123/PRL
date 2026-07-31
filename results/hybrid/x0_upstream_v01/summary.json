@@ -1,0 +1,34 @@
+{
+  "audit_id": "PRL-HYBRID-X0-A-UPSTREAM-V01",
+  "status": "passed_with_portability_findings",
+  "source": {
+    "url": "https://git.bsse.ethz.ch/iber/Publications/2024_runser_simucell3d.git",
+    "commit": "38af45154070b2b08dcdb25cbe629de499f382d9",
+    "license": "BSD-3-Clause",
+    "license_sha256": "04DFCCDCE4BDAE97AE45BA06FD2C2DA71E97B2CEB7DB5220EB5DDAC4CCBCF120",
+    "local_mesh_refiner_sha256": "51AE5DD9B66EF2A3B0222045B9304236FA63B5D3FBEB9B8A48B4026731B5B05B"
+  },
+  "linux_build": {
+    "compiler": "GCC 9.4.0",
+    "cmake": "3.16.3",
+    "python_bindings": false,
+    "target": "test_local_mesh_refiner",
+    "executable_sha256": "889375BBCAFAC476B9B6FF2DD8E61D86584C7506DAE64C95F8E2392C3B70F87F",
+    "status": "passed"
+  },
+  "upstream_tests": {
+    "can_be_merged_test": "passed",
+    "edge_swap_test": "passed",
+    "split_edge_test": "passed",
+    "merge_edge_test": "passed",
+    "get_triangle_score_test": "passed"
+  },
+  "portability_findings": [
+    "The upstream Dockerfile has three consecutive FROM instructions and only the final python:3.10 stage is effective.",
+    "CMake 4 requires CMAKE_POLICY_VERSION_MINIMUM=3.5 for the upstream cmake_minimum_required declarations.",
+    "Native MSVC needs the LLVM OpenMP mode for '#pragma omp atomic write'.",
+    "The C++17 source still calls removed std::random_shuffle.",
+    "local_mesh_refiner.hpp uses std::sqrt in a C++17 constexpr initializer, which is not portable to current MSVC."
+  ],
+  "claim_guard": "This audit verifies provenance, a Linux/GCC build, and the five upstream local-remeshing unit tests only; it does not verify cardiac material-state transfer or volumetric ECM coupling."
+}

@@ -1,36 +1,33 @@
-# PRL — Route H passive DCM–ECM model
+# PRL — cardiac cell–ECM–flow hybrid model
 
-本仓库当前实现早期心室平面 patch 的 Stage 1 无量纲被动力学内核：
+本仓库现在包含两条严格隔离的证据线：
 
-`lumen → endocardial closed-surface DCM → finite-strain viscoelastic ECM → myocardial closed-surface DCM → compliant surroundings`
+1. **Route H reference/oracle**：独立闭合表面 DCM 细胞 + 独立四面体有限变形黏弹 ECM。Stage 2 Gate A 已冻结为 `failed_invalid_numerics`，Gate B–E 仍 blocked。
+2. **Hybrid X0 feasibility**：验证 SimuCell3D cell engine + 独立体积 ECM 的混合架构，不覆盖 Route H 历史结果。
 
-模型使用独立 watertight 三角曲面细胞、独立四面体 ECM、动态 closed-surface
-steric、冻结 material tether、心内膜 pressure/WSS 端口和固定参考
-Kelvin–Voigt 支撑。ECM amount 与 natural thickness 冻结，`j_myo=0`。
+目标架构：
 
-当前权威科学输入是 Stage 0 v05；v05 只修复 binary64 对称角 face-identity
-并列规则，不改变 v04 的拓扑、方程、参数或接触机制。Stage 1 只允许 reference
-materialization 和被动模块/制造解验证：
+`lumen → remeshable endocardial cells → tetrahedral ECM → remeshable myocardial cells → surroundings`
 
-- active preferred-length contraction：未启用；
-- full-patch trajectory：未运行；
-- Stage 2 Gate A–E：未授权；
-- 生理标定和论文 claim：未进行。
+## 最小目录
 
-最简目录：
+- `src/route_h/`：原小规模参考力学内核；
+- `src/hybrid/`：混合架构的持久材料点与耦合 seam；
+- `external/simucell3d/`：固定提交的官方 SimuCell3D submodule；
+- `tests/stage1/`, `tests/stage2/`, `tests/hybrid/`：可执行验证；
+- `docs/`：模型与架构说明；
+- `project_control/`：计划、冻结边界和阶段记录；
+- `results/`：小型、可审计的正式结果摘要；
+- `scripts/`：可复算入口。
 
-- `src/route_h/`：被动核心模块和冻结合同；
-- `data/route_h/stage1_reference_bundle_v01/`：canonical reference arrays 与 hash seal；
-- `tests/stage1/`：可执行模块/制造解测试；
-- `tests/route_h/`：冻结 registry 与机器可读证据；
-- `docs/route_h/`：坐标、符号和功率账本；
-- `project_control/`：授权、冻结、检查和阶段记录；
-- `scripts/`：可复算 materialization/verification 工具。
-
-复算：
+## 当前可复算入口
 
 ```powershell
+git submodule update --init --recursive
 $env:PYTHONPATH = "$PWD\src"
-pytest -q
-python scripts\route_h_stage1_verification_evidence.py
+pytest -q tests/hybrid
+pytest -q tests/stage1 tests/stage2
+python scripts\run_hybrid_x0_probe.py
 ```
+
+混合阶段计划见 `project_control/hybrid_architecture_feasibility_plan_v01.md`。目前 X0-A 与 X0-B 已完成；X0-C 与 X0-D 尚未宣告通过。

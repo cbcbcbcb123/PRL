@@ -1,0 +1,4 @@
+[submodule "external/simucell3d"]
+	path = external/simucell3d
+	url = https://git.bsse.ethz.ch/iber/Publications/2024_runser_simucell3d.git
+	branch = main
