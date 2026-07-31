@@ -50,15 +50,41 @@ def triangle_area_gradients(a: FloatArray, b: FloatArray, c: FloatArray) -> tupl
     return 0.5 * twice_area, gradients
 
 
+def _triangle_area_gradients_bulk(
+    triangles: FloatArray,
+) -> tuple[FloatArray, FloatArray]:
+    """Vectorized equivalent of :func:`triangle_area_gradients`."""
+    a = triangles[:, 0]
+    b = triangles[:, 1]
+    c = triangles[:, 2]
+    raw_normal = np.cross(b - a, c - a)
+    twice_area = np.linalg.norm(raw_normal, axis=1)
+    if np.any(twice_area <= 0.0):
+        raise ValueError("degenerate geometric primitive")
+    normal = raw_normal / twice_area[:, None]
+    gradients = 0.5 * np.stack(
+        (
+            np.cross(b - c, normal),
+            np.cross(c - a, normal),
+            np.cross(a - b, normal),
+        ),
+        axis=1,
+    )
+    return 0.5 * twice_area, gradients
+
+
 def surface_volume_and_gradient(vertices: FloatArray, faces: IntArray) -> tuple[float, FloatArray]:
+    triangles = vertices[faces]
+    a = triangles[:, 0]
+    b = triangles[:, 1]
+    c = triangles[:, 2]
+    volume = float(np.sum(a * np.cross(b, c))) / 6.0
+    local_gradient = np.stack(
+        (np.cross(b, c), np.cross(c, a), np.cross(a, b)),
+        axis=1,
+    ) / 6.0
     gradient = np.zeros_like(vertices)
-    volume = 0.0
-    for face in faces:
-        a, b, c = vertices[face]
-        volume += float(np.dot(a, np.cross(b, c))) / 6.0
-        gradient[face[0]] += np.cross(b, c) / 6.0
-        gradient[face[1]] += np.cross(c, a) / 6.0
-        gradient[face[2]] += np.cross(a, b) / 6.0
+    np.add.at(gradient, faces.reshape(-1), local_gradient.reshape(-1, 3))
     return volume, gradient
 
 
@@ -105,6 +131,74 @@ def _hinge_angle_gradient(local: FloatArray) -> tuple[float, FloatArray]:
 
     gradient[1] += edge_bar
     gradient[0] -= edge_bar
+    return theta, gradient
+
+
+def _hinge_angle_gradients_bulk(
+    local: FloatArray,
+) -> tuple[FloatArray, FloatArray]:
+    """Vectorized equivalent of ``_hinge_angle_gradient`` for all hinges."""
+    x0, x1, x2, x3 = np.moveaxis(local, 1, 0)
+    edge = x1 - x0
+    edge_length = np.linalg.norm(edge, axis=1)
+    raw0 = np.cross(x1 - x0, x2 - x0)
+    raw1 = np.cross(x0 - x1, x3 - x1)
+    length0 = np.linalg.norm(raw0, axis=1)
+    length1 = np.linalg.norm(raw1, axis=1)
+    if (
+        np.any(edge_length <= 0.0)
+        or np.any(length0 <= 0.0)
+        or np.any(length1 <= 0.0)
+    ):
+        raise ValueError("degenerate geometric primitive")
+    tangent = edge / edge_length[:, None]
+    normal0 = raw0 / length0[:, None]
+    normal1 = raw1 / length1[:, None]
+    normal_cross = np.cross(normal0, normal1)
+    sine = np.sum(tangent * normal_cross, axis=1)
+    cosine = np.sum(normal0 * normal1, axis=1)
+    theta = np.arctan2(sine, cosine)
+    denominator = sine * sine + cosine * cosine
+    sine_bar = cosine / denominator
+    cosine_bar = -sine / denominator
+    tangent_bar = sine_bar[:, None] * normal_cross
+    normal0_bar = (
+        sine_bar[:, None] * np.cross(normal1, tangent)
+        + cosine_bar[:, None] * normal1
+    )
+    normal1_bar = (
+        sine_bar[:, None] * np.cross(tangent, normal0)
+        + cosine_bar[:, None] * normal0
+    )
+    raw0_bar = (
+        normal0_bar
+        - normal0 * np.sum(normal0 * normal0_bar, axis=1)[:, None]
+    ) / length0[:, None]
+    raw1_bar = (
+        normal1_bar
+        - normal1 * np.sum(normal1 * normal1_bar, axis=1)[:, None]
+    ) / length1[:, None]
+    edge_bar = (
+        tangent_bar
+        - tangent * np.sum(tangent * tangent_bar, axis=1)[:, None]
+    ) / edge_length[:, None]
+
+    gradient = np.zeros_like(local)
+    left0, right0 = x1 - x0, x2 - x0
+    left0_bar = np.cross(right0, raw0_bar)
+    right0_bar = np.cross(raw0_bar, left0)
+    gradient[:, 1] += left0_bar
+    gradient[:, 2] += right0_bar
+    gradient[:, 0] -= left0_bar + right0_bar
+
+    left1, right1 = x0 - x1, x3 - x1
+    left1_bar = np.cross(right1, raw1_bar)
+    right1_bar = np.cross(raw1_bar, left1)
+    gradient[:, 0] += left1_bar
+    gradient[:, 3] += right1_bar
+    gradient[:, 1] -= left1_bar + right1_bar
+    gradient[:, 1] += edge_bar
+    gradient[:, 0] -= edge_bar
     return theta, gradient
 
 
@@ -166,12 +260,9 @@ def area_energy_gradient(
     k_area: float,
 ) -> tuple[float, FloatArray]:
     group_codes = reference.primary * 10 + reference.directional
-    face_areas = np.empty(len(reference.faces), dtype=np.float64)
-    face_gradients = np.empty((len(reference.faces), 3, 3), dtype=np.float64)
-    for face_id, face in enumerate(reference.faces):
-        face_areas[face_id], face_gradients[face_id] = triangle_area_gradients(
-            *vertices[face]
-        )
+    face_areas, face_gradients = _triangle_area_gradients_bulk(
+        vertices[reference.faces]
+    )
     energy = 0.0
     gradient = np.zeros_like(vertices)
     for key, target in zip(reference.area_group_keys, reference.area0, strict=True):
@@ -180,8 +271,11 @@ def area_energy_gradient(
         strain = area / target - 1.0
         energy += 0.5 * k_area * target * strain * strain
         coefficient = k_area * strain
-        for face_id in selected:
-            gradient[reference.faces[face_id]] += coefficient * face_gradients[face_id]
+        np.add.at(
+            gradient,
+            reference.faces[selected].reshape(-1),
+            (coefficient * face_gradients[selected]).reshape(-1, 3),
+        )
     return energy, gradient
 
 
@@ -201,39 +295,39 @@ def bending_energy_gradient(
     reference: CellReference,
     k_bend: float,
 ) -> tuple[float, FloatArray]:
-    energy = 0.0
-    gradient = np.zeros_like(vertices)
-    for hinge_id, local_ids in enumerate(reference.hinges.vertices):
-        local = vertices[local_ids]
-        angle, angle_gradient = _hinge_angle_gradient(local)
-        delta = math.atan2(
-            math.sin(angle - reference.hinges.theta0[hinge_id]),
-            math.cos(angle - reference.hinges.theta0[hinge_id]),
-        )
-        edge = local[1] - local[0]
-        edge_length = float(np.linalg.norm(edge))
-        area0, area_gradient0 = triangle_area_gradients(local[0], local[1], local[2])
-        area1_raw, raw_gradient1 = triangle_area_gradients(local[1], local[0], local[3])
-        area_diamond = area0 + area1_raw
-        prefactor = edge_length * edge_length / area_diamond
-        energy += 0.5 * k_bend * prefactor * delta * delta
+    hinge_ids = reference.hinges.vertices
+    local = vertices[hinge_ids]
+    angle, angle_gradient = _hinge_angle_gradients_bulk(local)
+    raw_delta = angle - reference.hinges.theta0
+    delta = np.arctan2(np.sin(raw_delta), np.cos(raw_delta))
+    edge = local[:, 1] - local[:, 0]
+    edge_length = np.linalg.norm(edge, axis=1)
+    area0, area_gradient0 = _triangle_area_gradients_bulk(local[:, [0, 1, 2]])
+    area1, area_gradient1 = _triangle_area_gradients_bulk(local[:, [1, 0, 3]])
+    area_diamond = area0 + area1
+    prefactor = edge_length * edge_length / area_diamond
+    energy = float(np.sum(0.5 * k_bend * prefactor * delta * delta))
 
-        prefactor_gradient = np.zeros((4, 3), dtype=np.float64)
-        edge_direction = edge / edge_length
-        prefactor_gradient[1] += 2.0 * edge_length * edge_direction / area_diamond
-        prefactor_gradient[0] -= 2.0 * edge_length * edge_direction / area_diamond
-        diamond_gradient = np.zeros((4, 3), dtype=np.float64)
-        diamond_gradient[[0, 1, 2]] += area_gradient0
-        diamond_gradient[[1, 0, 3]] += raw_gradient1
-        prefactor_gradient -= (
-            edge_length * edge_length / (area_diamond * area_diamond)
-        ) * diamond_gradient
-        local_gradient = (
-            0.5 * k_bend * delta * delta * prefactor_gradient
-            + k_bend * prefactor * delta * angle_gradient
-        )
-        for local_id, global_id in enumerate(local_ids):
-            gradient[global_id] += local_gradient[local_id]
+    prefactor_gradient = np.zeros_like(local)
+    edge_direction = edge / edge_length[:, None]
+    edge_term = (
+        2.0 * edge_length / area_diamond
+    )[:, None] * edge_direction
+    prefactor_gradient[:, 1] += edge_term
+    prefactor_gradient[:, 0] -= edge_term
+    diamond_gradient = np.zeros_like(local)
+    diamond_gradient[:, [0, 1, 2]] += area_gradient0
+    diamond_gradient[:, [1, 0, 3]] += area_gradient1
+    prefactor_gradient -= (
+        edge_length * edge_length / (area_diamond * area_diamond)
+    )[:, None, None] * diamond_gradient
+    local_gradient = (
+        (0.5 * k_bend * delta * delta)[:, None, None]
+        * prefactor_gradient
+        + (k_bend * prefactor * delta)[:, None, None] * angle_gradient
+    )
+    gradient = np.zeros_like(vertices)
+    np.add.at(gradient, hinge_ids.reshape(-1), local_gradient.reshape(-1, 3))
     return energy, gradient
 
 
@@ -259,4 +353,3 @@ def passive_energy_force(
 
 def nodal_drag_dissipation(velocity: FloatArray, dual_weights: FloatArray, drag: float = 1.0) -> float:
     return float(drag * np.sum(dual_weights[:, None] * velocity * velocity))
-

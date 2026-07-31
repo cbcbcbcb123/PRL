@@ -1,0 +1,3 @@
+START A0_ZERO_dt0.01
+COMPLETE A0_ZERO_dt0.01 {"accepted_steps": 500, "case_id": "A0_ZERO", "dt": 0.01, "integrated_active_work": 0.0, "integrated_power_residual": 0.0, "maximum_active_net_force": 0.0, "maximum_active_net_moment": 0.0, "maximum_centroid_drift": 0.0, "maximum_gauge_increment_residual": 0.0, "maximum_projected_residual": 9.511724923123747e-17, "maximum_volume_error": 0.0, "minimum_dissipation": 0.0, "optimizer_evaluations_total": 501, "optimizer_iterations_total": 0, "optimizer_reported_success_all_steps": true, "peak_axial_shortening": 0.0, "plateau_transverse_scale_changes": [0.0, 0.0], "total_dissipation": 0.0}
+START A1_ACTIVE_dt0.02

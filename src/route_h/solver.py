@@ -1,7 +1,7 @@
-"""The only Stage 1 computation entry point.
+"""The only Route H computation entry point.
 
-This module evaluates passive reference/local manufactured states.  It has no
-time-trajectory runner, active controller, or Stage 2 gate dispatcher.
+Stage 1 passive functions remain sealed below.  Stage 2 gate runners are added
+only after their governing decision and authorization records exist.
 """
 
 from __future__ import annotations
@@ -211,3 +211,22 @@ def audit_reference_arrays(
         assembled_net_force=float(np.linalg.norm(total_force)),
         assembled_net_moment=float(np.linalg.norm(total_moment)),
     )
+
+
+def run_gate_a_trajectory(
+    case_id: str,
+    *,
+    dt: float,
+    duration: float = 5.0,
+):
+    """Run one frozen Stage 2 Gate A trajectory."""
+    from .stage2_gate_a import run_gate_a_trajectory as run
+
+    return run(case_id, dt=dt, duration=duration)
+
+
+def run_gate_a_suite():
+    """Run and evaluate the complete frozen Stage 2 Gate A suite."""
+    from .stage2_gate_a import run_gate_a_suite as run
+
+    return run()

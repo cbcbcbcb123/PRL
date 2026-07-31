@@ -1,0 +1,76 @@
+{
+  "suite_id": "PRL-ROUTE-H-STAGE2-GATE-A-V01",
+  "gate_id": "A",
+  "status": "failed",
+  "disposition": "blocked_downstream",
+  "effective_contract": "CONTRACT-PRL-ROUTE-H-STAGE0-V06",
+  "effective_freeze": "FREEZE-PRL-ROUTE-H-STAGE0-V06-V02",
+  "effective_numerical_method": "DEC-PRL-ROUTE-H-STAGE2-NUMERICAL-METHOD-V02",
+  "formal_run_started_at": "2026-07-31T10:51:37+08:00",
+  "formal_run_stopped_at": "2026-07-31T10:51:59+08:00",
+  "parameter_or_threshold_change_after_formal_start": false,
+  "adaptive_retry_used": false,
+  "formal_response_rerun": false,
+  "runs": {
+    "A0_ZERO_dt0.01": {
+      "status": "passed",
+      "accepted_steps": 500,
+      "peak_axial_shortening": 0.0,
+      "plateau_transverse_scale_changes": [
+        0.0,
+        0.0
+      ],
+      "maximum_volume_error": 0.0,
+      "maximum_centroid_drift": 0.0,
+      "maximum_active_net_force": 0.0,
+      "maximum_active_net_moment": 0.0,
+      "minimum_dissipation": 0.0,
+      "integrated_active_work": 0.0,
+      "total_dissipation": 0.0,
+      "integrated_power_residual": 0.0,
+      "maximum_projected_residual": 9.511724923123747e-17,
+      "maximum_gauge_increment_residual": 0.0
+    },
+    "A1_ACTIVE_dt0.02": {
+      "status": "invalid_numerics",
+      "failure": "physical_projected_overdamped_residual_above_frozen_limit",
+      "observed_projected_residual": 1.488435e-08,
+      "projected_residual_limit": 1e-08,
+      "observed_gauge_increment_residual": 4.634497e-20,
+      "gauge_increment_residual_limit": 1e-12,
+      "optimizer_reported_success": false,
+      "optimizer_message": "ABNORMAL",
+      "partial_trajectory_persisted": false,
+      "failure_time_node": "not_persisted_by_fail_fast_runner"
+    },
+    "A1_ACTIVE_dt0.01": {
+      "status": "not_run_gate_a_blocked"
+    },
+    "A1_ACTIVE_dt0.005": {
+      "status": "not_run_gate_a_blocked"
+    }
+  },
+  "gate_checks": {
+    "manufactured_active_derivative_force_moment_objectivity_power_sign": "passed",
+    "stage1_regression_after_vectorization": "passed",
+    "A0_zero_invariance": "passed",
+    "A1_frozen_solver_residual": "failed",
+    "A1_response_metrics": "not_evaluated_invalid_numerics",
+    "A1_time_refinement": "not_run_gate_a_blocked"
+  },
+  "downstream": {
+    "Gate_B": "blocked",
+    "Gate_C": "blocked",
+    "Gate_D": "blocked",
+    "Gate_E": "blocked"
+  },
+  "evidence": {
+    "formal_stdout_sha256": "5F8604C1FC1FE11ADE64C1F19E09E97D4A6A21856162C1D0CCDE458A336F11CA",
+    "formal_stderr_sha256": "884A91464E35C68F2CB1DD16D0598859884D5E4D0700011A920FADA9CB0AD213",
+    "A0_manifest_sha256": "F3FD6D0A30C933D012EC5A63FDB056484A36A10B3706532A9EA02925B71D747B",
+    "manufactured_metrics_sha256": "1AB9E0D0A1422143CB010CA6E137BA9CC873FC8775A8EBC556F6E6BA2B4524B3",
+    "pytest_junit_sha256": "1AC331D7BD62D02D2D390A09EE7DD27E18047FC41969EC0C9813E056ED2A4B7C",
+    "numerical_method_v02_sha256_at_formal_run": "CF5C6D6708035210403F5E5C1B4912B91A8B47B81F9E694048F8452B4106CFB2",
+    "numerical_method_v02_sha256_after_timestamp_correction": "9C53EB3DA0FF59280DB071577EBC7EB27B4EB9AC62324BF50EA09E555F0359F3"
+  }
+}

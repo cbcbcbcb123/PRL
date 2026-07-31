@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "E:\Temp-Projects\PRL\scripts\run_route_h_stage2_gate_a.py", line 226, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "E:\Temp-Projects\PRL\scripts\run_route_h_stage2_gate_a.py", line 192, in main
+    trajectory = run_gate_a_trajectory(case_id, dt=dt)
+  File "E:\Temp-Projects\PRL\src\route_h\solver.py", line 225, in run_gate_a_trajectory
+    return run(case_id, dt=dt, duration=duration)
+  File "E:\Temp-Projects\PRL\src\route_h\stage2_gate_a.py", line 531, in run_gate_a_trajectory
+    _solve_step(
+    ~~~~~~~~~~~^
+        current,
+        ^^^^^^^^
+    ...<2 lines>...
+        alpha=alpha,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Temp-Projects\PRL\src\route_h\stage2_gate_a.py", line 383, in _solve_step
+    raise GateANumericalError(
+    ...<3 lines>...
+    )
+route_h.stage2_gate_a.GateANumericalError: Gate A implicit step failed without retry: residual=1.488435e-08, gauge=4.634497e-20, optimizer_success=False, message=ABNORMAL: 
