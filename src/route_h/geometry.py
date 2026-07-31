@@ -86,6 +86,8 @@ def _normalized(vector: FloatArray) -> FloatArray:
 
 
 def icosphere_template(level: int = 2) -> SurfaceTemplate:
+    if not isinstance(level, int) or level < 0:
+        raise ValueError("icosphere subdivision level must be a nonnegative integer")
     phi = (1.0 + math.sqrt(5.0)) / 2.0
     raw = [
         (-1, phi, 0), (1, phi, 0), (-1, -phi, 0), (1, -phi, 0),
@@ -126,7 +128,12 @@ def icosphere_template(level: int = 2) -> SurfaceTemplate:
         np.ascontiguousarray(vertices, dtype=np.float64),
         np.ascontiguousarray(faces, dtype=np.int64),
     )
-    if result.unit_vertices.shape != (162, 3) or result.faces.shape != (320, 3):
+    expected_vertices = 10 * (4 ** level) + 2
+    expected_faces = 20 * (4 ** level)
+    if (
+        result.unit_vertices.shape != (expected_vertices, 3)
+        or result.faces.shape != (expected_faces, 3)
+    ):
         raise RuntimeError("icosphere count mismatch")
     return result
 
@@ -174,8 +181,8 @@ def _face_labels(layer: str, unit_vertices: FloatArray, faces: IntArray) -> tupl
     return primary, directional
 
 
-def build_cells() -> list[CellGeometry]:
-    template = icosphere_template()
+def build_cells(subdivision_level: int = 2) -> list[CellGeometry]:
+    template = icosphere_template(subdivision_level)
     cells: list[CellGeometry] = []
     for layer, nx, ny, axes in (
         ("endocardial", 3, 2, (0.5, 0.45, 0.12)),
@@ -267,10 +274,14 @@ def _grid_vertex(i: int, j: int, k: int, nx: int = 12, ny: int = 8) -> int:
     return ((k * (ny + 1)) + j) * (nx + 1) + i
 
 
-def build_ecm() -> ECMGeometry:
-    nx, ny, nz = 12, 8, 2
+def build_ecm(nx: int = 12, ny: int = 8, nz: int = 2) -> ECMGeometry:
+    if any(not isinstance(value, int) or value <= 0 for value in (nx, ny, nz)):
+        raise ValueError("ECM interval counts must be positive integers")
+    if nz < 2:
+        raise ValueError("ECM requires at least two elements through thickness")
+    dx, dy, dz = 3.0 / nx, 1.8 / ny, 0.2 / nz
     vertices = np.asarray([
-        (0.25 * i, 0.225 * j, 0.1 * k)
+        (dx * i, dy * j, dz * k)
         for k in range(nz + 1)
         for j in range(ny + 1)
         for i in range(nx + 1)
@@ -284,10 +295,14 @@ def build_ecm() -> ECMGeometry:
         for j in range(ny):
             for i in range(nx):
                 local = [
-                    _grid_vertex(i, j, k), _grid_vertex(i + 1, j, k),
-                    _grid_vertex(i, j + 1, k), _grid_vertex(i + 1, j + 1, k),
-                    _grid_vertex(i, j, k + 1), _grid_vertex(i + 1, j, k + 1),
-                    _grid_vertex(i, j + 1, k + 1), _grid_vertex(i + 1, j + 1, k + 1),
+                    _grid_vertex(i, j, k, nx, ny),
+                    _grid_vertex(i + 1, j, k, nx, ny),
+                    _grid_vertex(i, j + 1, k, nx, ny),
+                    _grid_vertex(i + 1, j + 1, k, nx, ny),
+                    _grid_vertex(i, j, k + 1, nx, ny),
+                    _grid_vertex(i + 1, j, k + 1, nx, ny),
+                    _grid_vertex(i, j + 1, k + 1, nx, ny),
+                    _grid_vertex(i + 1, j + 1, k + 1, nx, ny),
                 ]
                 for pattern in local_patterns:
                     tet = [local[index] for index in pattern]
@@ -331,7 +346,12 @@ def build_ecm() -> ECMGeometry:
         else:
             raise RuntimeError(f"unclassified ECM boundary face {face_id}")
         identity[face_id] = ECM_BOUNDARY_CODES[label]
-    if vertices.shape != (351, 3) or tets.shape != (1152, 4):
+    expected_vertices = (nx + 1) * (ny + 1) * (nz + 1)
+    expected_tetrahedra = 6 * nx * ny * nz
+    if (
+        vertices.shape != (expected_vertices, 3)
+        or tets.shape != (expected_tetrahedra, 4)
+    ):
         raise RuntimeError("ECM count mismatch")
     return ECMGeometry(vertices, tets, boundary_faces, identity, boundary_tetra)
 
@@ -373,6 +393,50 @@ def ray_triangle_hit(
     return best[1], best[2], best[0]
 
 
+def ray_triangle_hit_vectorized(
+    origin: FloatArray,
+    direction: FloatArray,
+    vertices: FloatArray,
+    faces: IntArray,
+    face_ids: IntArray,
+    *,
+    strictly_positive: bool,
+) -> tuple[int, FloatArray, float]:
+    """Vectorized equivalent of the frozen nearest-hit and face-ID tie rule."""
+    candidate_faces = faces[face_ids]
+    triangles = vertices[candidate_faces]
+    edge1 = triangles[:, 1] - triangles[:, 0]
+    edge2 = triangles[:, 2] - triangles[:, 0]
+    direction_rows = np.broadcast_to(direction, edge2.shape)
+    cross_direction_edge2 = np.cross(direction_rows, edge2)
+    determinant = np.einsum("ij,ij->i", edge1, cross_direction_edge2)
+    tolerance = 1e-12
+    valid = np.abs(determinant) > tolerance
+    inverse = np.zeros_like(determinant)
+    inverse[valid] = 1.0 / determinant[valid]
+    offset = origin[None, :] - triangles[:, 0]
+    bary_u = np.einsum("ij,ij->i", offset, cross_direction_edge2) * inverse
+    cross_offset_edge1 = np.cross(offset, edge1)
+    bary_v = np.einsum("j,ij->i", direction, cross_offset_edge1) * inverse
+    distance = np.einsum("ij,ij->i", edge2, cross_offset_edge1) * inverse
+    lower = tolerance if strictly_positive else -tolerance
+    valid &= distance >= lower
+    valid &= bary_u >= -tolerance
+    valid &= bary_v >= -tolerance
+    valid &= bary_u + bary_v <= 1.0 + tolerance
+    valid_ids = np.flatnonzero(valid)
+    if len(valid_ids) == 0:
+        raise RuntimeError("registered ray has no target hit")
+    nonnegative_distance = np.maximum(distance[valid_ids], 0.0)
+    order = np.lexsort((face_ids[valid_ids], nonnegative_distance))
+    selected = int(valid_ids[int(order[0])])
+    barycentric = np.asarray(
+        (1.0 - bary_u[selected] - bary_v[selected], bary_u[selected], bary_v[selected]),
+        dtype=np.float64,
+    )
+    return int(face_ids[selected]), barycentric, float(max(distance[selected], 0.0))
+
+
 def vertex_dual_weights(vertices: FloatArray, faces: IntArray, selected_faces: IntArray | None = None) -> FloatArray:
     chosen = faces if selected_faces is None else faces[selected_faces]
     areas, _ = triangle_geometry(vertices, chosen)
@@ -382,21 +446,37 @@ def vertex_dual_weights(vertices: FloatArray, faces: IntArray, selected_faces: I
     return weights
 
 
-def _material_tethers(cells: list[CellGeometry], ecm: ECMGeometry) -> tuple[IntArray, FloatArray]:
+def _material_tethers(
+    cells: list[CellGeometry],
+    ecm: ECMGeometry,
+    *,
+    cell_ecm_maximum_gap: float = 0.05,
+    cell_cell_maximum_gap: float = 0.15,
+    vectorized_ray_search: bool = False,
+) -> tuple[IntArray, FloatArray]:
     entity_index = {cell.entity_id: index for index, cell in enumerate(cells)}
     records: list[tuple[str, str, int, str, int, FloatArray, float, float, float, FloatArray, FloatArray]] = []
     ecm_entity = len(cells)
+    hit_search = ray_triangle_hit_vectorized if vectorized_ray_search else ray_triangle_hit
     for cell in cells:
         if cell.layer == "endocardial":
-            interface, direction, target_code, maximum = "IF_ENDO_ECM", np.array([0., 0., 1.]), ECM_BOUNDARY_CODES["lumen_facing"], 0.05
+            interface, direction, target_code = (
+                "IF_ENDO_ECM",
+                np.array([0., 0., 1.]),
+                ECM_BOUNDARY_CODES["lumen_facing"],
+            )
         else:
-            interface, direction, target_code, maximum = "IF_MYO_ECM", np.array([0., 0., -1.]), ECM_BOUNDARY_CODES["outer_facing"], 0.05
+            interface, direction, target_code = (
+                "IF_MYO_ECM",
+                np.array([0., 0., -1.]),
+                ECM_BOUNDARY_CODES["outer_facing"],
+            )
         target_ids = np.flatnonzero(ecm.boundary_identity == target_code).astype(np.int64)
         areas, normals = triangle_geometry(cell.vertices, cell.faces)
         for face_id in np.flatnonzero(cell.primary == PRIMARY_CODES["basal_ecm"]).tolist():
             master_face = cell.faces[face_id]
             master_point = cell.vertices[master_face].mean(axis=0)
-            target_face, target_bary, _ = ray_triangle_hit(
+            target_face, target_bary, _ = hit_search(
                 master_point, direction, ecm.vertices, ecm.boundary_faces, target_ids,
                 strictly_positive=False,
             )
@@ -407,7 +487,7 @@ def _material_tethers(cells: list[CellGeometry], ecm: ECMGeometry) -> tuple[IntA
             t1 = _normalized(edge)
             t2 = np.cross(normal, t1)
             gap = float(np.dot(slave_point - master_point, normal))
-            if gap < -1e-12 or gap > maximum + 1e-12:
+            if gap < -1e-12 or gap > cell_ecm_maximum_gap + 1e-12:
                 raise RuntimeError(f"invalid natural gap {gap} for {cell.entity_id}:{face_id}")
             records.append((interface, cell.entity_id, face_id, "ECM", target_face, target_bary, areas[face_id], gap, sign, t1, t2))
 
@@ -429,7 +509,7 @@ def _material_tethers(cells: list[CellGeometry], ecm: ECMGeometry) -> tuple[IntA
                         master_face = master.faces[face_id]
                         master_point = master.vertices[master_face].mean(axis=0)
                         try:
-                            target_face, target_bary, _ = ray_triangle_hit(
+                            target_face, target_bary, _ = hit_search(
                                 master_point, direction, slave.vertices, slave.faces, slave_faces,
                                 strictly_positive=True,
                             )
@@ -444,7 +524,7 @@ def _material_tethers(cells: list[CellGeometry], ecm: ECMGeometry) -> tuple[IntA
                         t1 = _normalized(master.vertices[master_face[1]] - master.vertices[master_face[0]])
                         t2 = np.cross(normal, t1)
                         gap = float(np.dot(slave_point - master_point, normal))
-                        if gap < -1e-12 or gap > 0.15 + 1e-12:
+                        if gap < -1e-12 or gap > cell_cell_maximum_gap + 1e-12:
                             raise RuntimeError(f"invalid cell-cell natural gap {gap}")
                         records.append(("IF_CELL_CELL", master.entity_id, face_id, slave.entity_id, target_face, target_bary, areas[face_id], gap, sign, t1, t2))
     records.sort(key=lambda item: (item[0], item[1], item[2], item[3], item[4]))
@@ -485,7 +565,14 @@ def _source_map(tether_int: IntArray, tether_float: FloatArray, cells: list[Cell
 
 
 def _owner_arrays(cells: list[CellGeometry], ecm: ECMGeometry) -> tuple[IntArray, IntArray]:
-    owners = np.full((len(cells), 320), OWNER_CODES["internal_interface"], dtype=np.int64)
+    face_count = len(cells[0].faces)
+    if any(len(cell.faces) != face_count for cell in cells):
+        raise ValueError("all cell templates must have the same face count")
+    owners = np.full(
+        (len(cells), face_count),
+        OWNER_CODES["internal_interface"],
+        dtype=np.int64,
+    )
     for cell_id, cell in enumerate(cells):
         if cell.layer == "endocardial":
             owners[cell_id, cell.primary == PRIMARY_CODES["apical_lumen"]] = OWNER_CODES["blood"]
@@ -506,10 +593,23 @@ def _owner_arrays(cells: list[CellGeometry], ecm: ECMGeometry) -> tuple[IntArray
     return owners, ecm_owner
 
 
-def reference_arrays() -> tuple[dict[str, np.ndarray], dict[str, object]]:
-    cells = build_cells()
-    ecm = build_ecm()
-    tether_int, tether_float = _material_tethers(cells, ecm)
+def reference_arrays(
+    subdivision_level: int = 2,
+    ecm_intervals: tuple[int, int, int] = (12, 8, 2),
+    *,
+    cell_ecm_maximum_gap: float = 0.05,
+    cell_cell_maximum_gap: float = 0.15,
+    vectorized_ray_search: bool = False,
+) -> tuple[dict[str, np.ndarray], dict[str, object]]:
+    cells = build_cells(subdivision_level)
+    ecm = build_ecm(*ecm_intervals)
+    tether_int, tether_float = _material_tethers(
+        cells,
+        ecm,
+        cell_ecm_maximum_gap=cell_ecm_maximum_gap,
+        cell_cell_maximum_gap=cell_cell_maximum_gap,
+        vectorized_ray_search=vectorized_ray_search,
+    )
     source_int, source_float = _source_map(tether_int, tether_float, cells, ecm)
     cell_owner, ecm_owner = _owner_arrays(cells, ecm)
     max_anchor = max(len(cell.anchor_minus) for cell in cells)

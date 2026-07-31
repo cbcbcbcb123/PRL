@@ -1,0 +1,146 @@
+{
+  "geometry_spec_id": "GEOMETRY-FAMILY-PRL-ROUTE-H-STAGE0-V06",
+  "schema_version": "6.0.0",
+  "created_at": "2026-07-31T09:35:21+08:00",
+  "status": "approved_materialized_candidate_pending_freeze",
+  "evidence_level": "deterministic_dimensionless_spatial_discretization_family_no_solver_response",
+  "supersedes_for_future_work": "GEOMETRY-PRL-ROUTE-H-STAGE0-V05 base-only topology",
+  "authority": {
+    "decision": "project_control/route_h_stage0_v06_discretization_authorization_decision_v01.md",
+    "decision_sha256": "1FBD85591EBE03CDF2940A8F6EE093354EB393BE4C3FE4B2F590B8C35FC69856",
+    "preflight": "project_control/route_h_stage2_preflight_discretization_block_v01.md",
+    "preflight_sha256": "B3BD9A4274BCEE0F33F1C145399C6FB9194DBFEA6497E7E85AE46E0C9F07BCE5"
+  },
+  "inherited_reference": {
+    "base_geometry_spec": "data/route_h/route_h_reference_geometry_spec_v05.json",
+    "base_geometry_spec_sha256": "45A1BE59D412B0816A4AB0BF15F4D6C37CF93F58D13CF584A22824CB032C9CFA",
+    "base_reference_bundle": "data/route_h/stage1_reference_bundle_v01/manifest.json",
+    "base_reference_bundle_sha256": "4A73D370162D8EBFB7B120C42881F7470D68E82D10ABD159CB65C2B73ADECC59",
+    "all_22_base_arrays_byte_exact": true
+  },
+  "family_manifest": {
+    "path": "data/route_h/stage0_v06_discretization_family/manifest.json",
+    "sha256": "7F76FC157D825AFFE66492ED8FBE1DECB0E32DC1926FAF9F50C275BF977751F3",
+    "family_sha256": "346ED9E4586717F14D58E7D10E8C7C07F702041922FFC7B807F7982769E2EA1F"
+  },
+  "levels": [
+    {
+      "array_payload_sha256": "D59B6D1338F6327B24F723FD79B0DEE46A44BB3095B697B8D0B4494264AC6F4B",
+      "bundle_sha256": "7597A71AC76A3B78D2A348D4FBBB3A54C6E155BE30F2AAC36212A4E70F4E538B",
+      "ecm_intervals": [
+        6,
+        4,
+        2
+      ],
+      "manifest_path": "coarse/manifest.json",
+      "manifest_sha256": "1F20A148421E779BC9E1A31669FB376123E10C34CE23C984C03E9D03AFE3857E",
+      "name": "coarse",
+      "subdivision_level": 1,
+      "expected_cell_count": 15,
+      "expected_vertices_per_cell": 42,
+      "expected_faces_per_cell": 80,
+      "expected_ECM_vertices": 105,
+      "expected_ECM_tetrahedra": 288
+    },
+    {
+      "array_payload_sha256": "4F3F6C1331ED1CDE0BD7F926E031FF0D0FEC5BBA48AC4C1CEC5E780961343905",
+      "bundle_sha256": "09AD92F711310451A93E2C31B66CDF9F3AC0319681A30C56AB3817EEE621286F",
+      "ecm_intervals": [
+        12,
+        8,
+        2
+      ],
+      "manifest_path": "base/manifest.json",
+      "manifest_sha256": "1816F1BD79BF6FBABBE1744ABE61D786B4D1E41228737CE0D25B28F873B274C8",
+      "name": "base",
+      "subdivision_level": 2,
+      "expected_cell_count": 15,
+      "expected_vertices_per_cell": 162,
+      "expected_faces_per_cell": 320,
+      "expected_ECM_vertices": 351,
+      "expected_ECM_tetrahedra": 1152
+    },
+    {
+      "array_payload_sha256": "7530A03D6328A92410AC8A5E7B48864F4D20A82EE78EE88CEBACECC967F057E9",
+      "bundle_sha256": "197C0C0E79195141A5A70F157CD4BAE872A32603DD678EC74BDCC702C6E9482B",
+      "ecm_intervals": [
+        24,
+        16,
+        4
+      ],
+      "manifest_path": "fine/manifest.json",
+      "manifest_sha256": "8E1C38798A9B80C9B3E304B16D5D8786D97082ED25E982F40E6A87622ECE4767",
+      "name": "fine",
+      "subdivision_level": 3,
+      "expected_cell_count": 15,
+      "expected_vertices_per_cell": 642,
+      "expected_faces_per_cell": 1280,
+      "expected_ECM_vertices": 2125,
+      "expected_ECM_tetrahedra": 9216
+    }
+  ],
+  "generator_contract": {
+    "cell_surface": "Use the v05 ordered icosahedron, binary64 normalization, child-face order, superellipsoid map and 8*eps z-x-y face-identity tie rule; subdivision levels are 1, 2 and 3.",
+    "ECM": "Use v05 bounds [0,3]x[0,1.8]x[0,0.2], structured vertex/brick IDs and six-tetra pattern with intervals 6x4x2, 12x8x2 and 24x16x4.",
+    "base_rule": "The base level uses the scalar v05 ray search and every serialized array must be byte-identical to the frozen Stage 1 v01 bundle.",
+    "coarse_fine_ray_rule": "The same nearest-distance then smallest-face-ID rule is evaluated with deterministic vectorized binary64 arithmetic; replay must be byte exact.",
+    "canonical_serialization": "signed little-endian int64 or IEEE-754 binary64 C-order; negative zero canonicalized; UTF-8 sorted canonical JSON; SHA-256."
+  },
+  "material_tether_discretization_admission": {
+    "cell_ECM_maximum_reference_natural_gap": 0.075,
+    "cell_cell_maximum_reference_natural_gap": 0.15,
+    "reason": "The coarse planar face barycenter has a registered maximum cell-ECM natural gap of 0.06348416662201481. The v06 family therefore seals a 0.075 geometry-admission ceiling before any response is run.",
+    "mechanical_effect": false,
+    "stored_pair_rule": "Every exact g0_pair remains serialized per tether and delta_g=g-g0_pair; the admission ceiling is never read by energy, force or solver code.",
+    "adhesion_or_steric_potential_change": false
+  },
+  "seal_gates": [
+    "all three levels contain exactly 22 canonical arrays",
+    "base arrays byte-match the v05 frozen bundle",
+    "cell surfaces are oriented watertight 2-manifolds with quality >=0.30",
+    "all cell signed volumes and ECM tetra determinants are positive",
+    "ECM has at least two tetrahedral layers through thickness",
+    "material-tether and myocardial-source-map coverage are exact",
+    "boundary owner and gauge arrays are complete and positive where required",
+    "passive reference energy and force thresholds pass at every level",
+    "reference material forces and moments pass at every level",
+    "closed-surface steric energy is zero and proper intersections are absent",
+    "a fresh generator replay reproduces every serialized array byte exactly"
+  ],
+  "spatial_response_protocol": {
+    "execution_stage": "Stage 2 after this family is frozen and inspected",
+    "registered_cases": [
+      "E0_ZERO",
+      "E4_COMBINED"
+    ],
+    "levels": [
+      "coarse",
+      "base",
+      "fine"
+    ],
+    "comparison": "base versus fine; coarse is retained as a trend diagnostic",
+    "relative_metric": "|q_base-q_fine|/max(1e-8,|q_base|,|q_fine|)",
+    "relative_threshold": 0.03,
+    "exact_zero_policy": "Use the pre-existing absolute tolerance for registered exact-zero metrics; never convert a near-zero quantity to a relative pass.",
+    "observables": [
+      "peak myocardial axial shortening",
+      "peak positive transverse scale change",
+      "maximum relative cell-volume error",
+      "minimum ECM J",
+      "maximum physical penetration",
+      "peak ECM tangential traction",
+      "peak pressure and WSS resultants when enabled",
+      "integrated active work",
+      "integrated pressure work",
+      "integrated WSS work",
+      "total dissipation",
+      "integrated normalized power residual"
+    ]
+  },
+  "explicit_exclusions": [
+    "periodic geometry or periodic image contact",
+    "new cell count or patch bounds",
+    "mechanical parameter sweep or response-dependent threshold adjustment",
+    "turnover, nonzero j_myo, physiological calibration or claim-bearing output"
+  ]
+}

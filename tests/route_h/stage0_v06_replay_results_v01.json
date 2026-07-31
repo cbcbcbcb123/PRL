@@ -1,0 +1,26 @@
+{
+  "evidence_id": "EVIDENCE-PRL-ROUTE-H-STAGE0-V06-REPLAY-V01",
+  "family_manifest": "data/route_h/stage0_v06_discretization_family/manifest.json",
+  "family_manifest_sha256": "7F76FC157D825AFFE66492ED8FBE1DECB0E32DC1926FAF9F50C275BF977751F3",
+  "levels": [
+    {
+      "level": "coarse",
+      "array_count": 22,
+      "unequal_arrays": [],
+      "passed": true
+    },
+    {
+      "level": "base",
+      "array_count": 22,
+      "unequal_arrays": [],
+      "passed": true
+    },
+    {
+      "level": "fine",
+      "array_count": 22,
+      "unequal_arrays": [],
+      "passed": true
+    }
+  ],
+  "passed": true
+}

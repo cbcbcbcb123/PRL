@@ -61,6 +61,14 @@ def evaluate_passive_reference(
         full_patch_trajectory=full_patch_trajectory,
     )
     arrays, _ = load_reference_bundle()
+    return evaluate_passive_arrays(arrays)
+
+
+def evaluate_passive_arrays(
+    arrays: dict[str, np.ndarray],
+) -> PassiveReferenceResult:
+    """Evaluate a passive reference array set without enabling a trajectory."""
+    require_passive_stage1()
     cell_energy = 0.0
     maximum_cell_force = 0.0
     for cell_id in range(len(arrays["cell_vertices"])):
@@ -95,6 +103,15 @@ def audit_reference_seal() -> ReferenceSealAudit:
     """Run the full assembled PreA reference-state checks."""
     require_passive_stage1()
     arrays, metadata = load_reference_bundle()
+    return audit_reference_arrays(arrays, metadata)
+
+
+def audit_reference_arrays(
+    arrays: dict[str, np.ndarray],
+    metadata: dict[str, object],
+) -> ReferenceSealAudit:
+    """Run the full assembled PreA checks on one sealed array set."""
+    require_passive_stage1()
     cell_count = len(arrays["cell_vertices"])
     entity_vertices = [array for array in arrays["cell_vertices"]] + [arrays["ecm_vertices"]]
     entity_faces = [array for array in arrays["cell_faces"]] + [arrays["ecm_boundary_faces"]]
