@@ -1,0 +1,144 @@
+{
+  "evidence_id": "EVIDENCE-PRL-ROUTE-H-STAGE0-V06-V01",
+  "contract_id": "CONTRACT-PRL-ROUTE-H-STAGE0-V06",
+  "family_manifest_sha256": "8E3F35BA8B69DD518D9EF4551D8791910F1AC260C3AE50A4B7211D5AEBDCBF0B",
+  "replay_evidence_sha256": "94A3F5CC41E9B0ECFCEB72618A99231A241C39FF2C17FDD000C0489C7FD8EB47",
+  "junit_sha256": "666D563CF2FBAACA50787BBDDDE5FA23769F6DBA8F534EDB8B7E5D19338A8C08",
+  "pytest": {
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "levels": {
+    "coarse": {
+      "cell_count": 15,
+      "vertices_per_cell": 42,
+      "faces_per_cell": 80,
+      "minimum_cell_triangle_quality": 0.4269934549237909,
+      "minimum_cell_signed_volume": 0.1631084531820984,
+      "minimum_anchor_length": 0.9246510283982459,
+      "ecm_vertices": 105,
+      "ecm_tetrahedra": 288,
+      "minimum_reference_tetra_determinant": 0.0225,
+      "minimum_ECM_J": 1.0,
+      "material_tethers": 468,
+      "myocardial_source_maps": 144,
+      "tether_gap_summary_by_interface_code": {
+        "1": {
+          "count": 96,
+          "maximum_g0_pair": 0.03785247193394912
+        },
+        "2": {
+          "count": 144,
+          "maximum_g0_pair": 0.06348416662201481
+        },
+        "3": {
+          "count": 228,
+          "maximum_g0_pair": 0.08674486146704599
+        }
+      },
+      "eligible_steric_pairs": 46,
+      "steric_owner_records": 4584,
+      "minimum_steric_gap": 0.0,
+      "proper_intersections": 0,
+      "steric_energy": 0.0,
+      "maximum_tether_opening": 4.440892098500626e-16,
+      "maximum_tether_slip": 1.962615573354719e-17,
+      "maximum_tether_force": 1.8793574782100235e-16,
+      "assembled_net_force": 8.942900523984784e-31,
+      "assembled_net_moment": 1.9721522630525295e-31,
+      "passive_total_energy": 5.137444960698065e-32,
+      "maximum_cell_force": 7.261854868270962e-17,
+      "maximum_ECM_force": 2.558937633260452e-17
+    },
+    "base": {
+      "cell_count": 15,
+      "vertices_per_cell": 162,
+      "faces_per_cell": 320,
+      "minimum_cell_triangle_quality": 0.3460311354261689,
+      "minimum_cell_signed_volume": 0.19285352592995667,
+      "minimum_anchor_length": 0.9821932172260959,
+      "ecm_vertices": 351,
+      "ecm_tetrahedra": 1152,
+      "minimum_reference_tetra_determinant": 0.005624999999999999,
+      "minimum_ECM_J": 1.0,
+      "material_tethers": 1828,
+      "myocardial_source_maps": 504,
+      "tether_gap_summary_by_interface_code": {
+        "1": {
+          "count": 336,
+          "maximum_g0_pair": 0.022915927509484898
+        },
+        "2": {
+          "count": 504,
+          "maximum_g0_pair": 0.0384333832371294
+        },
+        "3": {
+          "count": 988,
+          "maximum_g0_pair": 0.07219629310610368
+        }
+      },
+      "eligible_steric_pairs": 46,
+      "steric_owner_records": 16584,
+      "minimum_steric_gap": 0.0,
+      "proper_intersections": 0,
+      "steric_energy": 0.0,
+      "maximum_tether_opening": 4.443873654474961e-16,
+      "maximum_tether_slip": 2.1942709178604383e-17,
+      "maximum_tether_force": 2.7316190538445748e-17,
+      "assembled_net_force": 7.58321556256456e-31,
+      "assembled_net_moment": 2.9111173630988677e-30,
+      "passive_total_energy": 3.8522234511744953e-32,
+      "maximum_cell_force": 4.511310855777938e-17,
+      "maximum_ECM_force": 3.3853340862194516e-18
+    },
+    "fine": {
+      "cell_count": 15,
+      "vertices_per_cell": 642,
+      "faces_per_cell": 1280,
+      "minimum_cell_triangle_quality": 0.326587294472131,
+      "minimum_cell_signed_volume": 0.2001925809395191,
+      "minimum_anchor_length": 0.9936487392915747,
+      "ecm_vertices": 2125,
+      "ecm_tetrahedra": 9216,
+      "minimum_reference_tetra_determinant": 0.0007031249999999985,
+      "minimum_ECM_J": 1.0,
+      "material_tethers": 7268,
+      "myocardial_source_maps": 1944,
+      "tether_gap_summary_by_interface_code": {
+        "1": {
+          "count": 1296,
+          "maximum_g0_pair": 0.017466737646763587
+        },
+        "2": {
+          "count": 1944,
+          "maximum_g0_pair": 0.029294289816661646
+        },
+        "3": {
+          "count": 4028,
+          "maximum_g0_pair": 0.0606549939845197
+        }
+      },
+      "eligible_steric_pairs": 46,
+      "steric_owner_records": 65784,
+      "minimum_steric_gap": 0.0,
+      "proper_intersections": 0,
+      "steric_energy": 0.0,
+      "maximum_tether_opening": 4.49293380277993e-16,
+      "maximum_tether_slip": 2.7755575615628914e-17,
+      "maximum_tether_force": 1.672190303590045e-17,
+      "assembled_net_force": 7.732999898855354e-31,
+      "assembled_net_moment": 1.1713059421766623e-30,
+      "passive_total_energy": 1.0845997455956018e-31,
+      "maximum_cell_force": 3.514170203508043e-17,
+      "maximum_ECM_force": 1.0700586606578963e-18
+    }
+  },
+  "authorization": {
+    "stage2_scientific_runs_before_v06_freeze": 0,
+    "active_enabled_during_v06": false,
+    "full_patch_trajectory_run_during_v06": false,
+    "periodic_registered": false
+  }
+}

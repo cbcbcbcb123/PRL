@@ -238,6 +238,16 @@ def test_anchor_source_owner_and_gauge_coverage(v06_levels):
         assert np.all(arrays["ecm_gauge_lumped_volume_weights"] > 0.0)
 
 
+def test_coarse_fine_reference_plane_snap_preserves_exact_base(v06_levels):
+    for level_name in ("coarse", "fine"):
+        arrays, metadata = v06_levels[level_name]
+        assert "8*eps" in metadata["reference_plane_snap"]
+        assert float(np.min(arrays["cell_vertices"][6:, :, 2])) == 0.2
+        assert float(np.max(arrays["cell_vertices"][:6, :, 2])) == 0.0
+    _, base_metadata = v06_levels["base"]
+    assert base_metadata["reference_plane_snap"].startswith("disabled")
+
+
 def test_deterministic_replay_evidence_passes_all_levels():
     evidence = json.loads(
         (
@@ -359,6 +369,7 @@ def test_v06_registry_closes_only_the_discretization_preregistration_gap():
         "SPACE-MAP-COVERAGE",
         "SPACE-DETERMINISTIC-REPLAY",
         "SPACE-REFERENCE-SEAL",
+        "SPACE-FLOAT-INTERFACE-SNAP",
         "SPACE-REFINEMENT",
     }
     assert required <= set(test_ids)

@@ -133,6 +133,12 @@ def create_geometry_spec() -> dict[str, Any]:
                 "with deterministic vectorized binary64 arithmetic; replay must be "
                 "byte exact."
             ),
+            "coarse_fine_reference_plane_snap": (
+                "Before identity and tether generation, analytic cell-coordinate "
+                "extrema within 8*eps of a rounded 15-decimal reference plane are "
+                "snapped to that plane. This removes one-ULP false transverse "
+                "crossings; it is disabled at base so all v05 arrays remain byte exact."
+            ),
             "canonical_serialization": (
                 "signed little-endian int64 or IEEE-754 binary64 C-order; negative "
                 "zero canonicalized; UTF-8 sorted canonical JSON; SHA-256."
@@ -165,6 +171,7 @@ def create_geometry_spec() -> dict[str, Any]:
             "reference material forces and moments pass at every level",
             "closed-surface steric energy is zero and proper intersections are absent",
             "a fresh generator replay reproduces every serialized array byte exactly",
+            "fine myocardial/ECM analytic tangencies contain no proper intersections",
         ],
         "spatial_response_protocol": {
             "execution_stage": "Stage 2 after this family is frozen and inspected",
@@ -315,6 +322,11 @@ def create_contract(geometry: dict[str, Any]) -> None:
     contract["review_finding_resolutions"]["V06-DISCRETIZATION-001"] = (
         "The separately approved coarse/base/fine identity-bearing family exists; "
         "base is byte-exact to v05 and response observables are preregistered."
+    )
+    contract["review_finding_resolutions"]["V06-FLOAT-INTERFACE-SNAP-001"] = (
+        "A one-ULP fine myocardial vertex below the analytic ECM plane produced six "
+        "false transverse pair flags. Coarse/fine analytic extrema now use the frozen "
+        "8*eps reference-plane snap; base remains byte exact and all mechanics are unchanged."
     )
     contract["completion_gate"] = {
         "stage0_v06_contract_candidate": True,
@@ -546,6 +558,23 @@ def create_registry() -> None:
             "review_mapping": "V06-DISCRETIZATION-001",
         },
         {
+            "test_id": "SPACE-FLOAT-INTERFACE-SNAP",
+            "stage": "0",
+            "gate": "PreStage2",
+            "requirement": (
+                "Coarse/fine analytic cell extrema are snapped within 8*eps so "
+                "myocardial-ECM tangencies have zero proper intersections while base "
+                "arrays remain byte exact"
+            ),
+            "metric": "proper intersection or base-array changes",
+            "threshold": "0",
+            "units": "count",
+            "case_ids": "all",
+            "frozen_status": "registered_v06_materialization",
+            "failure_action": "do not freeze v06",
+            "review_mapping": "V06-FLOAT-INTERFACE-SNAP-001",
+        },
+        {
             "test_id": "SPACE-REFINEMENT",
             "stage": "2",
             "gate": "E",
@@ -604,6 +633,19 @@ ceiling**。该量只决定 reference tether 是否允许写入 bundle：
 - 每对 tether 仍使用自身封存的 `g0_pair` 和 `delta_g=g-g0_pair`；
 - cell–cell admission ceiling 保持 `0.15`；
 - 接触/黏附势、无量纲机械参数和所有 Stage 2 载荷均不变。
+
+## fine reference-plane binary64 erratum
+
+首次 fine seal audit 发现 6 个 myocardial–ECM entity pairs 被标记为 proper
+intersection。逐三角形检查表明：每个事件都来自解析上应为 `z=0.2` 的 myocardial
+极点被 binary64 计算为 `0.19999999999999996`，而相邻 fine 顶点略高于 ECM 平面，
+使静态判据把一个 one-ULP 切触误认为横穿。
+
+v06 在 coarse/fine identity 与 tether 生成前加入冻结的 reference-plane snap：
+若 cell 坐标极值与按 15 位小数规范化的解析参考平面相差不超过
+`8*eps*max(1,|coordinate|)`，则写为该参考平面。base 禁用该修订以保持 v05 的
+22 个数组逐字节不变。修订后 fine `min myocardial z=0.2`，proper intersection
+计数为 0；它不改变方程、参数、势能或响应。
 
 ## PreStage2 封存门
 

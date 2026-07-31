@@ -45,7 +45,7 @@
     },
     {
       "path": "data/route_h/route_h_spatial_discretization_family_v06.json",
-      "sha256": "0B502AC35AA029D6C44078D5979A130E8B33F6FD4745774A41FBA9B3CC05A338",
+      "sha256": "DF4F5BEEB85A0FF254006A5F310F82291F867D232BDBDDD0A5A642EB77620F2E",
       "role": "identity-bearing coarse/base/fine geometry family"
     }
   ],
@@ -86,7 +86,7 @@
   },
   "reference_geometry_and_state": {
     "geometry_spec": "data/route_h/route_h_spatial_discretization_family_v06.json",
-    "geometry_spec_sha256": "0B502AC35AA029D6C44078D5979A130E8B33F6FD4745774A41FBA9B3CC05A338",
+    "geometry_spec_sha256": "DF4F5BEEB85A0FF254006A5F310F82291F867D232BDBDDD0A5A642EB77620F2E",
     "materialization_authorized": true,
     "deterministic_identity": "Explicit icosahedron arrays, subdivision order, ECM tetra arrays, face subtypes and canonical serialization are frozen in the geometry spec.",
     "cell_targets": {
@@ -385,7 +385,8 @@
     "V03-ADH-COMPRESSION-SLACK-001": "The interval 0<=g<g0_pair is explicitly registered as intentional tension-only adhesion slack before physical steric overlap.",
     "V03-SENSOR-SEMANTICS-001": "chi_E is explicitly limited to a global prescribed-command diagnostic with no local-shear or mechanical-feedback claim.",
     "V05-FACE-TIE-001": "Binary64 near-equal component comparisons use an 8*eps tie band and the fixed z-x-y priority, restoring mirror-consistent corner identities without changing topology, coordinates, mechanics or parameters.",
-    "V06-DISCRETIZATION-001": "The separately approved coarse/base/fine identity-bearing family exists; base is byte-exact to v05 and response observables are preregistered."
+    "V06-DISCRETIZATION-001": "The separately approved coarse/base/fine identity-bearing family exists; base is byte-exact to v05 and response observables are preregistered.",
+    "V06-FLOAT-INTERFACE-SNAP-001": "A one-ULP fine myocardial vertex below the analytic ECM plane produced six false transverse pair flags. Coarse/fine analytic extrema now use the frozen 8*eps reference-plane snap; base remains byte exact and all mechanics are unchanged."
   },
   "completion_gate": {
     "stage0_v06_contract_candidate": true,

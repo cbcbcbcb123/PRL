@@ -32,6 +32,19 @@ ceiling**。该量只决定 reference tether 是否允许写入 bundle：
 - cell–cell admission ceiling 保持 `0.15`；
 - 接触/黏附势、无量纲机械参数和所有 Stage 2 载荷均不变。
 
+## fine reference-plane binary64 erratum
+
+首次 fine seal audit 发现 6 个 myocardial–ECM entity pairs 被标记为 proper
+intersection。逐三角形检查表明：每个事件都来自解析上应为 `z=0.2` 的 myocardial
+极点被 binary64 计算为 `0.19999999999999996`，而相邻 fine 顶点略高于 ECM 平面，
+使静态判据把一个 one-ULP 切触误认为横穿。
+
+v06 在 coarse/fine identity 与 tether 生成前加入冻结的 reference-plane snap：
+若 cell 坐标极值与按 15 位小数规范化的解析参考平面相差不超过
+`8*eps*max(1,|coordinate|)`，则写为该参考平面。base 禁用该修订以保持 v05 的
+22 个数组逐字节不变。修订后 fine `min myocardial z=0.2`，proper intersection
+计数为 0；它不改变方程、参数、势能或响应。
+
 ## PreStage2 封存门
 
 每个 level 必须同时通过：

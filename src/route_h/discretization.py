@@ -80,6 +80,7 @@ def _level_arrays(level: DiscretizationLevel) -> tuple[dict[str, np.ndarray], di
         cell_ecm_maximum_gap=CELL_ECM_MATERIALIZATION_GAP_CEILING,
         cell_cell_maximum_gap=CELL_CELL_MATERIALIZATION_GAP_CEILING,
         vectorized_ray_search=level.name != "base",
+        snap_reference_planes=level.name != "base",
     )
     metadata = dict(inherited_metadata)
     metadata.update(
@@ -100,6 +101,11 @@ def _level_arrays(level: DiscretizationLevel) -> tuple[dict[str, np.ndarray], di
                 CELL_CELL_MATERIALIZATION_GAP_CEILING
             ),
             "materialization_gap_ceiling_enters_mechanics": False,
+            "reference_plane_snap": (
+                "8*eps one-ULP-class snap of analytic cell extrema for coarse/fine"
+                if level.name != "base"
+                else "disabled to preserve byte-exact v05 base arrays"
+            ),
             "active_mechanism_enabled": False,
             "full_patch_trajectory_enabled": False,
         }

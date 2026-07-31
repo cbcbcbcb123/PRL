@@ -138,7 +138,13 @@ def icosphere_template(level: int = 2) -> SurfaceTemplate:
     return result
 
 
-def _superellipsoid(unit_vertices: FloatArray, center: Iterable[float], axes: Iterable[float]) -> FloatArray:
+def _superellipsoid(
+    unit_vertices: FloatArray,
+    center: Iterable[float],
+    axes: Iterable[float],
+    *,
+    snap_reference_planes: bool = False,
+) -> FloatArray:
     output = np.empty_like(unit_vertices)
     center_array = np.asarray(tuple(center), dtype=np.float64)
     axes_array = np.asarray(tuple(axes), dtype=np.float64)
@@ -153,6 +159,22 @@ def _superellipsoid(unit_vertices: FloatArray, center: Iterable[float], axes: It
         summed = summed_xy + powers[2]
         denominator = math.sqrt(math.sqrt(math.sqrt(summed)))
         output[row_id] = center_array + axes_array * direction / denominator
+    if snap_reference_planes:
+        for axis in range(3):
+            for sign in (-1.0, 1.0):
+                target = float(
+                    round(
+                        float(center_array[axis] + sign * axes_array[axis]),
+                        15,
+                    )
+                )
+                tolerance = (
+                    8.0
+                    * np.finfo(np.float64).eps
+                    * max(1.0, abs(target))
+                )
+                selected = np.abs(output[:, axis] - target) <= tolerance
+                output[selected, axis] = target
     output[output == 0.0] = 0.0
     return np.ascontiguousarray(output, dtype=np.float64)
 
@@ -181,7 +203,11 @@ def _face_labels(layer: str, unit_vertices: FloatArray, faces: IntArray) -> tupl
     return primary, directional
 
 
-def build_cells(subdivision_level: int = 2) -> list[CellGeometry]:
+def build_cells(
+    subdivision_level: int = 2,
+    *,
+    snap_reference_planes: bool = False,
+) -> list[CellGeometry]:
     template = icosphere_template(subdivision_level)
     cells: list[CellGeometry] = []
     for layer, nx, ny, axes in (
@@ -215,7 +241,12 @@ def build_cells(subdivision_level: int = 2) -> list[CellGeometry]:
                     layer=layer,
                     grid_i=i,
                     grid_j=j,
-                    vertices=_superellipsoid(template.unit_vertices, center, axes),
+                    vertices=_superellipsoid(
+                        template.unit_vertices,
+                        center,
+                        axes,
+                        snap_reference_planes=snap_reference_planes,
+                    ),
                     faces=template.faces.copy(),
                     primary=primary.copy(),
                     directional=directional.copy(),
@@ -600,8 +631,12 @@ def reference_arrays(
     cell_ecm_maximum_gap: float = 0.05,
     cell_cell_maximum_gap: float = 0.15,
     vectorized_ray_search: bool = False,
+    snap_reference_planes: bool = False,
 ) -> tuple[dict[str, np.ndarray], dict[str, object]]:
-    cells = build_cells(subdivision_level)
+    cells = build_cells(
+        subdivision_level,
+        snap_reference_planes=snap_reference_planes,
+    )
     ecm = build_ecm(*ecm_intervals)
     tether_int, tether_float = _material_tethers(
         cells,

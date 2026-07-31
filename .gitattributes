@@ -1,5 +1,10 @@
 # Preserve byte-stable line endings for versioned scientific contracts and records.
+.gitattributes text eol=lf
 *.json text eol=lf
 *.md text eol=lf
 *.csv text eol=lf
 *.txt text eol=lf
+*.py text eol=lf
+*.toml text eol=lf
+*.xml text eol=lf
+*.bin -text

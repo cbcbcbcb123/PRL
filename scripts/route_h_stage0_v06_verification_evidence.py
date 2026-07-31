@@ -32,6 +32,7 @@ V06_TEST_IDS = {
     "SPACE-MAP-COVERAGE",
     "SPACE-DETERMINISTIC-REPLAY",
     "SPACE-REFERENCE-SEAL",
+    "SPACE-FLOAT-INTERFACE-SNAP",
 }
 
 
@@ -205,11 +206,23 @@ def build_results() -> list[dict[str, str]]:
                 evidence = "tests/route_h/route_h_verification_registry_v06.csv"
                 note = "No inherited Stage 1 terminal row; retained as not run."
             else:
-                status = inherited["terminal_status"]
+                inherited_status = inherited["terminal_status"]
+                status = (
+                    "not_run_stage2_preexecution"
+                    if inherited_status.startswith("not_run")
+                    else inherited_status
+                )
                 evidence = (
                     "tests/route_h/stage1_verification_results_v02.csv"
                 )
-                note = "Stage 1 v02 terminal status inherited without promotion."
+                note = (
+                    "Stage 1 v02 pass inherited without promotion."
+                    if status == "passed"
+                    else (
+                        "Historically out of Stage 1 scope; Stage 2 is now authorized "
+                        "but this response test remains not run before v06 freeze."
+                    )
+                )
         else:
             status = "not_run_stage2_preexecution"
             evidence = (
