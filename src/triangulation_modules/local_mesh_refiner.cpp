@@ -1,9 +1,5 @@
 #include "local_mesh_refiner.hpp"
 
-#include <unordered_map>
-
-
-
 /*
     This class makes sure that all the edges of the cell meshes have lengths comprised in the range [l_min, l_max]. 
     When an edge is too long, it is subdivided into two edges. When an edge is too short, it is merged with into one node.
@@ -31,44 +27,6 @@ local_mesh_refiner::local_mesh_refiner(
 
 
 //-----------------------------------------------------------------------------------------------
-prl::core::SurfaceMeshSnapshot local_mesh_refiner::capture_surface_snapshot(const cell& c) const {
-    prl::core::SurfaceMeshSnapshot snapshot;
-    snapshot.cell_id = c.get_id();
-    snapshot.revision = c.get_mesh_revision();
-    snapshot.vertices.reserve(c.get_nb_of_nodes());
-    snapshot.faces.reserve(c.get_nb_of_faces());
-
-    std::unordered_map<unsigned, std::uint32_t> compact_vertex_index;
-    compact_vertex_index.reserve(c.get_nb_of_nodes());
-    for(const node& current_node: c.get_node_lst()){
-        if(!current_node.is_used()) continue;
-        const auto compact_index = static_cast<std::uint32_t>(snapshot.vertices.size());
-        compact_vertex_index.emplace(current_node.get_local_id(), compact_index);
-        snapshot.vertices.push_back({
-            current_node.get_persistent_id(),
-            {
-                current_node.pos().dx(),
-                current_node.pos().dy(),
-                current_node.pos().dz(),
-            },
-        });
-    }
-
-    for(const face& current_face: c.get_face_lst()){
-        if(!current_face.is_used()) continue;
-        const auto node_ids = current_face.get_node_ids();
-        snapshot.faces.push_back({{
-            compact_vertex_index.at(node_ids[0]),
-            compact_vertex_index.at(node_ids[1]),
-            compact_vertex_index.at(node_ids[2]),
-        }});
-    }
-    return snapshot;
-}
-//-----------------------------------------------------------------------------------------------
-
-
-//-----------------------------------------------------------------------------------------------
 void local_mesh_refiner::emit_remesh_event(
     const prl::core::RemeshOperation operation,
     cell_ptr c,
@@ -83,7 +41,7 @@ void local_mesh_refiner::emit_remesh_event(
 
     assert(before.has_value());
     assert(before->revision == before_revision);
-    const auto after = capture_surface_snapshot(*c);
+    const auto after = prl::cell_engine::capture_surface_snapshot(*c);
     const prl::core::RemeshEvent event{
         c->get_id(),
         operation,
@@ -347,7 +305,7 @@ void local_mesh_refiner::swap_edge(edge& e_ab, cell_ptr c) const noexcept(false)
     assert(e_da.has_face(f_2_id) && e_da.has_face(f_6_id));
 
     const auto before_snapshot = remesh_event_sink_
-        ? std::optional<prl::core::SurfaceMeshSnapshot>(capture_surface_snapshot(*c))
+        ? std::optional<prl::core::SurfaceMeshSnapshot>(prl::cell_engine::capture_surface_snapshot(*c))
         : std::nullopt;
 
     //Delete the faces 1 and 2 from the cell
@@ -475,7 +433,7 @@ void local_mesh_refiner::split_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_ch
     const node& n_d = c->get_node(id_n_d);
 
     const auto before_snapshot = remesh_event_sink_
-        ? std::optional<prl::core::SurfaceMeshSnapshot>(capture_surface_snapshot(*c))
+        ? std::optional<prl::core::SurfaceMeshSnapshot>(prl::cell_engine::capture_surface_snapshot(*c))
         : std::nullopt;
 
     //Create a node in the middle of the edge
@@ -694,7 +652,7 @@ void local_mesh_refiner::merge_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_ch
     const unsigned id_f_2 = e_ab.f2();
 
     const auto before_snapshot = remesh_event_sink_
-        ? std::optional<prl::core::SurfaceMeshSnapshot>(capture_surface_snapshot(*c))
+        ? std::optional<prl::core::SurfaceMeshSnapshot>(prl::cell_engine::capture_surface_snapshot(*c))
         : std::nullopt;
 
 

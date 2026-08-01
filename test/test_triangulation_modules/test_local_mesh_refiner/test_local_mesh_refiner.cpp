@@ -956,9 +956,9 @@ int local_mesh_refiner_tester::merge_edge_test(){
         );
     }
 
-    const auto before_rebase = lmr.capture_surface_snapshot(*c);
+    const auto before_rebase = prl::cell_engine::capture_surface_snapshot(*c);
     c->rebase();
-    const auto after_rebase = lmr.capture_surface_snapshot(*c);
+    const auto after_rebase = prl::cell_engine::capture_surface_snapshot(*c);
     const auto before_rebase_ids = sorted_vertex_ids(before_rebase);
     const auto after_rebase_ids = sorted_vertex_ids(after_rebase);
     const bool t11 = (

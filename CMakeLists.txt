@@ -18,9 +18,19 @@ else()
     message(STATUS "Python bindings disabled")
 endif()
 
+if(NOT DEFINED PRL_CELL_ENGINE_BUILD_TESTS)
+    set(PRL_CELL_ENGINE_BUILD_TESTS TRUE)
+endif()
 
-#Activate unit testing
-enable_testing()
+if(NOT DEFINED PRL_CELL_ENGINE_BUILD_EXECUTABLE)
+    set(PRL_CELL_ENGINE_BUILD_EXECUTABLE TRUE)
+endif()
+
+
+#Activate unit testing when this repository is built standalone.
+if(PRL_CELL_ENGINE_BUILD_TESTS)
+    enable_testing()
+endif()
 
 #Contains the external library such as tinyxml (the xml reader)
 add_subdirectory(lib)
@@ -29,22 +39,20 @@ add_subdirectory(lib)
 add_subdirectory(src bin) 
 
 #Library containing all the tests to run
-add_subdirectory(test)
+if(PRL_CELL_ENGINE_BUILD_TESTS)
+    add_subdirectory(test)
+endif()
 
-#Locate the openMP library to parallelize the code
-find_package(OpenMP REQUIRED)
-
-#Create the main executable
-add_executable(simucell3d main.cpp)
-
-#Indicate to main the path to project source directory
-add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
-
-#Link the lib, include and source libraries with the main library
-target_link_libraries(simucell3d PUBLIC 
-    src
-    OpenMP::OpenMP_CXX
-)
+#Create the standalone executable unless the engine is embedded as a library.
+if(PRL_CELL_ENGINE_BUILD_EXECUTABLE)
+    find_package(OpenMP REQUIRED)
+    add_executable(simucell3d main.cpp)
+    add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+    target_link_libraries(simucell3d PUBLIC
+        src
+        OpenMP::OpenMP_CXX
+    )
+endif()
 
 #In debog mode, we do not use openMP
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")

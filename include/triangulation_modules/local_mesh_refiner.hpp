@@ -21,7 +21,7 @@
 #include "cell.hpp"
 #include "face.hpp"
 #include "edge.hpp"
-#include "prl_cell_engine/remesh_contract.hpp"
+#include "prl_cell_engine/cell_surface_snapshot.hpp"
 
 
 
@@ -57,8 +57,6 @@ class local_mesh_refiner
         const std::function<void(cell_ptr)> refine_mesh_func_ = [=](cell_ptr c) -> void {refine_mesh(c);};
 
         friend class local_mesh_refiner_tester;
-
-        prl::core::SurfaceMeshSnapshot capture_surface_snapshot(const cell& c) const;
 
         void emit_remesh_event(
             prl::core::RemeshOperation operation,
