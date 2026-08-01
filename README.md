@@ -3,7 +3,7 @@
 本仓库现在包含两条严格隔离的证据线：
 
 1. **Route H reference/oracle**：独立闭合表面 DCM 细胞 + 独立四面体有限变形黏弹 ECM。Stage 2 Gate A 已冻结为 `failed_invalid_numerics`，Gate B–E 仍 blocked。
-2. **Hybrid X0–X1 implementation**：采用 PRL 自有 cell engine + 独立体积 ECM 的混合架构，不覆盖 Route H 历史结果。X0-A–E 已完成；X1-A 已冻结逐操作事件源，X1-B 已冻结 C++ 心肌材料状态迁移模块，X1-C 已冻结真实 remesher—材料迁移端到端 C++ 路径。
+2. **Hybrid X0–X1 implementation**：采用 PRL 自有 cell engine + 独立体积 ECM 的混合架构，不覆盖 Route H 历史结果。X0-A–E 已完成；X1-A–C 已冻结真实 remesher—材料迁移 C++ 闭环，X1-D 已冻结多细胞规模、并发确定性与性能基线。
 
 目标架构：
 
@@ -32,4 +32,12 @@ python scripts\run_hybrid_x0_probe.py
 python scripts\run_hybrid_x0_cd_probe.py
 ```
 
-长期架构决策见 `docs/adr/0001-owned-cpp-core-python-research-layer.md`，X0-C/D 冻结接口见 `docs/hybrid_architecture_v02.md`，X0-E 自有仓库拓扑见 `docs/hybrid_architecture_v03.md`，X1-A 事件源见 `docs/hybrid_architecture_v04.md`，X1-B C++ 状态迁移见 `docs/hybrid_architecture_v05.md`，X1-C 真实 C++ 闭环见 `docs/hybrid_architecture_v06.md`。下一安全切片为 X1-D 多细胞 remesh—材料迁移规模与性能基线。
+X1-D Release 基准入口：
+
+```powershell
+cmake -S cpp -B cpp/build-release -DCMAKE_BUILD_TYPE=Release
+cmake --build cpp/build-release --target prl_multicell_remesh_benchmark
+python scripts/run_hybrid_x1_d_benchmark.py --executable cpp/build-release/prl_multicell_remesh_benchmark --build-type Release
+```
+
+长期架构决策见 `docs/adr/0001-owned-cpp-core-python-research-layer.md`，X0-C/D 冻结接口见 `docs/hybrid_architecture_v02.md`，X0-E 自有仓库拓扑见 `docs/hybrid_architecture_v03.md`，X1-A–D 的递进冻结见 `docs/hybrid_architecture_v04.md` 至 `docs/hybrid_architecture_v07.md`。下一安全切片为 X1-E 单细胞主动收缩 C++ 最小闭环。

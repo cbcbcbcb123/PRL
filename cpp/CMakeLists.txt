@@ -92,5 +92,40 @@ if(BUILD_TESTING)
             NAME prl_cell_engine_material_transfer_real_split_merge
             COMMAND prl_cell_engine_material_transfer_integration_test real_split_merge
         )
+
+        add_executable(
+            prl_multicell_remesh_benchmark
+            benchmarks/multicell_remesh_benchmark.cpp
+        )
+        target_link_libraries(
+            prl_multicell_remesh_benchmark
+            PRIVATE
+                prl_core
+                triangulation_modules
+                mesh
+        )
+        add_test(
+            NAME prl_multicell_remesh_scale_smoke
+            COMMAND prl_multicell_remesh_benchmark
+                --cells 4
+                --operations-per-cell 8
+                --threads 2
+        )
+        add_test(
+            NAME prl_multicell_remesh_serial_parallel_determinism
+            COMMAND prl_multicell_remesh_benchmark
+                --cells 8
+                --operations-per-cell 16
+                --threads 4
+                --verify-determinism true
+        )
+        add_test(
+            NAME prl_multicell_remesh_split_merge_scale_smoke
+            COMMAND prl_multicell_remesh_benchmark
+                --cells 4
+                --operations-per-cell 2
+                --threads 2
+                --operation-pattern split_merge
+        )
     endif()
 endif()
