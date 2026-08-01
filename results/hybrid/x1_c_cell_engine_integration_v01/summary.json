@@ -1,0 +1,31 @@
+{
+  "audit_id": "PRL-HYBRID-X1-C-CELL-ENGINE-INTEGRATION-V01",
+  "status": "passed_frozen",
+  "date": "2026-08-01",
+  "cell_engine": {
+    "repository": "https://github.com/cbcbcbcb123/prl-cell-engine",
+    "branch": "codex/cell-engine-integration-seam",
+    "commit": "1ae6b27c785b3d4eabff136e3c8c588c2abc76ab",
+    "github_actions_run_id": 30698500648,
+    "github_actions_status": "success",
+    "github_actions_url": "https://github.com/cbcbcbcb123/prl-cell-engine/actions/runs/30698500648"
+  },
+  "implementation": {
+    "snapshot_adapter": "prl::cell_engine::capture_surface_snapshot(const cell&)",
+    "real_event_source": "local_mesh_refiner",
+    "material_consumer": "prl::core::MyocardialMaterialTransferSink",
+    "operations": ["edge_swap", "edge_split", "edge_merge"],
+    "linked_targets": ["prl_core", "triangulation_modules", "mesh"],
+    "failure_semantics": "cell topology and revision remain advanced; material registry does not commit; caller must abort the simulation step"
+  },
+  "tests": {
+    "parent_cpp_ctest": "11/11 passed",
+    "real_swap": "passed",
+    "real_split_merge": "passed",
+    "real_failure_propagation": "passed",
+    "fork_ctest": "126/126 passed",
+    "parent_python": "63 passed",
+    "diff_check": "passed"
+  },
+  "claim_guard": "X1-C verifies a real local_mesh_refiner-to-material-transfer C++ path. It does not verify a complete timestep driver, active contraction, volumetric ECM time integration, flow coupling, multicell scale performance, or physiological calibration."
+}

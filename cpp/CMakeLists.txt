@@ -4,6 +4,12 @@ project(prl_core LANGUAGES CXX)
 include(CTest)
 find_package(Threads REQUIRED)
 
+option(
+    PRL_BUILD_CELL_ENGINE_INTEGRATION_TESTS
+    "Build tests that link the controlled prl-cell-engine fork"
+    ON
+)
+
 add_library(prl_core STATIC src/myocardial_material_transfer.cpp)
 target_compile_features(prl_core PUBLIC cxx_std_17)
 target_link_libraries(prl_core PUBLIC Threads::Threads)
@@ -52,4 +58,39 @@ if(BUILD_TESTING)
         NAME prl_myocardial_material_transfer_multicell_concurrency
         COMMAND prl_myocardial_material_transfer_test multicell_concurrency
     )
+
+    if(PRL_BUILD_CELL_ENGINE_INTEGRATION_TESTS)
+        set(ENABLE_PYTHON_BINDINGS OFF CACHE BOOL "" FORCE)
+        set(PRL_CELL_ENGINE_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+        set(PRL_CELL_ENGINE_BUILD_EXECUTABLE OFF CACHE BOOL "" FORCE)
+        add_subdirectory(
+            "${CMAKE_CURRENT_SOURCE_DIR}/../external/simucell3d"
+            "${CMAKE_CURRENT_BINARY_DIR}/cell_engine"
+            EXCLUDE_FROM_ALL
+        )
+
+        add_executable(
+            prl_cell_engine_material_transfer_integration_test
+            tests/cell_engine_material_transfer_integration_test.cpp
+        )
+        target_link_libraries(
+            prl_cell_engine_material_transfer_integration_test
+            PRIVATE
+                prl_core
+                triangulation_modules
+                mesh
+        )
+        add_test(
+            NAME prl_cell_engine_material_transfer_real_swap
+            COMMAND prl_cell_engine_material_transfer_integration_test real_swap
+        )
+        add_test(
+            NAME prl_cell_engine_material_transfer_failure_propagation
+            COMMAND prl_cell_engine_material_transfer_integration_test failure_propagation
+        )
+        add_test(
+            NAME prl_cell_engine_material_transfer_real_split_merge
+            COMMAND prl_cell_engine_material_transfer_integration_test real_split_merge
+        )
+    endif()
 endif()
