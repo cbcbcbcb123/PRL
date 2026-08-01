@@ -74,6 +74,9 @@ struct RemeshTransferAudit {
     double maximum_fiber_norm_error{};
     double maximum_fiber_tangency_error{};
     double minimum_fiber_alignment{};
+    double maximum_rebind_error{};
+    double id_retention_fraction{};
+    double reference_weight_residual{};
 };
 
 /**
