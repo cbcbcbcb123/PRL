@@ -1,0 +1,40 @@
+{
+  "audit_id": "PRL-HYBRID-X1-A-REMESH-EVENT-V01",
+  "status": "passed_frozen",
+  "date": "2026-08-01",
+  "source": {
+    "owned_repository": "https://github.com/cbcbcbcb123/prl-cell-engine",
+    "owned_commit": "bbcdad4ae4f0134dec9a30c523ef253b314fc8f3",
+    "official_upstream_base": "38af45154070b2b08dcdb25cbe629de499f382d9"
+  },
+  "contract": {
+    "source_of_truth": "external/simucell3d/include/prl_cell_engine/remesh_contract.hpp",
+    "parent_compatibility_header": "cpp/include/prl/core/remesh_contract.hpp",
+    "callback_timing": "synchronous_after_each_accepted_operation",
+    "persistent_vertex_identity": "cell_scoped_monotone_uint64",
+    "mesh_revision": "increment_once_per_accepted_operation",
+    "snapshot_cost_without_sink": "none"
+  },
+  "operation_tests": {
+    "edge_split": "passed",
+    "edge_swap": "passed",
+    "edge_merge": "passed",
+    "persistent_ids_across_rebase": "passed",
+    "rejected_operation_revision": "passed",
+    "accepted_no_sink_revision": "passed"
+  },
+  "fork_tests": {
+    "focused_ctest": "5/5 passed",
+    "complete_ctest": "126/126 passed",
+    "github_actions_run_id": 30692305769,
+    "github_actions_status": "success",
+    "github_actions_url": "https://github.com/cbcbcbcb123/prl-cell-engine/actions/runs/30692305769"
+  },
+  "parent_tests": {
+    "cpp_contract": "1/1 passed",
+    "hybrid_python": "14 passed",
+    "stage0_v06_python": "11 passed",
+    "stage1_stage2_python": "38 passed"
+  },
+  "claim_guard": "X1-A verifies the synchronous remesh event source and stable mesh identity only; it does not verify the production C++ material-state transfer consumer, active contraction, volumetric ECM time integration, flow coupling, or physiological calibration."
+}

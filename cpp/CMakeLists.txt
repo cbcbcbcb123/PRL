@@ -9,6 +9,7 @@ target_include_directories(
     prl_core
     INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/simucell3d/include>
 )
 
 if(BUILD_TESTING)
