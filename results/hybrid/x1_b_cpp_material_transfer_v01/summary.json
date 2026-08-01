@@ -1,0 +1,34 @@
+{
+  "audit_id": "PRL-HYBRID-X1-B-CPP-MATERIAL-TRANSFER-V01",
+  "status": "passed_frozen",
+  "date": "2026-08-01",
+  "cell_engine": {
+    "repository": "https://github.com/cbcbcbcb123/prl-cell-engine",
+    "commit": "7fc0ae0b2c01218c540d40b48bf81ce3db22e42b",
+    "github_actions_run_id": 30697145303,
+    "github_actions_status": "success",
+    "github_actions_url": "https://github.com/cbcbcbcb123/prl-cell-engine/actions/runs/30697145303"
+  },
+  "implementation": {
+    "public_header": "cpp/include/prl/core/myocardial_material_transfer.hpp",
+    "source": "cpp/src/myocardial_material_transfer.cpp",
+    "ownership": "persistent_material_point_id",
+    "host_representation": "persistent_vertex_id_triplet_plus_barycentric_coordinates",
+    "concurrency": "registry_map_lock_plus_per_cell_lock",
+    "failure_commit_semantics": "atomic_material_state_no_commit_on_exception"
+  },
+  "tests": {
+    "parent_cpp_ctest": "8/8 passed",
+    "parent_cpp_warnings_as_errors": "passed",
+    "fork_ctest": "126/126 passed",
+    "parent_python": "63 passed",
+    "edge_swap": "passed",
+    "edge_split": "passed",
+    "edge_merge": "passed",
+    "stable_host_ids": "passed",
+    "fiber_projection": "passed",
+    "failure_atomicity": "passed",
+    "multicell_concurrency": "passed"
+  },
+  "claim_guard": "X1-B verifies the production C++ material-transfer consumer against synthetic contract snapshots. A real local_mesh_refiner-to-consumer integration path, active contraction, volumetric ECM time integration, flow coupling, scale benchmarks, and physiological calibration remain unverified."
+}

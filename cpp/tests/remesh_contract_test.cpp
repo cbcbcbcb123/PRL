@@ -65,8 +65,14 @@ int main() {
         0.0,
         0.0,
         1.0,
+        0.0,
+        1.0,
+        0.0,
     };
     assert(audit.region_retention_fraction == 1.0);
     assert(audit.minimum_fiber_alignment == 1.0);
+    assert(audit.maximum_rebind_error == 0.0);
+    assert(audit.id_retention_fraction == 1.0);
+    assert(audit.reference_weight_residual == 0.0);
     return 0;
 }

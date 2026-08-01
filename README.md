@@ -3,7 +3,7 @@
 本仓库现在包含两条严格隔离的证据线：
 
 1. **Route H reference/oracle**：独立闭合表面 DCM 细胞 + 独立四面体有限变形黏弹 ECM。Stage 2 Gate A 已冻结为 `failed_invalid_numerics`，Gate B–E 仍 blocked。
-2. **Hybrid X0–X1 implementation**：采用 PRL 自有 cell engine + 独立体积 ECM 的混合架构，不覆盖 Route H 历史结果。X0-A–E 已完成；X1-A 已把逐 split/swap/merge 的同步事件源落入受控 fork。
+2. **Hybrid X0–X1 implementation**：采用 PRL 自有 cell engine + 独立体积 ECM 的混合架构，不覆盖 Route H 历史结果。X0-A–E 已完成；X1-A 已冻结逐操作事件源，X1-B 已冻结 C++ 心肌材料状态迁移模块。
 
 目标架构：
 
@@ -32,4 +32,4 @@ python scripts\run_hybrid_x0_probe.py
 python scripts\run_hybrid_x0_cd_probe.py
 ```
 
-长期架构决策见 `docs/adr/0001-owned-cpp-core-python-research-layer.md`，X0-C/D 冻结接口见 `docs/hybrid_architecture_v02.md`，X0-E 自有仓库拓扑见 `docs/hybrid_architecture_v03.md`，X1-A 事件源见 `docs/hybrid_architecture_v04.md`。下一安全切片为 X1-B C++ 材料状态迁移适配器。
+长期架构决策见 `docs/adr/0001-owned-cpp-core-python-research-layer.md`，X0-C/D 冻结接口见 `docs/hybrid_architecture_v02.md`，X0-E 自有仓库拓扑见 `docs/hybrid_architecture_v03.md`，X1-A 事件源见 `docs/hybrid_architecture_v04.md`，X1-B C++ 状态迁移见 `docs/hybrid_architecture_v05.md`。下一安全切片为 X1-C 真实 remesher—材料迁移端到端集成。
