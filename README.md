@@ -14,7 +14,7 @@
 - `src/route_h/`：原小规模参考力学内核；
 - `src/hybrid/`：混合架构的持久材料点与耦合 seam；
 - `cpp/`：PRL 自有 C++17 高性能内核的公共合同与测试；
-- `external/simucell3d/`：固定提交的官方 SimuCell3D submodule；
+- `external/simucell3d/`：固定提交的 PRL 受控 fork submodule；官方基线通过 fork 的 `upstream/main` 与 immutable tag 保留；
 - `tests/stage1/`, `tests/stage2/`, `tests/hybrid/`：可执行验证；
 - `docs/`：模型与架构说明；
 - `project_control/`：计划、冻结边界和阶段记录；
@@ -32,4 +32,4 @@ python scripts\run_hybrid_x0_probe.py
 python scripts\run_hybrid_x0_cd_probe.py
 ```
 
-长期架构决策见 `docs/adr/0001-owned-cpp-core-python-research-layer.md`，冻结接口见 `docs/hybrid_architecture_v02.md`。目前 X0-A–D 已完成；下一关口为 X0-E 受控 fork 决策。
+长期架构决策见 `docs/adr/0001-owned-cpp-core-python-research-layer.md`，X0-C/D 冻结接口见 `docs/hybrid_architecture_v02.md`，X0-E 自有仓库拓扑见 `docs/hybrid_architecture_v03.md`。目前 X0-A–E 已完成；下一安全切片为 X1-A remesh event hook。
