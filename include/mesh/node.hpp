@@ -6,6 +6,7 @@
 #include <memory>
 #include <optional>
 #include <map>
+#include <cstdint>
 
 #include <omp.h>
 
@@ -34,6 +35,10 @@ class node final
 
         //Each node has a unique identifier
         unsigned node_id_;
+
+        //Stable identity within the owning cell. Unlike node_id_, this value is
+        //never rewritten by cell::rebase() and is not reused after remeshing.
+        std::uint64_t persistent_id_ = 0;
 
         //Wether or not it is used by a cell
         bool is_used_ = true;
@@ -133,6 +138,9 @@ class node final
         
         //Get the unique identifier of this node
         unsigned get_local_id() const noexcept {return node_id_;}
+
+        //Get the stable identifier used by remesh-state transfer.
+        std::uint64_t get_persistent_id() const noexcept {return persistent_id_;}
 
         //Get a constant reference of the node position, force and momentum
         inline const vec3& pos()       const noexcept {return pos_;}

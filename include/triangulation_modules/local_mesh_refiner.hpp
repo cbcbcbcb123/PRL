@@ -7,6 +7,8 @@
 #include <cassert>
 #include <cmath>  
 #include <set>  
+#include <memory>
+#include <optional>
 
 
 #include "utils.hpp"
@@ -19,6 +21,7 @@
 #include "cell.hpp"
 #include "face.hpp"
 #include "edge.hpp"
+#include "prl_cell_engine/remesh_contract.hpp"
 
 
 
@@ -40,6 +43,9 @@ class local_mesh_refiner
         //by swapping their longest edge
         const bool enable_edge_swap_operation_;
 
+        //Optional observer. When absent, no remesh snapshots are constructed.
+        const std::shared_ptr<prl::core::RemeshEventSink> remesh_event_sink_;
+
         //The isoperimetric ratio of an equliateral triangle, which
         //is the smmallest possible isoperimetric ratio
         static constexpr double q_min_ = 36. / std::sqrt(3.);
@@ -51,6 +57,14 @@ class local_mesh_refiner
         const std::function<void(cell_ptr)> refine_mesh_func_ = [=](cell_ptr c) -> void {refine_mesh(c);};
 
         friend class local_mesh_refiner_tester;
+
+        prl::core::SurfaceMeshSnapshot capture_surface_snapshot(const cell& c) const;
+
+        void emit_remesh_event(
+            prl::core::RemeshOperation operation,
+            cell_ptr c,
+            const std::optional<prl::core::SurfaceMeshSnapshot>& before
+        ) const;
 
 
     public:
@@ -68,7 +82,12 @@ class local_mesh_refiner
         double get_l_max_squared() const noexcept {return l_max_squared_;};
 
         //Trivial constructor
-        local_mesh_refiner(const double l_min, const double l_max, const bool enable_edge_swap_operation = true) noexcept;
+        local_mesh_refiner(
+            const double l_min,
+            const double l_max,
+            const bool enable_edge_swap_operation = true,
+            std::shared_ptr<prl::core::RemeshEventSink> remesh_event_sink = nullptr
+        ) noexcept;
 
         //Refine the meshes of all the cells in the vector
         void refine_meshes(const std::vector<cell_ptr> cell_lst) const noexcept(false);

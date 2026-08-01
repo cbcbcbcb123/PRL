@@ -1,5 +1,7 @@
 #include "local_mesh_refiner.hpp"
 
+#include <unordered_map>
+
 
 
 /*
@@ -11,13 +13,85 @@
 
 //-----------------------------------------------------------------------------------------------
 //Trivial constructor
-local_mesh_refiner::local_mesh_refiner(const double l_min, const double l_max, const bool enable_edge_swap_operation /*=true*/ ) noexcept: 
+local_mesh_refiner::local_mesh_refiner(
+    const double l_min,
+    const double l_max,
+    const bool enable_edge_swap_operation /*=true*/,
+    std::shared_ptr<prl::core::RemeshEventSink> remesh_event_sink /*=nullptr*/
+) noexcept:
     l_min_(l_min), l_max_(l_max), 
     l_min_squared_(l_min * l_min), l_max_squared_(l_max * l_max),
-    enable_edge_swap_operation_(enable_edge_swap_operation) 
+    enable_edge_swap_operation_(enable_edge_swap_operation),
+    remesh_event_sink_(std::move(remesh_event_sink))
 {
     assert(l_min_ > 0.);
     assert(l_max_ > l_min_);    
+}
+//-----------------------------------------------------------------------------------------------
+
+
+//-----------------------------------------------------------------------------------------------
+prl::core::SurfaceMeshSnapshot local_mesh_refiner::capture_surface_snapshot(const cell& c) const {
+    prl::core::SurfaceMeshSnapshot snapshot;
+    snapshot.cell_id = c.get_id();
+    snapshot.revision = c.get_mesh_revision();
+    snapshot.vertices.reserve(c.get_nb_of_nodes());
+    snapshot.faces.reserve(c.get_nb_of_faces());
+
+    std::unordered_map<unsigned, std::uint32_t> compact_vertex_index;
+    compact_vertex_index.reserve(c.get_nb_of_nodes());
+    for(const node& current_node: c.get_node_lst()){
+        if(!current_node.is_used()) continue;
+        const auto compact_index = static_cast<std::uint32_t>(snapshot.vertices.size());
+        compact_vertex_index.emplace(current_node.get_local_id(), compact_index);
+        snapshot.vertices.push_back({
+            current_node.get_persistent_id(),
+            {
+                current_node.pos().dx(),
+                current_node.pos().dy(),
+                current_node.pos().dz(),
+            },
+        });
+    }
+
+    for(const face& current_face: c.get_face_lst()){
+        if(!current_face.is_used()) continue;
+        const auto node_ids = current_face.get_node_ids();
+        snapshot.faces.push_back({{
+            compact_vertex_index.at(node_ids[0]),
+            compact_vertex_index.at(node_ids[1]),
+            compact_vertex_index.at(node_ids[2]),
+        }});
+    }
+    return snapshot;
+}
+//-----------------------------------------------------------------------------------------------
+
+
+//-----------------------------------------------------------------------------------------------
+void local_mesh_refiner::emit_remesh_event(
+    const prl::core::RemeshOperation operation,
+    cell_ptr c,
+    const std::optional<prl::core::SurfaceMeshSnapshot>& before
+) const {
+    const auto before_revision = c->mesh_revision_;
+    c->mesh_revision_++;
+    if(!remesh_event_sink_){
+        assert(!before.has_value());
+        return;
+    }
+
+    assert(before.has_value());
+    assert(before->revision == before_revision);
+    const auto after = capture_surface_snapshot(*c);
+    const prl::core::RemeshEvent event{
+        c->get_id(),
+        operation,
+        before->revision,
+        after.revision,
+    };
+    assert(prl::core::is_valid_remesh_event(event, before.value(), after));
+    remesh_event_sink_->on_remesh(event, before.value(), after);
 }
 //-----------------------------------------------------------------------------------------------
 
@@ -272,6 +346,10 @@ void local_mesh_refiner::swap_edge(edge& e_ab, cell_ptr c) const noexcept(false)
     assert(e_bd.has_face(f_2_id) && e_bd.has_face(f_7_id));
     assert(e_da.has_face(f_2_id) && e_da.has_face(f_6_id));
 
+    const auto before_snapshot = remesh_event_sink_
+        ? std::optional<prl::core::SurfaceMeshSnapshot>(capture_surface_snapshot(*c))
+        : std::nullopt;
+
     //Delete the faces 1 and 2 from the cell
     c->delete_face(f_1.get_local_id());
     c->delete_face(f_2.get_local_id());
@@ -329,6 +407,8 @@ void local_mesh_refiner::swap_edge(edge& e_ab, cell_ptr c) const noexcept(false)
     assert(e_cb.has_face(f_4_id) && e_cb.has_face(f_8_id));
     assert(e_bd.has_face(f_4_id) && e_bd.has_face(f_7_id));
     assert(e_da.has_face(f_3_id) && e_da.has_face(f_6_id));
+
+    emit_remesh_event(prl::core::RemeshOperation::edge_swap, c, before_snapshot);
 
 
 
@@ -393,6 +473,10 @@ void local_mesh_refiner::split_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_ch
     const unsigned id_n_d = f_2.get_opposite_node(n_a.get_local_id(), n_b.get_local_id());
     const node& n_c = c->get_node(id_n_c);
     const node& n_d = c->get_node(id_n_d);
+
+    const auto before_snapshot = remesh_event_sink_
+        ? std::optional<prl::core::SurfaceMeshSnapshot>(capture_surface_snapshot(*c))
+        : std::nullopt;
 
     //Create a node in the middle of the edge
     const vec3 n_e_pos = (n_b.pos() + n_a.pos()) * 0.5;
@@ -502,6 +586,8 @@ void local_mesh_refiner::split_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_ch
     if(edge_i_ad != edge_to_check_set.end()){const_cast<edge&>(*edge_i_ad).replace_face(f_2_id, f_4_id);}
     if(edge_i_bd != edge_to_check_set.end()){const_cast<edge&>(*edge_i_bd).replace_face(f_2_id, f_6_id);}
 
+    emit_remesh_event(prl::core::RemeshOperation::edge_split, c, before_snapshot);
+
 
 }
 //-----------------------------------------------------------------------------------------------
@@ -607,6 +693,10 @@ void local_mesh_refiner::merge_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_ch
     const unsigned id_f_1 = e_ab.f1();
     const unsigned id_f_2 = e_ab.f2();
 
+    const auto before_snapshot = remesh_event_sink_
+        ? std::optional<prl::core::SurfaceMeshSnapshot>(capture_surface_snapshot(*c))
+        : std::nullopt;
+
 
     //The node i will be inserted at the middle of the edge
     const vec3 n_i_pos = (n_b.pos() + n_a.pos()) * 0.5;
@@ -675,6 +765,8 @@ void local_mesh_refiner::merge_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_ch
             edge_to_check_set.insert(e);
         }
     });
+
+    emit_remesh_event(prl::core::RemeshOperation::edge_merge, c, before_snapshot);
 
 }
 //-----------------------------------------------------------------------------------------------

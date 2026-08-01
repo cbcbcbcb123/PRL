@@ -16,6 +16,7 @@
 #include <numeric>
 #include <chrono> 
 #include <random>
+#include <cstdint>
 
 #include "global_configuration.hpp"
 
@@ -73,6 +74,14 @@ class cell: public std::enable_shared_from_this<cell> {
         //The index of the cell in the cell_lst vector
         unsigned local_id_; 
 
+        //Monotone revision of the surface topology, incremented after every
+        //accepted split, swap, or merge operation.
+        std::uint64_t mesh_revision_ = 0;
+
+        //Monotone source of stable node identities. Values are scoped by
+        //cell_id_ and are deliberately not recycled when node slots are reused.
+        std::uint64_t next_persistent_node_id_ = 0;
+
         //Pointer to the structure that stores all the cell type parameters
         cell_type_param_ptr cell_type_; 
 
@@ -121,6 +130,8 @@ class cell: public std::enable_shared_from_this<cell> {
  
         void add_free_node(const unsigned node_id) noexcept;
         void add_free_face(const unsigned face_id) noexcept;
+
+        void assign_initial_persistent_node_ids() noexcept;
 
         void update_target_volume(const double time_step) noexcept;
 
@@ -188,6 +199,7 @@ class cell: public std::enable_shared_from_this<cell> {
         //Set the position of the cell in the cell_lst vector
         void set_local_id(const unsigned local_id) noexcept {local_id_ = local_id;}
         unsigned get_local_id() const noexcept {return local_id_;}
+        std::uint64_t get_mesh_revision() const noexcept {return mesh_revision_;}
 
 
         //Returns the number of nodes used by the cell mesh

@@ -9,6 +9,15 @@
 
 
 //---------------------------------------------------------------------------------------------------------
+void cell::assign_initial_persistent_node_ids() noexcept{
+    for(node& current_node : node_lst_){
+        current_node.persistent_id_ = next_persistent_node_id_++;
+    }
+}
+//---------------------------------------------------------------------------------------------------------
+
+
+//---------------------------------------------------------------------------------------------------------
 //Instantiate the cell by directly giving it its nodes and faces as well as its parameters
 cell::cell(
             const std::vector<node>& node_lst,
@@ -20,6 +29,7 @@ cell::cell(
 
     node_lst_ = node_lst;
     face_lst_ = face_lst;
+    assign_initial_persistent_node_ids();
 }
 
 //---------------------------------------------------------------------------------------------------------
@@ -68,6 +78,7 @@ cell::cell(
     for(unsigned face_id = 0; face_id < nb_faces; face_id++){
         face_lst_.emplace_back(face_node_ids[face_id*3    ],face_node_ids[face_id*3 + 1],face_node_ids[face_id*3 + 2],face_id);
     }
+    assign_initial_persistent_node_ids();
 }
 //---------------------------------------------------------------------------------------------------------
 
@@ -114,6 +125,7 @@ cell::cell(
     for(unsigned face_id = 0; face_id < nb_faces; face_id++){
         face_lst_.emplace_back(m.face_point_ids[face_id][0], m.face_point_ids[face_id][1], m.face_point_ids[face_id][2], face_id);
     }
+    assign_initial_persistent_node_ids();
 
 }
 //---------------------------------------------------------------------------------------------------------
@@ -585,6 +597,7 @@ unsigned cell::add_node(const node& n) noexcept{
         //Update the id of the node
         node_lst_[free_node_id].set_local_id(free_node_id);
         node_lst_[free_node_id].set_is_used(true);
+        node_lst_[free_node_id].persistent_id_ = next_persistent_node_id_++;
 
         return free_node_id;
 
@@ -596,6 +609,7 @@ unsigned cell::add_node(const node& n) noexcept{
         node_lst_.back().set_local_id(node_lst_.size() - 1);
 
         node_lst_.back().set_is_used(true);
+        node_lst_.back().persistent_id_ = next_persistent_node_id_++;
 
         return node_lst_.size() - 1;
     }

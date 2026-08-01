@@ -1,5 +1,39 @@
 #include "local_mesh_refiner_tester.hpp"
 
+#include <cstdint>
+
+
+namespace {
+
+struct recorded_remesh_event {
+    prl::core::RemeshEvent event;
+    prl::core::SurfaceMeshSnapshot before;
+    prl::core::SurfaceMeshSnapshot after;
+};
+
+class recording_remesh_sink final : public prl::core::RemeshEventSink {
+public:
+    void on_remesh(
+        const prl::core::RemeshEvent& event,
+        const prl::core::SurfaceMeshSnapshot& before,
+        const prl::core::SurfaceMeshSnapshot& after
+    ) override {
+        records.push_back({event, before, after});
+    }
+
+    std::vector<recorded_remesh_event> records;
+};
+
+std::vector<std::uint64_t> sorted_vertex_ids(const prl::core::SurfaceMeshSnapshot& snapshot) {
+    std::vector<std::uint64_t> ids;
+    ids.reserve(snapshot.vertices.size());
+    for (const auto& vertex : snapshot.vertices) ids.push_back(vertex.persistent_id);
+    std::sort(ids.begin(), ids.end());
+    return ids;
+}
+
+} // namespace
+
 
 
 
@@ -91,12 +125,14 @@ int local_mesh_refiner_tester::can_be_merged_test(){
 
     //Remove the face ABD ADC and BCD
     bool t2 = lmr.can_be_merged(edge_ab, c) == false;
+    bool t3 = c->get_mesh_revision() == 0;
 
 
     std::cout << t1 << std::endl;
     std::cout << t2 << std::endl;
+    std::cout << t3 << std::endl;
  
-    return !(t1 && t2);
+    return !(t1 && t2 && t3);
 }
 
 
@@ -438,7 +474,8 @@ int local_mesh_refiner_tester::edge_swap_test(){
     edge& edge_ab = const_cast<edge&>(*edge_it);
 
     //Create the local mesh refiner
-    local_mesh_refiner lmr(0.1, 0.3);
+    auto event_sink = std::make_shared<recording_remesh_sink>();
+    local_mesh_refiner lmr(0.1, 0.3, true, event_sink);
 
     //Remove the face ABD ADC and BCD
     lmr.swap_edge(edge_ab, c);
@@ -477,12 +514,36 @@ int local_mesh_refiner_tester::edge_swap_test(){
                 std::equal(f2_nodes.begin(), f2_nodes.end(), std::vector<unsigned int>{1, 2, 3}.begin())
             );
 
+    bool t4 = false;
+    if(event_sink->records.size() == 1){
+        const auto& record = event_sink->records.front();
+        t4 = (
+            record.event.operation == prl::core::RemeshOperation::edge_swap
+            && prl::core::is_valid_remesh_event(record.event, record.before, record.after)
+            && record.event.cell_id == c->get_id()
+            && record.event.before_revision == 0
+            && record.event.after_revision == 1
+            && record.before.vertices.size() == record.after.vertices.size()
+            && record.before.faces.size() == record.after.faces.size()
+            && sorted_vertex_ids(record.before) == sorted_vertex_ids(record.after)
+        );
+    }
+
+    bool t5 = false;
+    const auto reverse_edge_it = c->get_edge_set().find(edge(2, 3));
+    if(reverse_edge_it != c->get_edge_set().end()){
+        local_mesh_refiner legacy_lmr(0.1, 0.3);
+        legacy_lmr.swap_edge(const_cast<edge&>(*reverse_edge_it), c);
+        t5 = c->get_mesh_revision() == 2 && event_sink->records.size() == 1;
+    }
 
     std::cout << "t1 " << t1 << std::endl;
     std::cout << "t2 " << t2 << std::endl;
     std::cout << "t3 " << t3 << std::endl;
+    std::cout << "t4 " << t4 << std::endl;
+    std::cout << "t5 " << t5 << std::endl;
 
-    return !(t1 && t2 && t3);
+    return !(t1 && t2 && t3 && t4 && t5);
 
 
 }
@@ -606,7 +667,8 @@ int local_mesh_refiner_tester::split_edge_test(){
     edge& edge_ab = const_cast<edge&>(*edge_it);
 
     //Create the local mesh refiner
-    local_mesh_refiner lmr(0.1, 0.3);
+    auto event_sink = std::make_shared<recording_remesh_sink>();
+    local_mesh_refiner lmr(0.1, 0.3, true, event_sink);
 
     edge_set dummy_set;
 
@@ -642,6 +704,22 @@ int local_mesh_refiner_tester::split_edge_test(){
     #else
         bool t6 = true;
     #endif
+
+    bool t7 = false;
+    if(event_sink->records.size() == 1){
+        const auto& record = event_sink->records.front();
+        const auto before_ids = sorted_vertex_ids(record.before);
+        const auto after_ids = sorted_vertex_ids(record.after);
+        t7 = (
+            record.event.operation == prl::core::RemeshOperation::edge_split
+            && prl::core::is_valid_remesh_event(record.event, record.before, record.after)
+            && record.event.before_revision == 0
+            && record.event.after_revision == 1
+            && record.after.vertices.size() == record.before.vertices.size() + 1
+            && record.after.faces.size() == record.before.faces.size() + 2
+            && std::includes(after_ids.begin(), after_ids.end(), before_ids.begin(), before_ids.end())
+        );
+    }
     
 
     std::cout << "t1 " << t1 << std::endl;
@@ -650,8 +728,9 @@ int local_mesh_refiner_tester::split_edge_test(){
     std::cout << "t4 " << t4 << std::endl;
     std::cout << "t5 " << t5 << std::endl;
     std::cout << "t6 " << t6 << std::endl;
+    std::cout << "t7 " << t7 << std::endl;
 
-    return !(t1 && t2 && t3 && t4 && t5 && t6);
+    return !(t1 && t2 && t3 && t4 && t5 && t6 && t7);
 }
 //---------------------------------------------------------------------------------------------------------
 
@@ -772,7 +851,8 @@ int local_mesh_refiner_tester::merge_edge_test(){
 
 
     //Create the local mesh refiner
-    local_mesh_refiner lmr(0.1, 0.3);
+    auto event_sink = std::make_shared<recording_remesh_sink>();
+    local_mesh_refiner lmr(0.1, 0.3, true, event_sink);
 
 
     edge_set dummy_set;
@@ -854,6 +934,38 @@ int local_mesh_refiner_tester::merge_edge_test(){
         }
     );
 
+    bool t10 = false;
+    if(event_sink->records.size() == 1){
+        const auto& record = event_sink->records.front();
+        const auto before_ids = sorted_vertex_ids(record.before);
+        const auto after_ids = sorted_vertex_ids(record.after);
+        std::vector<std::uint64_t> retained_ids;
+        std::set_intersection(
+            before_ids.begin(), before_ids.end(),
+            after_ids.begin(), after_ids.end(),
+            std::back_inserter(retained_ids)
+        );
+        t10 = (
+            record.event.operation == prl::core::RemeshOperation::edge_merge
+            && prl::core::is_valid_remesh_event(record.event, record.before, record.after)
+            && record.event.before_revision == 0
+            && record.event.after_revision == 1
+            && record.after.vertices.size() + 1 == record.before.vertices.size()
+            && record.after.faces.size() + 2 == record.before.faces.size()
+            && retained_ids.size() + 1 == record.after.vertices.size()
+        );
+    }
+
+    const auto before_rebase = lmr.capture_surface_snapshot(*c);
+    c->rebase();
+    const auto after_rebase = lmr.capture_surface_snapshot(*c);
+    const auto before_rebase_ids = sorted_vertex_ids(before_rebase);
+    const auto after_rebase_ids = sorted_vertex_ids(after_rebase);
+    const bool t11 = (
+        before_rebase_ids == after_rebase_ids
+        && std::adjacent_find(after_rebase_ids.begin(), after_rebase_ids.end()) == after_rebase_ids.end()
+    );
+
 
 
     mesh_writer::write_cell_data_file(std::string("./test_9.vtk"), {c});
@@ -869,8 +981,10 @@ int local_mesh_refiner_tester::merge_edge_test(){
     std::cout << "t7 " << t7 << std::endl;
     std::cout << "t8 " << t8 << std::endl;
     std::cout << "t9 " << t9 << std::endl;
+    std::cout << "t10 " << t10 << std::endl;
+    std::cout << "t11 " << t11 << std::endl;
 
-    return !(t1 && t2 && t3 && t4 && t5 && t6 && t7 && t8 && t9);
+    return !(t1 && t2 && t3 && t4 && t5 && t6 && t7 && t8 && t9 && t10 && t11);
 }
 //---------------------------------------------------------------------------------------------------------
 
