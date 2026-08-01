@@ -8,6 +8,21 @@ from .remesh_registry import (
     resultant_and_moment,
     scatter_material_forces,
 )
+from .remesh_transfer import (
+    MyocardialMaterialField,
+    RemeshEvent,
+    RemeshOperation,
+    RemeshTransferAudit,
+    SurfaceRegion,
+    transfer_myocardial_state,
+)
+from .cell_ecm_coupling import (
+    CellECMTether,
+    CellECMVerticalSlice,
+    PowerAudit,
+    VerticalSliceEvaluation,
+    build_cell_ecm_tether,
+)
 
 __all__ = [
     "RebindReport",
@@ -16,4 +31,15 @@ __all__ = [
     "rebind_registry",
     "resultant_and_moment",
     "scatter_material_forces",
+    "MyocardialMaterialField",
+    "RemeshEvent",
+    "RemeshOperation",
+    "RemeshTransferAudit",
+    "SurfaceRegion",
+    "transfer_myocardial_state",
+    "CellECMTether",
+    "CellECMVerticalSlice",
+    "PowerAudit",
+    "VerticalSliceEvaluation",
+    "build_cell_ecm_tether",
 ]

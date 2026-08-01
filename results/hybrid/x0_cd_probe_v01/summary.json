@@ -1,0 +1,58 @@
+{
+  "probe_id": "PRL-HYBRID-X0-CD-V01",
+  "status": "passed",
+  "x0_c": {
+    "status": "passed",
+    "operations": {
+      "edge_split": {
+        "point_count": 3,
+        "region_retention_fraction": 1.0,
+        "active_state_residual": 0.0,
+        "maximum_fiber_norm_error": 0.0,
+        "maximum_fiber_tangency_error": 0.0,
+        "minimum_fiber_alignment": 1.0,
+        "maximum_position_error": 2.7755575615628914e-17
+      },
+      "edge_swap": {
+        "point_count": 3,
+        "region_retention_fraction": 1.0,
+        "active_state_residual": 0.0,
+        "maximum_fiber_norm_error": 0.0,
+        "maximum_fiber_tangency_error": 0.0,
+        "minimum_fiber_alignment": 1.0,
+        "maximum_position_error": 0.0
+      },
+      "edge_merge": {
+        "point_count": 3,
+        "region_retention_fraction": 1.0,
+        "active_state_residual": 0.0,
+        "maximum_fiber_norm_error": 0.0,
+        "maximum_fiber_tangency_error": 0.0,
+        "minimum_fiber_alignment": 1.0,
+        "maximum_position_error": 1.2412670766236366e-16
+      }
+    }
+  },
+  "x0_d": {
+    "status": "passed",
+    "metrics": {
+      "remesh_energy_residual": 0.0,
+      "remesh_resultant_force_residual": 4.025077749585488e-18,
+      "pair_force_residual": 1.21217487951527e-19,
+      "pair_moment_residual": 1.734723475976807e-18,
+      "force_directional_derivative_residual": 2.025803309824159e-10,
+      "normalized_integrated_power_residual": 1.9521964852668293e-15,
+      "minimum_gap": 0.11200000000000002,
+      "minimum_ecm_jacobian": 1.01
+    }
+  },
+  "limits": {
+    "material_position_error": 1e-12,
+    "fiber_norm_error": 1e-12,
+    "fiber_tangency_error": 1e-12,
+    "pair_force_residual": 1e-10,
+    "pair_moment_residual": 1e-10,
+    "force_directional_derivative_residual": 1e-06,
+    "normalized_integrated_power_residual": 0.005
+  }
+}
