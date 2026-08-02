@@ -177,7 +177,20 @@ int tester_contact_model_abstract::compute_node_triangle_distance_test(){
     return !(t1 && t2 && t3 && t4 && t5 && t6 && t7 && t8 && t9 && t10 && t11 && t12 && t13 && t14 && t15 && t16 && t17 && t18 && t19 && t20 && t21 && t22 && t23 && t24 && t25 && t26 && t27 && t28);
 }
 
+int tester_contact_model_abstract::compute_translated_triangle_distance_test(){
+    const vec3 A(2., -4., 3.);
+    const vec3 B(3., -4., 3.);
+    const vec3 C(2., -3., 3.);
+    const vec3 point(2.25, -3.75, 4.);
 
+    const auto [distance_squared, closest_point_barycentric] =
+        contact_model_abstract::compute_node_triangle_distance(point, A, B, C);
+
+    return !(
+        distance_squared == 1.
+        && closest_point_barycentric == vec3(0.5, 0.25, 0.25)
+    );
+}
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -194,6 +207,7 @@ int main (int argc, char** argv){
     tester_contact_model_abstract tester;
 
     if (test_name == "compute_node_triangle_distance_test")               return tester.compute_node_triangle_distance_test();
+    if (test_name == "compute_translated_triangle_distance_test")          return tester.compute_translated_triangle_distance_test();
 
     std::cout << "TEST NAME :" << test_name << " DOES NOT EXIST" << std::endl;
     return 1;

@@ -26,6 +26,17 @@ struct SurfaceForceInjectionAudit {
     double net_moment_residual{};
 };
 
+/** Validated and committed derived geometry for one surface cell. */
+struct SurfaceGeometryAudit {
+    core::CellId cell_id{};
+    core::MeshRevision revision{};
+    std::size_t refreshed_face_count{};
+    double surface_area{};
+    double volume{};
+    std::array<double, 3> centroid{};
+    double minimum_face_area{};
+};
+
 /** Audit of one atomic overdamped position update. */
 struct SurfaceOverdampedStepAudit {
     core::CellId cell_id{};
@@ -41,6 +52,11 @@ struct SurfaceOverdampedStepAudit {
     double viscous_dissipation{};
     double work_dissipation_residual{};
     double net_displacement_residual{};
+    std::size_t refreshed_face_count{};
+    double surface_area_after{};
+    double volume_after{};
+    std::array<double, 3> centroid_after{};
+    double minimum_face_area_after{};
 };
 
 /**
@@ -61,8 +77,8 @@ struct SurfaceOverdampedStepAudit {
  *
  * Existing node forces are treated as preassembled contributions. Additional
  * forces are addressed by persistent vertex ID. Positions and force buffers
- * are committed only after the complete step has been validated. Derived
- * geometry caches are intentionally not refreshed by this primitive.
+ * are committed only after the complete step, including the derived face and
+ * cell geometry, has been validated. Geometry caches are refreshed on commit.
  */
 [[nodiscard]] SurfaceOverdampedStepAudit advance_surface_overdamped(
     ::cell& target,
@@ -70,6 +86,18 @@ struct SurfaceOverdampedStepAudit {
     double time_step,
     double damping_coefficient,
     const std::vector<SurfaceVertexForce>& additional_forces = {}
+);
+
+/** Validate current positions and refresh face/cell geometry caches. */
+[[nodiscard]] SurfaceGeometryAudit refresh_surface_geometry(
+    ::cell& target,
+    core::MeshRevision expected_revision
+);
+
+/** Clear every used-node force buffer after a rejected owned assembly. */
+[[nodiscard]] std::size_t reset_surface_forces(
+    ::cell& target,
+    core::MeshRevision expected_revision
 );
 
 } // namespace prl::cell_engine

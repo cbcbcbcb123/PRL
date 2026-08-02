@@ -234,7 +234,7 @@ std::pair<double, vec3> contact_model_abstract::compute_node_triangle_distance(
     const double denom = 1.0 / (va + vb + vc);
     const double v = vb * denom;
     const double w = vc * denom;
-    const vec3 cpa = a + ab * v + a + ac * w;
+    const vec3 cpa = a + ab * v + ac * w;
     return {(p - cpa).squared_norm(), vec3(1.0-v-w, v, w)}; // = u*a + v*b + w*c, u = va * denom = 1.0-v-w
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

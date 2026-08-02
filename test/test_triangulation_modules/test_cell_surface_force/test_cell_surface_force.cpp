@@ -1,6 +1,7 @@
 #include "prl_cell_engine/cell_surface_force.hpp"
 
 #include "cell.hpp"
+#include "face.hpp"
 #include "node.hpp"
 #include "vec3.hpp"
 
@@ -156,6 +157,26 @@ int overdamped_step_updates_positions_and_consumes_forces() {
             "overdamped work-dissipation residual mismatch");
     require(audit.net_displacement_residual <= tolerance,
             "balanced overdamped step translated the centroid");
+    require(audit.refreshed_face_count == 4,
+            "overdamped step did not refresh every face");
+    require(audit.surface_area_after > 0.0
+            && audit.volume_after > 0.0
+            && audit.minimum_face_area_after > 0.0,
+            "overdamped geometry audit is invalid");
+    require(nearly_equal(current_cell->get_area(), audit.surface_area_after)
+            && nearly_equal(current_cell->get_volume(), audit.volume_after),
+            "overdamped step left stale cell geometry caches");
+    require(nearly_equal(current_cell->get_centroid().dx(), audit.centroid_after[0])
+            && nearly_equal(current_cell->get_centroid().dy(), audit.centroid_after[1])
+            && nearly_equal(current_cell->get_centroid().dz(), audit.centroid_after[2]),
+            "overdamped step left a stale centroid cache");
+    double cached_face_area = 0.0;
+    for(const face& current_face : current_cell->get_face_lst()) {
+        if(!current_face.is_used()) continue;
+        cached_face_area += current_face.get_area();
+    }
+    require(nearly_equal(cached_face_area, audit.surface_area_after),
+            "overdamped step left stale face-area caches");
     require(nearly_equal(current_cell->get_node_lst().at(0).pos().dx(), 0.02),
             "first overdamped displacement mismatch");
     require(nearly_equal(current_cell->get_node_lst().at(1).pos().dx(), 0.98),
@@ -216,6 +237,44 @@ int rejected_overdamped_step_is_atomic() {
     return 0;
 }
 
+int geometry_rejection_preserves_positions_and_forces() {
+    auto current_cell = test_cell();
+    const auto moving_id = current_cell->get_node_lst().at(1).get_persistent_id();
+    static_cast<void>(prl::cell_engine::apply_surface_vertex_forces(
+        *current_cell,
+        0,
+        {{moving_id, {-10.0, 0.0, 0.0}}}
+    ));
+    const auto before_positions = current_cell->get_node_coord_lst();
+
+    bool invalid_geometry_rejected = false;
+    try {
+        static_cast<void>(prl::cell_engine::advance_surface_overdamped(
+            *current_cell,
+            0,
+            0.1,
+            1.0
+        ));
+    } catch(const std::runtime_error&) {
+        invalid_geometry_rejected = true;
+    }
+    require(invalid_geometry_rejected,
+            "overdamped step accepted a collapsed surface");
+    require(current_cell->get_node_coord_lst() == before_positions,
+            "geometry rejection committed a node position");
+    for(const node& current_node : current_cell->get_node_lst()) {
+        if(!current_node.is_used()) continue;
+        const double expected_x = current_node.get_persistent_id() == moving_id
+            ? -10.0
+            : 0.0;
+        require(nearly_equal(current_node.force().dx(), expected_x)
+                && nearly_equal(current_node.force().dy(), 0.0)
+                && nearly_equal(current_node.force().dz(), 0.0),
+                "geometry rejection changed or consumed a force buffer");
+    }
+    return 0;
+}
+
 } // namespace
 
 int main(const int argc, const char* const argv[]) {
@@ -231,6 +290,9 @@ int main(const int argc, const char* const argv[]) {
         }
         if(behavior == "overdamped_failure_atomicity") {
             return rejected_overdamped_step_is_atomic();
+        }
+        if(behavior == "overdamped_geometry_atomicity") {
+            return geometry_rejection_preserves_positions_and_forces();
         }
         throw std::invalid_argument("unknown behavior: " + behavior);
     } catch(const std::exception& error) {

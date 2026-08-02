@@ -135,6 +135,15 @@ class cell: public std::enable_shared_from_this<cell> {
             double,
             const std::vector<prl::cell_engine::SurfaceVertexForce>&
         );
+        friend prl::cell_engine::SurfaceGeometryAudit
+        prl::cell_engine::refresh_surface_geometry(
+            cell&,
+            prl::core::MeshRevision
+        );
+        friend std::size_t prl::cell_engine::reset_surface_forces(
+            cell&,
+            prl::core::MeshRevision
+        );
 
         //The following classes are used for testing purposes
         friend class cell_tester;

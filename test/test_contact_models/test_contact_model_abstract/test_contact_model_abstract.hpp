@@ -18,6 +18,7 @@
 class tester_contact_model_abstract{   
     public:
         int compute_node_triangle_distance_test();
+        int compute_translated_triangle_distance_test();
          
 };
 

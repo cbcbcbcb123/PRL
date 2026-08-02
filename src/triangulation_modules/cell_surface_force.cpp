@@ -1,11 +1,14 @@
 #include "prl_cell_engine/cell_surface_force.hpp"
 
 #include "cell.hpp"
+#include "face.hpp"
 #include "node.hpp"
 #include "vec3.hpp"
 
+#include <algorithm>
 #include <array>
 #include <cmath>
+#include <limits>
 #include <stdexcept>
 #include <unordered_map>
 #include <unordered_set>
@@ -24,6 +27,10 @@ bool finite_vector(const Vector3& value) noexcept {
 
 Vector3 add(const Vector3& left, const Vector3& right) noexcept {
     return {left[0] + right[0], left[1] + right[1], left[2] + right[2]};
+}
+
+Vector3 subtract(const Vector3& left, const Vector3& right) noexcept {
+    return {left[0] - right[0], left[1] - right[1], left[2] - right[2]};
 }
 
 Vector3 scale(const Vector3& value, const double factor) noexcept {
@@ -55,6 +62,83 @@ struct PendingPositionWrite {
     std::size_t node_index{};
     vec3 resulting_position{};
 };
+
+struct PendingSurfaceGeometry {
+    std::size_t face_count{};
+    double surface_area{};
+    double volume{};
+    Vector3 centroid{};
+    double minimum_face_area{};
+};
+
+std::vector<Vector3> current_positions(const ::cell& target) {
+    std::vector<Vector3> result(target.get_node_lst().size());
+    for(std::size_t index = 0; index < target.get_node_lst().size(); ++index) {
+        const node& current_node = target.get_node_lst()[index];
+        if(!current_node.is_used()) continue;
+        result[index] = {
+            current_node.pos().dx(),
+            current_node.pos().dy(),
+            current_node.pos().dz(),
+        };
+        if(!finite_vector(result[index])) {
+            throw std::runtime_error("surface geometry position must be finite");
+        }
+    }
+    return result;
+}
+
+PendingSurfaceGeometry validated_surface_geometry(
+    const ::cell& target,
+    const std::vector<Vector3>& positions
+) {
+    if(positions.size() != target.get_node_lst().size()) {
+        throw std::invalid_argument("surface geometry position count mismatch");
+    }
+    PendingSurfaceGeometry result;
+    result.minimum_face_area = std::numeric_limits<double>::infinity();
+    double signed_six_volume = 0.0;
+    for(const face& current_face : target.get_face_lst()) {
+        if(!current_face.is_used()) continue;
+        const auto node_ids = current_face.get_node_ids();
+        for(const unsigned node_id : node_ids) {
+            if(node_id >= positions.size()
+               || !target.get_node_lst()[node_id].is_used()) {
+                throw std::runtime_error("surface geometry face references an invalid node");
+            }
+        }
+        const auto& a = positions[node_ids[0]];
+        const auto& b = positions[node_ids[1]];
+        const auto& c = positions[node_ids[2]];
+        const auto normal = cross(subtract(b, a), subtract(c, a));
+        const double face_area = 0.5 * std::sqrt(squared_norm(normal));
+        if(!std::isfinite(face_area) || face_area <= 0.0) {
+            throw std::runtime_error("surface geometry contains a degenerate face");
+        }
+        result.face_count += 1;
+        result.surface_area += face_area;
+        result.minimum_face_area = std::min(result.minimum_face_area, face_area);
+        result.centroid = add(
+            result.centroid,
+            scale(add(add(a, b), c), face_area / 3.0)
+        );
+        signed_six_volume += dot(a, cross(b, c));
+    }
+    if(result.face_count == 0
+       || !std::isfinite(result.surface_area)
+       || result.surface_area <= 0.0) {
+        throw std::runtime_error("surface geometry requires positive finite area");
+    }
+    result.volume = std::abs(signed_six_volume) / 6.0;
+    result.centroid = scale(result.centroid, 1.0 / result.surface_area);
+    if(!std::isfinite(result.volume)
+       || result.volume <= 0.0
+       || !finite_vector(result.centroid)
+       || !std::isfinite(result.minimum_face_area)) {
+        throw std::runtime_error("surface geometry audit must be finite and nondegenerate");
+    }
+    return result;
+}
 
 } // namespace
 
@@ -197,6 +281,7 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
         additional_by_node.emplace(target_node->second, vertex_force.force);
     }
 
+    auto pending_positions = current_positions(target);
     std::vector<PendingPositionWrite> pending_writes;
     pending_writes.reserve(node_by_persistent_id.size());
     double additional_squared_norm = 0.0;
@@ -236,6 +321,7 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
             index,
             vec3{resulting_position[0], resulting_position[1], resulting_position[2]},
         });
+        pending_positions[index] = resulting_position;
         additional_squared_norm += squared_norm(additional_force);
         preassembled_squared_norm += squared_norm(preassembled_force);
         total_squared_norm += squared_norm(total_force);
@@ -254,12 +340,21 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
        || !finite_vector(net_displacement)) {
         throw std::runtime_error("overdamped step audit became non-finite");
     }
+    const auto geometry = validated_surface_geometry(target, pending_positions);
 
     for(const auto& write : pending_writes) {
         node& current_node = target.node_lst_[write.node_index];
         current_node.pos_.reset(write.resulting_position);
         current_node.force_.reset();
     }
+    target.update_all_face_normals_and_areas();
+    target.area_ = geometry.surface_area;
+    target.volume_ = geometry.volume;
+    target.centroid_.reset(vec3{
+        geometry.centroid[0],
+        geometry.centroid[1],
+        geometry.centroid[2],
+    });
     return {
         target.get_id(),
         expected_revision,
@@ -274,7 +369,55 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
         viscous_dissipation,
         std::abs(total_force_work - viscous_dissipation),
         std::sqrt(squared_norm(net_displacement)),
+        geometry.face_count,
+        geometry.surface_area,
+        geometry.volume,
+        geometry.centroid,
+        geometry.minimum_face_area,
     };
+}
+
+SurfaceGeometryAudit refresh_surface_geometry(
+    ::cell& target,
+    const core::MeshRevision expected_revision
+) {
+    if(target.get_mesh_revision() != expected_revision) {
+        throw std::logic_error("surface geometry revision does not match target cell");
+    }
+    const auto geometry = validated_surface_geometry(target, current_positions(target));
+    target.update_all_face_normals_and_areas();
+    target.area_ = geometry.surface_area;
+    target.volume_ = geometry.volume;
+    target.centroid_.reset(vec3{
+        geometry.centroid[0],
+        geometry.centroid[1],
+        geometry.centroid[2],
+    });
+    return {
+        target.get_id(),
+        expected_revision,
+        geometry.face_count,
+        geometry.surface_area,
+        geometry.volume,
+        geometry.centroid,
+        geometry.minimum_face_area,
+    };
+}
+
+std::size_t reset_surface_forces(
+    ::cell& target,
+    const core::MeshRevision expected_revision
+) {
+    if(target.get_mesh_revision() != expected_revision) {
+        throw std::logic_error("surface-force reset revision does not match target cell");
+    }
+    std::size_t reset_count = 0;
+    for(node& current_node : target.node_lst_) {
+        if(!current_node.is_used()) continue;
+        current_node.set_force(vec3{});
+        reset_count += 1;
+    }
+    return reset_count;
 }
 
 } // namespace prl::cell_engine

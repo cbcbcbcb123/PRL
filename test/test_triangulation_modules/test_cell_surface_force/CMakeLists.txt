@@ -34,3 +34,7 @@ add_test(
     NAME triangulation_modules_cell_surface_overdamped_failure_atomicity
     COMMAND test_cell_surface_force overdamped_failure_atomicity
 )
+add_test(
+    NAME triangulation_modules_cell_surface_overdamped_geometry_atomicity
+    COMMAND test_cell_surface_force overdamped_geometry_atomicity
+)
