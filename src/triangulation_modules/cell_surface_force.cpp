@@ -26,6 +26,14 @@ Vector3 add(const Vector3& left, const Vector3& right) noexcept {
     return {left[0] + right[0], left[1] + right[1], left[2] + right[2]};
 }
 
+Vector3 scale(const Vector3& value, const double factor) noexcept {
+    return {factor * value[0], factor * value[1], factor * value[2]};
+}
+
+double dot(const Vector3& left, const Vector3& right) noexcept {
+    return left[0] * right[0] + left[1] * right[1] + left[2] * right[2];
+}
+
 Vector3 cross(const Vector3& left, const Vector3& right) noexcept {
     return {
         left[1] * right[2] - left[2] * right[1],
@@ -41,6 +49,11 @@ double squared_norm(const Vector3& value) noexcept {
 struct PendingForceWrite {
     std::size_t node_index{};
     vec3 resulting_force{};
+};
+
+struct PendingPositionWrite {
+    std::size_t node_index{};
+    vec3 resulting_position{};
 };
 
 } // namespace
@@ -124,6 +137,143 @@ SurfaceForceInjectionAudit apply_surface_vertex_forces(
         std::sqrt(injected_squared_norm),
         std::sqrt(squared_norm(net_force)),
         std::sqrt(squared_norm(net_moment)),
+    };
+}
+
+SurfaceOverdampedStepAudit advance_surface_overdamped(
+    ::cell& target,
+    const core::MeshRevision expected_revision,
+    const double time_step,
+    const double damping_coefficient,
+    const std::vector<SurfaceVertexForce>& additional_forces
+) {
+    if(target.get_mesh_revision() != expected_revision) {
+        throw std::logic_error("overdamped step revision does not match target cell");
+    }
+    if(target.is_static()) {
+        throw std::logic_error("overdamped step cannot advance a static cell");
+    }
+    if(!std::isfinite(time_step) || time_step <= 0.0) {
+        throw std::invalid_argument("overdamped time step must be finite and positive");
+    }
+    if(!std::isfinite(damping_coefficient) || damping_coefficient <= 0.0) {
+        throw std::invalid_argument("overdamped damping coefficient must be finite and positive");
+    }
+    const double mobility_step = time_step / damping_coefficient;
+    if(!std::isfinite(mobility_step)) {
+        throw std::invalid_argument("overdamped dt/damping ratio must be finite");
+    }
+
+    std::unordered_map<core::VertexId, std::size_t> node_by_persistent_id;
+    node_by_persistent_id.reserve(target.get_nb_of_nodes());
+    for(std::size_t index = 0; index < target.node_lst_.size(); ++index) {
+        const node& current_node = target.node_lst_[index];
+        if(!current_node.is_used()) continue;
+        if(!node_by_persistent_id.emplace(current_node.get_persistent_id(), index).second) {
+            throw std::runtime_error("target cell contains duplicate persistent vertex IDs");
+        }
+    }
+    if(node_by_persistent_id.empty()) {
+        throw std::invalid_argument("overdamped step requires at least one used vertex");
+    }
+
+    std::unordered_set<core::VertexId> additional_force_ids;
+    additional_force_ids.reserve(additional_forces.size());
+    std::unordered_map<std::size_t, Vector3> additional_by_node;
+    additional_by_node.reserve(additional_forces.size());
+    for(const auto& vertex_force : additional_forces) {
+        if(!additional_force_ids.emplace(vertex_force.vertex_id).second) {
+            throw std::invalid_argument("overdamped additional-force vertex IDs must be unique");
+        }
+        if(!finite_vector(vertex_force.force)) {
+            throw std::invalid_argument("overdamped additional-force increment must be finite");
+        }
+        const auto target_node = node_by_persistent_id.find(vertex_force.vertex_id);
+        if(target_node == node_by_persistent_id.end()) {
+            throw std::out_of_range(
+                "overdamped additional-force vertex is not present in the target cell"
+            );
+        }
+        additional_by_node.emplace(target_node->second, vertex_force.force);
+    }
+
+    std::vector<PendingPositionWrite> pending_writes;
+    pending_writes.reserve(node_by_persistent_id.size());
+    double additional_squared_norm = 0.0;
+    double preassembled_squared_norm = 0.0;
+    double total_squared_norm = 0.0;
+    double displacement_squared_norm = 0.0;
+    double total_force_work = 0.0;
+    Vector3 net_displacement{};
+    for(std::size_t index = 0; index < target.node_lst_.size(); ++index) {
+        const node& current_node = target.node_lst_[index];
+        if(!current_node.is_used()) continue;
+        const Vector3 position{
+            current_node.pos().dx(),
+            current_node.pos().dy(),
+            current_node.pos().dz(),
+        };
+        const Vector3 preassembled_force{
+            current_node.force().dx(),
+            current_node.force().dy(),
+            current_node.force().dz(),
+        };
+        if(!finite_vector(position) || !finite_vector(preassembled_force)) {
+            throw std::runtime_error("overdamped target state must be finite");
+        }
+        Vector3 additional_force{};
+        const auto additional = additional_by_node.find(index);
+        if(additional != additional_by_node.end()) additional_force = additional->second;
+        const auto total_force = add(preassembled_force, additional_force);
+        const auto displacement = scale(total_force, mobility_step);
+        const auto resulting_position = add(position, displacement);
+        if(!finite_vector(total_force)
+           || !finite_vector(displacement)
+           || !finite_vector(resulting_position)) {
+            throw std::runtime_error("overdamped step would create a non-finite state");
+        }
+        pending_writes.push_back({
+            index,
+            vec3{resulting_position[0], resulting_position[1], resulting_position[2]},
+        });
+        additional_squared_norm += squared_norm(additional_force);
+        preassembled_squared_norm += squared_norm(preassembled_force);
+        total_squared_norm += squared_norm(total_force);
+        displacement_squared_norm += squared_norm(displacement);
+        total_force_work += dot(total_force, displacement);
+        net_displacement = add(net_displacement, displacement);
+    }
+    const double viscous_dissipation = damping_coefficient
+        * displacement_squared_norm / time_step;
+    if(!std::isfinite(additional_squared_norm)
+       || !std::isfinite(preassembled_squared_norm)
+       || !std::isfinite(total_squared_norm)
+       || !std::isfinite(displacement_squared_norm)
+       || !std::isfinite(total_force_work)
+       || !std::isfinite(viscous_dissipation)
+       || !finite_vector(net_displacement)) {
+        throw std::runtime_error("overdamped step audit became non-finite");
+    }
+
+    for(const auto& write : pending_writes) {
+        node& current_node = target.node_lst_[write.node_index];
+        current_node.pos_.reset(write.resulting_position);
+        current_node.force_.reset();
+    }
+    return {
+        target.get_id(),
+        expected_revision,
+        pending_writes.size(),
+        time_step,
+        damping_coefficient,
+        std::sqrt(preassembled_squared_norm),
+        std::sqrt(additional_squared_norm),
+        std::sqrt(total_squared_norm),
+        std::sqrt(displacement_squared_norm),
+        total_force_work,
+        viscous_dissipation,
+        std::abs(total_force_work - viscous_dissipation),
+        std::sqrt(squared_norm(net_displacement)),
     };
 }
 

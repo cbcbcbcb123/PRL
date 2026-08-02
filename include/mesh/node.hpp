@@ -17,6 +17,7 @@ class face;
 class cell;
 
 #include "vec3.hpp"
+#include "prl_cell_engine/cell_surface_force.hpp"
 
 
 /*
@@ -61,6 +62,14 @@ class node final
         friend class cell_divider;
         friend class node_tester;
         friend class cell_tester;
+        friend prl::cell_engine::SurfaceOverdampedStepAudit
+        prl::cell_engine::advance_surface_overdamped(
+            cell&,
+            prl::core::MeshRevision,
+            double,
+            double,
+            const std::vector<prl::cell_engine::SurfaceVertexForce>&
+        );
 
 
         

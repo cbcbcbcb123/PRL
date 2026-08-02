@@ -127,6 +127,14 @@ class cell: public std::enable_shared_from_this<cell> {
             prl::core::MeshRevision,
             const std::vector<prl::cell_engine::SurfaceVertexForce>&
         );
+        friend prl::cell_engine::SurfaceOverdampedStepAudit
+        prl::cell_engine::advance_surface_overdamped(
+            cell&,
+            prl::core::MeshRevision,
+            double,
+            double,
+            const std::vector<prl::cell_engine::SurfaceVertexForce>&
+        );
 
         //The following classes are used for testing purposes
         friend class cell_tester;
