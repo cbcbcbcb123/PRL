@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <array>
 #include <cmath>
+#include <iomanip>
 #include <iostream>
 #include <limits>
 #include <memory>
@@ -392,6 +393,68 @@ int post_assembly_failure_cleans_force_buffers_without_motion() {
     return 0;
 }
 
+int owned_step_uses_dual_area_damping() {
+    using namespace prl::core;
+    auto current_cell = passive_active_test_cell();
+    const auto before_mesh = prl::cell_engine::capture_surface_snapshot(*current_cell);
+    const MyocardialCellMaterialState material{
+        17,
+        0,
+        active_material_points(*current_cell),
+    };
+    const auto unit = build_active_contraction_unit(
+        before_mesh,
+        material,
+        501,
+        101,
+        205,
+        101,
+        10.0,
+        0.9
+    );
+    const prl::cell_engine::CellSurfaceDampingLaw damping{
+        prl::cell_engine::CellSurfaceDampingMeasure::barycentric_dual_area,
+        10.0,
+    };
+
+    const auto audit = prl::cell_engine::advance_owned_active_cell_overdamped_one_step(
+        *current_cell,
+        material,
+        {unit},
+        1.0e-3,
+        damping
+    );
+    const auto before_geometry = independent_geometry(before_mesh);
+
+    std::cout << std::setprecision(17)
+              << "control_area_sum=" << audit.motion.control_area_sum
+              << " min_nodal_damping=" << audit.motion.minimum_nodal_damping
+              << " max_nodal_damping=" << audit.motion.maximum_nodal_damping
+              << " total_force_l2=" << audit.motion.total_force_l2_norm
+              << " displacement_l2=" << audit.motion.displacement_l2_norm
+              << " force_work=" << audit.motion.total_force_work
+              << " viscous_dissipation=" << audit.motion.viscous_dissipation
+              << '\n';
+
+    require(audit.motion.damping_measure
+                == prl::cell_engine::CellSurfaceDampingMeasure::barycentric_dual_area,
+            "owned driver did not preserve the dual-area damping measure");
+    require(nearly_equal(audit.motion.control_area_sum, before_geometry.area),
+            "owned driver dual areas do not partition the current surface");
+    require(audit.motion.minimum_nodal_damping > 0.0
+                && audit.motion.maximum_nodal_damping
+                    >= audit.motion.minimum_nodal_damping,
+            "owned driver reported invalid effective nodal damping");
+    require(audit.motion.work_dissipation_residual <= tolerance,
+            "owned dual-area force work and dissipation diverged");
+    for(const node& current_node : current_cell->get_node_lst()) {
+        if(!current_node.is_used()) continue;
+        require(nearly_equal(current_node.force().norm(), 0.0),
+                "owned dual-area step did not consume the force buffer");
+    }
+    return 0;
+}
+
 } // namespace
 
 int main(const int argc, const char* const argv[]) {
@@ -406,6 +469,9 @@ int main(const int argc, const char* const argv[]) {
         }
         if(behavior == "post_assembly_failure_cleanup") {
             return post_assembly_failure_cleans_force_buffers_without_motion();
+        }
+        if(behavior == "dual_area_owned_step") {
+            return owned_step_uses_dual_area_damping();
         }
         throw std::invalid_argument("unknown behavior: " + behavior);
     } catch(const std::exception& error) {

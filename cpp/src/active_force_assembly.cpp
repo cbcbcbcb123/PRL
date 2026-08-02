@@ -22,6 +22,22 @@ std::vector<SurfaceVertexForce> surface_forces_from(
     return result;
 }
 
+SurfaceDampingLaw cell_engine_damping(const CellSurfaceDampingLaw damping) {
+    switch(damping.measure) {
+        case CellSurfaceDampingMeasure::uniform_per_vertex:
+            return {
+                SurfaceDampingMeasure::uniform_per_vertex,
+                damping.coefficient,
+            };
+        case CellSurfaceDampingMeasure::barycentric_dual_area:
+            return {
+                SurfaceDampingMeasure::barycentric_dual_area,
+                damping.coefficient,
+            };
+    }
+    throw std::invalid_argument("active overdamped damping measure is not supported");
+}
+
 } // namespace
 
 ActiveCellForceAssemblyAudit assemble_active_cell_forces(
@@ -57,16 +73,17 @@ ActiveCellOverdampedStepAudit advance_active_cell_overdamped_one_step(
     const core::MyocardialCellMaterialState& material,
     const std::vector<core::ActiveContractionUnit>& units,
     const double time_step,
-    const double damping_coefficient
+    const CellSurfaceDampingLaw damping
 ) {
     if(!std::isfinite(time_step) || time_step <= 0.0) {
         throw std::invalid_argument("active overdamped time step must be finite and positive");
     }
-    if(!std::isfinite(damping_coefficient) || damping_coefficient <= 0.0) {
+    if(!std::isfinite(damping.coefficient) || damping.coefficient <= 0.0) {
         throw std::invalid_argument(
             "active overdamped damping coefficient must be finite and positive"
         );
     }
+    const auto fork_damping = cell_engine_damping(damping);
     const auto before_mesh = capture_surface_snapshot(target);
     const auto before_active = core::evaluate_active_contraction(
         before_mesh,
@@ -87,7 +104,7 @@ ActiveCellOverdampedStepAudit advance_active_cell_overdamped_one_step(
         target,
         before_mesh.revision,
         time_step,
-        damping_coefficient,
+        fork_damping,
         surface_forces_from(before_active)
     );
     return {
@@ -97,6 +114,10 @@ ActiveCellOverdampedStepAudit advance_active_cell_overdamped_one_step(
         step.stepped_vertex_count,
         step.time_step,
         step.damping_coefficient,
+        damping.measure,
+        step.control_area_sum,
+        step.minimum_nodal_damping,
+        step.maximum_nodal_damping,
         before_active.audit.total_energy,
         before_active.audit.total_input_power,
         active_control_energy,
@@ -116,6 +137,25 @@ ActiveCellOverdampedStepAudit advance_active_cell_overdamped_one_step(
         step.centroid_after,
         step.minimum_face_area_after,
     };
+}
+
+ActiveCellOverdampedStepAudit advance_active_cell_overdamped_one_step(
+    ::cell& target,
+    const core::MyocardialCellMaterialState& material,
+    const std::vector<core::ActiveContractionUnit>& units,
+    const double time_step,
+    const double damping_coefficient
+) {
+    return advance_active_cell_overdamped_one_step(
+        target,
+        material,
+        units,
+        time_step,
+        CellSurfaceDampingLaw{
+            CellSurfaceDampingMeasure::uniform_per_vertex,
+            damping_coefficient,
+        }
+    );
 }
 
 } // namespace prl::cell_engine

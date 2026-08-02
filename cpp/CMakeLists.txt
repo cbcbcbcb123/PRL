@@ -211,6 +211,11 @@ if(BUILD_TESTING)
             COMMAND prl_cell_engine_owned_step_integration_test
                 post_assembly_failure_cleanup
         )
+        add_test(
+            NAME prl_cell_engine_owned_dual_area_damping
+            COMMAND prl_cell_engine_owned_step_integration_test
+                dual_area_owned_step
+        )
 
         add_executable(
             prl_multicell_remesh_benchmark

@@ -1,0 +1,93 @@
+{
+  "audit_id": "PRL-HYBRID-X1-I-SPATIAL-DAMPING-V01",
+  "status": "passed_frozen",
+  "date": "2026-08-02",
+  "governed_by": "CONSTRAINT-PRL-EXTERNAL-SCIENTIFIC-REVIEW-V01",
+  "parent_branch": "codex/simucell3d-hybrid-feasibility",
+  "cell_engine": {
+    "repository": "https://github.com/cbcbcbcb123/prl-cell-engine",
+    "branch": "codex/cell-engine-integration-seam",
+    "commit": "2d4b2183f5966c2afe3f4234471e727fe5f9e68d",
+    "remote_synced": true
+  },
+  "damping_contract": {
+    "measure": "barycentric_dual_area",
+    "control_area": "A_i = (1/3) sum incident_face_area",
+    "nodal_damping": "zeta_i = zeta_A A_i",
+    "explicit_update": "dx_i = dt F_i / zeta_i",
+    "control_area_configuration": "current_geometry",
+    "legacy_scalar_overload": "preserved_as_uniform_per_vertex_for_x1_g_h_replay",
+    "new_trajectory_requirement": "explicit_barycentric_dual_area"
+  },
+  "manufactured_spatial_refinement": {
+    "geometry": "closed_unit_cube_surface",
+    "levels": [
+      {
+        "name": "coarse",
+        "vertices": 8,
+        "faces": 12,
+        "control_area_sum": 6.0,
+        "minimum_nodal_damping": 1.3333333333333333,
+        "maximum_nodal_damping": 1.9999999999999998,
+        "force_work": 0.063,
+        "viscous_dissipation": 0.06300000000000003
+      },
+      {
+        "name": "base",
+        "vertices": 20,
+        "faces": 36,
+        "control_area_sum": 6.000000000000004,
+        "minimum_nodal_damping": 0.3333333333333333,
+        "maximum_nodal_damping": 1.3333333333333337,
+        "force_work": 0.06300000000000003,
+        "viscous_dissipation": 0.06300000000000003
+      },
+      {
+        "name": "fine",
+        "vertices": 56,
+        "faces": 108,
+        "control_area_sum": 5.999999999999993,
+        "minimum_nodal_damping": 0.1111111111111111,
+        "maximum_nodal_damping": 0.8888888888888892,
+        "force_work": 0.06299999999999997,
+        "viscous_dissipation": 0.06299999999999997
+      }
+    ],
+    "time_step": 0.1,
+    "damping_per_area": 2.0,
+    "traction": [0.4, -0.2, 0.1],
+    "expected_displacement_per_vertex": [0.02, -0.01, 0.005],
+    "maximum_component_error_gate": 1e-12,
+    "status": "passed"
+  },
+  "owned_passive_active_case": {
+    "vertices": 8,
+    "faces": 12,
+    "time_step": 0.001,
+    "damping_per_area": 10.0,
+    "control_area_sum": 13.211102550927979,
+    "minimum_nodal_damping": 11.009252125773315,
+    "maximum_nodal_damping": 22.01850425154663,
+    "total_force_l2_norm": 1.8092040532021201,
+    "displacement_l2_norm": 0.00011671963537361354,
+    "force_work": 0.00020756259441726845,
+    "viscous_dissipation": 0.00020756259441726845,
+    "force_buffers_cleared": true,
+    "status": "passed"
+  },
+  "tests": {
+    "cell_engine_standalone_ctest": "133/133 passed",
+    "parent_cpp_ctest": "30/30 passed",
+    "owned_parent_cpp_werror": "13/13 passed",
+    "cell_engine_x1i_translation_units_strict_compile": "passed with inherited ignored-qualifiers and unused-parameter warnings downgraded",
+    "parent_python": "63/63 passed",
+    "tracked_python_ruff": "passed",
+    "diff_check": "passed",
+    "json_parse": "passed"
+  },
+  "next_required_stages": [
+    "X1-J remesh energy-defect ledger and cyclic drift",
+    "X1-K short-trajectory numerical gates"
+  ],
+  "claim_guard": "X1-I verifies barycentric-dual-area damping against a coarse/base/fine constant-traction manufactured solution and verifies that the explicit law reaches the PRL-owned real passive-active single-step path. It does not establish time stability or convergence, general nonlinear spatial convergence, a discrete energy inequality, trajectory validity, remesh energy consistency, complete cell-ECM/flow coupling, EFE bistability or memory, developmental mechanism, physiological calibration, or recovery of the frozen failed Route H Gate A v01. W_F=D_zeta remains an algebraic audit identity."
+}

@@ -175,7 +175,7 @@ OwnedActiveCellOverdampedStepAudit advance_owned_active_cell_overdamped_one_step
     const core::MyocardialCellMaterialState& material,
     const std::vector<core::ActiveContractionUnit>& units,
     const double time_step,
-    const double damping_coefficient,
+    const CellSurfaceDampingLaw damping,
     ::contact_face_face_via_coupling* const contact_model,
     const std::vector<std::shared_ptr<::cell>>& contact_context
 ) {
@@ -188,8 +188,12 @@ OwnedActiveCellOverdampedStepAudit advance_owned_active_cell_overdamped_one_step
     if(!std::isfinite(time_step) || time_step <= 0.0) {
         throw std::invalid_argument("owned-step time step must be finite and positive");
     }
-    if(!std::isfinite(damping_coefficient) || damping_coefficient <= 0.0) {
+    if(!std::isfinite(damping.coefficient) || damping.coefficient <= 0.0) {
         throw std::invalid_argument("owned-step damping must be finite and positive");
+    }
+    if(damping.measure != CellSurfaceDampingMeasure::uniform_per_vertex
+       && damping.measure != CellSurfaceDampingMeasure::barycentric_dual_area) {
+        throw std::invalid_argument("owned-step damping measure is not supported");
     }
     const auto before_mesh = capture_surface_snapshot(target);
     static_cast<void>(core::evaluate_active_contraction(before_mesh, material, units));
@@ -259,7 +263,7 @@ OwnedActiveCellOverdampedStepAudit advance_owned_active_cell_overdamped_one_step
             material,
             units,
             time_step,
-            damping_coefficient
+            damping
         );
     } catch(...) {
         reset_context_forces();
@@ -289,6 +293,29 @@ OwnedActiveCellOverdampedStepAudit advance_owned_active_cell_overdamped_one_step
         motion.centroid_after,
         motion.minimum_face_area_after,
     };
+}
+
+OwnedActiveCellOverdampedStepAudit advance_owned_active_cell_overdamped_one_step(
+    ::cell& target,
+    const core::MyocardialCellMaterialState& material,
+    const std::vector<core::ActiveContractionUnit>& units,
+    const double time_step,
+    const double damping_coefficient,
+    ::contact_face_face_via_coupling* const contact_model,
+    const std::vector<std::shared_ptr<::cell>>& contact_context
+) {
+    return advance_owned_active_cell_overdamped_one_step(
+        target,
+        material,
+        units,
+        time_step,
+        CellSurfaceDampingLaw{
+            CellSurfaceDampingMeasure::uniform_per_vertex,
+            damping_coefficient,
+        },
+        contact_model,
+        contact_context
+    );
 }
 
 } // namespace prl::cell_engine

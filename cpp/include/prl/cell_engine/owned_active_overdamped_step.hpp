@@ -40,6 +40,18 @@ advance_owned_active_cell_overdamped_one_step(
     const core::MyocardialCellMaterialState& material,
     const std::vector<core::ActiveContractionUnit>& units,
     double time_step,
+    CellSurfaceDampingLaw damping,
+    ::contact_face_face_via_coupling* contact_model = nullptr,
+    const std::vector<std::shared_ptr<::cell>>& contact_context = {}
+);
+
+/** Replay-compatible X1-H overload using uniform per-vertex damping. */
+[[nodiscard]] OwnedActiveCellOverdampedStepAudit
+advance_owned_active_cell_overdamped_one_step(
+    ::cell& target,
+    const core::MyocardialCellMaterialState& material,
+    const std::vector<core::ActiveContractionUnit>& units,
+    double time_step,
     double damping_coefficient,
     ::contact_face_face_via_coupling* contact_model = nullptr,
     const std::vector<std::shared_ptr<::cell>>& contact_context = {}
