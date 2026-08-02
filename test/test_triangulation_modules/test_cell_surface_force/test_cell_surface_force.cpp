@@ -177,6 +177,12 @@ int overdamped_step_updates_positions_and_consumes_forces() {
     }
     require(nearly_equal(cached_face_area, audit.surface_area_after),
             "overdamped step left stale face-area caches");
+    for(const node& current_node : current_cell->get_node_lst()) {
+        if(!current_node.is_used()) continue;
+        require(std::isfinite(current_node.get_curvature())
+                && nearly_equal(current_node.get_normal().norm(), 1.0),
+                "overdamped step left stale node geometry caches");
+    }
     require(nearly_equal(current_cell->get_node_lst().at(0).pos().dx(), 0.02),
             "first overdamped displacement mismatch");
     require(nearly_equal(current_cell->get_node_lst().at(1).pos().dx(), 0.98),

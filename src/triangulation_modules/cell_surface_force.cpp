@@ -355,6 +355,9 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
         geometry.centroid[1],
         geometry.centroid[2],
     });
+    #if CONTACT_MODEL_INDEX == 1 || CONTACT_MODEL_INDEX == 2
+        target.compute_node_curvature_and_normals();
+    #endif
     return {
         target.get_id(),
         expected_revision,
@@ -393,6 +396,9 @@ SurfaceGeometryAudit refresh_surface_geometry(
         geometry.centroid[1],
         geometry.centroid[2],
     });
+    #if CONTACT_MODEL_INDEX == 1 || CONTACT_MODEL_INDEX == 2
+        target.compute_node_curvature_and_normals();
+    #endif
     return {
         target.get_id(),
         expected_revision,
