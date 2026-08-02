@@ -1,3 +1,4 @@
+#include "prl/core/active_myocardial_mechanics.hpp"
 #include "prl/core/myocardial_material_transfer.hpp"
 #include "prl_cell_engine/cell_surface_snapshot.hpp"
 
@@ -15,6 +16,10 @@
 namespace {
 
 constexpr double tolerance = 1.0e-12;
+
+void require(const bool condition, const char* const message) {
+    if(!condition) throw std::runtime_error(message);
+}
 
 cell_ptr closed_swap_cell(const double lifted_vertex_height = 0.0) {
     mesh cell_mesh;
@@ -180,6 +185,73 @@ int real_split_and_merge_advance_the_same_material_registry() {
     return 0;
 }
 
+int active_mechanics_is_invariant_through_the_real_refiner() {
+    using namespace prl::core;
+    auto current_cell = closed_swap_cell();
+    auto sink = std::make_shared<MyocardialMaterialTransferSink>(tolerance);
+    sink->register_cell(
+        prl::cell_engine::capture_surface_snapshot(*current_cell),
+        myocardial_points(*current_cell)
+    );
+
+    const auto activation = c1_activation_protocol(1.5, 0.0, 0.1);
+    sink->update_active_state(
+        17,
+        101,
+        0,
+        {activation.activation, activation.activation_rate}
+    );
+    const auto before_mesh = prl::cell_engine::capture_surface_snapshot(*current_cell);
+    const auto before_material = sink->cell_state(17);
+    const auto unit = build_active_contraction_unit(
+        before_mesh,
+        before_material,
+        501,
+        101,
+        205,
+        101,
+        10.0,
+        0.9
+    );
+    const auto before = evaluate_active_contraction(before_mesh, before_material, {unit});
+
+    local_mesh_refiner refiner(0.1, 10.0, true, sink);
+    const auto edge_iterator = current_cell->get_edge_set().find(edge(0, 1));
+    require(edge_iterator != current_cell->get_edge_set().end(), "swap edge is missing");
+    refiner.swap_edge(const_cast<edge&>(*edge_iterator), current_cell);
+
+    const auto after_mesh = prl::cell_engine::capture_surface_snapshot(*current_cell);
+    const auto after_material = sink->cell_state(17);
+    const auto after = evaluate_active_contraction(after_mesh, after_material, {unit});
+    require(after_mesh.revision == 1, "real refiner did not advance the mesh revision");
+    require(after_material.revision == after_mesh.revision,
+            "active material and mesh revisions diverged after remeshing");
+    require(std::abs(after.audit.total_energy - before.audit.total_energy) <= tolerance,
+            "active energy changed across real remeshing");
+    require(
+        std::abs(after.audit.total_input_power - before.audit.total_input_power) <= tolerance,
+        "active input power changed across real remeshing"
+    );
+    require(
+        std::abs(after.unit_states.at(0).length - before.unit_states.at(0).length) <= tolerance,
+        "active anchor length changed across real remeshing"
+    );
+    require(
+        std::abs(
+            after.unit_states.at(0).preferred_length
+            - before.unit_states.at(0).preferred_length
+        ) <= tolerance,
+        "active preferred length changed across real remeshing"
+    );
+    require(after.audit.net_force_residual <= tolerance,
+            "active resultant is nonzero after real remeshing");
+    require(after.audit.net_moment_residual <= tolerance,
+            "active net moment is nonzero after real remeshing");
+    require(after.audit.minimum_axis_fiber_alignment >= 0.9,
+            "active axis lost fiber alignment after real remeshing");
+    return 0;
+}
+
 } // namespace
 
 int main(const int argc, const char* const argv[]) {
@@ -188,5 +260,8 @@ int main(const int argc, const char* const argv[]) {
     if(behavior == "real_swap") return real_swap_transfers_registered_myocardial_state();
     if(behavior == "failure_propagation") return transfer_failure_propagates_from_the_real_refiner();
     if(behavior == "real_split_merge") return real_split_and_merge_advance_the_same_material_registry();
+    if(behavior == "active_remesh_invariance") {
+        return active_mechanics_is_invariant_through_the_real_refiner();
+    }
     return 1;
 }

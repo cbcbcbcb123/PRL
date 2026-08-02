@@ -1,0 +1,56 @@
+{
+  "audit_id": "PRL-HYBRID-X1-E-ACTIVE-MECHANICS-V01",
+  "status": "passed_frozen",
+  "date": "2026-08-02",
+  "parent_branch": "codex/simucell3d-hybrid-feasibility",
+  "cell_engine_commit": "1ae6b27c785b3d4eabff136e3c8c588c2abc76ab",
+  "mechanism": {
+    "type": "preferred_length",
+    "activation_state": ["alpha", "alpha_rate"],
+    "activation_bounds": [0.0, 0.2],
+    "preferred_length": "L_f_star = L_f0 * (1 - alpha)",
+    "energy": "Psi_f = 0.5 * k_f * (L_f - L_f_star)^2",
+    "input_power": "P_act = -k_f * (L_f - L_f_star) * dL_f_star_dt",
+    "force_scatter": "central anchor-force pair scattered by current barycentric hosts to persistent vertex IDs"
+  },
+  "manufactured_case": {
+    "reference_length": 0.5,
+    "current_length": 0.5,
+    "stiffness": 10.0,
+    "time": 1.5,
+    "alpha_peak": 0.1,
+    "activation": 0.05,
+    "activation_rate": 0.15707963267948966,
+    "preferred_length": 0.475,
+    "energy": 0.003125,
+    "input_power": 0.019634954084936207,
+    "anchor_force_magnitude": 0.25,
+    "scattered_vertex_force_magnitude": 0.125
+  },
+  "real_remesh_case": {
+    "operation": "edge_swap",
+    "revision_before": 0,
+    "revision_after": 1,
+    "reference_length": 0.9013878188659973,
+    "preferred_length": 0.8563184279226974,
+    "energy": 0.010156250000000002,
+    "input_power": 0.06381360077604267,
+    "axis_fiber_alignment": 0.9429903335828895,
+    "length_difference_tolerance": 1e-12,
+    "preferred_length_difference_tolerance": 1e-12,
+    "energy_difference_tolerance": 1e-12,
+    "input_power_difference_tolerance": 1e-12,
+    "net_force_residual_tolerance": 1e-12,
+    "net_moment_residual_tolerance": 1e-12,
+    "status": "passed"
+  },
+  "tests": {
+    "cpp_with_cell_engine": "20/20 passed",
+    "owned_cpp_werror": "13/13 passed",
+    "python_hybrid_stage0_stage1_stage2": "63 passed",
+    "directional_derivative_relative_tolerance": 1e-9,
+    "rigid_objectivity_tolerance": 1e-14,
+    "remesh_invariance_tolerance": 1e-12
+  },
+  "claim_guard": "X1-E verifies an auditable active energy/force/power port and its invariance through one real edge swap. It does not verify passive-plus-active force assembly, a geometry-updating timestep, a stable contraction trajectory, volumetric ECM, flow coupling, physiological calibration, or recovery of the frozen failed Route H Gate A."
+}

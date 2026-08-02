@@ -28,6 +28,10 @@ using prl::core::SurfaceVertex;
 
 constexpr double tolerance = 1.0e-12;
 
+void require(const bool condition, const char* const message) {
+    if(!condition) throw std::runtime_error(message);
+}
+
 SurfaceMeshSnapshot old_mesh() {
     return {
         17,
@@ -412,6 +416,35 @@ int different_cells_transfer_concurrently() {
     return 0;
 }
 
+int active_state_update_is_revision_safe_and_atomic() {
+    MyocardialMaterialTransferSink sink(tolerance);
+    sink.register_cell(old_mesh(), material_points());
+    sink.update_active_state(17, 101, 41, {0.05, 0.125});
+
+    auto state = sink.cell_state(17);
+    require(state.revision == 41, "active-state update changed the mesh revision");
+    require(point_with_id(state, 101).material.active_state
+                == std::vector<double>({0.05, 0.125}),
+            "active-state update did not commit to the selected material point");
+    require(point_with_id(state, 205).material.active_state
+                == std::vector<double>({0.4, 0.7}),
+            "active-state update changed an unrelated material point");
+
+    bool stale_revision_rejected = false;
+    try {
+        sink.update_active_state(17, 101, 40, {0.08, 0.0});
+    } catch(const std::logic_error&) {
+        stale_revision_rejected = true;
+    }
+    require(stale_revision_rejected, "stale active-state revision was accepted");
+    state = sink.cell_state(17);
+    require(state.revision == 41, "rejected active-state update changed the revision");
+    require(point_with_id(state, 101).material.active_state
+                == std::vector<double>({0.05, 0.125}),
+            "rejected active-state update was not atomic");
+    return 0;
+}
+
 } // namespace
 
 int main(const int argc, const char* const argv[]) {
@@ -424,5 +457,6 @@ int main(const int argc, const char* const argv[]) {
     if(behavior == "stable_host_ids") return stable_host_ids_survive_local_reordering();
     if(behavior == "fiber_projection") return fibers_are_projected_to_the_new_host_tangent_plane();
     if(behavior == "multicell_concurrency") return different_cells_transfer_concurrently();
+    if(behavior == "active_state_update") return active_state_update_is_revision_safe_and_atomic();
     return 1;
 }

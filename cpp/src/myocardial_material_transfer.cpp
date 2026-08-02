@@ -442,6 +442,35 @@ void MyocardialMaterialTransferSink::on_remesh(
     entry->audit = audit;
 }
 
+void MyocardialMaterialTransferSink::update_active_state(
+    const CellId cell_id,
+    const MaterialPointId material_point_id,
+    const MeshRevision expected_revision,
+    std::vector<double> active_state
+) {
+    if(!std::all_of(active_state.begin(), active_state.end(), [](const double value) {
+        return std::isfinite(value);
+    })) {
+        throw std::invalid_argument("active state must be finite");
+    }
+    const auto entry = implementation_->find_cell(cell_id);
+    std::lock_guard<std::mutex> lock(entry->mutex);
+    if(entry->state.revision != expected_revision) {
+        throw std::logic_error("active-state update revision does not match material state");
+    }
+    const auto point = std::find_if(
+        entry->state.points.begin(),
+        entry->state.points.end(),
+        [material_point_id](const SurfaceMaterialPoint& candidate) {
+            return candidate.material.material_point_id == material_point_id;
+        }
+    );
+    if(point == entry->state.points.end()) {
+        throw std::out_of_range("active-state material point is not registered");
+    }
+    point->material.active_state = std::move(active_state);
+}
+
 MyocardialCellMaterialState MyocardialMaterialTransferSink::cell_state(
     const CellId cell_id
 ) const {

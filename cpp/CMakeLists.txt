@@ -10,7 +10,12 @@ option(
     ON
 )
 
-add_library(prl_core STATIC src/myocardial_material_transfer.cpp)
+add_library(
+    prl_core
+    STATIC
+        src/active_myocardial_mechanics.cpp
+        src/myocardial_material_transfer.cpp
+)
 target_compile_features(prl_core PUBLIC cxx_std_17)
 target_link_libraries(prl_core PUBLIC Threads::Threads)
 target_include_directories(
@@ -58,6 +63,32 @@ if(BUILD_TESTING)
         NAME prl_myocardial_material_transfer_multicell_concurrency
         COMMAND prl_myocardial_material_transfer_test multicell_concurrency
     )
+    add_test(
+        NAME prl_myocardial_material_active_state_update
+        COMMAND prl_myocardial_material_transfer_test active_state_update
+    )
+
+    add_executable(
+        prl_active_myocardial_mechanics_test
+        tests/active_myocardial_mechanics_test.cpp
+    )
+    target_link_libraries(prl_active_myocardial_mechanics_test PRIVATE prl_core)
+    add_test(
+        NAME prl_active_myocardial_preferred_length_force_power
+        COMMAND prl_active_myocardial_mechanics_test preferred_length_force_power
+    )
+    add_test(
+        NAME prl_active_myocardial_activation_protocol
+        COMMAND prl_active_myocardial_mechanics_test activation_protocol
+    )
+    add_test(
+        NAME prl_active_myocardial_directional_derivative
+        COMMAND prl_active_myocardial_mechanics_test directional_derivative
+    )
+    add_test(
+        NAME prl_active_myocardial_rigid_objectivity
+        COMMAND prl_active_myocardial_mechanics_test rigid_objectivity
+    )
 
     if(PRL_BUILD_CELL_ENGINE_INTEGRATION_TESTS)
         set(ENABLE_PYTHON_BINDINGS OFF CACHE BOOL "" FORCE)
@@ -91,6 +122,10 @@ if(BUILD_TESTING)
         add_test(
             NAME prl_cell_engine_material_transfer_real_split_merge
             COMMAND prl_cell_engine_material_transfer_integration_test real_split_merge
+        )
+        add_test(
+            NAME prl_cell_engine_active_remesh_invariance
+            COMMAND prl_cell_engine_material_transfer_integration_test active_remesh_invariance
         )
 
         add_executable(

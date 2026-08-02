@@ -57,6 +57,13 @@ public:
         const SurfaceMeshSnapshot& after
     ) override;
 
+    void update_active_state(
+        CellId cell_id,
+        MaterialPointId material_point_id,
+        MeshRevision expected_revision,
+        std::vector<double> active_state
+    );
+
     [[nodiscard]] MyocardialCellMaterialState cell_state(CellId cell_id) const;
     [[nodiscard]] RemeshTransferAudit last_audit(CellId cell_id) const;
 
