@@ -61,7 +61,8 @@ struct SurfaceOverdampedStepAudit {
  *
  * Existing node forces are treated as preassembled contributions. Additional
  * forces are addressed by persistent vertex ID. Positions and force buffers
- * are committed only after the complete step has been validated.
+ * are committed only after the complete step has been validated. Derived
+ * geometry caches are intentionally not refreshed by this primitive.
  */
 [[nodiscard]] SurfaceOverdampedStepAudit advance_surface_overdamped(
     ::cell& target,
