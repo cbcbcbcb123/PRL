@@ -6,6 +6,7 @@ add_subdirectory(test_initial_triangulation)
 add_subdirectory(test_poisson_sampling)
 add_subdirectory(test_bpa)
 add_subdirectory(test_cell_divider)
+add_subdirectory(test_cell_surface_force)
 
 
 

@@ -32,6 +32,7 @@ class node;
 #include "face.hpp"
 #include "vec3.hpp"
 #include "mat33.hpp"
+#include "prl_cell_engine/cell_surface_force.hpp"
 
 
 
@@ -120,6 +121,12 @@ class cell: public std::enable_shared_from_this<cell> {
         friend class contact_node_face_via_spring;
         friend class cell_divider;
         friend class automatic_polarizer;
+        friend prl::cell_engine::SurfaceForceInjectionAudit
+        prl::cell_engine::apply_surface_vertex_forces(
+            cell&,
+            prl::core::MeshRevision,
+            const std::vector<prl::cell_engine::SurfaceVertexForce>&
+        );
 
         //The following classes are used for testing purposes
         friend class cell_tester;
