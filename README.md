@@ -3,7 +3,7 @@
 本仓库现在包含两条严格隔离的证据线：
 
 1. **Route H reference/oracle**：独立闭合表面 DCM 细胞 + 独立四面体有限变形黏弹 ECM。Stage 2 Gate A 已冻结为 `failed_invalid_numerics`，Gate B–E 仍 blocked。
-2. **Hybrid X0–X1 implementation**：采用 PRL 自有 cell engine + 独立体积 ECM 的混合架构，不覆盖 Route H 历史结果。X0-A–E 已完成；X1-A–C 已冻结真实 remesher—材料迁移 C++ 闭环，X1-D 已冻结多细胞规模、并发确定性与性能基线，X1-E 已冻结单细胞主动能量/力/功率端口，X1-F 已冻结主动力进入真实 cell-engine force buffer 的单步装配 seam。
+2. **Hybrid X0–X1 implementation**：采用 PRL 自有 cell engine + 独立体积 ECM 的混合架构，不覆盖 Route H 历史结果。X0-A–E 已完成；X1-A–C 已冻结真实 remesher—材料迁移 C++ 闭环，X1-D 已冻结多细胞规模、并发确定性与性能基线，X1-E 已冻结单细胞主动能量/力/功率端口，X1-F 已冻结主动力进入真实 cell-engine force buffer 的装配 seam，X1-G 已冻结真实 cell 上一次原子主动过阻尼位置更新及其功—耗散账本。
 
 目标架构：
 
@@ -40,4 +40,4 @@ cmake --build cpp/build-release --target prl_multicell_remesh_benchmark
 python scripts/run_hybrid_x1_d_benchmark.py --executable cpp/build-release/prl_multicell_remesh_benchmark --build-type Release
 ```
 
-长期架构决策见 `docs/adr/0001-owned-cpp-core-python-research-layer.md`，X0-C/D 冻结接口见 `docs/hybrid_architecture_v02.md`，X0-E 自有仓库拓扑见 `docs/hybrid_architecture_v03.md`，X1-A–F 的递进冻结见 `docs/hybrid_architecture_v04.md` 至 `docs/hybrid_architecture_v09.md`。下一安全切片为 X1-G 自有单步 driver/hook；当前 stock solver 尚未自动调用主动装配，也尚未形成几何更新的收缩轨迹或接入体积 ECM/血流。
+长期架构决策见 `docs/adr/0001-owned-cpp-core-python-research-layer.md`，X0-C/D 冻结接口见 `docs/hybrid_architecture_v02.md`，X0-E 自有仓库拓扑见 `docs/hybrid_architecture_v03.md`，X1-A–G 的递进冻结见 `docs/hybrid_architecture_v04.md` 至 `docs/hybrid_architecture_v10.md`。下一安全切片建议为 X1-H：在 PRL owned driver 中接入真实被动力装配与派生几何缓存刷新，并继续保持单步可审计边界；当前 stock solver 尚未自动调用该路径，也尚未形成经时间步收敛验证的收缩轨迹或接入体积 ECM/血流。

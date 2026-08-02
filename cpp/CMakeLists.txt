@@ -155,6 +155,21 @@ if(BUILD_TESTING)
             COMMAND prl_cell_engine_active_force_assembly_integration_test
                 post_remesh_revision
         )
+        add_test(
+            NAME prl_cell_engine_active_overdamped_single_step
+            COMMAND prl_cell_engine_active_force_assembly_integration_test
+                overdamped_single_step
+        )
+        add_test(
+            NAME prl_cell_engine_active_overdamped_failure_atomicity
+            COMMAND prl_cell_engine_active_force_assembly_integration_test
+                overdamped_failure_atomicity
+        )
+        add_test(
+            NAME prl_cell_engine_active_overdamped_post_remesh
+            COMMAND prl_cell_engine_active_force_assembly_integration_test
+                overdamped_post_remesh
+        )
 
         add_executable(
             prl_multicell_remesh_benchmark
