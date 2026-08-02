@@ -37,6 +37,20 @@ struct SurfaceGeometryAudit {
     double minimum_face_area{};
 };
 
+/** Spatial measure represented by one damping coefficient. */
+enum class SurfaceDampingMeasure {
+    /** Legacy X1-G/H law: the same damping is assigned to every used vertex. */
+    uniform_per_vertex,
+    /** Surface drag density lumped with one third of each incident face area. */
+    barycentric_dual_area,
+};
+
+/** Explicit damping law for an overdamped surface update. */
+struct SurfaceDampingLaw {
+    SurfaceDampingMeasure measure{SurfaceDampingMeasure::uniform_per_vertex};
+    double coefficient{};
+};
+
 /** Audit of one atomic overdamped position update. */
 struct SurfaceOverdampedStepAudit {
     core::CellId cell_id{};
@@ -44,6 +58,10 @@ struct SurfaceOverdampedStepAudit {
     std::size_t stepped_vertex_count{};
     double time_step{};
     double damping_coefficient{};
+    SurfaceDampingMeasure damping_measure{SurfaceDampingMeasure::uniform_per_vertex};
+    double control_area_sum{};
+    double minimum_nodal_damping{};
+    double maximum_nodal_damping{};
     double preassembled_force_l2_norm{};
     double additional_force_l2_norm{};
     double total_force_l2_norm{};
@@ -79,6 +97,20 @@ struct SurfaceOverdampedStepAudit {
  * forces are addressed by persistent vertex ID. Positions and force buffers
  * are committed only after the complete step, including the derived face and
  * cell geometry, has been validated. Geometry caches are refreshed on commit.
+ */
+[[nodiscard]] SurfaceOverdampedStepAudit advance_surface_overdamped(
+    ::cell& target,
+    core::MeshRevision expected_revision,
+    double time_step,
+    SurfaceDampingLaw damping,
+    const std::vector<SurfaceVertexForce>& additional_forces = {}
+);
+
+/**
+ * Backward-compatible X1-G/H overload using uniform per-vertex damping.
+ *
+ * This overload deliberately preserves its historical meaning. New spatially
+ * convergent PRL paths should pass an explicit SurfaceDampingLaw instead.
  */
 [[nodiscard]] SurfaceOverdampedStepAudit advance_surface_overdamped(
     ::cell& target,

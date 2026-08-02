@@ -69,6 +69,7 @@ struct PendingSurfaceGeometry {
     double volume{};
     Vector3 centroid{};
     double minimum_face_area{};
+    std::vector<double> barycentric_dual_areas{};
 };
 
 std::vector<Vector3> current_positions(const ::cell& target) {
@@ -97,6 +98,7 @@ PendingSurfaceGeometry validated_surface_geometry(
     }
     PendingSurfaceGeometry result;
     result.minimum_face_area = std::numeric_limits<double>::infinity();
+    result.barycentric_dual_areas.assign(positions.size(), 0.0);
     double signed_six_volume = 0.0;
     for(const face& current_face : target.get_face_lst()) {
         if(!current_face.is_used()) continue;
@@ -118,6 +120,9 @@ PendingSurfaceGeometry validated_surface_geometry(
         result.face_count += 1;
         result.surface_area += face_area;
         result.minimum_face_area = std::min(result.minimum_face_area, face_area);
+        for(const unsigned node_id : node_ids) {
+            result.barycentric_dual_areas[node_id] += face_area / 3.0;
+        }
         result.centroid = add(
             result.centroid,
             scale(add(add(a, b), c), face_area / 3.0)
@@ -228,7 +233,7 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
     ::cell& target,
     const core::MeshRevision expected_revision,
     const double time_step,
-    const double damping_coefficient,
+    const SurfaceDampingLaw damping,
     const std::vector<SurfaceVertexForce>& additional_forces
 ) {
     if(target.get_mesh_revision() != expected_revision) {
@@ -240,12 +245,12 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
     if(!std::isfinite(time_step) || time_step <= 0.0) {
         throw std::invalid_argument("overdamped time step must be finite and positive");
     }
-    if(!std::isfinite(damping_coefficient) || damping_coefficient <= 0.0) {
+    if(!std::isfinite(damping.coefficient) || damping.coefficient <= 0.0) {
         throw std::invalid_argument("overdamped damping coefficient must be finite and positive");
     }
-    const double mobility_step = time_step / damping_coefficient;
-    if(!std::isfinite(mobility_step)) {
-        throw std::invalid_argument("overdamped dt/damping ratio must be finite");
+    if(damping.measure != SurfaceDampingMeasure::uniform_per_vertex
+       && damping.measure != SurfaceDampingMeasure::barycentric_dual_area) {
+        throw std::invalid_argument("overdamped damping measure is not supported");
     }
 
     std::unordered_map<core::VertexId, std::size_t> node_by_persistent_id;
@@ -282,6 +287,7 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
     }
 
     auto pending_positions = current_positions(target);
+    const auto current_geometry = validated_surface_geometry(target, pending_positions);
     std::vector<PendingPositionWrite> pending_writes;
     pending_writes.reserve(node_by_persistent_id.size());
     double additional_squared_norm = 0.0;
@@ -289,6 +295,10 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
     double total_squared_norm = 0.0;
     double displacement_squared_norm = 0.0;
     double total_force_work = 0.0;
+    double viscous_dissipation = 0.0;
+    double control_area_sum = 0.0;
+    double minimum_nodal_damping = std::numeric_limits<double>::infinity();
+    double maximum_nodal_damping = 0.0;
     Vector3 net_displacement{};
     for(std::size_t index = 0; index < target.node_lst_.size(); ++index) {
         const node& current_node = target.node_lst_[index];
@@ -310,6 +320,21 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
         const auto additional = additional_by_node.find(index);
         if(additional != additional_by_node.end()) additional_force = additional->second;
         const auto total_force = add(preassembled_force, additional_force);
+        const double control_area = current_geometry.barycentric_dual_areas.at(index);
+        const double nodal_damping = damping.measure
+                == SurfaceDampingMeasure::barycentric_dual_area
+            ? damping.coefficient * control_area
+            : damping.coefficient;
+        const double mobility_step = time_step / nodal_damping;
+        if(!std::isfinite(control_area)
+           || control_area <= 0.0
+           || !std::isfinite(nodal_damping)
+           || nodal_damping <= 0.0
+           || !std::isfinite(mobility_step)) {
+            throw std::runtime_error(
+                "overdamped nodal damping must be finite and positive"
+            );
+        }
         const auto displacement = scale(total_force, mobility_step);
         const auto resulting_position = add(position, displacement);
         if(!finite_vector(total_force)
@@ -327,16 +352,22 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
         total_squared_norm += squared_norm(total_force);
         displacement_squared_norm += squared_norm(displacement);
         total_force_work += dot(total_force, displacement);
+        viscous_dissipation += nodal_damping
+            * squared_norm(displacement) / time_step;
+        control_area_sum += control_area;
+        minimum_nodal_damping = std::min(minimum_nodal_damping, nodal_damping);
+        maximum_nodal_damping = std::max(maximum_nodal_damping, nodal_damping);
         net_displacement = add(net_displacement, displacement);
     }
-    const double viscous_dissipation = damping_coefficient
-        * displacement_squared_norm / time_step;
     if(!std::isfinite(additional_squared_norm)
        || !std::isfinite(preassembled_squared_norm)
        || !std::isfinite(total_squared_norm)
        || !std::isfinite(displacement_squared_norm)
        || !std::isfinite(total_force_work)
        || !std::isfinite(viscous_dissipation)
+       || !std::isfinite(control_area_sum)
+       || !std::isfinite(minimum_nodal_damping)
+       || !std::isfinite(maximum_nodal_damping)
        || !finite_vector(net_displacement)) {
         throw std::runtime_error("overdamped step audit became non-finite");
     }
@@ -363,7 +394,11 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
         expected_revision,
         pending_writes.size(),
         time_step,
-        damping_coefficient,
+        damping.coefficient,
+        damping.measure,
+        control_area_sum,
+        minimum_nodal_damping,
+        maximum_nodal_damping,
         std::sqrt(preassembled_squared_norm),
         std::sqrt(additional_squared_norm),
         std::sqrt(total_squared_norm),
@@ -378,6 +413,25 @@ SurfaceOverdampedStepAudit advance_surface_overdamped(
         geometry.centroid,
         geometry.minimum_face_area,
     };
+}
+
+SurfaceOverdampedStepAudit advance_surface_overdamped(
+    ::cell& target,
+    const core::MeshRevision expected_revision,
+    const double time_step,
+    const double damping_coefficient,
+    const std::vector<SurfaceVertexForce>& additional_forces
+) {
+    return advance_surface_overdamped(
+        target,
+        expected_revision,
+        time_step,
+        SurfaceDampingLaw{
+            SurfaceDampingMeasure::uniform_per_vertex,
+            damping_coefficient,
+        },
+        additional_forces
+    );
 }
 
 SurfaceGeometryAudit refresh_surface_geometry(

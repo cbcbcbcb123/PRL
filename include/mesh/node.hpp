@@ -67,6 +67,14 @@ class node final
             cell&,
             prl::core::MeshRevision,
             double,
+            prl::cell_engine::SurfaceDampingLaw,
+            const std::vector<prl::cell_engine::SurfaceVertexForce>&
+        );
+        friend prl::cell_engine::SurfaceOverdampedStepAudit
+        prl::cell_engine::advance_surface_overdamped(
+            cell&,
+            prl::core::MeshRevision,
+            double,
             double,
             const std::vector<prl::cell_engine::SurfaceVertexForce>&
         );
