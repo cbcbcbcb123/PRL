@@ -1,5 +1,7 @@
 #include "prl/core/myocardial_material_transfer.hpp"
 
+#include "prl/core/active_myocardial_mechanics.hpp"
+
 #include <algorithm>
 #include <cmath>
 #include <limits>
@@ -286,10 +288,18 @@ void validate_material_point(
 
 class MyocardialMaterialTransferSink::Impl {
 public:
+    struct ActiveEnergyLedgerState {
+        std::vector<ActiveContractionUnit> units{};
+        std::unordered_map<MaterialPointId, Vector3> initial_fibers{};
+        RemeshEnergyLedgerAudit audit{};
+        std::optional<RemeshEnergyDefectAudit> last_defect{};
+    };
+
     struct CellEntry {
         mutable std::mutex mutex{};
         MyocardialCellMaterialState state{};
         std::optional<RemeshTransferAudit> audit{};
+        std::optional<ActiveEnergyLedgerState> active_energy_ledger{};
     };
 
     explicit Impl(const double maximum_rebind_distance)
@@ -437,9 +447,128 @@ void MyocardialMaterialTransferSink::on_remesh(
         retained_fraction,
         0.0,
     };
-    entry->state.revision = event.after_revision;
-    entry->state.points = std::move(transferred_points);
+
+    MyocardialCellMaterialState transferred_state{
+        event.cell_id,
+        event.after_revision,
+        transferred_points,
+    };
+    std::optional<RemeshEnergyDefectAudit> pending_defect;
+    std::optional<RemeshEnergyLedgerAudit> pending_ledger;
+    if(entry->active_energy_ledger.has_value()) {
+        const auto before_energy = evaluate_active_contraction(
+            before,
+            entry->state,
+            entry->active_energy_ledger->units
+        );
+        const auto after_energy = evaluate_active_contraction(
+            after,
+            transferred_state,
+            entry->active_energy_ledger->units
+        );
+        const double inter_event_change = before_energy.audit.total_energy
+            - entry->active_energy_ledger->audit.final_stored_energy;
+        const double delta_psi_remesh = after_energy.audit.total_energy
+            - before_energy.audit.total_energy;
+        constexpr double declared_remesh_work = 0.0;
+        const double algorithmic_energy_defect = delta_psi_remesh
+            - declared_remesh_work;
+        double minimum_initial_fiber_alignment = 1.0;
+        for(const auto& point : transferred_state.points) {
+            const auto initial = entry->active_energy_ledger->initial_fibers.find(
+                point.material.material_point_id
+            );
+            if(initial == entry->active_energy_ledger->initial_fibers.end()) {
+                throw std::runtime_error(
+                    "remesh-energy ledger lost a registered material-point ID"
+                );
+            }
+            const auto current_fiber = normalized(
+                point.material.fiber_direction,
+                "remesh-energy ledger fiber must be nonzero"
+            );
+            minimum_initial_fiber_alignment = std::min(
+                minimum_initial_fiber_alignment,
+                std::clamp(
+                    std::abs(dot(initial->second, current_fiber)),
+                    0.0,
+                    1.0
+                )
+            );
+        }
+        pending_defect = RemeshEnergyDefectAudit{
+            event.cell_id,
+            event.operation,
+            event.before_revision,
+            event.after_revision,
+            RemeshEnergyCoverage::active_contraction_only,
+            entry->active_energy_ledger->units.size(),
+            before_energy.audit.total_energy,
+            after_energy.audit.total_energy,
+            inter_event_change,
+            delta_psi_remesh,
+            declared_remesh_work,
+            algorithmic_energy_defect,
+            minimum_fiber_alignment,
+            minimum_initial_fiber_alignment,
+            maximum_rebind_error,
+        };
+        pending_ledger = entry->active_energy_ledger->audit;
+        pending_ledger->current_revision = event.after_revision;
+        pending_ledger->event_count += 1;
+        switch(event.operation) {
+            case RemeshOperation::edge_split:
+                pending_ledger->split_event_count += 1;
+                break;
+            case RemeshOperation::edge_swap:
+                pending_ledger->swap_event_count += 1;
+                break;
+            case RemeshOperation::edge_merge:
+                pending_ledger->merge_event_count += 1;
+                break;
+        }
+        pending_ledger->final_stored_energy = after_energy.audit.total_energy;
+        pending_ledger->cumulative_inter_event_stored_energy_change
+            += inter_event_change;
+        pending_ledger->cumulative_delta_psi_remesh += delta_psi_remesh;
+        pending_ledger->cumulative_absolute_delta_psi_remesh
+            += std::abs(delta_psi_remesh);
+        pending_ledger->cumulative_declared_remesh_work
+            += declared_remesh_work;
+        pending_ledger->cumulative_algorithmic_energy_defect
+            += algorithmic_energy_defect;
+        pending_ledger->cumulative_absolute_algorithmic_energy_defect
+            += std::abs(algorithmic_energy_defect);
+        pending_ledger->maximum_absolute_delta_psi_remesh = std::max(
+            pending_ledger->maximum_absolute_delta_psi_remesh,
+            std::abs(delta_psi_remesh)
+        );
+        pending_ledger->minimum_step_fiber_alignment = std::min(
+            pending_ledger->minimum_step_fiber_alignment,
+            minimum_fiber_alignment
+        );
+        pending_ledger->minimum_initial_fiber_alignment = std::min(
+            pending_ledger->minimum_initial_fiber_alignment,
+            minimum_initial_fiber_alignment
+        );
+        pending_ledger->maximum_rebind_error = std::max(
+            pending_ledger->maximum_rebind_error,
+            maximum_rebind_error
+        );
+        pending_ledger->energy_telescoping_residual = std::abs(
+            (pending_ledger->final_stored_energy
+             - pending_ledger->initial_stored_energy)
+            - pending_ledger->cumulative_inter_event_stored_energy_change
+            - pending_ledger->cumulative_delta_psi_remesh
+        );
+    }
+
+    entry->state = std::move(transferred_state);
     entry->audit = audit;
+    if(pending_ledger.has_value()) {
+        entry->active_energy_ledger->audit = pending_ledger.value();
+        entry->active_energy_ledger->last_defect = pending_defect.value();
+    }
 }
 
 void MyocardialMaterialTransferSink::update_active_state(
@@ -471,6 +600,48 @@ void MyocardialMaterialTransferSink::update_active_state(
     point->material.active_state = std::move(active_state);
 }
 
+void MyocardialMaterialTransferSink::begin_active_remesh_energy_ledger(
+    const SurfaceMeshSnapshot& mesh,
+    std::vector<ActiveContractionUnit> units
+) {
+    validate_mesh(mesh);
+    const auto entry = implementation_->find_cell(mesh.cell_id);
+    std::lock_guard<std::mutex> lock(entry->mutex);
+    if(entry->state.revision != mesh.revision) {
+        throw std::logic_error(
+            "remesh-energy ledger mesh revision does not match material state"
+        );
+    }
+    if(entry->active_energy_ledger.has_value()) {
+        throw std::logic_error("remesh-energy ledger is already active for this cell");
+    }
+    const auto initial_energy = evaluate_active_contraction(mesh, entry->state, units);
+    Impl::ActiveEnergyLedgerState ledger;
+    ledger.units = std::move(units);
+    ledger.initial_fibers.reserve(entry->state.points.size());
+    for(const auto& point : entry->state.points) {
+        if(!ledger.initial_fibers.emplace(
+                point.material.material_point_id,
+                normalized(
+                    point.material.fiber_direction,
+                    "remesh-energy ledger initial fiber must be nonzero"
+                )
+            ).second) {
+            throw std::runtime_error(
+                "remesh-energy ledger material-point IDs must be unique"
+            );
+        }
+    }
+    ledger.audit.cell_id = mesh.cell_id;
+    ledger.audit.initial_revision = mesh.revision;
+    ledger.audit.current_revision = mesh.revision;
+    ledger.audit.coverage = RemeshEnergyCoverage::active_contraction_only;
+    ledger.audit.active_unit_count = ledger.units.size();
+    ledger.audit.initial_stored_energy = initial_energy.audit.total_energy;
+    ledger.audit.final_stored_energy = initial_energy.audit.total_energy;
+    entry->active_energy_ledger = std::move(ledger);
+}
+
 MyocardialCellMaterialState MyocardialMaterialTransferSink::cell_state(
     const CellId cell_id
 ) const {
@@ -488,6 +659,104 @@ RemeshTransferAudit MyocardialMaterialTransferSink::last_audit(
         throw std::logic_error("myocardial material cell has no remesh audit");
     }
     return entry->audit.value();
+}
+
+RemeshEnergyDefectAudit MyocardialMaterialTransferSink::last_remesh_energy_defect(
+    const CellId cell_id
+) const {
+    const auto entry = implementation_->find_cell(cell_id);
+    std::lock_guard<std::mutex> lock(entry->mutex);
+    if(!entry->active_energy_ledger.has_value()
+       || !entry->active_energy_ledger->last_defect.has_value()) {
+        throw std::logic_error("myocardial material cell has no remesh-energy defect");
+    }
+    return entry->active_energy_ledger->last_defect.value();
+}
+
+RemeshEnergyLedgerAudit MyocardialMaterialTransferSink::remesh_energy_ledger(
+    const CellId cell_id
+) const {
+    const auto entry = implementation_->find_cell(cell_id);
+    std::lock_guard<std::mutex> lock(entry->mutex);
+    if(!entry->active_energy_ledger.has_value()) {
+        throw std::logic_error("myocardial material cell has no remesh-energy ledger");
+    }
+    return entry->active_energy_ledger->audit;
+}
+
+RemeshCycleGateAudit evaluate_remesh_cycle_gate(
+    const RemeshEnergyLedgerAudit& ledger,
+    const RemeshCycleGateThresholds& thresholds
+) {
+    const std::array<double, 5> nonnegative_thresholds{
+        thresholds.maximum_absolute_final_energy_drift,
+        thresholds.maximum_cumulative_absolute_energy_defect,
+        thresholds.maximum_absolute_inter_event_energy_change,
+        thresholds.maximum_absolute_declared_remesh_work,
+        thresholds.maximum_energy_telescoping_residual,
+    };
+    if(!std::all_of(
+            nonnegative_thresholds.begin(),
+            nonnegative_thresholds.end(),
+            [](const double value) { return std::isfinite(value) && value >= 0.0; }
+        )
+       || !std::isfinite(thresholds.minimum_initial_fiber_alignment)
+       || thresholds.minimum_initial_fiber_alignment < 0.0
+       || thresholds.minimum_initial_fiber_alignment > 1.0
+       || thresholds.minimum_event_count == 0) {
+        throw std::invalid_argument("remesh-cycle gate thresholds are invalid");
+    }
+    const std::array<double, 8> audited_values{
+        ledger.initial_stored_energy,
+        ledger.final_stored_energy,
+        ledger.cumulative_absolute_delta_psi_remesh,
+        ledger.cumulative_inter_event_stored_energy_change,
+        ledger.cumulative_declared_remesh_work,
+        ledger.cumulative_algorithmic_energy_defect,
+        ledger.cumulative_absolute_algorithmic_energy_defect,
+        ledger.energy_telescoping_residual,
+    };
+    if(!std::all_of(
+            audited_values.begin(),
+            audited_values.end(),
+            [](const double value) { return std::isfinite(value); }
+        )
+       || !std::isfinite(ledger.minimum_initial_fiber_alignment)
+       || ledger.cumulative_absolute_delta_psi_remesh < 0.0
+       || ledger.cumulative_absolute_algorithmic_energy_defect < 0.0
+       || ledger.energy_telescoping_residual < 0.0
+       || ledger.minimum_initial_fiber_alignment < 0.0
+       || ledger.minimum_initial_fiber_alignment > 1.0) {
+        throw std::invalid_argument("remesh-cycle gate ledger is non-finite");
+    }
+
+    RemeshCycleGateAudit result;
+    result.final_energy_drift = ledger.final_stored_energy
+        - ledger.initial_stored_energy;
+    result.fiber_drift = 1.0 - ledger.minimum_initial_fiber_alignment;
+    result.event_count_passed = ledger.event_count >= thresholds.minimum_event_count;
+    result.energy_drift_passed = std::abs(result.final_energy_drift)
+        <= thresholds.maximum_absolute_final_energy_drift;
+    result.absolute_defect_passed
+        = ledger.cumulative_absolute_algorithmic_energy_defect
+        <= thresholds.maximum_cumulative_absolute_energy_defect;
+    result.inter_event_change_passed = std::abs(
+        ledger.cumulative_inter_event_stored_energy_change
+    ) <= thresholds.maximum_absolute_inter_event_energy_change;
+    result.remesh_work_passed = std::abs(ledger.cumulative_declared_remesh_work)
+        <= thresholds.maximum_absolute_declared_remesh_work;
+    result.telescoping_passed = ledger.energy_telescoping_residual
+        <= thresholds.maximum_energy_telescoping_residual;
+    result.fiber_drift_passed = ledger.minimum_initial_fiber_alignment
+        >= thresholds.minimum_initial_fiber_alignment;
+    result.passed = result.event_count_passed
+        && result.energy_drift_passed
+        && result.absolute_defect_passed
+        && result.inter_event_change_passed
+        && result.remesh_work_passed
+        && result.telescoping_passed
+        && result.fiber_drift_passed;
+    return result;
 }
 
 } // namespace prl::core

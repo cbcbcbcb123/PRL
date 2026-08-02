@@ -1,0 +1,94 @@
+{
+  "audit_id": "PRL-HYBRID-X1-J-REMESH-ENERGY-DEFECT-V01",
+  "status": "passed_frozen_active_energy_owner",
+  "date": "2026-08-02",
+  "governed_by": "CONSTRAINT-PRL-EXTERNAL-SCIENTIFIC-REVIEW-V01",
+  "parent_branch": "codex/simucell3d-hybrid-feasibility",
+  "cell_engine": {
+    "repository": "https://github.com/cbcbcbcb123/prl-cell-engine",
+    "branch": "codex/cell-engine-integration-seam",
+    "commit": "2d4b2183f5966c2afe3f4234471e727fe5f9e68d",
+    "changed_in_stage": false,
+    "remote_synced": true
+  },
+  "coverage": {
+    "enum": "active_contraction_only",
+    "included_energy_owner": "PRL active contraction stored energy",
+    "excluded_owners": [
+      "upstream passive pressure/surface/bending energy caches",
+      "contact",
+      "volumetric ECM",
+      "flow"
+    ],
+    "whole_system_energy_consistency_claim_allowed": false
+  },
+  "event_contract": {
+    "delta_psi_remesh": "Psi_active_after - Psi_active_before",
+    "declared_remesh_work": 0.0,
+    "algorithmic_energy_defect": "delta_psi_remesh - declared_remesh_work",
+    "absolute_accumulators": [
+      "sum(abs(delta_psi_remesh))",
+      "sum(abs(algorithmic_energy_defect))"
+    ],
+    "inter_event_energy_is_separate": true,
+    "operations": ["edge_split", "edge_swap", "edge_merge"],
+    "atomic_commit": [
+      "material state",
+      "material-transfer audit",
+      "remesh-energy defect",
+      "cumulative ledger"
+    ]
+  },
+  "real_event_results": {
+    "swap": {
+      "event_count": 1,
+      "delta_psi_remesh": 0.0,
+      "declared_remesh_work": 0.0,
+      "minimum_step_fiber_alignment": 1.0,
+      "minimum_initial_fiber_alignment": 1.0,
+      "status": "passed"
+    },
+    "split_merge": {
+      "event_count": 2,
+      "split_event_count": 1,
+      "merge_event_count": 1,
+      "split_delta_psi_remesh": 5.204170427930421e-17,
+      "merge_delta_psi_remesh": 0.0,
+      "cumulative_delta_psi_remesh": 5.204170427930421e-17,
+      "final_active_energy_drift": 5.204170427930421e-17,
+      "declared_remesh_work": 0.0,
+      "status": "passed"
+    },
+    "swap_cycles": {
+      "cycle_count": 8,
+      "event_count": 16,
+      "final_active_energy_drift": -1.5439038936193583e-16,
+      "cumulative_absolute_delta_psi_remesh": 1.5439038936193583e-16,
+      "cumulative_declared_remesh_work": 0.0,
+      "minimum_initial_fiber_alignment": 1.0,
+      "status": "passed"
+    }
+  },
+  "cycle_gate": {
+    "minimum_event_count": 1,
+    "maximum_absolute_final_energy_drift": 1e-12,
+    "maximum_cumulative_absolute_energy_defect": 1e-12,
+    "maximum_absolute_inter_event_energy_change": 1e-12,
+    "maximum_absolute_declared_remesh_work": 1e-12,
+    "maximum_energy_telescoping_residual": 1e-12,
+    "minimum_initial_fiber_alignment": 0.999999999999,
+    "independent_failure_test": "passed"
+  },
+  "tests": {
+    "x1j_targeted_ctest": "4/4 passed",
+    "parent_cpp_ctest": "34/34 passed",
+    "owned_parent_cpp_werror": "14/14 passed",
+    "cell_engine_standalone_ctest": "133/133 passed",
+    "parent_python": "63/63 passed",
+    "tracked_python_ruff": "passed",
+    "diff_check": "passed",
+    "json_parse": "passed"
+  },
+  "next_required_stage": "X1-K short-trajectory numerical gates",
+  "claim_guard": "X1-J v01 verifies an atomic active-contraction-only remesh energy-defect ledger for tested real split, swap, merge, and repeated swap cycles. It does not establish whole-system remesh energy consistency, a discrete total-energy inequality, time or space convergence, a stable contraction trajectory, complete cell-ECM/flow coupling, EFE bistability or memory, developmental mechanism, parameter calibration, physiological prediction, or recovery of the frozen failed Route H Gate A v01."
+}

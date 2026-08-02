@@ -445,6 +445,53 @@ int active_state_update_is_revision_safe_and_atomic() {
     return 0;
 }
 
+int remesh_cycle_gate_reports_independent_failures() {
+    prl::core::RemeshEnergyLedgerAudit ledger;
+    ledger.initial_stored_energy = 1.0;
+    ledger.final_stored_energy = 1.1;
+    ledger.event_count = 1;
+    ledger.cumulative_absolute_delta_psi_remesh = 0.0;
+    ledger.cumulative_absolute_algorithmic_energy_defect = 0.2;
+    ledger.cumulative_inter_event_stored_energy_change = 0.03;
+    ledger.cumulative_declared_remesh_work = 0.04;
+    ledger.energy_telescoping_residual = 0.05;
+    ledger.minimum_initial_fiber_alignment = 0.9;
+    const prl::core::RemeshCycleGateThresholds thresholds{
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.99,
+    };
+    const auto gate = prl::core::evaluate_remesh_cycle_gate(ledger, thresholds);
+    require(gate.event_count_passed
+                && !gate.energy_drift_passed
+                && !gate.absolute_defect_passed
+                && !gate.inter_event_change_passed
+                && !gate.remesh_work_passed
+                && !gate.telescoping_passed
+                && !gate.fiber_drift_passed
+                && !gate.passed,
+            "remesh-cycle gate hid one or more independent failures");
+    require(nearly_equal(gate.final_energy_drift, 0.1)
+                && nearly_equal(gate.fiber_drift, 0.1),
+            "remesh-cycle gate derived diagnostics are wrong");
+
+    bool invalid_threshold_rejected = false;
+    try {
+        static_cast<void>(prl::core::evaluate_remesh_cycle_gate(
+            ledger,
+            {-1.0, 0.01, 0.01, 0.01, 0.01, 0.99}
+        ));
+    } catch(const std::invalid_argument&) {
+        invalid_threshold_rejected = true;
+    }
+    require(invalid_threshold_rejected,
+            "remesh-cycle gate accepted a negative tolerance");
+    return 0;
+}
+
 } // namespace
 
 int main(const int argc, const char* const argv[]) {
@@ -458,5 +505,8 @@ int main(const int argc, const char* const argv[]) {
     if(behavior == "fiber_projection") return fibers_are_projected_to_the_new_host_tangent_plane();
     if(behavior == "multicell_concurrency") return different_cells_transfer_concurrently();
     if(behavior == "active_state_update") return active_state_update_is_revision_safe_and_atomic();
+    if(behavior == "remesh_cycle_gate") {
+        return remesh_cycle_gate_reports_independent_failures();
+    }
     return 1;
 }

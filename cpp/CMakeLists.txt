@@ -81,6 +81,10 @@ if(BUILD_TESTING)
         NAME prl_myocardial_material_active_state_update
         COMMAND prl_myocardial_material_transfer_test active_state_update
     )
+    add_test(
+        NAME prl_myocardial_remesh_cycle_gate_failures
+        COMMAND prl_myocardial_material_transfer_test remesh_cycle_gate
+    )
 
     add_executable(
         prl_active_myocardial_mechanics_test
@@ -140,6 +144,21 @@ if(BUILD_TESTING)
         add_test(
             NAME prl_cell_engine_active_remesh_invariance
             COMMAND prl_cell_engine_material_transfer_integration_test active_remesh_invariance
+        )
+        add_test(
+            NAME prl_cell_engine_real_swap_remesh_energy_ledger
+            COMMAND prl_cell_engine_material_transfer_integration_test
+                real_swap_energy_ledger
+        )
+        add_test(
+            NAME prl_cell_engine_real_split_merge_remesh_energy_ledger
+            COMMAND prl_cell_engine_material_transfer_integration_test
+                real_split_merge_energy_ledger
+        )
+        add_test(
+            NAME prl_cell_engine_real_swap_cycle_remesh_gate
+            COMMAND prl_cell_engine_material_transfer_integration_test
+                real_swap_cycle_gate
         )
 
         add_executable(
