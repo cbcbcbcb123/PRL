@@ -1,0 +1,59 @@
+{
+  "audit_id": "PRL-HYBRID-X1-F-ACTIVE-FORCE-ASSEMBLY-V01",
+  "status": "passed_frozen",
+  "date": "2026-08-02",
+  "parent_branch": "codex/simucell3d-hybrid-feasibility",
+  "cell_engine": {
+    "repository": "https://github.com/cbcbcbcb123/prl-cell-engine",
+    "branch": "codex/cell-engine-integration-seam",
+    "commit": "29edb7925137277e9e0633cc73cfe86605bd8361",
+    "remote_synced": true,
+    "github_actions_run": null,
+    "github_actions_note": "workflow listens only to main pushes and pull requests targeting main"
+  },
+  "assembly_contract": {
+    "parent_entry": "prl::cell_engine::assemble_active_cell_forces",
+    "cell_engine_entry": "prl::cell_engine::apply_surface_vertex_forces",
+    "identity": "persistent vertex ID",
+    "write_semantics": "add active increment to existing node.force_ after validating every pending write",
+    "owner_rule": "one cell is owned by one worker during force assembly",
+    "position_update": false,
+    "stock_solver_hooked": false
+  },
+  "manufactured_real_cell_case": {
+    "cell_id": 17,
+    "revision": 0,
+    "used_vertex_count": 8,
+    "unit_count": 1,
+    "passive_force_baseline_per_vertex": [0.01, -0.02, 0.03],
+    "active_energy": 0.01015625,
+    "active_input_power": 0.06381360077604267,
+    "injected_force_l2_norm": 0.29033924123342336,
+    "net_force_residual_tolerance": 1e-12,
+    "net_moment_residual_tolerance": 1e-12,
+    "status": "passed"
+  },
+  "failure_cases": {
+    "stale_material_revision": "rejected_without_buffer_change",
+    "stale_target_revision": "rejected_without_buffer_change",
+    "unknown_persistent_vertex": "rejected_without_buffer_change",
+    "nonfinite_force_increment": "rejected_without_buffer_change"
+  },
+  "post_remesh_case": {
+    "operation": "edge_swap",
+    "mesh_revision": 1,
+    "material_revision": 1,
+    "assembly_revision": 1,
+    "same_frozen_contraction_unit": true,
+    "energy_power_and_force_match_independent_evaluation": true,
+    "status": "passed"
+  },
+  "tests": {
+    "parent_cpp_ctest": "23/23 passed",
+    "cell_engine_standalone_ctest": "128/128 passed",
+    "owned_parent_cpp_werror": "13/13 passed",
+    "parent_python": "63 passed",
+    "diff_check": "passed"
+  },
+  "claim_guard": "X1-F verifies additive, revision-safe, atomic active-force assembly into the real cell-engine node.force_ buffer and its power ledger. It does not verify automatic stock-solver orchestration, a position update, a contraction trajectory, volumetric ECM, flow coupling, physiological calibration, or recovery of the frozen failed Route H Gate A."
+}

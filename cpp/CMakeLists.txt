@@ -13,6 +13,7 @@ option(
 add_library(
     prl_core
     STATIC
+        src/active_force_assembly.cpp
         src/active_myocardial_mechanics.cpp
         src/myocardial_material_transfer.cpp
 )
@@ -126,6 +127,33 @@ if(BUILD_TESTING)
         add_test(
             NAME prl_cell_engine_active_remesh_invariance
             COMMAND prl_cell_engine_material_transfer_integration_test active_remesh_invariance
+        )
+
+        add_executable(
+            prl_cell_engine_active_force_assembly_integration_test
+            tests/cell_engine_active_force_assembly_integration_test.cpp
+        )
+        target_link_libraries(
+            prl_cell_engine_active_force_assembly_integration_test
+            PRIVATE
+                prl_core
+                triangulation_modules
+                mesh
+        )
+        add_test(
+            NAME prl_cell_engine_active_force_assembly_single_step
+            COMMAND prl_cell_engine_active_force_assembly_integration_test
+                single_step_accumulation
+        )
+        add_test(
+            NAME prl_cell_engine_active_force_assembly_failure_atomicity
+            COMMAND prl_cell_engine_active_force_assembly_integration_test
+                failure_atomicity
+        )
+        add_test(
+            NAME prl_cell_engine_active_force_assembly_post_remesh_revision
+            COMMAND prl_cell_engine_active_force_assembly_integration_test
+                post_remesh_revision
         )
 
         add_executable(
