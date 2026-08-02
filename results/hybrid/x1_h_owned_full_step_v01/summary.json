@@ -1,0 +1,96 @@
+{
+  "audit_id": "PRL-HYBRID-X1-H-OWNED-FULL-STEP-V01",
+  "status": "passed_frozen",
+  "date": "2026-08-02",
+  "governed_by": "CONSTRAINT-PRL-EXTERNAL-SCIENTIFIC-REVIEW-V01",
+  "parent_branch": "codex/simucell3d-hybrid-feasibility",
+  "cell_engine": {
+    "repository": "https://github.com/cbcbcbcb123/prl-cell-engine",
+    "branch": "codex/cell-engine-integration-seam",
+    "functional_commit": "69da1f9",
+    "frozen_commit": "b8828da18bfda62f28cece95027ba65edd431a0f",
+    "remote_synced": true
+  },
+  "step_contract": {
+    "parent_entry": "prl::cell_engine::advance_owned_active_cell_overdamped_one_step",
+    "order": [
+      "preflight and current snapshot",
+      "current face/cell/node geometry refresh",
+      "optional real face-face contact assembly",
+      "real cell::apply_internal_forces passive assembly",
+      "active persistent-vertex force assembly",
+      "pending position and pending geometry validation",
+      "atomic position/force/cache commit",
+      "static contact-body force cleanup and audit return"
+    ],
+    "contact_scope": "one mobile target plus force-only static bodies",
+    "mesh_revision_changes": false,
+    "derived_geometry_caches_refreshed": [
+      "face normal",
+      "face area",
+      "cell surface area",
+      "cell volume",
+      "cell centroid",
+      "node normal",
+      "node curvature"
+    ],
+    "stock_solver_hooked": false
+  },
+  "manufactured_real_cell_cases": {
+    "shared": {
+      "cell_id": 17,
+      "revision": 0,
+      "used_vertex_count": 8,
+      "used_face_count": 12,
+      "time_step": 0.001,
+      "uniform_node_damping": 10.0,
+      "metric_precision_note": "deterministic audit values recorded to six significant digits"
+    },
+    "passive_active": {
+      "passive_force_increment_l2_norm": 1.50084,
+      "active_force_l2_norm": 0.598496,
+      "total_force_l2_norm": 1.8092,
+      "displacement_l2_norm": 0.00018092,
+      "surface_area_after": 13.2098,
+      "volume_after": 2.99952,
+      "minimum_face_area_after": 0.901269,
+      "status": "passed"
+    },
+    "contact_passive_active": {
+      "contact_context_cell_count": 2,
+      "contact_target_force_l2_norm": 40.0,
+      "contact_context_net_force_residual": 0.0,
+      "contact_context_net_moment_residual": 1.77636e-15,
+      "passive_force_increment_l2_norm": 1.50084,
+      "total_force_l2_norm": 40.7549,
+      "displacement_l2_norm": 0.00407549,
+      "surface_area_after": 13.1954,
+      "volume_after": 2.99352,
+      "minimum_face_area_after": 0.899466,
+      "static_body_position_unchanged": true,
+      "status": "passed"
+    }
+  },
+  "failure_cases": {
+    "collapsed_pending_geometry": "rejected_without_position_or_force-buffer_commit",
+    "post_passive_nonfinite_active_audit": "propagated_with_position_unchanged_force_buffers_cleared",
+    "position_coupling_epithelial_contact": "rejected_by_context_contract",
+    "upstream_noexcept_assertion": "registered_process_abort_boundary_not_converted_to_cpp_exception"
+  },
+  "tests": {
+    "parent_cpp_ctest": "29/29 passed",
+    "cell_engine_standalone_ctest": "132/132 passed",
+    "owned_parent_cpp_werror": "13/13 passed",
+    "cell_engine_x1h_translation_units_strict_compile": "passed with inherited ignored-qualifiers and unused-parameter warnings downgraded",
+    "parent_python": "63 passed",
+    "tracked_python_ruff": "passed",
+    "diff_check": "passed",
+    "json_parse": "passed"
+  },
+  "next_required_stages": [
+    "X1-I spatially consistent damping",
+    "X1-J remesh energy-defect ledger and cyclic drift",
+    "X1-K short-trajectory numerical gates"
+  ],
+  "claim_guard": "X1-H verifies one dimensionless single-cell owned step with real passive/contact/active force assembly, atomic position commit, derived geometry refresh, and controlled failure cleanup. It does not verify trajectory stability or convergence, damping spatial consistency, remesh energy consistency, complete cell-ECM/flow coupling, EFE bistability or memory, developmental mechanism, physiological calibration, or recovery of the frozen failed Route H Gate A."
+}

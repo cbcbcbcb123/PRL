@@ -110,6 +110,11 @@ ActiveCellOverdampedStepAudit advance_active_cell_overdamped_one_step(
         step.net_displacement_residual,
         before_active.audit.minimum_axis_fiber_alignment,
         before_active.audit.maximum_activation,
+        step.refreshed_face_count,
+        step.surface_area_after,
+        step.volume_after,
+        step.centroid_after,
+        step.minimum_face_area_after,
     };
 }
 

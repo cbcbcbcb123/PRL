@@ -16,6 +16,7 @@ add_library(
         src/active_force_assembly.cpp
         src/active_myocardial_mechanics.cpp
         src/myocardial_material_transfer.cpp
+        src/owned_active_overdamped_step.cpp
 )
 target_compile_features(prl_core PUBLIC cxx_std_17)
 target_link_libraries(prl_core PUBLIC Threads::Threads)
@@ -23,7 +24,19 @@ target_include_directories(
     prl_core
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+)
+target_include_directories(
+    prl_core
+    SYSTEM PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/simucell3d/include>
+)
+target_include_directories(
+    prl_core
+    SYSTEM PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/simucell3d/include/mesh>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/simucell3d/include/math_modules>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/simucell3d/include/contact_models>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/simucell3d/include/uspg>
 )
 
 if(BUILD_TESTING)
@@ -169,6 +182,34 @@ if(BUILD_TESTING)
             NAME prl_cell_engine_active_overdamped_post_remesh
             COMMAND prl_cell_engine_active_force_assembly_integration_test
                 overdamped_post_remesh
+        )
+
+        add_executable(
+            prl_cell_engine_owned_step_integration_test
+            tests/cell_engine_owned_step_integration_test.cpp
+        )
+        target_link_libraries(
+            prl_cell_engine_owned_step_integration_test
+            PRIVATE
+                prl_core
+                contact_models
+                triangulation_modules
+                mesh
+        )
+        add_test(
+            NAME prl_cell_engine_owned_passive_active_geometry_step
+            COMMAND prl_cell_engine_owned_step_integration_test
+                passive_active_geometry_step
+        )
+        add_test(
+            NAME prl_cell_engine_owned_real_contact_step
+            COMMAND prl_cell_engine_owned_step_integration_test
+                real_contact_step
+        )
+        add_test(
+            NAME prl_cell_engine_owned_post_assembly_failure_cleanup
+            COMMAND prl_cell_engine_owned_step_integration_test
+                post_assembly_failure_cleanup
         )
 
         add_executable(

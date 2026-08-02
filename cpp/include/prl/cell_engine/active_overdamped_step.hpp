@@ -2,6 +2,7 @@
 
 #include "prl/core/active_myocardial_mechanics.hpp"
 
+#include <array>
 #include <cstddef>
 #include <vector>
 
@@ -30,6 +31,11 @@ struct ActiveCellOverdampedStepAudit {
     double net_displacement_residual{};
     double minimum_axis_fiber_alignment{};
     double maximum_activation{};
+    std::size_t refreshed_face_count{};
+    double surface_area_after{};
+    double volume_after{};
+    std::array<double, 3> centroid_after{};
+    double minimum_face_area_after{};
 };
 
 /**
