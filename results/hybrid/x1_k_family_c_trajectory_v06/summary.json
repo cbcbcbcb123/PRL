@@ -1,0 +1,119 @@
+{
+  "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V06-S1",
+  "contract_commit": "ae80a0b6c77309fcfc6c3b2a19d8dbeb68af90b8",
+  "status": "failed_family_c_smooth_short_trajectory_analytic_radius_nonmonotonic",
+  "x1_k_passed": false,
+  "first_failed_gate": {
+    "case": "S1_Family_C",
+    "qoi": "control_area_mean_radius_ratio",
+    "criterion": "four_level_excursion_normalized_analytic_error_nonincreasing",
+    "errors": [
+      1.0439287051472873e-07,
+      1.6965749578041943e-07,
+      1.931183453395129e-07,
+      1.984083464348854e-07
+    ],
+    "observed_orders": [
+      -0.7305866503451734,
+      -0.1888361880551532,
+      -0.03909027092934956
+    ],
+    "plateau": false,
+    "monotonic": false
+  },
+  "frozen_matrix": {
+    "source_levels": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "h_rms": [
+      0.5846465833622684,
+      0.3007587447307266,
+      0.1514741410305466,
+      0.0758752187252943
+    ],
+    "time_step": 0.0001,
+    "steps": 200,
+    "final_time": 0.02,
+    "finest_half_time_step": 5e-05,
+    "finest_half_steps": 400,
+    "surface_tension": 0.02,
+    "damping_per_area": 10.0,
+    "reference_radius": 1.0,
+    "topology": "fixed",
+    "remesh_contact_active": false
+  },
+  "other_gates": {
+    "area_ratio": true,
+    "volume_ratio": true,
+    "registered_energy_ratio": true,
+    "self_convergence": true,
+    "time_pollution": true,
+    "global_geometry_and_cache": true,
+    "surface_tension_only_energy": true,
+    "local_risk_bounds": true,
+    "force_buffers_cleared": true
+  },
+  "local_risk_observations": {
+    "maximum_valence_five_excursion_error": 0.14907345589013393,
+    "maximum_closed_one_ring_excursion_error": 0.14907345589013393,
+    "maximum_radial_error_over_initial_h": 0.0001853231892446462,
+    "maximum_closed_one_ring_edge_scaling_error": 8.11597228111971e-06,
+    "minimum_local_quality_ratio": 0.9999958973908598,
+    "pointwise_convergence_claim_allowed": false
+  },
+  "coverage": {
+    "energy": "surface_tension_only",
+    "registered": [
+      "gamma*A",
+      "D_zeta"
+    ],
+    "excluded": [
+      "legacy_0.5_gamma_A_cache",
+      "membrane_elasticity",
+      "bending",
+      "pressure",
+      "contact",
+      "active",
+      "ECM",
+      "flow"
+    ]
+  },
+  "preserved_history": {
+    "v02_D1": "failed_instantaneous_smooth_surface_refinement",
+    "v04_Family_B": "failed_family_B_parameterized_diagnosis",
+    "v05": "passed_quality_controlled_symmetry_broken_global_L2_diagnosis",
+    "route_h_gate_a_v01": "failed_invalid_numerics"
+  },
+  "verification": {
+    "parent_cpp": {
+      "passed": 48,
+      "total": 51,
+      "expected_frozen_failures": [
+        "prl_x1k_sphere_instantaneous_velocity_refinement",
+        "prl_x1k_v04_family_b_parameterized_diagnosis",
+        "prl_x1k_v06_family_c_short_trajectory_gate"
+      ],
+      "unexpected_failures": 0
+    },
+    "controlled_fork": {
+      "passed": 134,
+      "total": 134
+    },
+    "owned_prl_core_strict_build": "passed",
+    "python_pytest": {
+      "passed": 63,
+      "total": 63
+    },
+    "python_ruff": "passed"
+  },
+  "not_executed": [
+    "R1_remesh_on",
+    "C1_contact",
+    "F1_failure_persistence",
+    "downstream_coupling"
+  ],
+  "claim_guard": "v06 is a correctly frozen short-trajectory failure. X1-K, long-time stability, physiology, ECM/flow, FSI, EFE, calibration, and developmental mechanism claims are not allowed."
+}

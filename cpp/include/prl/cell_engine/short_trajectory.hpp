@@ -163,6 +163,135 @@ struct SurfaceTensionShortTrajectoryAudit {
     std::optional<ShortTrajectoryFailure> failure{};
 };
 
+struct FamilyCSmoothSphereTrajectoryConfig {
+    double time_step{};
+    std::size_t step_count{};
+    double surface_tension{};
+    CellSurfaceDampingLaw damping{};
+    double reference_radius{};
+};
+
+struct FamilyCSmoothSphereTrajectorySample {
+    SurfaceTensionShortTrajectorySample global{};
+    double exact_radius{};
+    double control_area_mean_radius{};
+    double control_area_mean_radius_ratio{};
+    double maximum_valence_five_excursion_error{};
+    double rms_valence_five_radial_error{};
+    double maximum_closed_one_ring_excursion_error{};
+    double rms_closed_one_ring_radial_error{};
+    double maximum_valence_five_error_over_initial_h{};
+    double maximum_closed_one_ring_error_over_initial_h{};
+    double maximum_closed_one_ring_edge_scaling_error{};
+    double local_minimum_triangle_quality{};
+    double local_minimum_triangle_quality_ratio{};
+    double valence_five_normal_error_energy_fraction{};
+    double valence_five_normal_error_relative_rms{};
+    double valence_five_normal_error_pointwise_maximum{};
+    double closed_one_ring_normal_error_energy_fraction{};
+    double closed_one_ring_normal_error_relative_rms{};
+    double closed_one_ring_normal_error_pointwise_maximum{};
+    bool force_buffers_cleared{};
+};
+
+struct FamilyCSmoothSphereTrajectoryAudit {
+    ShortTrajectoryStatus status{ShortTrajectoryStatus::failed_step_exception};
+    FamilyCSmoothSphereTrajectoryConfig configuration{};
+    double initial_rms_edge_length{};
+    double initial_registered_surface_energy{};
+    double initial_local_minimum_triangle_quality{};
+    std::size_t valence_five_vertex_count{};
+    std::size_t closed_one_ring_vertex_count{};
+    std::size_t closed_one_ring_edge_count{};
+    std::size_t closed_one_ring_incident_face_count{};
+    double cumulative_positive_energy_balance_residual{};
+    double normalized_positive_energy_balance_residual{};
+    double minimum_oriented_face_alignment{1.0};
+    double minimum_triangle_quality{1.0};
+    double minimum_face_area_ratio{1.0};
+    double maximum_normalized_cache_residual{};
+    double maximum_normalized_centroid_drift{};
+    std::vector<FamilyCSmoothSphereTrajectorySample> samples{};
+    std::optional<ShortTrajectoryFailure> failure{};
+};
+
+struct FamilyCSmoothSphereGateThresholds {
+    double maximum_finest_excursion_normalized_error{};
+    double minimum_observed_order{};
+    double roundoff_plateau_threshold{};
+    double maximum_time_pollution_fraction{};
+    double minimum_triangle_quality{};
+    double minimum_face_area_ratio{};
+    double maximum_normalized_cache_residual{};
+    double maximum_normalized_centroid_drift{};
+    double maximum_normalized_positive_energy_residual{};
+    double maximum_local_excursion_normalized_error{};
+    double maximum_local_edge_scaling_error{};
+    double maximum_local_radial_error_over_initial_h{};
+    double minimum_local_triangle_quality_ratio{};
+};
+
+struct FamilyCSmoothSphereQoiGateAudit {
+    double exact_final_value{};
+    double exact_excursion{};
+    std::array<double, 4> responses{};
+    std::array<double, 4> analytic_excursions{};
+    std::array<double, 4> excursion_normalized_analytic_errors{};
+    std::array<double, 3> analytic_observed_orders{};
+    std::array<double, 3> adjacent_difference_excursions{};
+    std::array<double, 3> excursion_normalized_adjacent_differences{};
+    std::array<double, 2> generalized_self_convergence_orders{};
+    bool analytic_roundoff_plateau{};
+    bool analytic_errors_monotonic{};
+    bool analytic_orders_passed{};
+    bool finest_error_passed{};
+    bool self_convergence_roundoff_plateau{};
+    bool self_convergence_monotonic{};
+    bool self_convergence_orders_passed{};
+    bool passed{};
+};
+
+struct FamilyCSmoothSphereTimePollutionQoiAudit {
+    double coarse_time_step_response{};
+    double half_time_step_response{};
+    double exact_final_value{};
+    double exact_excursion{};
+    double absolute_time_difference{};
+    double excursion_normalized_time_difference{};
+    double absolute_space_proxy{};
+    double excursion_normalized_space_proxy{};
+    bool roundoff_plateau{};
+    bool passed{};
+};
+
+struct FamilyCSmoothSphereGateAudit {
+    std::array<double, 4> rms_edge_lengths{};
+    std::array<FamilyCSmoothSphereQoiGateAudit, 4> qois{};
+    std::array<FamilyCSmoothSphereTimePollutionQoiAudit, 4> time_pollution{};
+    double minimum_oriented_face_alignment{1.0};
+    double minimum_triangle_quality{1.0};
+    double minimum_face_area_ratio{1.0};
+    double maximum_normalized_cache_residual{};
+    double maximum_normalized_centroid_drift{};
+    double maximum_normalized_positive_energy_residual{};
+    double maximum_valence_five_excursion_error{};
+    double maximum_closed_one_ring_excursion_error{};
+    double maximum_valence_five_error_over_initial_h{};
+    double maximum_closed_one_ring_error_over_initial_h{};
+    double maximum_closed_one_ring_edge_scaling_error{};
+    double minimum_local_triangle_quality_ratio{1.0};
+    bool trajectories_passed{};
+    bool mesh_scales_decreased{};
+    bool analytic_qois_passed{};
+    bool self_convergence_passed{};
+    bool time_pollution_passed{};
+    bool global_geometry_passed{};
+    bool energy_coverage_passed{};
+    bool local_risk_bounds_passed{};
+    bool force_buffers_cleared{};
+    bool passed{};
+};
+
 struct SurfaceTensionSpatialRefinementThresholds {
     double maximum_base_fine_normalized_error{};
     double minimum_observed_order{};
@@ -386,6 +515,19 @@ struct SphericalMeshFamilyDiagnosticAudit {
 run_surface_tension_fixed_topology_short_trajectory(
     ::cell& target,
     const SurfaceTensionShortTrajectoryConfig& configuration
+);
+
+[[nodiscard]] FamilyCSmoothSphereTrajectoryAudit
+run_family_c_smooth_sphere_trajectory(
+    ::cell& target,
+    const FamilyCSmoothSphereTrajectoryConfig& configuration
+);
+
+[[nodiscard]] FamilyCSmoothSphereGateAudit
+evaluate_family_c_smooth_sphere_gate(
+    const std::array<FamilyCSmoothSphereTrajectoryAudit, 4>& levels,
+    const FamilyCSmoothSphereTrajectoryAudit& finest_half_time_step,
+    const FamilyCSmoothSphereGateThresholds& thresholds
 );
 
 [[nodiscard]] SurfaceTensionSpatialRefinementGateAudit

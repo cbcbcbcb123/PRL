@@ -1,0 +1,17 @@
+X1-K v06 TDD RED 1: trajectory and local-audit seam
+contract commit: ae80a0b6c77309fcfc6c3b2a19d8dbeb68af90b8
+response generated before RED: no
+
+The first public behavior test requested a one-step Family C fixed-topology
+trajectory with control-area mean radius, response-pre valence-5/closed-ring
+sets, local geometry metrics, current-force normal-error accounting, and
+cleared force buffers.
+
+The build failed before any trajectory response because these public symbols
+did not exist:
+- FamilyCSmoothSphereTrajectoryConfig
+- run_family_c_smooth_sphere_trajectory
+
+GREEN added only PRL-owned trajectory/audit types and implementation. The real
+surface-tension public force entry and barycentric-dual-area motion path were
+used unchanged. The one-step tracer then passed.

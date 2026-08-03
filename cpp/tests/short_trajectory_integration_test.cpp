@@ -1426,6 +1426,250 @@ int quality_controlled_spd_icosphere_runs_v05_family_c_diagnosis() {
     return 0;
 }
 
+int v06_family_c_local_trajectory_public_seam_is_auditable() {
+    auto current_cell = surface_tension_cell(
+        quality_controlled_spd_mapped_icosphere_mesh(1),
+        301
+    );
+    const prl::cell_engine::FamilyCSmoothSphereTrajectoryConfig configuration{
+        1.0e-4,
+        1,
+        0.02,
+        {
+            prl::cell_engine::CellSurfaceDampingMeasure::barycentric_dual_area,
+            10.0,
+        },
+        1.0,
+    };
+    const auto audit = prl::cell_engine::run_family_c_smooth_sphere_trajectory(
+        *current_cell,
+        configuration
+    );
+    require(audit.status == prl::cell_engine::ShortTrajectoryStatus::passed
+                && audit.samples.size() == 2,
+            "v06 local trajectory tracer did not complete one fixed step");
+    require(audit.valence_five_vertex_count == 12
+                && audit.closed_one_ring_vertex_count == 42
+                && audit.closed_one_ring_edge_count > 0
+                && audit.closed_one_ring_incident_face_count > 0,
+            "v06 response-pre extraordinary-vertex sets changed");
+    require(audit.samples.front().maximum_valence_five_excursion_error == 0.0
+                && audit.samples.front().maximum_closed_one_ring_excursion_error == 0.0
+                && audit.samples.front().maximum_valence_five_error_over_initial_h == 0.0
+                && audit.samples.front().maximum_closed_one_ring_error_over_initial_h == 0.0,
+            "v06 step-zero radial local metrics must be recorded as zero");
+    require(audit.samples.back().control_area_mean_radius > 0.0
+                && audit.samples.back().local_minimum_triangle_quality > 0.0
+                && audit.samples.back().valence_five_normal_error_energy_fraction >= 0.0
+                && audit.samples.back().closed_one_ring_normal_error_energy_fraction >= 0.0
+                && audit.samples.back().force_buffers_cleared,
+            "v06 local trajectory sample is incomplete");
+    return 0;
+}
+
+int v06_family_c_short_trajectory_passes_frozen_gate() {
+    constexpr std::array<std::size_t, 4> source_levels{1, 2, 3, 4};
+    std::array<prl::cell_engine::FamilyCSmoothSphereTrajectoryAudit, 4> levels;
+    for(std::size_t index = 0; index < source_levels.size(); ++index) {
+        auto current_cell = surface_tension_cell(
+            quality_controlled_spd_mapped_icosphere_mesh(source_levels[index]),
+            static_cast<unsigned>(401 + index)
+        );
+        levels[index] = prl::cell_engine::run_family_c_smooth_sphere_trajectory(
+            *current_cell,
+            {
+                1.0e-4,
+                200,
+                0.02,
+                {
+                    prl::cell_engine::CellSurfaceDampingMeasure::barycentric_dual_area,
+                    10.0,
+                },
+                1.0,
+            }
+        );
+    }
+    auto finest_half_step_cell = surface_tension_cell(
+        quality_controlled_spd_mapped_icosphere_mesh(4),
+        405
+    );
+    const auto finest_half_step
+        = prl::cell_engine::run_family_c_smooth_sphere_trajectory(
+            *finest_half_step_cell,
+            {
+                5.0e-5,
+                400,
+                0.02,
+                {
+                    prl::cell_engine::CellSurfaceDampingMeasure::barycentric_dual_area,
+                    10.0,
+                },
+                1.0,
+            }
+        );
+
+    prl::cell_engine::FamilyCSmoothSphereGateThresholds thresholds;
+    thresholds.maximum_finest_excursion_normalized_error = 2.0e-2;
+    thresholds.minimum_observed_order = 0.5;
+    thresholds.roundoff_plateau_threshold = 1.0e-10;
+    thresholds.maximum_time_pollution_fraction = 0.25;
+    thresholds.minimum_triangle_quality = 0.05;
+    thresholds.minimum_face_area_ratio = 1.0e-4;
+    thresholds.maximum_normalized_cache_residual = 1.0e-12;
+    thresholds.maximum_normalized_centroid_drift = 1.0e-2;
+    thresholds.maximum_normalized_positive_energy_residual = 1.0e-3;
+    thresholds.maximum_local_excursion_normalized_error = 0.25;
+    thresholds.maximum_local_edge_scaling_error = 5.0e-4;
+    thresholds.maximum_local_radial_error_over_initial_h = 5.0e-4;
+    thresholds.minimum_local_triangle_quality_ratio = 0.90;
+    const auto gate = prl::cell_engine::evaluate_family_c_smooth_sphere_gate(
+        levels,
+        finest_half_step,
+        thresholds
+    );
+
+    auto print_run = [&](const char* const run_name,
+                         const std::size_t source_level,
+                         const prl::cell_engine::FamilyCSmoothSphereTrajectoryAudit& audit) {
+        for(const auto& sample : audit.samples) {
+            std::cerr << std::setprecision(17)
+                      << "v06_step," << run_name
+                      << ',' << source_level
+                      << ',' << audit.configuration.time_step
+                      << ',' << sample.global.step
+                      << ',' << sample.global.time
+                      << ',' << audit.initial_rms_edge_length
+                      << ',' << sample.exact_radius
+                      << ',' << sample.control_area_mean_radius
+                      << ',' << sample.control_area_mean_radius_ratio
+                      << ',' << sample.global.area_ratio
+                      << ',' << sample.global.volume_ratio
+                      << ',' << sample.global.energy_ratio
+                      << ',' << sample.global.normalized_surface_centroid_drift
+                      << ',' << sample.global.minimum_oriented_face_alignment
+                      << ',' << sample.global.minimum_triangle_quality
+                      << ',' << sample.global.minimum_face_area_ratio
+                      << ',' << sample.global.maximum_normalized_cache_residual
+                      << '\n';
+            std::cerr << std::setprecision(17)
+                      << "v06_local," << run_name
+                      << ',' << source_level
+                      << ',' << audit.configuration.time_step
+                      << ',' << sample.global.step
+                      << ',' << sample.global.time
+                      << ',' << sample.maximum_valence_five_excursion_error
+                      << ',' << sample.rms_valence_five_radial_error
+                      << ',' << sample.maximum_closed_one_ring_excursion_error
+                      << ',' << sample.rms_closed_one_ring_radial_error
+                      << ',' << sample.maximum_valence_five_error_over_initial_h
+                      << ',' << sample.maximum_closed_one_ring_error_over_initial_h
+                      << ',' << sample.maximum_closed_one_ring_edge_scaling_error
+                      << ',' << sample.local_minimum_triangle_quality
+                      << ',' << sample.local_minimum_triangle_quality_ratio
+                      << ',' << sample.valence_five_normal_error_energy_fraction
+                      << ',' << sample.valence_five_normal_error_relative_rms
+                      << ',' << sample.valence_five_normal_error_pointwise_maximum
+                      << ',' << sample.closed_one_ring_normal_error_energy_fraction
+                      << ',' << sample.closed_one_ring_normal_error_relative_rms
+                      << ',' << sample.closed_one_ring_normal_error_pointwise_maximum
+                      << ',' << sample.force_buffers_cleared
+                      << '\n';
+            std::cerr << std::setprecision(17)
+                      << "v06_energy," << run_name
+                      << ',' << source_level
+                      << ',' << audit.configuration.time_step
+                      << ',' << sample.global.step
+                      << ',' << sample.global.time
+                      << ',' << sample.global.registered_surface_energy
+                      << ',' << sample.global.viscous_dissipation
+                      << ',' << sample.global.energy_balance_residual
+                      << '\n';
+        }
+    };
+    for(std::size_t index = 0; index < levels.size(); ++index) {
+        print_run("C", source_levels[index], levels[index]);
+    }
+    print_run("C_dt_half", 4, finest_half_step);
+
+    constexpr std::array<const char*, 4> qoi_names{
+        "mean_radius_ratio", "area_ratio", "volume_ratio", "energy_ratio"
+    };
+    for(std::size_t metric = 0; metric < gate.qois.size(); ++metric) {
+        const auto& qoi = gate.qois[metric];
+        std::cerr << std::setprecision(17)
+                  << "v06_qoi," << qoi_names[metric]
+                  << ",exact," << qoi.exact_final_value
+                  << ",excursion," << qoi.exact_excursion;
+        for(const double value : qoi.responses) std::cerr << ',' << value;
+        for(const double value : qoi.analytic_excursions) std::cerr << ',' << value;
+        for(const double value : qoi.excursion_normalized_analytic_errors) {
+            std::cerr << ',' << value;
+        }
+        for(const double value : qoi.analytic_observed_orders) {
+            std::cerr << ',' << value;
+        }
+        for(const double value : qoi.adjacent_difference_excursions) {
+            std::cerr << ',' << value;
+        }
+        for(const double value : qoi.excursion_normalized_adjacent_differences) {
+            std::cerr << ',' << value;
+        }
+        for(const double value : qoi.generalized_self_convergence_orders) {
+            std::cerr << ',' << value;
+        }
+        std::cerr << ",analytic_plateau," << qoi.analytic_roundoff_plateau
+                  << ",analytic_monotonic," << qoi.analytic_errors_monotonic
+                  << ",analytic_orders," << qoi.analytic_orders_passed
+                  << ",finest," << qoi.finest_error_passed
+                  << ",self_plateau," << qoi.self_convergence_roundoff_plateau
+                  << ",self_monotonic," << qoi.self_convergence_monotonic
+                  << ",self_orders," << qoi.self_convergence_orders_passed
+                  << ",passed," << qoi.passed
+                  << '\n';
+        const auto& time = gate.time_pollution[metric];
+        std::cerr << std::setprecision(17)
+                  << "v06_time," << qoi_names[metric]
+                  << ',' << time.coarse_time_step_response
+                  << ',' << time.half_time_step_response
+                  << ',' << time.exact_final_value
+                  << ',' << time.exact_excursion
+                  << ',' << time.absolute_time_difference
+                  << ',' << time.excursion_normalized_time_difference
+                  << ',' << time.absolute_space_proxy
+                  << ',' << time.excursion_normalized_space_proxy
+                  << ",plateau," << time.roundoff_plateau
+                  << ",passed," << time.passed
+                  << '\n';
+    }
+    std::cerr << std::setprecision(17)
+              << "v06_gate,global"
+              << ",trajectories," << gate.trajectories_passed
+              << ",mesh_scales," << gate.mesh_scales_decreased
+              << ",analytic," << gate.analytic_qois_passed
+              << ",self," << gate.self_convergence_passed
+              << ",time," << gate.time_pollution_passed
+              << ",geometry," << gate.global_geometry_passed
+              << ",energy," << gate.energy_coverage_passed
+              << ",local," << gate.local_risk_bounds_passed
+              << ",buffers," << gate.force_buffers_cleared
+              << ",min_alignment," << gate.minimum_oriented_face_alignment
+              << ",min_q," << gate.minimum_triangle_quality
+              << ",min_face_ratio," << gate.minimum_face_area_ratio
+              << ",max_cache," << gate.maximum_normalized_cache_residual
+              << ",max_centroid," << gate.maximum_normalized_centroid_drift
+              << ",max_energy," << gate.maximum_normalized_positive_energy_residual
+              << ",max_v5_excursion," << gate.maximum_valence_five_excursion_error
+              << ",max_ring_excursion," << gate.maximum_closed_one_ring_excursion_error
+              << ",max_v5_h," << gate.maximum_valence_five_error_over_initial_h
+              << ",max_ring_h," << gate.maximum_closed_one_ring_error_over_initial_h
+              << ",max_edge," << gate.maximum_closed_one_ring_edge_scaling_error
+              << ",min_local_q_ratio," << gate.minimum_local_triangle_quality_ratio
+              << ",passed," << gate.passed
+              << '\n';
+    require(gate.passed, "v06 Family C short-trajectory frozen gate failed");
+    return 0;
+}
+
 } // namespace
 
 int main(const int argc, const char* const argv[]) {
@@ -1473,6 +1717,12 @@ int main(const int argc, const char* const argv[]) {
         }
         if(behavior == "v05_family_c") {
             return quality_controlled_spd_icosphere_runs_v05_family_c_diagnosis();
+        }
+        if(behavior == "v06_local_trajectory_public_seam") {
+            return v06_family_c_local_trajectory_public_seam_is_auditable();
+        }
+        if(behavior == "v06_family_c_short_trajectory") {
+            return v06_family_c_short_trajectory_passes_frozen_gate();
         }
         throw std::invalid_argument("unknown behavior: " + behavior);
     } catch(const std::exception& error) {

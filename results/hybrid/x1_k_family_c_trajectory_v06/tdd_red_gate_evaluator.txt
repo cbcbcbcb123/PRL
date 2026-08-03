@@ -1,0 +1,16 @@
+X1-K v06 TDD RED 2: frozen aggregate gate evaluator
+contract commit: ae80a0b6c77309fcfc6c3b2a19d8dbeb68af90b8
+response generated before RED: no
+command: docker ... cmake --build cpp/build-linux-x1h --target prl_short_trajectory_integration_test -j2
+exit code: 1
+
+Observed compile failures before GREEN:
+- FamilyCSmoothSphereGateThresholds was not a PRL-owned public type.
+- evaluate_family_c_smooth_sphere_gate was not a PRL-owned public function.
+
+The RED test had already frozen the four source levels, dt/T, finest dt/2,
+all analytic/self/time/global/energy/local thresholds, raw output rows, and
+the requirement that the final aggregate gate pass. GREEN added the minimal
+evaluator and audit records. Its first formal response failed the frozen mean-
+radius analytic monotonicity gate; the failure was retained without threshold
+or response-matrix changes.

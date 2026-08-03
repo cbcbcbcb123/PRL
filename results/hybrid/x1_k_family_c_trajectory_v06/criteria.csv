@@ -1,0 +1,36 @@
+scope,criterion,operator,threshold,observed,passed,notes
+mean_radius_ratio,analytic_errors_nonincreasing,equal,true,0,0,four excursion-normalized errors
+mean_radius_ratio,minimum_nonplateau_analytic_order,greater_equal,0.5,-0.7305866503451734,0,actual h_rms; common plateau=1e-10
+mean_radius_ratio,finest_excursion_normalized_error,less_equal,0.02,1.984083464348854e-07,1,final source level 4
+mean_radius_ratio,adjacent_differences_nonincreasing,equal,true,1,1,three excursion-normalized differences
+mean_radius_ratio,minimum_generalized_self_order,greater_equal,0.5,1.5657957979615276,1,"root in [0,16] with actual h_rms"
+area_ratio,analytic_errors_nonincreasing,equal,true,1,1,four excursion-normalized errors
+area_ratio,minimum_nonplateau_analytic_order,greater_equal,0.5,1.639255680027239,1,actual h_rms; common plateau=1e-10
+area_ratio,finest_excursion_normalized_error,less_equal,0.02,8.1690677833343124e-05,1,final source level 4
+area_ratio,adjacent_differences_nonincreasing,equal,true,1,1,three excursion-normalized differences
+area_ratio,minimum_generalized_self_order,greater_equal,0.5,1.4913944569775595,1,"root in [0,16] with actual h_rms"
+volume_ratio,analytic_errors_nonincreasing,equal,true,1,1,four excursion-normalized errors
+volume_ratio,minimum_nonplateau_analytic_order,greater_equal,0.5,1.9274152351545766,1,actual h_rms; common plateau=1e-10
+volume_ratio,finest_excursion_normalized_error,less_equal,0.02,5.4207299474185325e-06,1,final source level 4
+volume_ratio,adjacent_differences_nonincreasing,equal,true,1,1,three excursion-normalized differences
+volume_ratio,minimum_generalized_self_order,greater_equal,0.5,1.7253079700644776,1,"root in [0,16] with actual h_rms"
+energy_ratio,analytic_errors_nonincreasing,equal,true,1,1,four excursion-normalized errors
+energy_ratio,minimum_nonplateau_analytic_order,greater_equal,0.5,1.639255680027239,1,actual h_rms; common plateau=1e-10
+energy_ratio,finest_excursion_normalized_error,less_equal,0.02,8.1690679221121904e-05,1,final source level 4
+energy_ratio,adjacent_differences_nonincreasing,equal,true,1,1,three excursion-normalized differences
+energy_ratio,minimum_generalized_self_order,greater_equal,0.5,1.4913944569775595,1,"root in [0,16] with actual h_rms"
+mean_radius_ratio,finest_time_pollution,plateau_or_less_equal_fraction,raw plateau=1e-10 or delta<=0.25*proxy,delta=8.0029316507079784e-12;proxy=7.8703710215677347e-12,1,raw and excursion-normalized values retained
+area_ratio,finest_time_pollution,plateau_or_less_equal_fraction,raw plateau=1e-10 or delta<=0.25*proxy,delta=1.5433876399129076e-11;proxy=1.3085942329738032e-08,1,raw and excursion-normalized values retained
+volume_ratio,finest_time_pollution,plateau_or_less_equal_fraction,raw plateau=1e-10 or delta<=0.25*proxy,delta=2.4005353260747597e-11;proxy=1.3249285002459033e-09,1,raw and excursion-normalized values retained
+energy_ratio,finest_time_pollution,plateau_or_less_equal_fraction,raw plateau=1e-10 or delta<=0.25*proxy,delta=1.5433876399129076e-11;proxy=1.3085942551782637e-08,1,raw and excursion-normalized values retained
+global,minimum_oriented_alignment,greater_than,0,0.99999997290602805,1,all runs and steps
+global,minimum_triangle_quality,greater_equal,0.05,0.93750290702806216,1,surface triangles only
+global,minimum_face_area_ratio,greater_equal,1e-4,0.9998276208355581,1,relative to each run initial minimum
+global,maximum_cache_residual,less_equal,1e-12,1.1654428776347817e-16,1,independent geometry versus cache
+global,maximum_centroid_drift,less_equal,1e-2,1.6882136130237922e-15,1,surface centroid divided by R0
+energy,maximum_normalized_positive_ledger,less_equal,1e-3,3.3249024395465112e-11,1,surface_tension_only coverage
+local,maximum_excursion_error,less_equal,0.25,0.14907345589013393,1,valence-5 and closed one-ring
+local,maximum_radial_error_over_h0,less_equal,5e-4,0.0001853231892446462,1,valence-5 and closed one-ring
+local,maximum_edge_scaling_error,less_equal,5e-4,8.1159722811197099e-06,1,closed one-ring edges
+local,minimum_quality_ratio,greater_equal,0.90,0.99999589739085981,1,closed one-ring incident faces
+v06,overall,equal,true,0,0,first failure is radius analytic monotonicity

@@ -336,6 +336,256 @@ std::vector<double> barycentric_control_areas(
     return result;
 }
 
+double triangle_quality(
+    const core::SurfaceMeshSnapshot& mesh,
+    const std::size_t face_index
+) {
+    const auto& current_face = mesh.faces.at(face_index);
+    const auto& a = mesh.vertices.at(current_face.vertex_indices[0]).position;
+    const auto& b = mesh.vertices.at(current_face.vertex_indices[1]).position;
+    const auto& c = mesh.vertices.at(current_face.vertex_indices[2]).position;
+    const auto ab = subtract(b, a);
+    const auto ac = subtract(c, a);
+    const auto bc = subtract(c, b);
+    const double edge_square_sum = dot(ab, ab) + dot(ac, ac) + dot(bc, bc);
+    const double quality = 2.0 * std::sqrt(3.0) * norm(cross(ab, ac))
+        / edge_square_sum;
+    if(!std::isfinite(quality) || quality <= 0.0) {
+        throw std::runtime_error("local trajectory face quality is invalid");
+    }
+    return quality;
+}
+
+struct FamilyCLocalTopologyReference {
+    std::vector<bool> is_valence_five{};
+    std::vector<bool> is_closed_one_ring{};
+    std::vector<double> initial_incident_edge_mean{};
+    std::vector<std::array<std::size_t, 2>> closed_one_ring_edges{};
+    std::vector<double> closed_one_ring_initial_edge_lengths{};
+    std::vector<std::size_t> closed_one_ring_incident_faces{};
+    double initial_local_minimum_triangle_quality{1.0};
+};
+
+FamilyCLocalTopologyReference family_c_local_topology_reference(
+    const core::SurfaceMeshSnapshot& mesh
+) {
+    if(mesh.vertices.empty() || mesh.faces.empty()) {
+        throw std::invalid_argument("Family C local topology requires a mesh");
+    }
+    std::unordered_map<std::uint64_t, std::array<std::size_t, 2>> edges;
+    edges.reserve(3 * mesh.faces.size() / 2);
+    std::vector<std::size_t> valences(mesh.vertices.size(), 0);
+    std::vector<double> incident_length_sums(mesh.vertices.size(), 0.0);
+    for(const auto& current_face : mesh.faces) {
+        for(std::size_t local_edge = 0; local_edge < 3; ++local_edge) {
+            const auto first = current_face.vertex_indices[local_edge];
+            const auto second = current_face.vertex_indices[(local_edge + 1) % 3];
+            const auto key = undirected_edge_key(first, second);
+            if(!edges.emplace(key, std::array<std::size_t, 2>{first, second}).second) {
+                continue;
+            }
+            const double length = norm(subtract(
+                mesh.vertices.at(first).position,
+                mesh.vertices.at(second).position
+            ));
+            if(!std::isfinite(length) || length <= 0.0) {
+                throw std::runtime_error("Family C initial edge is invalid");
+            }
+            ++valences.at(first);
+            ++valences.at(second);
+            incident_length_sums.at(first) += length;
+            incident_length_sums.at(second) += length;
+        }
+    }
+
+    FamilyCLocalTopologyReference result;
+    result.is_valence_five.resize(mesh.vertices.size(), false);
+    result.is_closed_one_ring.resize(mesh.vertices.size(), false);
+    result.initial_incident_edge_mean.resize(mesh.vertices.size(), 0.0);
+    for(std::size_t index = 0; index < mesh.vertices.size(); ++index) {
+        if(valences[index] == 0) {
+            throw std::runtime_error("Family C vertex has no incident edge");
+        }
+        result.is_valence_five[index] = valences[index] == 5;
+        result.is_closed_one_ring[index] = result.is_valence_five[index];
+        result.initial_incident_edge_mean[index] = incident_length_sums[index]
+            / static_cast<double>(valences[index]);
+    }
+    if(std::none_of(
+            result.is_valence_five.begin(),
+            result.is_valence_five.end(),
+            [](const bool selected) { return selected; }
+        )) {
+        throw std::invalid_argument("Family C mesh has no valence-five vertices");
+    }
+    for(const auto& [key, endpoints] : edges) {
+        static_cast<void>(key);
+        if(result.is_valence_five.at(endpoints[0])
+           || result.is_valence_five.at(endpoints[1])) {
+            result.is_closed_one_ring[endpoints[0]] = true;
+            result.is_closed_one_ring[endpoints[1]] = true;
+        }
+    }
+    for(const auto& [key, endpoints] : edges) {
+        static_cast<void>(key);
+        if(!result.is_closed_one_ring.at(endpoints[0])
+           || !result.is_closed_one_ring.at(endpoints[1])) {
+            continue;
+        }
+        result.closed_one_ring_edges.push_back(endpoints);
+        result.closed_one_ring_initial_edge_lengths.push_back(norm(subtract(
+            mesh.vertices.at(endpoints[0]).position,
+            mesh.vertices.at(endpoints[1]).position
+        )));
+    }
+    for(std::size_t face_index = 0; face_index < mesh.faces.size(); ++face_index) {
+        const auto& current_face = mesh.faces[face_index];
+        const bool incident = std::any_of(
+            current_face.vertex_indices.begin(),
+            current_face.vertex_indices.end(),
+            [&](const std::size_t vertex_index) {
+                return result.is_closed_one_ring.at(vertex_index);
+            }
+        );
+        if(!incident) continue;
+        result.closed_one_ring_incident_faces.push_back(face_index);
+        result.initial_local_minimum_triangle_quality = std::min(
+            result.initial_local_minimum_triangle_quality,
+            triangle_quality(mesh, face_index)
+        );
+    }
+    if(result.closed_one_ring_edges.empty()
+       || result.closed_one_ring_incident_faces.empty()
+       || !std::isfinite(result.initial_local_minimum_triangle_quality)
+       || result.initial_local_minimum_triangle_quality <= 0.0) {
+        throw std::runtime_error("Family C local topology is incomplete");
+    }
+    return result;
+}
+
+struct FamilyCLocalNormalErrorAudit {
+    double valence_five_energy_fraction{};
+    double valence_five_relative_rms{};
+    double valence_five_pointwise_maximum{};
+    double closed_one_ring_energy_fraction{};
+    double closed_one_ring_relative_rms{};
+    double closed_one_ring_pointwise_maximum{};
+    bool force_buffers_cleared{};
+};
+
+FamilyCLocalNormalErrorAudit audit_family_c_local_normal_error(
+    ::cell& target,
+    const core::SurfaceMeshSnapshot& mesh,
+    const std::vector<double>& control_areas,
+    const FamilyCLocalTopologyReference& local_reference,
+    const double damping_per_area,
+    const double exact_normal_velocity
+) {
+    for(const node& current_node : target.get_node_lst()) {
+        if(!current_node.is_used()) continue;
+        const Vector3 force{
+            current_node.force().dx(),
+            current_node.force().dy(),
+            current_node.force().dz(),
+        };
+        if(norm(force) != 0.0) {
+            throw std::logic_error(
+                "Family C local force audit requires empty force buffers"
+            );
+        }
+    }
+    std::vector<Vector3> forces;
+    forces.reserve(mesh.vertices.size());
+    try {
+        target.apply_internal_forces(0.0);
+        for(const node& current_node : target.get_node_lst()) {
+            if(!current_node.is_used()) continue;
+            forces.push_back({
+                current_node.force().dx(),
+                current_node.force().dy(),
+                current_node.force().dz(),
+            });
+        }
+    } catch(...) {
+        static_cast<void>(reset_surface_forces(
+            target,
+            target.get_mesh_revision()
+        ));
+        throw;
+    }
+    static_cast<void>(reset_surface_forces(target, target.get_mesh_revision()));
+    if(forces.size() != mesh.vertices.size()
+       || control_areas.size() != mesh.vertices.size()) {
+        throw std::runtime_error("Family C local force vertex order changed");
+    }
+
+    double total_energy = 0.0;
+    double valence_five_energy = 0.0;
+    double valence_five_area = 0.0;
+    double closed_one_ring_energy = 0.0;
+    double closed_one_ring_area = 0.0;
+    FamilyCLocalNormalErrorAudit result;
+    const double exact_speed = std::abs(exact_normal_velocity);
+    for(std::size_t index = 0; index < mesh.vertices.size(); ++index) {
+        const auto& position = mesh.vertices[index].position;
+        const double radius = norm(position);
+        if(!std::isfinite(radius) || radius <= 0.0) {
+            throw std::runtime_error("Family C local force radius is invalid");
+        }
+        const auto normal = scale(position, 1.0 / radius);
+        const auto velocity = scale(
+            forces[index],
+            1.0 / (damping_per_area * control_areas[index])
+        );
+        const double error = dot(velocity, normal) - exact_normal_velocity;
+        const double energy = control_areas[index] * error * error;
+        const double relative_error = std::abs(error) / exact_speed;
+        total_energy += energy;
+        if(local_reference.is_valence_five[index]) {
+            valence_five_energy += energy;
+            valence_five_area += control_areas[index];
+            result.valence_five_pointwise_maximum = std::max(
+                result.valence_five_pointwise_maximum,
+                relative_error
+            );
+        }
+        if(local_reference.is_closed_one_ring[index]) {
+            closed_one_ring_energy += energy;
+            closed_one_ring_area += control_areas[index];
+            result.closed_one_ring_pointwise_maximum = std::max(
+                result.closed_one_ring_pointwise_maximum,
+                relative_error
+            );
+        }
+    }
+    if(!std::isfinite(total_energy) || total_energy <= 0.0
+       || !std::isfinite(valence_five_area) || valence_five_area <= 0.0
+       || !std::isfinite(closed_one_ring_area)
+       || closed_one_ring_area <= 0.0) {
+        throw std::runtime_error("Family C local normal-error ledger is invalid");
+    }
+    result.valence_five_energy_fraction = valence_five_energy / total_energy;
+    result.valence_five_relative_rms = std::sqrt(
+        valence_five_energy / valence_five_area
+    ) / exact_speed;
+    result.closed_one_ring_energy_fraction = closed_one_ring_energy / total_energy;
+    result.closed_one_ring_relative_rms = std::sqrt(
+        closed_one_ring_energy / closed_one_ring_area
+    ) / exact_speed;
+    result.force_buffers_cleared = true;
+    for(const node& current_node : target.get_node_lst()) {
+        if(!current_node.is_used()) continue;
+        const Vector3 force{
+            current_node.force().dx(),
+            current_node.force().dy(),
+            current_node.force().dz(),
+        };
+        result.force_buffers_cleared
+            = result.force_buffers_cleared && norm(force) == 0.0;
+    }
+    return result;
+}
+
 double surface_area_with_displacement(
     const core::SurfaceMeshSnapshot& mesh,
     const std::vector<Vector3>& direction,
@@ -997,6 +1247,839 @@ run_surface_tension_fixed_topology_short_trajectory(
             entry_hash
         );
     }
+}
+
+FamilyCSmoothSphereTrajectoryAudit run_family_c_smooth_sphere_trajectory(
+    ::cell& target,
+    const FamilyCSmoothSphereTrajectoryConfig& configuration
+) {
+    FamilyCSmoothSphereTrajectoryAudit result;
+    result.configuration = configuration;
+    ActiveShortTrajectoryConfig hash_configuration;
+    hash_configuration.time_step = configuration.time_step;
+    hash_configuration.step_count = configuration.step_count;
+    hash_configuration.qoi_contraction_unit_id = 1;
+    hash_configuration.damping = configuration.damping;
+    auto config_hash = hash_value(
+        configuration_hash(hash_configuration),
+        configuration.surface_tension
+    );
+    config_hash = hash_value(config_hash, configuration.reference_radius);
+    auto fail = [&](const ShortTrajectoryStatus status,
+                    const std::size_t step,
+                    const double time,
+                    const std::string& reason,
+                    const std::uint64_t state_before) {
+        const auto state_after = cell_state_hash(target);
+        result.status = status;
+        result.failure = ShortTrajectoryFailure{
+            status,
+            step,
+            time,
+            reason,
+            config_hash,
+            state_before,
+            state_after,
+            state_before == state_after,
+        };
+        return result;
+    };
+    const auto entry_hash = cell_state_hash(target);
+    if(!std::isfinite(configuration.time_step)
+       || configuration.time_step <= 0.0
+       || configuration.step_count == 0
+       || !std::isfinite(configuration.surface_tension)
+       || configuration.surface_tension <= 0.0
+       || configuration.damping.measure
+            != CellSurfaceDampingMeasure::barycentric_dual_area
+       || !std::isfinite(configuration.damping.coefficient)
+       || configuration.damping.coefficient <= 0.0
+       || !std::isfinite(configuration.reference_radius)
+       || configuration.reference_radius <= 0.0) {
+        return fail(
+            ShortTrajectoryStatus::failed_invalid_configuration,
+            0,
+            0.0,
+            "Family C smooth trajectory configuration is invalid",
+            entry_hash
+        );
+    }
+
+    try {
+        static_cast<void>(refresh_surface_geometry(
+            target,
+            target.get_mesh_revision()
+        ));
+        const auto initial_mesh = capture_surface_snapshot(target);
+        const auto initial_geometry = independent_surface_geometry(
+            initial_mesh,
+            nullptr
+        );
+        const auto reference_faces = initial_geometry.oriented_face_vectors;
+        const auto initial_centroid = initial_geometry.centroid;
+        const auto local_reference = family_c_local_topology_reference(initial_mesh);
+        result.initial_rms_edge_length = surface_edge_scales(initial_mesh)[0]
+            / configuration.reference_radius;
+        result.initial_registered_surface_energy = configuration.surface_tension
+            * initial_geometry.area;
+        result.initial_local_minimum_triangle_quality
+            = local_reference.initial_local_minimum_triangle_quality;
+        result.valence_five_vertex_count = static_cast<std::size_t>(std::count(
+            local_reference.is_valence_five.begin(),
+            local_reference.is_valence_five.end(),
+            true
+        ));
+        result.closed_one_ring_vertex_count = static_cast<std::size_t>(std::count(
+            local_reference.is_closed_one_ring.begin(),
+            local_reference.is_closed_one_ring.end(),
+            true
+        ));
+        result.closed_one_ring_edge_count
+            = local_reference.closed_one_ring_edges.size();
+        result.closed_one_ring_incident_face_count
+            = local_reference.closed_one_ring_incident_faces.size();
+        if(!std::isfinite(result.initial_rms_edge_length)
+           || result.initial_rms_edge_length <= 0.0
+           || !std::isfinite(result.initial_registered_surface_energy)
+           || result.initial_registered_surface_energy <= 0.0) {
+            throw std::invalid_argument(
+                "Family C smooth trajectory requires positive initial scales"
+            );
+        }
+        result.samples.reserve(configuration.step_count + 1);
+
+        auto append_sample = [&](const std::size_t step,
+                                 const double time,
+                                 const SurfaceOverdampedStepAudit* const motion) {
+            const auto mesh = capture_surface_snapshot(target);
+            if(mesh.vertices.size() != initial_mesh.vertices.size()
+               || mesh.faces.size() != initial_mesh.faces.size()) {
+                throw std::runtime_error(
+                    "Family C smooth trajectory changed fixed topology"
+                );
+            }
+            const auto geometry = independent_surface_geometry(
+                mesh,
+                &reference_faces
+            );
+            const auto control_areas = barycentric_control_areas(mesh);
+            const double exact_radius_squared
+                = configuration.reference_radius * configuration.reference_radius
+                - 4.0 * configuration.surface_tension * time
+                    / configuration.damping.coefficient;
+            if(!std::isfinite(exact_radius_squared)
+               || exact_radius_squared <= 0.0) {
+                throw std::runtime_error(
+                    "Family C analytic radius became non-positive"
+                );
+            }
+            const double exact_radius = std::sqrt(exact_radius_squared);
+            const double exact_normal_velocity
+                = -2.0 * configuration.surface_tension
+                    / (configuration.damping.coefficient * exact_radius);
+            double control_area_sum = 0.0;
+            double weighted_radius_sum = 0.0;
+            for(std::size_t index = 0; index < mesh.vertices.size(); ++index) {
+                control_area_sum += control_areas[index];
+                weighted_radius_sum += control_areas[index]
+                    * norm(mesh.vertices[index].position);
+            }
+            const double control_area_mean_radius
+                = weighted_radius_sum / control_area_sum;
+            const double energy = configuration.surface_tension * geometry.area;
+            const double previous_energy = result.samples.empty()
+                ? energy
+                : result.samples.back().global.registered_surface_energy;
+            const double dissipation = motion == nullptr
+                ? 0.0
+                : motion->viscous_dissipation;
+            const double ledger_residual = energy - previous_energy + dissipation;
+            const double normalized_cache = cache_residual(
+                target,
+                geometry,
+                initial_geometry.area,
+                initial_geometry.volume,
+                configuration.reference_radius
+            );
+
+            double valence_five_radial_square_sum = 0.0;
+            double closed_one_ring_radial_square_sum = 0.0;
+            double maximum_valence_five_radial_error = 0.0;
+            double maximum_closed_one_ring_radial_error = 0.0;
+            double maximum_valence_five_error_over_h = 0.0;
+            double maximum_closed_one_ring_error_over_h = 0.0;
+            for(std::size_t index = 0; index < mesh.vertices.size(); ++index) {
+                const double radial_error = std::abs(
+                    norm(mesh.vertices[index].position) - exact_radius
+                );
+                if(local_reference.is_valence_five[index]) {
+                    valence_five_radial_square_sum += radial_error * radial_error;
+                    maximum_valence_five_radial_error = std::max(
+                        maximum_valence_five_radial_error,
+                        radial_error
+                    );
+                    maximum_valence_five_error_over_h = std::max(
+                        maximum_valence_five_error_over_h,
+                        radial_error
+                            / local_reference.initial_incident_edge_mean[index]
+                    );
+                }
+                if(local_reference.is_closed_one_ring[index]) {
+                    closed_one_ring_radial_square_sum += radial_error * radial_error;
+                    maximum_closed_one_ring_radial_error = std::max(
+                        maximum_closed_one_ring_radial_error,
+                        radial_error
+                    );
+                    maximum_closed_one_ring_error_over_h = std::max(
+                        maximum_closed_one_ring_error_over_h,
+                        radial_error
+                            / local_reference.initial_incident_edge_mean[index]
+                    );
+                }
+            }
+            const double radial_excursion = std::max(
+                std::abs(exact_radius - configuration.reference_radius),
+                1.0e-12
+            );
+            const double maximum_valence_five_excursion_error = step == 0
+                ? 0.0
+                : maximum_valence_five_radial_error / radial_excursion;
+            const double maximum_closed_one_ring_excursion_error = step == 0
+                ? 0.0
+                : maximum_closed_one_ring_radial_error / radial_excursion;
+            if(step == 0) {
+                maximum_valence_five_error_over_h = 0.0;
+                maximum_closed_one_ring_error_over_h = 0.0;
+            }
+            double maximum_edge_scaling_error = 0.0;
+            const double exact_radius_ratio
+                = exact_radius / configuration.reference_radius;
+            for(std::size_t edge_index = 0;
+                edge_index < local_reference.closed_one_ring_edges.size();
+                ++edge_index) {
+                const auto& endpoints
+                    = local_reference.closed_one_ring_edges[edge_index];
+                const double current_length = norm(subtract(
+                    mesh.vertices.at(endpoints[0]).position,
+                    mesh.vertices.at(endpoints[1]).position
+                ));
+                const double relative_scaling = current_length
+                    / local_reference.closed_one_ring_initial_edge_lengths[edge_index]
+                    / exact_radius_ratio;
+                maximum_edge_scaling_error = std::max(
+                    maximum_edge_scaling_error,
+                    std::abs(relative_scaling - 1.0)
+                );
+            }
+            double local_minimum_quality = 1.0;
+            for(const auto face_index
+                : local_reference.closed_one_ring_incident_faces) {
+                local_minimum_quality = std::min(
+                    local_minimum_quality,
+                    triangle_quality(mesh, face_index)
+                );
+            }
+            const auto local_force = audit_family_c_local_normal_error(
+                target,
+                mesh,
+                control_areas,
+                local_reference,
+                configuration.damping.coefficient,
+                exact_normal_velocity
+            );
+
+            FamilyCSmoothSphereTrajectorySample sample;
+            sample.global = SurfaceTensionShortTrajectorySample{
+                step,
+                time,
+                geometry.area,
+                geometry.area / initial_geometry.area,
+                geometry.volume,
+                geometry.volume / initial_geometry.volume,
+                geometry.centroid,
+                norm(subtract(geometry.centroid, initial_centroid))
+                    / configuration.reference_radius,
+                energy,
+                energy / result.initial_registered_surface_energy,
+                dissipation,
+                ledger_residual,
+                geometry.minimum_oriented_face_alignment,
+                geometry.minimum_triangle_quality,
+                geometry.minimum_face_area / initial_geometry.minimum_face_area,
+                normalized_cache,
+            };
+            sample.exact_radius = exact_radius;
+            sample.control_area_mean_radius = control_area_mean_radius;
+            sample.control_area_mean_radius_ratio = control_area_mean_radius
+                / configuration.reference_radius;
+            sample.maximum_valence_five_excursion_error
+                = maximum_valence_five_excursion_error;
+            sample.rms_valence_five_radial_error = std::sqrt(
+                valence_five_radial_square_sum
+                / static_cast<double>(result.valence_five_vertex_count)
+            );
+            sample.maximum_closed_one_ring_excursion_error
+                = maximum_closed_one_ring_excursion_error;
+            sample.rms_closed_one_ring_radial_error = std::sqrt(
+                closed_one_ring_radial_square_sum
+                / static_cast<double>(result.closed_one_ring_vertex_count)
+            );
+            sample.maximum_valence_five_error_over_initial_h
+                = maximum_valence_five_error_over_h;
+            sample.maximum_closed_one_ring_error_over_initial_h
+                = maximum_closed_one_ring_error_over_h;
+            sample.maximum_closed_one_ring_edge_scaling_error
+                = maximum_edge_scaling_error;
+            sample.local_minimum_triangle_quality = local_minimum_quality;
+            sample.local_minimum_triangle_quality_ratio = local_minimum_quality
+                / result.initial_local_minimum_triangle_quality;
+            sample.valence_five_normal_error_energy_fraction
+                = local_force.valence_five_energy_fraction;
+            sample.valence_five_normal_error_relative_rms
+                = local_force.valence_five_relative_rms;
+            sample.valence_five_normal_error_pointwise_maximum
+                = local_force.valence_five_pointwise_maximum;
+            sample.closed_one_ring_normal_error_energy_fraction
+                = local_force.closed_one_ring_energy_fraction;
+            sample.closed_one_ring_normal_error_relative_rms
+                = local_force.closed_one_ring_relative_rms;
+            sample.closed_one_ring_normal_error_pointwise_maximum
+                = local_force.closed_one_ring_pointwise_maximum;
+            sample.force_buffers_cleared = local_force.force_buffers_cleared;
+            result.samples.push_back(sample);
+            result.cumulative_positive_energy_balance_residual += std::max(
+                0.0,
+                ledger_residual
+            );
+            result.minimum_oriented_face_alignment = std::min(
+                result.minimum_oriented_face_alignment,
+                sample.global.minimum_oriented_face_alignment
+            );
+            result.minimum_triangle_quality = std::min(
+                result.minimum_triangle_quality,
+                sample.global.minimum_triangle_quality
+            );
+            result.minimum_face_area_ratio = std::min(
+                result.minimum_face_area_ratio,
+                sample.global.minimum_face_area_ratio
+            );
+            result.maximum_normalized_cache_residual = std::max(
+                result.maximum_normalized_cache_residual,
+                sample.global.maximum_normalized_cache_residual
+            );
+            result.maximum_normalized_centroid_drift = std::max(
+                result.maximum_normalized_centroid_drift,
+                sample.global.normalized_surface_centroid_drift
+            );
+        };
+
+        append_sample(0, 0.0, nullptr);
+        const auto damping = surface_damping(configuration.damping);
+        for(std::size_t step = 1; step <= configuration.step_count; ++step) {
+            const auto state_before = cell_state_hash(target);
+            try {
+                target.apply_internal_forces(configuration.time_step);
+                const auto motion = advance_surface_overdamped(
+                    target,
+                    target.get_mesh_revision(),
+                    configuration.time_step,
+                    damping
+                );
+                append_sample(
+                    step,
+                    static_cast<double>(step) * configuration.time_step,
+                    &motion
+                );
+            } catch(const std::exception& error) {
+                static_cast<void>(reset_surface_forces(
+                    target,
+                    target.get_mesh_revision()
+                ));
+                return fail(
+                    classify_failure(error.what()),
+                    step,
+                    static_cast<double>(step - 1) * configuration.time_step,
+                    error.what(),
+                    state_before
+                );
+            }
+        }
+        result.normalized_positive_energy_balance_residual
+            = result.cumulative_positive_energy_balance_residual
+                / result.initial_registered_surface_energy;
+        result.status = ShortTrajectoryStatus::passed;
+        return result;
+    } catch(const std::exception& error) {
+        return fail(
+            classify_failure(error.what()),
+            result.samples.size(),
+            result.samples.empty() ? 0.0 : result.samples.back().global.time,
+            error.what(),
+            entry_hash
+        );
+    }
+}
+
+FamilyCSmoothSphereGateAudit evaluate_family_c_smooth_sphere_gate(
+    const std::array<FamilyCSmoothSphereTrajectoryAudit, 4>& levels,
+    const FamilyCSmoothSphereTrajectoryAudit& finest_half_time_step,
+    const FamilyCSmoothSphereGateThresholds& thresholds
+) {
+    const std::array<double, 13> threshold_values{
+        thresholds.maximum_finest_excursion_normalized_error,
+        thresholds.minimum_observed_order,
+        thresholds.roundoff_plateau_threshold,
+        thresholds.maximum_time_pollution_fraction,
+        thresholds.minimum_triangle_quality,
+        thresholds.minimum_face_area_ratio,
+        thresholds.maximum_normalized_cache_residual,
+        thresholds.maximum_normalized_centroid_drift,
+        thresholds.maximum_normalized_positive_energy_residual,
+        thresholds.maximum_local_excursion_normalized_error,
+        thresholds.maximum_local_edge_scaling_error,
+        thresholds.maximum_local_radial_error_over_initial_h,
+        thresholds.minimum_local_triangle_quality_ratio,
+    };
+    if(!std::all_of(
+            threshold_values.begin(),
+            threshold_values.end(),
+            [](const double value) { return std::isfinite(value) && value >= 0.0; }
+        )
+       || thresholds.minimum_triangle_quality > 1.0
+       || thresholds.minimum_face_area_ratio > 1.0
+       || thresholds.minimum_local_triangle_quality_ratio > 1.0) {
+        throw std::invalid_argument("Family C smooth trajectory thresholds are invalid");
+    }
+
+    FamilyCSmoothSphereGateAudit result;
+    result.force_buffers_cleared = true;
+    result.trajectories_passed = std::all_of(
+        levels.begin(),
+        levels.end(),
+        [](const auto& audit) {
+            return audit.status == ShortTrajectoryStatus::passed
+                && !audit.samples.empty();
+        }
+    ) && finest_half_time_step.status == ShortTrajectoryStatus::passed
+        && !finest_half_time_step.samples.empty();
+    if(!result.trajectories_passed) return result;
+
+    const auto& reference = levels.front().configuration;
+    auto nearly_equal = [](const double left, const double right) {
+        return std::abs(left - right)
+            <= 1.0e-12 * std::max({1.0, std::abs(left), std::abs(right)});
+    };
+    const double final_time = reference.time_step
+        * static_cast<double>(reference.step_count);
+    for(std::size_t index = 0; index < levels.size(); ++index) {
+        const auto& audit = levels[index];
+        const auto& configuration = audit.configuration;
+        if(configuration.damping.measure
+                != CellSurfaceDampingMeasure::barycentric_dual_area
+           || configuration.step_count != reference.step_count
+           || audit.samples.size() != configuration.step_count + 1
+           || !nearly_equal(configuration.time_step, reference.time_step)
+           || !nearly_equal(configuration.surface_tension, reference.surface_tension)
+           || !nearly_equal(
+                configuration.damping.coefficient,
+                reference.damping.coefficient
+              )
+           || !nearly_equal(
+                configuration.reference_radius,
+                reference.reference_radius
+              )
+           || !nearly_equal(audit.samples.back().global.time, final_time)) {
+            throw std::invalid_argument(
+                "Family C spatial gate requires one frozen physical trajectory configuration"
+            );
+        }
+        result.rms_edge_lengths[index] = audit.initial_rms_edge_length;
+    }
+    const auto& half_configuration = finest_half_time_step.configuration;
+    if(half_configuration.damping.measure
+            != CellSurfaceDampingMeasure::barycentric_dual_area
+       || finest_half_time_step.samples.size()
+            != half_configuration.step_count + 1
+       || half_configuration.step_count != 2 * reference.step_count
+       || !nearly_equal(2.0 * half_configuration.time_step, reference.time_step)
+       || !nearly_equal(
+            half_configuration.time_step
+                * static_cast<double>(half_configuration.step_count),
+            final_time
+          )
+       || !nearly_equal(
+            half_configuration.surface_tension,
+            reference.surface_tension
+          )
+       || !nearly_equal(
+            half_configuration.damping.coefficient,
+            reference.damping.coefficient
+          )
+       || !nearly_equal(
+            half_configuration.reference_radius,
+            reference.reference_radius
+          )
+       || !nearly_equal(
+            finest_half_time_step.initial_rms_edge_length,
+            levels.back().initial_rms_edge_length
+          )) {
+        throw std::invalid_argument(
+            "Family C time-pollution gate requires the frozen finest dt/2 run"
+        );
+    }
+    result.mesh_scales_decreased = true;
+    for(std::size_t index = 0; index + 1 < levels.size(); ++index) {
+        result.mesh_scales_decreased = result.mesh_scales_decreased
+            && result.rms_edge_lengths[index + 1]
+                < result.rms_edge_lengths[index];
+    }
+
+    const double exact_radius_squared
+        = reference.reference_radius * reference.reference_radius
+        - 4.0 * reference.surface_tension * final_time
+            / reference.damping.coefficient;
+    if(!std::isfinite(exact_radius_squared) || exact_radius_squared <= 0.0) {
+        throw std::invalid_argument("Family C exact final radius is invalid");
+    }
+    const double exact_radius_ratio = std::sqrt(exact_radius_squared)
+        / reference.reference_radius;
+    const std::array<double, 4> exact_values{
+        exact_radius_ratio,
+        exact_radius_ratio * exact_radius_ratio,
+        exact_radius_ratio * exact_radius_ratio * exact_radius_ratio,
+        exact_radius_ratio * exact_radius_ratio,
+    };
+    auto qoi_value = [](const FamilyCSmoothSphereTrajectorySample& sample,
+                        const std::size_t metric) {
+        switch(metric) {
+            case 0: return sample.control_area_mean_radius_ratio;
+            case 1: return sample.global.area_ratio;
+            case 2: return sample.global.volume_ratio;
+            case 3: return sample.global.energy_ratio;
+            default: throw std::logic_error("Family C QoI index is invalid");
+        }
+    };
+    auto observed_order = [&](const double coarse_error,
+                              const double fine_error,
+                              const double coarse_h,
+                              const double fine_h) {
+        if(!std::isfinite(coarse_error) || !std::isfinite(fine_error)
+           || coarse_error <= 0.0 || fine_error <= 0.0
+           || !std::isfinite(coarse_h) || !std::isfinite(fine_h)
+           || coarse_h <= fine_h || fine_h <= 0.0) {
+            return std::numeric_limits<double>::quiet_NaN();
+        }
+        return std::log(coarse_error / fine_error)
+            / std::log(coarse_h / fine_h);
+    };
+    auto generalized_order = [](const double coarse_difference,
+                                const double fine_difference,
+                                const double coarse_h,
+                                const double middle_h,
+                                const double fine_h) {
+        if(!std::isfinite(coarse_difference)
+           || !std::isfinite(fine_difference)
+           || coarse_difference <= 0.0 || fine_difference <= 0.0
+           || !std::isfinite(coarse_h) || !std::isfinite(middle_h)
+           || !std::isfinite(fine_h)
+           || coarse_h <= middle_h || middle_h <= fine_h || fine_h <= 0.0) {
+            return std::numeric_limits<double>::quiet_NaN();
+        }
+        const double target = coarse_difference / fine_difference;
+        auto ratio = [&](const double order) {
+            if(std::abs(order) < 1.0e-10) {
+                return std::log(coarse_h / middle_h)
+                    / std::log(middle_h / fine_h);
+            }
+            return (std::pow(coarse_h, order) - std::pow(middle_h, order))
+                / (std::pow(middle_h, order) - std::pow(fine_h, order));
+        };
+        auto residual = [&](const double order) {
+            const double current_ratio = ratio(order);
+            if(!std::isfinite(current_ratio) || current_ratio <= 0.0) {
+                return std::numeric_limits<double>::quiet_NaN();
+            }
+            return std::log(current_ratio / target);
+        };
+        constexpr double minimum_search_order = 0.0;
+        constexpr double maximum_search_order = 16.0;
+        constexpr std::size_t search_intervals = 4096;
+        double left = minimum_search_order;
+        double left_residual = residual(left);
+        for(std::size_t index = 1; index <= search_intervals; ++index) {
+            const double right = minimum_search_order
+                + (maximum_search_order - minimum_search_order)
+                    * static_cast<double>(index)
+                    / static_cast<double>(search_intervals);
+            const double right_residual = residual(right);
+            if(std::isfinite(left_residual) && std::isfinite(right_residual)
+               && (left_residual == 0.0 || right_residual == 0.0
+                   || std::signbit(left_residual) != std::signbit(right_residual))) {
+                double bracket_left = left;
+                double bracket_right = right;
+                for(std::size_t iteration = 0; iteration < 100; ++iteration) {
+                    const double middle = 0.5 * (bracket_left + bracket_right);
+                    const double middle_residual = residual(middle);
+                    if(!std::isfinite(middle_residual)) break;
+                    const double bracket_left_residual = residual(bracket_left);
+                    if(middle_residual == 0.0
+                       || std::abs(bracket_right - bracket_left) <= 1.0e-12) {
+                        return middle;
+                    }
+                    if(std::signbit(bracket_left_residual)
+                       != std::signbit(middle_residual)) {
+                        bracket_right = middle;
+                    } else {
+                        bracket_left = middle;
+                    }
+                }
+                return 0.5 * (bracket_left + bracket_right);
+            }
+            left = right;
+            left_residual = right_residual;
+        }
+        return std::numeric_limits<double>::quiet_NaN();
+    };
+
+    result.analytic_qois_passed = true;
+    result.self_convergence_passed = true;
+    result.time_pollution_passed = true;
+    for(std::size_t metric = 0; metric < result.qois.size(); ++metric) {
+        auto& qoi = result.qois[metric];
+        qoi.exact_final_value = exact_values[metric];
+        for(std::size_t level = 0; level < levels.size(); ++level) {
+            const double initial_value = qoi_value(
+                levels[level].samples.front(),
+                metric
+            );
+            qoi.analytic_excursions[level] = std::max(
+                std::abs(qoi.exact_final_value - initial_value),
+                1.0e-12
+            );
+            qoi.responses[level] = qoi_value(levels[level].samples.back(), metric);
+            qoi.excursion_normalized_analytic_errors[level] = std::abs(
+                qoi.responses[level] - qoi.exact_final_value
+            ) / qoi.analytic_excursions[level];
+        }
+        qoi.exact_excursion = qoi.analytic_excursions.back();
+        qoi.analytic_roundoff_plateau = std::all_of(
+            qoi.excursion_normalized_analytic_errors.begin(),
+            qoi.excursion_normalized_analytic_errors.end(),
+            [&](const double error) {
+                return error <= thresholds.roundoff_plateau_threshold;
+            }
+        );
+        qoi.analytic_errors_monotonic = true;
+        qoi.analytic_orders_passed = true;
+        for(std::size_t pair = 0; pair < 3; ++pair) {
+            const double coarse_error
+                = qoi.excursion_normalized_analytic_errors[pair];
+            const double fine_error
+                = qoi.excursion_normalized_analytic_errors[pair + 1];
+            qoi.analytic_errors_monotonic
+                = qoi.analytic_errors_monotonic && fine_error <= coarse_error;
+            qoi.analytic_observed_orders[pair] = observed_order(
+                coarse_error,
+                fine_error,
+                result.rms_edge_lengths[pair],
+                result.rms_edge_lengths[pair + 1]
+            );
+            qoi.analytic_orders_passed = qoi.analytic_orders_passed
+                && (qoi.analytic_roundoff_plateau
+                    || (std::isfinite(qoi.analytic_observed_orders[pair])
+                        && qoi.analytic_observed_orders[pair]
+                            >= thresholds.minimum_observed_order));
+        }
+        qoi.finest_error_passed
+            = qoi.excursion_normalized_analytic_errors.back()
+            <= thresholds.maximum_finest_excursion_normalized_error;
+        for(std::size_t pair = 0; pair < 3; ++pair) {
+            qoi.adjacent_difference_excursions[pair] = std::max(
+                std::abs(
+                    qoi.exact_final_value
+                    - qoi_value(levels[pair].samples.front(), metric)
+                ),
+                1.0e-12
+            );
+            qoi.excursion_normalized_adjacent_differences[pair] = std::abs(
+                qoi.responses[pair] - qoi.responses[pair + 1]
+            ) / qoi.adjacent_difference_excursions[pair];
+        }
+        qoi.self_convergence_roundoff_plateau = std::all_of(
+            qoi.excursion_normalized_adjacent_differences.begin(),
+            qoi.excursion_normalized_adjacent_differences.end(),
+            [&](const double difference) {
+                return difference <= thresholds.roundoff_plateau_threshold;
+            }
+        );
+        qoi.self_convergence_monotonic = true;
+        qoi.self_convergence_orders_passed = true;
+        for(std::size_t triplet = 0; triplet < 2; ++triplet) {
+            const double coarse_difference
+                = qoi.excursion_normalized_adjacent_differences[triplet];
+            const double fine_difference
+                = qoi.excursion_normalized_adjacent_differences[triplet + 1];
+            qoi.self_convergence_monotonic
+                = qoi.self_convergence_monotonic
+                && fine_difference <= coarse_difference;
+            qoi.generalized_self_convergence_orders[triplet]
+                = generalized_order(
+                    coarse_difference,
+                    fine_difference,
+                    result.rms_edge_lengths[triplet],
+                    result.rms_edge_lengths[triplet + 1],
+                    result.rms_edge_lengths[triplet + 2]
+                );
+            qoi.self_convergence_orders_passed
+                = qoi.self_convergence_orders_passed
+                && (qoi.self_convergence_roundoff_plateau
+                    || (std::isfinite(
+                            qoi.generalized_self_convergence_orders[triplet]
+                        )
+                        && qoi.generalized_self_convergence_orders[triplet]
+                            >= thresholds.minimum_observed_order));
+        }
+        qoi.passed = qoi.analytic_errors_monotonic
+            && qoi.analytic_orders_passed
+            && qoi.finest_error_passed
+            && qoi.self_convergence_monotonic
+            && qoi.self_convergence_orders_passed;
+        result.analytic_qois_passed = result.analytic_qois_passed
+            && qoi.analytic_errors_monotonic
+            && qoi.analytic_orders_passed
+            && qoi.finest_error_passed;
+        result.self_convergence_passed = result.self_convergence_passed
+            && qoi.self_convergence_monotonic
+            && qoi.self_convergence_orders_passed;
+
+        auto& time = result.time_pollution[metric];
+        time.coarse_time_step_response = qoi.responses.back();
+        time.half_time_step_response = qoi_value(
+            finest_half_time_step.samples.back(),
+            metric
+        );
+        time.exact_final_value = qoi.exact_final_value;
+        time.exact_excursion = std::max(
+            std::abs(
+                time.exact_final_value
+                - qoi_value(finest_half_time_step.samples.front(), metric)
+            ),
+            1.0e-12
+        );
+        time.absolute_time_difference = std::abs(
+            time.coarse_time_step_response - time.half_time_step_response
+        );
+        time.excursion_normalized_time_difference
+            = time.absolute_time_difference / time.exact_excursion;
+        time.absolute_space_proxy = std::abs(
+            time.half_time_step_response - time.exact_final_value
+        );
+        time.excursion_normalized_space_proxy
+            = time.absolute_space_proxy / time.exact_excursion;
+        time.roundoff_plateau
+            = time.absolute_time_difference
+                <= thresholds.roundoff_plateau_threshold
+            && time.absolute_space_proxy
+                <= thresholds.roundoff_plateau_threshold;
+        time.passed = time.roundoff_plateau
+            || time.absolute_time_difference
+                <= thresholds.maximum_time_pollution_fraction
+                    * time.absolute_space_proxy;
+        result.time_pollution_passed = result.time_pollution_passed
+            && time.passed;
+    }
+
+    auto audit_run = [&](const FamilyCSmoothSphereTrajectoryAudit& audit) {
+        result.minimum_oriented_face_alignment = std::min(
+            result.minimum_oriented_face_alignment,
+            audit.minimum_oriented_face_alignment
+        );
+        result.minimum_triangle_quality = std::min(
+            result.minimum_triangle_quality,
+            audit.minimum_triangle_quality
+        );
+        result.minimum_face_area_ratio = std::min(
+            result.minimum_face_area_ratio,
+            audit.minimum_face_area_ratio
+        );
+        result.maximum_normalized_cache_residual = std::max(
+            result.maximum_normalized_cache_residual,
+            audit.maximum_normalized_cache_residual
+        );
+        result.maximum_normalized_centroid_drift = std::max(
+            result.maximum_normalized_centroid_drift,
+            audit.maximum_normalized_centroid_drift
+        );
+        result.maximum_normalized_positive_energy_residual = std::max(
+            result.maximum_normalized_positive_energy_residual,
+            audit.normalized_positive_energy_balance_residual
+        );
+        for(const auto& sample : audit.samples) {
+            result.maximum_valence_five_excursion_error = std::max(
+                result.maximum_valence_five_excursion_error,
+                sample.maximum_valence_five_excursion_error
+            );
+            result.maximum_closed_one_ring_excursion_error = std::max(
+                result.maximum_closed_one_ring_excursion_error,
+                sample.maximum_closed_one_ring_excursion_error
+            );
+            result.maximum_valence_five_error_over_initial_h = std::max(
+                result.maximum_valence_five_error_over_initial_h,
+                sample.maximum_valence_five_error_over_initial_h
+            );
+            result.maximum_closed_one_ring_error_over_initial_h = std::max(
+                result.maximum_closed_one_ring_error_over_initial_h,
+                sample.maximum_closed_one_ring_error_over_initial_h
+            );
+            result.maximum_closed_one_ring_edge_scaling_error = std::max(
+                result.maximum_closed_one_ring_edge_scaling_error,
+                sample.maximum_closed_one_ring_edge_scaling_error
+            );
+            result.minimum_local_triangle_quality_ratio = std::min(
+                result.minimum_local_triangle_quality_ratio,
+                sample.local_minimum_triangle_quality_ratio
+            );
+            result.force_buffers_cleared = result.force_buffers_cleared
+                && sample.force_buffers_cleared;
+        }
+    };
+    for(const auto& audit : levels) audit_run(audit);
+    audit_run(finest_half_time_step);
+
+    result.global_geometry_passed
+        = result.minimum_oriented_face_alignment > 0.0
+        && result.minimum_triangle_quality >= thresholds.minimum_triangle_quality
+        && result.minimum_face_area_ratio >= thresholds.minimum_face_area_ratio
+        && result.maximum_normalized_cache_residual
+            <= thresholds.maximum_normalized_cache_residual
+        && result.maximum_normalized_centroid_drift
+            <= thresholds.maximum_normalized_centroid_drift;
+    result.energy_coverage_passed
+        = result.maximum_normalized_positive_energy_residual
+        <= thresholds.maximum_normalized_positive_energy_residual;
+    result.local_risk_bounds_passed
+        = result.maximum_valence_five_excursion_error
+            <= thresholds.maximum_local_excursion_normalized_error
+        && result.maximum_closed_one_ring_excursion_error
+            <= thresholds.maximum_local_excursion_normalized_error
+        && result.maximum_valence_five_error_over_initial_h
+            <= thresholds.maximum_local_radial_error_over_initial_h
+        && result.maximum_closed_one_ring_error_over_initial_h
+            <= thresholds.maximum_local_radial_error_over_initial_h
+        && result.maximum_closed_one_ring_edge_scaling_error
+            <= thresholds.maximum_local_edge_scaling_error
+        && result.minimum_local_triangle_quality_ratio
+            >= thresholds.minimum_local_triangle_quality_ratio;
+    result.passed = result.trajectories_passed
+        && result.mesh_scales_decreased
+        && result.analytic_qois_passed
+        && result.self_convergence_passed
+        && result.time_pollution_passed
+        && result.global_geometry_passed
+        && result.energy_coverage_passed
+        && result.local_risk_bounds_passed
+        && result.force_buffers_cleared;
+    return result;
 }
 
 SurfaceTensionSpatialRefinementGateAudit
