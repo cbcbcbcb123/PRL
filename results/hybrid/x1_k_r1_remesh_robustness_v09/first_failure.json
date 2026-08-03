@@ -1,0 +1,34 @@
+{
+  "status": "failed_r1_geometry_cache_force_finite_gate",
+  "first_failure_step": 3,
+  "first_failed_criterion": "normalized_surface_centroid_drift",
+  "observed": 0.08373679738719757,
+  "threshold": 0.01,
+  "fixed_sample_count": 9,
+  "remesh_sample_count": 4,
+  "event_count": 2,
+  "qoi_gate_status": "not_adjudicated_due_to_first_failure",
+  "j1_gate_status": "not_adjudicated_due_to_first_failure",
+  "x1_k_passed": false,
+  "c1_f1": "not_executed",
+  "downstream_authorized": false,
+  "failure_reason": "R1 remesh step safety gate failed",
+  "peer_safety_checks": {
+    "finite": true,
+    "minimum_oriented_face_alignment": true,
+    "minimum_triangle_quality": true,
+    "minimum_face_area_ratio": true,
+    "maximum_normalized_cache_residual": true,
+    "normalized_surface_centroid_drift": false,
+    "volume_ratio": true,
+    "force_buffer_l2_norm": true
+  },
+  "step_3_mesh": {
+    "revision": 2,
+    "vertex_count": 8,
+    "face_count": 12,
+    "surface_area_ratio": 0.9149120577912477,
+    "volume_ratio": 0.8749875042125971,
+    "normalized_surface_centroid_drift": 0.08373679738719757
+  }
+}

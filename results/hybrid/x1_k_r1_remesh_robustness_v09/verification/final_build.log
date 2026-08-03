@@ -1,0 +1,9 @@
+[ 20%] Built target uspg
+[ 33%] Built target prl_core
+[ 43%] Built target math_modules
+[ 70%] Built target triangulation_modules
+[ 86%] Built target mesh
+[ 93%] Built target prl_r1_remesh_robustness
+[ 96%] Building CXX object CMakeFiles/prl_x1k_r1_remesh_robustness_integration_test.dir/tests/r1_remesh_robustness_integration_test.cpp.o
+[100%] Linking CXX executable prl_x1k_r1_remesh_robustness_integration_test
+[100%] Built target prl_x1k_r1_remesh_robustness_integration_test

@@ -1,0 +1,3 @@
+event_id,operation,point_count,region_retention_fraction,active_state_residual,maximum_fiber_norm_error,maximum_fiber_tangency_error,minimum_fiber_alignment,maximum_rebind_error,id_retention_fraction,reference_weight_residual
+1,edge_split,2,1,0,0,0,1,1.1102230246251565e-16,1,0
+2,edge_merge,2,1,0,0,0,1,1.1102230246251565e-16,1,0

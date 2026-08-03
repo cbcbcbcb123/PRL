@@ -1,0 +1,3 @@
+event_id,scheduled_step,operation,before_revision,after_revision,stored_energy_before,stored_energy_after,inter_event_stored_energy_change,delta_psi_remesh,declared_remesh_work,algorithmic_energy_defect,minimum_step_fiber_alignment,minimum_initial_fiber_alignment,maximum_rebind_error
+1,2,edge_split,0,1,0.010782134580316453,0.010782134580316505,0,5.2041704279304213e-17,0,5.2041704279304213e-17,1,1,1.1102230246251565e-16
+2,3,edge_merge,1,2,0.010782134580316505,0.010782134580316505,0,0,0,0,1,1,1.1102230246251565e-16

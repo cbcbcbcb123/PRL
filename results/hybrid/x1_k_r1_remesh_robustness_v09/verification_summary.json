@@ -1,0 +1,73 @@
+{
+  "status": "passed_software_regression_with_frozen_r1_failure",
+  "focused_scientific_response": {
+    "status": "failed_r1_geometry_cache_force_finite_gate",
+    "first_failure_step": 3,
+    "first_failed_criterion": "normalized_surface_centroid_drift",
+    "observed": 0.08373679738719757,
+    "threshold": 0.01,
+    "fixed_sample_count": 9,
+    "remesh_sample_count": 4,
+    "event_count": 2,
+    "qoi_gate_status": "not_adjudicated_due_to_first_failure",
+    "j1_gate_status": "not_adjudicated_due_to_first_failure",
+    "x1_k_passed": false,
+    "c1_f1": "not_executed",
+    "downstream_authorized": false
+  },
+  "commands": {
+    "parent_ctest": {
+      "log_path": "verification/parent_ctest.log",
+      "exitcode_path": "verification/parent_ctest.exitcode",
+      "log_sha256": "7a9414e4294084ae48ee409894204af98dd812726bd13e0fbd6b5ef04d55d0c5",
+      "log_bytes": 1216726,
+      "exit_code": 8,
+      "passed": 53,
+      "failed": 3,
+      "total": 56,
+      "failures": [
+        "prl_x1k_sphere_instantaneous_velocity_refinement",
+        "prl_x1k_v04_family_b_parameterized_diagnosis",
+        "prl_x1k_v06_family_c_short_trajectory_gate"
+      ],
+      "v09_regression_passed": true
+    },
+    "fork_ctest": {
+      "log_path": "verification/fork_ctest.log",
+      "exitcode_path": "verification/fork_ctest.exitcode",
+      "log_sha256": "c2b33715a42d061981b051322d778ac63caca8f0be41ca2ae3a31b40beb98092",
+      "log_bytes": 24807,
+      "exit_code": 0,
+      "passed": 134,
+      "failed": 0,
+      "total": 134
+    },
+    "strict_prl": {
+      "log_path": "verification/strict_prl.log",
+      "exitcode_path": "verification/strict_prl.exitcode",
+      "log_sha256": "e03013f96b6fd9eea1593f89d6a753569e58c702567f01428a2eabbe8e6c4f83",
+      "log_bytes": 29,
+      "exit_code": 0,
+      "prl_core_built": true,
+      "r1_source_and_regression_werror_compile": true
+    },
+    "python_pytest": {
+      "log_path": "verification/python_pytest.log",
+      "exitcode_path": "verification/python_pytest.exitcode",
+      "log_sha256": "5f1efb0fc038cba6ebadb056a77012600e1ea78f93805626a1d55fe045302cfd",
+      "log_bytes": 371,
+      "exit_code": 0,
+      "passed": 78
+    },
+    "ruff": {
+      "log_path": "verification/ruff.log",
+      "exitcode_path": "verification/ruff.exitcode",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "log_bytes": 19,
+      "exit_code": 0,
+      "passed": true
+    }
+  },
+  "counts_parsed_from_raw_logs": true,
+  "hardcoded_verification_counts_used": false
+}

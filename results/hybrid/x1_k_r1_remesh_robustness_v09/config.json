@@ -1,0 +1,40 @@
+{
+  "contract_commit": "f7701d59ce3e1c94737e3b0a276205ed70fae6f8",
+  "parent_before_r1": "3d0a8217e869213e34223d7206f4588e7b6e9aca",
+  "cell_engine_commit": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+  "time_step": 0.000625,
+  "step_count": 8,
+  "terminal_time": 0.005,
+  "split_step": 2,
+  "merge_step": 3,
+  "swap_count": 0,
+  "qoi_contraction_unit_id": 501,
+  "damping_measure": "barycentric_dual_area",
+  "damping_coefficient": 10.0,
+  "adaptive_remesh": false,
+  "adaptive_retry": false,
+  "configuration_hash": "13109976761839099815",
+  "fixed_initial_state_hash": "2353052345733728689",
+  "remesh_initial_state_hash": "2353052345733728689",
+  "characteristic_length": 1.4422495703074083,
+  "initial_axis_length": 0.9290452088031023,
+  "initial_active_energy": 0.010789062500000019,
+  "thresholds": {
+    "maximum_qoi_difference": 0.002,
+    "maximum_remesh_defect": 1e-12,
+    "minimum_initial_active_energy_strict": 0.01,
+    "minimum_fiber_alignment": 0.999999999999,
+    "maximum_rebind_error": 1e-12,
+    "minimum_oriented_face_alignment_strict": 0.0,
+    "minimum_triangle_quality": 0.05,
+    "minimum_face_area_ratio": 0.0001,
+    "maximum_normalized_cache_residual": 1e-12,
+    "maximum_normalized_surface_centroid_drift": 0.01,
+    "volume_ratio_interval": [
+      0.5,
+      1.5
+    ],
+    "maximum_force_buffer_l2_norm": 1e-12,
+    "maximum_normalized_positive_energy_residual": 0.005
+  }
+}

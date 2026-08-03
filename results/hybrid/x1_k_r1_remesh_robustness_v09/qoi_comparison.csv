@@ -1,0 +1,5 @@
+step,normalized_axis_difference,area_ratio_difference,volume_ratio_difference,normalized_active_energy_difference,adjudicated,role
+0,0.0,0.0,0.0,0.0,False,diagnostic_only_after_first_failure
+1,0.0,0.0,0.0,0.0,False,diagnostic_only_after_first_failure
+2,1.1950150693478818e-16,1.1102230246251565e-16,0.0,4.823561294533619e-15,False,diagnostic_only_after_first_failure
+3,2.1158096528687403e-06,0.08508054177810032,0.12499876936752763,8.45898337204468e-05,False,diagnostic_only_after_first_failure

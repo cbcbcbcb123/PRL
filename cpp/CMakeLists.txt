@@ -119,6 +119,25 @@ if(BUILD_TESTING)
             EXCLUDE_FROM_ALL
         )
 
+        add_library(
+            prl_r1_remesh_robustness
+            STATIC
+                src/r1_remesh_robustness.cpp
+        )
+        target_compile_features(prl_r1_remesh_robustness PUBLIC cxx_std_17)
+        target_link_libraries(
+            prl_r1_remesh_robustness
+            PUBLIC
+                prl_core
+                triangulation_modules
+                mesh
+        )
+        target_include_directories(
+            prl_r1_remesh_robustness
+            PUBLIC
+                $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        )
+
         add_executable(
             prl_cell_engine_material_transfer_integration_test
             tests/cell_engine_material_transfer_integration_test.cpp
@@ -349,6 +368,20 @@ if(BUILD_TESTING)
             NAME prl_x1k_v07_family_c_mean_radius_time_floor_gate
             COMMAND prl_short_trajectory_integration_test
                 v07_family_c_time_floor
+        )
+
+        add_executable(
+            prl_x1k_r1_remesh_robustness_integration_test
+            tests/r1_remesh_robustness_integration_test.cpp
+        )
+        target_link_libraries(
+            prl_x1k_r1_remesh_robustness_integration_test
+            PRIVATE
+                prl_r1_remesh_robustness
+        )
+        add_test(
+            NAME prl_x1k_v09_r1_real_remesh_robustness
+            COMMAND prl_x1k_r1_remesh_robustness_integration_test
         )
 
         add_executable(

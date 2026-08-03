@@ -1,0 +1,5 @@
+role,scope,criterion,operator,threshold,observed,passed,adjudicated,provenance,notes
+acceptance,remesh_step_3,normalized_surface_centroid_drift,<=,0.01,0.083736797387197567,false,true,remesh_steps.csv:step=3,first hard gate failure
+control,remesh_step_3,finite_orientation_quality_face_cache_volume_force,all frozen bounds,see config.json,"{""finite"": true, ""force_buffer_l2_norm"": true, ""maximum_normalized_cache_residual"": true, ""minimum_face_area_ratio"": true, ""minimum_oriented_face_alignment"": true, ""minimum_triangle_quality"": true, ""volume_ratio"": true}",true,true,remesh_steps.csv:step=3,all peer safety checks passed
+not_adjudicated,R1_QoI,fixed_vs_remesh_four_QoI,<=,0.002,diagnostic rows only,false,false,qoi_comparison.csv,not adjudicated after first safety failure
+not_adjudicated,J1,real_split_merge_energy_cycle,frozen J1 thresholds,see config.json,raw ledger preserved,false,false,remesh_energy_ledger.csv,not adjudicated after first safety failure

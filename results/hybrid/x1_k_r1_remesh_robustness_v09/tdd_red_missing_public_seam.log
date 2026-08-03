@@ -1,0 +1,19 @@
+X1-K v09 TDD RED — missing public R1 runner
+
+Command:
+docker run --rm --entrypoint sh -v "${PWD}:/workspace" -w /workspace \
+  prl-simucell3d-x0:38af451 -lc \
+  "cmake --build cpp/build-linux-x1k-v02-strict \
+   --target prl_x1k_r1_remesh_robustness_integration_test -j2"
+
+Compiler response before GREEN:
+/workspace/cpp/tests/r1_remesh_robustness_integration_test.cpp:1:10: fatal error:
+prl/cell_engine/r1_remesh_robustness.hpp: No such file or directory
+    1 | #include "prl/cell_engine/r1_remesh_robustness.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake: *** [prl_x1k_r1_remesh_robustness_integration_test] Error 2
+
+Interpretation:
+The controlled fork already exposed the required cell/refiner/event interfaces,
+but PRL did not yet expose one public owned R1 trajectory/audit seam.

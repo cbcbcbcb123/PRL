@@ -1,0 +1,72 @@
+{
+  "contract_commit": "f7701d59ce3e1c94737e3b0a276205ed70fae6f8",
+  "source_evidence": [
+    {
+      "path": "verification/focused_build.log",
+      "sha256": "8d2a83775f12b0e72b60d87adf842d11b2e105284465f22251ff9b405468e25f",
+      "bytes": 1306
+    },
+    {
+      "path": "verification/focused_build.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "exit_code": 0
+    },
+    {
+      "path": "verification/focused_response.log",
+      "sha256": "36aabb0a0ebae70711f6c457f8e7257998e5255ec19154e6c53184dca10a2b24",
+      "bytes": 27974
+    },
+    {
+      "path": "verification/focused_response.exitcode",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "bytes": 3,
+      "exit_code": 1
+    },
+    {
+      "path": "verification/final_build.log",
+      "sha256": "cdd0957914381aad4aa84a52f56d53b37bcc9c1120d685de03ca74bbeee8381d",
+      "bytes": 479
+    },
+    {
+      "path": "verification/final_build.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "exit_code": 0
+    },
+    {
+      "path": "verification/formal_response.log",
+      "sha256": "ab993dd0471454c178b4dab376eb51309fb73c695a7cb0d0aa58eddebcfdfc98",
+      "bytes": 13607
+    },
+    {
+      "path": "verification/formal_response.exitcode",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "bytes": 3,
+      "exit_code": 1
+    },
+    {
+      "path": "verification/focused_regression.log",
+      "sha256": "72e61f3cab4768a6eb021fbb95725242f1c08e55302a685705cce2e42c76b372",
+      "bytes": 14921
+    },
+    {
+      "path": "verification/focused_regression.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "exit_code": 0
+    }
+  ],
+  "machine_record_counts": {
+    "fixed_samples": 9,
+    "remesh_samples": 4,
+    "events": 2,
+    "material_transfers": 2,
+    "ledger": 1,
+    "adjudicated_qoi_rows": 0,
+    "diagnostic_qoi_rows": 4
+  },
+  "schema_and_key_closure_verified": true,
+  "finite_values_verified": true,
+  "exit_codes_parsed_from_files": true
+}
