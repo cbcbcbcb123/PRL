@@ -1,0 +1,23 @@
+{
+  "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V06-S1",
+  "status": "failed_family_c_smooth_short_trajectory_analytic_radius_nonmonotonic",
+  "parent": {
+    "repository": "https://github.com/cbcbcbcb123/PRL.git",
+    "branch": "codex/simucell3d-hybrid-feasibility",
+    "contract_commit": "ae80a0b6c77309fcfc6c3b2a19d8dbeb68af90b8",
+    "failure_package_commit": "eb3c97339580e3d2e0f565e47b9b78dab292046e",
+    "local_and_upstream_match_at_failure_package": true
+  },
+  "fork": {
+    "repository": "https://github.com/cbcbcbcb123/prl-cell-engine.git",
+    "branch": "codex/cell-engine-integration-seam",
+    "commit": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+    "modified_in_v06": false,
+    "local_and_upstream_match": true
+  },
+  "submodule_pointer_in_failure_package": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+  "v01_through_v05_evidence_unchanged_relative_to_203e279": true,
+  "route_h_gate_a_v01": "unchanged_failed_invalid_numerics",
+  "r1_c1_f1_executed": false,
+  "protected_user_paths_tracked": false
+}
