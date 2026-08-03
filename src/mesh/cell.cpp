@@ -1371,7 +1371,7 @@ void cell::apply_surface_tension_and_membrane_elasticity() noexcept{
 
     //Reset the membrane elasticity and surface tension energy  
     membrane_elasticity_energy_ = 0.;
-    surface_tension_energy_ = 0.;
+    surface_tension_energy_ = 0.0;
 
     //Loop over the faces
     for(face& f : face_lst_){

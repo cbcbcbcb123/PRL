@@ -90,9 +90,9 @@ class cell: public std::enable_shared_from_this<cell> {
         std::vector<unsigned> free_node_queue_;
         std::vector<unsigned> free_face_queue_;
 
-        //The different contributions to the potential energy of the cell
-        //We use float values since they are only meant for plotting
-        float surface_tension_energy_ = 0.;
+        //The different contributions to the potential energy of the cell.
+        //Surface tension uses double to keep high-face-count plotting sums stable.
+        double surface_tension_energy_ = 0.0;
         float membrane_elasticity_energy_ = 0.;
         float bending_energy_ = 0.;
         float pressure_energy_ = 0.;
@@ -471,7 +471,7 @@ class cell: public std::enable_shared_from_this<cell> {
         double get_volume() const noexcept {return volume_;}
         double get_pressure() const noexcept {return pressure_;}
         double get_target_volume() const noexcept {return target_volume_;}
-        float get_surface_tension_energy() const noexcept {return surface_tension_energy_;}
+        double get_surface_tension_energy() const noexcept {return surface_tension_energy_;}
         float get_membrane_elasticity_energy() const noexcept {return membrane_elasticity_energy_;}
         float get_bending_energy() const noexcept {return bending_energy_;}
         float get_pressure_energy() const noexcept {return pressure_energy_;}
