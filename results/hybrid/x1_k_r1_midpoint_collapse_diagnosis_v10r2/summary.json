@@ -1,0 +1,31 @@
+{
+  "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V10R2-LOCATOR-COUNT-FORK-EVIDENCE-REPAIR",
+  "contract_commit": "d3d5a51d0e58ac9413eeb4c1b019eebb671470b4",
+  "v10r1_result_commit": "1348f6aff6a3f46437f836ad053618ed68cb9b5b",
+  "status": "packaging_evidence_repair_complete_scientific_failure_preserved",
+  "v10_scientific_status": "failed_v10_midpoint_collapse_diagnosis_eligible_candidate_material_rebind",
+  "classification_status": "not_adjudicated_due_to_first_failure",
+  "candidate_3_topology_status": "not_adjudicated_due_to_production_sink_exception",
+  "candidate_3_merge_succeeded": false,
+  "candidate_3_rebind_distance": 0.047434164902525666,
+  "candidate_3_rebind_distance_threshold": 1e-12,
+  "x1_k_passed": false,
+  "r1_passed": false,
+  "c1_f1": "not_executed",
+  "downstream_authorized": false,
+  "new_microprobe_run": false,
+  "new_formal_response_run": false,
+  "new_physical_data_generated": false,
+  "configuration_artifact_status": "reconstructed_successor_with_all_32_sources_resolved_from_frozen_blobs",
+  "historical_v10_configuration_delivery_claim": false,
+  "configuration_canonical_leaf_count": 32,
+  "configuration_resolved_leaf_count": 32,
+  "frozen_lifecycle_blob_count": 102,
+  "controlled_fork": {
+    "identity": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+    "tracked_clean": true,
+    "pytest_passed": 91,
+    "pytest_exit_code": 0,
+    "source": "verification/combined_python_final.log"
+  }
+}

@@ -1,0 +1,45 @@
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____ test_v10r2_locator_verifier_reads_frozen_blob_instead_of_json_echo ______
+
+    def test_v10r2_locator_verifier_reads_frozen_blob_instead_of_json_echo() -> None:
+        payload = build_v10r2_configuration(ROOT)
+>       report = verify_configuration_sources(ROOT, payload)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_r1_midpoint_packaging_repair_v10r2.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo_root = WindowsPath('C:/Users/chenb/.codex/worktrees/046a/PRL')
+payload = {'artifact_status': 'v10r2_locator_evidence_repair', 'canonical_leaf_definition': 'recursively expand mappings; treat ...': 446}, 'path': 'cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp', 'source_value': 501}], 'value': 501}, ...], ...}
+
+    def verify_configuration_sources(
+        repo_root: Path,
+        payload: dict[str, Any],
+    ) -> dict[str, Any]:
+        fields = _canonical_fields(payload["configuration"])
+        provenance = {item["field"]: item for item in payload["field_provenance"]}
+        if set(fields) != set(provenance):
+            raise V10R2EvidenceError("canonical configuration fields are not closed")
+        resolved = []
+        for field, value in sorted(fields.items()):
+            item = provenance[field]
+            if item["value"] != value:
+                raise V10R2EvidenceError(f"field value mismatch for {field}")
+            if any(source["source_value"] != value for source in item["sources"]):
+                raise V10R2EvidenceError(f"source value mismatch for {field}")
+            for source in item["sources"]:
+                resolved_value = _resolve_source(repo_root, source)
+                if resolved_value != value:
+>                   raise V10R2EvidenceError(
+                        f"resolved value mismatch for {field}: "
+                        f"expected {value!r}, observed {resolved_value!r}"
+                    )
+E                   hybrid.r1_midpoint_packaging_repair_v10r2.V10R2EvidenceError: resolved value mismatch for configuration.execution.production_path: expected ['production MyocardialMaterialTransferSink', 'public local_mesh_refiner', 'public split_edge / can_be_merged / merge_edge', 'synchronous RemeshEvent', 'public capture_surface_snapshot and material-state getters'], observed ['production MyocardialMaterialTransferSink', 'public local_mesh_refiner', 'split_edge / can_be_merged / merge_edge', 'synchronous RemeshEvent', 'public capture_surface_snapshot and material-state getters']
+
+src\hybrid\r1_midpoint_packaging_repair_v10r2.py:611: V10R2EvidenceError
+=========================== short test summary info ===========================
+FAILED tests/test_r1_midpoint_packaging_repair_v10r2.py::test_v10r2_locator_verifier_reads_frozen_blob_instead_of_json_echo
+1 failed in 3.13s

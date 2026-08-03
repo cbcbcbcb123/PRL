@@ -1,0 +1,126 @@
+{
+  "status": "passed_packaging_software_verification",
+  "required": {
+    "combined_python_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": 91
+    },
+    "focused_python_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": 3
+    },
+    "ruff_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": null
+    }
+  },
+  "missing_required": [],
+  "failed_required": [],
+  "all_commands": {
+    "combined_python_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": 91
+    },
+    "exporter_final": {
+      "exit_code": 0,
+      "role": "supporting_verification",
+      "passed": null
+    },
+    "focused_python_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": 3
+    },
+    "ruff_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": null
+    },
+    "tdd_green_combined_log_parser": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": 1
+    },
+    "tdd_green_count_reconciliation": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": 1
+    },
+    "tdd_green_locator_resolution": {
+      "exit_code": 4,
+      "role": "superseded_test_node_selection_error",
+      "passed": null
+    },
+    "tdd_green_locator_resolution_valid": {
+      "exit_code": 1,
+      "role": "intermediate_green_semantic_normalization_failure",
+      "passed": null
+    },
+    "tdd_green_locator_resolution_valid2": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": 1
+    },
+    "tdd_red_combined_log_parser": {
+      "exit_code": 4,
+      "role": "expected_tdd_red",
+      "passed": null
+    },
+    "tdd_red_count_reconciliation": {
+      "exit_code": 4,
+      "role": "expected_tdd_red",
+      "passed": null
+    },
+    "tdd_red_locator_json_echo": {
+      "exit_code": 1,
+      "role": "expected_tdd_red",
+      "passed": null
+    },
+    "tdd_red_locator_seam_missing": {
+      "exit_code": 4,
+      "role": "expected_tdd_red",
+      "passed": null
+    }
+  },
+  "scientific_response_commands_executed": false,
+  "roles_are_not_interchangeable": true,
+  "controlled_fork": {
+    "status": "passed_combined_controlled_fork_verification",
+    "invocation": {
+      "argv": [
+        "scripts/run_x1k_v10r2_combined_verification.py",
+        "--repo-root",
+        ".",
+        "--controlled-parent-root",
+        "E:\\Temp-Projects\\PRL",
+        "--",
+        "-q"
+      ],
+      "controlled_parent_root": "E:\\Temp-Projects\\PRL",
+      "fork_root": "E:\\Temp-Projects\\PRL\\external\\simucell3d",
+      "pytest_args": [
+        "-q"
+      ],
+      "repo_root": "C:\\Users\\chenb\\.codex\\worktrees\\046a\\PRL"
+    },
+    "preflight": {
+      "fork_head": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+      "fork_tracked_clean": true,
+      "fork_tracked_status": [],
+      "fork_upstream": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+      "gitlink": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a"
+    },
+    "fork_identity": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+    "pytest": {
+      "passed": 91,
+      "exit_code": 0
+    },
+    "wrapper_exit_code": 0,
+    "sidecar_exit_code": 0
+  },
+  "counts_parsed_from_logs": true
+}

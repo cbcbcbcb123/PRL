@@ -1,0 +1,8 @@
+V10R2_INVOCATION_JSON {"argv": ["scripts/run_x1k_v10r2_combined_verification.py", "--repo-root", ".", "--controlled-parent-root", "E:\\Temp-Projects\\PRL", "--", "-q"], "controlled_parent_root": "E:\\Temp-Projects\\PRL", "fork_root": "E:\\Temp-Projects\\PRL\\external\\simucell3d", "pytest_args": ["-q"], "repo_root": "C:\\Users\\chenb\\.codex\\worktrees\\046a\\PRL"}
+V10R2_PREFLIGHT_JSON {"fork_head": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a", "fork_tracked_clean": true, "fork_tracked_status": [], "fork_upstream": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a", "gitlink": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a"}
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+........................................................................ [ 79%]
+...................                                                      [100%]
+91 passed in 181.51s (0:03:01)
+V10R2_RESULT_JSON {"pytest_exit_code": 0, "wrapper_exit_code": 0}

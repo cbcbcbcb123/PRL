@@ -1,0 +1,7 @@
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+ERROR: not found: C:\Users\chenb\.codex\worktrees\046a\PRL\tests\test_r1_midpoint_packaging_repair_v10r2.py::test_configuration_source_resolution_rejects_tampered_locator_with_self_consistent_echo
+(no match in any of [<Module test_r1_midpoint_packaging_repair_v10r2.py>])
+
+
+no tests ran in 0.10s

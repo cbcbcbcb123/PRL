@@ -1,0 +1,5 @@
+order,role,criterion,observed,passed,scientific_adjudication,provenance
+1,locator_repair,all_canonical_configuration_leaves_resolve,32/32,True,False,configuration_resolution.json
+2,count_reconciliation,canonical_sets_are_enumerated_and_unique,configuration=32; lifecycle_blobs=102,True,False,count_reconciliation.json
+3,controlled_fork_verification,identity_cleanliness_and_pytest_are_log_parsed,tracked_clean; pytest=91/91,True,False,verification/combined_python_final.log
+4,scientific_state_preservation,v10_failure_and_non_authorization_preserved,X1-K=false; R1=false; C1/F1 not executed,True,False,scientific_claim_guard.json

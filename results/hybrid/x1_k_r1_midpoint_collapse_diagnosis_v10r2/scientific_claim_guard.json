@@ -1,0 +1,16 @@
+{
+  "status": "passed_scientific_claim_preservation_guard",
+  "v10_scientific_status": "failed_v10_midpoint_collapse_diagnosis_eligible_candidate_material_rebind",
+  "classification_status": "not_adjudicated_due_to_first_failure",
+  "candidate_3_topology_status": "not_adjudicated_due_to_production_sink_exception",
+  "candidate_3_merge_succeeded": false,
+  "candidate_3_rebind_distance": 0.047434164902525666,
+  "candidate_3_rebind_distance_threshold": 1e-12,
+  "x1_k_passed": false,
+  "r1_passed": false,
+  "c1_f1": "not_executed",
+  "downstream_authorized": false,
+  "new_microprobe_run": false,
+  "new_formal_response_run": false,
+  "new_physical_data_generated": false
+}

@@ -1,0 +1,689 @@
+{
+  "schema_version": "x1-k-v10r2-count-reconciliation-1",
+  "status": "passed_canonical_count_reconciliation",
+  "canonical_counts": {
+    "configuration": {
+      "definition": "recursively expand mappings; treat each array as one leaf",
+      "count": 32,
+      "items": [
+        "configuration.active_contraction.activation_material_point_id",
+        "configuration.active_contraction.minimum_axis_fiber_alignment",
+        "configuration.active_contraction.minus_material_point_id",
+        "configuration.active_contraction.plus_material_point_id",
+        "configuration.active_contraction.stiffness",
+        "configuration.active_contraction.unit_id",
+        "configuration.execution.candidate_order",
+        "configuration.execution.disabled_dynamics_and_couplings",
+        "configuration.execution.new_formal_response_run",
+        "configuration.execution.new_microprobe_run",
+        "configuration.execution.new_physical_data_generated",
+        "configuration.execution.output_precision_digits",
+        "configuration.execution.production_path",
+        "configuration.formal_response.expected_exit_code",
+        "configuration.formal_response.first_failed_candidate",
+        "configuration.formal_response.frozen_candidate_count",
+        "configuration.formal_response.frozen_publicly_eligible_count",
+        "configuration.initial_state.cell_id",
+        "configuration.initial_state.face_count",
+        "configuration.initial_state.faces",
+        "configuration.initial_state.material_points",
+        "configuration.initial_state.passive_parameters",
+        "configuration.initial_state.revision",
+        "configuration.initial_state.vertex_count",
+        "configuration.initial_state.vertices",
+        "configuration.material_transfer.implementation",
+        "configuration.material_transfer.maximum_rebind_distance",
+        "configuration.refiner.curvature_threshold",
+        "configuration.refiner.edge_length_threshold",
+        "configuration.refiner.enable_edge_swap",
+        "configuration.refiner.implementation",
+        "configuration.tolerance"
+      ]
+    },
+    "frozen_lifecycle_blobs": {
+      "definition": "unique changed paths across the six frozen v09/v10 lifecycle commits",
+      "source_commits": [
+        "f7701d59ce3e1c94737e3b0a276205ed70fae6f8",
+        "10bb2c2602b499b5a75ba2d57a35ba717e156616",
+        "855bd8b7467761ba7fcdaa49632bed2ee5681e85",
+        "e54bc5933387070c697f5c88218f37f25faea4c3",
+        "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+        "ddd663d461da7b25aefd5cf3fbecff488800053e"
+      ],
+      "count": 102,
+      "items": [
+        {
+          "path": "cpp/CMakeLists.txt",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616",
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "cpp/include/prl/cell_engine/r1_remesh_robustness.hpp",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "cpp/src/r1_remesh_robustness.cpp",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "cpp/tests/r1_remesh_robustness_integration_test.cpp",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "project_control/hybrid_x1_k_r1_midpoint_collapse_diagnostic_contract_v10.md",
+          "source_commits": [
+            "e54bc5933387070c697f5c88218f37f25faea4c3"
+          ]
+        },
+        {
+          "path": "project_control/hybrid_x1_k_r1_midpoint_collapse_diagnostic_failure_report_v10.md",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "project_control/hybrid_x1_k_r1_remesh_robustness_contract_v09.md",
+          "source_commits": [
+            "f7701d59ce3e1c94737e3b0a276205ed70fae6f8"
+          ]
+        },
+        {
+          "path": "project_control/hybrid_x1_k_r1_remesh_robustness_failure_report_v09.md",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/analytic_vs_machine.json",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/candidate_matrix.csv",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/criteria.csv",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/events_and_ancestry.csv",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/first_failure.json",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/frozen_merge.csv",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/machine_summary.csv",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/provenance_manifest.json",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/formal_response.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/formal_response.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/formal_response_pre_regression_fix.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/formal_response_pre_regression_fix.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/microprobe.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/microprobe.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/tdd_green_evidence.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/tdd_green_evidence.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/tdd_red_evidence.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/tdd_red_evidence.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/remote_sync.json",
+          "source_commits": [
+            "ddd663d461da7b25aefd5cf3fbecff488800053e"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/repair_options.csv",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/reproduction_commands.md",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/source_provenance.json",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/split_gate.csv",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/stage_edges.csv",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/stage_faces.csv",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/stage_material.csv",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/stage_vertices.csv",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/stages.csv",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/summary.json",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+            "ddd663d461da7b25aefd5cf3fbecff488800053e"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/focused_build.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/focused_build.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/focused_regression.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/focused_regression.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/fork_ctest.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/fork_ctest.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/formal_response.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/formal_response.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/parent_ctest.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/parent_ctest.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/python_pytest.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/python_pytest.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/python_pytest_command_error.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/python_pytest_command_error.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/ruff.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/ruff.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/strict_prl.exitcode",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/strict_prl.log",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification_artifact_manifest.json",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification_summary.json",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/config.json",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/criteria.csv",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/events.csv",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/first_failure.json",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/fixed_steps.csv",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/material_transfer.csv",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/provenance_manifest.json",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/qoi_comparison.csv",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/remesh_energy_ledger.csv",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/remesh_steps.csv",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/remote_sync.json",
+          "source_commits": [
+            "855bd8b7467761ba7fcdaa49632bed2ee5681e85"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/reproduction_commands.md",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/summary.json",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616",
+            "855bd8b7467761ba7fcdaa49632bed2ee5681e85"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/tdd_red_missing_public_seam.exitcode",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/tdd_red_missing_public_seam.log",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/final_build.exitcode",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/final_build.log",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/focused_build.exitcode",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/focused_build.log",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/focused_regression.exitcode",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/focused_regression.log",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/focused_response.exitcode",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/focused_response.log",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/fork_ctest.exitcode",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/fork_ctest.log",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/formal_response.exitcode",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/formal_response.log",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/parent_ctest.exitcode",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/parent_ctest.log",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/python_pytest.exitcode",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/python_pytest.log",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/ruff.exitcode",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/ruff.log",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/strict_prl.exitcode",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification/strict_prl.log",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "results/hybrid/x1_k_r1_remesh_robustness_v09/verification_summary.json",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "scripts/capture_command_evidence.py",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "scripts/export_x1k_r1_v09.py",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "scripts/export_x1k_r1_v10.py",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "src/hybrid/r1_midpoint_diagnosis_evidence.py",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "src/hybrid/r1_remesh_robustness_evidence.py",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "src/hybrid/r1_verification_evidence.py",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        },
+        {
+          "path": "tests/test_r1_midpoint_diagnosis_evidence.py",
+          "source_commits": [
+            "2919a5df50d9fa287fe823ee5a1bb9169c438f65"
+          ]
+        },
+        {
+          "path": "tests/test_r1_remesh_robustness_evidence.py",
+          "source_commits": [
+            "10bb2c2602b499b5a75ba2d57a35ba717e156616"
+          ]
+        }
+      ]
+    }
+  },
+  "superseded_interim_counts": {
+    "37": {
+      "status": "non_versioned_interim_miscount_superseded_non_reconstructable",
+      "explanation": "The precise interim set was not versioned and cannot be reconstructed without inventing evidence.",
+      "entered_frozen_summary": false,
+      "entered_frozen_manifest": false,
+      "entered_gate": false
+    },
+    "105": {
+      "status": "non_versioned_interim_miscount_superseded_non_reconstructable",
+      "explanation": "The precise interim set was not versioned and cannot be reconstructed without inventing evidence.",
+      "entered_frozen_summary": false,
+      "entered_frozen_manifest": false,
+      "entered_gate": false
+    }
+  }
+}
