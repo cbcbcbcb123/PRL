@@ -1,6 +1,8 @@
 {
   "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V09-R1",
   "contract_commit": "f7701d59ce3e1c94737e3b0a276205ed70fae6f8",
+  "result_package_commit": "10bb2c2602b499b5a75ba2d57a35ba717e156616",
+  "remote_sync_proof": "remote_sync.json",
   "status": "failed_r1_geometry_cache_force_finite_gate",
   "first_failure": {
     "status": "failed_r1_geometry_cache_force_finite_gate",
