@@ -330,6 +330,26 @@ if(BUILD_TESTING)
             COMMAND prl_short_trajectory_integration_test
                 v06_family_c_short_trajectory
         )
+        add_test(
+            NAME prl_x1k_v07_structural_identity_public_seam
+            COMMAND prl_short_trajectory_integration_test
+                v07_structural_identity_public_seam
+        )
+        add_test(
+            NAME prl_x1k_v07_four_level_structural_identity_gate
+            COMMAND prl_short_trajectory_integration_test
+                v07_four_level_structural_identity
+        )
+        add_test(
+            NAME prl_x1k_v07_time_floor_public_gate
+            COMMAND prl_short_trajectory_integration_test
+                v07_time_floor_public_gate
+        )
+        add_test(
+            NAME prl_x1k_v07_family_c_mean_radius_time_floor_gate
+            COMMAND prl_short_trajectory_integration_test
+                v07_family_c_time_floor
+        )
 
         add_executable(
             prl_multicell_remesh_benchmark

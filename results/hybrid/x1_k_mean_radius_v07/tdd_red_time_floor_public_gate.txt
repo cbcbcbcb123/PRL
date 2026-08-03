@@ -1,0 +1,27 @@
+X1-K v07 TDD RED 2 — public time-floor evaluator
+date: 2026-08-03 Asia/Shanghai
+
+Behavior written first:
+- public test: v07_mean_radius_time_floor_public_gate_is_auditable
+- CTest: prl_x1k_v07_time_floor_public_gate
+- required a public evaluator for the frozen 2 x 4 run matrix, strict raw time
+  differences, bounded first-order estimates, roundoff-platform failure,
+  Richardson errors, cross-mesh difference, and v06 read-only controls.
+
+RED command:
+docker run --rm --entrypoint sh -v "${PWD}:/workspace" -w /workspace prl-simucell3d-x0:38af451 -lc "cmake --build cpp/build-linux-x1h --target prl_short_trajectory_integration_test -j2"
+
+Observed RED:
+cpp/tests/short_trajectory_integration_test.cpp failed to compile because
+MeanRadiusTimeFloorThresholds and evaluate_mean_radius_time_floor did not exist
+in prl::cell_engine. No formal eight-trajectory v07 response had been generated.
+
+Minimal GREEN:
+- added the public thresholds/audit records and evaluator;
+- fixed the exact dt/step/T/physics matrix in the evaluator;
+- added a synthetic first-order behavior test before the formal response;
+- did not modify the runner, force, damping, fork, or old v02/v04/v06 semantics.
+
+GREEN evidence:
+- prl_x1k_v07_time_floor_public_gate: passed
+- prl_x1k_v07_family_c_mean_radius_time_floor_gate: passed

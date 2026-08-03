@@ -1670,6 +1670,376 @@ int v06_family_c_short_trajectory_passes_frozen_gate() {
     return 0;
 }
 
+int v07_mean_radius_structural_identity_public_seam_is_readonly() {
+    auto current_cell = surface_tension_cell(
+        quality_controlled_spd_mapped_icosphere_mesh(1),
+        501
+    );
+    const auto audit
+        = prl::cell_engine::audit_spherical_mean_radius_structural_identity(
+            *current_cell,
+            0.02,
+            10.0,
+            1.0
+        );
+    std::cerr << std::setprecision(17)
+              << "v07_structural_tracer"
+              << ",position_displacement," << audit.maximum_position_displacement
+              << ",position_hash_before," << audit.position_hash_before
+              << ",position_hash_after," << audit.position_hash_after
+              << ",state_hash_before," << audit.state_hash_before
+              << ",state_hash_after," << audit.state_hash_after
+              << ",force_after," << audit.maximum_force_buffer_norm_after
+              << ",buffers," << audit.force_buffers_cleared
+              << '\n';
+    require(audit.vertex_count == 42 && audit.face_count == 80,
+            "v07 structural tracer changed the frozen Family C mesh");
+    require(audit.normalized_homogeneity_residual <= 1.0e-12
+                && audit.normalized_mean_radial_velocity_residual <= 1.0e-12,
+            "v07 structural tracer did not recover the two identities");
+    require(std::abs(audit.dual_area_to_surface_area_ratio - 1.0) <= 1.0e-12
+                && audit.normalized_net_force_residual <= 1.0e-12
+                && audit.maximum_relative_radius_deviation <= 1.0e-12,
+            "v07 structural tracer geometry accounting is incomplete");
+    require(audit.maximum_position_displacement == 0.0
+                && audit.position_hash_before == audit.position_hash_after
+                && audit.state_hash_before == audit.state_hash_after
+                && audit.force_buffers_cleared
+                && audit.maximum_force_buffer_norm_after == 0.0,
+            "v07 structural tracer changed state or retained force");
+    return 0;
+}
+
+int v07_four_level_structural_identities_pass_frozen_gate() {
+    constexpr std::array<std::size_t, 4> source_levels{1, 2, 3, 4};
+    std::array<prl::cell_engine::SphericalMeanRadiusStructuralIdentityAudit, 4>
+        audits;
+    for(std::size_t index = 0; index < source_levels.size(); ++index) {
+        auto current_cell = surface_tension_cell(
+            quality_controlled_spd_mapped_icosphere_mesh(source_levels[index]),
+            static_cast<unsigned>(511 + index)
+        );
+        audits[index]
+            = prl::cell_engine::audit_spherical_mean_radius_structural_identity(
+                *current_cell,
+                0.02,
+                10.0,
+                1.0
+            );
+    }
+    for(std::size_t index = 0; index < audits.size(); ++index) {
+        const auto& audit = audits[index];
+        const bool passed = audit.normalized_homogeneity_residual <= 1.0e-12
+            && audit.normalized_mean_radial_velocity_residual <= 1.0e-12
+            && std::abs(audit.dual_area_to_surface_area_ratio - 1.0)
+                <= 1.0e-12
+            && audit.normalized_net_force_residual <= 1.0e-12
+            && audit.maximum_relative_radius_deviation <= 1.0e-12
+            && audit.maximum_position_displacement == 0.0
+            && audit.position_hash_before == audit.position_hash_after
+            && audit.state_hash_before == audit.state_hash_after
+            && audit.force_buffers_cleared
+            && audit.maximum_force_buffer_norm_after == 0.0;
+        std::cerr << std::setprecision(17)
+                  << "v07_structural,C"
+                  << ',' << source_levels[index]
+                  << ',' << audit.vertex_count
+                  << ',' << audit.face_count
+                  << ',' << audit.rms_edge_length
+                  << ',' << audit.surface_area
+                  << ',' << audit.dual_area_sum
+                  << ',' << audit.dual_area_to_surface_area_ratio
+                  << ',' << audit.homogeneity_force_contraction
+                  << ',' << audit.exact_homogeneity_force_contraction
+                  << ',' << audit.normalized_homogeneity_residual
+                  << ',' << audit.mean_radial_velocity
+                  << ',' << audit.exact_mean_radial_velocity
+                  << ',' << audit.normalized_mean_radial_velocity_residual
+                  << ',' << audit.normalized_net_force_residual
+                  << ',' << audit.maximum_relative_radius_deviation
+                  << ',' << audit.maximum_position_displacement
+                  << ',' << audit.position_hash_before
+                  << ',' << audit.position_hash_after
+                  << ',' << audit.state_hash_before
+                  << ',' << audit.state_hash_after
+                  << ',' << audit.maximum_force_buffer_norm_after
+                  << ',' << audit.force_buffers_cleared
+                  << ',' << passed
+                  << '\n';
+        require(passed, "v07 four-level structural identity gate failed");
+    }
+    return 0;
+}
+
+int v07_mean_radius_time_floor_public_gate_is_auditable() {
+    constexpr std::array<double, 4> time_steps{
+        4.0e-4, 2.0e-4, 1.0e-4, 5.0e-5
+    };
+    constexpr std::array<std::size_t, 4> step_counts{50, 100, 200, 400};
+    const double exact = std::sqrt(1.0 - 4.0 * 0.02 * 0.02 / 10.0);
+    auto synthetic_run = [&](const std::size_t level_index,
+                             const std::size_t time_index) {
+        prl::cell_engine::FamilyCSmoothSphereTrajectoryAudit audit;
+        audit.status = prl::cell_engine::ShortTrajectoryStatus::passed;
+        audit.configuration = {
+            time_steps[time_index],
+            step_counts[time_index],
+            0.02,
+            {
+                prl::cell_engine::CellSurfaceDampingMeasure::barycentric_dual_area,
+                10.0,
+            },
+            1.0,
+        };
+        audit.initial_rms_edge_length = level_index == 0 ? 0.5 : 0.1;
+        audit.initial_registered_surface_energy = 0.2;
+        audit.initial_local_minimum_triangle_quality = 0.9;
+        audit.minimum_oriented_face_alignment = 1.0;
+        audit.minimum_triangle_quality = 0.9;
+        audit.minimum_face_area_ratio = 1.0;
+        audit.samples.resize(step_counts[time_index] + 1);
+        const double coefficient = level_index == 0 ? 1.0e-4 : 2.0e-4;
+        for(std::size_t step = 0; step < audit.samples.size(); ++step) {
+            auto& sample = audit.samples[step];
+            sample.global.step = step;
+            sample.global.time = time_steps[time_index]
+                * static_cast<double>(step);
+            sample.global.area_ratio = 1.0;
+            sample.global.volume_ratio = 1.0;
+            sample.global.energy_ratio = 1.0;
+            sample.global.minimum_oriented_face_alignment = 1.0;
+            sample.global.minimum_triangle_quality = 0.9;
+            sample.global.minimum_face_area_ratio = 1.0;
+            sample.control_area_mean_radius_ratio = step == 0
+                ? 1.0
+                : exact + coefficient * time_steps[time_index];
+            sample.local_minimum_triangle_quality_ratio = 1.0;
+            sample.force_buffers_cleared = true;
+        }
+        return audit;
+    };
+
+    std::array<
+        std::array<prl::cell_engine::FamilyCSmoothSphereTrajectoryAudit, 4>,
+        2
+    > runs;
+    for(std::size_t level = 0; level < runs.size(); ++level) {
+        for(std::size_t time = 0; time < runs[level].size(); ++time) {
+            runs[level][time] = synthetic_run(level, time);
+        }
+    }
+    prl::cell_engine::MeanRadiusTimeFloorThresholds thresholds;
+    thresholds.minimum_time_order = 0.75;
+    thresholds.maximum_time_order = 1.25;
+    thresholds.common_raw_roundoff_plateau = 1.0e-13;
+    thresholds.maximum_richardson_error = 1.0e-10;
+    thresholds.maximum_cross_mesh_richardson_difference = 1.0e-10;
+    thresholds.minimum_triangle_quality = 0.05;
+    thresholds.minimum_face_area_ratio = 1.0e-4;
+    thresholds.maximum_normalized_cache_residual = 1.0e-12;
+    thresholds.maximum_normalized_centroid_drift = 1.0e-2;
+    thresholds.maximum_normalized_positive_energy_residual = 1.0e-3;
+    thresholds.maximum_local_excursion_normalized_error = 0.25;
+    thresholds.maximum_local_edge_scaling_error = 5.0e-4;
+    thresholds.maximum_local_radial_error_over_initial_h = 5.0e-4;
+    thresholds.minimum_local_triangle_quality_ratio = 0.90;
+    const auto gate = prl::cell_engine::evaluate_mean_radius_time_floor(
+        runs,
+        thresholds
+    );
+    require(gate.trajectories_passed
+                && gate.time_levels_passed
+                && gate.richardson_cross_mesh_passed
+                && gate.readonly_controls_passed
+                && gate.passed,
+            "v07 synthetic first-order time-floor tracer failed");
+    for(const auto& level : gate.levels) {
+        require(!level.common_roundoff_plateau
+                    && level.differences_strictly_decreased
+                    && level.time_orders_passed
+                    && level.richardson_passed,
+                "v07 synthetic level gate is incomplete");
+    }
+    return 0;
+}
+
+int v07_family_c_mean_radius_time_floor_passes_frozen_gate() {
+    constexpr std::array<std::size_t, 2> source_levels{1, 4};
+    constexpr std::array<double, 4> time_steps{
+        4.0e-4, 2.0e-4, 1.0e-4, 5.0e-5
+    };
+    constexpr std::array<std::size_t, 4> step_counts{50, 100, 200, 400};
+    std::array<
+        std::array<prl::cell_engine::FamilyCSmoothSphereTrajectoryAudit, 4>,
+        2
+    > runs;
+    for(std::size_t level = 0; level < source_levels.size(); ++level) {
+        for(std::size_t time_index = 0;
+            time_index < time_steps.size();
+            ++time_index) {
+            auto current_cell = surface_tension_cell(
+                quality_controlled_spd_mapped_icosphere_mesh(source_levels[level]),
+                static_cast<unsigned>(601 + 10 * level + time_index)
+            );
+            runs[level][time_index]
+                = prl::cell_engine::run_family_c_smooth_sphere_trajectory(
+                    *current_cell,
+                    {
+                        time_steps[time_index],
+                        step_counts[time_index],
+                        0.02,
+                        {
+                            prl::cell_engine::CellSurfaceDampingMeasure::barycentric_dual_area,
+                            10.0,
+                        },
+                        1.0,
+                    }
+                );
+        }
+    }
+    prl::cell_engine::MeanRadiusTimeFloorThresholds thresholds;
+    thresholds.minimum_time_order = 0.75;
+    thresholds.maximum_time_order = 1.25;
+    thresholds.common_raw_roundoff_plateau = 1.0e-13;
+    thresholds.maximum_richardson_error = 1.0e-10;
+    thresholds.maximum_cross_mesh_richardson_difference = 1.0e-10;
+    thresholds.minimum_triangle_quality = 0.05;
+    thresholds.minimum_face_area_ratio = 1.0e-4;
+    thresholds.maximum_normalized_cache_residual = 1.0e-12;
+    thresholds.maximum_normalized_centroid_drift = 1.0e-2;
+    thresholds.maximum_normalized_positive_energy_residual = 1.0e-3;
+    thresholds.maximum_local_excursion_normalized_error = 0.25;
+    thresholds.maximum_local_edge_scaling_error = 5.0e-4;
+    thresholds.maximum_local_radial_error_over_initial_h = 5.0e-4;
+    thresholds.minimum_local_triangle_quality_ratio = 0.90;
+    const auto gate = prl::cell_engine::evaluate_mean_radius_time_floor(
+        runs,
+        thresholds
+    );
+
+    for(std::size_t level = 0; level < runs.size(); ++level) {
+        for(std::size_t time_index = 0;
+            time_index < runs[level].size();
+            ++time_index) {
+            const auto& audit = runs[level][time_index];
+            for(const auto& sample : audit.samples) {
+                std::cerr << std::setprecision(17)
+                          << "v07_step,C"
+                          << ',' << source_levels[level]
+                          << ',' << audit.configuration.time_step
+                          << ',' << sample.global.step
+                          << ',' << sample.global.time
+                          << ',' << audit.initial_rms_edge_length
+                          << ',' << sample.exact_radius
+                          << ',' << sample.control_area_mean_radius
+                          << ',' << sample.control_area_mean_radius_ratio
+                          << ',' << sample.global.area_ratio
+                          << ',' << sample.global.volume_ratio
+                          << ',' << sample.global.energy_ratio
+                          << ',' << sample.global.normalized_surface_centroid_drift
+                          << ',' << sample.global.minimum_oriented_face_alignment
+                          << ',' << sample.global.minimum_triangle_quality
+                          << ',' << sample.global.minimum_face_area_ratio
+                          << ',' << sample.global.maximum_normalized_cache_residual
+                          << '\n';
+                std::cerr << std::setprecision(17)
+                          << "v07_local,C"
+                          << ',' << source_levels[level]
+                          << ',' << audit.configuration.time_step
+                          << ',' << sample.global.step
+                          << ',' << sample.global.time
+                          << ',' << sample.maximum_valence_five_excursion_error
+                          << ',' << sample.rms_valence_five_radial_error
+                          << ',' << sample.maximum_closed_one_ring_excursion_error
+                          << ',' << sample.rms_closed_one_ring_radial_error
+                          << ',' << sample.maximum_valence_five_error_over_initial_h
+                          << ',' << sample.maximum_closed_one_ring_error_over_initial_h
+                          << ',' << sample.maximum_closed_one_ring_edge_scaling_error
+                          << ',' << sample.local_minimum_triangle_quality
+                          << ',' << sample.local_minimum_triangle_quality_ratio
+                          << ',' << sample.valence_five_normal_error_energy_fraction
+                          << ',' << sample.valence_five_normal_error_relative_rms
+                          << ',' << sample.valence_five_normal_error_pointwise_maximum
+                          << ',' << sample.closed_one_ring_normal_error_energy_fraction
+                          << ',' << sample.closed_one_ring_normal_error_relative_rms
+                          << ',' << sample.closed_one_ring_normal_error_pointwise_maximum
+                          << ',' << sample.force_buffers_cleared
+                          << '\n';
+                std::cerr << std::setprecision(17)
+                          << "v07_energy,C"
+                          << ',' << source_levels[level]
+                          << ',' << audit.configuration.time_step
+                          << ',' << sample.global.step
+                          << ',' << sample.global.time
+                          << ',' << sample.global.registered_surface_energy
+                          << ',' << sample.global.viscous_dissipation
+                          << ',' << sample.global.energy_balance_residual
+                          << '\n';
+            }
+        }
+    }
+    for(std::size_t level = 0; level < gate.levels.size(); ++level) {
+        const auto& current = gate.levels[level];
+        std::cerr << std::setprecision(17)
+                  << "v07_time_level,C"
+                  << ',' << source_levels[level]
+                  << ',' << current.initial_rms_edge_length
+                  << ',' << current.exact_mean_radius_response;
+        for(const double value : current.mean_radius_responses) {
+            std::cerr << ',' << value;
+        }
+        for(const double value : current.adjacent_time_differences) {
+            std::cerr << ',' << value;
+        }
+        for(const double value : current.observed_time_orders) {
+            std::cerr << ',' << value;
+        }
+        std::cerr << ',' << current.richardson_response
+                  << ',' << current.richardson_error;
+        for(const double value : current.final_area_ratios) {
+            std::cerr << ',' << value;
+        }
+        for(const double value : current.final_volume_ratios) {
+            std::cerr << ',' << value;
+        }
+        for(const double value : current.final_registered_energy_ratios) {
+            std::cerr << ',' << value;
+        }
+        std::cerr << ",plateau," << current.common_roundoff_plateau
+                  << ",strict," << current.differences_strictly_decreased
+                  << ",orders," << current.time_orders_passed
+                  << ",richardson," << current.richardson_passed
+                  << ",min_alignment," << current.minimum_oriented_face_alignment
+                  << ",min_q," << current.minimum_triangle_quality
+                  << ",min_face_ratio," << current.minimum_face_area_ratio
+                  << ",max_cache," << current.maximum_normalized_cache_residual
+                  << ",max_centroid," << current.maximum_normalized_centroid_drift
+                  << ",max_energy," << current.maximum_normalized_positive_energy_residual
+                  << ",max_v5_excursion," << current.maximum_valence_five_excursion_error
+                  << ",max_ring_excursion," << current.maximum_closed_one_ring_excursion_error
+                  << ",max_v5_h," << current.maximum_valence_five_error_over_initial_h
+                  << ",max_ring_h," << current.maximum_closed_one_ring_error_over_initial_h
+                  << ",max_edge," << current.maximum_closed_one_ring_edge_scaling_error
+                  << ",min_local_q_ratio," << current.minimum_local_triangle_quality_ratio
+                  << ",buffers," << current.force_buffers_cleared
+                  << ",controls," << current.readonly_controls_passed
+                  << ",passed," << current.passed
+                  << '\n';
+    }
+    std::cerr << std::setprecision(17)
+              << "v07_time_gate,C"
+              << ",exact," << gate.exact_mean_radius_response
+              << ",trajectories," << gate.trajectories_passed
+              << ",time_levels," << gate.time_levels_passed
+              << ",cross_difference," << gate.cross_mesh_richardson_difference
+              << ",cross_passed," << gate.richardson_cross_mesh_passed
+              << ",controls," << gate.readonly_controls_passed
+              << ",passed," << gate.passed
+              << '\n';
+    require(gate.passed, "v07 Family C mean-radius time-floor frozen gate failed");
+    return 0;
+}
+
 } // namespace
 
 int main(const int argc, const char* const argv[]) {
@@ -1723,6 +2093,18 @@ int main(const int argc, const char* const argv[]) {
         }
         if(behavior == "v06_family_c_short_trajectory") {
             return v06_family_c_short_trajectory_passes_frozen_gate();
+        }
+        if(behavior == "v07_structural_identity_public_seam") {
+            return v07_mean_radius_structural_identity_public_seam_is_readonly();
+        }
+        if(behavior == "v07_four_level_structural_identity") {
+            return v07_four_level_structural_identities_pass_frozen_gate();
+        }
+        if(behavior == "v07_time_floor_public_gate") {
+            return v07_mean_radius_time_floor_public_gate_is_auditable();
+        }
+        if(behavior == "v07_family_c_time_floor") {
+            return v07_family_c_mean_radius_time_floor_passes_frozen_gate();
         }
         throw std::invalid_argument("unknown behavior: " + behavior);
     } catch(const std::exception& error) {

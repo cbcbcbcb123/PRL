@@ -1,0 +1,39 @@
+X1-K v07 frozen verification evidence
+date: 2026-08-03 Asia/Shanghai
+
+Parent C++
+- build: passed
+- CTest: 52/55 passed
+- expected frozen failures:
+  1. prl_x1k_sphere_instantaneous_velocity_refinement (v02 D1)
+  2. prl_x1k_v04_family_b_parameterized_diagnosis (v04 Family B)
+  3. prl_x1k_v06_family_c_short_trajectory_gate (v06 Family C)
+- unexpected failures: 0
+- v07 tests: 4/4 passed
+
+Controlled SimuCell3D fork
+- commit: e2ed64a26bb5d7c2d878772564fb5ffcca343c3a
+- upstream: e2ed64a26bb5d7c2d878772564fb5ffcca343c3a
+- tests: 134/134 passed
+- v07 fork modifications: none
+
+Strict owned build
+- target: prl_core
+- flags verified in generated flags.make: -Wall -Wextra -Wpedantic -Werror
+- result: passed
+
+Python and export
+- PYTHONPATH: src
+- pytest: 63/63 passed
+- scripts/export_x1k_v07_diagnosis.py Ruff: passed
+- exporter checks: 4 structural rows, 1508 matched global/local/energy
+  keys, exact 2 x 4 run/step matrix, and recomputed energy ledger passed
+
+History and protected user content
+- v01-v06 tracked result packages: no differences from b66a437
+- Route H Gate A v01 remains failed_invalid_numerics
+- v06 remains failed_family_c_smooth_short_trajectory_analytic_radius_nonmonotonic
+- figures/: remains untracked
+- scripts/build_efe_nature_figure_plan_docx.py: remains untracked
+- scripts/insert_efe_figure_mockups_docx.py: remains untracked
+- none of the three protected items were added to the v07 package

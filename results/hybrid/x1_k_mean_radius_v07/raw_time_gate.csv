@@ -1,0 +1,8 @@
+criterion,observed
+exact,0.99991999679974397
+trajectories,1
+time_levels,1
+cross_difference,7.5994766035591965e-12
+cross_passed,1
+controls,1
+passed,1

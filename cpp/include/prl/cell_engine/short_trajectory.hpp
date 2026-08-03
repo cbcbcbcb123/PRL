@@ -292,6 +292,68 @@ struct FamilyCSmoothSphereGateAudit {
     bool passed{};
 };
 
+struct MeanRadiusTimeFloorThresholds {
+    double minimum_time_order{};
+    double maximum_time_order{};
+    double common_raw_roundoff_plateau{};
+    double maximum_richardson_error{};
+    double maximum_cross_mesh_richardson_difference{};
+    double minimum_triangle_quality{};
+    double minimum_face_area_ratio{};
+    double maximum_normalized_cache_residual{};
+    double maximum_normalized_centroid_drift{};
+    double maximum_normalized_positive_energy_residual{};
+    double maximum_local_excursion_normalized_error{};
+    double maximum_local_edge_scaling_error{};
+    double maximum_local_radial_error_over_initial_h{};
+    double minimum_local_triangle_quality_ratio{};
+};
+
+struct MeanRadiusTimeFloorLevelAudit {
+    double initial_rms_edge_length{};
+    std::array<double, 4> time_steps{};
+    std::array<std::size_t, 4> step_counts{};
+    std::array<double, 4> mean_radius_responses{};
+    std::array<double, 4> final_area_ratios{};
+    std::array<double, 4> final_volume_ratios{};
+    std::array<double, 4> final_registered_energy_ratios{};
+    std::array<double, 3> adjacent_time_differences{};
+    std::array<double, 2> observed_time_orders{};
+    double exact_mean_radius_response{};
+    double richardson_response{};
+    double richardson_error{};
+    double minimum_oriented_face_alignment{1.0};
+    double minimum_triangle_quality{1.0};
+    double minimum_face_area_ratio{1.0};
+    double maximum_normalized_cache_residual{};
+    double maximum_normalized_centroid_drift{};
+    double maximum_normalized_positive_energy_residual{};
+    double maximum_valence_five_excursion_error{};
+    double maximum_closed_one_ring_excursion_error{};
+    double maximum_valence_five_error_over_initial_h{};
+    double maximum_closed_one_ring_error_over_initial_h{};
+    double maximum_closed_one_ring_edge_scaling_error{};
+    double minimum_local_triangle_quality_ratio{1.0};
+    bool common_roundoff_plateau{};
+    bool differences_strictly_decreased{};
+    bool time_orders_passed{};
+    bool richardson_passed{};
+    bool readonly_controls_passed{};
+    bool force_buffers_cleared{};
+    bool passed{};
+};
+
+struct MeanRadiusTimeFloorGateAudit {
+    double exact_mean_radius_response{};
+    std::array<MeanRadiusTimeFloorLevelAudit, 2> levels{};
+    double cross_mesh_richardson_difference{};
+    bool trajectories_passed{};
+    bool time_levels_passed{};
+    bool richardson_cross_mesh_passed{};
+    bool readonly_controls_passed{};
+    bool passed{};
+};
+
 struct SurfaceTensionSpatialRefinementThresholds {
     double maximum_base_fine_normalized_error{};
     double minimum_observed_order{};
@@ -382,6 +444,30 @@ struct SphericalSurfaceTensionInstantaneousAudit {
     std::vector<SphericalValenceDistributionDiagnostic> valence_distributions{};
     std::vector<SphericalSymmetryClassDistributionDiagnostic>
         symmetry_class_distributions{};
+};
+
+struct SphericalMeanRadiusStructuralIdentityAudit {
+    std::size_t vertex_count{};
+    std::size_t face_count{};
+    double rms_edge_length{};
+    double surface_area{};
+    double dual_area_sum{};
+    double dual_area_to_surface_area_ratio{};
+    double homogeneity_force_contraction{};
+    double exact_homogeneity_force_contraction{};
+    double normalized_homogeneity_residual{};
+    double mean_radial_velocity{};
+    double exact_mean_radial_velocity{};
+    double normalized_mean_radial_velocity_residual{};
+    double normalized_net_force_residual{};
+    double maximum_relative_radius_deviation{};
+    double maximum_position_displacement{};
+    double maximum_force_buffer_norm_after{};
+    std::uint64_t position_hash_before{};
+    std::uint64_t position_hash_after{};
+    std::uint64_t state_hash_before{};
+    std::uint64_t state_hash_after{};
+    bool force_buffers_cleared{};
 };
 
 struct SphericalNormalErrorRegionDiagnostic {
@@ -530,6 +616,14 @@ evaluate_family_c_smooth_sphere_gate(
     const FamilyCSmoothSphereGateThresholds& thresholds
 );
 
+[[nodiscard]] MeanRadiusTimeFloorGateAudit evaluate_mean_radius_time_floor(
+    const std::array<
+        std::array<FamilyCSmoothSphereTrajectoryAudit, 4>,
+        2
+    >& runs,
+    const MeanRadiusTimeFloorThresholds& thresholds
+);
+
 [[nodiscard]] SurfaceTensionSpatialRefinementGateAudit
 evaluate_surface_tension_spatial_refinement(
     const SurfaceTensionShortTrajectoryAudit& coarse,
@@ -545,6 +639,15 @@ audit_spherical_surface_tension_instantaneous(
     double surface_tension,
     double damping_per_area,
     double directional_step_per_rms_edge
+);
+
+/** Audit the initial equal-radius Euler/mean-radius identities without motion. */
+[[nodiscard]] SphericalMeanRadiusStructuralIdentityAudit
+audit_spherical_mean_radius_structural_identity(
+    ::cell& target,
+    double surface_tension,
+    double damping_per_area,
+    double reference_radius
 );
 
 [[nodiscard]] SphericalDirectionalDerivativeRefinementAudit

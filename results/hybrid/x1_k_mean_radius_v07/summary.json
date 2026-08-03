@@ -1,0 +1,222 @@
+{
+  "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V07-DIAGNOSIS",
+  "contract_commit": "668465c9f554850d0624eef474c49b8514c21cce",
+  "result_package_commit": null,
+  "status": "passed_structural_mean_radius_identity_and_time_floor_diagnosis",
+  "x1_k_passed": false,
+  "downstream_authorized": false,
+  "structural_identity": {
+    "source_levels": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "maximum_homogeneity_residual": 4.201685312125912e-15,
+    "maximum_mean_velocity_residual": 1.734723475976807e-15,
+    "maximum_dual_area_closure_residual": 4.218847493575595e-15,
+    "maximum_net_force_residual": 3.328259002865581e-16,
+    "maximum_radius_inconsistency": 3.3306690738754696e-16,
+    "maximum_position_displacement": 0.0,
+    "force_buffers_cleared": true,
+    "position_and_state_hashes_unchanged": true,
+    "claim_scope": "initial equal-radius sphere only; Euler uniform-scaling identity, not a full gradient or full-trajectory identity"
+  },
+  "time_floor_diagnosis": {
+    "source_levels": [
+      1,
+      4
+    ],
+    "time_steps": [
+      0.0004,
+      0.0002,
+      0.0001,
+      5e-05
+    ],
+    "step_counts": [
+      50,
+      100,
+      200,
+      400
+    ],
+    "final_time": 0.02,
+    "exact_mean_radius_response": 0.999919996799744,
+    "levels": {
+      "1": {
+        "initial_h_rms": 0.5846465833622684,
+        "responses": [
+          0.9999199968563438,
+          0.9999199968241776,
+          0.9999199968080957,
+          0.9999199968000538
+        ],
+        "adjacent_time_differences": [
+          3.216615862555727e-11,
+          1.608191357860278e-11,
+          8.041900478872321e-12
+        ],
+        "observed_time_orders": [
+          1.0001045732496145,
+          0.9998306947275621
+        ],
+        "richardson_response": 0.9999199967920119,
+        "richardson_error": 7.73203723269944e-12,
+        "roundoff_plateau": false,
+        "readonly_controls_passed": true,
+        "passed": true
+      },
+      "4": {
+        "initial_h_rms": 0.0758752187252943,
+        "responses": [
+          0.9999199968636283,
+          0.9999199968316186,
+          0.9999199968156173,
+          0.9999199968076143
+        ],
+        "adjacent_time_differences": [
+          3.200972820138759e-11,
+          1.6001311387014994e-11,
+          8.002931650707978e-12
+        ],
+        "observed_time_orders": [
+          1.000320280842622,
+          0.9995896529799322
+        ],
+        "richardson_response": 0.9999199967996114,
+        "richardson_error": 1.325606291402437e-13,
+        "roundoff_plateau": false,
+        "readonly_controls_passed": true,
+        "passed": true
+      }
+    },
+    "cross_mesh_richardson_difference": 7.599476603559197e-12,
+    "passed": true
+  },
+  "frozen_model": {
+    "family": "C",
+    "M_C": [
+      [
+        1.0,
+        0.05,
+        0.025
+      ],
+      [
+        0.05,
+        1.05,
+        0.04
+      ],
+      [
+        0.025,
+        0.04,
+        0.95
+      ]
+    ],
+    "reference_radius": 1.0,
+    "surface_tension": 0.02,
+    "damping_per_area": 10.0,
+    "damping_measure": "barycentric_dual_area",
+    "topology": "fixed"
+  },
+  "coverage": {
+    "energy": "surface_tension_only",
+    "registered": [
+      "gamma*A",
+      "D_zeta"
+    ],
+    "excluded": [
+      "legacy_0.5_gamma_A_cache",
+      "membrane_elasticity",
+      "bending",
+      "pressure",
+      "contact",
+      "active",
+      "ECM",
+      "flow"
+    ]
+  },
+  "preserved_history": {
+    "v02_D1": "failed_instantaneous_smooth_surface_refinement",
+    "v04_Family_B": "failed_family_B_parameterized_diagnosis",
+    "v05": "passed_quality_controlled_symmetry_broken_global_L2_diagnosis",
+    "v06": {
+      "status": "failed_family_c_smooth_short_trajectory_analytic_radius_nonmonotonic",
+      "mean_radius_errors": [
+        1.0439287051472873e-07,
+        1.6965749578041943e-07,
+        1.931183453395129e-07,
+        1.984083464348854e-07
+      ],
+      "observed_spatial_orders": [
+        -0.7305866503451734,
+        -0.1888361880551532,
+        -0.03909027092934956
+      ],
+      "rejudged_by_v07": false
+    },
+    "route_h_gate_a_v01": "failed_invalid_numerics"
+  },
+  "verification": {
+    "parent_cpp": {
+      "passed": 52,
+      "total": 55,
+      "expected_frozen_failures": [
+        "prl_x1k_sphere_instantaneous_velocity_refinement",
+        "prl_x1k_v04_family_b_parameterized_diagnosis",
+        "prl_x1k_v06_family_c_short_trajectory_gate"
+      ],
+      "unexpected_failures": 0,
+      "v07_passed": 4,
+      "v07_total": 4
+    },
+    "controlled_fork": {
+      "passed": 134,
+      "total": 134
+    },
+    "owned_prl_core_strict_build": {
+      "status": "passed",
+      "flags": "-Wall -Wextra -Wpedantic -Werror"
+    },
+    "python_pytest": {
+      "passed": 63,
+      "total": 63
+    },
+    "python_ruff": "passed",
+    "exporter": {
+      "structural_rows": 4,
+      "global_rows": 1508,
+      "local_rows": 1508,
+      "energy_rows": 1508,
+      "energy_ledger_recomputed": true
+    }
+  },
+  "not_executed": [
+    "R1_remesh_on",
+    "C1_contact",
+    "F1_failure_persistence",
+    "ECM_flow_long_coupling",
+    "parameter_calibration"
+  ],
+  "claim_guard": "v07 supports only the frozen initial structural identity and bounded two-mesh time-floor diagnosis. X1-K remains failed; long-time stability, physiology, cell-ECM/FSI, EFE, calibration, and developmental-mechanism claims are not allowed.",
+  "structural_levels": {
+    "1": {
+      "h_rms": 0.5846465833622684,
+      "homogeneity_residual": 3.573353188610301e-16,
+      "mean_velocity_residual": 0.0
+    },
+    "2": {
+      "h_rms": 0.3007587447307266,
+      "homogeneity_residual": 7.881665680180794e-16,
+      "mean_velocity_residual": 2.1684043449710089e-16
+    },
+    "3": {
+      "h_rms": 0.1514741410305466,
+      "homogeneity_residual": 1.9975511246778127e-15,
+      "mean_velocity_residual": 1.3010426069826053e-15
+    },
+    "4": {
+      "h_rms": 0.0758752187252943,
+      "homogeneity_residual": 4.201685312125912e-15,
+      "mean_velocity_residual": 1.734723475976807e-15
+    }
+  }
+}

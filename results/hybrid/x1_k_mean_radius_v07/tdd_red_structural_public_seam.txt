@@ -1,0 +1,25 @@
+X1-K v07 TDD RED 1 — public read-only structural identity seam
+date: 2026-08-03 Asia/Shanghai
+
+Behavior written first:
+- public test: v07_mean_radius_structural_identity_public_seam_is_readonly
+- CTest: prl_x1k_v07_structural_identity_public_seam
+- required a public audit that obtains the real surface-tension force, computes
+  the two frozen identities, preserves positions/state, and clears force buffers.
+
+RED command:
+docker run --rm --entrypoint sh -v "${PWD}:/workspace" -w /workspace prl-simucell3d-x0:38af451 -lc "cmake --build cpp/build-linux-x1h --target prl_short_trajectory_integration_test -j2"
+
+Observed RED:
+cpp/tests/short_trajectory_integration_test.cpp failed to compile because
+prl::cell_engine::audit_spherical_mean_radius_structural_identity was not a
+member of prl::cell_engine. No v07 numerical response had been generated.
+
+Minimal GREEN:
+- added SphericalMeanRadiusStructuralIdentityAudit and the public audit seam;
+- added an independent position hash and read-only force-buffer lifecycle;
+- did not modify the force, damping, owned advance, fork, or registered owner.
+
+GREEN evidence:
+- prl_x1k_v07_structural_identity_public_seam: passed
+- prl_x1k_v07_four_level_structural_identity_gate: passed
