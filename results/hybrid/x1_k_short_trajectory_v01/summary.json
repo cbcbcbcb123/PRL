@@ -1,0 +1,104 @@
+{
+  "audit_id": "PRL-HYBRID-X1-K-SHORT-TRAJECTORY-V01",
+  "status": "failed_spatial_refinement_nonconvergent_area_energy",
+  "date": "2026-08-03",
+  "acceptance_contract": {
+    "id": "CONTRACT-PRL-HYBRID-X1-K-V01",
+    "commit": "1241d80",
+    "frozen_before_results": true,
+    "thresholds_changed_after_results": false,
+    "adaptive_retry_used": false
+  },
+  "governed_by": "CONSTRAINT-PRL-EXTERNAL-SCIENTIFIC-REVIEW-V01",
+  "parent_branch": "codex/simucell3d-hybrid-feasibility",
+  "cell_engine": {
+    "repository": "https://github.com/cbcbcbcb123/prl-cell-engine",
+    "branch": "codex/cell-engine-integration-seam",
+    "commit": "2d4b2183f5966c2afe3f4234471e727fe5f9e68d",
+    "changed_in_stage": false
+  },
+  "x1j_hardening": {
+    "split_merge_nontrivial_gate": "passed",
+    "initial_active_energy_threshold": 0.01,
+    "signed_inter_event_sum_semantics": "signed_telescoping_term_only",
+    "absolute_inter_event_accumulator_added": true,
+    "maximum_per_event_inter_event_metric_added": true,
+    "cancellation_fixture": "signed sum cancelled but absolute and max gates rejected"
+  },
+  "T1_time_refinement": {
+    "status": "passed",
+    "time_steps": [0.0025, 0.00125, 0.000625],
+    "step_counts": [8, 16, 32],
+    "final_time": 0.02,
+    "damping": "barycentric_dual_area",
+    "energy_coverage": "active_contraction_only",
+    "state_errors": [1.6332467973203779e-8, 8.163705749752318e-9],
+    "observed_orders": {
+      "state": 1.0004467223827034,
+      "axis_length": 1.0004466394371907,
+      "contraction": 1.0004466394354372,
+      "area_ratio": 1.000446737190632,
+      "volume_ratio": 1.0004466742744309,
+      "registered_active_energy": 1.0004457665779467
+    },
+    "normalized_positive_energy_residuals": [
+      3.2857097751376663e-6,
+      1.6423405646888264e-6,
+      8.210417602639492e-7
+    ]
+  },
+  "S1_spatial_refinement": {
+    "status": "failed",
+    "geometry": "geometrically equivalent midpoint-refined unit cube surface",
+    "vertices": [8, 26, 98],
+    "triangles": [12, 48, 192],
+    "surface_tension": 0.02,
+    "damping_per_area": 10.0,
+    "time_step": 0.0001,
+    "final_time": 0.002,
+    "energy_coverage": "surface_tension_only_Psi_equals_gamma_A",
+    "final_area_ratios": [
+      0.9999780000079998,
+      0.9999620002519274,
+      0.9999300020317471
+    ],
+    "final_volume_ratios": [
+      0.9999680001650004,
+      0.9999599998948097,
+      0.9999559983304835
+    ],
+    "area_errors": [1.599975607236015e-5, 3.1998220180295966e-5],
+    "area_observed_order": -0.9999417507277046,
+    "volume_errors": [8.000270190766656e-6, 4.001564326117091e-6],
+    "volume_observed_order": 0.9994846234517949,
+    "registered_energy_observed_order": -0.9999417507277046,
+    "normalized_positive_energy_residuals": [
+      6.099743967376479e-12,
+      2.51995787805336e-11,
+      1.5200192547477984e-10
+    ],
+    "minimum_triangle_quality": 0.8659976853395835,
+    "minimum_oriented_face_alignment": 0.9999999959038804,
+    "minimum_face_area_ratio": 0.9998080038662113,
+    "maximum_normalized_cache_residual": 2.482534153247273e-16,
+    "failed_criteria": [
+      "area_ratio_monotonic_self_convergence_and_order",
+      "registered_surface_energy_ratio_monotonic_self_convergence_and_order"
+    ]
+  },
+  "not_executed": {
+    "R1_remesh_on_robustness": "not_executed_due_to_prior_hard_gate_failure",
+    "C1_contact": "not_executed_due_to_prior_hard_gate_failure",
+    "F1_failure_persistence": "not_executed_due_to_prior_hard_gate_failure"
+  },
+  "tests": {
+    "parent_cpp_ctest": "38/39 passed; S1 hard gate failed and persisted",
+    "owned_parent_cpp_werror": "14/14 passed",
+    "parent_python_pytest": "63/63 passed",
+    "tracked_python_ruff": "all checks passed",
+    "s1_raw_timeseries": "63 rows; coarse/base/fine each contain 21 rows",
+    "route_h_gate_a_v01": "unchanged failed_invalid_numerics"
+  },
+  "diagnostic_inference": "For the nonsmooth cube, area-gradient surface-tension forces concentrate on one-dimensional edges. Under midpoint refinement, edge nodal forces scale approximately with h while barycentric-dual-area damping scales with h^2, producing an approximately 1/h edge velocity and the observed negative-first-order area/energy behavior. This is an inference from the implementation and frozen results, not a validated replacement discretization.",
+  "claim_guard": "X1-K did not pass. T1 verifies short-time first-order temporal self-convergence only for the frozen active-only case. S1 fails area and registered-surface-energy spatial self-convergence. No claim of complete short-trajectory validity, long-time stability, physiology, complete cell-ECM/FSI coupling, EFE bistability or memory, developmental mechanism, parameter calibration, or recovery of Route H Gate A v01 is allowed."
+}

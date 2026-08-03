@@ -17,6 +17,7 @@ add_library(
         src/active_myocardial_mechanics.cpp
         src/myocardial_material_transfer.cpp
         src/owned_active_overdamped_step.cpp
+        src/short_trajectory.cpp
 )
 target_compile_features(prl_core PUBLIC cxx_std_17)
 target_link_libraries(prl_core PUBLIC Threads::Threads)
@@ -160,6 +161,11 @@ if(BUILD_TESTING)
             COMMAND prl_cell_engine_material_transfer_integration_test
                 real_swap_cycle_gate
         )
+        add_test(
+            NAME prl_cell_engine_interleaved_remesh_energy_no_cancellation
+            COMMAND prl_cell_engine_material_transfer_integration_test
+                interleaved_energy_no_cancellation
+        )
 
         add_executable(
             prl_cell_engine_active_force_assembly_integration_test
@@ -234,6 +240,35 @@ if(BUILD_TESTING)
             NAME prl_cell_engine_owned_dual_area_damping
             COMMAND prl_cell_engine_owned_step_integration_test
                 dual_area_owned_step
+        )
+
+        add_executable(
+            prl_short_trajectory_integration_test
+            tests/short_trajectory_integration_test.cpp
+        )
+        target_link_libraries(
+            prl_short_trajectory_integration_test
+            PRIVATE
+                prl_core
+                triangulation_modules
+                mesh
+        )
+        add_test(
+            NAME prl_x1k_active_fixed_topology_trajectory
+            COMMAND prl_short_trajectory_integration_test active_fixed_topology
+        )
+        add_test(
+            NAME prl_x1k_active_time_refinement_gate
+            COMMAND prl_short_trajectory_integration_test active_time_refinement
+        )
+        add_test(
+            NAME prl_x1k_surface_tension_trajectory
+            COMMAND prl_short_trajectory_integration_test surface_tension_trajectory
+        )
+        add_test(
+            NAME prl_x1k_surface_tension_spatial_refinement_gate
+            COMMAND prl_short_trajectory_integration_test
+                surface_tension_spatial_refinement
         )
 
         add_executable(

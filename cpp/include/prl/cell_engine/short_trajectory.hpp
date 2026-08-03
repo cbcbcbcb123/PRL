@@ -1,0 +1,219 @@
+#pragma once
+
+#include "prl/cell_engine/active_overdamped_step.hpp"
+
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <optional>
+#include <string>
+#include <vector>
+
+class cell;
+
+namespace prl::cell_engine {
+
+enum class ShortTrajectoryStatus : std::uint8_t {
+    passed,
+    failed_invalid_configuration,
+    failed_non_finite_state,
+    failed_degenerate_or_flipped_surface,
+    failed_penetration_limit,
+    failed_energy_gate,
+    failed_refinement_gate,
+    failed_step_exception,
+};
+
+[[nodiscard]] const char* short_trajectory_status_name(
+    ShortTrajectoryStatus status
+) noexcept;
+
+struct ActiveShortTrajectoryConfig {
+    double time_step{};
+    std::size_t step_count{};
+    core::ActiveContractionUnitId qoi_contraction_unit_id{};
+    CellSurfaceDampingLaw damping{};
+};
+
+struct ShortTrajectoryFailure {
+    ShortTrajectoryStatus status{ShortTrajectoryStatus::failed_step_exception};
+    std::size_t first_failure_step{};
+    double time_before_failure{};
+    std::string reason{};
+    std::uint64_t configuration_hash{};
+    std::uint64_t state_hash_before{};
+    std::uint64_t state_hash_after{};
+    bool atomic_state_preserved{};
+};
+
+struct TrajectoryVertexPosition {
+    core::VertexId vertex_id{};
+    std::array<double, 3> position{};
+};
+
+struct ActiveShortTrajectorySample {
+    std::size_t step{};
+    double time{};
+    double axis_length{};
+    double contraction{};
+    double surface_area{};
+    double area_ratio{};
+    double volume{};
+    double volume_ratio{};
+    std::array<double, 3> surface_centroid{};
+    double normalized_surface_centroid_drift{};
+    double registered_active_energy{};
+    double active_control_work{};
+    double viscous_dissipation{};
+    double energy_balance_residual{};
+    double minimum_oriented_face_alignment{};
+    double minimum_triangle_quality{};
+    double minimum_face_area_ratio{};
+    double maximum_normalized_cache_residual{};
+    std::uint64_t state_hash{};
+};
+
+struct ActiveShortTrajectoryAudit {
+    ShortTrajectoryStatus status{ShortTrajectoryStatus::failed_step_exception};
+    ActiveShortTrajectoryConfig configuration{};
+    double characteristic_length{};
+    double initial_axis_length{};
+    double initial_registered_active_energy{};
+    double cumulative_positive_energy_balance_residual{};
+    double minimum_oriented_face_alignment{1.0};
+    double minimum_triangle_quality{1.0};
+    double minimum_face_area_ratio{1.0};
+    double maximum_normalized_cache_residual{};
+    std::vector<ActiveShortTrajectorySample> samples{};
+    std::vector<TrajectoryVertexPosition> final_positions{};
+    std::optional<ShortTrajectoryFailure> failure{};
+};
+
+struct ActiveTimeRefinementThresholds {
+    double maximum_medium_fine_normalized_error{};
+    double minimum_observed_order{};
+    double roundoff_plateau_threshold{};
+    double maximum_coarse_normalized_positive_energy_residual{};
+    double minimum_energy_residual_reduction{};
+};
+
+struct SelfConvergenceAudit {
+    double coarse_medium_normalized_error{};
+    double medium_fine_normalized_error{};
+    double observed_order{};
+    bool roundoff_plateau{};
+    bool monotonic{};
+    bool fine_error_passed{};
+    bool order_passed{};
+    bool passed{};
+};
+
+struct ActiveTimeRefinementGateAudit {
+    SelfConvergenceAudit state{};
+    SelfConvergenceAudit axis_length{};
+    SelfConvergenceAudit contraction{};
+    SelfConvergenceAudit area_ratio{};
+    SelfConvergenceAudit volume_ratio{};
+    SelfConvergenceAudit registered_active_energy{};
+    double coarse_normalized_positive_energy_residual{};
+    double medium_normalized_positive_energy_residual{};
+    double fine_normalized_positive_energy_residual{};
+    bool energy_residual_passed{};
+    bool passed{};
+};
+
+struct SurfaceTensionShortTrajectoryConfig {
+    double time_step{};
+    std::size_t step_count{};
+    double surface_tension{};
+    CellSurfaceDampingLaw damping{};
+};
+
+struct SurfaceTensionShortTrajectorySample {
+    std::size_t step{};
+    double time{};
+    double surface_area{};
+    double area_ratio{};
+    double volume{};
+    double volume_ratio{};
+    std::array<double, 3> surface_centroid{};
+    double normalized_surface_centroid_drift{};
+    double registered_surface_energy{};
+    double energy_ratio{};
+    double viscous_dissipation{};
+    double energy_balance_residual{};
+    double minimum_oriented_face_alignment{};
+    double minimum_triangle_quality{};
+    double minimum_face_area_ratio{};
+    double maximum_normalized_cache_residual{};
+};
+
+struct SurfaceTensionShortTrajectoryAudit {
+    ShortTrajectoryStatus status{ShortTrajectoryStatus::failed_step_exception};
+    SurfaceTensionShortTrajectoryConfig configuration{};
+    double characteristic_length{};
+    double initial_registered_surface_energy{};
+    double cumulative_positive_energy_balance_residual{};
+    double normalized_positive_energy_balance_residual{};
+    double minimum_oriented_face_alignment{1.0};
+    double minimum_triangle_quality{1.0};
+    double minimum_face_area_ratio{1.0};
+    double maximum_normalized_cache_residual{};
+    std::vector<SurfaceTensionShortTrajectorySample> samples{};
+    std::optional<ShortTrajectoryFailure> failure{};
+};
+
+struct SurfaceTensionSpatialRefinementThresholds {
+    double maximum_base_fine_normalized_error{};
+    double minimum_observed_order{};
+    double roundoff_plateau_threshold{};
+    double maximum_normalized_positive_energy_residual{};
+    double minimum_triangle_quality{};
+    double maximum_normalized_cache_residual{};
+};
+
+struct SurfaceTensionSpatialRefinementGateAudit {
+    SelfConvergenceAudit area_ratio{};
+    SelfConvergenceAudit volume_ratio{};
+    SelfConvergenceAudit registered_energy_ratio{};
+    SelfConvergenceAudit normalized_surface_centroid_drift{};
+    double minimum_oriented_face_alignment{};
+    double minimum_triangle_quality{};
+    double minimum_face_area_ratio{};
+    double maximum_normalized_cache_residual{};
+    bool energy_coverage_passed{};
+    bool surface_quality_passed{};
+    bool cache_consistency_passed{};
+    bool passed{};
+};
+
+/** Run a fixed-topology, active-only trajectory with no retry or step adaptation. */
+[[nodiscard]] ActiveShortTrajectoryAudit run_active_fixed_topology_short_trajectory(
+    ::cell& target,
+    const core::MyocardialCellMaterialState& material,
+    const std::vector<core::ActiveContractionUnit>& units,
+    const ActiveShortTrajectoryConfig& configuration
+);
+
+[[nodiscard]] ActiveTimeRefinementGateAudit evaluate_active_time_refinement(
+    const ActiveShortTrajectoryAudit& coarse,
+    const ActiveShortTrajectoryAudit& medium,
+    const ActiveShortTrajectoryAudit& fine,
+    const ActiveTimeRefinementThresholds& thresholds
+);
+
+[[nodiscard]] SurfaceTensionShortTrajectoryAudit
+run_surface_tension_fixed_topology_short_trajectory(
+    ::cell& target,
+    const SurfaceTensionShortTrajectoryConfig& configuration
+);
+
+[[nodiscard]] SurfaceTensionSpatialRefinementGateAudit
+evaluate_surface_tension_spatial_refinement(
+    const SurfaceTensionShortTrajectoryAudit& coarse,
+    const SurfaceTensionShortTrajectoryAudit& base,
+    const SurfaceTensionShortTrajectoryAudit& fine,
+    const SurfaceTensionSpatialRefinementThresholds& thresholds
+);
+
+} // namespace prl::cell_engine

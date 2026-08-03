@@ -530,6 +530,13 @@ void MyocardialMaterialTransferSink::on_remesh(
         pending_ledger->final_stored_energy = after_energy.audit.total_energy;
         pending_ledger->cumulative_inter_event_stored_energy_change
             += inter_event_change;
+        pending_ledger->cumulative_absolute_inter_event_stored_energy_change
+            += std::abs(inter_event_change);
+        pending_ledger->maximum_absolute_inter_event_stored_energy_change
+            = std::max(
+                pending_ledger->maximum_absolute_inter_event_stored_energy_change,
+                std::abs(inter_event_change)
+            );
         pending_ledger->cumulative_delta_psi_remesh += delta_psi_remesh;
         pending_ledger->cumulative_absolute_delta_psi_remesh
             += std::abs(delta_psi_remesh);
@@ -688,12 +695,15 @@ RemeshCycleGateAudit evaluate_remesh_cycle_gate(
     const RemeshEnergyLedgerAudit& ledger,
     const RemeshCycleGateThresholds& thresholds
 ) {
-    const std::array<double, 5> nonnegative_thresholds{
+    const std::array<double, 8> nonnegative_thresholds{
         thresholds.maximum_absolute_final_energy_drift,
         thresholds.maximum_cumulative_absolute_energy_defect,
         thresholds.maximum_absolute_inter_event_energy_change,
         thresholds.maximum_absolute_declared_remesh_work,
         thresholds.maximum_energy_telescoping_residual,
+        thresholds.maximum_rebind_error,
+        thresholds.maximum_cumulative_absolute_inter_event_energy_change,
+        thresholds.maximum_per_event_absolute_inter_event_energy_change,
     };
     if(!std::all_of(
             nonnegative_thresholds.begin(),
@@ -706,15 +716,18 @@ RemeshCycleGateAudit evaluate_remesh_cycle_gate(
        || thresholds.minimum_event_count == 0) {
         throw std::invalid_argument("remesh-cycle gate thresholds are invalid");
     }
-    const std::array<double, 8> audited_values{
+    const std::array<double, 11> audited_values{
         ledger.initial_stored_energy,
         ledger.final_stored_energy,
         ledger.cumulative_absolute_delta_psi_remesh,
         ledger.cumulative_inter_event_stored_energy_change,
+        ledger.cumulative_absolute_inter_event_stored_energy_change,
+        ledger.maximum_absolute_inter_event_stored_energy_change,
         ledger.cumulative_declared_remesh_work,
         ledger.cumulative_algorithmic_energy_defect,
         ledger.cumulative_absolute_algorithmic_energy_defect,
         ledger.energy_telescoping_residual,
+        ledger.maximum_rebind_error,
     };
     if(!std::all_of(
             audited_values.begin(),
@@ -723,8 +736,11 @@ RemeshCycleGateAudit evaluate_remesh_cycle_gate(
         )
        || !std::isfinite(ledger.minimum_initial_fiber_alignment)
        || ledger.cumulative_absolute_delta_psi_remesh < 0.0
+       || ledger.cumulative_absolute_inter_event_stored_energy_change < 0.0
+       || ledger.maximum_absolute_inter_event_stored_energy_change < 0.0
        || ledger.cumulative_absolute_algorithmic_energy_defect < 0.0
        || ledger.energy_telescoping_residual < 0.0
+       || ledger.maximum_rebind_error < 0.0
        || ledger.minimum_initial_fiber_alignment < 0.0
        || ledger.minimum_initial_fiber_alignment > 1.0) {
         throw std::invalid_argument("remesh-cycle gate ledger is non-finite");
@@ -743,19 +759,30 @@ RemeshCycleGateAudit evaluate_remesh_cycle_gate(
     result.inter_event_change_passed = std::abs(
         ledger.cumulative_inter_event_stored_energy_change
     ) <= thresholds.maximum_absolute_inter_event_energy_change;
+    result.absolute_inter_event_change_passed
+        = ledger.cumulative_absolute_inter_event_stored_energy_change
+        <= thresholds.maximum_cumulative_absolute_inter_event_energy_change;
+    result.maximum_inter_event_change_passed
+        = ledger.maximum_absolute_inter_event_stored_energy_change
+        <= thresholds.maximum_per_event_absolute_inter_event_energy_change;
     result.remesh_work_passed = std::abs(ledger.cumulative_declared_remesh_work)
         <= thresholds.maximum_absolute_declared_remesh_work;
     result.telescoping_passed = ledger.energy_telescoping_residual
         <= thresholds.maximum_energy_telescoping_residual;
     result.fiber_drift_passed = ledger.minimum_initial_fiber_alignment
         >= thresholds.minimum_initial_fiber_alignment;
+    result.rebind_passed = ledger.maximum_rebind_error
+        <= thresholds.maximum_rebind_error;
     result.passed = result.event_count_passed
         && result.energy_drift_passed
         && result.absolute_defect_passed
         && result.inter_event_change_passed
+        && result.absolute_inter_event_change_passed
+        && result.maximum_inter_event_change_passed
         && result.remesh_work_passed
         && result.telescoping_passed
-        && result.fiber_drift_passed;
+        && result.fiber_drift_passed
+        && result.rebind_passed;
     return result;
 }
 

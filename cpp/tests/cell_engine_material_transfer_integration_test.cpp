@@ -368,6 +368,8 @@ int real_split_and_merge_record_separate_energy_defects() {
         initial_material,
         {unit}
     ).audit.total_energy;
+    require(initial_energy > 1.0e-2,
+            "split/merge hardening case has trivial initial active energy");
     sink->begin_active_remesh_energy_ledger(initial_mesh, {unit});
     local_mesh_refiner refiner(0.1, 10.0, true, sink);
     edge_set edges_to_check;
@@ -429,6 +431,23 @@ int real_split_and_merge_record_separate_energy_defects() {
             "split/merge cumulative defect does not match the energy drift");
     require(ledger.energy_telescoping_residual <= tolerance,
             "split/merge energy ledger does not telescope");
+    RemeshCycleGateThresholds thresholds{
+        1.0e-12,
+        1.0e-12,
+        1.0e-12,
+        1.0e-12,
+        1.0e-12,
+        1.0 - 1.0e-12,
+    };
+    thresholds.minimum_event_count = 2;
+    thresholds.maximum_rebind_error = 1.0e-12;
+    const auto gate = evaluate_remesh_cycle_gate(ledger, thresholds);
+    require(gate.energy_drift_passed
+                && gate.absolute_defect_passed
+                && gate.fiber_drift_passed
+                && gate.rebind_passed
+                && gate.passed,
+            "real split/merge failed the nontrivial quantitative cycle gate");
     return 0;
 }
 
@@ -512,6 +531,87 @@ int repeated_real_swap_cycles_do_not_accumulate_remesh_defects() {
     return 0;
 }
 
+int interleaved_energy_changes_are_not_hidden_by_signed_cancellation() {
+    using namespace prl::core;
+    auto current_cell = closed_swap_cell();
+    auto sink = std::make_shared<MyocardialMaterialTransferSink>(tolerance);
+    sink->register_cell(
+        prl::cell_engine::capture_surface_snapshot(*current_cell),
+        myocardial_points(*current_cell)
+    );
+    const auto low_activation = c1_activation_protocol(1.5, 0.0, 0.1);
+    sink->update_active_state(
+        17,
+        101,
+        0,
+        {low_activation.activation, 0.0}
+    );
+    const auto initial_mesh = prl::cell_engine::capture_surface_snapshot(*current_cell);
+    const auto initial_material = sink->cell_state(17);
+    const auto unit = build_active_contraction_unit(
+        initial_mesh,
+        initial_material,
+        501,
+        101,
+        205,
+        101,
+        10.0,
+        0.9
+    );
+    sink->begin_active_remesh_energy_ledger(initial_mesh, {unit});
+    local_mesh_refiner refiner(0.1, 10.0, true, sink);
+
+    const auto forward_edge_1 = current_cell->get_edge_set().find(edge(0, 1));
+    require(forward_edge_1 != current_cell->get_edge_set().end(),
+            "first interleaved swap edge is missing");
+    refiner.swap_edge(const_cast<edge&>(*forward_edge_1), current_cell);
+
+    sink->update_active_state(17, 101, 1, {0.1, 0.0});
+    const auto reverse_edge = current_cell->get_edge_set().find(edge(2, 3));
+    require(reverse_edge != current_cell->get_edge_set().end(),
+            "interleaved reverse swap edge is missing");
+    refiner.swap_edge(const_cast<edge&>(*reverse_edge), current_cell);
+
+    sink->update_active_state(
+        17,
+        101,
+        2,
+        {low_activation.activation, 0.0}
+    );
+    const auto forward_edge_2 = current_cell->get_edge_set().find(edge(0, 1));
+    require(forward_edge_2 != current_cell->get_edge_set().end(),
+            "second interleaved swap edge is missing");
+    refiner.swap_edge(const_cast<edge&>(*forward_edge_2), current_cell);
+
+    const auto ledger = sink->remesh_energy_ledger(17);
+    require(std::abs(ledger.cumulative_inter_event_stored_energy_change)
+                <= 1.0e-12,
+            "interleaved signed energy changes did not cancel in the fixture");
+    require(ledger.cumulative_absolute_inter_event_stored_energy_change > 1.0e-2
+                && ledger.maximum_absolute_inter_event_stored_energy_change > 1.0e-2,
+            "interleaved absolute energy-change ledger hid cancellation");
+
+    RemeshCycleGateThresholds thresholds{
+        1.0e-12,
+        1.0e-12,
+        1.0e-12,
+        1.0e-12,
+        1.0e-12,
+        1.0 - 1.0e-12,
+    };
+    thresholds.minimum_event_count = 3;
+    thresholds.maximum_rebind_error = 1.0e-12;
+    thresholds.maximum_cumulative_absolute_inter_event_energy_change = 1.0e-12;
+    thresholds.maximum_per_event_absolute_inter_event_energy_change = 1.0e-12;
+    const auto gate = evaluate_remesh_cycle_gate(ledger, thresholds);
+    require(gate.inter_event_change_passed
+                && !gate.absolute_inter_event_change_passed
+                && !gate.maximum_inter_event_change_passed
+                && !gate.passed,
+            "signed cancellation incorrectly passed the no-interleaving gate");
+    return 0;
+}
+
 } // namespace
 
 int main(const int argc, const char* const argv[]) {
@@ -531,6 +631,9 @@ int main(const int argc, const char* const argv[]) {
     }
     if(behavior == "real_swap_cycle_gate") {
         return repeated_real_swap_cycles_do_not_accumulate_remesh_defects();
+    }
+    if(behavior == "interleaved_energy_no_cancellation") {
+        return interleaved_energy_changes_are_not_hidden_by_signed_cancellation();
     }
     return 1;
 }

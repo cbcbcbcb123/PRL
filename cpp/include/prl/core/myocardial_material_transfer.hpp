@@ -4,6 +4,7 @@
 
 #include <array>
 #include <cstdint>
+#include <limits>
 #include <memory>
 #include <vector>
 
@@ -69,6 +70,8 @@ struct RemeshEnergyLedgerAudit {
     double initial_stored_energy{};
     double final_stored_energy{};
     double cumulative_inter_event_stored_energy_change{};
+    double cumulative_absolute_inter_event_stored_energy_change{};
+    double maximum_absolute_inter_event_stored_energy_change{};
     double cumulative_delta_psi_remesh{};
     double cumulative_absolute_delta_psi_remesh{};
     double cumulative_declared_remesh_work{};
@@ -90,6 +93,13 @@ struct RemeshCycleGateThresholds {
     double maximum_energy_telescoping_residual{};
     double minimum_initial_fiber_alignment{};
     std::size_t minimum_event_count{1};
+    double maximum_rebind_error{std::numeric_limits<double>::max()};
+    double maximum_cumulative_absolute_inter_event_energy_change{
+        std::numeric_limits<double>::max()
+    };
+    double maximum_per_event_absolute_inter_event_energy_change{
+        std::numeric_limits<double>::max()
+    };
 };
 
 /** Independently visible decisions composing the remesh-cycle gate. */
@@ -98,9 +108,12 @@ struct RemeshCycleGateAudit {
     bool energy_drift_passed{};
     bool absolute_defect_passed{};
     bool inter_event_change_passed{};
+    bool absolute_inter_event_change_passed{};
+    bool maximum_inter_event_change_passed{};
     bool remesh_work_passed{};
     bool telescoping_passed{};
     bool fiber_drift_passed{};
+    bool rebind_passed{};
     bool passed{};
     double final_energy_drift{};
     double fiber_drift{};
