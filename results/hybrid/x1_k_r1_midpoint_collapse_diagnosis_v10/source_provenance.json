@@ -1,0 +1,79 @@
+{
+  "fork_commit": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+  "head": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+  "upstream": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+  "fork_clean": true,
+  "files": [
+    {
+      "source_commit": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+      "path": "include/triangulation_modules/local_mesh_refiner.hpp",
+      "object_type": "blob",
+      "source_blob_id": "ce22fb4bc0f60e0d847e17ba9bdfb684b9e15a91",
+      "current_blob_id": "ce22fb4bc0f60e0d847e17ba9bdfb684b9e15a91",
+      "sha256": "466413c46fc09f7101f87ee6a51dd1bfd7c791375cfb98d502478e936ad704c2",
+      "bytes": 4271,
+      "source_blob_verified": true,
+      "raw_worktree_bytes_equal": false,
+      "git_clean_filter_equivalent": true
+    },
+    {
+      "source_commit": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+      "path": "src/triangulation_modules/local_mesh_refiner.cpp",
+      "object_type": "blob",
+      "source_blob_id": "0a7ba89075a9ea4c1a12ae0d883509c8eec1b5dd",
+      "current_blob_id": "0a7ba89075a9ea4c1a12ae0d883509c8eec1b5dd",
+      "sha256": "fd52277c19cf5e303ba878d9ec5ea0b178130f2fc4180eccbaa7298e1f93d8e2",
+      "bytes": 27974,
+      "source_blob_verified": true,
+      "raw_worktree_bytes_equal": false,
+      "git_clean_filter_equivalent": true
+    },
+    {
+      "source_commit": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+      "path": "include/mesh/cell.hpp",
+      "object_type": "blob",
+      "source_blob_id": "d17d0283baf923d5b56d7338722150c25f2d2d2a",
+      "current_blob_id": "d17d0283baf923d5b56d7338722150c25f2d2d2a",
+      "sha256": "bd0baad333b912bd8c7081ad28be39c369eb6e83ebf41412149d670b682d2763",
+      "bytes": 21563,
+      "source_blob_verified": true,
+      "raw_worktree_bytes_equal": false,
+      "git_clean_filter_equivalent": true
+    },
+    {
+      "source_commit": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+      "path": "src/mesh/cell.cpp",
+      "object_type": "blob",
+      "source_blob_id": "a22406abd4bd84b0a21cdcb8ff18e447e52a55df",
+      "current_blob_id": "a22406abd4bd84b0a21cdcb8ff18e447e52a55df",
+      "sha256": "c62c1832ab862fbc778a96d8c04b4434e55d89945ec3e9c0fe18312dc34e7d7c",
+      "bytes": 81741,
+      "source_blob_verified": true,
+      "raw_worktree_bytes_equal": false,
+      "git_clean_filter_equivalent": true
+    },
+    {
+      "source_commit": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+      "path": "include/prl_cell_engine/remesh_contract.hpp",
+      "object_type": "blob",
+      "source_blob_id": "5b3791b006bda01852c1fe81597bd7dc12d36b94",
+      "current_blob_id": "5b3791b006bda01852c1fe81597bd7dc12d36b94",
+      "sha256": "d86749d44baa9f66cb906f70f6e90cd9e6bd0c065e499282b9191e43033efcdf",
+      "bytes": 2589,
+      "source_blob_verified": true,
+      "raw_worktree_bytes_equal": true,
+      "git_clean_filter_equivalent": true
+    }
+  ],
+  "public_signatures": [
+    "bool can_be_merged(edge& e_ab, cell_ptr c) const noexcept(false);",
+    "void split_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_check_set) const noexcept(false);",
+    "void merge_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_check_set) const noexcept(false);"
+  ],
+  "midpoint_statement_verified": true,
+  "both_endpoints_replaced_verified": true,
+  "public_header_identity_control_found": false,
+  "event_identity_control_found": false,
+  "source_capability_observation": "public merge is midpoint coarsening with no survivor, ancestor-inverse, or collapse-position parameter in the audited interfaces",
+  "classification_role": "supporting_not_adjudicated_due_to_first_failure"
+}

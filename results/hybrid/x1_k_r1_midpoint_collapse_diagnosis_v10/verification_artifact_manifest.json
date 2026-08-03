@@ -1,0 +1,114 @@
+{
+  "artifacts": [
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/focused_build.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/focused_build.log",
+      "sha256": "772d2f97dd86d8e9e4f71a59078bd1841e4826bbdd609bd8355c8c6a43737a54",
+      "bytes": 433,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/focused_regression.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/focused_regression.log",
+      "sha256": "6efd24e09bfa966d5731bf9d68884c6bc6448c46061c2f4a2c1cfe045c24b59d",
+      "bytes": 34430,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/fork_ctest.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/fork_ctest.log",
+      "sha256": "f9f1460281c33611c7679ade4877a434228a9df1e75ea0a3035066033aa4d1b3",
+      "bytes": 24807,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/formal_response.exitcode",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "bytes": 3,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/formal_response.log",
+      "sha256": "2279d5979bf5bcb6e1b4b68172427434cab7549456d60f2c8f73baba2b4c24e6",
+      "bytes": 32361,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/parent_ctest.exitcode",
+      "sha256": "e0c18a6a8d48da87994c100bbb324c758d413e95f0fa5135bd0738a692b4d56f",
+      "bytes": 3,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/parent_ctest.log",
+      "sha256": "95382677a28c0855f1c202608f072fad945cd5e915723fffc9e852238c42fd69",
+      "bytes": 1217325,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/python_pytest.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/python_pytest.log",
+      "sha256": "effc8b1d5828e7eb53392ead11e74692b5b20ff231c2af6ef992acccbc0be943",
+      "bytes": 371,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/python_pytest_command_error.exitcode",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "bytes": 3,
+      "role": "superseded_command_invocation_error"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/python_pytest_command_error.log",
+      "sha256": "5bbfb4808ba69bf788f4fe3f6dc57812e7a12c9a091de4f063694781bcbec40d",
+      "bytes": 8075,
+      "role": "superseded_command_invocation_error"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/ruff.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/strict_prl.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3,
+      "role": "required_verification_evidence"
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/verification/strict_prl.log",
+      "sha256": "89b4f60f0bf0b8dec24bd25844fba7575fd67ac22b66c1bb3688eb9e7a651412",
+      "bytes": 6035,
+      "role": "required_verification_evidence"
+    }
+  ],
+  "superseded_command_error_retained": true,
+  "note": "The superseded Python invocation failed before pytest because an environment-variable command was quoted incorrectly; its bytes are retained and it is excluded from scientific and final verification claims."
+}

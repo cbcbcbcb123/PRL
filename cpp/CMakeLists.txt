@@ -385,6 +385,22 @@ if(BUILD_TESTING)
         )
 
         add_executable(
+            prl_x1k_v10_midpoint_collapse_diagnostic_test
+            tests/r1_midpoint_collapse_diagnostic_test.cpp
+        )
+        target_link_libraries(
+            prl_x1k_v10_midpoint_collapse_diagnostic_test
+            PRIVATE
+                prl_core
+                triangulation_modules
+                mesh
+        )
+        add_test(
+            NAME prl_x1k_v10_midpoint_collapse_microprobe
+            COMMAND prl_x1k_v10_midpoint_collapse_diagnostic_test
+        )
+
+        add_executable(
             prl_multicell_remesh_benchmark
             benchmarks/multicell_remesh_benchmark.cpp
         )

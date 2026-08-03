@@ -1,0 +1,2 @@
+status,candidate_count,eligible_count,all_eligible_completed,any_geometric_inverse,first_failed_candidate,classification_input_ready
+failed_v10_midpoint_collapse_diagnosis_eligible_candidate_material_rebind,4,4,False,False,3,False

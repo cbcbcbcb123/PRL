@@ -1,0 +1,34 @@
+{
+  "derivation": {
+    "split": "m=(x0+x1)/2",
+    "frozen_merge": "q=(x0+m)/2=(3/4)x0+(1/4)x1",
+    "other_half_edge": "q=(m+x1)/2=(1/4)x0+(3/4)x1"
+  },
+  "machine": {
+    "local_0": 0,
+    "local_1": 8,
+    "persistent_0": 0,
+    "split_persistent": 8,
+    "deleted_persistent_0": 0,
+    "deleted_persistent_1": 8,
+    "created_persistent": 9,
+    "analytic_x": 0,
+    "analytic_y": -0.75,
+    "analytic_z": 0,
+    "machine_x": 0,
+    "machine_y": -0.75,
+    "machine_z": 0,
+    "analytic_residual": 0,
+    "distance_from_x0_over_original_edge": 0.25,
+    "centroid_jump": 0.08373635837457412,
+    "area_jump": 0.08508095792315566,
+    "volume_jump": 0.125,
+    "axis_jump": 1.1950150693478818e-16,
+    "active_energy_jump": 4.823561294533619e-15,
+    "minimum_fiber_alignment": 1,
+    "maximum_rebind_error": 5.551115123125783e-17,
+    "passed_analytic": true
+  },
+  "normalized_residual_threshold": 1e-12,
+  "frozen_half_edge_closed": true
+}

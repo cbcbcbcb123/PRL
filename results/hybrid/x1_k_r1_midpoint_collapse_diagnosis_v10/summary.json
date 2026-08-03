@@ -1,0 +1,111 @@
+{
+  "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V10-R1-MIDPOINT-DIAGNOSIS",
+  "contract_commit": "e54bc5933387070c697f5c88218f37f25faea4c3",
+  "status": "failed_v10_midpoint_collapse_diagnosis_eligible_candidate_material_rebind",
+  "first_failed_gate": "eligible_candidate_production_merge_completion",
+  "first_failed_candidate": 3,
+  "formal_response_exit_code": 1,
+  "split_geometry_neutral": true,
+  "frozen_merge_quarter_point_closed": true,
+  "candidate_enumeration": {
+    "adjacent": 4,
+    "publicly_eligible": 4,
+    "completed": 3,
+    "production_sink_failed": 1,
+    "any_geometric_inverse": false
+  },
+  "classification_status": "not_adjudicated_due_to_first_failure",
+  "source_capability_role": "supporting_not_adjudicated_due_to_first_failure",
+  "v09_status": "failed_r1_geometry_cache_force_finite_gate",
+  "route_h_gate_a_v01": "failed_invalid_numerics",
+  "x1_k_passed": false,
+  "r1_passed": false,
+  "c1_f1": "not_executed",
+  "downstream_authorized": false,
+  "fork_modified": false,
+  "new_r1_acceptance_response_generated": false,
+  "verification": {
+    "status": "passed_software_regression_with_frozen_v10_failure",
+    "commands": {
+      "focused_build": {
+        "log_path": "verification/focused_build.log",
+        "exitcode_path": "verification/focused_build.exitcode",
+        "log_sha256": "772d2f97dd86d8e9e4f71a59078bd1841e4826bbdd609bd8355c8c6a43737a54",
+        "log_bytes": 433,
+        "exit_code": 0,
+        "verified": true
+      },
+      "focused_regression": {
+        "log_path": "verification/focused_regression.log",
+        "exitcode_path": "verification/focused_regression.exitcode",
+        "log_sha256": "6efd24e09bfa966d5731bf9d68884c6bc6448c46061c2f4a2c1cfe045c24b59d",
+        "log_bytes": 34430,
+        "exit_code": 0,
+        "verified": true
+      },
+      "strict_prl": {
+        "log_path": "verification/strict_prl.log",
+        "exitcode_path": "verification/strict_prl.exitcode",
+        "log_sha256": "89b4f60f0bf0b8dec24bd25844fba7575fd67ac22b66c1bb3688eb9e7a651412",
+        "log_bytes": 6035,
+        "exit_code": 0,
+        "verified": true
+      },
+      "ruff": {
+        "log_path": "verification/ruff.log",
+        "exitcode_path": "verification/ruff.exitcode",
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "log_bytes": 19,
+        "exit_code": 0,
+        "verified": true
+      },
+      "formal_response": {
+        "log_path": "verification/formal_response.log",
+        "exitcode_path": "verification/formal_response.exitcode",
+        "log_sha256": "2279d5979bf5bcb6e1b4b68172427434cab7549456d60f2c8f73baba2b4c24e6",
+        "log_bytes": 32361,
+        "exit_code": 1,
+        "verified": true
+      },
+      "parent_ctest": {
+        "log_path": "verification/parent_ctest.log",
+        "exitcode_path": "verification/parent_ctest.exitcode",
+        "log_sha256": "95382677a28c0855f1c202608f072fad945cd5e915723fffc9e852238c42fd69",
+        "log_bytes": 1217325,
+        "exit_code": 8,
+        "passed": 54,
+        "failed": 3,
+        "total": 57,
+        "failures": [
+          "prl_x1k_sphere_instantaneous_velocity_refinement",
+          "prl_x1k_v04_family_b_parameterized_diagnosis",
+          "prl_x1k_v06_family_c_short_trajectory_gate"
+        ],
+        "v10_frozen_failure_regression_passed": true,
+        "verified": true
+      },
+      "fork_ctest": {
+        "log_path": "verification/fork_ctest.log",
+        "exitcode_path": "verification/fork_ctest.exitcode",
+        "log_sha256": "f9f1460281c33611c7679ade4877a434228a9df1e75ea0a3035066033aa4d1b3",
+        "log_bytes": 24807,
+        "exit_code": 0,
+        "passed": 134,
+        "failed": 0,
+        "total": 134,
+        "verified": true
+      },
+      "python_pytest": {
+        "log_path": "verification/python_pytest.log",
+        "exitcode_path": "verification/python_pytest.exitcode",
+        "log_sha256": "effc8b1d5828e7eb53392ead11e74692b5b20ff231c2af6ef992acccbc0be943",
+        "log_bytes": 371,
+        "exit_code": 0,
+        "passed": 83,
+        "verified": true
+      }
+    },
+    "counts_parsed_from_raw_logs": true,
+    "hardcoded_verification_counts_used": false
+  }
+}

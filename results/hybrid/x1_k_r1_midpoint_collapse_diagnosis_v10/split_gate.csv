@@ -1,0 +1,2 @@
+split_local,split_persistent,analytic_midpoint_x,analytic_midpoint_y,analytic_midpoint_z,machine_midpoint_x,machine_midpoint_y,machine_midpoint_z,midpoint_residual,original_vertex_position_residual,area_jump,volume_jump,centroid_jump,axis_jump,active_energy_jump,passed
+8,8,0,-1.5,0,0,-1.5,0,0,0,0,0,2.9134042681147884e-17,1.1950150693478818e-16,4.823561294533619e-15,True

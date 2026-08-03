@@ -1,0 +1,5 @@
+option,proposal,implementation,verdict,risk
+A,explicit survivor / endpoint-preserving collapse,not_implemented,not_adjudicated_due_to_first_failure,"event identity, material transfer, energy ledger, API compatibility, fork maintenance"
+B,split-ancestor inverse operation,not_implemented,not_adjudicated_due_to_first_failure,"persistent ancestry, face/vertex identity restoration, concurrency, regression surface"
+C,"change mesh, edge, or threshold",not_implemented,cannot_repair_or_rejudge_v09,rewrites frozen case and requires a future contract
+D,manually restore coordinates after merge,not_implemented,unacceptable_algorithm_bypass,breaks event/material/energy atomic semantics
