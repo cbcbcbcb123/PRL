@@ -4,6 +4,7 @@ status: failed_family_B_parameterized_diagnosis
 first_failed_criterion: family_B_source_level_2_maximum_edge_ratio
 contract_commit: 4314566
 fork_commit: e2ed64a26bb5d7c2d878772564fb5ffcca343c3a
+failure_package_commit: f363f0b13365956dcf7b449ab68b92e6ac93217d
 ---
 
 # X1-K v04 legacy-cache repair + Family B 诊断失败报告

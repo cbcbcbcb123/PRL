@@ -1,6 +1,7 @@
 {
   "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V04-DIAGNOSTIC",
   "contract_commit": "4314566",
+  "failure_package_commit": "f363f0b13365956dcf7b449ab68b92e6ac93217d",
   "status": "failed_family_B_parameterized_diagnosis",
   "preserved_x1_k_status": "failed_instantaneous_smooth_surface_refinement",
   "first_failed_criterion": "family_B_source_level_2_maximum_edge_ratio",

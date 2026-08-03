@@ -1,0 +1,19 @@
+{
+  "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V04-DIAGNOSTIC",
+  "parent": {
+    "repository": "https://github.com/cbcbcbcb123/PRL.git",
+    "branch": "codex/simucell3d-hybrid-feasibility",
+    "contract_commit": "43145661d2e8636e518e51bbf5de954c646358b6",
+    "failure_package_commit": "f363f0b13365956dcf7b449ab68b92e6ac93217d",
+    "local_and_upstream_match_at_failure_package": true
+  },
+  "fork": {
+    "repository": "https://github.com/cbcbcbcb123/prl-cell-engine.git",
+    "branch": "codex/cell-engine-integration-seam",
+    "before": "2d4b2183f5966c2afe3f4234471e727fe5f9e68d",
+    "repair_commit": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+    "local_and_upstream_match": true
+  },
+  "submodule_pointer_in_failure_package": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+  "protected_user_paths_tracked": false
+}
