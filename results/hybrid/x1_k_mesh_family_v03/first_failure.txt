@@ -1,0 +1,17 @@
+contract_id=CONTRACT-PRL-HYBRID-X1-K-V03-DIAGNOSTIC
+status=failed_family_A_asymptotic_diagnosis
+test=prl_x1k_v03_family_a_asymptotic_diagnosis
+first_failed_criterion=family_A_excluded_legacy_cache_ratio
+source_level=5
+registered_owner=gamma*A
+legacy_owner=excluded upstream float 0.5*gamma*A plotting cache
+legacy_cache_ratio=0.50000236120481867
+absolute_error_from_half=2.36120481867e-6
+threshold=1e-6
+direction_residual=6.8224093163683568e-8
+direction_plateau_passed=true
+mesh_gate_passed=true
+normal_gate_passed=true
+tangential_gate_passed=true
+net_force_gate_passed=true
+family_B=not_executed_due_to_family_A_hard_failure

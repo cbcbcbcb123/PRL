@@ -6,10 +6,12 @@
 #include "custom_structures.hpp"
 #include "node.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <memory>
+#include <numeric>
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
@@ -698,6 +700,218 @@ int spherical_instantaneous_velocity_converges_to_manufactured_solution() {
     return 0;
 }
 
+int spherical_mesh_diagnostic_reports_quality_and_valence_distribution() {
+    auto current_cell = surface_tension_cell(icosphere_mesh(2), 71);
+    const auto audit = prl::cell_engine::audit_spherical_surface_tension_instantaneous(
+        *current_cell,
+        0.02,
+        10.0,
+        1.0e-6
+    );
+    require(audit.vertex_diagnostics.size() == 162,
+            "sphere diagnostic did not report every used vertex");
+    const auto valence_five = std::count_if(
+        audit.vertex_diagnostics.begin(),
+        audit.vertex_diagnostics.end(),
+        [](const auto& vertex) { return vertex.valence == 5; }
+    );
+    const auto valence_six = std::count_if(
+        audit.vertex_diagnostics.begin(),
+        audit.vertex_diagnostics.end(),
+        [](const auto& vertex) { return vertex.valence == 6; }
+    );
+    require(valence_five == 12 && valence_six == 150,
+            "standard level-2 icosphere valence distribution changed");
+    require(audit.closed_two_manifold
+                && audit.euler_characteristic == 2
+                && audit.positive_signed_volume
+                && audit.all_face_origin_contributions_positive
+                && audit.no_self_intersection_proxy_passed,
+            "sphere topology/orientation proxy failed");
+    require(audit.maximum_radius_deviation <= 1.0e-12
+                && audit.minimum_outward_alignment > 0.0,
+            "sphere vertices or outward orientation are invalid");
+    require(audit.minimum_triangle_quality >= 0.05
+                && audit.minimum_face_to_mean_area_ratio >= 1.0e-2
+                && audit.maximum_edge_length / audit.minimum_edge_length <= 2.0,
+            "sphere mesh is not shape regular under the frozen proxy");
+    return 0;
+}
+
+int spherical_mesh_diagnostic_reports_geometry_defined_symmetry_classes() {
+    auto current_cell = surface_tension_cell(icosphere_mesh(2), 72);
+    const auto audit = prl::cell_engine::audit_spherical_surface_tension_instantaneous(
+        *current_cell,
+        0.02,
+        10.0,
+        1.0e-6
+    );
+    require(audit.valence_distributions.size() == 2,
+            "standard sphere did not report its two valence groups");
+    const auto valence_total = std::accumulate(
+        audit.valence_distributions.begin(),
+        audit.valence_distributions.end(),
+        std::size_t{0},
+        [](const std::size_t total, const auto& group) {
+            return total + group.vertex_count;
+        }
+    );
+    const auto class_total = std::accumulate(
+        audit.symmetry_class_distributions.begin(),
+        audit.symmetry_class_distributions.end(),
+        std::size_t{0},
+        [](const std::size_t total, const auto& group) {
+            return total + group.vertex_count;
+        }
+    );
+    require(valence_total == audit.vertex_count && class_total == audit.vertex_count,
+            "sphere distribution summaries lost or duplicated vertices");
+    require(!audit.symmetry_class_distributions.empty()
+                && audit.symmetry_class_distributions.size() < audit.vertex_count
+                && audit.maximum_symmetry_class_size > 1,
+            "standard sphere symmetry classes were not detected");
+    require(std::all_of(
+                audit.vertex_diagnostics.begin(),
+                audit.vertex_diagnostics.end(),
+                [](const auto& vertex) {
+                    return vertex.symmetry_class_id > 0;
+                }
+            ),
+            "one sphere vertex is missing its geometry-defined class ID");
+    return 0;
+}
+
+void print_v03_family_level(
+    const char* const family,
+    const std::size_t source_level,
+    const prl::cell_engine::SphericalSurfaceTensionInstantaneousAudit& audit
+) {
+    std::cerr << std::setprecision(17)
+              << "v03_level," << family
+              << ',' << source_level
+              << ',' << audit.vertex_count
+              << ',' << audit.face_count
+              << ',' << audit.minimum_edge_length
+              << ',' << audit.rms_edge_length
+              << ',' << audit.maximum_edge_length
+              << ',' << audit.normalized_directional_derivative_residual
+              << ',' << audit.legacy_cache_energy / audit.registered_surface_energy
+              << ',' << audit.normal_velocity_relative_l2_error
+              << ',' << audit.tangential_velocity_relative_l2_error
+              << ',' << audit.normalized_net_force_residual
+              << ',' << audit.minimum_triangle_quality
+              << ',' << audit.minimum_outward_alignment
+              << ',' << audit.minimum_face_to_mean_area_ratio
+              << ',' << audit.maximum_radius_deviation
+              << ',' << audit.euler_characteristic
+              << ',' << audit.closed_two_manifold
+              << ',' << audit.no_self_intersection_proxy_passed
+              << ',' << audit.symmetry_class_distributions.size()
+              << ',' << audit.maximum_symmetry_class_size
+              << '\n';
+    for(const auto& group : audit.valence_distributions) {
+        std::cerr << std::setprecision(17)
+                  << "v03_valence," << family
+                  << ',' << source_level
+                  << ',' << group.valence
+                  << ',' << group.vertex_count
+                  << ',' << group.normal_absolute_error_mean
+                  << ',' << group.normal_absolute_error_maximum
+                  << ',' << group.normal_absolute_error_rms
+                  << ',' << group.tangential_speed_mean
+                  << ',' << group.tangential_speed_maximum
+                  << ',' << group.tangential_speed_rms
+                  << '\n';
+    }
+    for(const auto& group : audit.symmetry_class_distributions) {
+        std::cerr << std::setprecision(17)
+                  << "v03_class," << family
+                  << ',' << source_level
+                  << ',' << group.symmetry_class_id
+                  << ',' << group.valence
+                  << ',' << group.vertex_count
+                  << ',' << group.normal_absolute_error_mean
+                  << ',' << group.normal_absolute_error_maximum
+                  << ',' << group.normal_absolute_error_rms
+                  << ',' << group.tangential_speed_mean
+                  << ',' << group.tangential_speed_maximum
+                  << ',' << group.tangential_speed_rms
+                  << '\n';
+    }
+}
+
+int standard_icosphere_asymptotic_family_passes_v03_diagnosis() {
+    const std::array<std::size_t, 4> source_levels{2, 3, 4, 5};
+    const std::array<std::size_t, 4> expected_vertices{162, 642, 2562, 10242};
+    const std::array<std::size_t, 4> expected_faces{320, 1280, 5120, 20480};
+    std::array<prl::cell_engine::SphericalSurfaceTensionInstantaneousAudit, 4>
+        audits{};
+    for(std::size_t index = 0; index < audits.size(); ++index) {
+        auto current_cell = surface_tension_cell(
+            icosphere_mesh(source_levels[index]),
+            static_cast<unsigned>(81 + index)
+        );
+        audits[index] = prl::cell_engine::audit_spherical_surface_tension_instantaneous(
+            *current_cell,
+            0.02,
+            10.0,
+            1.0e-6
+        );
+        require(audits[index].vertex_count == expected_vertices[index]
+                    && audits[index].face_count == expected_faces[index],
+                "family A topology matrix changed");
+        print_v03_family_level("A", source_levels[index], audits[index]);
+    }
+
+    const prl::cell_engine::SphericalMeshFamilyDiagnosticThresholds mesh_thresholds{
+        1.0e-12,
+        0.05,
+        1.0e-2,
+        2.0,
+    };
+    const auto mesh_gate = prl::cell_engine::evaluate_spherical_mesh_family_quality(
+        audits,
+        mesh_thresholds
+    );
+    const prl::cell_engine::SphericalDirectionalDerivativeThresholds
+        direction_thresholds{1.0e-6, 0.5, 1.0e-7, 1.0e-6};
+    const auto direction_gate
+        = prl::cell_engine::evaluate_spherical_directional_derivative_refinement(
+            audits,
+            direction_thresholds
+        );
+    const prl::cell_engine::SphericalInstantaneousVelocityThresholds
+        velocity_thresholds{2.0e-2, 2.0e-2, 0.5, 1.0e-10, 1.0e-12};
+    const auto velocity_gate
+        = prl::cell_engine::evaluate_spherical_instantaneous_velocity_refinement(
+            audits,
+            velocity_thresholds
+        );
+    std::cerr << std::setprecision(17)
+              << "v03_gate,A,mesh," << mesh_gate.passed
+              << ",direction," << direction_gate.passed
+              << ",direction_plateau," << direction_gate.consistency_plateau
+              << ",direction_finest," << direction_gate.finest_residual_passed
+              << ",legacy_cache," << direction_gate.legacy_cache_exclusion_passed
+              << ",normal," << velocity_gate.normal_velocity_passed
+              << ",tangent," << velocity_gate.tangential_pollution_passed
+              << ",net," << velocity_gate.net_force_passed
+              << ",normal_orders,"
+              << velocity_gate.normal_velocity_observed_orders[0] << ','
+              << velocity_gate.normal_velocity_observed_orders[1] << ','
+              << velocity_gate.normal_velocity_observed_orders[2]
+              << ",tangent_orders,"
+              << velocity_gate.tangential_pollution_observed_orders[0] << ','
+              << velocity_gate.tangential_pollution_observed_orders[1] << ','
+              << velocity_gate.tangential_pollution_observed_orders[2]
+              << '\n';
+    require(mesh_gate.passed, "family A mesh-quality diagnosis failed");
+    require(direction_gate.passed,
+            "family A direction-or-excluded-cache diagnosis failed");
+    require(velocity_gate.passed, "family A asymptotic velocity diagnosis failed");
+    return 0;
+}
+
 } // namespace
 
 int main(const int argc, const char* const argv[]) {
@@ -724,6 +938,15 @@ int main(const int argc, const char* const argv[]) {
         }
         if(behavior == "sphere_instantaneous_velocity") {
             return spherical_instantaneous_velocity_converges_to_manufactured_solution();
+        }
+        if(behavior == "sphere_mesh_diagnostic") {
+            return spherical_mesh_diagnostic_reports_quality_and_valence_distribution();
+        }
+        if(behavior == "sphere_symmetry_classes") {
+            return spherical_mesh_diagnostic_reports_geometry_defined_symmetry_classes();
+        }
+        if(behavior == "v03_family_a") {
+            return standard_icosphere_asymptotic_family_passes_v03_diagnosis();
         }
         throw std::invalid_argument("unknown behavior: " + behavior);
     } catch(const std::exception& error) {

@@ -12,6 +12,8 @@
 #include <cstdint>
 #include <cstring>
 #include <limits>
+#include <map>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
@@ -273,12 +275,13 @@ std::uint64_t undirected_edge_key(std::size_t first, std::size_t second) {
         | static_cast<std::uint64_t>(second);
 }
 
-std::array<double, 2> surface_edge_scales(
+std::array<double, 3> surface_edge_scales(
     const core::SurfaceMeshSnapshot& mesh
 ) {
     std::unordered_set<std::uint64_t> edges;
     edges.reserve(3 * mesh.faces.size() / 2);
     double squared_length_sum = 0.0;
+    double minimum_length = std::numeric_limits<double>::infinity();
     double maximum_length = 0.0;
     for(const auto& current_face : mesh.faces) {
         for(std::size_t local_edge = 0; local_edge < 3; ++local_edge) {
@@ -293,6 +296,7 @@ std::array<double, 2> surface_edge_scales(
                 throw std::runtime_error("surface edge scale is invalid");
             }
             squared_length_sum += length * length;
+            minimum_length = std::min(minimum_length, length);
             maximum_length = std::max(maximum_length, length);
         }
     }
@@ -302,6 +306,7 @@ std::array<double, 2> surface_edge_scales(
     return {
         std::sqrt(squared_length_sum / static_cast<double>(edges.size())),
         maximum_length,
+        minimum_length,
     };
 }
 
@@ -1136,9 +1141,92 @@ audit_spherical_surface_tension_instantaneous(
     if(!std::isfinite(reference_radius) || reference_radius <= 0.0) {
         throw std::runtime_error("spherical instantaneous audit radius is invalid");
     }
+    std::unordered_map<std::uint64_t, std::size_t> edge_incidence;
+    edge_incidence.reserve(3 * mesh.faces.size() / 2);
+    double minimum_outward_alignment = std::numeric_limits<double>::infinity();
+    double signed_volume = 0.0;
+    bool all_face_origin_contributions_positive = true;
+    for(const auto& current_face : mesh.faces) {
+        for(std::size_t local_edge = 0; local_edge < 3; ++local_edge) {
+            const auto first = current_face.vertex_indices[local_edge];
+            const auto second = current_face.vertex_indices[(local_edge + 1) % 3];
+            ++edge_incidence[undirected_edge_key(first, second)];
+        }
+        const auto& a = mesh.vertices.at(current_face.vertex_indices[0]).position;
+        const auto& b = mesh.vertices.at(current_face.vertex_indices[1]).position;
+        const auto& c = mesh.vertices.at(current_face.vertex_indices[2]).position;
+        const auto oriented = cross(subtract(b, a), subtract(c, a));
+        const auto face_centroid = scale(add(add(a, b), c), 1.0 / 3.0);
+        const double alignment = dot(oriented, face_centroid)
+            / (norm(oriented) * norm(face_centroid));
+        const double face_signed_volume = dot(a, cross(b, c)) / 6.0;
+        if(!std::isfinite(alignment) || !std::isfinite(face_signed_volume)) {
+            throw std::runtime_error("spherical mesh orientation proxy is non-finite");
+        }
+        minimum_outward_alignment = std::min(
+            minimum_outward_alignment,
+            alignment
+        );
+        all_face_origin_contributions_positive
+            = all_face_origin_contributions_positive && face_signed_volume > 0.0;
+        signed_volume += face_signed_volume;
+    }
+    std::vector<std::size_t> valences(mesh.vertices.size(), 0);
+    std::vector<std::vector<double>> incident_edge_lengths(mesh.vertices.size());
+    bool closed_two_manifold = true;
+    for(const auto& [key, incidence] : edge_incidence) {
+        closed_two_manifold = closed_two_manifold && incidence == 2;
+        const auto first = static_cast<std::size_t>(key >> 32U);
+        const auto second = static_cast<std::size_t>(key & 0xffffffffULL);
+        ++valences.at(first);
+        ++valences.at(second);
+        const double edge_length = norm(subtract(
+            mesh.vertices.at(first).position,
+            mesh.vertices.at(second).position
+        ));
+        incident_edge_lengths.at(first).push_back(edge_length);
+        incident_edge_lengths.at(second).push_back(edge_length);
+    }
+    const auto euler_characteristic
+        = static_cast<std::int64_t>(mesh.vertices.size())
+        - static_cast<std::int64_t>(edge_incidence.size())
+        + static_cast<std::int64_t>(mesh.faces.size());
+    const bool positive_signed_volume = std::isfinite(signed_volume)
+        && signed_volume > 0.0;
+    const bool no_self_intersection_proxy_passed = closed_two_manifold
+        && euler_characteristic == 2
+        && minimum_outward_alignment > 0.0
+        && positive_signed_volume
+        && all_face_origin_contributions_positive;
+    constexpr double symmetry_quantization = 1.0e-10;
+    std::vector<std::size_t> symmetry_class_ids(mesh.vertices.size(), 0);
+    std::unordered_map<std::string, std::size_t> symmetry_class_by_signature;
+    std::size_t next_symmetry_class_id = 1;
+    for(std::size_t index = 0; index < mesh.vertices.size(); ++index) {
+        auto normalized_lengths = incident_edge_lengths.at(index);
+        for(double& length : normalized_lengths) length /= edge_scales[0];
+        std::sort(normalized_lengths.begin(), normalized_lengths.end());
+        std::ostringstream signature;
+        signature << valences.at(index) << ':'
+                  << std::llround(
+                        control_areas.at(index)
+                        / (geometry.area / static_cast<double>(mesh.vertices.size()))
+                        / symmetry_quantization
+                     );
+        for(const double length : normalized_lengths) {
+            signature << ':' << std::llround(length / symmetry_quantization);
+        }
+        const auto [class_entry, inserted] = symmetry_class_by_signature.emplace(
+            signature.str(),
+            next_symmetry_class_id
+        );
+        if(inserted) ++next_symmetry_class_id;
+        symmetry_class_ids[index] = class_entry->second;
+    }
     std::vector<Vector3> direction;
     direction.reserve(mesh.vertices.size());
     double maximum_direction_norm = 0.0;
+    double maximum_radius_deviation = 0.0;
     for(const auto& current_vertex : mesh.vertices) {
         const auto& position = current_vertex.position;
         const double radius = norm(position);
@@ -1151,6 +1239,10 @@ audit_spherical_surface_tension_instantaneous(
                 "spherical instantaneous audit requires one projected radius"
             );
         }
+        maximum_radius_deviation = std::max(
+            maximum_radius_deviation,
+            std::abs(radius - reference_radius)
+        );
         const auto normal = scale(position, 1.0 / radius);
         const double amplitude = 0.25
             + 0.10 * position[0]
@@ -1250,6 +1342,8 @@ audit_spherical_surface_tension_instantaneous(
     double tangential_square_integral = 0.0;
     double control_area_sum = 0.0;
     Vector3 net_force{};
+    std::vector<SphericalVertexInstantaneousDiagnostic> vertex_diagnostics;
+    vertex_diagnostics.reserve(assembled_forces.size());
     for(std::size_t index = 0; index < assembled_forces.size(); ++index) {
         const auto& position = mesh.vertices.at(index).position;
         const auto normal = scale(position, 1.0 / norm(position));
@@ -1264,6 +1358,17 @@ audit_spherical_surface_tension_instantaneous(
             scale(normal, normal_velocity)
         );
         const double normal_error = normal_velocity - exact_normal_velocity;
+        vertex_diagnostics.push_back({
+            index,
+            valences.at(index),
+            symmetry_class_ids.at(index),
+            control_area / (
+                geometry.area / static_cast<double>(mesh.vertices.size())
+            ),
+            normal_error / std::abs(exact_normal_velocity),
+            std::abs(normal_error) / std::abs(exact_normal_velocity),
+            norm(tangential_velocity) / std::abs(exact_normal_velocity),
+        });
         normal_error_square_integral += control_area
             * normal_error * normal_error;
         tangential_square_integral += control_area
@@ -1288,21 +1393,112 @@ audit_spherical_surface_tension_instantaneous(
        || !std::isfinite(net_force_residual)) {
         throw std::runtime_error("spherical instantaneous audit became non-finite");
     }
-    return {
-        mesh.vertices.size(),
-        mesh.faces.size(),
-        edge_scales[0],
-        edge_scales[1],
-        registered_energy,
-        legacy_cache,
-        finite_difference,
-        force_directional,
-        residual,
-        normal_velocity_error,
-        tangential_velocity_error,
-        net_force_residual,
-        force_buffers_cleared,
+    struct DistributionAccumulator {
+        std::size_t valence{};
+        std::size_t count{};
+        double normal_sum{};
+        double normal_square_sum{};
+        double normal_maximum{};
+        double tangent_sum{};
+        double tangent_square_sum{};
+        double tangent_maximum{};
     };
+    auto accumulate_vertex = [](DistributionAccumulator& distribution,
+                                const SphericalVertexInstantaneousDiagnostic& vertex) {
+        distribution.valence = vertex.valence;
+        ++distribution.count;
+        distribution.normal_sum += vertex.normal_absolute_relative_error;
+        distribution.normal_square_sum += vertex.normal_absolute_relative_error
+            * vertex.normal_absolute_relative_error;
+        distribution.normal_maximum = std::max(
+            distribution.normal_maximum,
+            vertex.normal_absolute_relative_error
+        );
+        distribution.tangent_sum += vertex.tangential_relative_speed;
+        distribution.tangent_square_sum += vertex.tangential_relative_speed
+            * vertex.tangential_relative_speed;
+        distribution.tangent_maximum = std::max(
+            distribution.tangent_maximum,
+            vertex.tangential_relative_speed
+        );
+    };
+    std::map<std::size_t, DistributionAccumulator> by_valence;
+    std::map<std::size_t, DistributionAccumulator> by_symmetry_class;
+    for(const auto& vertex : vertex_diagnostics) {
+        accumulate_vertex(by_valence[vertex.valence], vertex);
+        accumulate_vertex(by_symmetry_class[vertex.symmetry_class_id], vertex);
+    }
+    std::vector<SphericalValenceDistributionDiagnostic> valence_distributions;
+    valence_distributions.reserve(by_valence.size());
+    for(const auto& [valence, distribution] : by_valence) {
+        const double count = static_cast<double>(distribution.count);
+        valence_distributions.push_back({
+            valence,
+            distribution.count,
+            distribution.normal_sum / count,
+            distribution.normal_maximum,
+            std::sqrt(distribution.normal_square_sum / count),
+            distribution.tangent_sum / count,
+            distribution.tangent_maximum,
+            std::sqrt(distribution.tangent_square_sum / count),
+        });
+    }
+    std::vector<SphericalSymmetryClassDistributionDiagnostic>
+        symmetry_class_distributions;
+    symmetry_class_distributions.reserve(by_symmetry_class.size());
+    std::size_t maximum_symmetry_class_size = 0;
+    for(const auto& [class_id, distribution] : by_symmetry_class) {
+        const double count = static_cast<double>(distribution.count);
+        maximum_symmetry_class_size = std::max(
+            maximum_symmetry_class_size,
+            distribution.count
+        );
+        symmetry_class_distributions.push_back({
+            class_id,
+            distribution.valence,
+            distribution.count,
+            distribution.normal_sum / count,
+            distribution.normal_maximum,
+            std::sqrt(distribution.normal_square_sum / count),
+            distribution.tangent_sum / count,
+            distribution.tangent_maximum,
+            std::sqrt(distribution.tangent_square_sum / count),
+        });
+    }
+    SphericalSurfaceTensionInstantaneousAudit result;
+    result.vertex_count = mesh.vertices.size();
+    result.face_count = mesh.faces.size();
+    result.rms_edge_length = edge_scales[0];
+    result.maximum_edge_length = edge_scales[1];
+    result.minimum_edge_length = edge_scales[2];
+    result.maximum_radius_deviation = maximum_radius_deviation;
+    result.minimum_triangle_quality = geometry.minimum_triangle_quality;
+    result.minimum_outward_alignment = minimum_outward_alignment;
+    result.minimum_face_to_mean_area_ratio = geometry.minimum_face_area
+        / (geometry.area / static_cast<double>(mesh.faces.size()));
+    result.euler_characteristic = euler_characteristic;
+    result.closed_two_manifold = closed_two_manifold;
+    result.positive_signed_volume = positive_signed_volume;
+    result.all_face_origin_contributions_positive
+        = all_face_origin_contributions_positive;
+    result.no_self_intersection_proxy_passed
+        = no_self_intersection_proxy_passed;
+    result.registered_surface_energy = registered_energy;
+    result.legacy_cache_energy = legacy_cache;
+    result.finite_difference_directional_derivative = finite_difference;
+    result.force_directional_derivative = force_directional;
+    result.normalized_directional_derivative_residual = residual;
+    result.normal_velocity_relative_l2_error = normal_velocity_error;
+    result.tangential_velocity_relative_l2_error = tangential_velocity_error;
+    result.normalized_net_force_residual = net_force_residual;
+    result.force_buffers_cleared = force_buffers_cleared;
+    result.vertex_diagnostics = std::move(vertex_diagnostics);
+    result.maximum_symmetry_class_size = maximum_symmetry_class_size;
+    result.valence_distributions = std::move(valence_distributions);
+    result.symmetry_class_distributions = std::move(
+        symmetry_class_distributions
+    );
+    return result;
 }
 
 SphericalDirectionalDerivativeRefinementAudit
@@ -1517,6 +1713,92 @@ evaluate_spherical_instantaneous_velocity_refinement(
         && result.normal_velocity_passed
         && result.tangential_pollution_passed
         && result.net_force_passed;
+    return result;
+}
+
+SphericalMeshFamilyDiagnosticAudit evaluate_spherical_mesh_family_quality(
+    const std::array<SphericalSurfaceTensionInstantaneousAudit, 4>& levels,
+    const SphericalMeshFamilyDiagnosticThresholds& thresholds
+) {
+    const std::array<double, 4> threshold_values{
+        thresholds.maximum_radius_deviation,
+        thresholds.minimum_triangle_quality,
+        thresholds.minimum_face_to_mean_area_ratio,
+        thresholds.maximum_edge_length_ratio,
+    };
+    if(!std::all_of(
+            threshold_values.begin(),
+            threshold_values.end(),
+            [](const double value) { return std::isfinite(value) && value >= 0.0; }
+        )
+       || thresholds.minimum_triangle_quality > 1.0
+       || thresholds.minimum_face_to_mean_area_ratio > 1.0
+       || thresholds.maximum_edge_length_ratio < 1.0) {
+        throw std::invalid_argument("spherical mesh-family thresholds are invalid");
+    }
+
+    SphericalMeshFamilyDiagnosticAudit result;
+    result.mesh_scales_decreased = true;
+    result.radii_passed = true;
+    result.topology_proxy_passed = true;
+    result.outward_orientation_passed = true;
+    result.shape_regularity_passed = true;
+    for(std::size_t level = 0; level < levels.size(); ++level) {
+        const auto& current = levels[level];
+        const std::array<double, 7> values{
+            current.rms_edge_length,
+            current.minimum_edge_length,
+            current.maximum_edge_length,
+            current.maximum_radius_deviation,
+            current.minimum_triangle_quality,
+            current.minimum_outward_alignment,
+            current.minimum_face_to_mean_area_ratio,
+        };
+        if(!std::all_of(
+                values.begin(),
+                values.end(),
+                [](const double value) { return std::isfinite(value) && value >= 0.0; }
+            )
+           || current.rms_edge_length <= 0.0
+           || current.minimum_edge_length <= 0.0) {
+            throw std::invalid_argument("spherical mesh-family level is invalid");
+        }
+        result.rms_edge_lengths[level] = current.rms_edge_length;
+        result.minimum_triangle_qualities[level] = current.minimum_triangle_quality;
+        result.minimum_outward_alignments[level] = current.minimum_outward_alignment;
+        result.minimum_face_to_mean_area_ratios[level]
+            = current.minimum_face_to_mean_area_ratio;
+        result.maximum_to_minimum_edge_ratios[level]
+            = current.maximum_edge_length / current.minimum_edge_length;
+        if(level > 0) {
+            result.mesh_scales_decreased = result.mesh_scales_decreased
+                && current.rms_edge_length < levels[level - 1].rms_edge_length;
+        }
+        result.radii_passed = result.radii_passed
+            && current.maximum_radius_deviation
+                <= thresholds.maximum_radius_deviation;
+        result.topology_proxy_passed = result.topology_proxy_passed
+            && current.closed_two_manifold
+            && current.euler_characteristic == 2
+            && current.positive_signed_volume
+            && current.all_face_origin_contributions_positive
+            && current.no_self_intersection_proxy_passed;
+        result.outward_orientation_passed
+            = result.outward_orientation_passed
+            && current.minimum_outward_alignment > 0.0;
+        result.shape_regularity_passed = result.shape_regularity_passed
+            && current.minimum_triangle_quality
+                >= thresholds.minimum_triangle_quality
+            && current.minimum_face_to_mean_area_ratio
+                >= thresholds.minimum_face_to_mean_area_ratio
+            && result.maximum_to_minimum_edge_ratios[level]
+                <= thresholds.maximum_edge_length_ratio;
+    }
+    result.passed = result.mesh_scales_decreased
+        && result.radii_passed
+        && result.topology_proxy_passed
+        && result.outward_orientation_passed
+        && result.shape_regularity_passed;
     return result;
 }
 

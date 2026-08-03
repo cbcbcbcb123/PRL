@@ -1,0 +1,19 @@
+family,criterion,operator,threshold,observed,passed,notes
+A,h_rms_strictly_decreasing,equal,true,true,true,actual RMS edge scale
+A,maximum_radius_deviation,less_equal,1e-12,2.220446049250313e-16,true,all levels
+A,closed_manifold_euler_outward_proxy,equal,true,true,true,all levels
+A,minimum_triangle_quality,greater_equal,0.05,0.9742044876206929,true,all levels
+A,minimum_face_to_mean_area_ratio,greater_equal,0.01,0.9278210838852025,true,all levels
+A,maximum_edge_ratio,less_equal,2.0,1.194840578420597,true,all levels
+A,directional_consistency_plateau,less_equal,1e-7,6.822409316368357e-8,true,maximum residual
+A,directional_finest_residual,less_equal,1e-6,6.822409316368357e-8,true,level 5
+A,legacy_cache_ratio_error,less_equal,1e-6,2.36120481867e-6,false,first hard failure
+A,normal_errors_nonincreasing,equal,true,true,true,levels 2-5
+A,minimum_normal_order,greater_equal,0.5,0.957265265112834,true,actual h
+A,finest_normal_error,less_equal,0.02,0.0044003196067863275,true,level 5
+A,tangential_errors_nonincreasing,equal,true,true,true,levels 2-5
+A,minimum_tangential_order,greater_equal,0.5,1.1749227699534339,true,actual h
+A,finest_tangential_error,less_equal,0.02,0.0006876363131545197,true,level 5
+A,maximum_normalized_net_force,less_equal,1e-12,1.8168641637451863e-15,true,all levels
+A,overall,equal,true,false,false,failed excluded legacy cache audit
+B,execution,equal,executed,not_executed,false,stopped after Family A failure

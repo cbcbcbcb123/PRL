@@ -285,6 +285,21 @@ if(BUILD_TESTING)
             COMMAND prl_short_trajectory_integration_test
                 sphere_instantaneous_velocity
         )
+        add_test(
+            NAME prl_x1k_v03_sphere_mesh_diagnostic
+            COMMAND prl_short_trajectory_integration_test
+                sphere_mesh_diagnostic
+        )
+        add_test(
+            NAME prl_x1k_v03_sphere_symmetry_class_diagnostic
+            COMMAND prl_short_trajectory_integration_test
+                sphere_symmetry_classes
+        )
+        add_test(
+            NAME prl_x1k_v03_family_a_asymptotic_diagnosis
+            COMMAND prl_short_trajectory_integration_test
+                v03_family_a
+        )
 
         add_executable(
             prl_multicell_remesh_benchmark

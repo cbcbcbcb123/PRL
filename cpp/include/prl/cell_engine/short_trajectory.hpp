@@ -187,11 +187,54 @@ struct SurfaceTensionSpatialRefinementGateAudit {
     bool passed{};
 };
 
+struct SphericalVertexInstantaneousDiagnostic {
+    std::size_t vertex_index{};
+    std::size_t valence{};
+    std::size_t symmetry_class_id{};
+    double control_area_ratio{};
+    double normal_signed_relative_error{};
+    double normal_absolute_relative_error{};
+    double tangential_relative_speed{};
+};
+
+struct SphericalValenceDistributionDiagnostic {
+    std::size_t valence{};
+    std::size_t vertex_count{};
+    double normal_absolute_error_mean{};
+    double normal_absolute_error_maximum{};
+    double normal_absolute_error_rms{};
+    double tangential_speed_mean{};
+    double tangential_speed_maximum{};
+    double tangential_speed_rms{};
+};
+
+struct SphericalSymmetryClassDistributionDiagnostic {
+    std::size_t symmetry_class_id{};
+    std::size_t valence{};
+    std::size_t vertex_count{};
+    double normal_absolute_error_mean{};
+    double normal_absolute_error_maximum{};
+    double normal_absolute_error_rms{};
+    double tangential_speed_mean{};
+    double tangential_speed_maximum{};
+    double tangential_speed_rms{};
+};
+
 struct SphericalSurfaceTensionInstantaneousAudit {
     std::size_t vertex_count{};
     std::size_t face_count{};
     double rms_edge_length{};
     double maximum_edge_length{};
+    double minimum_edge_length{};
+    double maximum_radius_deviation{};
+    double minimum_triangle_quality{};
+    double minimum_outward_alignment{};
+    double minimum_face_to_mean_area_ratio{};
+    std::int64_t euler_characteristic{};
+    bool closed_two_manifold{};
+    bool positive_signed_volume{};
+    bool all_face_origin_contributions_positive{};
+    bool no_self_intersection_proxy_passed{};
     double registered_surface_energy{};
     double legacy_cache_energy{};
     double finite_difference_directional_derivative{};
@@ -201,6 +244,11 @@ struct SphericalSurfaceTensionInstantaneousAudit {
     double tangential_velocity_relative_l2_error{};
     double normalized_net_force_residual{};
     bool force_buffers_cleared{};
+    std::vector<SphericalVertexInstantaneousDiagnostic> vertex_diagnostics{};
+    std::size_t maximum_symmetry_class_size{};
+    std::vector<SphericalValenceDistributionDiagnostic> valence_distributions{};
+    std::vector<SphericalSymmetryClassDistributionDiagnostic>
+        symmetry_class_distributions{};
 };
 
 struct SphericalDirectionalDerivativeThresholds {
@@ -244,6 +292,27 @@ struct SphericalInstantaneousVelocityRefinementAudit {
     bool normal_velocity_passed{};
     bool tangential_pollution_passed{};
     bool net_force_passed{};
+    bool passed{};
+};
+
+struct SphericalMeshFamilyDiagnosticThresholds {
+    double maximum_radius_deviation{};
+    double minimum_triangle_quality{};
+    double minimum_face_to_mean_area_ratio{};
+    double maximum_edge_length_ratio{};
+};
+
+struct SphericalMeshFamilyDiagnosticAudit {
+    std::array<double, 4> rms_edge_lengths{};
+    std::array<double, 4> minimum_triangle_qualities{};
+    std::array<double, 4> minimum_outward_alignments{};
+    std::array<double, 4> minimum_face_to_mean_area_ratios{};
+    std::array<double, 4> maximum_to_minimum_edge_ratios{};
+    bool mesh_scales_decreased{};
+    bool radii_passed{};
+    bool topology_proxy_passed{};
+    bool outward_orientation_passed{};
+    bool shape_regularity_passed{};
     bool passed{};
 };
 
@@ -295,6 +364,12 @@ evaluate_spherical_directional_derivative_refinement(
 evaluate_spherical_instantaneous_velocity_refinement(
     const std::array<SphericalSurfaceTensionInstantaneousAudit, 4>& levels,
     const SphericalInstantaneousVelocityThresholds& thresholds
+);
+
+[[nodiscard]] SphericalMeshFamilyDiagnosticAudit
+evaluate_spherical_mesh_family_quality(
+    const std::array<SphericalSurfaceTensionInstantaneousAudit, 4>& levels,
+    const SphericalMeshFamilyDiagnosticThresholds& thresholds
 );
 
 } // namespace prl::cell_engine
