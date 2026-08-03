@@ -1,0 +1,14 @@
+X1-K v08r1 repaired adjudication evidence
+status: passed_revised_fixed_topology_d1_s1_acceptance_after_adjudicator_repair
+v08: failed_adjudicator_contract_incomplete
+historical v02/v04/v06: failed, unchanged
+required raw evidence files: 23
+source/current Git blobs verified: true
+v05 fraction/global-L2/error-order semantics recomputed: true
+limitation included in D1 acceptance aggregate: false
+machine verification: passed_with_expected_historical_failures
+revised D1 passed: true
+revised S1 passed: true
+X1-K passed: false
+R1/C1/F1: not_executed
+downstream authorized: false

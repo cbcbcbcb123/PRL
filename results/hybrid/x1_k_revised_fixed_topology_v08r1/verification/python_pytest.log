@@ -1,0 +1,12 @@
+﻿python.exe : F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CU
+DA_PATH environment variable if CuPy fails to load.
+At line:5 char:1
++ & python -m pytest -q 2>&1 | Out-File -FilePath $logPath -Encoding ut ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (F:\python\Lib\s... fails to load.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  warnings.warn(
+........................................................................ [ 96%]
+...                                                                      [100%]
+75 passed in 160.63s (0:02:40)

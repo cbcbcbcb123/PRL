@@ -1,0 +1,61 @@
+{
+  "status": "passed_with_expected_historical_failures",
+  "commands": {
+    "parent_ctest": {
+      "log_path": "parent_ctest.log",
+      "exitcode_path": "parent_ctest.exitcode",
+      "log_sha256": "dbd2b60bb74d3bca913441e359efa5de876460b51e556eb609cf7e9e2635c90c",
+      "log_bytes": 1219449,
+      "exit_code": 8,
+      "passed": 52,
+      "failed": 3,
+      "total": 55,
+      "expected_historical_failures": [
+        "prl_x1k_sphere_instantaneous_velocity_refinement",
+        "prl_x1k_v04_family_b_parameterized_diagnosis",
+        "prl_x1k_v06_family_c_short_trajectory_gate"
+      ],
+      "unexpected_failures": [],
+      "verified": true
+    },
+    "fork_ctest": {
+      "log_path": "fork_ctest.log",
+      "exitcode_path": "fork_ctest.exitcode",
+      "log_sha256": "53834faa97c4413f347262129d089cc82e34dea4280cdeeecbc74ad2e42dd229",
+      "log_bytes": 25121,
+      "exit_code": 0,
+      "passed": 134,
+      "failed": 0,
+      "total": 134,
+      "verified": true
+    },
+    "strict_prl_core": {
+      "log_path": "strict_prl_core.log",
+      "exitcode_path": "strict_prl_core.exitcode",
+      "log_sha256": "3cbc5b27d90053b84bec8aa5f3889b78453342f243fac0e1ce9fa7c825372323",
+      "log_bytes": 33,
+      "exit_code": 0,
+      "passed": true,
+      "verified": true
+    },
+    "python_pytest": {
+      "log_path": "python_pytest.log",
+      "exitcode_path": "python_pytest.exitcode",
+      "log_sha256": "5f203deabc62a209667e3d8ced0ef4920c817e692b3d888751e8e564db39ea9d",
+      "log_bytes": 675,
+      "exit_code": 0,
+      "passed": 75,
+      "verified": true
+    },
+    "ruff": {
+      "log_path": "ruff.log",
+      "exitcode_path": "ruff.exitcode",
+      "log_sha256": "e0af5e08a7ef46da5421b01a4ef0562a8b8873ea00d36522b4c928b565eef4dd",
+      "log_bytes": 23,
+      "exit_code": 0,
+      "passed": true,
+      "verified": true
+    }
+  },
+  "all_required_command_evidence_verified": true
+}

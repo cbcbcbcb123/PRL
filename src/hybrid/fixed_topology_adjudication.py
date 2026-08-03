@@ -4,7 +4,8 @@ import csv
 import hashlib
 import io
 import math
-from dataclasses import dataclass
+import subprocess
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
 
@@ -31,6 +32,7 @@ class EvidenceSpec:
     sha256: str
     row_count: int
     schema: tuple[str, ...]
+    source_path: str | None = None
 
 
 @dataclass(frozen=True)
@@ -40,6 +42,9 @@ class ProvenanceRecord:
     sha256: str
     row_count: int
     schema: tuple[str, ...]
+    source_blob_id: str
+    current_blob_id: str
+    source_blob_verified: bool
     verified: bool
 
 
@@ -289,13 +294,35 @@ def _close(left: float, right: float, scale: float = 1.0) -> bool:
     return abs(left - right) <= 1.0e-12 * max(scale, abs(left), abs(right))
 
 
+def _git(
+    workspace_root: Path,
+    arguments: list[str],
+    *,
+    text_output: bool = True,
+) -> subprocess.CompletedProcess[Any]:
+    try:
+        return subprocess.run(
+            ["git", *arguments],
+            cwd=workspace_root,
+            capture_output=True,
+            check=False,
+            text=text_output,
+        )
+    except OSError as error:
+        _fail_integrity(
+            f"git object verification could not run: {error}",
+            reason="git_object_verification_unavailable",
+        )
+
+
 def _load_evidence(
     workspace_root: Path,
+    evidence_specs: tuple[EvidenceSpec, ...],
 ) -> tuple[dict[str, list[dict[str, str]]], tuple[ProvenanceRecord, ...]]:
     loaded: dict[str, list[dict[str, str]]] = {}
     provenance: list[ProvenanceRecord] = []
     forbidden = {"nan", "+nan", "-nan", "inf", "+inf", "-inf", "infinity", "+infinity", "-infinity"}
-    for spec in EVIDENCE_SPECS:
+    for spec in evidence_specs:
         path = workspace_root / spec.path
         if not path.is_file():
             _fail_integrity(f"missing required evidence: {spec.path}")
@@ -305,6 +332,70 @@ def _load_evidence(
             _fail_integrity(
                 f"sha256 mismatch for {spec.path}: expected {spec.sha256}, observed {observed_hash}",
                 reason="sha256_mismatch",
+                path=spec.path,
+            )
+        commit_check = _git(
+            workspace_root,
+            ["rev-parse", "--verify", f"{spec.source_commit}^{{commit}}"],
+        )
+        if commit_check.returncode != 0:
+            _fail_integrity(
+                f"source commit does not exist for {spec.path}: "
+                f"{spec.source_commit}",
+                reason="source_commit_missing",
+                path=spec.path,
+            )
+        source_path = spec.source_path or spec.path
+        source_ref = f"{spec.source_commit}:{source_path}"
+        source_id_result = _git(
+            workspace_root,
+            ["rev-parse", "--verify", source_ref],
+        )
+        if source_id_result.returncode != 0:
+            _fail_integrity(
+                f"source path does not exist at frozen commit for {spec.path}: "
+                f"{source_ref}",
+                reason="source_path_missing",
+                path=spec.path,
+            )
+        source_blob_id = source_id_result.stdout.strip()
+        source_type_result = _git(workspace_root, ["cat-file", "-t", source_ref])
+        if (
+            source_type_result.returncode != 0
+            or source_type_result.stdout.strip() != "blob"
+        ):
+            _fail_integrity(
+                f"source object is not a blob for {spec.path}: {source_ref}",
+                reason="source_object_not_blob",
+                path=spec.path,
+            )
+        source_bytes_result = _git(
+            workspace_root,
+            ["cat-file", "blob", source_ref],
+            text_output=False,
+        )
+        if source_bytes_result.returncode != 0:
+            _fail_integrity(
+                f"source blob could not be read for {spec.path}: {source_ref}",
+                reason="source_blob_unreadable",
+                path=spec.path,
+            )
+        current_id_result = _git(
+            workspace_root,
+            ["hash-object", "--no-filters", "--", spec.path],
+        )
+        if current_id_result.returncode != 0:
+            _fail_integrity(
+                f"current blob id could not be computed for {spec.path}",
+                reason="current_blob_unreadable",
+                path=spec.path,
+            )
+        current_blob_id = current_id_result.stdout.strip()
+        if source_bytes_result.stdout != payload or source_blob_id != current_blob_id:
+            _fail_integrity(
+                f"source blob differs from current evidence for {spec.path}: "
+                f"source {source_blob_id}, current {current_blob_id}",
+                reason="source_blob_mismatch",
                 path=spec.path,
             )
         try:
@@ -337,6 +428,9 @@ def _load_evidence(
                 sha256=observed_hash,
                 row_count=len(rows),
                 schema=spec.schema,
+                source_blob_id=source_blob_id,
+                current_blob_id=current_blob_id,
+                source_blob_verified=True,
                 verified=True,
             )
         )
@@ -795,13 +889,71 @@ def _adjudicate_d1(
     ring_rows = data[ring_path]
     partition_passed = True
     pointwise_v5: list[float] = []
+    error_energy_by_level: dict[int, dict[str, float]] = {}
+    region_semantic_closure: list[dict[str, Any]] = []
     for level_index, level_row in enumerate(levels, start=1):
         level_regions = {
             row["region"]: row for row in regions if row["source_level"] == str(level_index)
         }
         v5 = level_regions["valence_5"]
         v6 = level_regions["valence_6"]
-        total = _as_float(v5, "normal_error_energy", region_path) + _as_float(v6, "normal_error_energy", region_path)
+        v5_energy = _as_float(v5, "normal_error_energy", region_path)
+        v6_energy = _as_float(v6, "normal_error_energy", region_path)
+        total = v5_energy + v6_energy
+        if total <= 0.0:
+            _fail_integrity(
+                f"non-positive v05 regional error energy at source level {level_index}",
+                reason="v05_region_energy_nonpositive",
+                path=region_path,
+            )
+        v5_fraction = _as_float(v5, "fraction_of_total_error_energy", region_path)
+        v6_fraction = _as_float(v6, "fraction_of_total_error_energy", region_path)
+        if not _close(v5_fraction, v5_energy / total) or not _close(
+            v6_fraction, v6_energy / total
+        ):
+            _fail_integrity(
+                f"v05 regional error fractions do not recompute at source level "
+                f"{level_index}",
+                reason="v05_region_fraction_mismatch",
+                path=region_path,
+            )
+        total_area = _as_float(v5, "control_area", region_path) + _as_float(
+            v6, "control_area", region_path
+        )
+        exact_velocity = abs(
+            _as_float(level_row, "exact_normal_velocity", levels_path)
+        )
+        if total_area <= 0.0 or exact_velocity <= 0.0:
+            _fail_integrity(
+                f"v05 global L2 reconstruction has a non-positive denominator "
+                f"at source level {level_index}",
+                reason="v05_global_l2_denominator_nonpositive",
+                path=levels_path,
+            )
+        rebuilt_global_l2 = math.sqrt(total / total_area) / exact_velocity
+        reported_global_l2 = _as_float(
+            level_row, "normal_velocity_relative_l2", levels_path
+        )
+        if not _close(rebuilt_global_l2, reported_global_l2):
+            _fail_integrity(
+                f"v05 global normal L2 does not rebuild from regional energy "
+                f"at source level {level_index}",
+                reason="v05_global_l2_mismatch",
+                path=levels_path,
+            )
+        region_semantic_closure.append(
+            {
+                "source_level": level_index,
+                "total_error_energy": total,
+                "total_control_area": total_area,
+                "reported_valence_5_fraction": v5_fraction,
+                "recomputed_valence_5_fraction": v5_energy / total,
+                "reported_valence_6_fraction": v6_fraction,
+                "recomputed_valence_6_fraction": v6_energy / total,
+                "reported_global_normal_l2": reported_global_l2,
+                "recomputed_global_normal_l2": rebuilt_global_l2,
+            }
+        )
         fractions = _as_float(v5, "fraction_of_total_error_energy", region_path) + _as_float(v6, "fraction_of_total_error_energy", region_path)
         counts = _as_int(v5, "vertex_count", region_path) + _as_int(v6, "vertex_count", region_path)
         partition_passed = partition_passed and _close(fractions, 1.0) and counts == _as_int(level_row, "vertices", levels_path)
@@ -823,6 +975,14 @@ def _adjudicate_d1(
         partition_passed = partition_passed and all(
             ring[field] == registered_ring[field] for field in ERROR_REGION_SCHEMA
         )
+        error_energy_by_level[level_index] = {
+            "total_error_energy_order": total,
+            "valence_5_error_energy_order": v5_energy,
+            "valence_6_error_energy_order": v6_energy,
+            "valence_5_closed_one_ring_error_energy_order": _as_float(
+                registered_ring, "normal_error_energy", region_path
+            ),
+        }
         pointwise_v5.append(_as_float(v5, "maximum_pointwise_relative_error", region_path))
         matching_valence = [row for row in valence_rows if row["source_level"] == str(level_index)]
         partition_passed = partition_passed and sum(_as_int(row, "vertex_count", valence_path) for row in matching_valence) == _as_int(level_row, "vertices", levels_path)
@@ -837,18 +997,82 @@ def _adjudicate_d1(
         partition_passed,
         (region_path, valence_path, ring_path, V05_PREFIX + "family_c_error_energy_orders.csv"),
     )
-    pointwise_not_improved = pointwise_v5[-1] >= pointwise_v5[0]
+    order_path = V05_PREFIX + "family_c_error_energy_orders.csv"
+    order_rows = _unique_map(
+        data[order_path],
+        ("family", "coarse_source_level", "fine_source_level"),
+        order_path,
+    )
+    recomputed_energy_orders: list[dict[str, float | int]] = []
+    for coarse_level in range(1, 4):
+        fine_level = coarse_level + 1
+        row = order_rows[("C", str(coarse_level), str(fine_level))]
+        recomputed_row: dict[str, float | int] = {
+            "coarse_source_level": coarse_level,
+            "fine_source_level": fine_level,
+        }
+        for field in (
+            "total_error_energy_order",
+            "valence_5_error_energy_order",
+            "valence_6_error_energy_order",
+            "valence_5_closed_one_ring_error_energy_order",
+        ):
+            expected_order = _observed_order(
+                error_energy_by_level[coarse_level][field],
+                error_energy_by_level[fine_level][field],
+                h[coarse_level - 1],
+                h[fine_level - 1],
+            )
+            recomputed_row[field] = expected_order
+            if not math.isfinite(expected_order) or not _close(
+                expected_order, _as_float(row, field, order_path)
+            ):
+                _fail_integrity(
+                    f"v05 error-energy order {field} does not recompute for "
+                    f"levels {coarse_level}->{fine_level}",
+                    reason="v05_error_energy_order_mismatch",
+                    path=order_path,
+                )
+        recomputed_energy_orders.append(recomputed_row)
+    _record(
+        decisions,
+        "evidence_integrity",
+        "D1_global_L2",
+        "v05_region_fraction_and_global_l2_semantic_closure",
+        "recomputed",
+        "1e-12 relative/absolute tolerance",
+        region_semantic_closure,
+        True,
+        (region_path, levels_path),
+    )
+    _record(
+        decisions,
+        "evidence_integrity",
+        "D1_global_L2",
+        "v05_error_energy_orders_semantic_closure",
+        "recomputed with actual h",
+        "1e-12 relative/absolute tolerance",
+        recomputed_energy_orders,
+        True,
+        (region_path, order_path, levels_path),
+    )
+    pointwise_trend = (
+        "improved"
+        if pointwise_v5[-1] < pointwise_v5[0]
+        else "not_improved"
+    )
     _record(
         decisions,
         "limitation",
         "D1_extraordinary_vertices",
-        "valence_5_pointwise_not_improved",
-        "finest>=coarsest",
-        "true",
+        "valence_5_pointwise_sequence_reported",
+        "report_only",
+        "claim_allowed=false",
         pointwise_v5,
-        pointwise_not_improved,
+        True,
         (region_path,),
-        "global L2 convergence is not pointwise or uniform convergence",
+        f"observed_trend={pointwise_trend}; global L2 convergence does not "
+        "authorize pointwise or uniform convergence claims",
     )
     return {
         "h_rms": h,
@@ -857,6 +1081,8 @@ def _adjudicate_d1(
         "tangential_errors": tangent,
         "tangential_orders": tangent_orders,
         "valence_5_pointwise_maxima": pointwise_v5,
+        "region_semantic_closure": region_semantic_closure,
+        "recomputed_error_energy_orders": recomputed_energy_orders,
         "pointwise_convergence_claim_allowed": False,
         "uniform_convergence_claim_allowed": False,
     }
@@ -1145,9 +1371,11 @@ def _result(
 
 def adjudicate_fixed_topology_evidence(
     workspace_root: Path,
+    *,
+    evidence_specs: tuple[EvidenceSpec, ...] = EVIDENCE_SPECS,
 ) -> AdjudicationDecision:
     """Recompute the bounded v08 decision directly from frozen raw CSV evidence."""
-    data, provenance = _load_evidence(workspace_root)
+    data, provenance = _load_evidence(workspace_root, evidence_specs)
     _validate_v05_keys(data)
     v06_ledger, v07_ledger = _validate_v06_v07_keys(data)
     ledgers = {"v06": v06_ledger, "v07": v07_ledger}
@@ -1172,8 +1400,7 @@ def adjudicate_fixed_topology_evidence(
     d1_records = [
         record
         for record in decisions
-        if record.role in {"revised_acceptance", "limitation"}
-        and record.scope.startswith("D1")
+        if record.role == "revised_acceptance" and record.scope.startswith("D1")
     ]
     if not all(record.passed for record in d1_records):
         first = next(record for record in d1_records if not record.passed)
@@ -1212,4 +1439,31 @@ def adjudicate_fixed_topology_evidence(
         ledgers,
         True,
         True,
+    )
+
+
+def adjudicate_fixed_topology_evidence_after_repair(
+    workspace_root: Path,
+    *,
+    evidence_specs: tuple[EvidenceSpec, ...] = EVIDENCE_SPECS,
+) -> AdjudicationDecision:
+    """Run the repaired v08r1 contract while preserving the rejected v08 state."""
+    decision = adjudicate_fixed_topology_evidence(
+        workspace_root,
+        evidence_specs=evidence_specs,
+    )
+    historical_statuses = {
+        **decision.historical_statuses,
+        "v08": "failed_adjudicator_contract_incomplete",
+    }
+    status = decision.status
+    if status == "passed_revised_fixed_topology_d1_s1_acceptance":
+        status = (
+            "passed_revised_fixed_topology_d1_s1_acceptance_"
+            "after_adjudicator_repair"
+        )
+    return replace(
+        decision,
+        status=status,
+        historical_statuses=historical_statuses,
     )

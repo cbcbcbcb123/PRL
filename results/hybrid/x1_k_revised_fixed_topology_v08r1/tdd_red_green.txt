@@ -1,0 +1,46 @@
+X1-K v08r1 adjudicator repair TDD evidence
+================================================
+
+1. Source commit existence
+RED: public adjudicator rejected the injected keyword because no frozen-spec seam existed.
+GREEN: a missing commit object raises EvidenceIntegrityError(reason=source_commit_missing).
+
+2. Source path/blob provenance
+RED: ProvenanceRecord had no source_blob_verified field.
+GREEN: all 23 source_commit:path blobs are read from Git, compared byte-for-byte with
+current evidence, and source_blob_id/current_blob_id/source_blob_verified are recorded;
+a replaced source path raises source_blob_mismatch.
+
+3. v05 region fractions
+RED: paired fraction corruption preserving fraction_v5+fraction_v6=1 did not raise.
+GREEN: each fraction is recomputed from E_i/(E_v5+E_v6); corruption raises
+v05_region_fraction_mismatch.
+
+4. v05 global normal L2
+RED: a 10% corrupted reported global normal L2 did not raise.
+GREEN: sqrt((E_v5+E_v6)/(A_v5+A_v6))/abs(v_exact) is recomputed and corruption
+raises v05_global_l2_mismatch.
+
+5. v05 error-energy orders
+RED: a corrupted closed-one-ring reported order did not raise.
+GREEN: all four energy-order columns for the three actual-h adjacent pairs are
+recomputed; corruption raises v05_error_energy_order_mismatch.
+
+6. Pointwise limitation direction
+RED: an improving injected pointwise sequence caused revised_d1_passed=false.
+GREEN: the sequence and claim flags are mandatory report data, but limitation records
+are excluded from the revised D1 Boolean aggregate.
+
+7. Machine verification evidence
+RED-a: verification module/public parser did not exist.
+GREEN-a: missing log or exit-code files fail closed.
+RED-b: complete synthetic command evidence reached NotImplementedError.
+GREEN-b: CTest/pytest counts, exact historical failures, completion markers, exit codes,
+and log SHA-256 values are parsed from files; Python pass count is not frozen in code.
+
+8. Repaired status boundary
+RED: repaired public entrypoint did not exist.
+GREEN: it returns passed_revised_fixed_topology_d1_s1_acceptance_after_adjudicator_repair,
+preserves v08=failed_adjudicator_contract_incomplete, and keeps X1-K/downstream false.
+
+Focused final result before full regression: 12 passed.

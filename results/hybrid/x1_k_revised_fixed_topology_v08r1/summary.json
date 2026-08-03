@@ -1,0 +1,465 @@
+{
+  "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V08R1-ADJUDICATOR-REPAIR",
+  "contract_commit": "a500893e86c2d5415a48a8458a8a0c2f7eb721ce",
+  "result_package_commit": null,
+  "status": "passed_revised_fixed_topology_d1_s1_acceptance_after_adjudicator_repair",
+  "v08_rejection_status": "failed_adjudicator_contract_incomplete",
+  "historical_evidence_status": {
+    "route_h_gate_a_v01": "failed_invalid_numerics",
+    "v02_d1": "failed_instantaneous_smooth_surface_refinement",
+    "v04_family_b": "failed_family_B_parameterized_diagnosis",
+    "v06_mean_radius_spatial": "failed_family_c_smooth_short_trajectory_analytic_radius_nonmonotonic",
+    "v08": "failed_adjudicator_contract_incomplete"
+  },
+  "revised_acceptance": {
+    "evidence_integrity_passed": true,
+    "d1_passed": true,
+    "s1_passed": true
+  },
+  "x1_k_passed": false,
+  "r1_c1_f1": "not_executed",
+  "downstream_authorized": false,
+  "limitations": {
+    "pointwise_convergence_claim_allowed": false,
+    "uniform_convergence_claim_allowed": false,
+    "v05_valence_5_pointwise_maxima": [
+      0.10956714380371381,
+      0.13802311139862158,
+      0.1468274025601768,
+      0.14907357087242268
+    ],
+    "role_in_acceptance_aggregate": false,
+    "interpretation": "The sequence is mandatory provenance but cannot gate D1 or authorize pointwise/uniform convergence claims."
+  },
+  "metrics": {
+    "revised_d1": {
+      "h_rms": [
+        0.5846465833622684,
+        0.3007587447307266,
+        0.1514741410305466,
+        0.0758752187252943
+      ],
+      "normal_errors": [
+        0.058544396083844895,
+        0.03441056060345361,
+        0.017857847447865338,
+        0.009008418460499743
+      ],
+      "normal_orders": [
+        0.7994923718410994,
+        0.9563007384792375,
+        0.9898148132375965
+      ],
+      "tangential_errors": [
+        0.024079009643659676,
+        0.012883427116400337,
+        0.005192115673290819,
+        0.00193459912826544
+      ],
+      "tangential_orders": [
+        0.9408749363956926,
+        1.3249877692957313,
+        1.4280424100311508
+      ],
+      "valence_5_pointwise_maxima": [
+        0.10956714380371381,
+        0.13802311139862158,
+        0.1468274025601768,
+        0.14907357087242268
+      ],
+      "region_semantic_closure": [
+        {
+          "source_level": 1,
+          "total_error_energy": 6.38934291346932e-07,
+          "total_control_area": 11.65106308442878,
+          "reported_valence_5_fraction": 0.7518019322312557,
+          "recomputed_valence_5_fraction": 0.751801932231256,
+          "reported_valence_6_fraction": 0.2481980677687438,
+          "recomputed_valence_6_fraction": 0.24819806776874392,
+          "reported_global_normal_l2": 0.058544396083844895,
+          "recomputed_global_normal_l2": 0.05854439608384489
+        },
+        {
+          "source_level": 2,
+          "total_error_energy": 2.3350906898445868e-07,
+          "total_control_area": 12.325378745635009,
+          "reported_valence_5_fraction": 0.9223614921240215,
+          "recomputed_valence_5_fraction": 0.9223614921240204,
+          "reported_valence_6_fraction": 0.07763850787597966,
+          "recomputed_valence_6_fraction": 0.07763850787597956,
+          "reported_global_normal_l2": 0.03441056060345361,
+          "recomputed_global_normal_l2": 0.034410560603453634
+        },
+        {
+          "source_level": 3,
+          "total_error_energy": 6.380769326239426e-08,
+          "total_control_area": 12.505321013045458,
+          "reported_valence_5_fraction": 0.9636970965589862,
+          "recomputed_valence_5_fraction": 0.9636970965589858,
+          "reported_valence_6_fraction": 0.036302903441014236,
+          "recomputed_valence_6_fraction": 0.036302903441014216,
+          "reported_global_normal_l2": 0.017857847447865338,
+          "recomputed_global_normal_l2": 0.01785784744786535
+        },
+        {
+          "source_level": 4,
+          "total_error_energy": 1.6296614913112402e-08,
+          "total_control_area": 12.551057433430845,
+          "reported_valence_5_fraction": 0.9744673158580983,
+          "recomputed_valence_5_fraction": 0.9744673158581019,
+          "reported_valence_6_fraction": 0.02553268414189808,
+          "recomputed_valence_6_fraction": 0.02553268414189817,
+          "reported_global_normal_l2": 0.009008418460499743,
+          "recomputed_global_normal_l2": 0.009008418460499731
+        }
+      ],
+      "recomputed_error_energy_orders": [
+        {
+          "coarse_source_level": 1,
+          "fine_source_level": 2,
+          "total_error_energy_order": 1.5143403965545963,
+          "valence_5_error_energy_order": 1.2067360708261985,
+          "valence_6_error_energy_order": 3.2627458678532077,
+          "valence_5_closed_one_ring_error_energy_order": 1.582632786153527
+        },
+        {
+          "coarse_source_level": 2,
+          "fine_source_level": 3,
+          "total_error_energy_order": 1.8914702294577368,
+          "valence_5_error_energy_order": 1.8275538794503847,
+          "valence_6_error_energy_order": 2.9997557132664503,
+          "valence_5_closed_one_ring_error_energy_order": 1.8750401694985872
+        },
+        {
+          "coarse_source_level": 3,
+          "fine_source_level": 4,
+          "total_error_energy_order": 1.9743489176985685,
+          "valence_5_error_energy_order": 1.9582726116411293,
+          "valence_6_error_energy_order": 2.483427087939208,
+          "valence_5_closed_one_ring_error_energy_order": 1.9618952062112773
+        }
+      ],
+      "pointwise_convergence_claim_allowed": false,
+      "uniform_convergence_claim_allowed": false
+    },
+    "revised_s1": {
+      "structural": [
+        {
+          "source_level": 1,
+          "r_H": 3.573353188610301e-16,
+          "r_v": 0.0,
+          "supporting_controls_passed": true
+        },
+        {
+          "source_level": 2,
+          "r_H": 7.881665680180794e-16,
+          "r_v": 2.1684043449710089e-16,
+          "supporting_controls_passed": true
+        },
+        {
+          "source_level": 3,
+          "r_H": 1.9975511246778127e-15,
+          "r_v": 1.3010426069826053e-15,
+          "supporting_controls_passed": true
+        },
+        {
+          "source_level": 4,
+          "r_H": 4.201685312125912e-15,
+          "r_v": 1.734723475976807e-15,
+          "supporting_controls_passed": true
+        }
+      ],
+      "mean_radius_time": {
+        "1": {
+          "responses": [
+            0.9999199968563438,
+            0.9999199968241776,
+            0.9999199968080957,
+            0.9999199968000538
+          ],
+          "differences": [
+            3.216615862555727e-11,
+            1.608191357860278e-11,
+            8.041900478872321e-12
+          ],
+          "orders": [
+            1.0001045732496145,
+            0.9998306947275621
+          ],
+          "roundoff_plateau": false,
+          "richardson_response": 0.9999199967920119,
+          "richardson_error": 7.73203723269944e-12
+        },
+        "4": {
+          "responses": [
+            0.9999199968636283,
+            0.9999199968316186,
+            0.9999199968156173,
+            0.9999199968076143
+          ],
+          "differences": [
+            3.200972820138759e-11,
+            1.6001311387014994e-11,
+            8.002931650707978e-12
+          ],
+          "orders": [
+            1.000320280842622,
+            0.9995896529799322
+          ],
+          "roundoff_plateau": false,
+          "richardson_response": 0.9999199967996114,
+          "richardson_error": 1.325606291402437e-13
+        }
+      },
+      "mean_radius_cross_mesh_richardson_difference": 7.599476603559197e-12,
+      "v06_historical_mean_radius_errors": [
+        1.0439287051472873e-07,
+        1.6965749578041943e-07,
+        1.931183453395129e-07,
+        1.984083464348854e-07
+      ],
+      "v06_historical_mean_radius_orders": [
+        -0.7305866503451734,
+        -0.1888361880551532,
+        -0.03909027092934956
+      ],
+      "v06_spatial_qois": {
+        "area_ratio": {
+          "exact": 0.99984,
+          "responses": [
+            0.9998393592297464,
+            0.9998397844788186,
+            0.999839945178757,
+            0.9998399869294915
+          ],
+          "errors": [
+            0.004004814084522685,
+            0.0013470073834116786,
+            0.0003426327686849645,
+            8.169067783334312e-05
+          ],
+          "orders": [
+            1.639255680027239,
+            1.995909592313835,
+            2.0738722984581583
+          ],
+          "adjacent_differences": [
+            0.002657806701111006,
+            0.0010043746147267141,
+            0.0002609420908516214
+          ],
+          "generalized_orders": [
+            1.4913944569775595,
+            1.9704701430205205
+          ]
+        },
+        "volume_ratio": {
+          "exact": 0.999760009600256,
+          "responses": [
+            0.9997597914346869,
+            0.9997599490118783,
+            0.9997599999026575,
+            0.9997600082993329
+          ],
+          "errors": [
+            0.0009090595682097984,
+            0.0002524616727335188,
+            4.0408276799180734e-05,
+            5.4207299474185325e-06
+          ],
+          "orders": [
+            1.9274152351545766,
+            2.671296335090018,
+            2.905731394812876
+          ],
+          "adjacent_differences": [
+            0.0006565978954762797,
+            0.00021205339593433805,
+            3.4987546851762206e-05
+          ],
+          "generalized_orders": [
+            1.7253079700644776,
+            2.631073547807773
+          ]
+        },
+        "energy_ratio": {
+          "exact": 0.99984,
+          "responses": [
+            0.9998393592297464,
+            0.9998397844788186,
+            0.999839945178757,
+            0.9998399869294913
+          ],
+          "errors": [
+            0.004004814084522685,
+            0.0013470073834116786,
+            0.0003426327686849645,
+            8.16906792211219e-05
+          ],
+          "orders": [
+            1.639255680027239,
+            1.995909592313835,
+            2.0738722738847377
+          ],
+          "adjacent_differences": [
+            0.002657806701111006,
+            0.0010043746147267141,
+            0.0002609420894638426
+          ],
+          "generalized_orders": [
+            1.4913944569775595,
+            1.9704701507566824
+          ]
+        }
+      },
+      "v06_time_pollution": {
+        "area_ratio": {
+          "delta_time": 1.5433876399129076e-11,
+          "space_proxy": 1.3085942329738032e-08,
+          "roundoff_plateau": false
+        },
+        "volume_ratio": {
+          "delta_time": 2.4005353260747597e-11,
+          "space_proxy": 1.3249285002459033e-09,
+          "roundoff_plateau": false
+        },
+        "energy_ratio": {
+          "delta_time": 1.5433876399129076e-11,
+          "space_proxy": 1.3085942551782637e-08,
+          "roundoff_plateau": false
+        }
+      },
+      "v06_step_controls": {
+        "minimum_oriented_alignment": 0.999999972906028,
+        "minimum_triangle_quality": 0.9375029070280622,
+        "minimum_face_area_ratio": 0.9998276208355581,
+        "maximum_cache_residual": 1.1654428776347817e-16,
+        "maximum_centroid_drift": 1.6882136130237922e-15,
+        "maximum_local_excursion": 0.14907345589013393,
+        "maximum_local_radial_error_over_h": 0.0001853231892446462,
+        "maximum_local_edge_scaling_error": 8.11597228111971e-06,
+        "minimum_local_quality_ratio": 0.9999958973908598,
+        "force_buffers_cleared": true,
+        "maximum_normalized_positive_energy": 3.324902439546511e-11
+      },
+      "v07_step_controls": {
+        "minimum_oriented_alignment": 0.9999999728836301,
+        "minimum_triangle_quality": 0.9375029070280622,
+        "minimum_face_area_ratio": 0.9998276208222706,
+        "maximum_cache_residual": 1.1204248708301837e-16,
+        "maximum_centroid_drift": 1.6882136130237922e-15,
+        "maximum_local_excursion": 0.14907345589013393,
+        "maximum_local_radial_error_over_h": 0.00018538803595970958,
+        "maximum_local_edge_scaling_error": 8.115977706335542e-06,
+        "minimum_local_quality_ratio": 0.9999958973804223,
+        "force_buffers_cleared": true,
+        "maximum_normalized_positive_energy": 1.3279069896530188e-10
+      },
+      "energy_coverage": {
+        "coverage": "surface_tension_only",
+        "registered": [
+          "gamma*A",
+          "D_zeta"
+        ],
+        "excluded": [
+          "legacy_0.5_gamma_A_cache",
+          "membrane_elasticity",
+          "bending",
+          "pressure",
+          "contact",
+          "active",
+          "ECM",
+          "flow"
+        ]
+      }
+    }
+  },
+  "ledger_recomputations": {
+    "v06": {
+      "rows": 1205,
+      "runs": 5,
+      "maximum_normalized_cumulative_positive_residual": 3.324902439546511e-11,
+      "ledger_recomputed": true,
+      "coverage": "surface_tension_only"
+    },
+    "v07": {
+      "rows": 1508,
+      "runs": 8,
+      "maximum_normalized_cumulative_positive_residual": 1.3279069896530188e-10,
+      "ledger_recomputed": true,
+      "coverage": "surface_tension_only"
+    }
+  },
+  "provenance_file_count": 23,
+  "decision_count": 56,
+  "revised_acceptance_failure_count": 0,
+  "verification": {
+    "status": "passed_with_expected_historical_failures",
+    "commands": {
+      "parent_ctest": {
+        "log_path": "parent_ctest.log",
+        "exitcode_path": "parent_ctest.exitcode",
+        "log_sha256": "dbd2b60bb74d3bca913441e359efa5de876460b51e556eb609cf7e9e2635c90c",
+        "log_bytes": 1219449,
+        "exit_code": 8,
+        "passed": 52,
+        "failed": 3,
+        "total": 55,
+        "expected_historical_failures": [
+          "prl_x1k_sphere_instantaneous_velocity_refinement",
+          "prl_x1k_v04_family_b_parameterized_diagnosis",
+          "prl_x1k_v06_family_c_short_trajectory_gate"
+        ],
+        "unexpected_failures": [],
+        "verified": true
+      },
+      "fork_ctest": {
+        "log_path": "fork_ctest.log",
+        "exitcode_path": "fork_ctest.exitcode",
+        "log_sha256": "53834faa97c4413f347262129d089cc82e34dea4280cdeeecbc74ad2e42dd229",
+        "log_bytes": 25121,
+        "exit_code": 0,
+        "passed": 134,
+        "failed": 0,
+        "total": 134,
+        "verified": true
+      },
+      "strict_prl_core": {
+        "log_path": "strict_prl_core.log",
+        "exitcode_path": "strict_prl_core.exitcode",
+        "log_sha256": "3cbc5b27d90053b84bec8aa5f3889b78453342f243fac0e1ce9fa7c825372323",
+        "log_bytes": 33,
+        "exit_code": 0,
+        "passed": true,
+        "verified": true
+      },
+      "python_pytest": {
+        "log_path": "python_pytest.log",
+        "exitcode_path": "python_pytest.exitcode",
+        "log_sha256": "5f203deabc62a209667e3d8ced0ef4920c817e692b3d888751e8e564db39ea9d",
+        "log_bytes": 675,
+        "exit_code": 0,
+        "passed": 75,
+        "verified": true
+      },
+      "ruff": {
+        "log_path": "ruff.log",
+        "exitcode_path": "ruff.exitcode",
+        "log_sha256": "e0af5e08a7ef46da5421b01a4ef0562a8b8873ea00d36522b4c928b565eef4dd",
+        "log_bytes": 23,
+        "exit_code": 0,
+        "passed": true,
+        "verified": true
+      }
+    },
+    "all_required_command_evidence_verified": true
+  },
+  "not_executed": [
+    "R1_remesh_on",
+    "C1_contact",
+    "F1_failure_persistence",
+    "ECM_flow_long_coupling",
+    "parameter_calibration"
+  ],
+  "claim_guard": "v08r1 repairs the fixed-topology evidence adjudicator only. v08 remains rejected; X1-K and downstream mechanistic, long-time, physiological, FSI, EFE and calibration claims are not authorized."
+}
