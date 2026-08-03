@@ -1,0 +1,12 @@
+{
+  "branch": "codex/simucell3d-hybrid-feasibility",
+  "parent_remote": "origin",
+  "parent_remote_url": "https://github.com/cbcbcbcb123/PRL.git",
+  "contract_commit": "a500893e86c2d5415a48a8458a8a0c2f7eb721ce",
+  "result_package_commit": "d457d558757c8b107e92ed43b24985cecbc99fad",
+  "result_package_push_verified": true,
+  "controlled_fork_commit": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+  "controlled_fork_unchanged": true,
+  "rejected_v08_files_modified": false,
+  "protected_untracked_content_staged": false
+}

@@ -1,7 +1,7 @@
 {
   "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V08R1-ADJUDICATOR-REPAIR",
   "contract_commit": "a500893e86c2d5415a48a8458a8a0c2f7eb721ce",
-  "result_package_commit": null,
+  "result_package_commit": "d457d558757c8b107e92ed43b24985cecbc99fad",
   "status": "passed_revised_fixed_topology_d1_s1_acceptance_after_adjudicator_repair",
   "v08_rejection_status": "failed_adjudicator_contract_incomplete",
   "historical_evidence_status": {

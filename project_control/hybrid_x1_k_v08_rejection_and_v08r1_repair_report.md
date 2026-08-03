@@ -3,6 +3,7 @@ report_id: REPORT-PRL-HYBRID-X1-K-V08R1-ADJUDICATOR-REPAIR
 status: passed_revised_fixed_topology_d1_s1_acceptance_after_adjudicator_repair
 contract: CONTRACT-PRL-HYBRID-X1-K-V08R1-ADJUDICATOR-REPAIR
 contract_commit: a500893e86c2d5415a48a8458a8a0c2f7eb721ce
+result_package_commit: d457d558757c8b107e92ed43b24985cecbc99fad
 rejected_v08_status: failed_adjudicator_contract_incomplete
 fork_commit: e2ed64a26bb5d7c2d878772564fb5ffcca343c3a
 x1_k_passed: false

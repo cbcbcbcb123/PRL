@@ -16,7 +16,7 @@ from hybrid.verification_evidence import adjudicate_verification_evidence
 
 CONTRACT_ID = "CONTRACT-PRL-HYBRID-X1-K-V08R1-ADJUDICATOR-REPAIR"
 CONTRACT_COMMIT = "a500893e86c2d5415a48a8458a8a0c2f7eb721ce"
-RESULT_PACKAGE_COMMIT: str | None = None
+RESULT_PACKAGE_COMMIT = "d457d558757c8b107e92ed43b24985cecbc99fad"
 
 
 def _write_json(path: Path, payload: Any) -> None:
