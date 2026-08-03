@@ -1,0 +1,19 @@
+case,criterion,operator,threshold,observed,passed,notes
+D0,area_order,in_range,"[-1.05;-0.95]",-0.9999417507277046,true,nonsmooth diagnostic only
+D0,registered_energy_order,in_range,"[-1.05;-0.95]",-0.9999417507277046,true,nonsmooth diagnostic only
+D0,volume_order,in_range,"[0.90;1.10]",0.9994846234517949,true,nonsmooth diagnostic only
+D1_direction,all_level_consistency_plateau,less_equal,1e-7,3.309201123538148e-9,true,maximum across four levels
+D1_direction,finest_residual,less_equal,1e-6,3.309201123538148e-9,true,registered owner gamma*A
+D1_direction,legacy_ratio_error,less_equal,1e-6,7.029690939353017e-7,true,legacy cache excluded
+D1_velocity,normal_errors_nonincreasing,equal,true,false,false,coarse symmetry superconvergence
+D1_velocity,normal_order_0_1,greater_equal,0.5,-57.11619008567927,false,non-plateau pair
+D1_velocity,normal_order_1_2,greater_equal,0.5,0.8061586680878775,true,actual RMS h
+D1_velocity,normal_order_2_3,greater_equal,0.5,0.957265265112834,true,actual RMS h
+D1_velocity,finest_normal_error,less_equal,0.02,0.01740432186214391,true,finest accuracy passes
+D1_velocity,tangential_errors_nonincreasing,equal,true,false,false,coarse/base symmetry plateau then emergence
+D1_velocity,tangential_order_0_1,greater_equal,0.5,-0.3769308985935439,false,non-plateau family condition
+D1_velocity,tangential_order_1_2,greater_equal,0.5,-47.206276067527284,false,non-plateau family condition
+D1_velocity,tangential_order_2_3,greater_equal,0.5,1.1749227699534339,true,actual RMS h
+D1_velocity,finest_tangential_pollution,less_equal,0.02,0.004857026773020317,true,finest accuracy passes
+D1_velocity,maximum_normalized_net_force,less_equal,1e-12,4.560319363353449e-16,true,all levels
+D1_velocity,overall,equal,true,false,false,first hard gate failure

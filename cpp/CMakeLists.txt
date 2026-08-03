@@ -266,9 +266,24 @@ if(BUILD_TESTING)
             COMMAND prl_short_trajectory_integration_test surface_tension_trajectory
         )
         add_test(
-            NAME prl_x1k_surface_tension_spatial_refinement_gate
+            NAME prl_x1k_cube_singularity_diagnostic_regression
             COMMAND prl_short_trajectory_integration_test
-                surface_tension_spatial_refinement
+                cube_singularity_diagnostic
+        )
+        add_test(
+            NAME prl_x1k_sphere_force_directional_derivative
+            COMMAND prl_short_trajectory_integration_test
+                sphere_force_directional_derivative
+        )
+        add_test(
+            NAME prl_x1k_sphere_directional_derivative_refinement
+            COMMAND prl_short_trajectory_integration_test
+                sphere_directional_refinement
+        )
+        add_test(
+            NAME prl_x1k_sphere_instantaneous_velocity_refinement
+            COMMAND prl_short_trajectory_integration_test
+                sphere_instantaneous_velocity
         )
 
         add_executable(

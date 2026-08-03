@@ -187,6 +187,66 @@ struct SurfaceTensionSpatialRefinementGateAudit {
     bool passed{};
 };
 
+struct SphericalSurfaceTensionInstantaneousAudit {
+    std::size_t vertex_count{};
+    std::size_t face_count{};
+    double rms_edge_length{};
+    double maximum_edge_length{};
+    double registered_surface_energy{};
+    double legacy_cache_energy{};
+    double finite_difference_directional_derivative{};
+    double force_directional_derivative{};
+    double normalized_directional_derivative_residual{};
+    double normal_velocity_relative_l2_error{};
+    double tangential_velocity_relative_l2_error{};
+    double normalized_net_force_residual{};
+    bool force_buffers_cleared{};
+};
+
+struct SphericalDirectionalDerivativeThresholds {
+    double maximum_finest_normalized_residual{};
+    double minimum_observed_order{};
+    double consistency_plateau_threshold{};
+    double maximum_legacy_cache_ratio_error{};
+};
+
+struct SphericalDirectionalDerivativeRefinementAudit {
+    std::array<double, 4> normalized_residuals{};
+    std::array<double, 3> observed_orders{};
+    double minimum_observed_order{};
+    bool consistency_plateau{};
+    bool mesh_scales_decreased{};
+    bool residuals_monotonic{};
+    bool finest_residual_passed{};
+    bool legacy_cache_exclusion_passed{};
+    bool force_buffers_cleared{};
+    bool passed{};
+};
+
+struct SphericalInstantaneousVelocityThresholds {
+    double maximum_finest_normal_velocity_error{};
+    double maximum_finest_tangential_pollution{};
+    double minimum_observed_order{};
+    double roundoff_plateau_threshold{};
+    double maximum_normalized_net_force_residual{};
+};
+
+struct SphericalInstantaneousVelocityRefinementAudit {
+    std::array<double, 4> normal_velocity_errors{};
+    std::array<double, 4> tangential_pollution_errors{};
+    std::array<double, 4> normalized_net_force_residuals{};
+    std::array<double, 3> normal_velocity_observed_orders{};
+    std::array<double, 3> tangential_pollution_observed_orders{};
+    bool normal_velocity_plateau{};
+    bool tangential_pollution_plateau{};
+    bool normal_velocity_monotonic{};
+    bool tangential_pollution_monotonic{};
+    bool normal_velocity_passed{};
+    bool tangential_pollution_passed{};
+    bool net_force_passed{};
+    bool passed{};
+};
+
 /** Run a fixed-topology, active-only trajectory with no retry or step adaptation. */
 [[nodiscard]] ActiveShortTrajectoryAudit run_active_fixed_topology_short_trajectory(
     ::cell& target,
@@ -214,6 +274,27 @@ evaluate_surface_tension_spatial_refinement(
     const SurfaceTensionShortTrajectoryAudit& base,
     const SurfaceTensionShortTrajectoryAudit& fine,
     const SurfaceTensionSpatialRefinementThresholds& thresholds
+);
+
+/** Audit the real surface-tension force against the registered gamma*A owner. */
+[[nodiscard]] SphericalSurfaceTensionInstantaneousAudit
+audit_spherical_surface_tension_instantaneous(
+    ::cell& target,
+    double surface_tension,
+    double damping_per_area,
+    double directional_step_per_rms_edge
+);
+
+[[nodiscard]] SphericalDirectionalDerivativeRefinementAudit
+evaluate_spherical_directional_derivative_refinement(
+    const std::array<SphericalSurfaceTensionInstantaneousAudit, 4>& levels,
+    const SphericalDirectionalDerivativeThresholds& thresholds
+);
+
+[[nodiscard]] SphericalInstantaneousVelocityRefinementAudit
+evaluate_spherical_instantaneous_velocity_refinement(
+    const std::array<SphericalSurfaceTensionInstantaneousAudit, 4>& levels,
+    const SphericalInstantaneousVelocityThresholds& thresholds
 );
 
 } // namespace prl::cell_engine

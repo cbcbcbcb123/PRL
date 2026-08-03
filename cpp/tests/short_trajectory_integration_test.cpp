@@ -145,6 +145,53 @@ mesh midpoint_refined(const mesh& input) {
     return result;
 }
 
+void project_vertices_to_unit_sphere(mesh& surface_mesh) {
+    for(std::size_t offset = 0; offset < surface_mesh.node_pos_lst.size(); offset += 3) {
+        const double radius = std::sqrt(
+            surface_mesh.node_pos_lst[offset] * surface_mesh.node_pos_lst[offset]
+            + surface_mesh.node_pos_lst[offset + 1]
+                * surface_mesh.node_pos_lst[offset + 1]
+            + surface_mesh.node_pos_lst[offset + 2]
+                * surface_mesh.node_pos_lst[offset + 2]
+        );
+        require(std::isfinite(radius) && radius > 0.0,
+                "icosphere projection encountered an invalid vertex");
+        for(std::size_t component = 0; component < 3; ++component) {
+            surface_mesh.node_pos_lst[offset + component] /= radius;
+        }
+    }
+}
+
+mesh projected_midpoint_refined(const mesh& input) {
+    auto result = midpoint_refined(input);
+    project_vertices_to_unit_sphere(result);
+    return result;
+}
+
+mesh icosphere_mesh(const std::size_t level) {
+    const double phi = 0.5 * (1.0 + std::sqrt(5.0));
+    mesh result;
+    result.node_pos_lst = {
+        -1.0,  phi,  0.0,   1.0,  phi,  0.0,
+        -1.0, -phi,  0.0,   1.0, -phi,  0.0,
+         0.0, -1.0,  phi,   0.0,  1.0,  phi,
+         0.0, -1.0, -phi,   0.0,  1.0, -phi,
+         phi,  0.0, -1.0,   phi,  0.0,  1.0,
+        -phi,  0.0, -1.0,  -phi,  0.0,  1.0,
+    };
+    result.face_point_ids = {
+        {0, 11, 5}, {0, 5, 1}, {0, 1, 7}, {0, 7, 10}, {0, 10, 11},
+        {1, 5, 9}, {5, 11, 4}, {11, 10, 2}, {10, 7, 6}, {7, 1, 8},
+        {3, 9, 4}, {3, 4, 2}, {3, 2, 6}, {3, 6, 8}, {3, 8, 9},
+        {4, 9, 5}, {2, 4, 11}, {6, 2, 10}, {8, 6, 7}, {9, 8, 1},
+    };
+    project_vertices_to_unit_sphere(result);
+    for(std::size_t refinement = 0; refinement < level; ++refinement) {
+        result = projected_midpoint_refined(result);
+    }
+    return result;
+}
+
 std::shared_ptr<cell_type_parameters> surface_tension_cell_type() {
     face_type_parameters face_type;
     face_type.name_ = "registered_surface_tension";
@@ -412,7 +459,7 @@ prl::cell_engine::SurfaceTensionShortTrajectoryAudit run_surface_level(
     );
 }
 
-int surface_tension_spatial_refinement_passes_objective_qois() {
+int cube_singularity_family_reproduces_frozen_negative_order() {
     const auto coarse_mesh = cube_surface_mesh();
     const auto base_mesh = midpoint_refined(coarse_mesh);
     const auto fine_mesh = midpoint_refined(base_mesh);
@@ -501,16 +548,153 @@ int surface_tension_spatial_refinement_passes_objective_qois() {
               << gate.surface_quality_passed << ','
               << gate.cache_consistency_passed
               << '\n';
-    require(gate.area_ratio.passed
-                && gate.volume_ratio.passed
-                && gate.registered_energy_ratio.passed
-                && gate.normalized_surface_centroid_drift.passed,
-            "one objective spatial QoI failed self-convergence");
+    require(gate.area_ratio.observed_order >= -1.05
+                && gate.area_ratio.observed_order <= -0.95,
+            "cube area response no longer reproduces the frozen negative order");
+    require(gate.registered_energy_ratio.observed_order >= -1.05
+                && gate.registered_energy_ratio.observed_order <= -0.95,
+            "cube registered-energy response no longer reproduces the frozen negative order");
+    require(gate.volume_ratio.observed_order >= 0.90
+                && gate.volume_ratio.observed_order <= 1.10,
+            "cube volume response no longer reproduces its frozen positive order");
+    require(gate.area_ratio.medium_fine_normalized_error
+                > gate.area_ratio.coarse_medium_normalized_error
+                && gate.registered_energy_ratio.medium_fine_normalized_error
+                > gate.registered_energy_ratio.coarse_medium_normalized_error,
+            "cube singular-family response no longer grows under refinement");
     require(gate.energy_coverage_passed
                 && gate.surface_quality_passed
-                && gate.cache_consistency_passed
-                && gate.passed,
-            "frozen surface-tension spatial gate failed");
+                && gate.cache_consistency_passed,
+            "cube diagnostic lost its frozen non-refinement gates");
+    return 0;
+}
+
+int spherical_surface_force_matches_registered_energy_directional_derivative() {
+    const auto surface_mesh = icosphere_mesh(0);
+    require(surface_mesh.node_pos_lst.size() / 3 == 12
+                && surface_mesh.face_point_ids.size() == 20,
+            "frozen coarse icosphere matrix changed");
+    auto current_cell = surface_tension_cell(surface_mesh, 51);
+    const auto audit = prl::cell_engine::audit_spherical_surface_tension_instantaneous(
+        *current_cell,
+        0.02,
+        10.0,
+        1.0e-6
+    );
+    require(audit.vertex_count == 12 && audit.face_count == 20,
+            "instantaneous force audit used the wrong icosphere topology");
+    require(audit.normalized_directional_derivative_residual <= 1.0e-6,
+            "surface force is not the negative gradient of registered gamma*A");
+    require(std::abs(
+                audit.legacy_cache_energy / audit.registered_surface_energy - 0.5
+            ) <= 1.0e-6,
+            "legacy surface-tension cache changed or entered the registered owner");
+    require(audit.force_buffers_cleared,
+            "instantaneous force audit did not clear the assembled force buffers");
+    std::cerr << std::setprecision(17)
+              << "sphere_directional,level,0,h," << audit.rms_edge_length
+              << ",h_max," << audit.maximum_edge_length
+              << ",registered_energy," << audit.registered_surface_energy
+              << ",legacy_cache," << audit.legacy_cache_energy
+              << ",fd," << audit.finite_difference_directional_derivative
+              << ",force," << audit.force_directional_derivative
+              << ",residual," << audit.normalized_directional_derivative_residual
+              << '\n';
+    return 0;
+}
+
+int spherical_directional_derivative_passes_four_level_refinement_gate() {
+    const std::array<std::size_t, 4> expected_vertices{12, 42, 162, 642};
+    const std::array<std::size_t, 4> expected_faces{20, 80, 320, 1280};
+    std::array<prl::cell_engine::SphericalSurfaceTensionInstantaneousAudit, 4>
+        audits{};
+    for(std::size_t level = 0; level < audits.size(); ++level) {
+        const auto surface_mesh = icosphere_mesh(level);
+        require(surface_mesh.node_pos_lst.size() / 3 == expected_vertices[level]
+                    && surface_mesh.face_point_ids.size() == expected_faces[level],
+                "frozen four-level icosphere matrix changed");
+        auto current_cell = surface_tension_cell(
+            surface_mesh,
+            static_cast<unsigned>(52 + level)
+        );
+        audits[level] = prl::cell_engine::audit_spherical_surface_tension_instantaneous(
+            *current_cell,
+            0.02,
+            10.0,
+            1.0e-6
+        );
+        std::cerr << std::setprecision(17)
+                  << "sphere_directional,level," << level
+                  << ",h," << audits[level].rms_edge_length
+                  << ",h_max," << audits[level].maximum_edge_length
+                  << ",residual,"
+                  << audits[level].normalized_directional_derivative_residual
+                  << ",legacy_ratio,"
+                  << audits[level].legacy_cache_energy
+                        / audits[level].registered_surface_energy
+                  << '\n';
+    }
+    const prl::cell_engine::SphericalDirectionalDerivativeThresholds thresholds{
+        1.0e-6,
+        0.5,
+        1.0e-7,
+        1.0e-6,
+    };
+    const auto gate
+        = prl::cell_engine::evaluate_spherical_directional_derivative_refinement(
+            audits,
+            thresholds
+        );
+    require(gate.passed,
+            "four-level gamma*A directional derivative gate failed");
+    require(gate.consistency_plateau || gate.minimum_observed_order >= 0.5,
+            "directional derivative neither converged nor entered its plateau");
+    return 0;
+}
+
+int spherical_instantaneous_velocity_converges_to_manufactured_solution() {
+    std::array<prl::cell_engine::SphericalSurfaceTensionInstantaneousAudit, 4>
+        audits{};
+    for(std::size_t level = 0; level < audits.size(); ++level) {
+        auto current_cell = surface_tension_cell(
+            icosphere_mesh(level),
+            static_cast<unsigned>(61 + level)
+        );
+        audits[level] = prl::cell_engine::audit_spherical_surface_tension_instantaneous(
+            *current_cell,
+            0.02,
+            10.0,
+            1.0e-6
+        );
+        std::cerr << std::setprecision(17)
+                  << "sphere_velocity,level," << level
+                  << ",h," << audits[level].rms_edge_length
+                  << ",normal_l2," << audits[level].normal_velocity_relative_l2_error
+                  << ",tangent_l2,"
+                  << audits[level].tangential_velocity_relative_l2_error
+                  << ",net_force," << audits[level].normalized_net_force_residual
+                  << '\n';
+    }
+    const prl::cell_engine::SphericalInstantaneousVelocityThresholds thresholds{
+        2.0e-2,
+        2.0e-2,
+        0.5,
+        1.0e-10,
+        1.0e-12,
+    };
+    const auto gate
+        = prl::cell_engine::evaluate_spherical_instantaneous_velocity_refinement(
+            audits,
+            thresholds
+        );
+    require(gate.normal_velocity_passed,
+            "sphere normal velocity failed manufactured spatial convergence");
+    require(gate.tangential_pollution_passed,
+            "sphere tangential velocity pollution failed spatial convergence");
+    require(gate.net_force_passed,
+            "sphere instantaneous surface force has excessive net residual");
+    require(gate.passed,
+            "sphere instantaneous velocity gate failed");
     return 0;
 }
 
@@ -529,8 +713,17 @@ int main(const int argc, const char* const argv[]) {
         if(behavior == "surface_tension_trajectory") {
             return surface_tension_trajectory_records_registered_energy();
         }
-        if(behavior == "surface_tension_spatial_refinement") {
-            return surface_tension_spatial_refinement_passes_objective_qois();
+        if(behavior == "cube_singularity_diagnostic") {
+            return cube_singularity_family_reproduces_frozen_negative_order();
+        }
+        if(behavior == "sphere_force_directional_derivative") {
+            return spherical_surface_force_matches_registered_energy_directional_derivative();
+        }
+        if(behavior == "sphere_directional_refinement") {
+            return spherical_directional_derivative_passes_four_level_refinement_gate();
+        }
+        if(behavior == "sphere_instantaneous_velocity") {
+            return spherical_instantaneous_velocity_converges_to_manufactured_solution();
         }
         throw std::invalid_argument("unknown behavior: " + behavior);
     } catch(const std::exception& error) {

@@ -1,0 +1,114 @@
+{
+  "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V02",
+  "contract_commit": "c640d2a06c3e8642782bf8a258ca741741d8bae7",
+  "status": "failed_instantaneous_smooth_surface_refinement",
+  "first_failed_case": "D1_instantaneous_velocity",
+  "registered_energy_owner": "Psi_surface=gamma*A",
+  "excluded_energy_owners": [
+    "legacy_surface_tension_energy_cache=0.5*gamma*A",
+    "membrane_elasticity",
+    "bending",
+    "pressure",
+    "contact",
+    "active",
+    "ECM",
+    "flow"
+  ],
+  "D0_cube_diagnostic": {
+    "status": "passed",
+    "area_observed_order": -0.9999417507277046,
+    "registered_energy_observed_order": -0.9999417507277046,
+    "volume_observed_order": 0.9994846234517949,
+    "acceptance_role": "nonsmooth_singular_family_diagnostic_only"
+  },
+  "D1_mesh_family": {
+    "levels": [0, 1, 2, 3],
+    "vertices": [12, 42, 162, 642],
+    "triangles": [20, 80, 320, 1280],
+    "rms_edge_h": [
+      1.051462224238267,
+      0.5833799767501565,
+      0.2999543167525501,
+      0.15104703676954007
+    ],
+    "maximum_edge_h": [
+      1.0514622242382672,
+      0.6180339887498949,
+      0.3249196962329064,
+      0.16464716006392044
+    ]
+  },
+  "D1_directional_derivative": {
+    "status": "passed_consistency_plateau",
+    "normalized_residuals": [
+      5.781145652225154e-11,
+      2.793126941101084e-12,
+      6.329425267435071e-10,
+      3.309201123538148e-9
+    ],
+    "consistency_plateau_threshold": 1e-7,
+    "maximum_finest_residual": 1e-6,
+    "legacy_cache_ratio_maximum_error_from_half": 7.029690939353017e-7,
+    "legacy_cache_ratio_tolerance": 1e-6,
+    "force_buffers_cleared": true
+  },
+  "D1_instantaneous_velocity": {
+    "status": "failed",
+    "normal_relative_l2_errors": [
+      1.3996989859860865e-16,
+      0.05738043558645111,
+      0.03356352001836485,
+      0.01740432186214391
+    ],
+    "normal_observed_orders": [
+      -57.11619008567927,
+      0.8061586680878775,
+      0.957265265112834
+    ],
+    "normal_monotonic": false,
+    "normal_finest_threshold_passed": true,
+    "tangential_relative_l2_errors": [
+      2.0057290356172717e-16,
+      2.5044194914478364e-16,
+      0.010875028470750475,
+      0.004857026773020317
+    ],
+    "tangential_observed_orders": [
+      -0.3769308985935439,
+      -47.206276067527284,
+      1.1749227699534339
+    ],
+    "tangential_monotonic": false,
+    "tangential_finest_threshold_passed": true,
+    "normalized_net_force_residuals": [
+      4.438006157029522e-17,
+      2.2688928423732637e-17,
+      6.382879252150122e-17,
+      4.560319363353449e-16
+    ],
+    "net_force_threshold_passed": true,
+    "failed_criteria": [
+      "normal_velocity_error_nonincreasing_across_all_four_levels",
+      "normal_velocity_all_nonplateau_orders_at_least_0.5",
+      "tangential_pollution_error_nonincreasing_across_all_four_levels",
+      "tangential_pollution_all_nonplateau_orders_at_least_0.5"
+    ]
+  },
+  "not_executed": {
+    "smooth_S1_short_trajectory": "not_executed_due_to_prior_hard_gate_failure",
+    "R1_remesh_on": "not_executed_due_to_prior_hard_gate_failure",
+    "C1_contact": "not_executed_due_to_prior_hard_gate_failure",
+    "F1_failure_persistence": "not_executed_due_to_prior_hard_gate_failure"
+  },
+  "verification": {
+    "parent_cpp_ctest": "41/42 passed; only frozen D1 instantaneous-velocity hard gate failed",
+    "strict_prl_owned_core": "compiled with -Wall -Wextra -Wpedantic -Werror",
+    "strict_full_integration_target": "blocked by pre-existing upstream utils.hpp unknown OpenMP pragma warnings under global -Werror",
+    "parent_python_pytest": "63/63 passed",
+    "tracked_python_ruff": "all checks passed",
+    "v01_artifact_hashes": "unchanged"
+  },
+  "diagnostic_classification": "manufactured geometry family symmetry-induced coarse superconvergence interacting with barycentric lumped control areas; force directional derivative passed; time integration was not reached",
+  "route_h_gate_a_v01": "unchanged_failed_invalid_numerics",
+  "claim_guard": "X1-K v02 did not pass. No smooth short-trajectory, ECM/flow, calibration, physiology, full cell-ECM/FSI, EFE bistability/memory, or developmental-mechanism claim is allowed."
+}

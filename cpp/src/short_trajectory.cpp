@@ -15,6 +15,7 @@
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 namespace prl::cell_engine {
@@ -40,6 +41,14 @@ double dot(const Vector3& left, const Vector3& right) noexcept {
 
 double norm(const Vector3& value) noexcept {
     return std::sqrt(dot(value, value));
+}
+
+Vector3 add(const Vector3& left, const Vector3& right) noexcept {
+    return {left[0] + right[0], left[1] + right[1], left[2] + right[2]};
+}
+
+Vector3 scale(const Vector3& value, const double factor) noexcept {
+    return {factor * value[0], factor * value[1], factor * value[2]};
 }
 
 struct IndependentSurfaceGeometry {
@@ -252,6 +261,92 @@ double cache_residual(
         std::abs(target.get_volume() - geometry.volume) / initial_volume,
         norm(subtract(cache_centroid, geometry.centroid)) / characteristic_length,
     });
+}
+
+std::uint64_t undirected_edge_key(std::size_t first, std::size_t second) {
+    if(first > second) std::swap(first, second);
+    if(first > std::numeric_limits<std::uint32_t>::max()
+       || second > std::numeric_limits<std::uint32_t>::max()) {
+        throw std::overflow_error("surface edge index exceeds audit key range");
+    }
+    return (static_cast<std::uint64_t>(first) << 32U)
+        | static_cast<std::uint64_t>(second);
+}
+
+std::array<double, 2> surface_edge_scales(
+    const core::SurfaceMeshSnapshot& mesh
+) {
+    std::unordered_set<std::uint64_t> edges;
+    edges.reserve(3 * mesh.faces.size() / 2);
+    double squared_length_sum = 0.0;
+    double maximum_length = 0.0;
+    for(const auto& current_face : mesh.faces) {
+        for(std::size_t local_edge = 0; local_edge < 3; ++local_edge) {
+            const auto first = current_face.vertex_indices[local_edge];
+            const auto second = current_face.vertex_indices[(local_edge + 1) % 3];
+            if(!edges.emplace(undirected_edge_key(first, second)).second) continue;
+            const double length = norm(subtract(
+                mesh.vertices.at(first).position,
+                mesh.vertices.at(second).position
+            ));
+            if(!std::isfinite(length) || length <= 0.0) {
+                throw std::runtime_error("surface edge scale is invalid");
+            }
+            squared_length_sum += length * length;
+            maximum_length = std::max(maximum_length, length);
+        }
+    }
+    if(edges.empty() || !std::isfinite(squared_length_sum)) {
+        throw std::runtime_error("surface edge scale requires a finite mesh");
+    }
+    return {
+        std::sqrt(squared_length_sum / static_cast<double>(edges.size())),
+        maximum_length,
+    };
+}
+
+std::vector<double> barycentric_control_areas(
+    const core::SurfaceMeshSnapshot& mesh
+) {
+    std::vector<double> result(mesh.vertices.size(), 0.0);
+    for(const auto& current_face : mesh.faces) {
+        const auto& a = mesh.vertices.at(current_face.vertex_indices[0]).position;
+        const auto& b = mesh.vertices.at(current_face.vertex_indices[1]).position;
+        const auto& c = mesh.vertices.at(current_face.vertex_indices[2]).position;
+        const double face_area = 0.5 * norm(cross(subtract(b, a), subtract(c, a)));
+        if(!std::isfinite(face_area) || face_area <= 0.0) {
+            throw std::runtime_error("barycentric control area contains invalid face");
+        }
+        for(const auto vertex_index : current_face.vertex_indices) {
+            result.at(vertex_index) += face_area / 3.0;
+        }
+    }
+    if(!std::all_of(
+            result.begin(),
+            result.end(),
+            [](const double area) { return std::isfinite(area) && area > 0.0; }
+        )) {
+        throw std::runtime_error("barycentric control area is invalid");
+    }
+    return result;
+}
+
+double surface_area_with_displacement(
+    const core::SurfaceMeshSnapshot& mesh,
+    const std::vector<Vector3>& direction,
+    const double scale_factor
+) {
+    if(direction.size() != mesh.vertices.size()) {
+        throw std::invalid_argument("surface-energy direction size mismatch");
+    }
+    auto displaced = mesh;
+    for(std::size_t index = 0; index < displaced.vertices.size(); ++index) {
+        displaced.vertices[index].position = add(
+            displaced.vertices[index].position,
+            scale(direction[index], scale_factor)
+        );
+    }
+    return independent_surface_geometry(displaced, nullptr).area;
 }
 
 std::vector<TrajectoryVertexPosition> vertex_positions(
@@ -1012,6 +1107,416 @@ evaluate_surface_tension_spatial_refinement(
         && result.energy_coverage_passed
         && result.surface_quality_passed
         && result.cache_consistency_passed;
+    return result;
+}
+
+SphericalSurfaceTensionInstantaneousAudit
+audit_spherical_surface_tension_instantaneous(
+    ::cell& target,
+    const double surface_tension,
+    const double damping_per_area,
+    const double directional_step_per_rms_edge
+) {
+    if(!std::isfinite(surface_tension) || surface_tension <= 0.0
+       || !std::isfinite(damping_per_area) || damping_per_area <= 0.0
+       || !std::isfinite(directional_step_per_rms_edge)
+       || directional_step_per_rms_edge <= 0.0) {
+        throw std::invalid_argument("spherical instantaneous audit configuration is invalid");
+    }
+    const auto revision = target.get_mesh_revision();
+    static_cast<void>(refresh_surface_geometry(target, revision));
+    const auto mesh = capture_surface_snapshot(target);
+    const auto geometry = independent_surface_geometry(mesh, nullptr);
+    const auto edge_scales = surface_edge_scales(mesh);
+    const auto control_areas = barycentric_control_areas(mesh);
+    if(mesh.vertices.empty()) {
+        throw std::invalid_argument("spherical instantaneous audit requires vertices");
+    }
+    const double reference_radius = norm(mesh.vertices.front().position);
+    if(!std::isfinite(reference_radius) || reference_radius <= 0.0) {
+        throw std::runtime_error("spherical instantaneous audit radius is invalid");
+    }
+    std::vector<Vector3> direction;
+    direction.reserve(mesh.vertices.size());
+    double maximum_direction_norm = 0.0;
+    for(const auto& current_vertex : mesh.vertices) {
+        const auto& position = current_vertex.position;
+        const double radius = norm(position);
+        if(!std::isfinite(radius) || radius <= 0.0) {
+            throw std::runtime_error("spherical instantaneous audit vertex is invalid");
+        }
+        if(std::abs(radius - reference_radius)
+           > 1.0e-12 * std::max(1.0, reference_radius)) {
+            throw std::invalid_argument(
+                "spherical instantaneous audit requires one projected radius"
+            );
+        }
+        const auto normal = scale(position, 1.0 / radius);
+        const double amplitude = 0.25
+            + 0.10 * position[0]
+            + 0.07 * position[1]
+            - 0.05 * position[2];
+        const Vector3 tangent{
+            -normal[2] * normal[0],
+            -normal[2] * normal[1],
+            1.0 - normal[2] * normal[2],
+        };
+        direction.push_back(add(
+            scale(normal, amplitude),
+            scale(tangent, 0.05)
+        ));
+        maximum_direction_norm = std::max(
+            maximum_direction_norm,
+            norm(direction.back())
+        );
+    }
+    if(!std::isfinite(maximum_direction_norm) || maximum_direction_norm <= 0.0) {
+        throw std::runtime_error("spherical instantaneous audit direction is invalid");
+    }
+    for(auto& value : direction) value = scale(value, 1.0 / maximum_direction_norm);
+
+    const double epsilon = directional_step_per_rms_edge * edge_scales[0];
+    const double registered_energy = surface_tension * geometry.area;
+    const double energy_plus = surface_tension
+        * surface_area_with_displacement(mesh, direction, epsilon);
+    const double energy_minus = surface_tension
+        * surface_area_with_displacement(mesh, direction, -epsilon);
+    const double finite_difference = (energy_plus - energy_minus) / (2.0 * epsilon);
+
+    for(const node& current_node : target.get_node_lst()) {
+        if(!current_node.is_used()) continue;
+        const Vector3 force{
+            current_node.force().dx(),
+            current_node.force().dy(),
+            current_node.force().dz(),
+        };
+        if(norm(force) != 0.0) {
+            throw std::logic_error("spherical instantaneous audit requires empty force buffers");
+        }
+    }
+
+    double force_directional = 0.0;
+    double legacy_cache = 0.0;
+    std::vector<Vector3> assembled_forces;
+    assembled_forces.reserve(mesh.vertices.size());
+    try {
+        target.apply_internal_forces(0.0);
+        legacy_cache = target.get_surface_tension_energy();
+        std::size_t used_index = 0;
+        for(const node& current_node : target.get_node_lst()) {
+            if(!current_node.is_used()) continue;
+            if(used_index >= direction.size()) {
+                throw std::runtime_error("force and snapshot vertex order mismatch");
+            }
+            const Vector3 force{
+                current_node.force().dx(),
+                current_node.force().dy(),
+                current_node.force().dz(),
+            };
+            assembled_forces.push_back(force);
+            force_directional -= dot(force, direction[used_index]);
+            ++used_index;
+        }
+        if(used_index != direction.size()) {
+            throw std::runtime_error("force and snapshot vertex count mismatch");
+        }
+    } catch(...) {
+        static_cast<void>(reset_surface_forces(target, revision));
+        throw;
+    }
+    static_cast<void>(reset_surface_forces(target, revision));
+
+    bool force_buffers_cleared = true;
+    for(const node& current_node : target.get_node_lst()) {
+        if(!current_node.is_used()) continue;
+        const Vector3 force{
+            current_node.force().dx(),
+            current_node.force().dy(),
+            current_node.force().dz(),
+        };
+        force_buffers_cleared = force_buffers_cleared && norm(force) == 0.0;
+    }
+    const double denominator = std::max({
+        std::abs(finite_difference),
+        std::abs(force_directional),
+        registered_energy,
+        1.0e-30,
+    });
+    const double residual = std::abs(finite_difference - force_directional)
+        / denominator;
+    const double exact_normal_velocity = -2.0 * surface_tension
+        / (damping_per_area * reference_radius);
+    double normal_error_square_integral = 0.0;
+    double tangential_square_integral = 0.0;
+    double control_area_sum = 0.0;
+    Vector3 net_force{};
+    for(std::size_t index = 0; index < assembled_forces.size(); ++index) {
+        const auto& position = mesh.vertices.at(index).position;
+        const auto normal = scale(position, 1.0 / norm(position));
+        const double control_area = control_areas.at(index);
+        const auto velocity = scale(
+            assembled_forces[index],
+            1.0 / (damping_per_area * control_area)
+        );
+        const double normal_velocity = dot(velocity, normal);
+        const auto tangential_velocity = subtract(
+            velocity,
+            scale(normal, normal_velocity)
+        );
+        const double normal_error = normal_velocity - exact_normal_velocity;
+        normal_error_square_integral += control_area
+            * normal_error * normal_error;
+        tangential_square_integral += control_area
+            * dot(tangential_velocity, tangential_velocity);
+        control_area_sum += control_area;
+        net_force = add(net_force, assembled_forces[index]);
+    }
+    const double normal_velocity_error = std::sqrt(
+        normal_error_square_integral / control_area_sum
+    ) / std::abs(exact_normal_velocity);
+    const double tangential_velocity_error = std::sqrt(
+        tangential_square_integral / control_area_sum
+    ) / std::abs(exact_normal_velocity);
+    const double net_force_residual = norm(net_force)
+        / (surface_tension * geometry.area / reference_radius);
+    if(!std::isfinite(legacy_cache)
+       || !std::isfinite(finite_difference)
+       || !std::isfinite(force_directional)
+       || !std::isfinite(residual)
+       || !std::isfinite(normal_velocity_error)
+       || !std::isfinite(tangential_velocity_error)
+       || !std::isfinite(net_force_residual)) {
+        throw std::runtime_error("spherical instantaneous audit became non-finite");
+    }
+    return {
+        mesh.vertices.size(),
+        mesh.faces.size(),
+        edge_scales[0],
+        edge_scales[1],
+        registered_energy,
+        legacy_cache,
+        finite_difference,
+        force_directional,
+        residual,
+        normal_velocity_error,
+        tangential_velocity_error,
+        net_force_residual,
+        force_buffers_cleared,
+    };
+}
+
+SphericalDirectionalDerivativeRefinementAudit
+evaluate_spherical_directional_derivative_refinement(
+    const std::array<SphericalSurfaceTensionInstantaneousAudit, 4>& levels,
+    const SphericalDirectionalDerivativeThresholds& thresholds
+) {
+    const std::array<double, 4> threshold_values{
+        thresholds.maximum_finest_normalized_residual,
+        thresholds.minimum_observed_order,
+        thresholds.consistency_plateau_threshold,
+        thresholds.maximum_legacy_cache_ratio_error,
+    };
+    if(!std::all_of(
+            threshold_values.begin(),
+            threshold_values.end(),
+            [](const double value) { return std::isfinite(value) && value >= 0.0; }
+        )) {
+        throw std::invalid_argument("spherical directional thresholds are invalid");
+    }
+
+    SphericalDirectionalDerivativeRefinementAudit result;
+    result.minimum_observed_order = std::numeric_limits<double>::infinity();
+    result.mesh_scales_decreased = true;
+    result.residuals_monotonic = true;
+    result.legacy_cache_exclusion_passed = true;
+    result.force_buffers_cleared = true;
+    for(std::size_t level = 0; level < levels.size(); ++level) {
+        const auto& current = levels[level];
+        const double residual = current.normalized_directional_derivative_residual;
+        if(!std::isfinite(current.rms_edge_length)
+           || current.rms_edge_length <= 0.0
+           || !std::isfinite(residual)
+           || residual < 0.0
+           || !std::isfinite(current.registered_surface_energy)
+           || current.registered_surface_energy <= 0.0
+           || !std::isfinite(current.legacy_cache_energy)) {
+            throw std::invalid_argument("spherical directional level is invalid");
+        }
+        result.normalized_residuals[level] = residual;
+        result.legacy_cache_exclusion_passed
+            = result.legacy_cache_exclusion_passed
+            && std::abs(
+                current.legacy_cache_energy / current.registered_surface_energy - 0.5
+            ) <= thresholds.maximum_legacy_cache_ratio_error;
+        result.force_buffers_cleared
+            = result.force_buffers_cleared && current.force_buffers_cleared;
+        if(level == 0) continue;
+        result.mesh_scales_decreased = result.mesh_scales_decreased
+            && current.rms_edge_length < levels[level - 1].rms_edge_length;
+        result.residuals_monotonic = result.residuals_monotonic
+            && residual <= levels[level - 1]
+                .normalized_directional_derivative_residual;
+    }
+    result.consistency_plateau = std::all_of(
+        result.normalized_residuals.begin(),
+        result.normalized_residuals.end(),
+        [&](const double residual) {
+            return residual <= thresholds.consistency_plateau_threshold;
+        }
+    );
+    bool orders_passed = true;
+    if(!result.consistency_plateau) {
+        for(std::size_t pair = 0; pair < result.observed_orders.size(); ++pair) {
+            const double coarse_error = result.normalized_residuals[pair];
+            const double fine_error = result.normalized_residuals[pair + 1];
+            const double mesh_ratio = levels[pair].rms_edge_length
+                / levels[pair + 1].rms_edge_length;
+            if(coarse_error <= 0.0 || fine_error <= 0.0 || mesh_ratio <= 1.0) {
+                orders_passed = false;
+                result.observed_orders[pair] = 0.0;
+                continue;
+            }
+            result.observed_orders[pair] = std::log(coarse_error / fine_error)
+                / std::log(mesh_ratio);
+            result.minimum_observed_order = std::min(
+                result.minimum_observed_order,
+                result.observed_orders[pair]
+            );
+            orders_passed = orders_passed
+                && std::isfinite(result.observed_orders[pair])
+                && result.observed_orders[pair] >= thresholds.minimum_observed_order;
+        }
+    } else {
+        result.minimum_observed_order = 0.0;
+    }
+    result.finest_residual_passed = result.normalized_residuals.back()
+        <= thresholds.maximum_finest_normalized_residual;
+    result.passed = result.mesh_scales_decreased
+        && (result.consistency_plateau || result.residuals_monotonic)
+        && orders_passed
+        && result.finest_residual_passed
+        && result.legacy_cache_exclusion_passed
+        && result.force_buffers_cleared;
+    return result;
+}
+
+SphericalInstantaneousVelocityRefinementAudit
+evaluate_spherical_instantaneous_velocity_refinement(
+    const std::array<SphericalSurfaceTensionInstantaneousAudit, 4>& levels,
+    const SphericalInstantaneousVelocityThresholds& thresholds
+) {
+    const std::array<double, 5> threshold_values{
+        thresholds.maximum_finest_normal_velocity_error,
+        thresholds.maximum_finest_tangential_pollution,
+        thresholds.minimum_observed_order,
+        thresholds.roundoff_plateau_threshold,
+        thresholds.maximum_normalized_net_force_residual,
+    };
+    if(!std::all_of(
+            threshold_values.begin(),
+            threshold_values.end(),
+            [](const double value) { return std::isfinite(value) && value >= 0.0; }
+        )) {
+        throw std::invalid_argument("spherical velocity thresholds are invalid");
+    }
+
+    SphericalInstantaneousVelocityRefinementAudit result;
+    bool mesh_scales_decreased = true;
+    for(std::size_t level = 0; level < levels.size(); ++level) {
+        const auto& current = levels[level];
+        const std::array<double, 4> values{
+            current.rms_edge_length,
+            current.normal_velocity_relative_l2_error,
+            current.tangential_velocity_relative_l2_error,
+            current.normalized_net_force_residual,
+        };
+        if(!std::all_of(
+                values.begin(),
+                values.end(),
+                [](const double value) { return std::isfinite(value) && value >= 0.0; }
+            )
+           || current.rms_edge_length <= 0.0) {
+            throw std::invalid_argument("spherical velocity level is invalid");
+        }
+        result.normal_velocity_errors[level]
+            = current.normal_velocity_relative_l2_error;
+        result.tangential_pollution_errors[level]
+            = current.tangential_velocity_relative_l2_error;
+        result.normalized_net_force_residuals[level]
+            = current.normalized_net_force_residual;
+        if(level > 0) {
+            mesh_scales_decreased = mesh_scales_decreased
+                && current.rms_edge_length < levels[level - 1].rms_edge_length;
+        }
+    }
+
+    struct MetricGate {
+        std::array<double, 3> orders{};
+        bool plateau{};
+        bool monotonic{};
+        bool passed{};
+    };
+    auto evaluate_metric = [&](const std::array<double, 4>& errors,
+                               const double maximum_finest_error) {
+        MetricGate metric;
+        metric.plateau = std::all_of(
+            errors.begin(),
+            errors.end(),
+            [&](const double error) {
+                return error <= thresholds.roundoff_plateau_threshold;
+            }
+        );
+        metric.monotonic = true;
+        bool orders_passed = true;
+        for(std::size_t pair = 0; pair < metric.orders.size(); ++pair) {
+            metric.monotonic = metric.monotonic
+                && errors[pair + 1] <= errors[pair];
+            if(metric.plateau) continue;
+            const double mesh_ratio = levels[pair].rms_edge_length
+                / levels[pair + 1].rms_edge_length;
+            if(errors[pair] <= 0.0 || errors[pair + 1] <= 0.0
+               || mesh_ratio <= 1.0) {
+                orders_passed = false;
+                continue;
+            }
+            metric.orders[pair] = std::log(errors[pair] / errors[pair + 1])
+                / std::log(mesh_ratio);
+            orders_passed = orders_passed
+                && std::isfinite(metric.orders[pair])
+                && metric.orders[pair] >= thresholds.minimum_observed_order;
+        }
+        metric.passed = errors.back() <= maximum_finest_error
+            && (metric.plateau || (metric.monotonic && orders_passed));
+        return metric;
+    };
+
+    const auto normal = evaluate_metric(
+        result.normal_velocity_errors,
+        thresholds.maximum_finest_normal_velocity_error
+    );
+    const auto tangent = evaluate_metric(
+        result.tangential_pollution_errors,
+        thresholds.maximum_finest_tangential_pollution
+    );
+    result.normal_velocity_observed_orders = normal.orders;
+    result.tangential_pollution_observed_orders = tangent.orders;
+    result.normal_velocity_plateau = normal.plateau;
+    result.tangential_pollution_plateau = tangent.plateau;
+    result.normal_velocity_monotonic = normal.monotonic;
+    result.tangential_pollution_monotonic = tangent.monotonic;
+    result.normal_velocity_passed = normal.passed;
+    result.tangential_pollution_passed = tangent.passed;
+    result.net_force_passed = std::all_of(
+        result.normalized_net_force_residuals.begin(),
+        result.normalized_net_force_residuals.end(),
+        [&](const double residual) {
+            return residual <= thresholds.maximum_normalized_net_force_residual;
+        }
+    );
+    result.passed = mesh_scales_decreased
+        && result.normal_velocity_passed
+        && result.tangential_pollution_passed
+        && result.net_force_passed;
     return result;
 }
 

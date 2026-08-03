@@ -1,0 +1,4 @@
+metric,coarse_base_error,base_fine_error,observed_order,status
+area_ratio,1.599975607236015e-5,3.1998220180295966e-5,-0.9999417507277046,passed_negative_order_diagnostic
+registered_energy_ratio,1.599975607236015e-5,3.1998220180295966e-5,-0.9999417507277046,passed_negative_order_diagnostic
+volume_ratio,8.000270190766656e-6,4.001564326117091e-6,0.9994846234517949,passed_positive_order_diagnostic
