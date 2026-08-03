@@ -1,0 +1,46 @@
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+F                                                                        [100%]
+================================== FAILURES ===================================
+_______ test_v10r1_manifest_closes_sources_and_generated_core_artifacts _______
+
+tmp_path = WindowsPath('C:/Users/chenb/AppData/Local/Temp/pytest-of-chenb/pytest-124/test_v10r1_manifest_closes_sou0')
+
+    def test_v10r1_manifest_closes_sources_and_generated_core_artifacts(
+        tmp_path: Path,
+    ) -> None:
+        export_v10r1_package(ROOT, tmp_path)
+    
+        integrity = json.loads(
+>           (tmp_path / "frozen_integrity.json").read_text(encoding="utf-8")
+        )
+
+tests\test_r1_midpoint_packaging_repair.py:190: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+F:\python\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+F:\python\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/chenb/AppData/Local/Temp/pytest-of-chenb/pytest-124/test_v10r1_manifest_closes_sou0/frozen_integrity.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\chenb\\AppData\\Local\\Temp\\pytest-of-chenb\\pytest-124\\test_v10r1_manifest_closes_sou0\\frozen_integrity.json'
+
+F:\python\Lib\pathlib\_local.py:537: FileNotFoundError
+=========================== short test summary info ===========================
+FAILED tests/test_r1_midpoint_packaging_repair.py::test_v10r1_manifest_closes_sources_and_generated_core_artifacts
+1 failed in 1.35s

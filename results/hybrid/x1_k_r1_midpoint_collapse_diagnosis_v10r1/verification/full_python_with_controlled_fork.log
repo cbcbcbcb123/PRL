@@ -1,0 +1,4 @@
+usage: run_x1k_v10r1_python_tests.py [-h]
+                                     --controlled-parent-root CONTROLLED_PARENT_ROOT
+                                     ...
+run_x1k_v10r1_python_tests.py: error: unrecognized arguments: -q

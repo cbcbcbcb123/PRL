@@ -1,0 +1,29 @@
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+F                                                                        [100%]
+================================== FAILURES ===================================
+______ test_v10r1_candidate_parser_uses_exception_aware_topology_states _______
+
+    def test_v10r1_candidate_parser_uses_exception_aware_topology_states() -> None:
+        repaired = repair_candidate_topology_semantics(
+            ROOT
+            / "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/"
+            "candidate_matrix.csv"
+        )
+    
+        assert [row["candidate_id"] for row in repaired] == [1, 2, 3, 4]
+>       assert [row["topology_status"] for row in repaired] == [
+            "adjudicated_legal",
+            "adjudicated_legal",
+            "not_adjudicated_due_to_production_sink_exception",
+            "adjudicated_legal",
+        ]
+E       AssertionError: assert ['adjudicated...icated_legal'] == ['adjudicated...icated_legal']
+E         
+E         At index 2 diff: 'adjudicated_illegal' != 'not_adjudicated_due_to_production_sink_exception'
+E         Use -v to get more diff
+
+tests\test_r1_midpoint_packaging_repair.py:82: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_r1_midpoint_packaging_repair.py::test_v10r1_candidate_parser_uses_exception_aware_topology_states
+1 failed in 1.38s

@@ -1,0 +1,160 @@
+{
+  "status": "passed_packaging_software_verification",
+  "required": {
+    "focused_exporter_recompute_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": null
+    },
+    "focused_python_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": 5
+    },
+    "full_python_with_controlled_fork_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": 88
+    },
+    "ruff_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": null
+    }
+  },
+  "all_commands": {
+    "focused_exporter_recompute": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": null
+    },
+    "focused_exporter_recompute_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": null
+    },
+    "focused_python": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": 5
+    },
+    "focused_python_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": 5
+    },
+    "focused_python_post_report": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": 5
+    },
+    "full_python": {
+      "exit_code": 1,
+      "role": "superseded_uninitialized_worktree_layout",
+      "passed": 87
+    },
+    "full_python_with_controlled_fork": {
+      "exit_code": 2,
+      "role": "superseded_argument_invocation",
+      "passed": null
+    },
+    "full_python_with_controlled_fork_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": 88
+    },
+    "full_python_with_controlled_fork_valid": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": 88
+    },
+    "ruff": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": null
+    },
+    "ruff_final": {
+      "exit_code": 0,
+      "role": "required_final_verification",
+      "passed": null
+    },
+    "ruff_post_report": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": null
+    },
+    "tdd_green_configuration": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": 1
+    },
+    "tdd_green_integrity_gate": {
+      "exit_code": 1,
+      "role": "intermediate_green_regression_failure",
+      "passed": null
+    },
+    "tdd_green_integrity_gate_valid": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": 4
+    },
+    "tdd_green_packaging_artifacts": {
+      "exit_code": 2,
+      "role": "intermediate_green_syntax_failure",
+      "passed": null
+    },
+    "tdd_green_packaging_artifacts_valid": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": 3
+    },
+    "tdd_green_provenance_manifest": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": 5
+    },
+    "tdd_green_semantic_repair": {
+      "exit_code": 0,
+      "role": "supporting_green_verification",
+      "passed": 2
+    },
+    "tdd_red_binary_topology_semantics": {
+      "exit_code": 1,
+      "role": "expected_tdd_red",
+      "passed": null
+    },
+    "tdd_red_integrity_seam_missing": {
+      "exit_code": 4,
+      "role": "expected_tdd_red",
+      "passed": null
+    },
+    "tdd_red_missing_configuration": {
+      "exit_code": 1,
+      "role": "superseded_environment_invocation",
+      "passed": null
+    },
+    "tdd_red_missing_configuration_valid": {
+      "exit_code": 1,
+      "role": "expected_tdd_red",
+      "passed": null
+    },
+    "tdd_red_missing_packaging_artifacts": {
+      "exit_code": 1,
+      "role": "expected_tdd_red",
+      "passed": null
+    },
+    "tdd_red_missing_provenance_manifest": {
+      "exit_code": 1,
+      "role": "expected_tdd_red",
+      "passed": null
+    },
+    "tdd_red_semantic_seam_missing": {
+      "exit_code": 4,
+      "role": "expected_tdd_red",
+      "passed": null
+    }
+  },
+  "controlled_fork_commit": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+  "scientific_response_commands_executed": false,
+  "counts_parsed_from_logs": true
+}

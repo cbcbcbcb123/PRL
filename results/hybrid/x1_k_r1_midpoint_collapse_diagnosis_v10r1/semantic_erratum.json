@@ -1,0 +1,37 @@
+{
+  "erratum_id": "ERRATUM-PRL-HYBRID-X1-K-V10R1-CANDIDATE-3-TOPOLOGY",
+  "scope": "evidence_packaging_semantic_repair_only",
+  "source": {
+    "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+    "runner_path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+    "runner_default_locator": "lines 617-625",
+    "runner_exception_locator": "lines 691-711",
+    "runner_post_merge_audit_locator": "lines 714-750",
+    "raw_path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/formal_response.log",
+    "raw_locator": "record v10_candidate; candidate_id=3",
+    "candidate_matrix_path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/candidate_matrix.csv",
+    "candidate_matrix_locator": "candidate_id=3"
+  },
+  "original_serialization": {
+    "merge_succeeded": false,
+    "topology_legal": false,
+    "exception": "material point cannot be rebound within the configured distance: id=101; distance=0.047434164902525666",
+    "rebind_distance": 0.047434164902525666
+  },
+  "cause": "CandidateResult.topology_legal was default-initialized to false; the production sink exception returned before the post-merge topology audit, and the exception branch serialized that default boolean.",
+  "corrected_semantics": {
+    "merge_succeeded": false,
+    "topology_status": "not_adjudicated_due_to_production_sink_exception",
+    "topology_legal": null,
+    "exception": "material point cannot be rebound within the configured distance: id=101; distance=0.047434164902525666",
+    "rebind_distance": 0.047434164902525666,
+    "rebind_distance_threshold": 1e-12
+  },
+  "preservation": {
+    "frozen_v10_bytes_modified": false,
+    "legacy_serialized_value_retained_as_provenance": true,
+    "merge_succeeded_rewritten": false,
+    "candidate_declared_legal": false,
+    "new_scientific_adjudication": false
+  }
+}

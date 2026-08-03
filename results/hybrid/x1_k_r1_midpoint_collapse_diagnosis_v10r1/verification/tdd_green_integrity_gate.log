@@ -1,0 +1,157 @@
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+FFFF                                                                     [100%]
+================================== FAILURES ===================================
+_____ test_v10r1_export_reconstructs_configuration_with_closed_provenance _____
+
+tmp_path = WindowsPath('C:/Users/chenb/AppData/Local/Temp/pytest-of-chenb/pytest-122/test_v10r1_export_reconstructs0')
+
+    def test_v10r1_export_reconstructs_configuration_with_closed_provenance(
+        tmp_path: Path,
+    ) -> None:
+>       export_v10r1_package(ROOT, tmp_path)
+
+tests\test_r1_midpoint_packaging_repair.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\hybrid\r1_midpoint_packaging_repair.py:540: in export_v10r1_package
+    candidates = repair_candidate_topology_semantics(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+candidate_matrix_path = WindowsPath('C:/Users/chenb/.codex/worktrees/046a/PRL/results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/candidate_matrix.csv')
+
+    def repair_candidate_topology_semantics(
+        candidate_matrix_path: Path,
+    ) -> list[dict[str, Any]]:
+        """Parse the frozen matrix into the v10r1 candidate schema."""
+        with candidate_matrix_path.open("r", encoding="utf-8", newline="") as source:
+            rows = [
+                {key: _coerce_csv_value(value) for key, value in row.items()}
+                for row in csv.DictReader(source)
+            ]
+        if [row.get("candidate_id") for row in rows] != [1, 2, 3, 4]:
+            raise ValueError("frozen v10 candidate IDs are incomplete or reordered")
+        for row in rows:
+            legacy_topology_value = row["topology_legal"]
+            row["legacy_topology_legal_serialized"] = legacy_topology_value
+            exception = row.get("exception")
+            if row["merge_succeeded"] is False:
+                if row["candidate_id"] != 3 or not isinstance(exception, str):
+>                   raise ValueError("unexpected incomplete frozen v10 candidate")
+E                   ValueError: unexpected incomplete frozen v10 candidate
+
+src\hybrid\r1_midpoint_packaging_repair.py:266: ValueError
+______ test_v10r1_candidate_parser_uses_exception_aware_topology_states _______
+
+    def test_v10r1_candidate_parser_uses_exception_aware_topology_states() -> None:
+>       repaired = repair_candidate_topology_semantics(
+            ROOT
+            / "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/"
+            "candidate_matrix.csv"
+        )
+
+tests\test_r1_midpoint_packaging_repair.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+candidate_matrix_path = WindowsPath('C:/Users/chenb/.codex/worktrees/046a/PRL/results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/candidate_matrix.csv')
+
+    def repair_candidate_topology_semantics(
+        candidate_matrix_path: Path,
+    ) -> list[dict[str, Any]]:
+        """Parse the frozen matrix into the v10r1 candidate schema."""
+        with candidate_matrix_path.open("r", encoding="utf-8", newline="") as source:
+            rows = [
+                {key: _coerce_csv_value(value) for key, value in row.items()}
+                for row in csv.DictReader(source)
+            ]
+        if [row.get("candidate_id") for row in rows] != [1, 2, 3, 4]:
+            raise ValueError("frozen v10 candidate IDs are incomplete or reordered")
+        for row in rows:
+            legacy_topology_value = row["topology_legal"]
+            row["legacy_topology_legal_serialized"] = legacy_topology_value
+            exception = row.get("exception")
+            if row["merge_succeeded"] is False:
+                if row["candidate_id"] != 3 or not isinstance(exception, str):
+>                   raise ValueError("unexpected incomplete frozen v10 candidate")
+E                   ValueError: unexpected incomplete frozen v10 candidate
+
+src\hybrid\r1_midpoint_packaging_repair.py:266: ValueError
+_______ test_v10r1_export_emits_unambiguous_packaging_repair_artifacts ________
+
+tmp_path = WindowsPath('C:/Users/chenb/AppData/Local/Temp/pytest-of-chenb/pytest-122/test_v10r1_export_emits_unambi0')
+
+    def test_v10r1_export_emits_unambiguous_packaging_repair_artifacts(
+        tmp_path: Path,
+    ) -> None:
+>       exported = export_v10r1_package(ROOT, tmp_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_r1_midpoint_packaging_repair.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\hybrid\r1_midpoint_packaging_repair.py:540: in export_v10r1_package
+    candidates = repair_candidate_topology_semantics(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+candidate_matrix_path = WindowsPath('C:/Users/chenb/.codex/worktrees/046a/PRL/results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/candidate_matrix.csv')
+
+    def repair_candidate_topology_semantics(
+        candidate_matrix_path: Path,
+    ) -> list[dict[str, Any]]:
+        """Parse the frozen matrix into the v10r1 candidate schema."""
+        with candidate_matrix_path.open("r", encoding="utf-8", newline="") as source:
+            rows = [
+                {key: _coerce_csv_value(value) for key, value in row.items()}
+                for row in csv.DictReader(source)
+            ]
+        if [row.get("candidate_id") for row in rows] != [1, 2, 3, 4]:
+            raise ValueError("frozen v10 candidate IDs are incomplete or reordered")
+        for row in rows:
+            legacy_topology_value = row["topology_legal"]
+            row["legacy_topology_legal_serialized"] = legacy_topology_value
+            exception = row.get("exception")
+            if row["merge_succeeded"] is False:
+                if row["candidate_id"] != 3 or not isinstance(exception, str):
+>                   raise ValueError("unexpected incomplete frozen v10 candidate")
+E                   ValueError: unexpected incomplete frozen v10 candidate
+
+src\hybrid\r1_midpoint_packaging_repair.py:266: ValueError
+_____ test_v10r1_integrity_gate_closes_frozen_git_and_28_manifest_entries _____
+
+    def test_v10r1_integrity_gate_closes_frozen_git_and_28_manifest_entries() -> None:
+>       integrity = verify_frozen_v10_integrity(ROOT)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_r1_midpoint_packaging_repair.py:159: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\hybrid\r1_midpoint_packaging_repair.py:203: in verify_frozen_v10_integrity
+    repaired_candidates = repair_candidate_topology_semantics(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+candidate_matrix_path = WindowsPath('C:/Users/chenb/.codex/worktrees/046a/PRL/results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/candidate_matrix.csv')
+
+    def repair_candidate_topology_semantics(
+        candidate_matrix_path: Path,
+    ) -> list[dict[str, Any]]:
+        """Parse the frozen matrix into the v10r1 candidate schema."""
+        with candidate_matrix_path.open("r", encoding="utf-8", newline="") as source:
+            rows = [
+                {key: _coerce_csv_value(value) for key, value in row.items()}
+                for row in csv.DictReader(source)
+            ]
+        if [row.get("candidate_id") for row in rows] != [1, 2, 3, 4]:
+            raise ValueError("frozen v10 candidate IDs are incomplete or reordered")
+        for row in rows:
+            legacy_topology_value = row["topology_legal"]
+            row["legacy_topology_legal_serialized"] = legacy_topology_value
+            exception = row.get("exception")
+            if row["merge_succeeded"] is False:
+                if row["candidate_id"] != 3 or not isinstance(exception, str):
+>                   raise ValueError("unexpected incomplete frozen v10 candidate")
+E                   ValueError: unexpected incomplete frozen v10 candidate
+
+src\hybrid\r1_midpoint_packaging_repair.py:266: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_r1_midpoint_packaging_repair.py::test_v10r1_export_reconstructs_configuration_with_closed_provenance
+FAILED tests/test_r1_midpoint_packaging_repair.py::test_v10r1_candidate_parser_uses_exception_aware_topology_states
+FAILED tests/test_r1_midpoint_packaging_repair.py::test_v10r1_export_emits_unambiguous_packaging_repair_artifacts
+FAILED tests/test_r1_midpoint_packaging_repair.py::test_v10r1_integrity_gate_closes_frozen_git_and_28_manifest_entries
+4 failed in 2.84s
