@@ -1,6 +1,8 @@
 {
   "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V10-R1-MIDPOINT-DIAGNOSIS",
   "contract_commit": "e54bc5933387070c697f5c88218f37f25faea4c3",
+  "result_package_commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+  "remote_sync_proof": "remote_sync.json",
   "status": "failed_v10_midpoint_collapse_diagnosis_eligible_candidate_material_rebind",
   "first_failed_gate": "eligible_candidate_production_merge_completion",
   "first_failed_candidate": 3,
