@@ -3,6 +3,7 @@ architecture_id: PRL-HYBRID-ARCH-V20
 status: frozen_x1_k_v07_mean_radius_diagnosis_passed_without_x1_k_pass
 contract: CONTRACT-PRL-HYBRID-X1-K-V07-DIAGNOSIS
 contract_commit: 668465c9f554850d0624eef474c49b8514c21cce
+result_package_commit: f4df24c840f357fc06a45c4406bc55b9817199b9
 fork_commit: e2ed64a26bb5d7c2d878772564fb5ffcca343c3a
 x1_k_passed: false
 ---

@@ -3,6 +3,7 @@ report_id: REPORT-PRL-HYBRID-X1-K-V07-DIAGNOSIS
 status: passed_structural_mean_radius_identity_and_time_floor_diagnosis
 contract: CONTRACT-PRL-HYBRID-X1-K-V07-DIAGNOSIS
 contract_commit: 668465c9f554850d0624eef474c49b8514c21cce
+result_package_commit: f4df24c840f357fc06a45c4406bc55b9817199b9
 fork_commit: e2ed64a26bb5d7c2d878772564fb5ffcca343c3a
 x1_k_passed: false
 not_executed: [R1, C1, F1, downstream_coupling]
@@ -16,7 +17,7 @@ v07 的全部新门禁通过，唯一允许状态为 `passed_structural_mean_rad
 
 这不是 X1-K 通过。v06 仍是 `failed_family_c_smooth_short_trajectory_analytic_radius_nonmonotonic`；没有运行 R1、C1、F1、remesh/contact、ECM/flow 长耦合或参数标定。
 
-合同先行提交并推送为 `668465c9f554850d0624eef474c49b8514c21cce`。受控 fork 保持 `e2ed64a26bb5d7c2d878772564fb5ffcca343c3a`。响应后没有改变 `M_C`、力、阻尼、registered owner、`dt`、`T`、source levels 或既有阈值。
+合同先行提交并推送为 `668465c9f554850d0624eef474c49b8514c21cce`，结果包提交并推送为 `f4df24c840f357fc06a45c4406bc55b9817199b9`。受控 fork 保持 `e2ed64a26bb5d7c2d878772564fb5ffcca343c3a`。响应后没有改变 `M_C`、力、阻尼、registered owner、`dt`、`T`、source levels 或既有阈值。
 
 ## 1. Euler 二次齐次推导
 

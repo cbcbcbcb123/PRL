@@ -405,7 +405,7 @@ def main() -> int:
     summary = {
         "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V07-DIAGNOSIS",
         "contract_commit": "668465c9f554850d0624eef474c49b8514c21cce",
-        "result_package_commit": None,
+        "result_package_commit": "f4df24c840f357fc06a45c4406bc55b9817199b9",
         "status": "passed_structural_mean_radius_identity_and_time_floor_diagnosis",
         "x1_k_passed": False,
         "downstream_authorized": False,
