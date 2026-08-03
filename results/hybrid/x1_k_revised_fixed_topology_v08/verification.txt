@@ -1,0 +1,18 @@
+X1-K v08 verification
+======================
+
+focused Python adjudicator tests: 3 passed
+parent CTest: 52 passed / 55 total
+expected historical failures only:
+  - prl_x1k_sphere_instantaneous_velocity_refinement (v02 D1)
+  - prl_x1k_v04_family_b_parameterized_diagnosis (v04 Family B)
+  - prl_x1k_v06_family_c_short_trajectory_gate (v06 mean-radius spatial gate)
+unexpected parent failures: 0
+controlled SimuCell3D fork CTest: 134 passed / 134 total
+strict prl_core build: passed
+tracked Python pytest: 66 passed
+Ruff (v08 implementation/test/exporter): passed
+
+The three parent failures are required historical scientific evidence. They were
+not disabled, reclassified, or included in the revised D1/S1 acceptance aggregate.
+No R1, C1, F1, new trajectory, ECM/flow coupling, or calibration was executed.

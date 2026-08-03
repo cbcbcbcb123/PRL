@@ -1,0 +1,16 @@
+{
+  "v06": {
+    "rows": 1205,
+    "runs": 5,
+    "maximum_normalized_cumulative_positive_residual": 3.324902439546511e-11,
+    "ledger_recomputed": true,
+    "coverage": "surface_tension_only"
+  },
+  "v07": {
+    "rows": 1508,
+    "runs": 8,
+    "maximum_normalized_cumulative_positive_residual": 1.3279069896530188e-10,
+    "ledger_recomputed": true,
+    "coverage": "surface_tension_only"
+  }
+}

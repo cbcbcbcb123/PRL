@@ -1,0 +1,12 @@
+X1-K v08 frozen adjudication evidence
+status: passed_revised_fixed_topology_d1_s1_acceptance
+historical v02/v04/v06: failed, unchanged
+required raw evidence files: 23
+decision rows: 54
+revised acceptance failures: 0
+revised D1 passed: true
+revised S1 passed: true
+X1-K passed: false
+R1/C1/F1: not_executed
+downstream authorized: false
+pointwise/uniform convergence claim allowed: false/false

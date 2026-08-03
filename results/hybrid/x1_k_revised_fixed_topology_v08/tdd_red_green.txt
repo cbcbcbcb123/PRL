@@ -1,0 +1,43 @@
+X1-K v08 TDD RED/GREEN evidence
+date: 2026-08-03 Asia/Shanghai
+
+Cycle 1 — missing raw evidence must fail closed
+RED:
+- test: test_v08_adjudicator_fails_closed_when_required_raw_evidence_is_missing
+- failure: ModuleNotFoundError: No module named
+  'hybrid.fixed_topology_adjudication'
+GREEN:
+- public EvidenceIntegrityError and adjudicate_fixed_topology_evidence added
+- empty workspace rejected at family_c_levels.csv
+- focused result: 1 passed
+
+Cycle 2 — direct raw-evidence revised D1/S1 adjudication
+RED:
+- test: test_v08_adjudicator_recomputes_revised_d1_s1_from_frozen_raw_csv
+- failure: NotImplementedError: full raw-evidence adjudication is not implemented
+GREEN:
+- 23-file byte/schema/row manifest, key closure and ledger replay added
+- D1/S1 values recomputed from raw CSV, not summary self-report
+- focused result: 2 passed
+
+Cycle 3 — structured tamper failure
+RED:
+- test: test_v08_adjudicator_reports_the_first_tampered_raw_evidence
+- tampered bytes were rejected, but EvidenceIntegrityError lacked reason/path
+- failure: AttributeError: 'EvidenceIntegrityError' object has no attribute 'reason'
+GREEN:
+- first tampered file returns reason=sha256_mismatch and its exact relative path
+- focused result: 3 passed
+
+Cycle 4 — historical/revised decision lanes
+RED:
+- behavior required four historical_evidence decision rows
+- observed 1, expected 4
+GREEN:
+- Route H v01, v02 D1, v04 Family B and v06 mean-radius spatial failure
+  are separate historical_evidence rows with passed=false
+- historical rows remain excluded from revised acceptance aggregation
+- focused result: 3 passed; Ruff passed
+
+No cycle modified C++, the controlled fork, force, damping, registered owner,
+legacy cache, existing evaluator/test thresholds or v01-v07 evidence.
