@@ -1,0 +1,17 @@
+contract_id=CONTRACT-PRL-HYBRID-X1-K-V04-DIAGNOSTIC
+status=failed_family_B_parameterized_diagnosis
+test=prl_x1k_v04_family_b_parameterized_diagnosis
+first_failed_criterion=family_B_source_level_2_maximum_edge_ratio
+source_level=2
+h_min=0.20503114748388765
+h_max=0.41948821791780988
+h_max_over_h_min=2.04597312684296
+threshold=2.0
+mesh_gate_passed=false
+direction_gate_passed=true
+legacy_cache_gate_passed=true
+normal_gate_passed=true
+tangential_gate_passed=true
+net_force_gate_passed=true
+family_A_repaired_gate_passed=true
+trajectory_executed=false

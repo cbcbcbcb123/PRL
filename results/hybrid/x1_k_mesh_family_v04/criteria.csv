@@ -1,0 +1,27 @@
+family,criterion,operator,threshold,observed,passed,notes
+A,maximum_legacy_ratio_error,less_equal,1e-6,1.7985612998927536e-14,true,double cache repair
+A,mesh_gate,equal,true,true,true,v03 thresholds unchanged
+A,direction_gate,equal,true,true,true,consistency plateau
+A,normal_gate,equal,true,true,true,actual h orders
+A,tangential_gate,equal,true,true,true,actual h orders
+A,net_force_gate,equal,true,true,true,all levels
+A,overall,equal,true,true,true,repaired Family A passes
+B,h_rms_strictly_decreasing,equal,true,true,true,actual RMS edge scale
+B,maximum_radius_deviation,less_equal,1e-12,3.3306690738754696e-16,true,all levels
+B,closed_manifold_euler_outward_proxy,equal,true,true,true,all levels
+B,minimum_triangle_quality,greater_equal,0.05,0.88861068911400465,true,all levels
+B,minimum_face_to_mean_area_ratio,greater_equal,0.01,0.53861621609383792,true,all levels
+B,maximum_edge_ratio_level_1,less_equal,2.0,1.92691701506461,true,source level 1
+B,maximum_edge_ratio_level_2,less_equal,2.0,2.04597312684296,false,first hard failure
+B,maximum_edge_ratio_level_3,less_equal,2.0,2.11159537116101,false,source level 3
+B,maximum_edge_ratio_level_4,less_equal,2.0,2.1344815285804,false,source level 4
+B,directional_consistency_plateau,less_equal,1e-7,1.0825271367714543e-8,true,maximum residual
+B,maximum_legacy_ratio_error,less_equal,1e-6,1.6653345369377348e-15,true,double cache
+B,normal_errors_nonincreasing,equal,true,true,true,levels 1-4
+B,minimum_normal_order,greater_equal,0.5,0.77713223201236337,true,actual h
+B,finest_normal_error,less_equal,0.02,0.009720003631600976,true,level 4
+B,tangential_errors_nonincreasing,equal,true,true,true,levels 1-4
+B,minimum_tangential_order,greater_equal,0.5,1.5060243098962154,true,actual h
+B,finest_tangential_error,less_equal,0.02,0.0021125585236056415,true,level 4
+B,maximum_normalized_net_force,less_equal,1e-12,3.8200876247615283e-16,true,all levels
+B,overall,equal,true,false,false,failed shape-regularity proxy

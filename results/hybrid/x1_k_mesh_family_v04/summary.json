@@ -1,0 +1,111 @@
+{
+  "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V04-DIAGNOSTIC",
+  "contract_commit": "4314566",
+  "status": "failed_family_B_parameterized_diagnosis",
+  "preserved_x1_k_status": "failed_instantaneous_smooth_surface_refinement",
+  "first_failed_criterion": "family_B_source_level_2_maximum_edge_ratio",
+  "fork": {
+    "repository": "https://github.com/cbcbcbcb123/prl-cell-engine.git",
+    "branch": "codex/cell-engine-integration-seam",
+    "before": "2d4b2183f5966c2afe3f4234471e727fe5f9e68d",
+    "after": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+    "remote_synced": true,
+    "production_change": "surface_tension_energy_ storage/getter/reset float-to-double only",
+    "tests": {"passed": 134, "total": 134}
+  },
+  "cache_precision": {
+    "pre_fix_getter": "float",
+    "pre_fix_level_5_ratio_error": 2.3612048186683054e-6,
+    "post_fix_getter": "double",
+    "post_fix_level_5_ratio_error": 1.7985612998927536e-14,
+    "post_fix_threshold": 1e-10,
+    "mechanics_invariance_threshold": 1e-12,
+    "mechanics_invariance_passed": true,
+    "registered_owner": "gamma*A unchanged",
+    "legacy_owner": "excluded 0.5*gamma*A unchanged"
+  },
+  "family_A": {
+    "status": "passed_repaired_original_v03_gates",
+    "source_levels": [2, 3, 4, 5],
+    "normal_observed_orders": [
+      0.95726526511283405,
+      0.98955835040171769,
+      0.99739782436982105
+    ],
+    "tangential_observed_orders": [
+      1.1749227699534339,
+      1.3785409262993003,
+      1.4462965504282976
+    ],
+    "maximum_legacy_ratio_error": 1.7985612998927536e-14,
+    "mesh_gate_passed": true,
+    "direction_gate_passed": true,
+    "normal_gate_passed": true,
+    "tangential_gate_passed": true,
+    "net_force_gate_passed": true,
+    "valence_5_normal_absolute_error_means": [
+      0.13450119078309963,
+      0.14301365568111113,
+      0.14517471037746837,
+      0.14571706311377147
+    ]
+  },
+  "family_B": {
+    "status": "failed_shape_regularity_proxy",
+    "source_levels": [1, 2, 3, 4],
+    "h_max_over_h_min": [
+      1.92691701506461,
+      2.04597312684296,
+      2.11159537116101,
+      2.1344815285804
+    ],
+    "maximum_edge_ratio_threshold": 2.0,
+    "normal_observed_orders": [
+      0.77713223201236337,
+      0.95305088646334379,
+      0.99084682105751998
+    ],
+    "tangential_observed_orders": [
+      1.5060243098962154,
+      1.5443560908635627,
+      1.5330460945531446
+    ],
+    "symmetry_class_counts": [21, 81, 321, 1281],
+    "maximum_symmetry_class_sizes": [2, 2, 2, 2],
+    "mesh_gate_passed": false,
+    "direction_gate_passed": true,
+    "legacy_cache_gate_passed": true,
+    "normal_gate_passed": true,
+    "tangential_gate_passed": true,
+    "net_force_gate_passed": true,
+    "valence_5_normal_absolute_error_means": [
+      0.10847963137560233,
+      0.14281681852766775,
+      0.15191008873036385,
+      0.15420212010509485
+    ]
+  },
+  "verification": {
+    "parent_cpp": {
+      "passed": 45,
+      "total": 47,
+      "expected_frozen_failures": [
+        "prl_x1k_sphere_instantaneous_velocity_refinement",
+        "prl_x1k_v04_family_b_parameterized_diagnosis"
+      ],
+      "unexpected_failures": 0
+    },
+    "strict_owned_prl_core_build": "passed",
+    "python_pytest": {"passed": 63, "total": 63},
+    "python_ruff": "passed"
+  },
+  "not_executed": [
+    "smooth_S1_short_trajectory",
+    "R1_remesh_on",
+    "C1_contact",
+    "F1_failure_persistence"
+  ],
+  "future_required_gate": "extraordinary-vertex local quality and velocity audit before any trajectory acceptance",
+  "route_h_gate_a_v01": "unchanged_failed_invalid_numerics",
+  "claim_guard": "v04 failed and cannot restore X1-K. Global area-weighted L2 convergence is not uniform or pointwise convergence. No trajectory, ECM/flow, calibration, physiology, full cell-ECM/FSI, EFE, or developmental mechanism claim is allowed."
+}

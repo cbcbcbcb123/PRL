@@ -194,6 +194,39 @@ mesh icosphere_mesh(const std::size_t level) {
     return result;
 }
 
+mesh fixed_spd_mapped_icosphere_mesh(const std::size_t level) {
+    auto result = icosphere_mesh(level);
+    constexpr std::array<std::array<double, 3>, 3> matrix{{
+        {{1.00, 0.10, 0.05}},
+        {{0.10, 1.10, 0.08}},
+        {{0.05, 0.08, 0.90}},
+    }};
+    for(std::size_t offset = 0; offset < result.node_pos_lst.size(); offset += 3) {
+        const std::array<double, 3> source{
+            result.node_pos_lst[offset],
+            result.node_pos_lst[offset + 1],
+            result.node_pos_lst[offset + 2],
+        };
+        std::array<double, 3> mapped{};
+        for(std::size_t row = 0; row < 3; ++row) {
+            for(std::size_t column = 0; column < 3; ++column) {
+                mapped[row] += matrix[row][column] * source[column];
+            }
+        }
+        const double radius = std::sqrt(
+            mapped[0] * mapped[0]
+            + mapped[1] * mapped[1]
+            + mapped[2] * mapped[2]
+        );
+        require(std::isfinite(radius) && radius > 0.0,
+                "fixed SPD sphere mapping produced an invalid vertex");
+        for(std::size_t component = 0; component < 3; ++component) {
+            result.node_pos_lst[offset + component] = mapped[component] / radius;
+        }
+    }
+    return result;
+}
+
 std::shared_ptr<cell_type_parameters> surface_tension_cell_type() {
     face_type_parameters face_type;
     face_type.name_ = "registered_surface_tension";
@@ -912,6 +945,175 @@ int standard_icosphere_asymptotic_family_passes_v03_diagnosis() {
     return 0;
 }
 
+void print_v04_family_level(
+    const char* const family,
+    const std::size_t source_level,
+    const prl::cell_engine::SphericalSurfaceTensionInstantaneousAudit& audit
+) {
+    std::cerr << std::setprecision(17)
+              << "v04_level," << family
+              << ',' << source_level
+              << ',' << audit.vertex_count
+              << ',' << audit.face_count
+              << ',' << audit.minimum_edge_length
+              << ',' << audit.rms_edge_length
+              << ',' << audit.maximum_edge_length
+              << ',' << audit.normalized_directional_derivative_residual
+              << ',' << audit.legacy_cache_energy / audit.registered_surface_energy
+              << ',' << audit.normal_velocity_relative_l2_error
+              << ',' << audit.tangential_velocity_relative_l2_error
+              << ',' << audit.normalized_net_force_residual
+              << ',' << audit.minimum_triangle_quality
+              << ',' << audit.minimum_outward_alignment
+              << ',' << audit.minimum_face_to_mean_area_ratio
+              << ',' << audit.maximum_radius_deviation
+              << ',' << audit.euler_characteristic
+              << ',' << audit.closed_two_manifold
+              << ',' << audit.no_self_intersection_proxy_passed
+              << ',' << audit.symmetry_class_distributions.size()
+              << ',' << audit.maximum_symmetry_class_size
+              << '\n';
+    for(const auto& group : audit.valence_distributions) {
+        std::cerr << std::setprecision(17)
+                  << "v04_valence," << family
+                  << ',' << source_level
+                  << ',' << group.valence
+                  << ',' << group.vertex_count
+                  << ',' << group.normal_absolute_error_mean
+                  << ',' << group.normal_absolute_error_maximum
+                  << ',' << group.normal_absolute_error_rms
+                  << ',' << group.tangential_speed_mean
+                  << ',' << group.tangential_speed_maximum
+                  << ',' << group.tangential_speed_rms
+                  << '\n';
+    }
+    for(const auto& group : audit.symmetry_class_distributions) {
+        std::cerr << std::setprecision(17)
+                  << "v04_class," << family
+                  << ',' << source_level
+                  << ',' << group.symmetry_class_id
+                  << ',' << group.valence
+                  << ',' << group.vertex_count
+                  << ',' << group.normal_absolute_error_mean
+                  << ',' << group.normal_absolute_error_maximum
+                  << ',' << group.normal_absolute_error_rms
+                  << ',' << group.tangential_speed_mean
+                  << ',' << group.tangential_speed_maximum
+                  << ',' << group.tangential_speed_rms
+                  << '\n';
+    }
+}
+
+int run_v04_mesh_family_diagnosis(
+    const char* const family,
+    const std::array<std::size_t, 4>& source_levels,
+    const std::array<std::size_t, 4>& expected_vertices,
+    const std::array<std::size_t, 4>& expected_faces,
+    const std::array<mesh, 4>& family_meshes
+) {
+    std::array<prl::cell_engine::SphericalSurfaceTensionInstantaneousAudit, 4>
+        audits{};
+    for(std::size_t index = 0; index < audits.size(); ++index) {
+        auto current_cell = surface_tension_cell(
+            family_meshes[index],
+            static_cast<unsigned>(101 + index)
+        );
+        audits[index] = prl::cell_engine::audit_spherical_surface_tension_instantaneous(
+            *current_cell,
+            0.02,
+            10.0,
+            1.0e-6
+        );
+        require(audits[index].vertex_count == expected_vertices[index]
+                    && audits[index].face_count == expected_faces[index],
+                "v04 family topology matrix changed");
+        print_v04_family_level(family, source_levels[index], audits[index]);
+    }
+
+    const prl::cell_engine::SphericalMeshFamilyDiagnosticThresholds mesh_thresholds{
+        1.0e-12,
+        0.05,
+        1.0e-2,
+        2.0,
+    };
+    const auto mesh_gate = prl::cell_engine::evaluate_spherical_mesh_family_quality(
+        audits,
+        mesh_thresholds
+    );
+    const prl::cell_engine::SphericalDirectionalDerivativeThresholds
+        direction_thresholds{1.0e-6, 0.5, 1.0e-7, 1.0e-6};
+    const auto direction_gate
+        = prl::cell_engine::evaluate_spherical_directional_derivative_refinement(
+            audits,
+            direction_thresholds
+        );
+    const prl::cell_engine::SphericalInstantaneousVelocityThresholds
+        velocity_thresholds{2.0e-2, 2.0e-2, 0.5, 1.0e-10, 1.0e-12};
+    const auto velocity_gate
+        = prl::cell_engine::evaluate_spherical_instantaneous_velocity_refinement(
+            audits,
+            velocity_thresholds
+        );
+    std::cerr << std::setprecision(17)
+              << "v04_gate," << family
+              << ",mesh," << mesh_gate.passed
+              << ",direction," << direction_gate.passed
+              << ",direction_plateau," << direction_gate.consistency_plateau
+              << ",direction_finest," << direction_gate.finest_residual_passed
+              << ",legacy_cache," << direction_gate.legacy_cache_exclusion_passed
+              << ",normal," << velocity_gate.normal_velocity_passed
+              << ",tangent," << velocity_gate.tangential_pollution_passed
+              << ",net," << velocity_gate.net_force_passed
+              << ",normal_orders,"
+              << velocity_gate.normal_velocity_observed_orders[0] << ','
+              << velocity_gate.normal_velocity_observed_orders[1] << ','
+              << velocity_gate.normal_velocity_observed_orders[2]
+              << ",tangent_orders,"
+              << velocity_gate.tangential_pollution_observed_orders[0] << ','
+              << velocity_gate.tangential_pollution_observed_orders[1] << ','
+              << velocity_gate.tangential_pollution_observed_orders[2]
+              << '\n';
+    require(mesh_gate.passed, "v04 family mesh-quality diagnosis failed");
+    require(direction_gate.passed,
+            "v04 family direction-or-excluded-cache diagnosis failed");
+    require(velocity_gate.passed, "v04 family asymptotic velocity diagnosis failed");
+    return 0;
+}
+
+int repaired_standard_icosphere_passes_v04_family_a() {
+    const std::array<std::size_t, 4> source_levels{2, 3, 4, 5};
+    const std::array<std::size_t, 4> expected_vertices{162, 642, 2562, 10242};
+    const std::array<std::size_t, 4> expected_faces{320, 1280, 5120, 20480};
+    std::array<mesh, 4> family_meshes;
+    for(std::size_t index = 0; index < family_meshes.size(); ++index) {
+        family_meshes[index] = icosphere_mesh(source_levels[index]);
+    }
+    return run_v04_mesh_family_diagnosis(
+        "A",
+        source_levels,
+        expected_vertices,
+        expected_faces,
+        family_meshes
+    );
+}
+
+int fixed_spd_parameterized_icosphere_passes_v04_family_b() {
+    const std::array<std::size_t, 4> source_levels{1, 2, 3, 4};
+    const std::array<std::size_t, 4> expected_vertices{42, 162, 642, 2562};
+    const std::array<std::size_t, 4> expected_faces{80, 320, 1280, 5120};
+    std::array<mesh, 4> family_meshes;
+    for(std::size_t index = 0; index < family_meshes.size(); ++index) {
+        family_meshes[index] = fixed_spd_mapped_icosphere_mesh(source_levels[index]);
+    }
+    return run_v04_mesh_family_diagnosis(
+        "B",
+        source_levels,
+        expected_vertices,
+        expected_faces,
+        family_meshes
+    );
+}
+
 } // namespace
 
 int main(const int argc, const char* const argv[]) {
@@ -947,6 +1149,12 @@ int main(const int argc, const char* const argv[]) {
         }
         if(behavior == "v03_family_a") {
             return standard_icosphere_asymptotic_family_passes_v03_diagnosis();
+        }
+        if(behavior == "v04_repaired_family_a") {
+            return repaired_standard_icosphere_passes_v04_family_a();
+        }
+        if(behavior == "v04_family_b") {
+            return fixed_spd_parameterized_icosphere_passes_v04_family_b();
         }
         throw std::invalid_argument("unknown behavior: " + behavior);
     } catch(const std::exception& error) {
