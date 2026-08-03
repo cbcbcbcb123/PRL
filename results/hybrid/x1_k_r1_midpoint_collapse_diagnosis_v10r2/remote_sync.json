@@ -1,0 +1,56 @@
+{
+  "checked_at": "2026-08-03",
+  "parent_repository": {
+    "remote": "https://github.com/cbcbcbcb123/PRL.git",
+    "branch": "codex/simucell3d-hybrid-feasibility",
+    "contract_commit": "d3d5a51d0e58ac9413eeb4c1b019eebb671470b4",
+    "result_package_commit": "4a634fa067f55650466c7eef0a004cf5ac9c6c1f",
+    "local_head_at_result_push": "4a634fa067f55650466c7eef0a004cf5ac9c6c1f",
+    "ls_remote_at_result_push": "4a634fa067f55650466c7eef0a004cf5ac9c6c1f",
+    "result_push_verified": true,
+    "expected_parent_for_sync_commit": "4a634fa067f55650466c7eef0a004cf5ac9c6c1f",
+    "force_push_used": false
+  },
+  "controlled_cell_engine": {
+    "identity_source": "verification/combined_python_final.log",
+    "gitlink": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+    "readonly_verification_head": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+    "readonly_verification_upstream": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+    "tracked_clean": true,
+    "modified_by_v10r2": false,
+    "verified": true
+  },
+  "append_only_audit": {
+    "frozen_baseline_commit": "27b7fbfda1d8533a99dd7c80e91fce15ddfcdd6c",
+    "frozen_v01_v10r1_paths_verified": 328,
+    "frozen_path_mismatches": 0,
+    "frozen_worktree_changes": 0,
+    "canonical_configuration_leaves_resolved": 32,
+    "canonical_frozen_lifecycle_blobs_verified": 102,
+    "frozen_v10_manifest_entries_verified": 28,
+    "protected_parent_assets_modified": false,
+    "historical_files_modified": false
+  },
+  "verification": {
+    "status": "passed_packaging_software_verification",
+    "focused_python_passed": 3,
+    "combined_full_python_passed": 91,
+    "combined_full_python_exit_code": 0,
+    "ruff_exit_code": 0,
+    "counts_and_fork_identity_parsed_from_combined_log": true,
+    "new_cpp_scientific_response_executed": false
+  },
+  "scientific_state": {
+    "packaging_status": "packaging_evidence_repair_complete_scientific_failure_preserved",
+    "v10": "failed_v10_midpoint_collapse_diagnosis_eligible_candidate_material_rebind",
+    "classification": "not_adjudicated_due_to_first_failure",
+    "candidate_3_topology_status": "not_adjudicated_due_to_production_sink_exception",
+    "candidate_3_merge_succeeded": false,
+    "candidate_3_rebind_distance": 0.047434164902525666,
+    "candidate_3_rebind_distance_threshold": 1e-12,
+    "x1_k_passed": false,
+    "r1_passed": false,
+    "c1_f1": "not_executed",
+    "downstream_authorized": false
+  }
+}
