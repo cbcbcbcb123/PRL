@@ -227,6 +227,39 @@ mesh fixed_spd_mapped_icosphere_mesh(const std::size_t level) {
     return result;
 }
 
+mesh quality_controlled_spd_mapped_icosphere_mesh(const std::size_t level) {
+    auto result = icosphere_mesh(level);
+    constexpr std::array<std::array<double, 3>, 3> matrix{{
+        {{1.000, 0.050, 0.025}},
+        {{0.050, 1.050, 0.040}},
+        {{0.025, 0.040, 0.950}},
+    }};
+    for(std::size_t offset = 0; offset < result.node_pos_lst.size(); offset += 3) {
+        const std::array<double, 3> source{
+            result.node_pos_lst[offset],
+            result.node_pos_lst[offset + 1],
+            result.node_pos_lst[offset + 2],
+        };
+        std::array<double, 3> mapped{};
+        for(std::size_t row = 0; row < 3; ++row) {
+            for(std::size_t column = 0; column < 3; ++column) {
+                mapped[row] += matrix[row][column] * source[column];
+            }
+        }
+        const double radius = std::sqrt(
+            mapped[0] * mapped[0]
+            + mapped[1] * mapped[1]
+            + mapped[2] * mapped[2]
+        );
+        require(std::isfinite(radius) && radius > 0.0,
+                "quality-controlled SPD sphere mapping produced an invalid vertex");
+        for(std::size_t component = 0; component < 3; ++component) {
+            result.node_pos_lst[offset + component] = mapped[component] / radius;
+        }
+    }
+    return result;
+}
+
 std::shared_ptr<cell_type_parameters> surface_tension_cell_type() {
     face_type_parameters face_type;
     face_type.name_ = "registered_surface_tension";
@@ -1114,6 +1147,285 @@ int fixed_spd_parameterized_icosphere_passes_v04_family_b() {
     );
 }
 
+int v05_local_error_energy_public_seam_is_auditable() {
+    using prl::cell_engine::SphericalSurfaceTensionInstantaneousAudit;
+    using prl::cell_engine::SphericalVertexInstantaneousDiagnostic;
+    std::array<SphericalSurfaceTensionInstantaneousAudit, 4> levels{};
+    for(std::size_t level = 0; level < levels.size(); ++level) {
+        const double scale = std::pow(0.5, static_cast<double>(level));
+        auto& current = levels[level];
+        current.vertex_count = 4;
+        current.rms_edge_length = scale;
+        current.exact_normal_velocity = -1.0;
+        current.maximum_symmetry_class_size = 1;
+        current.symmetry_class_distributions.resize(4);
+        for(auto& distribution : current.symmetry_class_distributions) {
+            distribution.vertex_count = 1;
+        }
+        current.vertex_diagnostics = {
+            SphericalVertexInstantaneousDiagnostic{
+                0, 5, 1, 0.4, 0.1, -0.01 * scale,
+                -0.01 * scale, 0.01 * scale, 0.0, true,
+            },
+            SphericalVertexInstantaneousDiagnostic{
+                1, 6, 2, 0.8, 0.2, -0.02 * scale,
+                -0.02 * scale, 0.02 * scale, 0.0, true,
+            },
+            SphericalVertexInstantaneousDiagnostic{
+                2, 6, 3, 1.2, 0.3, -0.03 * scale,
+                -0.03 * scale, 0.03 * scale, 0.0, false,
+            },
+            SphericalVertexInstantaneousDiagnostic{
+                3, 6, 4, 1.6, 0.4, -0.04 * scale,
+                -0.04 * scale, 0.04 * scale, 0.0, false,
+            },
+        };
+    }
+
+    const auto energy = prl::cell_engine::
+        evaluate_spherical_normal_error_energy_refinement(levels);
+    require(energy.finite_nonnegative && energy.partition_closed,
+            "v05 error-energy partition must be finite and closed");
+    require(energy.levels.front().valence_five.vertex_count == 1
+                && energy.levels.front().valence_six.vertex_count == 3
+                && energy.levels.front().valence_five_closed_one_ring.vertex_count == 2,
+            "v05 error-energy regions changed");
+    require(energy.levels.front().valence_five.error_energy > 0.0
+                && energy.levels.front().valence_six.error_energy > 0.0
+                && energy.levels.front().valence_five_closed_one_ring.error_energy > 0.0,
+            "v05 error-energy regions must retain absolute energy");
+
+    const auto symmetry = prl::cell_engine::
+        evaluate_quality_controlled_symmetry_breaking(levels);
+    require(symmetry.passed,
+            "v05 geometry-defined singleton classes must pass the frozen gate");
+    levels.back().maximum_symmetry_class_size = 3;
+    levels.back().symmetry_class_distributions.resize(1);
+    const auto rejected = prl::cell_engine::
+        evaluate_quality_controlled_symmetry_breaking(levels);
+    require(!rejected.passed,
+            "v05 oversized response-pre geometry class must fail the frozen gate");
+    return 0;
+}
+
+void print_v05_family_c_level(
+    const std::size_t source_level,
+    const prl::cell_engine::SphericalSurfaceTensionInstantaneousAudit& audit
+) {
+    std::cerr << std::setprecision(17)
+              << "v05_level,C"
+              << ',' << source_level
+              << ',' << audit.vertex_count
+              << ',' << audit.face_count
+              << ',' << audit.minimum_edge_length
+              << ',' << audit.rms_edge_length
+              << ',' << audit.maximum_edge_length
+              << ',' << audit.normalized_directional_derivative_residual
+              << ',' << audit.legacy_cache_energy / audit.registered_surface_energy
+              << ',' << audit.normal_velocity_relative_l2_error
+              << ',' << audit.tangential_velocity_relative_l2_error
+              << ',' << audit.normalized_net_force_residual
+              << ',' << audit.minimum_triangle_quality
+              << ',' << audit.minimum_outward_alignment
+              << ',' << audit.minimum_face_to_mean_area_ratio
+              << ',' << audit.maximum_radius_deviation
+              << ',' << audit.euler_characteristic
+              << ',' << audit.closed_two_manifold
+              << ',' << audit.positive_signed_volume
+              << ',' << audit.all_face_origin_contributions_positive
+              << ',' << audit.no_self_intersection_proxy_passed
+              << ',' << audit.symmetry_class_distributions.size()
+              << ',' << audit.maximum_symmetry_class_size
+              << ',' << audit.exact_normal_velocity
+              << '\n';
+    for(const auto& group : audit.valence_distributions) {
+        std::cerr << std::setprecision(17)
+                  << "v05_valence,C"
+                  << ',' << source_level
+                  << ',' << group.valence
+                  << ',' << group.vertex_count
+                  << ',' << group.normal_absolute_error_mean
+                  << ',' << group.normal_absolute_error_maximum
+                  << ',' << group.normal_absolute_error_rms
+                  << ',' << group.tangential_speed_mean
+                  << ',' << group.tangential_speed_maximum
+                  << ',' << group.tangential_speed_rms
+                  << '\n';
+    }
+    for(const auto& group : audit.symmetry_class_distributions) {
+        std::cerr << std::setprecision(17)
+                  << "v05_class,C"
+                  << ',' << source_level
+                  << ',' << group.symmetry_class_id
+                  << ',' << group.valence
+                  << ',' << group.vertex_count
+                  << ',' << group.normal_absolute_error_mean
+                  << ',' << group.normal_absolute_error_maximum
+                  << ',' << group.normal_absolute_error_rms
+                  << ',' << group.tangential_speed_mean
+                  << ',' << group.tangential_speed_maximum
+                  << ',' << group.tangential_speed_rms
+                  << '\n';
+    }
+}
+
+void print_v05_error_region(
+    const std::size_t source_level,
+    const char* const region_name,
+    const prl::cell_engine::SphericalNormalErrorRegionDiagnostic& region
+) {
+    std::cerr << std::setprecision(17)
+              << "v05_region,C"
+              << ',' << source_level
+              << ',' << region_name
+              << ',' << region.vertex_count
+              << ',' << region.control_area
+              << ',' << region.error_energy
+              << ',' << region.total_error_energy_fraction
+              << ',' << region.area_weighted_relative_rms
+              << ',' << region.maximum_pointwise_relative_error
+              << '\n';
+}
+
+int quality_controlled_spd_icosphere_runs_v05_family_c_diagnosis() {
+    const std::array<std::size_t, 4> source_levels{1, 2, 3, 4};
+    const std::array<std::size_t, 4> expected_vertices{42, 162, 642, 2562};
+    const std::array<std::size_t, 4> expected_faces{80, 320, 1280, 5120};
+    std::array<prl::cell_engine::SphericalSurfaceTensionInstantaneousAudit, 4>
+        audits{};
+    for(std::size_t index = 0; index < audits.size(); ++index) {
+        const auto family_mesh = quality_controlled_spd_mapped_icosphere_mesh(
+            source_levels[index]
+        );
+        auto current_cell = surface_tension_cell(
+            family_mesh,
+            static_cast<unsigned>(201 + index)
+        );
+        audits[index] = prl::cell_engine::audit_spherical_surface_tension_instantaneous(
+            *current_cell,
+            0.02,
+            10.0,
+            1.0e-6
+        );
+        require(audits[index].vertex_count == expected_vertices[index]
+                    && audits[index].face_count == expected_faces[index],
+                "v05 Family C topology matrix changed");
+        print_v05_family_c_level(source_levels[index], audits[index]);
+    }
+
+    const prl::cell_engine::SphericalMeshFamilyDiagnosticThresholds mesh_thresholds{
+        1.0e-12,
+        0.05,
+        1.0e-2,
+        2.0,
+    };
+    const auto mesh_gate = prl::cell_engine::evaluate_spherical_mesh_family_quality(
+        audits,
+        mesh_thresholds
+    );
+    const prl::cell_engine::SphericalDirectionalDerivativeThresholds
+        direction_thresholds{1.0e-6, 0.5, 1.0e-7, 1.0e-6};
+    const auto direction_gate
+        = prl::cell_engine::evaluate_spherical_directional_derivative_refinement(
+            audits,
+            direction_thresholds
+        );
+    const prl::cell_engine::SphericalInstantaneousVelocityThresholds
+        velocity_thresholds{2.0e-2, 2.0e-2, 0.5, 1.0e-10, 1.0e-12};
+    const auto velocity_gate
+        = prl::cell_engine::evaluate_spherical_instantaneous_velocity_refinement(
+            audits,
+            velocity_thresholds
+        );
+    const auto symmetry_gate = prl::cell_engine::
+        evaluate_quality_controlled_symmetry_breaking(audits);
+    const auto error_energy = prl::cell_engine::
+        evaluate_spherical_normal_error_energy_refinement(audits);
+
+    for(std::size_t index = 0; index < audits.size(); ++index) {
+        const auto& level = error_energy.levels[index];
+        print_v05_error_region(
+            source_levels[index],
+            "valence_5",
+            level.valence_five
+        );
+        print_v05_error_region(
+            source_levels[index],
+            "valence_6",
+            level.valence_six
+        );
+        print_v05_error_region(
+            source_levels[index],
+            "valence_5_closed_one_ring",
+            level.valence_five_closed_one_ring
+        );
+        const auto& symmetry = symmetry_gate.levels[index];
+        std::cerr << std::setprecision(17)
+                  << "v05_symmetry,C"
+                  << ',' << source_levels[index]
+                  << ',' << symmetry.vertex_count
+                  << ',' << symmetry.symmetry_class_count
+                  << ',' << symmetry.maximum_symmetry_class_size
+                  << ',' << symmetry.minimum_required_class_count
+                  << ',' << symmetry.class_size_passed
+                  << ',' << symmetry.class_count_passed
+                  << ',' << symmetry.passed
+                  << '\n';
+    }
+    for(std::size_t pair = 0; pair < 3; ++pair) {
+        std::cerr << std::setprecision(17)
+                  << "v05_energy_order,C"
+                  << ',' << source_levels[pair]
+                  << ',' << source_levels[pair + 1]
+                  << ',' << error_energy.total_error_energy_observed_orders[pair]
+                  << ',' << error_energy
+                      .valence_five_error_energy_observed_orders[pair]
+                  << ',' << error_energy
+                      .valence_six_error_energy_observed_orders[pair]
+                  << ',' << error_energy
+                      .valence_five_closed_one_ring_observed_orders[pair]
+                  << '\n';
+    }
+    std::cerr << std::setprecision(17)
+              << "v05_gate,C"
+              << ",mesh," << mesh_gate.passed
+              << ",radii," << mesh_gate.radii_passed
+              << ",topology," << mesh_gate.topology_proxy_passed
+              << ",outward," << mesh_gate.outward_orientation_passed
+              << ",shape," << mesh_gate.shape_regularity_passed
+              << ",direction," << direction_gate.passed
+              << ",direction_plateau," << direction_gate.consistency_plateau
+              << ",legacy_cache," << direction_gate.legacy_cache_exclusion_passed
+              << ",normal," << velocity_gate.normal_velocity_passed
+              << ",tangent," << velocity_gate.tangential_pollution_passed
+              << ",net," << velocity_gate.net_force_passed
+              << ",symmetry," << symmetry_gate.passed
+              << ",energy_finite," << error_energy.finite_nonnegative
+              << ",partition_closed," << error_energy.partition_closed
+              << ",normal_orders,"
+              << velocity_gate.normal_velocity_observed_orders[0] << ','
+              << velocity_gate.normal_velocity_observed_orders[1] << ','
+              << velocity_gate.normal_velocity_observed_orders[2]
+              << ",tangent_orders,"
+              << velocity_gate.tangential_pollution_observed_orders[0] << ','
+              << velocity_gate.tangential_pollution_observed_orders[1] << ','
+              << velocity_gate.tangential_pollution_observed_orders[2]
+              << '\n';
+
+    require(mesh_gate.passed, "v05 Family C mesh-quality diagnosis failed");
+    require(direction_gate.passed,
+            "v05 Family C direction-or-excluded-cache diagnosis failed");
+    require(velocity_gate.passed,
+            "v05 Family C asymptotic velocity diagnosis failed");
+    require(symmetry_gate.passed,
+            "v05 Family C response-pre symmetry-breaking diagnosis failed");
+    require(error_energy.mesh_scales_decreased
+                && error_energy.finite_nonnegative
+                && error_energy.partition_closed,
+            "v05 Family C local error-energy accounting failed");
+    return 0;
+}
+
 } // namespace
 
 int main(const int argc, const char* const argv[]) {
@@ -1155,6 +1467,12 @@ int main(const int argc, const char* const argv[]) {
         }
         if(behavior == "v04_family_b") {
             return fixed_spd_parameterized_icosphere_passes_v04_family_b();
+        }
+        if(behavior == "v05_diagnostic_public_seam") {
+            return v05_local_error_energy_public_seam_is_auditable();
+        }
+        if(behavior == "v05_family_c") {
+            return quality_controlled_spd_icosphere_runs_v05_family_c_diagnosis();
         }
         throw std::invalid_argument("unknown behavior: " + behavior);
     } catch(const std::exception& error) {

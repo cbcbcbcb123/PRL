@@ -310,6 +310,16 @@ if(BUILD_TESTING)
             COMMAND prl_short_trajectory_integration_test
                 v04_family_b
         )
+        add_test(
+            NAME prl_x1k_v05_diagnostic_public_seam
+            COMMAND prl_short_trajectory_integration_test
+                v05_diagnostic_public_seam
+        )
+        add_test(
+            NAME prl_x1k_v05_family_c_quality_controlled_diagnosis
+            COMMAND prl_short_trajectory_integration_test
+                v05_family_c
+        )
 
         add_executable(
             prl_multicell_remesh_benchmark

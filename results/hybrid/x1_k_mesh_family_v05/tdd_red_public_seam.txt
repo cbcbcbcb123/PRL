@@ -1,0 +1,13 @@
+X1-K v05 TDD RED evidence
+contract commit: 4d2cad4ab77cb4d9410348283e07212092d31c24
+command: docker ... cmake --build cpp/build-linux-x1h -j2
+exit code: 1
+
+Observed compile failures before GREEN:
+- SphericalSurfaceTensionInstantaneousAudit had no exact_normal_velocity.
+- SphericalVertexInstantaneousDiagnostic did not expose the additional
+  control-area, physical normal-error, and closed-one-ring fields.
+- evaluate_spherical_normal_error_energy_refinement was absent.
+- evaluate_quality_controlled_symmetry_breaking was absent.
+
+No Family C mesh response had been generated before this RED run.

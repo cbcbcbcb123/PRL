@@ -1,0 +1,74 @@
+{
+  "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V05-DIAGNOSTIC",
+  "contract_commit": "4d2cad4ab77cb4d9410348283e07212092d31c24",
+  "status": "passed_quality_controlled_symmetry_broken_global_L2_diagnosis",
+  "preserved_x1_k_status": "failed_instantaneous_smooth_surface_refinement",
+  "preserved_v04_status": "failed_family_B_parameterized_diagnosis",
+  "matrix": {
+    "M_C": [[1.0, 0.05, 0.025], [0.05, 1.05, 0.04], [0.025, 0.04, 0.95]],
+    "leading_principal_minors": [1.0, 1.0475, 0.99296875],
+    "eigenvalues": [0.934772496, 0.969099738, 1.096127763],
+    "spectral_condition_number": 1.172614478,
+    "spd_and_positive_determinant": true,
+    "spectral_deviation_from_identity_relative_to_family_B": 0.5
+  },
+  "family_C": {
+    "source_levels": [1, 2, 3, 4],
+    "vertex_counts": [42, 162, 642, 2562],
+    "face_counts": [80, 320, 1280, 5120],
+    "h_rms": [0.5846465833622684, 0.3007587447307266, 0.1514741410305466, 0.0758752187252943],
+    "h_max_over_h_min": [1.4784954335495075, 1.549771368269678, 1.587784609782255, 1.598009239165388],
+    "normal_relative_L2": [0.058544396083844895, 0.034410560603453613, 0.017857847447865338, 0.009008418460499743],
+    "normal_observed_orders": [0.79949237184109945, 0.95630073847923747, 0.98981481323759646],
+    "tangential_relative_L2": [0.024079009643659676, 0.012883427116400337, 0.005192115673290819, 0.0019345991282654401],
+    "tangential_observed_orders": [0.94087493639569264, 1.3249877692957313, 1.4280424100311508],
+    "symmetry_class_counts": [21, 81, 321, 1281],
+    "maximum_symmetry_class_sizes": [2, 2, 2, 2],
+    "mesh_gate_passed": true,
+    "direction_gate_passed": true,
+    "legacy_cache_gate_passed": true,
+    "normal_gate_passed": true,
+    "tangential_gate_passed": true,
+    "net_force_gate_passed": true,
+    "symmetry_breaking_gate_passed": true,
+    "error_energy_ledger_passed": true
+  },
+  "local_error_energy": {
+    "valence_5_energy_fraction": [0.7518019322312557, 0.9223614921240215, 0.9636970965589862, 0.9744673158580983],
+    "valence_5_pointwise_max_relative_error": [0.10956714380371381, 0.13802311139862158, 0.14682740256017679, 0.14907357087242268],
+    "valence_5_energy_orders": [1.2067360708261985, 1.8275538794503847, 1.9582726116411293],
+    "closed_one_ring_energy_orders": [1.582632786153527, 1.8750401694985872, 1.9618952062112773],
+    "partition_closed": true,
+    "pointwise_convergence_claim_allowed": false
+  },
+  "fork": {
+    "repository": "https://github.com/cbcbcbcb123/prl-cell-engine.git",
+    "branch": "codex/cell-engine-integration-seam",
+    "commit": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+    "modified_in_v05": false,
+    "local_and_upstream_match": true,
+    "tests": {"passed": 134, "total": 134}
+  },
+  "verification": {
+    "parent_cpp": {
+      "passed": 47,
+      "total": 49,
+      "expected_frozen_failures": [
+        "prl_x1k_sphere_instantaneous_velocity_refinement",
+        "prl_x1k_v04_family_b_parameterized_diagnosis"
+      ],
+      "unexpected_failures": 0
+    },
+    "strict_owned_prl_core_build": "passed",
+    "python_pytest": {"passed": 63, "total": 63},
+    "python_ruff": "passed"
+  },
+  "not_executed_as_new_v05_cases": [
+    "smooth_S1_short_trajectory",
+    "R1_remesh_on",
+    "C1_contact",
+    "F1_failure_persistence"
+  ],
+  "route_h_gate_a_v01": "unchanged_failed_invalid_numerics",
+  "claim_guard": "This passes only the frozen quality-controlled symmetry-broken area-weighted global L2 diagnosis. X1-K remains failed; pointwise/uniform convergence, trajectory stability, ECM/flow, calibration, physiology, FSI, EFE, and developmental mechanism claims are not allowed."
+}

@@ -1187,6 +1187,22 @@ audit_spherical_surface_tension_instantaneous(
         incident_edge_lengths.at(first).push_back(edge_length);
         incident_edge_lengths.at(second).push_back(edge_length);
     }
+    std::vector<bool> in_valence_five_closed_one_ring(
+        mesh.vertices.size(),
+        false
+    );
+    for(std::size_t index = 0; index < valences.size(); ++index) {
+        in_valence_five_closed_one_ring[index] = valences[index] == 5;
+    }
+    for(const auto& [key, incidence] : edge_incidence) {
+        static_cast<void>(incidence);
+        const auto first = static_cast<std::size_t>(key >> 32U);
+        const auto second = static_cast<std::size_t>(key & 0xffffffffULL);
+        if(valences.at(first) == 5 || valences.at(second) == 5) {
+            in_valence_five_closed_one_ring[first] = true;
+            in_valence_five_closed_one_ring[second] = true;
+        }
+    }
     const auto euler_characteristic
         = static_cast<std::int64_t>(mesh.vertices.size())
         - static_cast<std::int64_t>(edge_incidence.size())
@@ -1365,9 +1381,12 @@ audit_spherical_surface_tension_instantaneous(
             control_area / (
                 geometry.area / static_cast<double>(mesh.vertices.size())
             ),
+            control_area,
+            normal_error,
             normal_error / std::abs(exact_normal_velocity),
             std::abs(normal_error) / std::abs(exact_normal_velocity),
             norm(tangential_velocity) / std::abs(exact_normal_velocity),
+            in_valence_five_closed_one_ring.at(index),
         });
         normal_error_square_integral += control_area
             * normal_error * normal_error;
@@ -1488,6 +1507,7 @@ audit_spherical_surface_tension_instantaneous(
     result.finite_difference_directional_derivative = finite_difference;
     result.force_directional_derivative = force_directional;
     result.normalized_directional_derivative_residual = residual;
+    result.exact_normal_velocity = exact_normal_velocity;
     result.normal_velocity_relative_l2_error = normal_velocity_error;
     result.tangential_velocity_relative_l2_error = tangential_velocity_error;
     result.normalized_net_force_residual = net_force_residual;
@@ -1799,6 +1819,212 @@ SphericalMeshFamilyDiagnosticAudit evaluate_spherical_mesh_family_quality(
         && result.topology_proxy_passed
         && result.outward_orientation_passed
         && result.shape_regularity_passed;
+    return result;
+}
+
+SphericalNormalErrorEnergyRefinementAudit
+evaluate_spherical_normal_error_energy_refinement(
+    const std::array<SphericalSurfaceTensionInstantaneousAudit, 4>& levels
+) {
+    SphericalNormalErrorEnergyRefinementAudit result;
+    result.mesh_scales_decreased = true;
+    result.finite_nonnegative = true;
+    result.partition_closed = true;
+
+    auto accumulate = [](SphericalNormalErrorRegionDiagnostic& region,
+                         const SphericalVertexInstantaneousDiagnostic& vertex,
+                         const double exact_normal_speed) {
+        const double error_energy = vertex.control_area
+            * vertex.normal_velocity_error * vertex.normal_velocity_error;
+        ++region.vertex_count;
+        region.control_area += vertex.control_area;
+        region.error_energy += error_energy;
+        region.maximum_pointwise_relative_error = std::max(
+            region.maximum_pointwise_relative_error,
+            std::abs(vertex.normal_velocity_error) / exact_normal_speed
+        );
+    };
+
+    for(std::size_t level = 0; level < levels.size(); ++level) {
+        const auto& current = levels[level];
+        auto& level_result = result.levels[level];
+        const double exact_normal_speed = std::abs(current.exact_normal_velocity);
+        if(!std::isfinite(current.rms_edge_length)
+           || current.rms_edge_length <= 0.0
+           || !std::isfinite(exact_normal_speed)
+           || exact_normal_speed <= 0.0
+           || current.vertex_diagnostics.size() != current.vertex_count) {
+            throw std::invalid_argument("spherical normal-error level is invalid");
+        }
+        level_result.rms_edge_length = current.rms_edge_length;
+        for(const auto& vertex : current.vertex_diagnostics) {
+            const std::array<double, 3> values{
+                vertex.control_area,
+                vertex.normal_velocity_error,
+                vertex.normal_absolute_relative_error,
+            };
+            if(!std::all_of(
+                    values.begin(),
+                    values.end(),
+                    [](const double value) { return std::isfinite(value); }
+                )
+               || vertex.control_area <= 0.0
+               || vertex.normal_absolute_relative_error < 0.0) {
+                throw std::invalid_argument(
+                    "spherical normal-error vertex is invalid"
+                );
+            }
+            const double error_energy = vertex.control_area
+                * vertex.normal_velocity_error * vertex.normal_velocity_error;
+            level_result.total_control_area += vertex.control_area;
+            level_result.total_error_energy += error_energy;
+            if(vertex.valence == 5) {
+                accumulate(
+                    level_result.valence_five,
+                    vertex,
+                    exact_normal_speed
+                );
+            } else if(vertex.valence == 6) {
+                accumulate(
+                    level_result.valence_six,
+                    vertex,
+                    exact_normal_speed
+                );
+            }
+            if(vertex.in_valence_five_closed_one_ring) {
+                accumulate(
+                    level_result.valence_five_closed_one_ring,
+                    vertex,
+                    exact_normal_speed
+                );
+            }
+        }
+        auto finalize = [&](SphericalNormalErrorRegionDiagnostic& region) {
+            region.total_error_energy_fraction
+                = level_result.total_error_energy > 0.0
+                ? region.error_energy / level_result.total_error_energy
+                : 0.0;
+            region.area_weighted_relative_rms = region.control_area > 0.0
+                ? std::sqrt(region.error_energy / region.control_area)
+                    / exact_normal_speed
+                : 0.0;
+        };
+        finalize(level_result.valence_five);
+        finalize(level_result.valence_six);
+        finalize(level_result.valence_five_closed_one_ring);
+        level_result.partition_closure_residual = std::abs(
+            level_result.total_error_energy
+            - level_result.valence_five.error_energy
+            - level_result.valence_six.error_energy
+        );
+        const std::array<double, 18> reported_values{
+            level_result.total_control_area,
+            level_result.total_error_energy,
+            level_result.partition_closure_residual,
+            level_result.valence_five.control_area,
+            level_result.valence_five.error_energy,
+            level_result.valence_five.total_error_energy_fraction,
+            level_result.valence_five.area_weighted_relative_rms,
+            level_result.valence_five.maximum_pointwise_relative_error,
+            level_result.valence_six.control_area,
+            level_result.valence_six.error_energy,
+            level_result.valence_six.total_error_energy_fraction,
+            level_result.valence_six.area_weighted_relative_rms,
+            level_result.valence_six.maximum_pointwise_relative_error,
+            level_result.valence_five_closed_one_ring.control_area,
+            level_result.valence_five_closed_one_ring.error_energy,
+            level_result.valence_five_closed_one_ring.total_error_energy_fraction,
+            level_result.valence_five_closed_one_ring.area_weighted_relative_rms,
+            level_result.valence_five_closed_one_ring
+                .maximum_pointwise_relative_error,
+        };
+        level_result.finite_nonnegative = std::all_of(
+            reported_values.begin(),
+            reported_values.end(),
+            [](const double value) {
+                return std::isfinite(value) && value >= 0.0;
+            }
+        );
+        level_result.partition_closed = level_result.partition_closure_residual
+            <= 1.0e-12 * std::max(1.0, level_result.total_error_energy);
+        result.finite_nonnegative = result.finite_nonnegative
+            && level_result.finite_nonnegative;
+        result.partition_closed = result.partition_closed
+            && level_result.partition_closed;
+        if(level > 0) {
+            result.mesh_scales_decreased = result.mesh_scales_decreased
+                && current.rms_edge_length < levels[level - 1].rms_edge_length;
+        }
+    }
+
+    auto observed_orders = [&](auto energy_at) {
+        std::array<double, 3> orders{};
+        for(std::size_t pair = 0; pair < orders.size(); ++pair) {
+            const double coarse = energy_at(result.levels[pair]);
+            const double fine = energy_at(result.levels[pair + 1]);
+            const double mesh_ratio = result.levels[pair].rms_edge_length
+                / result.levels[pair + 1].rms_edge_length;
+            if(coarse > 0.0 && fine > 0.0 && mesh_ratio > 1.0) {
+                orders[pair] = std::log(coarse / fine) / std::log(mesh_ratio);
+            }
+        }
+        return orders;
+    };
+    result.total_error_energy_observed_orders = observed_orders(
+        [](const auto& level) { return level.total_error_energy; }
+    );
+    result.valence_five_error_energy_observed_orders = observed_orders(
+        [](const auto& level) { return level.valence_five.error_energy; }
+    );
+    result.valence_six_error_energy_observed_orders = observed_orders(
+        [](const auto& level) { return level.valence_six.error_energy; }
+    );
+    result.valence_five_closed_one_ring_observed_orders = observed_orders(
+        [](const auto& level) {
+            return level.valence_five_closed_one_ring.error_energy;
+        }
+    );
+    return result;
+}
+
+SphericalSymmetryBreakingRefinementAudit
+evaluate_quality_controlled_symmetry_breaking(
+    const std::array<SphericalSurfaceTensionInstantaneousAudit, 4>& levels
+) {
+    SphericalSymmetryBreakingRefinementAudit result;
+    result.passed = true;
+    for(std::size_t level = 0; level < levels.size(); ++level) {
+        const auto& current = levels[level];
+        auto& level_result = result.levels[level];
+        std::size_t represented_vertices = 0;
+        std::size_t computed_maximum_class_size = 0;
+        for(const auto& distribution : current.symmetry_class_distributions) {
+            represented_vertices += distribution.vertex_count;
+            computed_maximum_class_size = std::max(
+                computed_maximum_class_size,
+                distribution.vertex_count
+            );
+        }
+        const bool class_partition_consistent
+            = represented_vertices == current.vertex_count
+            && computed_maximum_class_size
+                == current.maximum_symmetry_class_size;
+        level_result.vertex_count = current.vertex_count;
+        level_result.symmetry_class_count
+            = current.symmetry_class_distributions.size();
+        level_result.maximum_symmetry_class_size
+            = current.maximum_symmetry_class_size;
+        level_result.minimum_required_class_count = current.vertex_count / 2;
+        level_result.class_size_passed = class_partition_consistent
+            && computed_maximum_class_size <= 2;
+        level_result.class_count_passed
+            = level_result.symmetry_class_count
+                >= level_result.minimum_required_class_count;
+        level_result.passed = current.vertex_count > 0
+            && level_result.class_size_passed
+            && level_result.class_count_passed;
+        result.passed = result.passed && level_result.passed;
+    }
     return result;
 }
 

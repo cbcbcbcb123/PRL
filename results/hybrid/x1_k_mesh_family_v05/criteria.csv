@@ -1,0 +1,24 @@
+family,criterion,operator,threshold,observed,passed,notes
+C,h_rms_strictly_decreasing,equal,true,true,true,actual RMS edge scale
+C,maximum_radius_deviation,less_equal,1e-12,3.3306690738754696e-16,true,all levels
+C,closed_manifold_euler_outward_proxy,equal,true,true,true,all levels
+C,minimum_triangle_quality,greater_equal,0.05,0.93750343228680921,true,all levels
+C,minimum_face_to_mean_area_ratio,greater_equal,0.01,0.70556961482705416,true,all levels
+C,maximum_edge_ratio_level_1,less_equal,2.0,1.4784954335495075,true,source level 1
+C,maximum_edge_ratio_level_2,less_equal,2.0,1.5497713682696779,true,source level 2
+C,maximum_edge_ratio_level_3,less_equal,2.0,1.587784609782255,true,source level 3
+C,maximum_edge_ratio_level_4,less_equal,2.0,1.598009239165388,true,source level 4
+C,directional_consistency_plateau,less_equal,1e-7,3.2170202692530195e-8,true,maximum residual
+C,maximum_legacy_ratio_error,less_equal,1e-6,1.7763568394002505e-15,true,double cache remains excluded
+C,normal_errors_nonincreasing,equal,true,true,true,levels 1-4
+C,minimum_normal_order,greater_equal,0.5,0.79949237184109945,true,actual h
+C,finest_normal_error,less_than,0.02,0.0090084184604997432,true,source level 4
+C,tangential_errors_nonincreasing,equal,true,true,true,levels 1-4
+C,minimum_tangential_order,greater_equal,0.5,0.94087493639569264,true,actual h
+C,finest_tangential_error,less_than,0.02,0.0019345991282654401,true,source level 4
+C,maximum_normalized_net_force,less_equal,1e-12,3.3282590028655809e-16,true,all levels
+C,maximum_symmetry_class_size,less_equal,2,2,true,all levels
+C,minimum_symmetry_class_count,greater_equal,floor(N/2),exactly_floor(N/2),true,all levels
+C,error_energy_finite_nonnegative,equal,true,true,true,total and three registered regions
+C,valence_5_plus_valence_6_partition_closed,equal,true,true,true,tolerance 1e-12*max(1 E_total)
+C,overall,equal,true,true,true,global L2 diagnosis only

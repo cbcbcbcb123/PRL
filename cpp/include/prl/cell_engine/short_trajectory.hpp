@@ -192,9 +192,12 @@ struct SphericalVertexInstantaneousDiagnostic {
     std::size_t valence{};
     std::size_t symmetry_class_id{};
     double control_area_ratio{};
+    double control_area{};
+    double normal_velocity_error{};
     double normal_signed_relative_error{};
     double normal_absolute_relative_error{};
     double tangential_relative_speed{};
+    bool in_valence_five_closed_one_ring{};
 };
 
 struct SphericalValenceDistributionDiagnostic {
@@ -240,6 +243,7 @@ struct SphericalSurfaceTensionInstantaneousAudit {
     double finite_difference_directional_derivative{};
     double force_directional_derivative{};
     double normalized_directional_derivative_residual{};
+    double exact_normal_velocity{};
     double normal_velocity_relative_l2_error{};
     double tangential_velocity_relative_l2_error{};
     double normalized_net_force_residual{};
@@ -249,6 +253,53 @@ struct SphericalSurfaceTensionInstantaneousAudit {
     std::vector<SphericalValenceDistributionDiagnostic> valence_distributions{};
     std::vector<SphericalSymmetryClassDistributionDiagnostic>
         symmetry_class_distributions{};
+};
+
+struct SphericalNormalErrorRegionDiagnostic {
+    std::size_t vertex_count{};
+    double control_area{};
+    double error_energy{};
+    double total_error_energy_fraction{};
+    double area_weighted_relative_rms{};
+    double maximum_pointwise_relative_error{};
+};
+
+struct SphericalNormalErrorEnergyLevelAudit {
+    double rms_edge_length{};
+    double total_control_area{};
+    double total_error_energy{};
+    double partition_closure_residual{};
+    SphericalNormalErrorRegionDiagnostic valence_five{};
+    SphericalNormalErrorRegionDiagnostic valence_six{};
+    SphericalNormalErrorRegionDiagnostic valence_five_closed_one_ring{};
+    bool finite_nonnegative{};
+    bool partition_closed{};
+};
+
+struct SphericalNormalErrorEnergyRefinementAudit {
+    std::array<SphericalNormalErrorEnergyLevelAudit, 4> levels{};
+    std::array<double, 3> total_error_energy_observed_orders{};
+    std::array<double, 3> valence_five_error_energy_observed_orders{};
+    std::array<double, 3> valence_six_error_energy_observed_orders{};
+    std::array<double, 3> valence_five_closed_one_ring_observed_orders{};
+    bool mesh_scales_decreased{};
+    bool finite_nonnegative{};
+    bool partition_closed{};
+};
+
+struct SphericalSymmetryBreakingLevelAudit {
+    std::size_t vertex_count{};
+    std::size_t symmetry_class_count{};
+    std::size_t maximum_symmetry_class_size{};
+    std::size_t minimum_required_class_count{};
+    bool class_size_passed{};
+    bool class_count_passed{};
+    bool passed{};
+};
+
+struct SphericalSymmetryBreakingRefinementAudit {
+    std::array<SphericalSymmetryBreakingLevelAudit, 4> levels{};
+    bool passed{};
 };
 
 struct SphericalDirectionalDerivativeThresholds {
@@ -370,6 +421,16 @@ evaluate_spherical_instantaneous_velocity_refinement(
 evaluate_spherical_mesh_family_quality(
     const std::array<SphericalSurfaceTensionInstantaneousAudit, 4>& levels,
     const SphericalMeshFamilyDiagnosticThresholds& thresholds
+);
+
+[[nodiscard]] SphericalNormalErrorEnergyRefinementAudit
+evaluate_spherical_normal_error_energy_refinement(
+    const std::array<SphericalSurfaceTensionInstantaneousAudit, 4>& levels
+);
+
+[[nodiscard]] SphericalSymmetryBreakingRefinementAudit
+evaluate_quality_controlled_symmetry_breaking(
+    const std::array<SphericalSurfaceTensionInstantaneousAudit, 4>& levels
 );
 
 } // namespace prl::cell_engine
