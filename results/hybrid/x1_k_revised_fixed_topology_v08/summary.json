@@ -1,7 +1,7 @@
 {
   "contract_id": "CONTRACT-PRL-HYBRID-X1-K-V08-ADJUDICATION",
   "contract_commit": "929973c99d4971c3a151f3e0db8ef7931580293f",
-  "result_package_commit": null,
+  "result_package_commit": "66ff245d2da06d083ef205e2a4fc471903205dbb",
   "status": "passed_revised_fixed_topology_d1_s1_acceptance",
   "historical_evidence_status": {
     "route_h_gate_a_v01": "failed_invalid_numerics",

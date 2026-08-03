@@ -3,6 +3,7 @@ architecture_id: PRL-HYBRID-ARCH-V21
 status: frozen_x1_k_v08_revised_fixed_topology_acceptance
 contract: CONTRACT-PRL-HYBRID-X1-K-V08-ADJUDICATION
 contract_commit: 929973c99d4971c3a151f3e0db8ef7931580293f
+result_package_commit: 66ff245d2da06d083ef205e2a4fc471903205dbb
 fork_commit: e2ed64a26bb5d7c2d878772564fb5ffcca343c3a
 x1_k_passed: false
 downstream_authorized: false

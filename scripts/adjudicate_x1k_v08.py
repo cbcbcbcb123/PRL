@@ -15,6 +15,7 @@ from hybrid.fixed_topology_adjudication import (
 
 CONTRACT_ID = "CONTRACT-PRL-HYBRID-X1-K-V08-ADJUDICATION"
 CONTRACT_COMMIT = "929973c99d4971c3a151f3e0db8ef7931580293f"
+RESULT_PACKAGE_COMMIT = "66ff245d2da06d083ef205e2a4fc471903205dbb"
 
 
 def _write_json(path: Path, payload: Any) -> None:
@@ -102,7 +103,7 @@ def write_package(output_dir: Path, decision: AdjudicationDecision) -> None:
     summary = {
         "contract_id": CONTRACT_ID,
         "contract_commit": CONTRACT_COMMIT,
-        "result_package_commit": None,
+        "result_package_commit": RESULT_PACKAGE_COMMIT,
         "status": decision.status,
         "historical_evidence_status": decision.historical_statuses,
         "revised_acceptance": {
