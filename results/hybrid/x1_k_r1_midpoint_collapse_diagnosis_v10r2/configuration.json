@@ -1,0 +1,1353 @@
+{
+  "schema_version": "x1-k-v10r2-configuration-1",
+  "artifact_status": "v10r2_locator_evidence_repair",
+  "delivery_context": "created after the frozen v10 response as an append-only v10r2 reconstruction; it was not delivered by v10",
+  "reconstruction_basis": [
+    "frozen v10 contract",
+    "frozen v10 runner/source defaults",
+    "frozen v10 raw response and exit code",
+    "frozen v10r1 no-new-scientific-response contract"
+  ],
+  "historical_v10_delivery_claim": false,
+  "new_scientific_response_generated": false,
+  "canonical_leaf_definition": "recursively expand mappings; treat each array as one leaf",
+  "configuration": {
+    "tolerance": 1e-12,
+    "initial_state": {
+      "cell_id": 17,
+      "revision": 0,
+      "vertex_count": 8,
+      "face_count": 12,
+      "vertices": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -3.0,
+          0.0
+        ],
+        [
+          -1.0,
+          -1.5,
+          0.0
+        ],
+        [
+          1.0,
+          -1.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        [
+          0.0,
+          -3.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -1.5,
+          -1.0
+        ],
+        [
+          1.0,
+          -1.5,
+          -1.0
+        ]
+      ],
+      "faces": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          4,
+          2
+        ],
+        [
+          2,
+          6,
+          4
+        ],
+        [
+          2,
+          6,
+          5
+        ],
+        [
+          5,
+          1,
+          2
+        ],
+        [
+          0,
+          3,
+          7
+        ],
+        [
+          7,
+          4,
+          0
+        ],
+        [
+          3,
+          1,
+          5
+        ],
+        [
+          5,
+          7,
+          3
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          4,
+          5,
+          7
+        ]
+      ],
+      "passive_parameters": [
+        {
+          "field": "face.name",
+          "value": "v10_zero_passive_surface"
+        },
+        {
+          "field": "face.global_type_id",
+          "value": 0
+        },
+        {
+          "field": "face.surface_tension",
+          "value": 0.0
+        },
+        {
+          "field": "face.adherence_strength",
+          "value": 0.0
+        },
+        {
+          "field": "face.repulsion_strength",
+          "value": 0.0
+        },
+        {
+          "field": "face.bending_modulus",
+          "value": 0.0
+        },
+        {
+          "field": "cell.name",
+          "value": "v10_midpoint_probe_cell"
+        },
+        {
+          "field": "cell.global_type_id",
+          "value": 2
+        },
+        {
+          "field": "cell.mass_density",
+          "value": 1.0
+        },
+        {
+          "field": "cell.bulk_modulus",
+          "value": 0.0
+        },
+        {
+          "field": "cell.max_pressure",
+          "value": 1000000.0
+        },
+        {
+          "field": "cell.initial_pressure",
+          "value": 0.0
+        },
+        {
+          "field": "cell.area_elasticity_modulus",
+          "value": 0.0
+        },
+        {
+          "field": "cell.avg_division_volume",
+          "value": 1000000.0
+        },
+        {
+          "field": "cell.std_division_volume",
+          "value": 0.0
+        },
+        {
+          "field": "cell.avg_growth_rate",
+          "value": 0.0
+        },
+        {
+          "field": "cell.std_growth_rate",
+          "value": 0.0
+        },
+        {
+          "field": "cell.minimum_volume",
+          "value": 1e-12
+        },
+        {
+          "field": "cell.angle_regularization_factor",
+          "value": 0.0
+        },
+        {
+          "field": "cell.target_isoperimetric_ratio",
+          "value": 150.0
+        },
+        {
+          "field": "cell.surface_coupling_max_curvature",
+          "value": 1000000.0
+        }
+      ],
+      "material_points": [
+        {
+          "id": 101,
+          "surface_region": "apical",
+          "fiber_direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "activation": 0.05,
+          "activation_rate": 0.0,
+          "host": [
+            0,
+            1,
+            2
+          ],
+          "barycentric": [
+            0.2,
+            0.3,
+            0.5
+          ],
+          "reference_value": 0.17
+        },
+        {
+          "id": 205,
+          "surface_region": "basal",
+          "fiber_direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "activation": 0.0,
+          "activation_rate": 0.0,
+          "host": [
+            0,
+            1,
+            3
+          ],
+          "barycentric": [
+            0.4,
+            0.25,
+            0.35
+          ],
+          "reference_value": 0.23
+        }
+      ]
+    },
+    "material_transfer": {
+      "implementation": "production MyocardialMaterialTransferSink",
+      "maximum_rebind_distance": 1e-12
+    },
+    "refiner": {
+      "implementation": "public local_mesh_refiner",
+      "edge_length_threshold": 0.1,
+      "curvature_threshold": 10.0,
+      "enable_edge_swap": true
+    },
+    "active_contraction": {
+      "unit_id": 501,
+      "minus_material_point_id": 101,
+      "plus_material_point_id": 205,
+      "activation_material_point_id": 101,
+      "stiffness": 10.0,
+      "minimum_axis_fiber_alignment": 0.9
+    },
+    "execution": {
+      "production_path": [
+        "production MyocardialMaterialTransferSink",
+        "public local_mesh_refiner",
+        "public split_edge / can_be_merged / merge_edge",
+        "synchronous RemeshEvent",
+        "public capture_surface_snapshot and material-state getters"
+      ],
+      "disabled_dynamics_and_couplings": [
+        "mechanics_advance",
+        "passive",
+        "contact",
+        "pressure",
+        "ecm",
+        "flow",
+        "adaptive_remesh",
+        "retry"
+      ],
+      "candidate_order": "ascending local endpoint pair",
+      "output_precision_digits": 17,
+      "new_microprobe_run": false,
+      "new_formal_response_run": false,
+      "new_physical_data_generated": false
+    },
+    "formal_response": {
+      "expected_exit_code": 1,
+      "frozen_candidate_count": 4,
+      "frozen_publicly_eligible_count": 4,
+      "first_failed_candidate": 3
+    }
+  },
+  "field_provenance": [
+    {
+      "field": "configuration.active_contraction.activation_material_point_id",
+      "value": 101,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 446,
+            "end": 455,
+            "parser": "cpp_active_argument_4"
+          },
+          "source_value": 101
+        }
+      ]
+    },
+    {
+      "field": "configuration.active_contraction.minimum_axis_fiber_alignment",
+      "value": 0.9,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 446,
+            "end": 455,
+            "parser": "cpp_active_argument_6"
+          },
+          "source_value": 0.9
+        }
+      ]
+    },
+    {
+      "field": "configuration.active_contraction.minus_material_point_id",
+      "value": 101,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 446,
+            "end": 455,
+            "parser": "cpp_active_argument_2"
+          },
+          "source_value": 101
+        }
+      ]
+    },
+    {
+      "field": "configuration.active_contraction.plus_material_point_id",
+      "value": 205,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 446,
+            "end": 455,
+            "parser": "cpp_active_argument_3"
+          },
+          "source_value": 205
+        }
+      ]
+    },
+    {
+      "field": "configuration.active_contraction.stiffness",
+      "value": 10.0,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 446,
+            "end": 455,
+            "parser": "cpp_active_argument_5"
+          },
+          "source_value": 10.0
+        }
+      ]
+    },
+    {
+      "field": "configuration.active_contraction.unit_id",
+      "value": 501,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 446,
+            "end": 455,
+            "parser": "cpp_active_argument_1"
+          },
+          "source_value": 501
+        }
+      ]
+    },
+    {
+      "field": "configuration.execution.candidate_order",
+      "value": "ascending local endpoint pair",
+      "sources": [
+        {
+          "commit": "e54bc5933387070c697f5c88218f37f25faea4c3",
+          "path": "project_control/hybrid_x1_k_r1_midpoint_collapse_diagnostic_contract_v10.md",
+          "locator": {
+            "kind": "line_range",
+            "start": 102,
+            "end": 102,
+            "parser": "v10r2_candidate_order"
+          },
+          "source_value": "ascending local endpoint pair"
+        }
+      ]
+    },
+    {
+      "field": "configuration.execution.disabled_dynamics_and_couplings",
+      "value": [
+        "mechanics_advance",
+        "passive",
+        "contact",
+        "pressure",
+        "ecm",
+        "flow",
+        "adaptive_remesh",
+        "retry"
+      ],
+      "sources": [
+        {
+          "commit": "e54bc5933387070c697f5c88218f37f25faea4c3",
+          "path": "project_control/hybrid_x1_k_r1_midpoint_collapse_diagnostic_contract_v10.md",
+          "locator": {
+            "kind": "line_range",
+            "start": 39,
+            "end": 39,
+            "parser": "v10r2_disabled_dynamics"
+          },
+          "source_value": [
+            "mechanics_advance",
+            "passive",
+            "contact",
+            "pressure",
+            "ecm",
+            "flow",
+            "adaptive_remesh",
+            "retry"
+          ]
+        }
+      ]
+    },
+    {
+      "field": "configuration.execution.new_formal_response_run",
+      "value": false,
+      "sources": [
+        {
+          "commit": "785796d409b9f43ef9657b7d6b44a10d36d5eef1",
+          "path": "project_control/hybrid_x1_k_r1_midpoint_collapse_evidence_packaging_semantic_repair_contract_v10r1.md",
+          "locator": {
+            "kind": "line_range",
+            "start": 27,
+            "end": 27,
+            "parser": "v10r2_no_new_formal_response"
+          },
+          "source_value": false
+        }
+      ]
+    },
+    {
+      "field": "configuration.execution.new_microprobe_run",
+      "value": false,
+      "sources": [
+        {
+          "commit": "785796d409b9f43ef9657b7d6b44a10d36d5eef1",
+          "path": "project_control/hybrid_x1_k_r1_midpoint_collapse_evidence_packaging_semantic_repair_contract_v10r1.md",
+          "locator": {
+            "kind": "line_range",
+            "start": 27,
+            "end": 27,
+            "parser": "v10r2_no_new_microprobe"
+          },
+          "source_value": false
+        }
+      ]
+    },
+    {
+      "field": "configuration.execution.new_physical_data_generated",
+      "value": false,
+      "sources": [
+        {
+          "commit": "785796d409b9f43ef9657b7d6b44a10d36d5eef1",
+          "path": "project_control/hybrid_x1_k_r1_midpoint_collapse_evidence_packaging_semantic_repair_contract_v10r1.md",
+          "locator": {
+            "kind": "line_range",
+            "start": 27,
+            "end": 27,
+            "parser": "v10r2_no_new_physical_data"
+          },
+          "source_value": false
+        }
+      ]
+    },
+    {
+      "field": "configuration.execution.output_precision_digits",
+      "value": 17,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 1037,
+            "end": 1037,
+            "parser": "cpp_output_precision"
+          },
+          "source_value": 17
+        }
+      ]
+    },
+    {
+      "field": "configuration.execution.production_path",
+      "value": [
+        "production MyocardialMaterialTransferSink",
+        "public local_mesh_refiner",
+        "public split_edge / can_be_merged / merge_edge",
+        "synchronous RemeshEvent",
+        "public capture_surface_snapshot and material-state getters"
+      ],
+      "sources": [
+        {
+          "commit": "e54bc5933387070c697f5c88218f37f25faea4c3",
+          "path": "project_control/hybrid_x1_k_r1_midpoint_collapse_diagnostic_contract_v10.md",
+          "locator": {
+            "kind": "line_range",
+            "start": 44,
+            "end": 49,
+            "parser": "v10r2_production_pipeline"
+          },
+          "source_value": [
+            "production MyocardialMaterialTransferSink",
+            "public local_mesh_refiner",
+            "public split_edge / can_be_merged / merge_edge",
+            "synchronous RemeshEvent",
+            "public capture_surface_snapshot and material-state getters"
+          ]
+        }
+      ]
+    },
+    {
+      "field": "configuration.formal_response.expected_exit_code",
+      "value": 1,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/formal_response.exitcode",
+          "locator": {
+            "kind": "entire_file",
+            "parser": "integer_file"
+          },
+          "source_value": 1
+        }
+      ]
+    },
+    {
+      "field": "configuration.formal_response.first_failed_candidate",
+      "value": 3,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/formal_response.log",
+          "locator": {
+            "kind": "record_key",
+            "record": "v10_summary",
+            "key": "first_failed_candidate",
+            "parser": "v10_machine_record_key"
+          },
+          "source_value": 3
+        }
+      ]
+    },
+    {
+      "field": "configuration.formal_response.frozen_candidate_count",
+      "value": 4,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/formal_response.log",
+          "locator": {
+            "kind": "record_key",
+            "record": "v10_summary",
+            "key": "candidate_count",
+            "parser": "v10_machine_record_key"
+          },
+          "source_value": 4
+        }
+      ]
+    },
+    {
+      "field": "configuration.formal_response.frozen_publicly_eligible_count",
+      "value": 4,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/formal_response.log",
+          "locator": {
+            "kind": "record_key",
+            "record": "v10_summary",
+            "key": "eligible_count",
+            "parser": "v10_machine_record_key"
+          },
+          "source_value": 4
+        }
+      ]
+    },
+    {
+      "field": "configuration.initial_state.cell_id",
+      "value": 17,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 119,
+            "end": 120,
+            "parser": "cpp_cell_id"
+          },
+          "source_value": 17
+        }
+      ]
+    },
+    {
+      "field": "configuration.initial_state.face_count",
+      "value": 12,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 114,
+            "end": 118,
+            "parser": "cpp_face_count"
+          },
+          "source_value": 12
+        }
+      ]
+    },
+    {
+      "field": "configuration.initial_state.faces",
+      "value": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          4,
+          2
+        ],
+        [
+          2,
+          6,
+          4
+        ],
+        [
+          2,
+          6,
+          5
+        ],
+        [
+          5,
+          1,
+          2
+        ],
+        [
+          0,
+          3,
+          7
+        ],
+        [
+          7,
+          4,
+          0
+        ],
+        [
+          3,
+          1,
+          5
+        ],
+        [
+          5,
+          7,
+          3
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          4,
+          5,
+          7
+        ]
+      ],
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 114,
+            "end": 118,
+            "parser": "cpp_faces"
+          },
+          "source_value": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              1,
+              3
+            ],
+            [
+              0,
+              4,
+              2
+            ],
+            [
+              2,
+              6,
+              4
+            ],
+            [
+              2,
+              6,
+              5
+            ],
+            [
+              5,
+              1,
+              2
+            ],
+            [
+              0,
+              3,
+              7
+            ],
+            [
+              7,
+              4,
+              0
+            ],
+            [
+              3,
+              1,
+              5
+            ],
+            [
+              5,
+              7,
+              3
+            ],
+            [
+              4,
+              5,
+              6
+            ],
+            [
+              4,
+              5,
+              7
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "field": "configuration.initial_state.material_points",
+      "value": [
+        {
+          "id": 101,
+          "surface_region": "apical",
+          "fiber_direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "activation": 0.05,
+          "activation_rate": 0.0,
+          "host": [
+            0,
+            1,
+            2
+          ],
+          "barycentric": [
+            0.2,
+            0.3,
+            0.5
+          ],
+          "reference_value": 0.17
+        },
+        {
+          "id": 205,
+          "surface_region": "basal",
+          "fiber_direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "activation": 0.0,
+          "activation_rate": 0.0,
+          "host": [
+            0,
+            1,
+            3
+          ],
+          "barycentric": [
+            0.4,
+            0.25,
+            0.35
+          ],
+          "reference_value": 0.23
+        }
+      ],
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 131,
+            "end": 164,
+            "parser": "cpp_material_points"
+          },
+          "source_value": [
+            {
+              "id": 101,
+              "surface_region": "apical",
+              "fiber_direction": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "activation": 0.05,
+              "activation_rate": 0.0,
+              "host": [
+                0,
+                1,
+                2
+              ],
+              "barycentric": [
+                0.2,
+                0.3,
+                0.5
+              ],
+              "reference_value": 0.17
+            },
+            {
+              "id": 205,
+              "surface_region": "basal",
+              "fiber_direction": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "activation": 0.0,
+              "activation_rate": 0.0,
+              "host": [
+                0,
+                1,
+                3
+              ],
+              "barycentric": [
+                0.4,
+                0.25,
+                0.35
+              ],
+              "reference_value": 0.23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "field": "configuration.initial_state.passive_parameters",
+      "value": [
+        {
+          "field": "face.name",
+          "value": "v10_zero_passive_surface"
+        },
+        {
+          "field": "face.global_type_id",
+          "value": 0
+        },
+        {
+          "field": "face.surface_tension",
+          "value": 0.0
+        },
+        {
+          "field": "face.adherence_strength",
+          "value": 0.0
+        },
+        {
+          "field": "face.repulsion_strength",
+          "value": 0.0
+        },
+        {
+          "field": "face.bending_modulus",
+          "value": 0.0
+        },
+        {
+          "field": "cell.name",
+          "value": "v10_midpoint_probe_cell"
+        },
+        {
+          "field": "cell.global_type_id",
+          "value": 2
+        },
+        {
+          "field": "cell.mass_density",
+          "value": 1.0
+        },
+        {
+          "field": "cell.bulk_modulus",
+          "value": 0.0
+        },
+        {
+          "field": "cell.max_pressure",
+          "value": 1000000.0
+        },
+        {
+          "field": "cell.initial_pressure",
+          "value": 0.0
+        },
+        {
+          "field": "cell.area_elasticity_modulus",
+          "value": 0.0
+        },
+        {
+          "field": "cell.avg_division_volume",
+          "value": 1000000.0
+        },
+        {
+          "field": "cell.std_division_volume",
+          "value": 0.0
+        },
+        {
+          "field": "cell.avg_growth_rate",
+          "value": 0.0
+        },
+        {
+          "field": "cell.std_growth_rate",
+          "value": 0.0
+        },
+        {
+          "field": "cell.minimum_volume",
+          "value": 1e-12
+        },
+        {
+          "field": "cell.angle_regularization_factor",
+          "value": 0.0
+        },
+        {
+          "field": "cell.target_isoperimetric_ratio",
+          "value": 150.0
+        },
+        {
+          "field": "cell.surface_coupling_max_curvature",
+          "value": 1000000.0
+        }
+      ],
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 73,
+            "end": 99,
+            "parser": "cpp_passive_parameters"
+          },
+          "source_value": [
+            {
+              "field": "face.name",
+              "value": "v10_zero_passive_surface"
+            },
+            {
+              "field": "face.global_type_id",
+              "value": 0
+            },
+            {
+              "field": "face.surface_tension",
+              "value": 0.0
+            },
+            {
+              "field": "face.adherence_strength",
+              "value": 0.0
+            },
+            {
+              "field": "face.repulsion_strength",
+              "value": 0.0
+            },
+            {
+              "field": "face.bending_modulus",
+              "value": 0.0
+            },
+            {
+              "field": "cell.name",
+              "value": "v10_midpoint_probe_cell"
+            },
+            {
+              "field": "cell.global_type_id",
+              "value": 2
+            },
+            {
+              "field": "cell.mass_density",
+              "value": 1.0
+            },
+            {
+              "field": "cell.bulk_modulus",
+              "value": 0.0
+            },
+            {
+              "field": "cell.max_pressure",
+              "value": 1000000.0
+            },
+            {
+              "field": "cell.initial_pressure",
+              "value": 0.0
+            },
+            {
+              "field": "cell.area_elasticity_modulus",
+              "value": 0.0
+            },
+            {
+              "field": "cell.avg_division_volume",
+              "value": 1000000.0
+            },
+            {
+              "field": "cell.std_division_volume",
+              "value": 0.0
+            },
+            {
+              "field": "cell.avg_growth_rate",
+              "value": 0.0
+            },
+            {
+              "field": "cell.std_growth_rate",
+              "value": 0.0
+            },
+            {
+              "field": "cell.minimum_volume",
+              "value": 1e-12
+            },
+            {
+              "field": "cell.angle_regularization_factor",
+              "value": 0.0
+            },
+            {
+              "field": "cell.target_isoperimetric_ratio",
+              "value": 150.0
+            },
+            {
+              "field": "cell.surface_coupling_max_curvature",
+              "value": 1000000.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "field": "configuration.initial_state.revision",
+      "value": 0,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 137,
+            "end": 140,
+            "parser": "cpp_material_revision"
+          },
+          "source_value": 0
+        }
+      ]
+    },
+    {
+      "field": "configuration.initial_state.vertex_count",
+      "value": 8,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 103,
+            "end": 113,
+            "parser": "cpp_vertex_count"
+          },
+          "source_value": 8
+        }
+      ]
+    },
+    {
+      "field": "configuration.initial_state.vertices",
+      "value": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -3.0,
+          0.0
+        ],
+        [
+          -1.0,
+          -1.5,
+          0.0
+        ],
+        [
+          1.0,
+          -1.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        [
+          0.0,
+          -3.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -1.5,
+          -1.0
+        ],
+        [
+          1.0,
+          -1.5,
+          -1.0
+        ]
+      ],
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 103,
+            "end": 113,
+            "parser": "cpp_vertices"
+          },
+          "source_value": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              -3.0,
+              0.0
+            ],
+            [
+              -1.0,
+              -1.5,
+              0.0
+            ],
+            [
+              1.0,
+              -1.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            [
+              0.0,
+              -3.0,
+              -1.0
+            ],
+            [
+              -1.0,
+              -1.5,
+              -1.0
+            ],
+            [
+              1.0,
+              -1.5,
+              -1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "field": "configuration.material_transfer.implementation",
+      "value": "production MyocardialMaterialTransferSink",
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 457,
+            "end": 463,
+            "parser": "cpp_material_sink_implementation"
+          },
+          "source_value": "production MyocardialMaterialTransferSink"
+        }
+      ]
+    },
+    {
+      "field": "configuration.material_transfer.maximum_rebind_distance",
+      "value": 1e-12,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_ranges",
+            "ranges": [
+              {
+                "start": 33,
+                "end": 33
+              },
+              {
+                "start": 457,
+                "end": 459
+              }
+            ],
+            "parser": "cpp_material_sink_distance"
+          },
+          "source_value": 1e-12
+        }
+      ]
+    },
+    {
+      "field": "configuration.refiner.curvature_threshold",
+      "value": 10.0,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 597,
+            "end": 597,
+            "parser": "cpp_refiner_argument_2"
+          },
+          "source_value": 10.0
+        }
+      ]
+    },
+    {
+      "field": "configuration.refiner.edge_length_threshold",
+      "value": 0.1,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 597,
+            "end": 597,
+            "parser": "cpp_refiner_argument_1"
+          },
+          "source_value": 0.1
+        }
+      ]
+    },
+    {
+      "field": "configuration.refiner.enable_edge_swap",
+      "value": true,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 597,
+            "end": 597,
+            "parser": "cpp_refiner_argument_3"
+          },
+          "source_value": true
+        }
+      ]
+    },
+    {
+      "field": "configuration.refiner.implementation",
+      "value": "public local_mesh_refiner",
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 595,
+            "end": 600,
+            "parser": "cpp_refiner_implementation"
+          },
+          "source_value": "public local_mesh_refiner"
+        }
+      ]
+    },
+    {
+      "field": "configuration.tolerance",
+      "value": 1e-12,
+      "sources": [
+        {
+          "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+          "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+          "locator": {
+            "kind": "line_range",
+            "start": 33,
+            "end": 33,
+            "parser": "cpp_tolerance"
+          },
+          "source_value": 1e-12
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "schema_version": "x1-k-v10r2-verification-artifacts-1",
+  "artifacts": [
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/combined_python_final.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/combined_python_final.log",
+      "sha256": "c99fe4633f7f8db1e6d78eb22ecb6451421c37df49b59a5a818283d673f4748d",
+      "bytes": 1058
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/exporter_final.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/exporter_final.log",
+      "sha256": "7f4a1f0d8691a2bb27e21d2bd7e934abc02297e78b7bc130cb95c1d82c9313e4",
+      "bytes": 1358
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/focused_python_final.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/focused_python_final.log",
+      "sha256": "5a87dc447f04b354f0a99e7fcaefdc7f5bf68d3f61c732b0e49bd2a97ededab3",
+      "bytes": 277
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/ruff_final.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/ruff_final.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_green_combined_log_parser.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_green_combined_log_parser.log",
+      "sha256": "16c1c776f7b9e5f4eda7c89e34ddb4b891cccf7fc2f4d9f728d1ebd5835b436f",
+      "bytes": 277
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_green_count_reconciliation.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_green_count_reconciliation.log",
+      "sha256": "3bbcfa5aff4414cab2c87a6b49b64a225b13f99cd4c945cc77ef048b3b3a34a8",
+      "bytes": 277
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_green_locator_resolution.exitcode",
+      "sha256": "7c468f5e59f2871b946e051445493bbcace531d597edbbcc9935e7d02d025114",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_green_locator_resolution.log",
+      "sha256": "ec960bba738fa8a08c14f605444b5c5a944d3e6c58d217a4186815301832904c",
+      "bytes": 478
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_green_locator_resolution_valid.exitcode",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_green_locator_resolution_valid.log",
+      "sha256": "d1a3db7e62119a2694a5d61f736498644ce18aff9bccb3b58760c653748ab66b",
+      "bytes": 3209
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_green_locator_resolution_valid2.exitcode",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_green_locator_resolution_valid2.log",
+      "sha256": "3169b50be48f7fd59043c4fce60dd1bb3246bcd339c1a36dcc7a1b34c5ed09d4",
+      "bytes": 277
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_red_combined_log_parser.exitcode",
+      "sha256": "7c468f5e59f2871b946e051445493bbcace531d597edbbcc9935e7d02d025114",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_red_combined_log_parser.log",
+      "sha256": "cffd4057b1d00de80e1e91f0d55f620618ef503cb06e69ba75f001558739f248",
+      "bytes": 1430
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_red_count_reconciliation.exitcode",
+      "sha256": "7c468f5e59f2871b946e051445493bbcace531d597edbbcc9935e7d02d025114",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_red_count_reconciliation.log",
+      "sha256": "3728a03f09a238e1949f0e50de938c961d0459df5aaaed16efa2e35600e62997",
+      "bytes": 1422
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_red_locator_json_echo.exitcode",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_red_locator_json_echo.log",
+      "sha256": "ea28c3ad04d4a7adb121ddf9b50e7b2bd9139f55b2bb18f10e3b2fca3720c2c5",
+      "bytes": 1888
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_red_locator_seam_missing.exitcode",
+      "sha256": "7c468f5e59f2871b946e051445493bbcace531d597edbbcc9935e7d02d025114",
+      "bytes": 3
+    },
+    {
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r2/verification/tdd_red_locator_seam_missing.log",
+      "sha256": "729673b88b857d5038b561153d7abdc761c6ca26708e6c7374c049ba1e21a835",
+      "bytes": 1303
+    }
+  ]
+}

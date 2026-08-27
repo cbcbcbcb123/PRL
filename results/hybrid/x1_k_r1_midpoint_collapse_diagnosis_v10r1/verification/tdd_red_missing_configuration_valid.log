@@ -1,0 +1,24 @@
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____ test_v10r1_export_reconstructs_configuration_with_closed_provenance _____
+
+tmp_path = WindowsPath('C:/Users/chenb/AppData/Local/Temp/pytest-of-chenb/pytest-117/test_v10r1_export_reconstructs0')
+
+    def test_v10r1_export_reconstructs_configuration_with_closed_provenance(
+        tmp_path: Path,
+    ) -> None:
+        export_v10r1_package(ROOT, tmp_path)
+        configuration_path = tmp_path / "configuration.json"
+    
+>       assert configuration_path.is_file(), "v10 omitted its contracted configuration"
+E       AssertionError: v10 omitted its contracted configuration
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = WindowsPath('C:/Users/chenb/AppData/Local/Temp/pytest-of-chenb/pytest-117/test_v10r1_export_reconstructs0/configuration.json').is_file
+
+tests\test_r1_midpoint_packaging_repair.py:31: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_r1_midpoint_packaging_repair.py::test_v10r1_export_reconstructs_configuration_with_closed_provenance
+1 failed in 2.05s

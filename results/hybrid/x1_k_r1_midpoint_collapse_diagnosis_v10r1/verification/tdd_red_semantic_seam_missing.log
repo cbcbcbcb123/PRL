@@ -1,0 +1,19 @@
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+ERROR: found no collectors for C:\Users\chenb\.codex\worktrees\046a\PRL\tests\test_r1_midpoint_packaging_repair.py::test_v10r1_candidate_parser_uses_exception_aware_topology_states
+
+
+=================================== ERRORS ====================================
+_________ ERROR collecting tests/test_r1_midpoint_packaging_repair.py _________
+ImportError while importing test module 'C:\Users\chenb\.codex\worktrees\046a\PRL\tests\test_r1_midpoint_packaging_repair.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+F:\python\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_r1_midpoint_packaging_repair.py:7: in <module>
+    from hybrid.r1_midpoint_packaging_repair import (
+E   ImportError: cannot import name 'repair_candidate_topology_semantics' from 'hybrid.r1_midpoint_packaging_repair' (C:\Users\chenb\.codex\worktrees\046a\PRL\src\hybrid\r1_midpoint_packaging_repair.py)
+=========================== short test summary info ===========================
+ERROR tests/test_r1_midpoint_packaging_repair.py
+1 error in 0.86s

@@ -1,0 +1,81 @@
+{
+  "schema_version": "x1-k-v10r1-provenance-manifest-1",
+  "status": "passed_v10r1_provenance_closure",
+  "contract_commit": "785796d409b9f43ef9657b7d6b44a10d36d5eef1",
+  "approved_baseline_commit": "ddd663d461da7b25aefd5cf3fbecff488800053e",
+  "v10_contract_commit": "e54bc5933387070c697f5c88218f37f25faea4c3",
+  "v10_result_commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+  "frozen_manifest_entries": {
+    "expected": 28,
+    "observed": 28,
+    "verified": 28
+  },
+  "configuration_provenance": {
+    "fields": 32,
+    "fields_closed": 32,
+    "source_objects_verified": 5
+  },
+  "generated_artifacts": [
+    {
+      "path": "candidate_matrix_v10r1.csv",
+      "sha256": "d80af29485678e0ca24a003d256135974fc51f7a3e51182115441f4e392a064d",
+      "bytes": 2031
+    },
+    {
+      "path": "candidate_matrix_v10r1.json",
+      "sha256": "86f26231ef5a291042e24dc1eac55eb116656ed93d54120785857b778022eda8",
+      "bytes": 6769
+    },
+    {
+      "path": "configuration.json",
+      "sha256": "6120c536495aba61ce0b490a5577e4b5fa02cace9ae2df994c64df93287d422a",
+      "bytes": 28255
+    },
+    {
+      "path": "criteria.csv",
+      "sha256": "894f9167d0f9d187b7006bc97a7ac79e7800cc64f1abfa167a62dbdb34004c2f",
+      "bytes": 565
+    },
+    {
+      "path": "frozen_integrity.json",
+      "sha256": "193e88875f9c5b969d5177a0153426f8fa70870a8744519a49b4fdff7c13039f",
+      "bytes": 963
+    },
+    {
+      "path": "reproduction_commands.md",
+      "sha256": "43aa9222b7dd72ad0fc0d561e844880b5570a301c871a4bfcfa3ff75e2ead479",
+      "bytes": 605
+    },
+    {
+      "path": "semantic_erratum.json",
+      "sha256": "572f4aa0d2f7a9a4a638f4c819e437ff6a299754e673f27efb248a09707022ec",
+      "bytes": 1835
+    },
+    {
+      "path": "summary.json",
+      "sha256": "7bcb2057d90968073131a7299e7383df5561782afebc94b4a7445c046bfc42f2",
+      "bytes": 1159
+    },
+    {
+      "path": "verification_artifact_manifest.json",
+      "sha256": "53620d31f46cbffc4444d837883007590cd6766b4a14c178c3e5fca96f5c9479",
+      "bytes": 11666
+    },
+    {
+      "path": "verification_summary.json",
+      "sha256": "156827457e3d7c0cfd41ed81ad700f38419d43e5b2381bab25de0b53d6ecb4f3",
+      "bytes": 4155
+    },
+    {
+      "path": "project_control/hybrid_x1_k_r1_midpoint_collapse_evidence_packaging_semantic_repair_report_v10r1.md",
+      "sha256": "1af84ddb26dc50aaa19c729d867a5e5632e7a1304fbbe4045e66e86cfd0d0956",
+      "bytes": 6064
+    }
+  ],
+  "manifest_exclusions": [
+    "provenance_manifest.json (self-referential hash)",
+    "remote_sync.json (third-stage artifact)"
+  ],
+  "frozen_inputs_copied": false,
+  "new_scientific_response_generated": false
+}

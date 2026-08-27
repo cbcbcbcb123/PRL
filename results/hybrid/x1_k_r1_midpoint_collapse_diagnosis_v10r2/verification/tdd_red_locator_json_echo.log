@@ -1,0 +1,37 @@
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____ test_v10r2_locator_verifier_reads_frozen_blob_instead_of_json_echo ______
+
+    def test_v10r2_locator_verifier_reads_frozen_blob_instead_of_json_echo() -> None:
+        payload = build_v10r2_configuration(ROOT)
+        report = verify_configuration_sources(ROOT, payload)
+    
+        assert report["status"] == "passed_configuration_source_resolution"
+        assert report["canonical_leaf_count"] == 32
+        assert report["resolved_leaf_count"] == 32
+        assert len(report["resolved_fields"]) == 32
+    
+        tampered = copy.deepcopy(payload)
+        target = next(
+            item
+            for item in tampered["field_provenance"]
+            if item["field"] == "configuration.execution.production_path"
+        )
+        target["sources"][0]["locator"] = {
+            "kind": "line_range",
+            "start": 1,
+            "end": 1,
+            "parser": "v10_production_pipeline",
+        }
+        target["sources"][0]["source_value"] = target["value"]
+    
+>       with pytest.raises(V10R2EvidenceError, match="resolved value"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'hybrid.r1_midpoint_packaging_repair_v10r2.V10R2EvidenceError'>
+
+tests\test_r1_midpoint_packaging_repair_v10r2.py:41: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_r1_midpoint_packaging_repair_v10r2.py::test_v10r2_locator_verifier_reads_frozen_blob_instead_of_json_echo
+1 failed in 1.52s

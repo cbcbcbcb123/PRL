@@ -1,0 +1,4 @@
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+.                                                                        [100%]
+1 passed in 0.63s

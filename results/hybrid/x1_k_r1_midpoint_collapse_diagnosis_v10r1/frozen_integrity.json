@@ -1,0 +1,32 @@
+{
+  "status": "passed_frozen_v10_v09_integrity",
+  "baseline_commit": "ddd663d461da7b25aefd5cf3fbecff488800053e",
+  "frozen_git": {
+    "lifecycle_commits": [
+      "f7701d59ce3e1c94737e3b0a276205ed70fae6f8",
+      "10bb2c2602b499b5a75ba2d57a35ba717e156616",
+      "855bd8b7467761ba7fcdaa49632bed2ee5681e85",
+      "e54bc5933387070c697f5c88218f37f25faea4c3",
+      "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+      "ddd663d461da7b25aefd5cf3fbecff488800053e"
+    ],
+    "files_verified": 102,
+    "mismatches": [],
+    "worktree_changes": []
+  },
+  "manifest_entries": {
+    "expected": 28,
+    "observed": 28,
+    "verified": 28,
+    "raw_evidence": 10,
+    "verification_evidence": 18
+  },
+  "manifest_mismatches": [],
+  "candidate_3_frozen_observation": {
+    "merge_succeeded": false,
+    "legacy_topology_legal_serialized": false,
+    "rebind_distance": 0.047434164902525666,
+    "rebind_distance_threshold": 1e-12,
+    "rebind_distance_exceeded": true
+  }
+}

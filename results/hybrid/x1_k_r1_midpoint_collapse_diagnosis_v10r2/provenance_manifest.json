@@ -1,0 +1,48 @@
+{
+  "schema_version": "x1-k-v10r2-provenance-1",
+  "status": "passed_closed_packaging_provenance",
+  "configuration_sources": [
+    {
+      "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+      "path": "cpp/tests/r1_midpoint_collapse_diagnostic_test.cpp",
+      "git_blob_sha256": "6c145921ead79e5a8448107ebffd9093cc850309f49b1f479e6b5dc351497fde",
+      "bytes": 45698
+    },
+    {
+      "commit": "e54bc5933387070c697f5c88218f37f25faea4c3",
+      "path": "project_control/hybrid_x1_k_r1_midpoint_collapse_diagnostic_contract_v10.md",
+      "git_blob_sha256": "a96ebfb7179d06e3a1128fd78c8c0b46bd38e83d0bc7f4eee746c2ed9e85b2ca",
+      "bytes": 9346
+    },
+    {
+      "commit": "785796d409b9f43ef9657b7d6b44a10d36d5eef1",
+      "path": "project_control/hybrid_x1_k_r1_midpoint_collapse_evidence_packaging_semantic_repair_contract_v10r1.md",
+      "git_blob_sha256": "41215ff2ad66bff9e921e51441a6451aaba2f5aa919468c84c0e7cb11647c583",
+      "bytes": 7183
+    },
+    {
+      "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/formal_response.exitcode",
+      "git_blob_sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "bytes": 2
+    },
+    {
+      "commit": "2919a5df50d9fa287fe823ee5a1bb9169c438f65",
+      "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10/raw/formal_response.log",
+      "git_blob_sha256": "2279d5979bf5bcb6e1b4b68172427434cab7549456d60f2c8f73baba2b4c24e6",
+      "bytes": 32361
+    }
+  ],
+  "configuration_field_count": 32,
+  "configuration_resolved_count": 32,
+  "candidate_successor_source": {
+    "commit": "1348f6aff6a3f46437f836ad053618ed68cb9b5b",
+    "path": "results/hybrid/x1_k_r1_midpoint_collapse_diagnosis_v10r1/candidate_matrix_v10r1.json"
+  },
+  "combined_verification_source": {
+    "path": "verification/combined_python_final.log",
+    "fork_identity_parsed": "e2ed64a26bb5d7c2d878772564fb5ffcca343c3a",
+    "pytest_passed_parsed": 91
+  },
+  "new_scientific_evidence_generated": false
+}

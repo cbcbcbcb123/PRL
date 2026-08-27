@@ -1,0 +1,4 @@
+order,role,criterion,observed,passed,scientific_adjudication,provenance
+1,packaging_repair,configuration_artifact_reconstructed_with_field_provenance,32 fields closed,True,False,configuration.json
+2,semantic_repair,candidate_topology_status_is_exception_aware,1/2/4 adjudicated_legal; 3 not_adjudicated_due_to_production_sink_exception,True,False,candidate_matrix_v10r1.csv; semantic_erratum.json
+3,scientific_state_preservation,frozen_v10_failure_and_non_authorization_preserved,v10 failed; classification not adjudicated; downstream false,True,False,summary.json
