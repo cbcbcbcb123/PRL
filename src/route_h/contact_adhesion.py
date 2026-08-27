@@ -261,6 +261,55 @@ def _adhesion_shape(opening: float, cutoff: float) -> tuple[float, float]:
     return value, derivative
 
 
+def material_tether_gap_and_gradients(
+    master_vertices: FloatArray,
+    master_face: IntArray,
+    slave_vertices: FloatArray,
+    slave_face: IntArray,
+    *,
+    master_barycentric: FloatArray,
+    slave_barycentric: FloatArray,
+    normal_orientation_sign: float,
+) -> tuple[float, FloatArray, FloatArray]:
+    """Return the signed material-tether gap and its local gradients.
+
+    Positive gap denotes separation along the frozen interface orientation;
+    ``gap >= 0`` is therefore the unilateral non-penetration constraint.  The
+    gradients include the variation of the current master-face normal.
+    """
+    local_master = master_vertices[master_face]
+    local_slave = slave_vertices[slave_face]
+    master_point = master_barycentric @ local_master
+    slave_point = slave_barycentric @ local_slave
+    relative = slave_point - master_point
+    edge = local_master[1] - local_master[0]
+    other = local_master[2] - local_master[0]
+    raw_normal = np.cross(edge, other)
+    normal_length = float(np.linalg.norm(raw_normal))
+    if normal_length <= 0.0:
+        raise ValueError("degenerate material tether master face")
+    unit_normal = raw_normal / normal_length
+    normal = normal_orientation_sign * unit_normal
+    gap = float(np.dot(relative, normal))
+
+    relative_bar = normal
+    normal_bar = relative
+    unit_normal_bar = normal_orientation_sign * normal_bar
+    raw_bar = (
+        unit_normal_bar
+        - unit_normal * float(np.dot(unit_normal, unit_normal_bar))
+    ) / normal_length
+    edge_from_normal_bar = np.cross(other, raw_bar)
+    other_bar = np.cross(raw_bar, edge)
+    master_gradient = np.zeros((3, 3), dtype=np.float64)
+    master_gradient[1] += edge_from_normal_bar
+    master_gradient[2] += other_bar
+    master_gradient[0] -= edge_from_normal_bar + other_bar
+    master_gradient -= master_barycentric[:, None] * relative_bar
+    slave_gradient = slave_barycentric[:, None] * relative_bar
+    return gap, master_gradient, slave_gradient
+
+
 def material_tether_energy_force_with_reference(
     master_vertices: FloatArray,
     master_face: IntArray,

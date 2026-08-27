@@ -1,0 +1,29 @@
+{
+  "schema_version": "efe_node1_n1_2b_r5_cycle_summary_v01",
+  "cycle": 2,
+  "compared_with_cycle": 1,
+  "waveform_normalized_l2": {
+    "axial_shortening": 2.0525321889784596e-08,
+    "maximum_discrete_interface_traction": 9.400617462828775e-07,
+    "total_stored_energy": 1.7308320701564908e-09,
+    "ecm_internal_z_norm": 3.945234297805202e-06
+  },
+  "maximum_waveform_normalized_l2": 3.945234297805202e-06,
+  "cycle_end_internal_z_relative_difference": 4.9294054462849675e-06,
+  "cycle_dissipation": 2.4712588835453084e-06,
+  "maximum_kkt": 1.1079665378464154e-07,
+  "minimum_ecm_jacobian": 0.9877354262864646,
+  "minimum_gap": 0.015517646969783763,
+  "maximum_coupling_residual": 8.340595934889425e-05,
+  "peak_axial_shortening": 0.11688178155420581,
+  "peak_interface_traction": 0.09773421549704867,
+  "solve_seconds": 5345.573289323598,
+  "accepted_transaction_count": 128,
+  "cycle_end_commit": {
+    "path": "/workspace/results/hybrid/prl_p6_t128_transactional_cycle_v01_20260827/transaction_engine/cycle_02/cycle_end_checkpoint.npz",
+    "array_digest": "27cbb7b6dc3ab4a82922235be45620bd820aabdba05cd2cf5ab06f6a094ce1a5",
+    "payload_bytes": 72498,
+    "create_only": true
+  },
+  "cycle_stable": true
+}

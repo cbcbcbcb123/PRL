@@ -1,0 +1,7 @@
+{
+  "schema_version": "prl_p6_t128_warm_start_failure_v01",
+  "status": "failed_inner_warm_engine",
+  "authorization": "project_control/prl_independent_theory_mainline_decision_v01.md",
+  "inner_process": "E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_p6_t128_warm_start_v01_20260827\\inner_warm_process.json",
+  "passed": false
+}

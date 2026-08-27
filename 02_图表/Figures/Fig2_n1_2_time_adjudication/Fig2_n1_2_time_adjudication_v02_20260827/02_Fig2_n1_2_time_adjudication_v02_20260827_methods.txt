@@ -1,0 +1,34 @@
+# 图件方法与验证记录
+
+## 人工填写内容
+- 风格来源: 用户批准当前阶段自由排版的科研审阅图；暂不调用 cb-plot-unified-style
+- 用户提供的期刊规格: 未指定；按科研审阅和阶段终审用途执行
+- 03_材料方法来源: 不适用；本包直接冻结 PRL P6 正式 CSV/JSON/NPZ、T32/T64/T128 裁决脚本和时间细化模块快照
+- 数据/模型变换: T32/T64/T128 标量波形线性插值到 4097 个共有相位；积分使用 dense-linear 梯形规则；峰值相位规范化到 [0,1) 并用周期圆距离比较。场量只读五个精确共有相位。ECM J、Green–Lagrange 主应变、Cauchy 应力、SLS 离散耗散和界面 tether 牵引按冻结公式从真实状态重建。phase 1 三层位移按前瞻合同改用闭合残差除以整周期 p95 位移幅值；旧 P5 的近零量相对失败保持原样归档。未滤波、未平滑、未剔除适用门。
+- 统计方法与不确定性: 确定性三档时间离散裁决，无推断统计或误差线；绿色/红色表示 P6 预登记数值门通过/失败。观察阶和 Richardson 仅在单调、非近零且 0.25<=p<=4 时报告；边界/平台敏感峰值标记为不可辨识。图支持“固定 D0/E0/F150 基线在 T64→T128 下通过 P6 时间门”，不支持空间收敛、材料标定、EFE 疾病机制或 DCM–FEM 普适优势。
+- 生物学分组颜色: 不适用；本图无生物学分组颜色
+- 人工/代理视觉验收: 通过
+
+## 自动记录
+<!-- 自动记录开始 -->
+- 前缀: Fig2_n1_2_time_adjudication_v02_20260827
+- 包状态: 工作版本
+- 创建日期: 20260827
+- 执行时间: 2026-08-27T15:48:33+08:00
+- 自动校验: 通过
+- 颜色配置 SHA-256: 不适用
+- Notebook SHA-256: 6b45cf63bf84a2231d3e78c0a2d9a3b19db99c29dd997e39770f1eb26cc7c387
+- 文件 SHA-256: 已记录如下
+- 01_Fig2_n1_2_time_adjudication_v02_20260827_data.csv: 27df27ecacff85356e7991f1a6b1f2eaa4460b690a48be6db20247b844a0d478
+- 01a_Fig2_n1_2_time_adjudication_v02_20260827_data_dense.csv: 58733916a94bd89f891915d72a1ede19d46a12a26f5a671b8604f2d6f7bbe4d1
+- 01b_Fig2_n1_2_time_adjudication_v02_20260827_data_field.csv: e7d49d6f0bd1e35985cfc9bda9844eee15eedb56cede7f61ddf7f1fd578797b3
+- 01c_Fig2_n1_2_time_adjudication_v02_20260827_data_sensitive.csv: 6726846a3c061a10cc864e119cfe6d46a79a3905656273af9f68e89870dd17c3
+- 01d_Fig2_n1_2_time_adjudication_v02_20260827_data_summary.json: 5a039dde50790a787a7b54db13e41b4135d31df2109f5ff25a72e56bd84c4e17
+- 01e_Fig2_n1_2_time_adjudication_v02_20260827_data_closure.csv: e360867f19737fed1e816190728d847a0c309d5fcd0c38dd474fd81fae76b3a5
+- 03_Fig2_n1_2_time_adjudication_v02_20260827_plot.ipynb: 6b45cf63bf84a2231d3e78c0a2d9a3b19db99c29dd997e39770f1eb26cc7c387
+- 03a_Fig2_n1_2_time_adjudication_v02_20260827_adjudication.py: 36d3d8c66cadf565372d239bcf7d50eb4a15f21bc7712a73b813ee0556489945
+- 03c_Fig2_n1_2_time_adjudication_v02_20260827_peak_field.npz: fb39db43decdc1a03946fd6507dcf83bd0fca57fd457841fc9628ccc68f32862
+- 03d_Fig2_n1_2_time_adjudication_v02_20260827_plot_helper.py: ddff1ec88332ee50d96ae94267a34945c606825d1ba837ed93ad6ea3ed87bc86
+- 03e_Fig2_n1_2_time_adjudication_v02_20260827_time_refinement.py: caf5d14759114e104a680382b894c0fb0220f1a23c81b191ae1d7d500fd0dd0e
+- Python 与主要库版本: Python 3.13.7; Windows 11; ipython=9.6.0
+<!-- 自动记录结束 -->

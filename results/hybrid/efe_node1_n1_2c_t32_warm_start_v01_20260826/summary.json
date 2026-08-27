@@ -1,0 +1,99 @@
+{
+  "schema_version": "efe_node1_n1_2c_t32_warm_start_v01",
+  "status": "passed_t32_reperiodized_warm_start",
+  "authorization": "project_control/efe_node1_n1_2c_p0_p2_authorization_decision_v01.md",
+  "source_cycle_directory": "/workspace/results/hybrid/efe_node1_n1_2b_r5_transactional_cycle_v01_20260820/cycle_08",
+  "steps_per_cycle": 32,
+  "period": 1.0,
+  "resampling_summary": "/workspace/results/hybrid/efe_node1_n1_2c_t32_warm_start_v01_20260826/resampling_summary.json",
+  "inner_engine_summary": "/workspace/results/hybrid/efe_node1_n1_2c_t32_warm_start_v01_20260826/inner_warm_engine/summary.json",
+  "inner_engine_summary_sha256": "6ecdbe65472d582bfbc13c295c82f0f19c4643e8951eabdd4f7eae88f473d7f4",
+  "source_fingerprints": {
+    "scripts/prepare_efe_node1_n1_2c_t32_warm_start_v01.py": "fc07294a0577aede9b682fdde61484720a2ff8545a3c1e2c68d451e7d2be89ad",
+    "src/hybrid/efe_time_refinement.py": "a45b1a98bb50b559f9dafd2cddac8cd1a598adc19ed85c70361fe0a2f086d921",
+    "scripts/run_efe_node1_n1_2b_r4_reperiodized_warm_start_v01.py": "1f7a4d4185f1a3015fc4f26545ffd8c4c25650001bdcf046ea4472687b581688"
+  },
+  "phase_zero_sample": {
+    "cycle": 1,
+    "step": 0,
+    "t_over_T": 0.0,
+    "time": 0.0,
+    "activation": 0.0,
+    "activation_rate": 0.0,
+    "axial_shortening": 2.20063147451377e-05,
+    "maximum_discrete_interface_traction": 0.0023897622484696105,
+    "p95_discrete_interface_traction": 0.002200007597789833,
+    "total_stored_energy": -0.018618418591790743,
+    "ecm_equilibrium_energy": 1.4346215673683352e-06,
+    "ecm_viscoelastic_energy": 5.229950400691672e-06,
+    "ecm_internal_z_norm": 0.4786049147143901,
+    "ecm_dissipation_step": 0.0,
+    "cumulative_ecm_dissipation": 0.0,
+    "coupling_iterations": 0,
+    "coupling_residual": 0.0,
+    "solve_seconds": 0.0,
+    "normalized_kkt_residual": 3.4346780298767275e-06,
+    "volume_constraint_residual": 0.0,
+    "minimum_ecm_jacobian": 0.9990252083830323,
+    "maximum_ecm_jacobian": 1.0010272306265773,
+    "minimum_gap": 0.03912735294560759,
+    "minimum_myocyte_face_area_ratio": 0.9999455458209368,
+    "minimum_endocardial_face_area_ratio": 0.9994360298173633,
+    "internal_symmetry_residual": 0.0,
+    "internal_trace_residual": 6.938893903907228e-18,
+    "volume_multipliers": [
+      1.9745627863255136e-05,
+      3.646765469840844e-07
+    ],
+    "passed": true
+  },
+  "parent_audit": {
+    "contract": {
+      "kkt_tolerance": 1e-05,
+      "coupling_tolerance": 0.0001,
+      "volume_tolerance": 1e-08,
+      "minimum_ecm_jacobian": 0.5,
+      "minimum_gap": -1e-12,
+      "minimum_face_area_ratio": 0.05,
+      "internal_symmetry_tolerance": 1e-12,
+      "internal_trace_tolerance": 1e-12,
+      "periodicity_tolerance": 1e-12,
+      "candidate_tolerance": 1e-12
+    },
+    "metrics": {
+      "frozen_periodicity_residual": 1.0243246581655793e-15,
+      "candidate_internal_relative_difference": 0.0,
+      "normalized_kkt_residual": 3.4346780298767275e-06,
+      "volume_constraint_residual": 0.0,
+      "minimum_ecm_jacobian": 0.9990252083830323,
+      "minimum_gap": 0.03912735294560759,
+      "minimum_myocyte_face_area_ratio": 0.9999455458209368,
+      "minimum_endocardial_face_area_ratio": 0.9994360298173633,
+      "internal_symmetry_residual": 0.0,
+      "internal_trace_residual": 6.938893903907228e-18
+    },
+    "checks": {
+      "values_finite": true,
+      "frozen_periodicity_gate": true,
+      "candidate_internal_gate": true,
+      "kkt_gate": true,
+      "volume_gate": true,
+      "ecm_jacobian_gate": true,
+      "gap_gate": true,
+      "myocyte_face_gate": true,
+      "endocardial_face_gate": true,
+      "internal_symmetry_gate": true,
+      "internal_trace_gate": true
+    },
+    "passed": true
+  },
+  "commit": {
+    "path": "/workspace/results/hybrid/efe_node1_n1_2c_t32_warm_start_v01_20260826/periodic_warm_start_checkpoint.npz",
+    "array_digest": "51fb3fa5564a9d97d62ac75f60fbb075b590c60fd53b975d6b44c40d1a9cfc6f",
+    "payload_bytes": 72498,
+    "create_only": true
+  },
+  "elapsed_seconds": 32.63086644595023,
+  "passed": true,
+  "evidence_boundary": "This is a T32 frozen-geometry viscoelastic fixed-point warm start. It is not T32 cycle-stability or time-convergence evidence; two fully coupled T32 transactional cycles remain required."
+}

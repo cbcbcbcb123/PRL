@@ -1,0 +1,109 @@
+{
+  "schema_version": "efe_node1_n1_2c_t16_to_t32_resampling_v01",
+  "source_cycle_directory": "/workspace/results/hybrid/efe_node1_n1_2b_r5_transactional_cycle_v01_20260820/cycle_08",
+  "target_directory": "/workspace/results/hybrid/efe_node1_n1_2c_t32_warm_start_v01_20260826/resampled_source_cycle",
+  "method": "piecewise linear interpolation on the inclusive uniform phase grid",
+  "source_steps_per_cycle": 16,
+  "target_steps_per_cycle": 32,
+  "common_phase_stride": 2,
+  "state_array_audit": {
+    "ecm_internal_z": {
+      "source_shape": [
+        17,
+        1152,
+        3,
+        3
+      ],
+      "target_shape": [
+        33,
+        1152,
+        3,
+        3
+      ],
+      "common_source_phases_bitwise_equal": true,
+      "maximum_common_phase_absolute_difference": 0.0
+    },
+    "ecm_vertices": {
+      "source_shape": [
+        17,
+        315,
+        3
+      ],
+      "target_shape": [
+        33,
+        315,
+        3
+      ],
+      "common_source_phases_bitwise_equal": true,
+      "maximum_common_phase_absolute_difference": 0.0
+    },
+    "endocardial_vertices": {
+      "source_shape": [
+        17,
+        162,
+        3
+      ],
+      "target_shape": [
+        33,
+        162,
+        3
+      ],
+      "common_source_phases_bitwise_equal": true,
+      "maximum_common_phase_absolute_difference": 0.0
+    },
+    "myocyte_vertices": {
+      "source_shape": [
+        17,
+        162,
+        3
+      ],
+      "target_shape": [
+        33,
+        162,
+        3
+      ],
+      "common_source_phases_bitwise_equal": true,
+      "maximum_common_phase_absolute_difference": 0.0
+    },
+    "variables": {
+      "source_shape": [
+        17,
+        1915
+      ],
+      "target_shape": [
+        33,
+        1915
+      ],
+      "common_source_phases_bitwise_equal": true,
+      "maximum_common_phase_absolute_difference": 0.0
+    }
+  },
+  "csv_audit": {
+    "source_steps_per_cycle": 16,
+    "target_steps_per_cycle": 32,
+    "source_row_count": 17,
+    "target_row_count": 33,
+    "passthrough_fields": [
+      "passed"
+    ]
+  },
+  "source_fingerprints": {
+    "results/hybrid/efe_node1_n1_2b_r5_transactional_cycle_v01_20260820/cycle_08/cycle_states.npz": "fd8c31ca66125a1afe397699d96b2bd0b95cc6d2f1629034d5d804b0cf60bc9f",
+    "results/hybrid/efe_node1_n1_2b_r5_transactional_cycle_v01_20260820/cycle_08/cycle_timeseries.csv": "13545f2b756a02126346e9ead91fcc186d29e8d4d203aed3eac04c526a454992",
+    "results/hybrid/efe_node1_n1_2b_r5_transactional_cycle_v01_20260820/cycle_08/cycle_end_checkpoint.npz": "bc9cc661f745b44f5c7871f34b89732a0151e44d664aea32556fd0ec563c2168",
+    "results/hybrid/efe_node1_n1_2b_r5_transactional_cycle_v01_20260820/cycle_08/cycle_summary.json": "d5f0ae145b848042b42da3e91c3249d25b6d019de5fb75d106e1772183959720"
+  },
+  "resampled_fingerprints": {
+    "results/hybrid/efe_node1_n1_2c_t32_warm_start_v01_20260826/resampled_source_cycle/cycle_states.npz": "4ab7e71634511ef28900e65bed8832c73bcaa02c0ff27651907cc416c4a6075e",
+    "results/hybrid/efe_node1_n1_2c_t32_warm_start_v01_20260826/resampled_source_cycle/cycle_timeseries.csv": "463607b1f303cd86aacc9aaf5c1c32af7b2acb6431caabb108448f8773bab6e8",
+    "results/hybrid/efe_node1_n1_2c_t32_warm_start_v01_20260826/resampled_source_cycle/cycle_end_checkpoint.npz": "bc9cc661f745b44f5c7871f34b89732a0151e44d664aea32556fd0ec563c2168"
+  },
+  "end_checkpoint_commit": {
+    "path": "/workspace/results/hybrid/efe_node1_n1_2c_t32_warm_start_v01_20260826/resampled_source_cycle/cycle_end_checkpoint.npz",
+    "array_digest": "70bc31fc714eaae21c18faec1bfc98607c800d2c987a0e619ccdcc66d8d681d5",
+    "payload_bytes": 72520,
+    "create_only": true
+  },
+  "passed": true,
+  "evidence_boundary": "Interpolated intermediate phases initialize the T32 frozen-geometry warm calculation only; they are not accepted T32 dynamic states."
+}

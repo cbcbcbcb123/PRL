@@ -1,0 +1,139 @@
+{
+  "schema_version": "prl_p6_t128_time_adjudication_v01",
+  "status": "passed_p6_t64_t128_time_gate",
+  "authorization": "project_control/prl_independent_theory_mainline_decision_v01.md",
+  "paper_context": "PRL_independent_theory_first",
+  "p5_historical_evidence": {
+    "summary": "results\\hybrid\\efe_node1_n1_2c_time_adjudication_v01_20260826\\summary.json",
+    "summary_sha256": "dfe0f48ebdc375ecc9cfab2c22cd09a9b8fdc8e4d1e5a73ff06097200e3cd05d",
+    "status": "failed_registered_time_convergence_gate",
+    "preserved_without_reclassification": true
+  },
+  "levels": {
+    "T32": {
+      "steps_per_cycle": 32,
+      "selected_cycle": 2,
+      "directory": "results\\hybrid\\efe_node1_n1_2c_t32_transactional_cycle_v01_20260826\\transaction_engine\\cycle_02",
+      "input_hashes": {
+        "timeseries": "f0dd1fb2267635ec5da6af0c9440763a8b335a6c55915d688f76ba1c73d3519f",
+        "states": "c648dc9c10c750aedaba57ab0055ac6f1dab143cc0c6747b05e62553b0d69ead",
+        "cycle_summary": "7b2da878f40b2fbcc16803a4329c5982d49e50dbb05894dc244c4204cb260c61",
+        "run_summary": "0adc4093c73c1c02a9e6a4a74a6c56f87f1ab83ceac0c786f5ce09be87185a7e"
+      }
+    },
+    "T64": {
+      "steps_per_cycle": 64,
+      "selected_cycle": 2,
+      "directory": "results\\hybrid\\efe_node1_n1_2c_t64_transactional_cycle_v01_20260826\\transaction_engine\\cycle_02",
+      "input_hashes": {
+        "timeseries": "5320f98d888dabbdf0725f3b88fc80a914b29794218664d9dde30ef0a8048176",
+        "states": "3d237b175dc2f0390a285ec2b8e751e3fc0b02a9e5228e0e29304f9e5c71b35a",
+        "cycle_summary": "6a8954c624e9e4db8d3dcca334753af9d1ab42127c5f014a6571cd9349c1e3f2",
+        "run_summary": "e8ccae923d99585d6b54c51a508c48b3a9497cfc80aab0424a92237cd0dd5bc5"
+      }
+    },
+    "T128": {
+      "steps_per_cycle": 128,
+      "selected_cycle": 2,
+      "directory": "results\\hybrid\\prl_p6_t128_transactional_cycle_v01_20260827\\transaction_engine\\cycle_02",
+      "input_hashes": {
+        "timeseries": "7f6145b8bb79aeb8fe4bdfef615502366ff567015f349dcc27e51da211f28e99",
+        "states": "ba0cfb5a084a0b3e95293f392fe570b8d89de567571dbf48a94881cd94cb5c05",
+        "cycle_summary": "703f84644f606178163916cbcb24e9eef7c66db4c2e84d5cce079d6291375c60",
+        "run_summary": "a58d8b0cee0e87ab81bd6a9f46ef50828bf42f3037b79fd8caf04d4b92bcdef6"
+      }
+    }
+  },
+  "comparison_rules": {
+    "dense_sample_count": 4097,
+    "waveform_interpolation": "linear",
+    "integral_rule": "dense-linear trapezoid",
+    "common_field_phases": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "relative_difference": "symmetric L2 normalized by max norm with 1e-12 guard",
+    "peak_phase_distance": "periodic circular distance on [0,1)",
+    "phase_one_displacement": "excluded prospectively from relative field gate and governed by closure residual divided by within-cycle p95 amplitude",
+    "field_derivation_authorization": "project_control/prl_independent_theory_mainline_decision_v01.md"
+  },
+  "gates": {
+    "waveform": 0.02,
+    "integral": 0.02,
+    "peak_amplitude": 0.02,
+    "peak_phase": 0.01,
+    "dissipation": 0.05,
+    "field": 0.05,
+    "field_p95": 0.05,
+    "closure_ratio": 0.001
+  },
+  "checks": {
+    "within_level_periodic": true,
+    "global_time_gate": true,
+    "field_time_gate": true,
+    "closure_gate": true,
+    "safety_gate": true
+  },
+  "maximum_differences": {
+    "global_T32_T64": 0.010744468327972772,
+    "global_T64_T128": 0.0051513116174121965,
+    "field_T32_T64": 0.02458754110778845,
+    "field_T64_T128": 0.004422634645962939
+  },
+  "failed_global_rows": [],
+  "failed_field_rows": [],
+  "failed_closure_rows": [],
+  "observed_order_status_counts": {
+    "not_applicable_to_waveform_norm": 7,
+    "nonmonotone_time_refinement": 3,
+    "richardson_estimated": 12,
+    "order_not_identifiable": 6,
+    "peak_phase_not_identifiable": 1
+  },
+  "safety": {
+    "T32": {
+      "minimum_ecm_jacobian": 0.9877311093079696,
+      "minimum_gap": 0.015519953324705005,
+      "maximum_kkt": 5.728711390093004e-08,
+      "maximum_coupling_residual": 4.6068876517572425e-05,
+      "maximum_volume_constraint_residual": 5.551115123125783e-16,
+      "minimum_myocyte_face_area_ratio": 0.8816946048831515,
+      "minimum_endocardial_face_area_ratio": 0.9967283438887763
+    },
+    "T64": {
+      "minimum_ecm_jacobian": 0.9877339801210533,
+      "minimum_gap": 0.015518437298179772,
+      "maximum_kkt": 1.3515466903565645e-07,
+      "maximum_coupling_residual": 9.132849132309156e-05,
+      "maximum_volume_constraint_residual": 6.661338147750939e-16,
+      "minimum_myocyte_face_area_ratio": 0.8816945978316801,
+      "minimum_endocardial_face_area_ratio": 0.9967290947448828
+    },
+    "T128": {
+      "minimum_ecm_jacobian": 0.9877354262864646,
+      "minimum_gap": 0.015517646969783763,
+      "maximum_kkt": 1.1079665378464154e-07,
+      "maximum_coupling_residual": 8.340595934889425e-05,
+      "maximum_volume_constraint_residual": 5.551115123125783e-16,
+      "minimum_myocyte_face_area_ratio": 0.8816945942049992,
+      "minimum_endocardial_face_area_ratio": 0.9967294849996211
+    }
+  },
+  "source_fingerprints": {
+    "scripts\\postprocess_prl_p6_t128_time_refinement_v01.py": "36d3d8c66cadf565372d239bcf7d50eb4a15f21bc7712a73b813ee0556489945",
+    "src/hybrid/efe_time_refinement.py": "caf5d14759114e104a680382b894c0fb0220f1a23c81b191ae1d7d500fd0dd0e"
+  },
+  "outputs": {
+    "global_metric_table.csv": "27df27ecacff85356e7991f1a6b1f2eaa4460b690a48be6db20247b844a0d478",
+    "field_metric_table.csv": "e7d49d6f0bd1e35985cfc9bda9844eee15eedb56cede7f61ddf7f1fd578797b3",
+    "closure_metric_table.csv": "e360867f19737fed1e816190728d847a0c309d5fcd0c38dd474fd81fae76b3a5",
+    "dense_waveforms.csv": "58733916a94bd89f891915d72a1ede19d46a12a26f5a671b8604f2d6f7bbe4d1",
+    "sensitive_phase_table.csv": "6726846a3c061a10cc864e119cfe6d46a79a3905656273af9f68e89870dd17c3",
+    "peak_field_difference.npz": "fb39db43decdc1a03946fd6507dcf83bd0fca57fd457841fc9628ccc68f32862"
+  },
+  "passed": true,
+  "evidence_boundary": "This is the prospective T32/T64/T128 temporal adjudication for the fixed D0/E0/F150 PRL theory-first baseline. P5 remains a failed historical strict gate. This result does not establish spatial or parameter convergence, material calibration, EFE disease mechanism, or DCM-FEM universality, and it does not authorize T256 or N1-2d."
+}

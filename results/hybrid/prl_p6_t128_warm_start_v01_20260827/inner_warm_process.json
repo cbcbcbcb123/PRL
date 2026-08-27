@@ -1,0 +1,24 @@
+{
+  "command": [
+    "F:\\python\\python.exe",
+    "E:\\Temp-Projects\\PRL\\scripts\\run_efe_node1_n1_2b_r4_reperiodized_warm_start_v01.py",
+    "--source-cycle-directory",
+    "E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_p6_t128_warm_start_v01_20260827\\resampled_source_cycle",
+    "--output",
+    "E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_p6_t128_warm_start_v01_20260827\\inner_warm_engine",
+    "--period",
+    "1",
+    "--steps",
+    "128",
+    "--run-label",
+    "r5",
+    "--first-cycle-index",
+    "1",
+    "--authorization",
+    "project_control/prl_independent_theory_mainline_decision_v01.md"
+  ],
+  "returncode": 1,
+  "elapsed_seconds": 3.334305000025779,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"E:\\Temp-Projects\\PRL\\scripts\\run_efe_node1_n1_2b_r4_reperiodized_warm_start_v01.py\", line 331, in <module>\n    main()\n    ~~~~^^\n  File \"E:\\Temp-Projects\\PRL\\scripts\\run_efe_node1_n1_2b_r4_reperiodized_warm_start_v01.py\", line 143, in main\n    raise RuntimeError(f\"{run_label} periodic initializer failed\")\nRuntimeError: r5 periodic initializer failed\n"
+}

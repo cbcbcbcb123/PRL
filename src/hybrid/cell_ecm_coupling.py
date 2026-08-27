@@ -135,6 +135,7 @@ class CellECMVerticalSlice:
     mu_eq: float = 1.0
     kappa_eq: float = 20.0
     mu_ve: float = 0.5
+    eta_ve: float = 0.5
 
     def __post_init__(self) -> None:
         if self.cell_reference_vertices.ndim != 2 or self.cell_reference_vertices.shape[1] != 3:
@@ -157,21 +158,33 @@ class CellECMVerticalSlice:
             raise ValueError("each material point may own at most one X0-D tether")
         for tether in self.tethers:
             _material_point_row(self.cell_registry, tether.material_point_id)
+        if min(self.mu_eq, self.kappa_eq, self.mu_ve) < 0.0:
+            raise ValueError("ECM moduli must be nonnegative")
+        if not np.isfinite(self.eta_ve) or self.eta_ve <= 0.0:
+            raise ValueError("ECM viscosity must be finite and positive")
 
     def evaluate(
         self,
         cell_vertices: FloatArray,
         ecm_vertices: FloatArray,
+        *,
+        ecm_internal_z: FloatArray | None = None,
+        reject_penetration: bool = True,
     ) -> VerticalSliceEvaluation:
         if cell_vertices.shape != self.cell_reference_vertices.shape:
             raise ValueError("cell vertex shape does not match the reference")
         if ecm_vertices.shape != self.ecm_reference.vertices.shape:
             raise ValueError("ECM vertex shape does not match the reference")
 
+        selected_internal_z = (
+            self.ecm_internal_z
+            if ecm_internal_z is None
+            else np.asarray(ecm_internal_z, dtype=np.float64)
+        )
         ecm_energies, ecm_bulk_force, jacobians = ecm_energy_force(
             ecm_vertices,
             self.ecm_reference,
-            self.ecm_internal_z,
+            selected_internal_z,
             mu_eq=self.mu_eq,
             kappa_eq=self.kappa_eq,
             mu_ve=self.mu_ve,
@@ -209,7 +222,7 @@ class CellECMVerticalSlice:
             np.add.at(ecm_tether_force, ecm_face, local_ecm_force)
             coupling_energy += energies["adhesion_total"]
             current_gap = float(state["gap"])
-            if current_gap < -1e-12:
+            if reject_penetration and current_gap < -1e-12:
                 raise ValueError(
                     "cell-ECM penetration detected at material point "
                     f"{tether.material_point_id}: gap={current_gap:.17g}"

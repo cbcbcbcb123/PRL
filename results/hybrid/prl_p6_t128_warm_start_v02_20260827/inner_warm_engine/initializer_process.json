@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/dolfinx-env/bin/python3",
+    "/workspace/scripts/prepare_efe_node1_n1_2_periodic_warm_start_v01.py",
+    "--cycle-directory",
+    "/workspace/results/hybrid/prl_p6_t128_warm_start_v02_20260827/resampled_source_cycle",
+    "--output",
+    "/workspace/results/hybrid/prl_p6_t128_warm_start_v02_20260827/inner_warm_engine/initializer_staging",
+    "--dcm-level",
+    "D0",
+    "--ecm-level",
+    "E0",
+    "--ecm-footprint-scale",
+    "1.5",
+    "--period",
+    "1",
+    "--steps",
+    "128",
+    "--ecm-backend",
+    "fenicsx"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 40.85317216394469,
+  "stdout": "{\n  \"schema_version\": \"efe_node1_n1_2_periodic_warm_start_v02\",\n  \"status\": \"passed_periodic_warm_start\",\n  \"source_cycle_directory\": \"/workspace/results/hybrid/prl_p6_t128_warm_start_v02_20260827/resampled_source_cycle\",\n  \"dcm_level\": \"D0\",\n  \"ecm_level\": \"E0\",\n  \"ecm_footprint_scale\": 1.5,\n  \"ecm_backend\": \"fenicsx\",\n  \"ecm_backend_diagnostics\": {\n    \"backend\": \"fenicsx_ufl_ad_serial_v02_lazy_tangent\",\n    \"dolfinx_version\": \"0.11.0.post0\",\n    \"petsc_version\": \"3.25.1\",\n    \"setup_and_jit_seconds\": 3.253973870072514,\n    \"evaluation_count\": 71,\n    \"assembly_seconds\": 0.19260447821579874,\n    \"mean_assembly_seconds\": 0.002712739129799982,\n    \"tangent_count\": 0,\n    \"tangent_setup_and_jit_seconds\": 0.0,\n    \"tangent_seconds\": 0.0,\n    \"mean_tangent_seconds\": 0.0\n  },\n  \"steps_per_cycle\": 128,\n  \"cycle_decay\": 0.6065306597126334,\n  \"zero_start_end_internal_z_norm\": 0.1892164925302579,\n  \"periodic_internal_z_norm\": 0.48089259608401874,\n  \"frozen_geometry_periodicity_residual\": 2.0655598621589873e-15,\n  \"capture_seconds\": 5.339940380072221,\n  \"capture_kkt\": 8.334254346183182e-07,\n  \"capture_mechanical_converged\": true,\n  \"capture_passed\": true,\n  \"sparse_seconds\": 0.0,\n  \"sparse_method\": null,\n  \"sparse_residual_safeguard_triggered\": null,\n  \"final_kkt\": 8.334254346183182e-07,\n  \"final_minimum_ecm_jacobian\": 0.9990184663012823,\n  \"final_minimum_gap\": 0.03911921933635671,\n  \"final_checkpoint\": \"/workspace/results/hybrid/prl_p6_t128_warm_start_v02_20260827/inner_warm_engine/initializer_staging/periodic_warm_start_checkpoint.npz\",\n  \"passed\": true,\n  \"evidence_boundary\": \"This analytically periodic SLS state is a warm start under the frozen source-cycle geometry. N1-2 cycle stability still requires two subsequent consecutive fully coupled cycles to pass the registered waveform L2 gate.\"\n}\n",
+  "stderr": ""
+}

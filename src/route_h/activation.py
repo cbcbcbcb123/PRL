@@ -116,9 +116,14 @@ def active_energy_force(
     alpha: float,
     alpha_rate: float = 0.0,
     k_f: float = 10.0,
+    alpha_limit: float = 0.2,
 ) -> tuple[float, FloatArray, ActiveState]:
-    if not 0.0 <= alpha <= 0.2:
-        raise ValueError("activation must remain inside the frozen [0,0.2] bounds")
+    if not math.isfinite(alpha_limit) or alpha_limit <= 0.0:
+        raise ValueError("activation limit must be finite and positive")
+    if not math.isfinite(alpha) or not 0.0 <= alpha <= alpha_limit:
+        raise ValueError(
+            f"activation must remain inside [0,{alpha_limit:g}]"
+        )
     length, axis = anchor_length_axis(vertices, reference)
     preferred = reference.length0 * (1.0 - alpha)
     preferred_rate = -reference.length0 * alpha_rate

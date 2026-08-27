@@ -1,0 +1,162 @@
+{
+  "schema_version": "efe_node1_n1_2c_time_adjudication_v01",
+  "status": "failed_registered_time_convergence_gate",
+  "authorization": "project_control/efe_node1_n1_2c_t64_acceptance_and_p5_authorization_decision_v01.md",
+  "levels": {
+    "T16": {
+      "steps_per_cycle": 16,
+      "selected_cycle": 8,
+      "directory": "results\\hybrid\\efe_node1_n1_2b_r5_transactional_cycle_v01_20260820\\cycle_08",
+      "input_hashes": {
+        "timeseries": "13545f2b756a02126346e9ead91fcc186d29e8d4d203aed3eac04c526a454992",
+        "states": "fd8c31ca66125a1afe397699d96b2bd0b95cc6d2f1629034d5d804b0cf60bc9f",
+        "cycle_summary": "d5f0ae145b848042b42da3e91c3249d25b6d019de5fb75d106e1772183959720",
+        "run_summary": "d8299c193fc75d184b8b51fded8afe6a1cba32f7adc24c085af7d3948ebf21e9"
+      }
+    },
+    "T32": {
+      "steps_per_cycle": 32,
+      "selected_cycle": 2,
+      "directory": "results\\hybrid\\efe_node1_n1_2c_t32_transactional_cycle_v01_20260826\\transaction_engine\\cycle_02",
+      "input_hashes": {
+        "timeseries": "f0dd1fb2267635ec5da6af0c9440763a8b335a6c55915d688f76ba1c73d3519f",
+        "states": "c648dc9c10c750aedaba57ab0055ac6f1dab143cc0c6747b05e62553b0d69ead",
+        "cycle_summary": "7b2da878f40b2fbcc16803a4329c5982d49e50dbb05894dc244c4204cb260c61",
+        "run_summary": "0adc4093c73c1c02a9e6a4a74a6c56f87f1ab83ceac0c786f5ce09be87185a7e"
+      }
+    },
+    "T64": {
+      "steps_per_cycle": 64,
+      "selected_cycle": 2,
+      "directory": "results\\hybrid\\efe_node1_n1_2c_t64_transactional_cycle_v01_20260826\\transaction_engine\\cycle_02",
+      "input_hashes": {
+        "timeseries": "5320f98d888dabbdf0725f3b88fc80a914b29794218664d9dde30ef0a8048176",
+        "states": "3d237b175dc2f0390a285ec2b8e751e3fc0b02a9e5228e0e29304f9e5c71b35a",
+        "cycle_summary": "6a8954c624e9e4db8d3dcca334753af9d1ab42127c5f014a6571cd9349c1e3f2",
+        "run_summary": "e8ccae923d99585d6b54c51a508c48b3a9497cfc80aab0424a92237cd0dd5bc5"
+      }
+    }
+  },
+  "comparison_rules": {
+    "dense_sample_count": 4097,
+    "waveform_interpolation": "linear",
+    "integral_rule": "dense-linear trapezoid",
+    "common_field_phases": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "relative_difference": "symmetric L2 normalized by max norm with 1e-12 guard",
+    "field_derivation_authorization": "project_control/efe_node1_n1_2c_t64_acceptance_and_p5_authorization_decision_v01.md"
+  },
+  "gates": {
+    "waveform": 0.02,
+    "integral": 0.02,
+    "peak_amplitude": 0.02,
+    "peak_phase": 0.01,
+    "dissipation": 0.05,
+    "field": 0.05,
+    "field_p95": 0.05
+  },
+  "checks": {
+    "within_level_periodic": true,
+    "global_time_gate": false,
+    "field_time_gate": false,
+    "safety_gate": true
+  },
+  "maximum_differences": {
+    "global_T16_T32": 0.03311338004959951,
+    "global_T32_T64": 0.010744468327972772,
+    "field_T16_T32": 0.8286018049911344,
+    "field_T32_T64": 0.8537486374633874
+  },
+  "failed_global_rows": [
+    {
+      "kind": "peak_phase",
+      "quantity": "ecm_viscoelastic_energy"
+    },
+    {
+      "kind": "peak_phase",
+      "quantity": "ecm_internal_z_norm"
+    }
+  ],
+  "failed_field_rows": [
+    {
+      "phase": 1.0,
+      "field": "ecm_displacement",
+      "summary": "normalized_l2",
+      "difference": 0.8126789605243029
+    },
+    {
+      "phase": 1.0,
+      "field": "ecm_displacement",
+      "summary": "absolute_p95",
+      "difference": 0.7840318310698192
+    },
+    {
+      "phase": 1.0,
+      "field": "endocardial_displacement",
+      "summary": "normalized_l2",
+      "difference": 0.8459609339263467
+    },
+    {
+      "phase": 1.0,
+      "field": "endocardial_displacement",
+      "summary": "absolute_p95",
+      "difference": 0.8537486374633874
+    },
+    {
+      "phase": 1.0,
+      "field": "myocyte_displacement",
+      "summary": "normalized_l2",
+      "difference": 0.8258910621000081
+    },
+    {
+      "phase": 1.0,
+      "field": "myocyte_displacement",
+      "summary": "absolute_p95",
+      "difference": 0.8261076270028842
+    }
+  ],
+  "observed_order_status_counts": {
+    "not_applicable_to_waveform_norm": 7,
+    "richardson_estimated": 13,
+    "order_not_identifiable": 5,
+    "nonmonotone_time_refinement": 4
+  },
+  "safety": {
+    "T16": {
+      "minimum_ecm_jacobian": 0.9877254919611893,
+      "minimum_gap": 0.015522846679401292,
+      "maximum_kkt": 9.470090553906327e-06,
+      "maximum_coupling_residual": 8.344665293176093e-05
+    },
+    "T32": {
+      "minimum_ecm_jacobian": 0.9877311093079696,
+      "minimum_gap": 0.015519953324705005,
+      "maximum_kkt": 5.728711390093004e-08,
+      "maximum_coupling_residual": 4.6068876517572425e-05
+    },
+    "T64": {
+      "minimum_ecm_jacobian": 0.9877339801210533,
+      "minimum_gap": 0.015518437298179772,
+      "maximum_kkt": 1.3515466903565645e-07,
+      "maximum_coupling_residual": 9.132849132309156e-05
+    }
+  },
+  "source_fingerprints": {
+    "scripts\\postprocess_efe_node1_n1_2c_time_refinement_v01.py": "b0c5815bca224b1bd091246e8f81f347180e6a6e2f27733cc0c8f8e5572d5bf9",
+    "src/hybrid/efe_time_refinement.py": "34ddf3527c32607f4f43de6afeae759d847aaa95c3246457e47830da08a7e2a4"
+  },
+  "outputs": {
+    "global_metric_table.csv": "8fd18849a22f40fe350c3eafaf0fc593416f594183bfbb334abd6914b044624c",
+    "field_metric_table.csv": "86d21ded2549471d02748eba0e661283b610a8884ddb55dae802741cc6ea760c",
+    "dense_waveforms.csv": "17debdca99d29739c3d5df50ebe141165d183909f45883f33a0755d04112ff6c",
+    "sensitive_phase_table.csv": "72f5ada8ef234edc6bb83432ce8860b14fa7729bdece8cf0e0c7fac0233073b3",
+    "peak_field_difference.npz": "8080f3c7b893bd9cc5fefd6046bf598493601e94b23e5f6c1b89cd1eeac878fa"
+  },
+  "passed": false,
+  "evidence_boundary": "This is the preregistered T16/T32/T64 temporal adjudication for the fixed D0/E0/F150 baseline. It does not establish spatial or parameter convergence, biological validity, or the necessity of DCM-FEM, and it does not authorize T128 or N1-2d."
+}

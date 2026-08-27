@@ -1,0 +1,96 @@
+{
+  "schema_version": "efe_node1_n1_2c_t32_transactional_cycle_v01",
+  "status": "passed_n1_2_cycle_stability_transactional",
+  "authorization": "project_control/efe_node1_n1_2c_p0_p2_authorization_decision_v01.md",
+  "input_checkpoint": "/workspace/results/hybrid/efe_node1_n1_2c_t32_warm_start_v01_20260826/periodic_warm_start_checkpoint.npz",
+  "previous_t16_cycle_directory": "/workspace/results/hybrid/efe_node1_n1_2b_r5_transactional_cycle_v01_20260820/cycle_08",
+  "inner_engine_output": "/workspace/results/hybrid/efe_node1_n1_2c_t32_transactional_cycle_v01_20260826/transaction_engine",
+  "inner_engine_summary": "/workspace/results/hybrid/efe_node1_n1_2c_t32_transactional_cycle_v01_20260826/transaction_engine/summary.json",
+  "inner_engine_summary_sha256": "2965fca6d105b561fce6185ec09b61edf26051a636c32d080221b0bee0e61833",
+  "runtime_overrides": {
+    "steps_per_cycle": 32,
+    "parent_source_set_prepended": [
+      "scripts/run_efe_node1_n1_2c_t32_transactional_cycle_v01.py",
+      "src/hybrid/efe_time_refinement.py"
+    ],
+    "unchanged_engine_schema_label": "r5",
+    "console_step_denominator_note": "The inherited progress-only console string prints /16; all worker commands, phase records, accepted files, and summaries use the audited runtime value 32."
+  },
+  "source_fingerprints": {
+    "scripts/run_efe_node1_n1_2c_t32_transactional_cycle_v01.py": "5258a567aace2566a1c573988c854d8abe848e50464a34d25c017ee291f9cf08",
+    "src/hybrid/efe_time_refinement.py": "a45b1a98bb50b559f9dafd2cddac8cd1a598adc19ed85c70361fe0a2f086d921",
+    "scripts/run_efe_node1_n1_2b_r3_transactional_cycle_v01.py": "6968341e6215b18bf34940f4a858e5ba9156e6059467a4b6230e9f39fea76e50"
+  },
+  "steps_per_cycle": 32,
+  "time_step": 0.03125,
+  "target_cycles": [
+    1,
+    2
+  ],
+  "accepted_transaction_count": 64,
+  "all_worker_process_ids_unique": true,
+  "cycle_summaries": [
+    {
+      "schema_version": "efe_node1_n1_2b_r5_cycle_summary_v01",
+      "cycle": 1,
+      "compared_with_cycle": 0,
+      "waveform_normalized_l2": {
+        "axial_shortening": 0.006357705512612432,
+        "maximum_discrete_interface_traction": 0.006288956460636487,
+        "total_stored_energy": 0.01575936981279165,
+        "ecm_internal_z_norm": 0.004061140373482722
+      },
+      "maximum_waveform_normalized_l2": 0.01575936981279165,
+      "cycle_end_internal_z_relative_difference": 0.00015074399047645823,
+      "cycle_dissipation": 2.4782151477418313e-06,
+      "maximum_kkt": 3.4346780298767275e-06,
+      "minimum_ecm_jacobian": 0.9877310991487246,
+      "minimum_gap": 0.015519901686750489,
+      "maximum_coupling_residual": 4.606814550774666e-05,
+      "peak_axial_shortening": 0.11688184757542708,
+      "peak_interface_traction": 0.09772302152537914,
+      "solve_seconds": 1492.6887943020556,
+      "accepted_transaction_count": 32,
+      "cycle_end_commit": {
+        "path": "/workspace/results/hybrid/efe_node1_n1_2c_t32_transactional_cycle_v01_20260826/transaction_engine/cycle_01/cycle_end_checkpoint.npz",
+        "array_digest": "ffbe4badebbab68be71ff3ecae89d4cd6f49d743530ef2695d05f2f4814e6ee3",
+        "payload_bytes": 72524,
+        "create_only": true
+      },
+      "cycle_stable": false
+    },
+    {
+      "schema_version": "efe_node1_n1_2b_r5_cycle_summary_v01",
+      "cycle": 2,
+      "compared_with_cycle": 1,
+      "waveform_normalized_l2": {
+        "axial_shortening": 1.7504745115453728e-07,
+        "maximum_discrete_interface_traction": 9.594281908742123e-06,
+        "total_stored_energy": 4.3900670115257174e-08,
+        "ecm_internal_z_norm": 0.00010129482167055565
+      },
+      "maximum_waveform_normalized_l2": 0.00010129482167055565,
+      "cycle_end_internal_z_relative_difference": 0.00010593502866163845,
+      "cycle_dissipation": 2.478206805882001e-06,
+      "maximum_kkt": 5.728711390093004e-08,
+      "minimum_ecm_jacobian": 0.9877311093079696,
+      "minimum_gap": 0.015519953324705005,
+      "maximum_coupling_residual": 4.6068876517572425e-05,
+      "peak_axial_shortening": 0.11688184930018086,
+      "peak_interface_traction": 0.09772274091466808,
+      "solve_seconds": 1569.7268724479945,
+      "accepted_transaction_count": 32,
+      "cycle_end_commit": {
+        "path": "/workspace/results/hybrid/efe_node1_n1_2c_t32_transactional_cycle_v01_20260826/transaction_engine/cycle_02/cycle_end_checkpoint.npz",
+        "array_digest": "278fd699d0f32c554a7cf76c9ef7d1be292715e6b0c176e0182acedb3f7b7683",
+        "payload_bytes": 72504,
+        "create_only": true
+      },
+      "cycle_stable": true
+    }
+  ],
+  "elapsed_seconds": 3102.8596144031035,
+  "completed": true,
+  "passed": true,
+  "evidence_boundary": "This result tests within-level T32 cycle stability and supplies a T16-to-T32 preview only. It does not establish formal temporal or spatial convergence and stops at the T32 Human Gate."
+}

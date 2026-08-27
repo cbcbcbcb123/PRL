@@ -1,0 +1,6 @@
+{
+  "schema_version": "efe_node1_n1_2b_r5_warm_start_failure_v01",
+  "status": "failed_initializer",
+  "initializer_process": "E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_p6_t128_warm_start_v01_20260827\\inner_warm_engine\\initializer_process.json",
+  "passed": false
+}

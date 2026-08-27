@@ -198,6 +198,7 @@ def _objective_and_gradient(
     *,
     dt: float,
     alpha: float,
+    alpha_limit: float = 0.2,
 ) -> tuple[float, FloatArray, float]:
     increment = (reference.null_basis @ coordinates).reshape(
         current_vertices.shape
@@ -212,6 +213,7 @@ def _objective_and_gradient(
         reference.active,
         alpha=alpha,
         k_f=ACTIVE_STIFFNESS,
+        alpha_limit=alpha_limit,
     )
     drag_energy = (
         0.5
@@ -428,6 +430,7 @@ def _record_node(
     alpha_rate: float,
     projected_residual: float,
     gauge_residual: float,
+    alpha_limit: float = 0.2,
 ) -> None:
     passive_energies, _ = passive_energy_force(vertices, reference.cell)
     active_energy, active_force, active_state = active_energy_force(
@@ -436,6 +439,7 @@ def _record_node(
         alpha=alpha,
         alpha_rate=alpha_rate,
         k_f=ACTIVE_STIFFNESS,
+        alpha_limit=alpha_limit,
     )
     volume, _ = surface_volume_and_gradient(vertices, reference.faces)
     centroid = weighted_centroid(vertices, reference.dual_weights)

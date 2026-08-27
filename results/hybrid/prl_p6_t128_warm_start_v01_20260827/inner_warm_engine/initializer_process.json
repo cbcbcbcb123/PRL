@@ -1,0 +1,26 @@
+{
+  "command": [
+    "F:\\python\\python.exe",
+    "E:\\Temp-Projects\\PRL\\scripts\\prepare_efe_node1_n1_2_periodic_warm_start_v01.py",
+    "--cycle-directory",
+    "E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_p6_t128_warm_start_v01_20260827\\resampled_source_cycle",
+    "--output",
+    "E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_p6_t128_warm_start_v01_20260827\\inner_warm_engine\\initializer_staging",
+    "--dcm-level",
+    "D0",
+    "--ecm-level",
+    "E0",
+    "--ecm-footprint-scale",
+    "1.5",
+    "--period",
+    "1",
+    "--steps",
+    "128",
+    "--ecm-backend",
+    "fenicsx"
+  ],
+  "returncode": 1,
+  "elapsed_seconds": 2.0103347999975085,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"E:\\Temp-Projects\\PRL\\scripts\\prepare_efe_node1_n1_2_periodic_warm_start_v01.py\", line 315, in <module>\n    main()\n    ~~~~^^\n  File \"E:\\Temp-Projects\\PRL\\scripts\\prepare_efe_node1_n1_2_periodic_warm_start_v01.py\", line 102, in main\n    from hybrid.fenicsx_ecm_backend import FenicsxECMBackend\n  File \"E:\\Temp-Projects\\PRL\\src\\hybrid\\fenicsx_ecm_backend.py\", line 13, in <module>\n    import basix.ufl\nModuleNotFoundError: No module named 'basix'\n"
+}

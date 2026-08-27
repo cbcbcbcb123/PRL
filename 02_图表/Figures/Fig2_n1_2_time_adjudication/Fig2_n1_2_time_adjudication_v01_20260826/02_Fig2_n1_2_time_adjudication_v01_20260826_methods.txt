@@ -1,0 +1,33 @@
+# 图件方法与验证记录
+
+## 人工填写内容
+- 风格来源: 用户批准当前阶段自由排版的科研审阅图；暂不调用 cb-plot-unified-style
+- 用户提供的期刊规格: 未指定；按科研审阅和阶段终审用途执行
+- 03_材料方法来源: 不适用；本包直接冻结 P5 正式 CSV/JSON/NPZ、三档裁决脚本和时间细化模块快照
+- 数据/模型变换: T16/T32/T64 标量波形按预登记规则线性插值到 4097 个共有相位；积分用同一 dense-linear 梯形规则；峰值相位来自同一 dense 网格；场量只读五个精确共有相位。ECM J、Green–Lagrange 主应变、Cauchy 应力、SLS 离散耗散和界面 tether 牵引按授权决定中的冻结公式从真实状态重建。未滤波、未平滑、未剔除失败项。图中 physical fields 类别仅为解释用途排除 phase-1 近零位移，严格总裁决仍保留并判定这些闭合相对门失败。
+- 统计方法与不确定性: 确定性三档时间离散裁决，无推断统计或误差线；绿色/红色表示预登记数值门通过/失败。观察阶和 Richardson 仅在单调、非近零且 0.25<=p<=4 时报告。图支持“主要物理读数通过但严格总门未完全通过”，不支持正式时间收敛通过、空间收敛或生物学有效性结论。
+- 生物学分组颜色: 不适用；本图无生物学分组颜色
+- 人工/代理视觉验收: 通过
+
+## 自动记录
+<!-- 自动记录开始 -->
+- 前缀: Fig2_n1_2_time_adjudication_v01_20260826
+- 包状态: 最终包
+- 创建日期: 20260826
+- 执行时间: 2026-08-26T22:01:17+08:00
+- 自动校验: 通过
+- 颜色配置 SHA-256: 不适用
+- Notebook SHA-256: 67f5260fe419968a0b74d8e480cebe9d419ed0591e65669de219d3d686932b8c
+- 文件 SHA-256: 已记录如下
+- 01_Fig2_n1_2_time_adjudication_v01_20260826_data.csv: 8fd18849a22f40fe350c3eafaf0fc593416f594183bfbb334abd6914b044624c
+- 01a_Fig2_n1_2_time_adjudication_v01_20260826_data_dense.csv: 17debdca99d29739c3d5df50ebe141165d183909f45883f33a0755d04112ff6c
+- 01b_Fig2_n1_2_time_adjudication_v01_20260826_data_field.csv: 86d21ded2549471d02748eba0e661283b610a8884ddb55dae802741cc6ea760c
+- 01c_Fig2_n1_2_time_adjudication_v01_20260826_data_sensitive.csv: 72f5ada8ef234edc6bb83432ce8860b14fa7729bdece8cf0e0c7fac0233073b3
+- 01d_Fig2_n1_2_time_adjudication_v01_20260826_data_summary.json: dfe0f48ebdc375ecc9cfab2c22cd09a9b8fdc8e4d1e5a73ff06097200e3cd05d
+- 03_Fig2_n1_2_time_adjudication_v01_20260826_plot.ipynb: 67f5260fe419968a0b74d8e480cebe9d419ed0591e65669de219d3d686932b8c
+- 03a_Fig2_n1_2_time_adjudication_v01_20260826_adjudication.py: b0c5815bca224b1bd091246e8f81f347180e6a6e2f27733cc0c8f8e5572d5bf9
+- 03c_Fig2_n1_2_time_adjudication_v01_20260826_peak_field.npz: 8080f3c7b893bd9cc5fefd6046bf598493601e94b23e5f6c1b89cd1eeac878fa
+- 03d_Fig2_n1_2_time_adjudication_v01_20260826_time_refinement.py: 34ddf3527c32607f4f43de6afeae759d847aaa95c3246457e47830da08a7e2a4
+- 03e_Fig2_n1_2_time_adjudication_v01_20260826_plot_helper.py: d455acfb1b619e4ef552a2df2d62b163f61dd06096d3edfd971a1c42a3780cd9
+- Python 与主要库版本: Python 3.13.7; Windows 11; ipython=9.6.0
+<!-- 自动记录结束 -->
