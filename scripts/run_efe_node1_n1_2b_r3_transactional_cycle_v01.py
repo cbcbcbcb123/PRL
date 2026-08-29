@@ -760,7 +760,8 @@ def main() -> None:
         "completed": True,
         "passed": final_cycle_stable,
         "evidence_boundary": (
-            "This run evaluates D0/E0/F150 at T16 only. A stable result does "
+            f"This run evaluates D0/E0/F150 at T{STEPS_PER_CYCLE} only. "
+            "A stable result does "
             "not establish temporal or spatial convergence and requires human "
             "final review before entering formal project memory."
         ),
