@@ -10,6 +10,7 @@
 #include <cmath>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <memory>
 #include <numeric>
 #include <stdexcept>
@@ -377,6 +378,85 @@ int active_fixed_topology_trajectory_records_stepwise_qois() {
               << " min_quality=" << audit.minimum_triangle_quality
               << " min_orientation=" << audit.minimum_oriented_face_alignment
               << " max_cache_residual=" << audit.maximum_normalized_cache_residual
+              << '\n';
+    return 0;
+}
+
+int v11_f1_non_finite_first_step_is_persisted_atomically() {
+    auto current_cell = active_test_cell();
+    const auto material = active_material(*current_cell);
+    const auto initial_mesh =
+        prl::cell_engine::capture_surface_snapshot(*current_cell);
+    const auto unit = prl::core::build_active_contraction_unit(
+        initial_mesh,
+        material,
+        501,
+        101,
+        205,
+        101,
+        10.0,
+        0.9
+    );
+    prl::cell_engine::ActiveShortTrajectoryConfig config;
+    config.time_step = std::numeric_limits<double>::max();
+    config.step_count = 1;
+    config.qoi_contraction_unit_id = 501;
+    config.damping = {
+        prl::cell_engine::CellSurfaceDampingMeasure::barycentric_dual_area,
+        10.0,
+    };
+
+    const auto audit = prl::cell_engine::run_active_fixed_topology_short_trajectory(
+        *current_cell,
+        material,
+        {unit},
+        config
+    );
+    require(
+        audit.status
+            == prl::cell_engine::ShortTrajectoryStatus::failed_non_finite_state,
+        "F1 did not persist failed_non_finite_state"
+    );
+    require(audit.failure.has_value(), "F1 did not persist a failure record");
+    const auto& failure = *audit.failure;
+    require(failure.first_failure_step == 1 && failure.time_before_failure == 0.0,
+            "F1 first-failure boundary changed");
+    require(failure.configuration_hash != 0,
+            "F1 failure configuration hash is missing");
+    require(failure.state_hash_before != 0
+                && failure.state_hash_before == failure.state_hash_after
+                && failure.atomic_state_preserved,
+            "F1 failure did not preserve the exact pre-step state");
+    require(audit.samples.size() == 1
+                && audit.samples.front().step == 0
+                && audit.samples.front().time == 0.0
+                && audit.samples.front().state_hash == failure.state_hash_before,
+            "F1 did not retain the pre-failure sample and state hash");
+    require(audit.final_positions.size() == initial_mesh.vertices.size(),
+            "F1 changed the number of final vertices");
+    for(std::size_t index = 0; index < initial_mesh.vertices.size(); ++index) {
+        require(audit.final_positions[index].vertex_id
+                    == initial_mesh.vertices[index].persistent_id
+                    && audit.final_positions[index].position
+                    == initial_mesh.vertices[index].position,
+                "F1 committed a vertex position before rejecting the step");
+    }
+    for(const node& current_node : current_cell->get_node_lst()) {
+        if(!current_node.is_used()) continue;
+        require(current_node.force().norm() == 0.0,
+                "F1 changed a force buffer before rejecting the step");
+    }
+
+    std::cout << std::setprecision(17)
+              << "f1,status,"
+              << prl::cell_engine::short_trajectory_status_name(audit.status)
+              << ",first_failure_step," << failure.first_failure_step
+              << ",time_before_failure," << failure.time_before_failure
+              << ",configuration_hash," << failure.configuration_hash
+              << ",state_hash_before," << failure.state_hash_before
+              << ",state_hash_after," << failure.state_hash_after
+              << ",atomic_state_preserved," << failure.atomic_state_preserved
+              << ",reason," << failure.reason
               << '\n';
     return 0;
 }
@@ -2051,6 +2131,9 @@ int main(const int argc, const char* const argv[]) {
         }
         if(behavior == "active_time_refinement") {
             return active_time_refinement_passes_the_frozen_gate();
+        }
+        if(behavior == "v11_f1_non_finite_persistence") {
+            return v11_f1_non_finite_first_step_is_persisted_atomically();
         }
         if(behavior == "surface_tension_trajectory") {
             return surface_tension_trajectory_records_registered_energy();

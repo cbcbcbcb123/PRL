@@ -289,6 +289,8 @@ std::uint64_t configuration_hash(
     result = hash_value(result, configuration.qoi_contraction_unit_id);
     result = hash_value(result, configuration.damping.measure);
     result = hash_value(result, configuration.damping.coefficient);
+    result = hash_value(result, configuration.collapse_mode);
+    result = hash_value(result, configuration.survivor_persistent_id);
     const std::array<double, 12> thresholds{
         configuration.maximum_qoi_difference,
         configuration.maximum_remesh_defect,
@@ -410,6 +412,10 @@ bool valid_frozen_configuration(
         && configuration.damping.measure
             == CellSurfaceDampingMeasure::barycentric_dual_area
         && configuration.damping.coefficient == frozen_damping_density
+        && (configuration.collapse_mode == R1CollapseMode::midpoint
+            || (configuration.collapse_mode
+                    == R1CollapseMode::endpoint_survivor
+                && configuration.survivor_persistent_id == 0))
         && configuration.maximum_qoi_difference == 2.0e-3
         && configuration.maximum_remesh_defect == 1.0e-12
         && configuration.minimum_initial_active_energy == 1.0e-2
@@ -760,11 +766,25 @@ R1RemeshRobustnessAudit run_active_r1_remesh_robustness(
                         "R1 corresponding real merge edge is missing"
                     );
                 }
-                refiner.merge_edge(
-                    const_cast<edge&>(*merge_edge_iterator),
-                    remesh_cell,
-                    edges_to_check
-                );
+                const auto collapse_operation = configuration.collapse_mode
+                        == R1CollapseMode::endpoint_survivor
+                    ? core::RemeshOperation::edge_collapse_survivor
+                    : core::RemeshOperation::edge_merge;
+                if(configuration.collapse_mode
+                   == R1CollapseMode::endpoint_survivor) {
+                    refiner.collapse_edge_to_survivor(
+                        const_cast<edge&>(*merge_edge_iterator),
+                        configuration.survivor_persistent_id,
+                        remesh_cell,
+                        edges_to_check
+                    );
+                } else {
+                    refiner.merge_edge(
+                        const_cast<edge&>(*merge_edge_iterator),
+                        remesh_cell,
+                        edges_to_check
+                    );
+                }
                 current_material = sink->cell_state(remesh_initial_mesh.cell_id);
                 const auto transfer = sink->last_audit(remesh_initial_mesh.cell_id);
                 const auto defect = sink->last_remesh_energy_defect(
@@ -773,7 +793,7 @@ R1RemeshRobustnessAudit run_active_r1_remesh_robustness(
                 result.events.push_back({
                     result.events.size() + 1,
                     step,
-                    core::RemeshOperation::edge_merge,
+                    collapse_operation,
                     defect.before_revision,
                     defect.after_revision,
                     transfer,

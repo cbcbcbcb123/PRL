@@ -416,6 +416,55 @@ int different_cells_transfer_concurrently() {
     return 0;
 }
 
+int prepared_transfer_is_nonmutating_and_token_is_single_use() {
+    MyocardialMaterialTransferSink sink(tolerance);
+    sink.register_cell(old_mesh(), material_points());
+    sink.register_cell(
+        mesh_for_cell(old_mesh(), 18),
+        material_points()
+    );
+    const RemeshEvent event{17, RemeshOperation::edge_split, 41, 42};
+    const auto token = sink.prepare_remesh(event, old_mesh(), split_mesh());
+
+    require(sink.cell_state(17).revision == 41,
+            "transaction prepare changed committed material state");
+    bool cross_cell_rejected = false;
+    auto cross_cell_token = token;
+    cross_cell_token.cell_id = 18;
+    try {
+        sink.commit_prepared_remesh(cross_cell_token);
+    } catch(const std::logic_error&) {
+        cross_cell_rejected = true;
+    }
+    require(cross_cell_rejected && sink.cell_state(17).revision == 41,
+            "cross-cell token changed committed material state");
+
+    bool stale_token_rejected = false;
+    auto stale_token = token;
+    stale_token.before_revision = 40;
+    try {
+        sink.commit_prepared_remesh(stale_token);
+    } catch(const std::logic_error&) {
+        stale_token_rejected = true;
+    }
+    require(stale_token_rejected && sink.cell_state(17).revision == 41,
+            "stale token changed committed material state");
+
+    sink.commit_prepared_remesh(token);
+    require(sink.cell_state(17).revision == 42
+                && sink.last_audit(17).operation == RemeshOperation::edge_split,
+            "prepared transfer did not commit exactly once");
+    bool reused_token_rejected = false;
+    try {
+        sink.commit_prepared_remesh(token);
+    } catch(const std::logic_error&) {
+        reused_token_rejected = true;
+    }
+    require(reused_token_rejected && sink.cell_state(17).revision == 42,
+            "reused token changed committed material state");
+    return 0;
+}
+
 int active_state_update_is_revision_safe_and_atomic() {
     MyocardialMaterialTransferSink sink(tolerance);
     sink.register_cell(old_mesh(), material_points());
@@ -504,6 +553,9 @@ int main(const int argc, const char* const argv[]) {
     if(behavior == "stable_host_ids") return stable_host_ids_survive_local_reordering();
     if(behavior == "fiber_projection") return fibers_are_projected_to_the_new_host_tangent_plane();
     if(behavior == "multicell_concurrency") return different_cells_transfer_concurrently();
+    if(behavior == "prepared_transaction") {
+        return prepared_transfer_is_nonmutating_and_token_is_single_use();
+    }
     if(behavior == "active_state_update") return active_state_update_is_revision_safe_and_atomic();
     if(behavior == "remesh_cycle_gate") {
         return remesh_cycle_gate_reports_independent_failures();

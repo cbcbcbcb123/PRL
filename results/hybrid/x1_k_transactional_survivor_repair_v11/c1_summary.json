@@ -1,0 +1,26 @@
+{
+  "raw_records": [
+    "c1_step,step,1,time,0.0001,z_min,-0.99999886459135845,penetration,0.004998864591358454,contact_force_l2,0.50000000000000322,net_force_residual,1.626278418073297e-30,net_moment_residual,0,contact_work,1.62625021697459e-06,viscous_dissipation,1.62625021697459e-06,coverage_residual,0",
+    "c1_step,step,2,time,0.00020000000000000001,z_min,-0.99999772943956766,penetration,0.0049977294395676664,contact_force_l2,0.49983737692454516,net_force_residual,9.7117236011473738e-31,net_moment_residual,3.3526588471893002e-30,contact_work,1.6251163968911923e-06,viscous_dissipation,1.625116396891192e-06,coverage_residual,4.2351647362715017e-22",
+    "c1_step,step,3,time,0.00030000000000000003,z_min,-0.99999659454457002,penetration,0.0049965945445700211,contact_force_l2,0.49967481435686367,net_force_residual,3.944304526105059e-31,net_moment_residual,1.1102230246251565e-16,contact_work,1.6239834171384614e-06,viscous_dissipation,1.6239834171384612e-06,coverage_residual,8.4703294725430034e-22",
+    "c1_step,step,4,time,0.00040000000000000002,z_min,-0.999995459906308,penetration,0.0049954599063080085,contact_force_l2,0.49951231227193471,net_force_residual,1.8182345465763572e-30,net_moment_residual,1.1102230246251565e-16,contact_work,1.622851277062702e-06,viscous_dissipation,1.622851277062702e-06,coverage_residual,8.4703294725430034e-22",
+    "c1_step,step,5,time,0.00050000000000000001,z_min,-0.99999432552472411,penetration,0.0049943255247241192,contact_force_l2,0.49934987064474823,net_force_residual,5.5511151231257827e-17,net_moment_residual,2.2204460492503131e-16,contact_work,1.621719976010756e-06,viscous_dissipation,1.6217199760107562e-06,coverage_residual,1.6940658945086007e-21",
+    "c1_step,step,6,time,0.00060000000000000006,z_min,-0.99999319139976084,penetration,0.0049931913997608435,contact_force_l2,0.49918748945029967,net_force_residual,9.7117236011473738e-31,net_moment_residual,5.9164567891575885e-31,contact_work,1.6205895133299631e-06,viscous_dissipation,1.6205895133299631e-06,coverage_residual,1.6940658945086007e-21",
+    "c1_step,step,7,time,0.00069999999999999999,z_min,-0.99999205753136067,penetration,0.0049920575313606719,contact_force_l2,0.49902516866359869,net_force_residual,5.5511151231257827e-17,net_moment_residual,1.1102230246251565e-16,contact_work,1.6194598883681968e-06,viscous_dissipation,1.6194598883681968e-06,coverage_residual,1.6940658945086007e-21",
+    "c1_step,step,8,time,0.00080000000000000004,z_min,-0.9999909239194662,penetration,0.0049909239194662058,contact_force_l2,0.498862908259666,net_force_residual,5.5511151231257827e-17,net_moment_residual,1.1102230246251565e-16,contact_work,1.6183311004738711e-06,viscous_dissipation,1.6183311004738711e-06,coverage_residual,1.6940658945086007e-21",
+    "c1_step,step,9,time,0.00090000000000000008,z_min,-0.99998979056401982,penetration,0.0049897905640198248,contact_force_l2,0.49870070821353624,net_force_residual,3.944304526105059e-31,net_moment_residual,1.1102230246251565e-16,contact_work,1.6172031489959438e-06,viscous_dissipation,1.6172031489959438e-06,coverage_residual,1.6940658945086007e-21",
+    "c1_step,step,10,time,0.001,z_min,-0.99998865746496413,penetration,0.0049886574649641302,contact_force_l2,0.49853856850024703,net_force_residual,7.1106961074582404e-31,net_moment_residual,2.7610131682735413e-30,contact_work,1.616076033283834e-06,viscous_dissipation,1.6160760332838338e-06,coverage_residual,0",
+    "c1_summary,status,passed,maximum_penetration,0.0050000000000000044,maximum_force_residual,5.5511151231257827e-17,maximum_moment_residual,2.2204460492503131e-16,maximum_coverage_residual,1.6940658945086007e-21,maximum_passive_force,0,maximum_active_force,0,maximum_active_energy,0"
+  ],
+  "summary": {
+    "record": "c1_summary",
+    "status": "passed",
+    "maximum_penetration": "0.0050000000000000044",
+    "maximum_force_residual": "5.5511151231257827e-17",
+    "maximum_moment_residual": "2.2204460492503131e-16",
+    "maximum_coverage_residual": "1.6940658945086007e-21",
+    "maximum_passive_force": "0",
+    "maximum_active_force": "0",
+    "maximum_active_energy": "0"
+  }
+}

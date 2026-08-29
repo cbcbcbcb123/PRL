@@ -18,6 +18,7 @@
 #include <memory>
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace {
@@ -455,6 +456,241 @@ int owned_step_uses_dual_area_damping() {
     return 0;
 }
 
+std::shared_ptr<cell_type_parameters> c1_zero_mechanics_type(
+    const std::string& name,
+    const short global_type_id,
+    const double repulsion_strength
+) {
+    auto result = passive_cell_type();
+    result->name_ = name;
+    result->global_type_id_ = global_type_id;
+    result->bulk_modulus_ = 0.0;
+    result->initial_pressure_ = 0.0;
+    result->area_elasticity_modulus_ = 0.0;
+    result->angle_regularization_factor_ = 0.0;
+    result->face_types_.at(0).surface_tension_ = 0.0;
+    result->face_types_.at(0).adherence_strength_ = 0.0;
+    result->face_types_.at(0).repulsion_strength_ = repulsion_strength;
+    result->face_types_.at(0).bending_modulus_ = 0.0;
+    return result;
+}
+
+cell_ptr c1_mobile_cell() {
+    mesh cell_mesh;
+    cell_mesh.node_pos_lst = {
+         0.0,  0.0,  0.0,
+         0.0, -3.0,  0.0,
+        -1.0, -1.5,  0.0,
+         1.0, -1.5,  0.0,
+         0.0,  0.0, -1.0,
+         0.0, -3.0, -1.0,
+        -1.0, -1.5, -1.0,
+         1.0, -1.5, -1.0,
+    };
+    cell_mesh.face_point_ids = {
+        {0, 1, 2}, {0, 1, 3}, {0, 4, 2}, {2, 6, 4},
+        {2, 6, 5}, {5, 1, 2}, {0, 3, 7}, {7, 4, 0},
+        {3, 1, 5}, {5, 7, 3}, {4, 5, 6}, {4, 5, 7},
+    };
+    auto result = std::make_shared<cell>(
+        cell_mesh,
+        17,
+        c1_zero_mechanics_type("c1_mobile", 2, 5.0)
+    );
+    result->initialize_cell_properties();
+    return result;
+}
+
+cell_ptr c1_static_plane_body() {
+    constexpr double plane_z = -0.995;
+    constexpr double body_bottom_z = -1.495;
+    mesh body_mesh;
+    body_mesh.node_pos_lst = {
+        -2.0, -4.0, body_bottom_z,
+         2.0, -4.0, body_bottom_z,
+         2.0,  1.0, body_bottom_z,
+        -2.0,  1.0, body_bottom_z,
+        -2.0, -4.0, plane_z,
+         2.0, -4.0, plane_z,
+         2.0,  1.0, plane_z,
+        -2.0,  1.0, plane_z,
+    };
+    body_mesh.face_point_ids = {
+        {0, 2, 1}, {0, 3, 2},
+        {4, 5, 6}, {4, 6, 7},
+        {0, 1, 5}, {0, 5, 4},
+        {3, 7, 6}, {3, 6, 2},
+        {0, 4, 7}, {0, 7, 3},
+        {1, 2, 6}, {1, 6, 5},
+    };
+    auto result = std::make_shared<static_cell>(
+        body_mesh,
+        29,
+        c1_zero_mechanics_type("c1_static_plane", 1, 5.0)
+    );
+    result->initialize_cell_properties();
+    return result;
+}
+
+double minimum_z(const cell& current_cell) {
+    double result = std::numeric_limits<double>::infinity();
+    for(const node& current_node : current_cell.get_node_lst()) {
+        if(!current_node.is_used()) continue;
+        result = std::min(result, current_node.pos().dz());
+    }
+    return result;
+}
+
+int c1_short_contact_trajectory_passes() {
+    constexpr double plane_z = -0.995;
+    constexpr double time_step = 1.0e-4;
+    constexpr std::size_t step_count = 10;
+    auto current_cell = c1_mobile_cell();
+    auto contact_body = c1_static_plane_body();
+    current_cell->set_local_id(0);
+    contact_body->set_local_id(1);
+    const auto body_positions_before = contact_body->get_node_coord_lst();
+    auto material_points = active_material_points(*current_cell);
+    material_points.at(0).material.active_state = {0.0, 0.0};
+    const prl::core::MyocardialCellMaterialState material{
+        17,
+        0,
+        std::move(material_points),
+    };
+    const auto reference_mesh =
+        prl::cell_engine::capture_surface_snapshot(*current_cell);
+    const auto inactive_unit = prl::core::build_active_contraction_unit(
+        reference_mesh,
+        material,
+        501,
+        101,
+        205,
+        101,
+        10.0,
+        0.9
+    );
+    auto parameters = contact_parameters();
+    parameters.time_step_ = time_step;
+    parameters.contact_cutoff_adhesion_ = 0.1;
+    parameters.contact_cutoff_repulsion_ = 0.1;
+    contact_face_face_via_coupling contact_model(parameters);
+    const prl::cell_engine::CellSurfaceDampingLaw damping{
+        prl::cell_engine::CellSurfaceDampingMeasure::barycentric_dual_area,
+        10.0,
+    };
+
+    double maximum_penetration = std::max(0.0, plane_z - minimum_z(*current_cell));
+    double maximum_force_residual = 0.0;
+    double maximum_moment_residual = 0.0;
+    double cumulative_contact_work = 0.0;
+    double cumulative_viscous_dissipation = 0.0;
+    double maximum_coverage_residual = 0.0;
+    double maximum_passive_force = 0.0;
+    double maximum_active_force = 0.0;
+    double maximum_active_energy = 0.0;
+    bool nonzero_contact_observed = false;
+    for(std::size_t step = 1; step <= step_count; ++step) {
+        const auto audit =
+            prl::cell_engine::advance_owned_active_cell_overdamped_one_step(
+                *current_cell,
+                material,
+                {inactive_unit},
+                time_step,
+                damping,
+                &contact_model,
+                {current_cell, contact_body}
+            );
+        const double penetration = std::max(
+            0.0,
+            plane_z - minimum_z(*current_cell)
+        );
+        const double contact_work = audit.motion.total_force_work;
+        cumulative_contact_work += contact_work;
+        cumulative_viscous_dissipation += audit.motion.viscous_dissipation;
+        const double coverage_residual = std::abs(
+            cumulative_viscous_dissipation - cumulative_contact_work
+        );
+        maximum_penetration = std::max(maximum_penetration, penetration);
+        maximum_force_residual = std::max(
+            maximum_force_residual,
+            audit.contact_context_net_force_residual
+        );
+        maximum_moment_residual = std::max(
+            maximum_moment_residual,
+            audit.contact_context_net_moment_residual
+        );
+        maximum_coverage_residual = std::max(
+            maximum_coverage_residual,
+            coverage_residual
+        );
+        maximum_passive_force = std::max(
+            maximum_passive_force,
+            audit.passive_force_increment_l2_norm
+        );
+        maximum_active_force = std::max(
+            maximum_active_force,
+            audit.motion.active_force_l2_norm
+        );
+        maximum_active_energy = std::max(
+            maximum_active_energy,
+            std::abs(audit.motion.active_energy_before)
+        );
+        nonzero_contact_observed = nonzero_contact_observed
+            || audit.contact_target_force_l2_norm > 0.0;
+        std::cout << std::setprecision(17)
+                  << "c1_step,step," << step
+                  << ",time," << step * time_step
+                  << ",z_min," << minimum_z(*current_cell)
+                  << ",penetration," << penetration
+                  << ",contact_force_l2," << audit.contact_target_force_l2_norm
+                  << ",net_force_residual,"
+                  << audit.contact_context_net_force_residual
+                  << ",net_moment_residual,"
+                  << audit.contact_context_net_moment_residual
+                  << ",contact_work," << contact_work
+                  << ",viscous_dissipation," << audit.motion.viscous_dissipation
+                  << ",coverage_residual," << coverage_residual
+                  << '\n';
+    }
+
+    require(nonzero_contact_observed,
+            "C1 did not exercise the real contact-force path");
+    require(maximum_penetration <= 1.0e-2,
+            "C1 penetration exceeded 1e-2");
+    require(maximum_force_residual <= 1.0e-10,
+            "C1 action-reaction force residual exceeded 1e-10");
+    require(maximum_moment_residual <= 1.0e-10,
+            "C1 action-reaction moment residual exceeded 1e-10");
+    require(maximum_coverage_residual <= 1.0e-10,
+            "C1 declared contact-work coverage residual exceeded 1e-10");
+    require(maximum_passive_force <= 1.0e-12,
+            "C1 zero-passive fixture generated a passive force");
+    require(maximum_active_force <= 1.0e-12,
+            "C1 zero-activation fixture generated an active force");
+    require(maximum_active_energy <= 1.0e-12,
+            "C1 zero-activation fixture stored active energy");
+    require(contact_body->get_node_coord_lst() == body_positions_before,
+            "C1 static plane body moved");
+    for(const auto& context_cell : {current_cell, contact_body}) {
+        for(const node& current_node : context_cell->get_node_lst()) {
+            if(!current_node.is_used()) continue;
+            require(current_node.force().norm() <= 1.0e-12,
+                    "C1 left a nonzero context force buffer");
+        }
+    }
+    std::cout << std::setprecision(17)
+              << "c1_summary,status,passed"
+              << ",maximum_penetration," << maximum_penetration
+              << ",maximum_force_residual," << maximum_force_residual
+              << ",maximum_moment_residual," << maximum_moment_residual
+              << ",maximum_coverage_residual," << maximum_coverage_residual
+              << ",maximum_passive_force," << maximum_passive_force
+              << ",maximum_active_force," << maximum_active_force
+              << ",maximum_active_energy," << maximum_active_energy
+              << '\n';
+    return 0;
+}
+
 } // namespace
 
 int main(const int argc, const char* const argv[]) {
@@ -472,6 +708,9 @@ int main(const int argc, const char* const argv[]) {
         }
         if(behavior == "dual_area_owned_step") {
             return owned_step_uses_dual_area_damping();
+        }
+        if(behavior == "c1_short_contact_trajectory") {
+            return c1_short_contact_trajectory_passes();
         }
         throw std::invalid_argument("unknown behavior: " + behavior);
     } catch(const std::exception& error) {

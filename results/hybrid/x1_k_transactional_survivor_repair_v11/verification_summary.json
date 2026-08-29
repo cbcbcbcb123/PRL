@@ -1,0 +1,151 @@
+{
+  "status": "passed",
+  "commands": {
+    "tdd_red_transaction_capability": {
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "exit_code_as_expected": true,
+      "log_sha256": "90c7c30c52a070204042995a331328e6178691974cef201972791a30f4f2a988",
+      "log_bytes": 565
+    },
+    "cpp_build_all": {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "exit_code_as_expected": true,
+      "log_sha256": "ea267583056c0de73f166aad5db33cbab003794b9deef3425a7ad15253ede850",
+      "log_bytes": 1104
+    },
+    "cpp_v11_focused_ctest": {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "exit_code_as_expected": true,
+      "log_sha256": "62e133a2f4b57d97c6217246927db5610640e46d58f4df7e01705347b7230a5b",
+      "log_bytes": 27462
+    },
+    "cpp_material_abi_ctest": {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "exit_code_as_expected": true,
+      "log_sha256": "9ac7e9b55c456d595e92e917c6093d07ac465c0c109cac364caa6eb284468d2e",
+      "log_bytes": 1911
+    },
+    "cpp_v09_v10_regression_ctest": {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "exit_code_as_expected": true,
+      "log_sha256": "dbac5e9b05d9987f606fdc26d8bc96b50705c1546872cd1ca91c6e53d20e4fd1",
+      "log_bytes": 471
+    },
+    "cpp_full_ctest": {
+      "exit_code": 8,
+      "expected_exit_code": 8,
+      "exit_code_as_expected": true,
+      "log_sha256": "d265ddc28a15b96825d9183728c373f668343ae374d2539ad06e8f8f8ce09d5c",
+      "log_bytes": 1214752
+    },
+    "fork_build_all": {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "exit_code_as_expected": true,
+      "log_sha256": "4652d2f3907ff5bf93a2651102b4f2e51bb585cde4bb43d00b764cbe7f623e3f",
+      "log_bytes": 29949
+    },
+    "fork_full_ctest": {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "exit_code_as_expected": true,
+      "log_sha256": "51931d053d1b9d1cbae61519276d4e5a9f0aff8a8ff1251f3ea171318fcddedc",
+      "log_bytes": 23377
+    },
+    "python_pytest": {
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "exit_code_as_expected": true,
+      "log_sha256": "be14b47cb1e841a6e9e48d032a5ac0b1b62a8cf50df746a92b383ba9342dd747",
+      "log_bytes": 1894
+    },
+    "strict_prl_core": {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "exit_code_as_expected": true,
+      "log_sha256": "e03013f96b6fd9eea1593f89d6a753569e58c702567f01428a2eabbe8e6c4f83",
+      "log_bytes": 29
+    },
+    "strict_r1r_source": {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "exit_code_as_expected": true,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_bytes": 0
+    },
+    "strict_local_refiner_known_baseline": {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "exit_code_as_expected": true,
+      "log_sha256": "913a0423760a223b8437c166653e466cbe675c043e8b7a4a4f22537283eca84c",
+      "log_bytes": 6881
+    },
+    "ruff": {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "exit_code_as_expected": true,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "log_bytes": 19
+    }
+  },
+  "counts": {
+    "v11_focused": {
+      "percent_passed": 100,
+      "failed": 0,
+      "total": 5,
+      "passed": 5
+    },
+    "material_abi": {
+      "percent_passed": 100,
+      "failed": 0,
+      "total": 11,
+      "passed": 11
+    },
+    "v09_v10_regressions": {
+      "percent_passed": 100,
+      "failed": 0,
+      "total": 2,
+      "passed": 2
+    },
+    "parent_full": {
+      "percent_passed": 95,
+      "failed": 3,
+      "total": 62,
+      "passed": 59
+    },
+    "fork_full": {
+      "percent_passed": 100,
+      "failed": 0,
+      "total": 134,
+      "passed": 134
+    },
+    "python": {
+      "passed": 120,
+      "historical_guard_failures": 1
+    }
+  },
+  "expected_parent_historical_failures": [
+    "prl_x1k_sphere_instantaneous_velocity_refinement",
+    "prl_x1k_v04_family_b_parameterized_diagnosis",
+    "prl_x1k_v06_family_c_short_trajectory_gate"
+  ],
+  "observed_parent_historical_failures": [
+    "prl_x1k_sphere_instantaneous_velocity_refinement",
+    "prl_x1k_v04_family_b_parameterized_diagnosis",
+    "prl_x1k_v06_family_c_short_trajectory_gate"
+  ],
+  "new_parent_failures": [],
+  "python_historical_provenance_guard_only": true,
+  "strict_scope": {
+    "parent_prl_core_full_werror": true,
+    "r1r_source_full_werror_with_external_headers_as_system": true,
+    "fork_local_refiner": "Werror except four explicitly baselined inherited warning categories; raw warning log retained"
+  },
+  "v08r1_reverified": true,
+  "all_required_evidence_verified": true
+}

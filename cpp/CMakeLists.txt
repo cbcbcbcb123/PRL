@@ -79,6 +79,10 @@ if(BUILD_TESTING)
         COMMAND prl_myocardial_material_transfer_test multicell_concurrency
     )
     add_test(
+        NAME prl_x1k_v11_material_prepared_transaction
+        COMMAND prl_myocardial_material_transfer_test prepared_transaction
+    )
+    add_test(
         NAME prl_myocardial_material_active_state_update
         COMMAND prl_myocardial_material_transfer_test active_state_update
     )
@@ -260,6 +264,11 @@ if(BUILD_TESTING)
             COMMAND prl_cell_engine_owned_step_integration_test
                 dual_area_owned_step
         )
+        add_test(
+            NAME prl_x1k_v11_c1_short_contact_trajectory
+            COMMAND prl_cell_engine_owned_step_integration_test
+                c1_short_contact_trajectory
+        )
 
         add_executable(
             prl_short_trajectory_integration_test
@@ -279,6 +288,11 @@ if(BUILD_TESTING)
         add_test(
             NAME prl_x1k_active_time_refinement_gate
             COMMAND prl_short_trajectory_integration_test active_time_refinement
+        )
+        add_test(
+            NAME prl_x1k_v11_f1_non_finite_persistence
+            COMMAND prl_short_trajectory_integration_test
+                v11_f1_non_finite_persistence
         )
         add_test(
             NAME prl_x1k_surface_tension_trajectory
@@ -383,6 +397,11 @@ if(BUILD_TESTING)
             NAME prl_x1k_v09_r1_real_remesh_robustness
             COMMAND prl_x1k_r1_remesh_robustness_integration_test
         )
+        add_test(
+            NAME prl_x1k_v11_r1r_survivor_remesh_robustness
+            COMMAND prl_x1k_r1_remesh_robustness_integration_test
+                --survivor-repair
+        )
 
         add_executable(
             prl_x1k_v10_midpoint_collapse_diagnostic_test
@@ -398,6 +417,22 @@ if(BUILD_TESTING)
         add_test(
             NAME prl_x1k_v10_midpoint_collapse_microprobe
             COMMAND prl_x1k_v10_midpoint_collapse_diagnostic_test
+        )
+
+        add_executable(
+            prl_x1k_v11_transactional_rejection_test
+            tests/r1_transactional_rejection_test.cpp
+        )
+        target_link_libraries(
+            prl_x1k_v11_transactional_rejection_test
+            PRIVATE
+                prl_core
+                triangulation_modules
+                mesh
+        )
+        add_test(
+            NAME prl_x1k_v11_candidate_three_transactional_rejection
+            COMMAND prl_x1k_v11_transactional_rejection_test
         )
 
         add_executable(

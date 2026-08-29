@@ -295,11 +295,21 @@ public:
         std::optional<RemeshEnergyDefectAudit> last_defect{};
     };
 
+    struct PreparedTransfer {
+        RemeshPreparationToken token{};
+        MyocardialCellMaterialState state{};
+        RemeshTransferAudit audit{};
+        std::optional<RemeshEnergyDefectAudit> energy_defect{};
+        std::optional<RemeshEnergyLedgerAudit> energy_ledger{};
+    };
+
     struct CellEntry {
         mutable std::mutex mutex{};
         MyocardialCellMaterialState state{};
         std::optional<RemeshTransferAudit> audit{};
         std::optional<ActiveEnergyLedgerState> active_energy_ledger{};
+        std::optional<PreparedTransfer> prepared_transfer{};
+        std::uint64_t next_preparation_id{1};
     };
 
     explicit Impl(const double maximum_rebind_distance)
@@ -351,7 +361,7 @@ void MyocardialMaterialTransferSink::register_cell(
     }
 }
 
-void MyocardialMaterialTransferSink::on_remesh(
+RemeshPreparationToken MyocardialMaterialTransferSink::prepare_remesh(
     const RemeshEvent& event,
     const SurfaceMeshSnapshot& before,
     const SurfaceMeshSnapshot& after
@@ -363,6 +373,11 @@ void MyocardialMaterialTransferSink::on_remesh(
     validate_mesh(after);
     const auto entry = implementation_->find_cell(event.cell_id);
     std::lock_guard<std::mutex> lock(entry->mutex);
+    if(entry->prepared_transfer.has_value()) {
+        throw std::logic_error(
+            "myocardial material cell already has a prepared remesh"
+        );
+    }
     if(entry->state.revision != event.before_revision) {
         throw std::logic_error("remesh event revision does not match registered material state");
     }
@@ -524,6 +539,7 @@ void MyocardialMaterialTransferSink::on_remesh(
                 pending_ledger->swap_event_count += 1;
                 break;
             case RemeshOperation::edge_merge:
+            case RemeshOperation::edge_collapse_survivor:
                 pending_ledger->merge_event_count += 1;
                 break;
         }
@@ -570,11 +586,85 @@ void MyocardialMaterialTransferSink::on_remesh(
         );
     }
 
-    entry->state = std::move(transferred_state);
-    entry->audit = audit;
-    if(pending_ledger.has_value()) {
-        entry->active_energy_ledger->audit = pending_ledger.value();
-        entry->active_energy_ledger->last_defect = pending_defect.value();
+    const RemeshPreparationToken token{
+        event.cell_id,
+        event.before_revision,
+        event.after_revision,
+        entry->next_preparation_id++,
+    };
+    entry->prepared_transfer = Impl::PreparedTransfer{
+        token,
+        std::move(transferred_state),
+        audit,
+        std::move(pending_defect),
+        std::move(pending_ledger),
+    };
+    return token;
+}
+
+void MyocardialMaterialTransferSink::commit_prepared_remesh(
+    const RemeshPreparationToken& token
+) {
+    const auto entry = implementation_->find_cell(token.cell_id);
+    std::lock_guard<std::mutex> lock(entry->mutex);
+    if(!entry->prepared_transfer.has_value()) {
+        throw std::logic_error("remesh preparation token is absent or already used");
+    }
+    const auto& prepared_token = entry->prepared_transfer->token;
+    if(prepared_token.cell_id != token.cell_id
+       || prepared_token.before_revision != token.before_revision
+       || prepared_token.after_revision != token.after_revision
+       || prepared_token.preparation_id != token.preparation_id
+       || entry->state.revision != token.before_revision) {
+        throw std::logic_error("remesh preparation token is stale or mismatched");
+    }
+    if(entry->prepared_transfer->energy_ledger.has_value()
+       && (!entry->active_energy_ledger.has_value()
+           || !entry->prepared_transfer->energy_defect.has_value())) {
+        throw std::logic_error(
+            "prepared remesh energy state is internally inconsistent"
+        );
+    }
+
+    auto prepared = std::move(*entry->prepared_transfer);
+    entry->state = std::move(prepared.state);
+    entry->audit = prepared.audit;
+    if(prepared.energy_ledger.has_value()) {
+        entry->active_energy_ledger->audit = *prepared.energy_ledger;
+        entry->active_energy_ledger->last_defect = *prepared.energy_defect;
+    }
+    entry->prepared_transfer.reset();
+}
+
+void MyocardialMaterialTransferSink::reject_prepared_remesh(
+    const RemeshPreparationToken& token
+) noexcept {
+    try {
+        const auto entry = implementation_->find_cell(token.cell_id);
+        std::lock_guard<std::mutex> lock(entry->mutex);
+        if(!entry->prepared_transfer.has_value()) return;
+        const auto& prepared_token = entry->prepared_transfer->token;
+        if(prepared_token.cell_id == token.cell_id
+           && prepared_token.before_revision == token.before_revision
+           && prepared_token.after_revision == token.after_revision
+           && prepared_token.preparation_id == token.preparation_id) {
+            entry->prepared_transfer.reset();
+        }
+    } catch(...) {
+    }
+}
+
+void MyocardialMaterialTransferSink::on_remesh(
+    const RemeshEvent& event,
+    const SurfaceMeshSnapshot& before,
+    const SurfaceMeshSnapshot& after
+) {
+    const auto token = prepare_remesh(event, before, after);
+    try {
+        commit_prepared_remesh(token);
+    } catch(...) {
+        reject_prepared_remesh(token);
+        throw;
     }
 }
 
@@ -591,6 +681,11 @@ void MyocardialMaterialTransferSink::update_active_state(
     }
     const auto entry = implementation_->find_cell(cell_id);
     std::lock_guard<std::mutex> lock(entry->mutex);
+    if(entry->prepared_transfer.has_value()) {
+        throw std::logic_error(
+            "active-state update cannot cross a prepared remesh"
+        );
+    }
     if(entry->state.revision != expected_revision) {
         throw std::logic_error("active-state update revision does not match material state");
     }
@@ -614,6 +709,11 @@ void MyocardialMaterialTransferSink::begin_active_remesh_energy_ledger(
     validate_mesh(mesh);
     const auto entry = implementation_->find_cell(mesh.cell_id);
     std::lock_guard<std::mutex> lock(entry->mutex);
+    if(entry->prepared_transfer.has_value()) {
+        throw std::logic_error(
+            "remesh-energy ledger cannot start during a prepared remesh"
+        );
+    }
     if(entry->state.revision != mesh.revision) {
         throw std::logic_error(
             "remesh-energy ledger mesh revision does not match material state"

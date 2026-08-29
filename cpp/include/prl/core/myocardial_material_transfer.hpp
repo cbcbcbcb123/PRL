@@ -152,6 +152,24 @@ public:
         const SurfaceMeshSnapshot& after
     ) override;
 
+    [[nodiscard]] bool supports_transactional_remesh() const noexcept override {
+        return true;
+    }
+
+    [[nodiscard]] RemeshPreparationToken prepare_remesh(
+        const RemeshEvent& event,
+        const SurfaceMeshSnapshot& before,
+        const SurfaceMeshSnapshot& after
+    ) override;
+
+    void commit_prepared_remesh(
+        const RemeshPreparationToken& token
+    ) override;
+
+    void reject_prepared_remesh(
+        const RemeshPreparationToken& token
+    ) noexcept override;
+
     void update_active_state(
         CellId cell_id,
         MaterialPointId material_point_id,

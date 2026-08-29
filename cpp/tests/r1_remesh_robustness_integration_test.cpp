@@ -24,6 +24,8 @@ const char* operation_name(const prl::core::RemeshOperation operation) {
         case prl::core::RemeshOperation::edge_split: return "edge_split";
         case prl::core::RemeshOperation::edge_swap: return "edge_swap";
         case prl::core::RemeshOperation::edge_merge: return "edge_merge";
+        case prl::core::RemeshOperation::edge_collapse_survivor:
+            return "edge_collapse_survivor";
     }
     return "unknown";
 }
@@ -298,9 +300,11 @@ prl::core::MyocardialCellMaterialState r1_material(const cell& current_cell) {
 int main(const int argc, char* const argv[]) {
     const bool formal_response = argc == 2
         && std::string(argv[1]) == "--formal-response";
-    if(argc > 2 || (argc == 2 && !formal_response)) {
+    const bool survivor_repair = argc == 2
+        && std::string(argv[1]) == "--survivor-repair";
+    if(argc > 2 || (argc == 2 && !formal_response && !survivor_repair)) {
         std::cerr << "usage: r1_remesh_robustness_integration_test "
-                     "[--formal-response]\n";
+                     "[--formal-response|--survivor-repair]\n";
         return 2;
     }
     auto fixed_cell = r1_cell();
@@ -330,6 +334,11 @@ int main(const int argc, char* const argv[]) {
     };
     config.maximum_qoi_difference = 2.0e-3;
     config.maximum_remesh_defect = 1.0e-12;
+    if(survivor_repair) {
+        config.collapse_mode =
+            prl::cell_engine::R1CollapseMode::endpoint_survivor;
+        config.survivor_persistent_id = 0;
+    }
 
     const auto audit = prl::cell_engine::run_active_r1_remesh_robustness(
         *fixed_cell,
@@ -367,6 +376,38 @@ int main(const int argc, char* const argv[]) {
                   << ",volume_ratio," << last.volume_ratio
                   << ",force_buffer," << last.force_buffer_l2_norm
                   << '\n';
+    }
+
+    if(survivor_repair) {
+        require(audit.status == prl::cell_engine::R1RemeshRobustnessStatus::passed
+                    && audit.passed
+                    && audit.qoi_gate_passed
+                    && audit.j1_gate_passed
+                    && audit.safety_gate_passed,
+                "v11 R1r survivor trajectory did not pass all gates");
+        require(audit.fixed_samples.size() == 9
+                    && audit.remesh_samples.size() == 9
+                    && audit.qoi_comparisons.size() == 9,
+                "v11 R1r did not complete samples 0..8");
+        require(audit.events.size() == 2
+                    && audit.events[0].operation
+                        == prl::core::RemeshOperation::edge_split
+                    && audit.events[1].operation
+                        == prl::core::RemeshOperation::edge_collapse_survivor,
+                "v11 R1r event sequence is not split/survivor-collapse");
+        require(audit.remesh_ledger.event_count == 2
+                    && audit.remesh_ledger.split_event_count == 1
+                    && audit.remesh_ledger.swap_event_count == 0
+                    && audit.remesh_ledger.merge_event_count == 1,
+                "v11 R1r ledger operation counts are wrong");
+        require(audit.initial_active_energy > 1.0e-2
+                    && audit.maximum_axis_difference <= 2.0e-3
+                    && audit.maximum_area_ratio_difference <= 2.0e-3
+                    && audit.maximum_volume_ratio_difference <= 2.0e-3
+                    && audit.maximum_active_energy_difference <= 2.0e-3,
+                "v11 R1r nontrivial energy or QoI gates failed");
+        std::cout << "r1r_regression,status,passed_survivor_repair\n";
+        return 0;
     }
 
     require(

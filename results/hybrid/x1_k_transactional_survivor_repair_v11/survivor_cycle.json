@@ -1,0 +1,62 @@
+{
+  "stages": [
+    {
+      "record": "survivor_stage",
+      "stage": "initial",
+      "revision": "0",
+      "vertices": "8",
+      "faces": "12",
+      "edges": "18",
+      "material_points": "2",
+      "cell_state_hash": "7231991273962854489",
+      "material_state_hash": "9752609702288659773",
+      "material_payload_hash": "6149113972319146296"
+    },
+    {
+      "record": "survivor_stage",
+      "stage": "after_split",
+      "revision": "1",
+      "vertices": "9",
+      "faces": "14",
+      "edges": "21",
+      "material_points": "2",
+      "cell_state_hash": "8135641961492115153",
+      "material_state_hash": "17314506449340943532",
+      "material_payload_hash": "14792319613472566984"
+    },
+    {
+      "record": "survivor_stage",
+      "stage": "recovered",
+      "revision": "2",
+      "vertices": "8",
+      "faces": "12",
+      "edges": "18",
+      "material_points": "2",
+      "cell_state_hash": "5320447233202758646",
+      "material_state_hash": "16741875489140387316",
+      "material_payload_hash": "13131386558517101923",
+      "initial_energy": "0.010789062500000019",
+      "final_energy": "0.010789062500000121",
+      "events": "2",
+      "split_created_id": "8",
+      "collapse_survivor_id": "0",
+      "collapse_deleted_id": "8"
+    }
+  ],
+  "identity_contract": {
+    "split_created_persistent_id": 8,
+    "collapse_mode": "endpoint_survivor",
+    "survivor_persistent_id": 0,
+    "deleted_persistent_ids": [
+      8
+    ]
+  },
+  "full_stage_categories": [
+    "persistent vertices and positions",
+    "persistent face connectivity",
+    "edge count/connectivity",
+    "material-point payload and revision",
+    "active energy ledger"
+  ],
+  "recovered_within_contract_tolerance": true
+}

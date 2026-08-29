@@ -23,6 +23,11 @@ enum class R1RemeshRobustnessStatus : std::uint8_t {
     failed_geometry_cache_force_finite_gate,
 };
 
+enum class R1CollapseMode : std::uint8_t {
+    midpoint,
+    endpoint_survivor,
+};
+
 [[nodiscard]] const char* r1_remesh_robustness_status_name(
     R1RemeshRobustnessStatus status
 ) noexcept;
@@ -34,6 +39,8 @@ struct R1RemeshRobustnessConfig {
     std::size_t merge_step{};
     core::ActiveContractionUnitId qoi_contraction_unit_id{};
     CellSurfaceDampingLaw damping{};
+    R1CollapseMode collapse_mode{R1CollapseMode::midpoint};
+    core::VertexId survivor_persistent_id{};
 
     double maximum_qoi_difference{2.0e-3};
     double maximum_remesh_defect{1.0e-12};

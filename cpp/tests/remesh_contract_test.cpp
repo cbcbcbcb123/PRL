@@ -41,6 +41,22 @@ int main() {
         sink.on_remesh(event, before, after);
     }
     assert(sink.operations.size() == 3);
+    const RemeshEvent survivor_event{
+        17,
+        RemeshOperation::edge_collapse_survivor,
+        41,
+        42,
+        RemeshCollapseMode::endpoint_survivor,
+        VertexId{10},
+        {VertexId{14}},
+        std::nullopt,
+    };
+    assert(is_valid_remesh_event(survivor_event, before, after));
+    assert(survivor_event.survivor_persistent_id.value() == 10);
+    assert(survivor_event.deleted_persistent_ids
+        == std::vector<VertexId>({14}));
+    assert(!survivor_event.created_persistent_id.has_value());
+    assert(!sink.supports_transactional_remesh());
     assert(!is_valid_remesh_event(
         RemeshEvent{17, RemeshOperation::edge_swap, 42, 42},
         before,

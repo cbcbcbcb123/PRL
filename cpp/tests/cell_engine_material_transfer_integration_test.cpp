@@ -80,6 +80,57 @@ std::vector<prl::core::SurfaceMaterialPoint> myocardial_points(const cell& curre
     };
 }
 
+bool exactly_equal(
+    const prl::core::SurfaceMeshSnapshot& left,
+    const prl::core::SurfaceMeshSnapshot& right
+) {
+    if(left.cell_id != right.cell_id
+       || left.revision != right.revision
+       || left.vertices.size() != right.vertices.size()
+       || left.faces.size() != right.faces.size()) {
+        return false;
+    }
+    for(std::size_t index = 0; index < left.vertices.size(); ++index) {
+        if(left.vertices[index].persistent_id != right.vertices[index].persistent_id
+           || left.vertices[index].position != right.vertices[index].position) {
+            return false;
+        }
+    }
+    for(std::size_t index = 0; index < left.faces.size(); ++index) {
+        if(left.faces[index].vertex_indices != right.faces[index].vertex_indices) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool exactly_equal(
+    const prl::core::MyocardialCellMaterialState& left,
+    const prl::core::MyocardialCellMaterialState& right
+) {
+    if(left.cell_id != right.cell_id
+       || left.revision != right.revision
+       || left.points.size() != right.points.size()) {
+        return false;
+    }
+    for(std::size_t index = 0; index < left.points.size(); ++index) {
+        const auto& left_point = left.points[index];
+        const auto& right_point = right.points[index];
+        if(left_point.material.material_point_id
+               != right_point.material.material_point_id
+           || left_point.material.region != right_point.material.region
+           || left_point.material.fiber_direction
+               != right_point.material.fiber_direction
+           || left_point.material.active_state != right_point.material.active_state
+           || left_point.host_vertex_ids != right_point.host_vertex_ids
+           || left_point.barycentric != right_point.barycentric
+           || left_point.reference_weight != right_point.reference_weight) {
+            return false;
+        }
+    }
+    return true;
+}
+
 int real_swap_transfers_registered_myocardial_state() {
     using namespace prl::core;
     auto current_cell = closed_swap_cell();
@@ -123,6 +174,8 @@ int transfer_failure_propagates_from_the_real_refiner() {
         prl::cell_engine::capture_surface_snapshot(*current_cell),
         myocardial_points(*current_cell)
     );
+    const auto before_mesh = prl::cell_engine::capture_surface_snapshot(*current_cell);
+    const auto before_material = sink->cell_state(17);
     local_mesh_refiner refiner(0.1, 10.0, true, sink);
     const auto edge_iterator = current_cell->get_edge_set().find(edge(0, 1));
     assert(edge_iterator != current_cell->get_edge_set().end());
@@ -135,9 +188,15 @@ int transfer_failure_propagates_from_the_real_refiner() {
         failure_propagated = message.find("id=101") != std::string::npos
             && message.find("distance=") != std::string::npos;
     }
-    assert(failure_propagated);
-    assert(current_cell->get_mesh_revision() == 1);
-    assert(sink->cell_state(17).revision == 0);
+    require(failure_propagated, "material-transfer failure did not propagate");
+    const auto after_mesh = prl::cell_engine::capture_surface_snapshot(*current_cell);
+    const auto after_material = sink->cell_state(17);
+    require(current_cell->get_mesh_revision() == 0,
+            "rejected remesh advanced the cell revision");
+    require(exactly_equal(after_mesh, before_mesh),
+            "rejected remesh changed cell geometry, topology, or persistent IDs");
+    require(exactly_equal(after_material, before_material),
+            "rejected remesh changed myocardial material state");
 
     bool audit_absent = false;
     try {

@@ -1,0 +1,10 @@
+Internal ctest changing into directory: /workspace/cpp/build-linux-x1k-v11
+Test project /workspace/cpp/build-linux-x1k-v11
+    Start 56: prl_x1k_v09_r1_real_remesh_robustness
+1/2 Test #56: prl_x1k_v09_r1_real_remesh_robustness ......   Passed    0.12 sec
+    Start 58: prl_x1k_v10_midpoint_collapse_microprobe
+2/2 Test #58: prl_x1k_v10_midpoint_collapse_microprobe ...   Passed    0.10 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.41 sec

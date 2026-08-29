@@ -1,0 +1,212 @@
+{
+  "mode": "read_only_no_scientific_trajectory_rerun",
+  "required_file_count": 23,
+  "files": [
+    {
+      "path": "results/hybrid/x1_k_mesh_family_v05/family_c_levels.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_mesh_family_v05/criteria.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_mesh_family_v05/family_c_error_regions.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_mesh_family_v05/family_c_valence.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_mesh_family_v05/family_c_valence5_one_ring.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_mesh_family_v05/family_c_error_energy_orders.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_mesh_family_v05/family_c_symmetry_classes.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_mesh_family_v05/family_c_symmetry_gate.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_family_c_trajectory_v06/final_qoi_gate.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_family_c_trajectory_v06/time_pollution.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_family_c_trajectory_v06/raw_global_gate.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_family_c_trajectory_v06/family_c_level_1_steps.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_family_c_trajectory_v06/family_c_level_2_steps.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_family_c_trajectory_v06/family_c_level_3_steps.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_family_c_trajectory_v06/family_c_level_4_steps.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_family_c_trajectory_v06/family_c_level_4_dt_half_steps.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_family_c_trajectory_v06/local_step_metrics.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_family_c_trajectory_v06/energy_ledger.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_mean_radius_v07/structural_identity.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_mean_radius_v07/time_diagnosis.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_mean_radius_v07/global_step_metrics.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_mean_radius_v07/local_step_metrics.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    },
+    {
+      "path": "results/hybrid/x1_k_mean_radius_v07/energy_ledger.csv",
+      "sha256_verified": true,
+      "row_count_verified": true,
+      "schema_verified": true,
+      "source_and_current_blob_verified": true,
+      "verified": true
+    }
+  ],
+  "commands": {
+    "parent_ctest": {
+      "verified": true
+    },
+    "fork_ctest": {
+      "verified": true
+    },
+    "strict_prl_core": {
+      "verified": true
+    },
+    "python_pytest": {
+      "verified": true
+    },
+    "ruff": {
+      "verified": true
+    }
+  },
+  "scientific_status_verified": true,
+  "d1_passed": true,
+  "s1_passed": true,
+  "all_verified": true,
+  "failures": []
+}
