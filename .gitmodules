@@ -1,4 +1,0 @@
-[submodule "external/simucell3d"]
-	path = external/simucell3d
-	url = https://github.com/cbcbcbcb123/prl-cell-engine.git
-	branch = main
