@@ -1,5 +1,161 @@
 #include "local_mesh_refiner.hpp"
 
+struct local_mesh_refiner::CellRemeshState {
+    struct NodeState {
+        unsigned local_id{};
+        std::uint64_t persistent_id{};
+        bool is_used{};
+#if CONTACT_MODEL_INDEX == 1 || CONTACT_MODEL_INDEX == 2
+        vec3 normal{};
+        double curvature{};
+#endif
+#if CONTACT_MODEL_INDEX == 1
+        std::optional<std::pair<unsigned, unsigned>> coupled_node{};
+        double squared_distance_to_closest_node{};
+#elif CONTACT_MODEL_INDEX == 2
+        std::map<unsigned, std::pair<unsigned, double>> coupled_nodes{};
+#endif
+        vec3 position{};
+        vec3 force{};
+#if DYNAMIC_MODEL_INDEX == 0
+        vec3 momentum{};
+#endif
+    };
+
+    std::vector<NodeState> nodes{};
+    std::vector<face> faces{};
+    vec3 centroid{};
+    double area{};
+    double volume{};
+    double pressure{};
+    double target_volume{};
+    double target_area{};
+    unsigned cell_id{};
+    unsigned local_id{};
+    std::uint64_t mesh_revision{};
+    std::uint64_t next_persistent_node_id{};
+    cell_type_param_ptr cell_type{};
+    std::vector<unsigned> free_nodes{};
+    std::vector<unsigned> free_faces{};
+    double surface_tension_energy{};
+    float membrane_elasticity_energy{};
+    float bending_energy{};
+    float pressure_energy{};
+    float kinetic_energy{};
+    double growth_rate{};
+    double division_volume{};
+    bool is_static{};
+    edge_set edges{};
+};
+
+local_mesh_refiner::CellRemeshState local_mesh_refiner::capture_remesh_state(
+    const cell& source
+) const {
+    CellRemeshState state;
+    state.nodes.reserve(source.node_lst_.size());
+    for(const node& current_node : source.node_lst_) {
+        CellRemeshState::NodeState node_state;
+        node_state.local_id = current_node.node_id_;
+        node_state.persistent_id = current_node.persistent_id_;
+        node_state.is_used = current_node.is_used_;
+#if CONTACT_MODEL_INDEX == 1 || CONTACT_MODEL_INDEX == 2
+        node_state.normal = current_node.normal_;
+        node_state.curvature = current_node.curvature_;
+#endif
+#if CONTACT_MODEL_INDEX == 1
+        node_state.coupled_node = current_node.coupled_node_;
+        node_state.squared_distance_to_closest_node =
+            current_node.squared_distance_to_closest_node_;
+#elif CONTACT_MODEL_INDEX == 2
+        node_state.coupled_nodes = current_node.coupled_nodes_map_;
+#endif
+        node_state.position = current_node.pos_;
+        node_state.force = current_node.force_;
+#if DYNAMIC_MODEL_INDEX == 0
+        node_state.momentum = current_node.momentum_;
+#endif
+        state.nodes.push_back(std::move(node_state));
+    }
+    state.faces = source.face_lst_;
+    state.centroid = source.centroid_;
+    state.area = source.area_;
+    state.volume = source.volume_;
+    state.pressure = source.pressure_;
+    state.target_volume = source.target_volume_;
+    state.target_area = source.target_area_;
+    state.cell_id = source.cell_id_;
+    state.local_id = source.local_id_;
+    state.mesh_revision = source.mesh_revision_;
+    state.next_persistent_node_id = source.next_persistent_node_id_;
+    state.cell_type = source.cell_type_;
+    state.free_nodes = source.free_node_queue_;
+    state.free_faces = source.free_face_queue_;
+    state.surface_tension_energy = source.surface_tension_energy_;
+    state.membrane_elasticity_energy = source.membrane_elasticity_energy_;
+    state.bending_energy = source.bending_energy_;
+    state.pressure_energy = source.pressure_energy_;
+    state.kinetic_energy = source.kinetic_energy_;
+    state.growth_rate = source.growth_rate_;
+    state.division_volume = source.division_volume_;
+    state.is_static = source.is_static_;
+    state.edges = source.edge_set_;
+    return state;
+}
+
+void local_mesh_refiner::restore_remesh_state(
+    cell& destination,
+    CellRemeshState& state
+) const noexcept {
+    assert(destination.node_lst_.size() >= state.nodes.size());
+    destination.node_lst_.resize(state.nodes.size());
+    for(std::size_t index = 0; index < state.nodes.size(); ++index) {
+        node& current_node = destination.node_lst_[index];
+        auto& node_state = state.nodes[index];
+        current_node.node_id_ = node_state.local_id;
+        current_node.persistent_id_ = node_state.persistent_id;
+        current_node.is_used_ = node_state.is_used;
+#if CONTACT_MODEL_INDEX == 1 || CONTACT_MODEL_INDEX == 2
+        current_node.normal_ = node_state.normal;
+        current_node.curvature_ = node_state.curvature;
+#endif
+#if CONTACT_MODEL_INDEX == 1
+        current_node.coupled_node_.swap(node_state.coupled_node);
+        current_node.squared_distance_to_closest_node_ =
+            node_state.squared_distance_to_closest_node;
+#elif CONTACT_MODEL_INDEX == 2
+        current_node.coupled_nodes_map_.swap(node_state.coupled_nodes);
+#endif
+        current_node.pos_ = node_state.position;
+        current_node.force_ = node_state.force;
+#if DYNAMIC_MODEL_INDEX == 0
+        current_node.momentum_ = node_state.momentum;
+#endif
+    }
+    destination.face_lst_.swap(state.faces);
+    destination.centroid_ = state.centroid;
+    destination.area_ = state.area;
+    destination.volume_ = state.volume;
+    destination.pressure_ = state.pressure;
+    destination.target_volume_ = state.target_volume;
+    destination.target_area_ = state.target_area;
+    destination.cell_id_ = state.cell_id;
+    destination.local_id_ = state.local_id;
+    destination.mesh_revision_ = state.mesh_revision;
+    destination.next_persistent_node_id_ = state.next_persistent_node_id;
+    destination.cell_type_.swap(state.cell_type);
+    destination.free_node_queue_.swap(state.free_nodes);
+    destination.free_face_queue_.swap(state.free_faces);
+    destination.surface_tension_energy_ = state.surface_tension_energy;
+    destination.membrane_elasticity_energy_ = state.membrane_elasticity_energy;
+    destination.bending_energy_ = state.bending_energy;
+    destination.pressure_energy_ = state.pressure_energy;
+    destination.kinetic_energy_ = state.kinetic_energy;
+    destination.growth_rate_ = state.growth_rate;
+    destination.division_volume_ = state.division_volume;
+    destination.is_static_ = state.is_static;
+    destination.edge_set_.swap(state.edges);
+}
+
 /*
     This class makes sure that all the edges of the cell meshes have lengths comprised in the range [l_min, l_max]. 
     When an edge is too long, it is subdivided into two edges. When an edge is too short, it is merged with into one node.
@@ -30,25 +186,89 @@ local_mesh_refiner::local_mesh_refiner(
 void local_mesh_refiner::emit_remesh_event(
     const prl::core::RemeshOperation operation,
     cell_ptr c,
-    const std::optional<prl::core::SurfaceMeshSnapshot>& before
+    const std::optional<prl::core::SurfaceMeshSnapshot>& before,
+    const prl::core::RemeshCollapseMode collapse_mode,
+    std::optional<prl::core::VertexId> survivor_persistent_id,
+    std::vector<prl::core::VertexId> deleted_persistent_ids,
+    std::optional<prl::core::VertexId> created_persistent_id,
+    const CellRemeshState* const rollback_state,
+    edge_set* const edge_workset,
+    const edge_set* const rollback_edge_workset
 ) const {
     const auto before_revision = c->mesh_revision_;
-    c->mesh_revision_++;
     if(!remesh_event_sink_){
         assert(!before.has_value());
+        c->mesh_revision_++;
         return;
     }
 
     assert(before.has_value());
     assert(before->revision == before_revision);
-    const auto after = prl::cell_engine::capture_surface_snapshot(*c);
+    auto after = prl::cell_engine::capture_surface_snapshot(*c);
+    after.revision = before_revision + 1;
     const prl::core::RemeshEvent event{
         c->get_id(),
         operation,
         before->revision,
         after.revision,
+        collapse_mode,
+        std::move(survivor_persistent_id),
+        std::move(deleted_persistent_ids),
+        std::move(created_persistent_id),
     };
     assert(prl::core::is_valid_remesh_event(event, before.value(), after));
+
+    if(remesh_event_sink_->supports_transactional_remesh()) {
+        if(rollback_state == nullptr
+           || (edge_workset == nullptr) != (rollback_edge_workset == nullptr)) {
+            throw std::logic_error(
+                "transactional remesh requires a complete rollback state"
+            );
+        }
+
+        auto staged_after_state = capture_remesh_state(*c);
+        staged_after_state.mesh_revision = event.after_revision;
+        auto state_for_prepare = *rollback_state;
+        auto state_for_failure = *rollback_state;
+        auto state_for_commit = staged_after_state;
+        edge_set workset_for_prepare;
+        edge_set workset_for_failure;
+        edge_set workset_for_commit;
+        if(edge_workset != nullptr) {
+            workset_for_prepare = *rollback_edge_workset;
+            workset_for_failure = *rollback_edge_workset;
+            workset_for_commit = *edge_workset;
+        }
+
+        restore_remesh_state(*c, state_for_prepare);
+        if(edge_workset != nullptr) {
+            edge_workset->swap(workset_for_prepare);
+        }
+
+        const auto token = remesh_event_sink_->prepare_remesh(
+            event,
+            before.value(),
+            after
+        );
+        restore_remesh_state(*c, state_for_commit);
+        if(edge_workset != nullptr) {
+            edge_workset->swap(workset_for_commit);
+        }
+        try {
+            remesh_event_sink_->commit_prepared_remesh(token);
+        } catch(...) {
+            restore_remesh_state(*c, state_for_failure);
+            if(edge_workset != nullptr) {
+                edge_workset->swap(workset_for_failure);
+            }
+            remesh_event_sink_->reject_prepared_remesh(token);
+            throw;
+        }
+        return;
+    }
+
+    c->mesh_revision_++;
+    after = prl::cell_engine::capture_surface_snapshot(*c);
     remesh_event_sink_->on_remesh(event, before.value(), after);
 }
 //-----------------------------------------------------------------------------------------------
@@ -307,6 +527,7 @@ void local_mesh_refiner::swap_edge(edge& e_ab, cell_ptr c) const noexcept(false)
     const auto before_snapshot = remesh_event_sink_
         ? std::optional<prl::core::SurfaceMeshSnapshot>(prl::cell_engine::capture_surface_snapshot(*c))
         : std::nullopt;
+    auto rollback_state = capture_remesh_state(*c);
 
     //Delete the faces 1 and 2 from the cell
     c->delete_face(f_1.get_local_id());
@@ -366,7 +587,21 @@ void local_mesh_refiner::swap_edge(edge& e_ab, cell_ptr c) const noexcept(false)
     assert(e_bd.has_face(f_4_id) && e_bd.has_face(f_7_id));
     assert(e_da.has_face(f_3_id) && e_da.has_face(f_6_id));
 
-    emit_remesh_event(prl::core::RemeshOperation::edge_swap, c, before_snapshot);
+    try {
+        emit_remesh_event(
+            prl::core::RemeshOperation::edge_swap,
+            c,
+            before_snapshot,
+            prl::core::RemeshCollapseMode::none,
+            std::nullopt,
+            {},
+            std::nullopt,
+            &rollback_state
+        );
+    } catch(...) {
+        restore_remesh_state(*c, rollback_state);
+        throw;
+    }
 
 
 
@@ -435,6 +670,8 @@ void local_mesh_refiner::split_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_ch
     const auto before_snapshot = remesh_event_sink_
         ? std::optional<prl::core::SurfaceMeshSnapshot>(prl::cell_engine::capture_surface_snapshot(*c))
         : std::nullopt;
+    auto rollback_state = capture_remesh_state(*c);
+    auto rollback_edge_workset = edge_to_check_set;
 
     //Create a node in the middle of the edge
     const vec3 n_e_pos = (n_b.pos() + n_a.pos()) * 0.5;
@@ -544,7 +781,24 @@ void local_mesh_refiner::split_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_ch
     if(edge_i_ad != edge_to_check_set.end()){const_cast<edge&>(*edge_i_ad).replace_face(f_2_id, f_4_id);}
     if(edge_i_bd != edge_to_check_set.end()){const_cast<edge&>(*edge_i_bd).replace_face(f_2_id, f_6_id);}
 
-    emit_remesh_event(prl::core::RemeshOperation::edge_split, c, before_snapshot);
+    try {
+        emit_remesh_event(
+            prl::core::RemeshOperation::edge_split,
+            c,
+            before_snapshot,
+            prl::core::RemeshCollapseMode::none,
+            std::nullopt,
+            {},
+            c->node_lst_[id_n_e].persistent_id_,
+            &rollback_state,
+            &edge_to_check_set,
+            &rollback_edge_workset
+        );
+    } catch(...) {
+        restore_remesh_state(*c, rollback_state);
+        edge_to_check_set.swap(rollback_edge_workset);
+        throw;
+    }
 
 
 }
@@ -646,6 +900,8 @@ void local_mesh_refiner::merge_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_ch
 
     node& n_a = c->get_node(id_n_a);
     node& n_b = c->get_node(id_n_b);
+    const auto persistent_n_a = n_a.persistent_id_;
+    const auto persistent_n_b = n_b.persistent_id_;
     
     //Get the ids of the 2 faces that are connected to the edge
     const unsigned id_f_1 = e_ab.f1();
@@ -654,6 +910,8 @@ void local_mesh_refiner::merge_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_ch
     const auto before_snapshot = remesh_event_sink_
         ? std::optional<prl::core::SurfaceMeshSnapshot>(prl::cell_engine::capture_surface_snapshot(*c))
         : std::nullopt;
+    auto rollback_state = capture_remesh_state(*c);
+    auto rollback_edge_workset = edge_to_check_set;
 
 
     //The node i will be inserted at the middle of the edge
@@ -724,8 +982,202 @@ void local_mesh_refiner::merge_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_ch
         }
     });
 
-    emit_remesh_event(prl::core::RemeshOperation::edge_merge, c, before_snapshot);
+    try {
+        emit_remesh_event(
+            prl::core::RemeshOperation::edge_merge,
+            c,
+            before_snapshot,
+            prl::core::RemeshCollapseMode::midpoint,
+            std::nullopt,
+            {persistent_n_a, persistent_n_b},
+            c->node_lst_[id_n_i].persistent_id_,
+            &rollback_state,
+            &edge_to_check_set,
+            &rollback_edge_workset
+        );
+    } catch(...) {
+        restore_remesh_state(*c, rollback_state);
+        edge_to_check_set.swap(rollback_edge_workset);
+        throw;
+    }
 
+}
+//-----------------------------------------------------------------------------------------------
+
+
+//-----------------------------------------------------------------------------------------------
+void local_mesh_refiner::collapse_edge_to_survivor(
+    edge& e_ab,
+    const prl::core::VertexId survivor_persistent_id,
+    cell_ptr c,
+    edge_set& edge_to_check_set
+) const noexcept(false) {
+    if(!e_ab.is_manifold()) {
+        throw std::invalid_argument("survivor collapse requires a manifold edge");
+    }
+    const unsigned first_local_id = e_ab.n1();
+    const unsigned second_local_id = e_ab.n2();
+    const auto first_persistent_id = c->get_node(first_local_id).persistent_id_;
+    const auto second_persistent_id = c->get_node(second_local_id).persistent_id_;
+    unsigned survivor_local_id = first_local_id;
+    unsigned deleted_local_id = second_local_id;
+    prl::core::VertexId deleted_persistent_id = second_persistent_id;
+    if(survivor_persistent_id == second_persistent_id) {
+        survivor_local_id = second_local_id;
+        deleted_local_id = first_local_id;
+        deleted_persistent_id = first_persistent_id;
+    } else if(survivor_persistent_id != first_persistent_id) {
+        throw std::invalid_argument(
+            "survivor persistent ID must identify one endpoint of the edge"
+        );
+    }
+    if(!can_be_merged(e_ab, c)) {
+        throw std::invalid_argument(
+            "survivor collapse failed the topological eligibility gate"
+        );
+    }
+
+    const unsigned first_face_id = e_ab.f1();
+    const unsigned second_face_id = e_ab.f2();
+    const auto before_snapshot = remesh_event_sink_
+        ? std::optional<prl::core::SurfaceMeshSnapshot>(
+            prl::cell_engine::capture_surface_snapshot(*c)
+        )
+        : std::nullopt;
+    auto rollback_state = capture_remesh_state(*c);
+    auto rollback_edge_workset = edge_to_check_set;
+
+    try {
+        c->delete_face(first_face_id);
+        c->delete_face(second_face_id);
+        for(face& current_face : c->face_lst_) {
+            if(!current_face.is_used() || !current_face.has_node(deleted_local_id)) {
+                continue;
+            }
+            current_face.replace_node(deleted_local_id, survivor_local_id);
+            c->update_face_normal_and_area(current_face);
+        }
+        c->delete_node(deleted_local_id);
+        c->edge_set_.clear();
+        for(const face& current_face : c->face_lst_) {
+            if(!current_face.is_used()) continue;
+            const auto [first_node, second_node, third_node] =
+                current_face.get_node_ids();
+            auto [first_edge, first_inserted] =
+                c->edge_set_.emplace(first_node, second_node);
+            auto [second_edge, second_inserted] =
+                c->edge_set_.emplace(second_node, third_node);
+            auto [third_edge, third_inserted] =
+                c->edge_set_.emplace(third_node, first_node);
+            static_cast<void>(first_inserted);
+            static_cast<void>(second_inserted);
+            static_cast<void>(third_inserted);
+            const_cast<edge&>(*first_edge).add_face(current_face.get_local_id());
+            const_cast<edge&>(*second_edge).add_face(current_face.get_local_id());
+            const_cast<edge&>(*third_edge).add_face(current_face.get_local_id());
+        }
+        if(!c->is_manifold()) {
+            throw mesh_integrity_exception(
+                "survivor collapse produced a non-manifold cell surface"
+            );
+        }
+        const auto used_node_count = [](const auto& nodes) {
+            return static_cast<std::int64_t>(std::count_if(
+                nodes.begin(),
+                nodes.end(),
+                [](const auto& current_node) {
+                    return current_node.is_used;
+                }
+            ));
+        };
+        const auto used_face_count = [](const auto& faces) {
+            return static_cast<std::int64_t>(std::count_if(
+                faces.begin(),
+                faces.end(),
+                [](const face& current_face) {
+                    return current_face.is_used();
+                }
+            ));
+        };
+        const auto before_euler = used_node_count(rollback_state.nodes)
+            - static_cast<std::int64_t>(rollback_state.edges.size())
+            + used_face_count(rollback_state.faces);
+        const auto after_used_nodes = static_cast<std::int64_t>(std::count_if(
+            c->node_lst_.begin(),
+            c->node_lst_.end(),
+            [](const node& current_node) { return current_node.is_used(); }
+        ));
+        const auto after_euler = after_used_nodes
+            - static_cast<std::int64_t>(c->edge_set_.size())
+            + used_face_count(c->face_lst_);
+        if(after_euler != before_euler) {
+            throw mesh_integrity_exception(
+                "survivor collapse changed the surface Euler characteristic"
+            );
+        }
+
+        constexpr double minimum_triangle_quality = 0.05;
+        for(const face& current_face : c->face_lst_) {
+            if(!current_face.is_used()) continue;
+            const auto node_ids = current_face.get_node_ids();
+            const auto& first = c->node_lst_.at(node_ids[0]).pos_;
+            const auto& second = c->node_lst_.at(node_ids[1]).pos_;
+            const auto& third = c->node_lst_.at(node_ids[2]).pos_;
+            const auto first_second = second - first;
+            const auto first_third = third - first;
+            const auto second_third = third - second;
+            const double twice_area = first_second.cross(first_third).norm();
+            const double edge_square_sum = first_second.squared_norm()
+                + first_third.squared_norm()
+                + second_third.squared_norm();
+            const double quality = 2.0 * std::sqrt(3.0) * twice_area
+                / edge_square_sum;
+            if(!std::isfinite(quality)
+               || quality < minimum_triangle_quality) {
+                throw mesh_integrity_exception(
+                    "survivor collapse produced a degenerate or low-quality face"
+                );
+            }
+
+            const auto face_id = current_face.get_local_id();
+            if(face_id >= rollback_state.faces.size()
+               || !rollback_state.faces[face_id].is_used()) {
+                throw mesh_integrity_exception(
+                    "survivor collapse lost persistent face identity"
+                );
+            }
+            const auto& before_normal =
+                rollback_state.faces[face_id].get_normal();
+            const auto& after_normal = current_face.get_normal();
+            const double normal_scale = before_normal.norm()
+                * after_normal.norm();
+            const double orientation_alignment = before_normal.dot(after_normal)
+                / normal_scale;
+            if(!std::isfinite(orientation_alignment)
+               || orientation_alignment <= 0.0) {
+                throw mesh_integrity_exception(
+                    "survivor collapse would flip a surface face"
+                );
+            }
+        }
+        edge_to_check_set = c->edge_set_;
+        emit_remesh_event(
+            prl::core::RemeshOperation::edge_collapse_survivor,
+            c,
+            before_snapshot,
+            prl::core::RemeshCollapseMode::endpoint_survivor,
+            survivor_persistent_id,
+            {deleted_persistent_id},
+            std::nullopt,
+            &rollback_state,
+            &edge_to_check_set,
+            &rollback_edge_workset
+        );
+    } catch(...) {
+        restore_remesh_state(*c, rollback_state);
+        edge_to_check_set.swap(rollback_edge_workset);
+        throw;
+    }
 }
 //-----------------------------------------------------------------------------------------------
 

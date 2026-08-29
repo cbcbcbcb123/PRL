@@ -58,10 +58,31 @@ class local_mesh_refiner
 
         friend class local_mesh_refiner_tester;
 
+        struct CellRemeshState;
+
+        [[nodiscard]] CellRemeshState capture_remesh_state(
+            const cell& source
+        ) const;
+
+        void restore_remesh_state(
+            cell& destination,
+            CellRemeshState& state
+        ) const noexcept;
+
         void emit_remesh_event(
             prl::core::RemeshOperation operation,
             cell_ptr c,
-            const std::optional<prl::core::SurfaceMeshSnapshot>& before
+            const std::optional<prl::core::SurfaceMeshSnapshot>& before,
+            prl::core::RemeshCollapseMode collapse_mode =
+                prl::core::RemeshCollapseMode::none,
+            std::optional<prl::core::VertexId> survivor_persistent_id =
+                std::nullopt,
+            std::vector<prl::core::VertexId> deleted_persistent_ids = {},
+            std::optional<prl::core::VertexId> created_persistent_id =
+                std::nullopt,
+            const CellRemeshState* rollback_state = nullptr,
+            edge_set* edge_workset = nullptr,
+            const edge_set* rollback_edge_workset = nullptr
         ) const;
 
 
@@ -107,6 +128,13 @@ class local_mesh_refiner
         void split_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_check_set) const noexcept(false);
 
         void merge_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_check_set) const noexcept(false);
+
+        void collapse_edge_to_survivor(
+            edge& e_ab,
+            prl::core::VertexId survivor_persistent_id,
+            cell_ptr c,
+            edge_set& edge_to_check_set
+        ) const noexcept(false);
 
 
         
