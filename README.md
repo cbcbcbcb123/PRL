@@ -40,7 +40,7 @@ M1现已从外部位移控制推进到内部主动材料驱动。新的分布式
 - `src/route_h/`：原小规模参考力学内核；
 - `src/hybrid/`：混合架构的持久材料点与耦合 seam；
 - `cpp/`：PRL 自有 C++17 高性能内核的公共合同与测试；
-- `external/simucell3d/`：固定提交的 PRL 受控 fork submodule；官方基线通过 fork 的 `upstream/main` 与 immutable tag 保留；
+- `external/simucell3d/`：直接纳入 PRL 的细胞表面、接触与重网格引擎；不再使用 Git submodule，官方基线及原受控 fork 历史通过 PRL 提交图和保全标签留存；
 - `tests/stage1/`, `tests/stage2/`, `tests/hybrid/`：可执行验证；
 - `docs/`：模型与架构说明；
 - `project_control/`：计划、冻结边界和阶段记录；
@@ -50,13 +50,14 @@ M1现已从外部位移控制推进到内部主动材料驱动。新的分布式
 ## 当前可复算入口
 
 ```powershell
-git submodule update --init --recursive
 $env:PYTHONPATH = "$PWD\src"
 pytest -q tests/hybrid
 pytest -q tests/stage1 tests/stage2
 python scripts\run_hybrid_x0_probe.py
 python scripts\run_hybrid_x0_cd_probe.py
 ```
+
+`external/simucell3d/` 已随 PRL 一同克隆，不需要额外初始化子模块。
 
 X1-D Release 基准入口：
 
