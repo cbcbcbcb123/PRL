@@ -1,6 +1,6 @@
 ---
 plan_id: PLAN-PRL-FIG2-SPATIAL-TOLERANCE-V01
-status: draft_pending_human_approval
+status: revision_required_superseded_by_v02
 planner: codex_current_task
 requested_by: human_final_reviewer
 draft_authorized_by: human_final_reviewer
@@ -13,6 +13,8 @@ parent_decision: project_control/prl_p6_t128_acceptance_and_spatial_tolerance_dr
 baseline_acceptance: project_control/prl_p6_t128_execution_and_human_gate_review_v01.md
 current_figure: 02_图表/Figures/Fig2_n1_2_time_adjudication/Fig2_n1_2_time_adjudication_v02_20260827
 next_gate: prl_figure2_spatial_tolerance_contract_human_gate
+independent_review: project_control/prl_figure2_spatial_tolerance_contract_v01_independent_review_v01.md
+superseded_by: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
 ---
 
 # PRL Figure 2 空间与容差验证合同 v01（草案）

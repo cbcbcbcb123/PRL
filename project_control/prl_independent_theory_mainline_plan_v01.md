@@ -6,10 +6,11 @@ requested_by: human_final_reviewer
 approved_by: human_final_reviewer
 approved_at: 2026-08-27
 parent_decision: project_control/prl_independent_theory_mainline_decision_v01.md
-current_lifecycle: prl_figure2_spatial_tolerance_contract_draft
+current_lifecycle: prl_figure2_spatial_tolerance_contract_v02_human_review
 paper_role: independent_theory_first
 downstream_application: EFE_Nature_experiment_first
 current_authorization: drafting_only_no_spatial_or_tolerance_execution
+current_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
 ---
 
 # PRL 独立理论主线执行计划 v01
