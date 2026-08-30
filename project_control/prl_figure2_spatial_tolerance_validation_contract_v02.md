@@ -15,6 +15,8 @@ supersedes: project_control/prl_figure2_spatial_tolerance_validation_contract_v0
 baseline_acceptance: project_control/prl_p6_t128_execution_and_human_gate_review_v01.md
 current_figure: 02_图表/Figures/Fig2_n1_2_time_adjudication/Fig2_n1_2_time_adjudication_v02_20260827
 next_gate: prl_figure2_spatial_tolerance_contract_v02_human_gate
+independent_review: project_control/prl_figure2_spatial_tolerance_contract_v02_independent_review_v01.md
+inspection_status: pass_for_human_review
 ---
 
 # PRL Figure 2 空间与容差验证合同 v02（修订草案）
