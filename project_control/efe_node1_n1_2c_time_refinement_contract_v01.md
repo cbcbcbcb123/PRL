@@ -1,16 +1,17 @@
 ---
 plan_id: PLAN-EFE-NODE1-N1-2C-TIME-REFINEMENT-V01
-status: approved
+status: accepted_completed_with_p6_followup
 planner: codex_current_task
 approved_by: human_final_reviewer
 approved_at: 2026-08-26
 executor: codex_current_task
 inspector: human_final_reviewer
 related_memory_entries: []
-execution_authorized: none_pending_t128_human_gate
+execution_authorized: completed_no_further_execution
 latest_authorization: project_control/prl_independent_theory_mainline_decision_v01.md
 latest_inspection: project_control/prl_p6_t128_execution_and_human_gate_review_v01.md
 followup_plan: project_control/efe_node1_n1_2c_p6_t128_targeted_validation_contract_v01.md
+final_acceptance: project_control/prl_p6_t128_acceptance_and_spatial_tolerance_drafting_authorization_decision_v01.md
 required_parent_decision: accept_r5_t16_periodic_candidate
 ---
 

@@ -1,18 +1,19 @@
 ---
 plan_id: PLAN-EFE-NODE1-N1-2C-P6-T128-V01
-status: completed_pending_t128_human_gate
+status: accepted_at_t128_human_gate
 planner: codex_current_task
 approved_by: human_final_reviewer
 approved_at: 2026-08-27
 executor: codex_current_task
 inspector: human_final_reviewer
 related_memory_entries: []
-execution_authorized: none_pending_t128_human_gate
+execution_authorized: completed_no_further_execution
 parent_decision: project_control/efe_node1_n1_2c_p5_acceptance_and_p6_drafting_authorization_decision_v01.md
 current_authorization: project_control/prl_independent_theory_mainline_decision_v01.md
 paper_context: PRL_independent_theory_first
 execution_log: project_control/prl_p6_t128_execution_log_v01.md
 latest_inspection: project_control/prl_p6_t128_execution_and_human_gate_review_v01.md
+acceptance_decision: project_control/prl_p6_t128_acceptance_and_spatial_tolerance_drafting_authorization_decision_v01.md
 ---
 
 # EFE Node 1 N1-2c P6：T128 定向时间验证合同 v01
@@ -200,3 +201,12 @@ GPU、FEBio 或其他外部求解器，不追加第三周期。
 > T64→T128 暖启动、执行两个 T128 事务周期，并完成 T32/T64/T128 裁决和
 > Figure 2 v02；到 T128 Human Gate 停止。仍不授权 T256、空间细化、参数扫描、
 > N1-2d、N1-3、Node 2、GPU worker或新外部求解器。
+
+## T128 Human Gate 结果
+
+人类终审于 2026-08-30 接受 P6 T128 结果与有界结论，并确认 Figure 2 v02 为
+**时间离散阶段 FINAL**。该接受不扩大证据边界：P5 的历史严格失败保持冻结，
+P6 只证明固定 D0/E0/F150 基线通过 T64→T128 时间离散门。
+
+终审同时只批准起草空间与容差验证合同，未批准执行任何空间细化、容差实算、
+T256、N1-2d、N1-3、GPU、新求解器或双向 FSI。

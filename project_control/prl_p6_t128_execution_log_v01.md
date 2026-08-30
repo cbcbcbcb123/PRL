@@ -71,6 +71,13 @@ P3 正式结果：
 - Figure 2 v02 已执行、自动核验并通过代理视觉 QA，保持工作版本等待确认；
 - 审阅请求：`project_control/prl_p6_t128_execution_and_human_gate_review_v01.md`。
 
+## 执行后人类处置
+
+人类终审于 2026-08-30 接受 T128 Human Gate，并把 Figure 2 v02 冻结为时间
+离散阶段 FINAL。该处置记录于
+`project_control/prl_p6_t128_acceptance_and_spatial_tolerance_drafting_authorization_decision_v01.md`。
+执行时“工作版本等待确认”的事实保留；本段只记录后续生命周期变化。
+
 ## 偏差与阻塞
 
 DEV001：首次 P1 由宿主 Python 启动，因宿主缺少 `basix` 在内部初始化前失败。

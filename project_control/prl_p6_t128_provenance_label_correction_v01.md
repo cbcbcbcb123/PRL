@@ -1,8 +1,10 @@
 ---
 correction_id: CORRECTION-PRL-P6-T128-PROVENANCE-V01
-status: resolved_pending_t128_human_gate
+status: accepted_resolved_label_only_erratum
 prepared_by: codex_current_task
 date: 2026-08-29
+accepted_by: human_final_reviewer
+accepted_at: 2026-08-30
 affected_execution: EXEC-PRL-P6-T128-V01
 ---
 
@@ -35,3 +37,6 @@ T128 底层事务引擎摘要中的 `evidence_boundary` 继承了固定文案
 
 本勘误只修复溯源文字。Figure 2 v02 仍等待 T128 Human Gate；本记录不授权空间
 细化、容差扫描、T256、N1-2d、N1-3、GPU、新求解器或双向 FSI。
+
+人类终审于 2026-08-30 接受本加性勘误及“不回写原始证据”的处理。Figure 2
+v02 随 T128 Human Gate 被接受为时间离散阶段 FINAL；其余禁止范围不变。

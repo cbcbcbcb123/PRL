@@ -1,13 +1,15 @@
 ---
 inspection_id: INSPECTION-PRL-P6-T128-V01
-status: awaiting_t128_human_gate
+status: accepted_at_t128_human_gate
 inspector: human_final_reviewer
 prepared_by: codex_current_task
 submitted_at: 2026-08-27
+inspected_at: 2026-08-30
 related_plan: project_control/efe_node1_n1_2c_p6_t128_targeted_validation_contract_v01.md
 authorization: project_control/prl_independent_theory_mainline_decision_v01.md
 execution_log: project_control/prl_p6_t128_execution_log_v01.md
-stopped_at: t128_human_gate
+stopped_at: t128_human_gate_completed
+acceptance_decision: project_control/prl_p6_t128_acceptance_and_spatial_tolerance_drafting_authorization_decision_v01.md
 ---
 
 # PRL P6 T128 执行结果与 Human Gate 审阅请求 v01
@@ -146,3 +148,9 @@ step 30 以及 step 95–96 在两个周期可重复表现为局部求解敏感�
 > 接受 PRL P6 T128 结果与有界结论，确认 Figure 2 v02 为 FINAL；批准起草
 > PRL Figure 2 空间与容差验证合同，但暂不执行。仍不授权 T256、空间细化实算、
 > 参数扫描、N1-2d、N1-3、原 EFE Node 2–4、GPU、新求解器或双向 FSI。
+
+## 人类终审结果
+
+人类终审于 2026-08-30 按上述准确决定接受本审阅：T128 Human Gate 通过，
+Figure 2 v02 冻结为时间离散阶段 FINAL，并批准起草下一份空间与容差验证合同。
+本决定没有授权该合同的任何计算。

@@ -6,9 +6,10 @@ requested_by: human_final_reviewer
 approved_by: human_final_reviewer
 approved_at: 2026-08-27
 parent_decision: project_control/prl_independent_theory_mainline_decision_v01.md
-current_lifecycle: prl_p6_t128_human_gate
+current_lifecycle: prl_figure2_spatial_tolerance_contract_draft
 paper_role: independent_theory_first
 downstream_application: EFE_Nature_experiment_first
+current_authorization: drafting_only_no_spatial_or_tolerance_execution
 ---
 
 # PRL 独立理论主线执行计划 v01
@@ -65,7 +66,9 @@ PRL 研究一个独立于 EFE 病名的物理问题：周期主动组织通过�
 - 后续另行批准的空间、容差和功率闭合证据；
 - 所有失败项与不可辨识项显式保留。
 
-**当前状态：** P5 已接受，主要读数在 T64 稳定，但严格总门未全通过；P6 P0–P3 已获本轮人类授权，到 T128 Human Gate 停止。
+**当前状态：** P5 的严格失败作为历史证据保留；P6 已于 2026-08-30 通过
+T128 Human Gate，Figure 2 v02 冻结为时间离散阶段 FINAL。当前只获准起草空间
+与容差验证合同，尚未授权任何空间或容差计算。
 
 ### Figure 3 — 传递函数与动力学状态图
 
@@ -95,8 +98,8 @@ PRL 研究一个独立于 EFE 病名的物理问题：周期主动组织通过�
 
 ## 4. 执行顺序与 Human Gates
 
-1. **P6 时间门：** 执行 T128 P0–P3，停在 T128 Human Gate；
-2. **空间与容差门：** 仅在 T128 裁决后另立合同，检查 DCM 表面、ECM 体网格、界面 footprint、容差与边界敏感性；
+1. **P6 时间门：** 已完成并于 2026-08-30 通过 T128 Human Gate；
+2. **空间与容差门：** 合同草案已获准起草，检查 DCM 表面、ECM 体网格、界面 footprint、容差、功率闭合与边界敏感性；草案本身不授权执行；
 3. **共同极限门：** 另行批准 N1-2d，完成 all-FEM 对照和离散—连续适用域；
 4. **理论状态图门：** 冻结无量纲组后做最小参数设计，不做无界参数海；
 5. **PRL-Cal 门：** 只读实验需求清单与校准协议通过后，才接入实验量级；

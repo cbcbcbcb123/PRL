@@ -1,6 +1,8 @@
 {
   "schema_version": "prl_p6_t128_provenance_label_correction_v01",
-  "status": "resolved_label_only_erratum_pending_t128_human_gate",
+  "status": "accepted_resolved_label_only_erratum",
+  "accepted_by": "human_final_reviewer",
+  "accepted_at": "2026-08-30",
   "affected_file": "results/hybrid/prl_p6_t128_transactional_cycle_v01_20260827/transaction_engine/summary.json",
   "affected_file_sha256": "d48e5841d4d06cb2e1f121ba1930ccb1c9d4d4b274e4e6a70427723b449cd4e6",
   "incorrect_text": "This run evaluates D0/E0/F150 at T16 only.",
@@ -11,5 +13,5 @@
   "scientific_impact": "No numerical state, metric, gate, field, hash-referenced adjudication input, or Figure 2 value is changed. This correction resolves provenance wording only.",
   "immutability_policy": "The archived inner summary is intentionally not edited so its recorded hash and original execution evidence remain immutable.",
   "generator_fix": "scripts/run_efe_node1_n1_2b_r3_transactional_cycle_v01.py now writes the evidence boundary from the actual STEPS_PER_CYCLE value.",
-  "authorization_boundary": "This erratum does not approve Figure 2 v02, spatial refinement, tolerance scans, T256, N1-2d, N1-3, GPU execution, a new external solver, or two-way FSI."
+  "authorization_boundary": "The T128 Human Gate accepts Figure 2 v02 as the time-discretization-stage FINAL only. This erratum does not approve spatial refinement, tolerance runs, T256, N1-2d, N1-3, GPU execution, a new external solver, or two-way FSI."
 }
