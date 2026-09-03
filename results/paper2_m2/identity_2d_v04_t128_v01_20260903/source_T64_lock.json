@@ -1,0 +1,26 @@
+{
+  "all_keys_T64_D0": true,
+  "endpoint_count": 54,
+  "hash_ledger_entries_pass": true,
+  "hashes": {
+    "endpoint_summaries.json": {
+      "actual": "b5d7bc0e402bed089bdb8e189bf1cc5a5ebfb8c7a780451cb19309a63e93efe2",
+      "expected": "b5d7bc0e402bed089bdb8e189bf1cc5a5ebfb8c7a780451cb19309a63e93efe2",
+      "pass": true
+    },
+    "hash_ledger.json": {
+      "actual": "9701c68ee97c3f370ab8533ee0b2b14241a02fc4e1ba75425135183d1cf0b4b2",
+      "expected": "9701c68ee97c3f370ab8533ee0b2b14241a02fc4e1ba75425135183d1cf0b4b2",
+      "pass": true
+    },
+    "pass_summary.json": {
+      "actual": "753f4b320381ea62b82f139ad2913943dca081bb1e6d7ac3dab9d93084eb9ff7",
+      "expected": "753f4b320381ea62b82f139ad2913943dca081bb1e6d7ac3dab9d93084eb9ff7",
+      "pass": true
+    }
+  },
+  "json_finite": true,
+  "pass": true,
+  "schema": "paper2_m2a_v04_source_t64_lock_v01",
+  "source_decision": "T64_NUMERICAL_PASS_V03"
+}
