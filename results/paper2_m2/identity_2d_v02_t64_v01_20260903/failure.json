@@ -1,0 +1,43 @@
+{
+  "completed_endpoints": 53,
+  "elapsed_seconds": 162.37910993300102,
+  "endpoint": "ID-LN__DCM__S4__T64__C0",
+  "endpoint_runtime_budget_seconds": 30.0,
+  "endpoint_runtime_seconds": 12.08214363099978,
+  "memory_budget_gib": 16.0,
+  "peak_memory_gib": 0.8066215515136719,
+  "runtime_budget_seconds": 3600.0,
+  "schema": "paper2_m2a_v02_t64_failure_v01",
+  "stage": "T64_endpoint",
+  "status": "FAIL_CLOSED",
+  "structural_gate": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.1218260889938847e-16
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 9.78104009133575e-10
+      },
+      "power_ledger": {
+        "pass": false,
+        "threshold": 1e-08,
+        "value": 1.465114585633258e-07
+      },
+      "solver_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 2.5781233298002813e-08
+      }
+    },
+    "pass": false
+  }
+}

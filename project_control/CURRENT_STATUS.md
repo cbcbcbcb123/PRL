@@ -3,13 +3,13 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-03
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 41d4b731d5d79153db478ee89fb76ff6444fa15a
-current_lifecycle: paper2_m2a_v02_t64_full_numerical_gate_authorized_execution_pending
+verified_commit: 59d0f8fba85eacc53e17a7318e9784ff9eab1c49
+current_lifecycle: paper2_m2a_v02_t64_failed_endpoint53_power_ledger_supervisor_gate
 current_contract: project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v02.md
 current_authorization: project_control/paper2_m2a_s4_supervisor_acceptance_and_v02_ladder_decision_v01.md
-execution_authorized: paper2_m2a_v02_t64_full_numerical_gate_only
-current_execution_log: none_v02_t64_not_yet_executed
-latest_completed_execution_log: project_control/paper2_m2a_s4_terminal_spatial_diagnostic_execution_record_v01.md
+execution_authorized: none_v02_t64_failed_waiting_supervisor_decision
+current_execution_log: project_control/paper2_m2a_v02_t64_full_numerical_gate_execution_record_v01.md
+latest_completed_execution_log: project_control/paper2_m2a_v02_t64_full_numerical_gate_execution_record_v01.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
 current_mainline: project_control/prl_independent_theory_mainline_plan_v02.md
@@ -27,7 +27,7 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 
 ## 1. 一句话状态
 
-Paper 2 M2A 的 S4 终止型空间诊断已由 Supervisor 独立验收为 `DIAGNOSTIC_PASS`。生产空间梯度现按 v02 登记为 S2/S3/S4，生产 traction、1% 门和两项校准保持不变；当前已自主批准从头执行 108 个端点的 T64 全工况数值门。该阶段不计算跨表示身份结论；T128/T256、正式 identity gate 和 M2B 尚未启动。
+Paper 2 M2A v02 的 T64 全工况数值门在第 53/108 个端点 fail-closed：`ID-LN/DCM/S4/C0` 的功率账本归一化残差为 `1.4651e-07 > 1e-08`，其余该端点结构门通过。执行已停止在 Supervisor Gate；端点 54–108、T64 stage gate、T128/T256、正式 identity gate 和 M2B 均未启动。S4 诊断的既有 `DIAGNOSTIC_PASS` 不被改写，但 v02 当前不能声明 `T64_NUMERICAL_PASS`。
 
 旧 DCM–FEM–DCM Figure 2 路线仍原样保留：T128 时间离散阶段 FINAL 不变；A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。新 M1 不改判 A1，也不把旧时间离散结果迁移成新架构证据。
 
@@ -78,7 +78,13 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
   `project_control/paper2_m2a_s4_supervisor_acceptance_and_v02_ladder_decision_v01.md`；
 - 当前增量合同：
   `project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v02.md`；
-  生产梯度为 S2/S3/S4，当前只授权 108 个端点的 T64 数值门。
+  生产梯度为 S2/S3/S4；108 端点 T64 数值门已在第 53 个端点 fail-closed；
+- v02 T64 执行记录：
+  `project_control/paper2_m2a_v02_t64_full_numerical_gate_execution_record_v01.md`；
+- v02 T64 create-only 失败包：
+  `results/paper2_m2/identity_2d_v02_t64_v01_20260903/`；
+- 首个失败：`ID-LN__DCM__S4__T64__C0` 功率账本归一化残差
+  `1.465114585633258e-07 > 1e-08`；已完成 53/108 端点，没有 T64 通过结论。
 
 ## 2. 已完成并可引用的阶段证据
 
@@ -147,7 +153,7 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 ## 5. 当前禁止范围
 
-当前只授权 M2A v02 的 T64 全工况数值门。T128/T256、正式 identity gate、S5、重新校准、界面离散/共同投影修改、生产观测量替换和 1% 门槛修改尚未授权。仍不授权：M2B 三维、非匹配界面升级、A1 再周期化、B1/A2/B2、A3、A4、B3、B4、D1/F200N 完整周期、旧路线 T256、空间参数扫描、N1-2d、N1-3、原 EFE Node 2–4、GPU worker、新外部求解器、CFD、单向/双向 FSI、器官级几何扩展或大参数海。
+M2A v02 的 T64 全工况数值门已失败停止，当前没有自动延续的计算授权。不得补算端点 54–108、重跑失败端点、放宽功率账本门、改变残差定义或进入 T128/T256。正式 identity gate、S5、重新校准、界面离散/共同投影修改、生产观测量替换和 1% 门槛修改尚未授权。仍不授权：M2B 三维、非匹配界面升级、A1 再周期化、B1/A2/B2、A3、A4、B3、B4、D1/F200N 完整周期、旧路线 T256、空间参数扫描、N1-2d、N1-3、原 EFE Node 2–4、GPU worker、新外部求解器、CFD、单向/双向 FSI、器官级几何扩展或大参数海。
 
 ## 6. 最新终局主线与空间/容差门之后的优先级
 
