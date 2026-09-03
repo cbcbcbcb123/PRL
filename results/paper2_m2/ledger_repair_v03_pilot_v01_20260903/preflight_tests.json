@@ -1,0 +1,6 @@
+{
+  "frozen_dolfinx_cpu_container": "5 passed in 33.78s frozen dolfinx cpu",
+  "host": "2 passed in 0.68s host-compatible",
+  "pass": true,
+  "schema": "paper2_m2a_v03_repair_pilot_preflight_tests_v01"
+}

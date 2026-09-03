@@ -1,0 +1,1940 @@
+{
+  "comparisons": [
+    {
+      "case_id": "ID-P0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0,
+      "kind": "spatial",
+      "metric": "maximum_state_norm",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case_id": "ID-P0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0,
+      "kind": "spatial",
+      "metric": "maximum_state_norm",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case_id": "ID-P1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.265958931868531e-14,
+      "kind": "spatial",
+      "metric": "passive_tangent",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.6730769230769315,
+        0.6730769230769454,
+        0.6730769230769674
+      ]
+    },
+    {
+      "case_id": "ID-P1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.3620470658763013e-13,
+      "kind": "spatial",
+      "metric": "passive_tangent",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.6730769230769178,
+        0.6730769230769034,
+        0.6730769230770624
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.4174985962949736e-05,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.029511312729559386,
+        0.029512812074420414,
+        0.029513230424047396
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.441601490560732e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.018397160373089885,
+        0.01839811013477529,
+        0.018398375366028806
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 0.0016281599561374293,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0005979108196588707,
+          0.0005988859017023177
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0013619917861676157,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.0005950399805945444,
+        0.0005982325067084139,
+        0.0005990484057165166
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 0.00016237829602948147,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0005144615028521951,
+          0.0005143779654699892
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0002568747020046019,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.0005149899522734183,
+        0.0005145583487346964,
+        0.0005144261717122012
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 6.485485742478265e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.00012510421266430797,
+        0.00012507027101606134,
+        0.0001250621596014665
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.6735160331287348e-05,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.029677330858088453,
+        0.029679082186576593,
+        0.0296795788790877
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.710826135924103e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.018502633792314552,
+        0.018503749035692258,
+        0.01850406560808289
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 0.007268533309827629,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0004511044535911686,
+          0.00045440732839382894
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.006594746838082093,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.00044024504841514605,
+        0.0004517188053391403,
+        0.00045471755248058205
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 0.00018619397563571748,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0002383883348130333,
+          0.00023843272955087006
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0003994917043038223,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.00023879004001851824,
+        0.00023866738697641835,
+        0.0002385720413352334
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 5.9110437687106815e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.00012510986667270955,
+        0.00012507814941975157,
+        0.00012507075599559427
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.4174985962949736e-05,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.029511312729559386,
+        0.029512812074420414,
+        0.029513230424047396
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.441601490560732e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.018397160373089885,
+        0.01839811013477529,
+        0.018398375366028806
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 0.0016281599561374293,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0005979108196588707,
+          0.0005988859017023177
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0013619917861676157,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.0005950399805945444,
+        0.0005982325067084139,
+        0.0005990484057165166
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 0.00016237829602948147,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0005144615028521951,
+          0.0005143779654699892
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0002568747020046019,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.0005149899522734183,
+        0.0005145583487346964,
+        0.0005144261717122012
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 6.485485742478265e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.00012510421266430797,
+        0.00012507027101606134,
+        0.0001250621596014665
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.6735160331287348e-05,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.029677330858088453,
+        0.029679082186576593,
+        0.0296795788790877
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.710826135924103e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.018502633792314552,
+        0.018503749035692258,
+        0.01850406560808289
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 0.007268533309827629,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0004511044535911686,
+          0.00045440732839382894
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.006594746838082093,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.00044024504841514605,
+        0.0004517188053391403,
+        0.00045471755248058205
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 0.00018619397563571748,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0002383883348130333,
+          0.00023843272955087006
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0003994917043038223,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.00023879004001851824,
+        0.00023866738697641835,
+        0.0002385720413352334
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 5.9110437687106815e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.00012510986667270955,
+        0.00012507814941975157,
+        0.00012507075599559427
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.5341640502787328e-05,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        -0.003395206081143153,
+        -0.0033953910565969045,
+        -0.003395443148265033
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.4709208761133791e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.006466829031105346,
+        0.006467169594563321,
+        0.006467264722910244
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 5.943114426823537e-08,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.042607840760915186,
+          0.04260784329314807
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 5.332522429698764e-08,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.042607831200091595,
+        0.04260784128727266,
+        0.04260784355934547
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 4.679041792917309e-08,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.04288252592092676,
+          0.04288252792741817
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.548045393550139e-08,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.042882517093220204,
+        0.04288252603301361,
+        0.04288252798333045
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.18839950747462e-07,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.004582023255470685,
+        0.0045820189684071975,
+        0.004582017965678392
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.936708538760364e-05,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        -0.004157074519738152,
+        -0.004157357336572045,
+        -0.0041574378540259575
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.75388328930899e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.007886584194687192,
+        0.007887071363605598,
+        0.00788720969605845
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 1.477281993962781e-07,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.042601875284830025,
+          0.04260188157832928
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.3487931275558075e-07,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.04260185320742386,
+        0.04260187639840811,
+        0.042601882144520695
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 3.3911160712115074e-08,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.04287592528848939,
+          0.04287592674246183
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.119042176384611e-08,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.042875918471838505,
+        0.04287592552193816,
+        0.042875926859256404
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 7.646044585732283e-08,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.004587600734124336,
+        0.004587598847149568,
+        0.004587598496379715
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.173314286263298e-09,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        8.74825336915004e-16,
+        5.69329625080833e-15,
+        1.5199819645450317e-15
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.3994204188827e-09,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        5.149389920775097e-16,
+        4.305687306227563e-15,
+        9.062668873448628e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 1.3397225286930443e-07,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0258188917157019,
+          0.025818895174717454
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.3397225273492818e-07,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.025818877881148523,
+        0.0258188917157019,
+        0.02581889517471745
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 2.824891203607365e-07,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.02599951643332921,
+          0.02599952377791181
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.824891204941792e-07,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.025999487055806198,
+        0.025999516433329206,
+        0.02599952377791181
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.0745593574898331e-06,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.0021729199411533047,
+        0.0021729106011045217,
+        0.0021729082661831023
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.8628534357562757e-08,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        2.7461952861989e-15,
+        2.481378571837099e-16,
+        1.8876672214746468e-14
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.4376824246604895e-08,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        2.3501596900436725e-15,
+        2.4968804648968375e-15,
+        1.687370471150173e-14
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 7.208656635302818e-08,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.025870916599821193,
+          0.025870918464766874
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 7.208656648713425e-08,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.0258709091414794,
+        0.02587091659982119,
+        0.025870918464766874
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 2.2977313678773216e-07,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.026051341267025314,
+          0.02605134725292509
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.2977313678773216e-07,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.026051317324211048,
+        0.026051341267025314,
+        0.02605134725292509
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 8.797590448162823e-07,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.0021469950584892383,
+        0.0021469875029583576,
+        0.002146985614126683
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.4143522578337713e-05,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.021625514387218575,
+        0.021626612039291074,
+        0.021626917920092976
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.4149606801397427e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.012758458540938796,
+        0.012759105232409343,
+        0.012759285771286074
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 1.4538544813699978e-07,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.042640195629028925,
+          0.042640201828293776
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.1899790031222219e-07,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.042640177712834876,
+        0.04264019790699028,
+        0.0426402029810849
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 1.8317617954153054e-09,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0429205979983992,
+          0.04292059791977889
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 9.63701353090619e-09,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.04292059939189053,
+        0.042920598664393544,
+        0.042920598250767154
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.731467685397467e-06,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.00449961858499849,
+        0.0044995700501142015,
+        0.004499557759684011
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.6372983013400774e-05,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.02019105774854066,
+        0.02019222283576589,
+        0.020192553448100493
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.657146078164103e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.011773391394853203,
+        0.011774079134681509,
+        0.011774274251605502
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 3.131013435224126e-07,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.04262118071289761,
+          0.04262119405765073
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.8057882847264335e-07,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.04262113833531391,
+        0.04262118353331725,
+        0.04262119549192235
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 4.095209874486416e-09,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.042875795124253276,
+          0.042875794948667896
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.298132739233232e-08,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.04287579717687052,
+        0.04287579588359695,
+        0.0428757953270122
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.7125139102974696e-06,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.0046899594461501165,
+        0.004689909767396455,
+        0.004689897045950973
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.3872412041876229e-05,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.02145709741344517,
+        0.021458162654976142,
+        0.0214584603355797
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.4184665879212223e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.012678927074361026,
+        0.012679571457070372,
+        0.012679751315106208
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 2.9881362229096754e-07,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.04277087986572883,
+          0.04277089264625419
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.729602600450668e-07,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.04277083677736726,
+        0.04277088210439144,
+        0.04277089377914573
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 1.4531685785199552e-07,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0430527077535398,
+          0.043052714009824924
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.3770411758812544e-07,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.0430526848109416,
+        0.04305270840513624,
+        0.043052714333672276
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.936266794379174e-06,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.004707127468140204,
+        0.00470708923945258,
+        0.004707080125271988
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.646492962128914e-05,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.01985317816241478,
+        0.01985433096786971,
+        0.019854657873414252
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.6640513758653143e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.011600383956199362,
+        0.011601064582683817,
+        0.011601257633571086
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 5.000341239123723e-07,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.04259968939167529,
+          0.04259971069298431
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.6855111630826363e-07,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.042599616706720494,
+        0.04259969212055591,
+        0.04259971208069856
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 1.743302942048407e-07,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.04289978954265103,
+          0.042899797021385265
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.6580128059564696e-07,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.04289976235429019,
+        0.042899790271953196,
+        0.04289979738479454
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.643112236538725e-06,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.004712710600793671,
+        0.004712676996619679,
+        0.004712669253162439
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 9.832989742527906e-06,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.02933387612608971,
+        0.029334882837564982,
+        0.029335171290003372
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.0036875499220274e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.01828676341819196,
+        0.018287404557358618,
+        0.018287588107603635
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 0.008461066398004995,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.004556400871978968,
+          0.004517848861665226
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.009053128479952887,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.004714965544032215,
+        0.00456184481794991,
+        0.004520545850707402
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 0.0022069796222545617,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0016838829186160826,
+          0.0016876074338329171
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0016517496858765733,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.001674576574185206,
+        0.0016857574503480392,
+        0.0016885465065097547
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 8.685637526664809e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.00013089624645486032,
+        0.00013093138119641873,
+        0.00013094275440943417
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 5.656576339880897e-06,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.029464935505656063,
+        0.029465418839002645,
+        0.0294655855133365
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 6.079095803266332e-06,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.01837034417431772,
+        0.018370673430132427,
+        0.01837078510789508
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 0.008799665418382311,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.005137423776171202,
+          0.0050922161658284535
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.009397539391338033,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.005322611554589831,
+        0.005143625493574261,
+        0.005095288070384106
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "diagnostic_common_projection": {
+        "common_segments": 64,
+        "gating_role": "sidecar_only",
+        "pass": true,
+        "relative_difference": 0.0027249211095223855,
+        "threshold": 0.01,
+        "values_S3_S4": [
+          0.0018422044999742077,
+          0.0018472380780072833
+        ]
+      },
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0021236880775567656,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.0018282167870310696,
+        0.0018444257045224666,
+        0.0018483510255585852
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00012991800364244493,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "production_observable": "native_nodal_or_spring",
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold": 0.01,
+      "values_S2_S3_S4": [
+        0.00013185472760627285,
+        0.00013190855349113321,
+        0.0001319256930137987
+      ]
+    },
+    {
+      "finest_two_absolute_jump": 0.0,
+      "kind": "hotspot_spatial",
+      "pass": true,
+      "representation": "DCM",
+      "solver_level": "D0",
+      "threshold_one_S4_cell": 0.0078125,
+      "values_S2_S3_S4": [
+        -0.25000000000000006,
+        -0.25000000000000006,
+        -0.25000000000000006
+      ]
+    },
+    {
+      "finest_two_absolute_jump": 0.0,
+      "kind": "hotspot_spatial",
+      "pass": true,
+      "representation": "FEM",
+      "solver_level": "D0",
+      "threshold_one_S4_cell": 0.0078125,
+      "values_S2_S3_S4": [
+        -0.25000000000000006,
+        -0.25000000000000006,
+        -0.25000000000000006
+      ]
+    }
+  ],
+  "counts": {
+    "cycle": 54,
+    "cycle_pass": 54,
+    "hotspot": 2,
+    "hotspot_pass": 2,
+    "spatial": 74,
+    "spatial_pass": 74
+  },
+  "cycle_records": [
+    {
+      "endpoint": "ID-P0__DCM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 0.0
+    },
+    {
+      "endpoint": "ID-P0__DCM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 0.0
+    },
+    {
+      "endpoint": "ID-P0__DCM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 0.0
+    },
+    {
+      "endpoint": "ID-P0__FEM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 0.0
+    },
+    {
+      "endpoint": "ID-P0__FEM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 0.0
+    },
+    {
+      "endpoint": "ID-P0__FEM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 0.0
+    },
+    {
+      "endpoint": "ID-P1__DCM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 0.0
+    },
+    {
+      "endpoint": "ID-P1__DCM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 0.0
+    },
+    {
+      "endpoint": "ID-P1__DCM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 0.0
+    },
+    {
+      "endpoint": "ID-P1__FEM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 0.0
+    },
+    {
+      "endpoint": "ID-P1__FEM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 0.0
+    },
+    {
+      "endpoint": "ID-P1__FEM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 0.0
+    },
+    {
+      "endpoint": "ID-A1__DCM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2338159870240166e-16
+    },
+    {
+      "endpoint": "ID-A1__DCM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.230368012130851e-16
+    },
+    {
+      "endpoint": "ID-A1__DCM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2307468054246384e-16
+    },
+    {
+      "endpoint": "ID-A1__FEM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2428891375706113e-16
+    },
+    {
+      "endpoint": "ID-A1__FEM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2425646095306227e-16
+    },
+    {
+      "endpoint": "ID-A1__FEM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2411036409268314e-16
+    },
+    {
+      "endpoint": "ID-A2__DCM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2338159870240166e-16
+    },
+    {
+      "endpoint": "ID-A2__DCM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.230368012130851e-16
+    },
+    {
+      "endpoint": "ID-A2__DCM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2307468054246384e-16
+    },
+    {
+      "endpoint": "ID-A2__FEM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2428891375706113e-16
+    },
+    {
+      "endpoint": "ID-A2__FEM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2425646095306227e-16
+    },
+    {
+      "endpoint": "ID-A2__FEM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2411036409268314e-16
+    },
+    {
+      "endpoint": "ID-LN__DCM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.1263768804681063e-16
+    },
+    {
+      "endpoint": "ID-LN__DCM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.1237711837526167e-16
+    },
+    {
+      "endpoint": "ID-LN__DCM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.1218260889938847e-16
+    },
+    {
+      "endpoint": "ID-LN__FEM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.124971046103339e-16
+    },
+    {
+      "endpoint": "ID-LN__FEM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.116896756889791e-16
+    },
+    {
+      "endpoint": "ID-LN__FEM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.1146219490921235e-16
+    },
+    {
+      "endpoint": "ID-LS__DCM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 1.2758649371158564e-16
+    },
+    {
+      "endpoint": "ID-LS__DCM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 1.2602812268756326e-16
+    },
+    {
+      "endpoint": "ID-LS__DCM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 1.255607846373957e-16
+    },
+    {
+      "endpoint": "ID-LS__FEM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 1.2974009396229038e-16
+    },
+    {
+      "endpoint": "ID-LS__FEM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 1.280599346754215e-16
+    },
+    {
+      "endpoint": "ID-LS__FEM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 1.272649534620697e-16
+    },
+    {
+      "endpoint": "ID-C0__DCM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.1994811553594769e-16
+    },
+    {
+      "endpoint": "ID-C0__DCM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.201878391239296e-16
+    },
+    {
+      "endpoint": "ID-C0__DCM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2036141240108627e-16
+    },
+    {
+      "endpoint": "ID-C0__FEM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.1929266031612602e-16
+    },
+    {
+      "endpoint": "ID-C0__FEM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.1950447349723792e-16
+    },
+    {
+      "endpoint": "ID-C0__FEM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.1999785709013937e-16
+    },
+    {
+      "endpoint": "ID-CQ__DCM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 1.9446880427259309e-16
+    },
+    {
+      "endpoint": "ID-CQ__DCM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 1.9504371487543956e-16
+    },
+    {
+      "endpoint": "ID-CQ__DCM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 1.9505679871679657e-16
+    },
+    {
+      "endpoint": "ID-CQ__FEM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 1.916721445159708e-16
+    },
+    {
+      "endpoint": "ID-CQ__FEM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 1.9208310060465552e-16
+    },
+    {
+      "endpoint": "ID-CQ__FEM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 1.9213993251989302e-16
+    },
+    {
+      "endpoint": "ID-S1__DCM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.226315372579927e-16
+    },
+    {
+      "endpoint": "ID-S1__DCM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2229240119593815e-16
+    },
+    {
+      "endpoint": "ID-S1__DCM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.223747032920869e-16
+    },
+    {
+      "endpoint": "ID-S1__FEM__S2__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.23515130607048e-16
+    },
+    {
+      "endpoint": "ID-S1__FEM__S3__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.234212263477321e-16
+    },
+    {
+      "endpoint": "ID-S1__FEM__S4__T64__D0",
+      "pass": true,
+      "threshold": 0.001,
+      "value": 2.2315649109739954e-16
+    }
+  ],
+  "decision_observable": "native_nodal_or_spring_traction",
+  "failures": [],
+  "pass": true,
+  "projection_sidecar": {
+    "observable_conclusion_differences": [],
+    "role": "diagnostic_only_not_a_production_gate"
+  },
+  "schema": "paper2_m2a_v03_t64_numerical_gate_v01",
+  "solver_level": "D0",
+  "steps_per_cycle": 64
+}

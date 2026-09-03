@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-03
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: f26cb99ba4055d57de0a27731df94b2073dac5fc
-current_lifecycle: paper2_m2a_v03_ledger_repair_pilot_authorized_execution_pending
-current_contract: project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v03.md
-current_authorization: project_control/paper2_m2a_v02_diagnostic_acceptance_and_v03_repair_decision_v01.md
+verified_commit: f7d26817be8d9cbd0583358bc84105c7e5fa7209
+current_lifecycle: paper2_m2a_v04_t128_full_numerical_stage_authorized_execution_pending
+current_contract: project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v04.md
+current_authorization: project_control/paper2_m2a_v03_t64_supervisor_acceptance_and_t128_decision_v01.md
 current_clarification: project_control/paper2_m2a_v03_phase_r_endpoint_count_clarification_decision_v01.md
-execution_authorized: v03_ledger_repair_pilot_then_t64_full_gate
-current_execution_log: none_v03_execution_pending
-latest_completed_execution_log: project_control/paper2_m2a_v02_t64_power_ledger_diagnostic_execution_record_v01.md
+execution_authorized: v04_t128_full_numerical_stage_only
+current_execution_log: none_v04_t128_execution_pending
+latest_completed_execution_log: project_control/paper2_m2a_v03_ledger_repair_and_t64_execution_record_v01.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
 current_mainline: project_control/prl_independent_theory_mainline_plan_v02.md
@@ -28,7 +28,7 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 
 ## 1. 一句话状态
 
-Paper 2 M2A v02 的 T64 功率账本诊断已由 Supervisor 独立验收，正式标签为 `DISCRETE_LEDGER_MISMATCH_CONFIRMED`。v03 已授权使用与 Crank–Nicolson 一致的二次—双线性精确离散能量增量修复账本，并正式撤销对 SuperLU 不起作用的 C0/C1 伪收敛轴，改用单一直接解验证级 D0。当前先运行 ID-LN/DCM 的 S2/S3/S4 三个唯一端点修复试验；通过后自动进入 54 端点 T64 门。T128/T256、identity gate 和 M2B 均未启动。
+Paper 2 M2A v03 的离散账本修复、3 端点 Phase R 和 54 端点 T64 全门已由 Supervisor 独立验收，正式标签为 `T64_NUMERICAL_PASS_V03`。v04 已授权在相同九工况、两表示、S2/S3/S4 和 D0 下执行 54 端点 T128 数值阶段，并形成 74 个 T64→T128 配对审计。两个时间层不得宣称时间收敛；T256、identity gate 和 M2B 均未启动。
 
 旧 DCM–FEM–DCM Figure 2 路线仍原样保留：T128 时间离散阶段 FINAL 不变；A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。新 M1 不改判 A1，也不把旧时间离散结果迁移成新架构证据。
 
@@ -100,7 +100,22 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
   `project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v03.md`；
 - Phase R 端点数量澄清：
   `project_control/paper2_m2a_v03_phase_r_endpoint_count_clarification_decision_v01.md`；
-- v03 先执行三个唯一端点账本修复试验，通过后自动进入 54 端点 T64 门；当前尚无 v03 执行结果。
+- v03 执行记录：
+  `project_control/paper2_m2a_v03_ledger_repair_and_t64_execution_record_v01.md`；
+- Phase R create-only 结果包：
+  `results/paper2_m2/ledger_repair_v03_pilot_v01_20260903/`，正式标签
+  `LEDGER_REPAIR_PILOT_PASS_V03`；
+- Phase T64 create-only 结果包：
+  `results/paper2_m2/identity_2d_v03_t64_v01_20260903/`，正式标签
+  `T64_NUMERICAL_PASS_V03`；54/54 端点、74/74 空间主量、54/54 周期门和 2/2 热点门通过；
+- 最大 S3→S4 相对差为 `0.939754% < 1%`；最大 D0 相对残差为
+  `2.9681468104030423e-08 < 1e-07`，最大 normwise backward error 为
+  `1.0172675692304304e-15 < 1e-12`。该结论仍不是 DCM–FEM identity 判定；
+- v03 T64 Supervisor 验收与 T128 授权：
+  `project_control/paper2_m2a_v03_t64_supervisor_acceptance_and_t128_decision_v01.md`；
+- 当前 v04 T128 增量合同：
+  `project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v04.md`；
+- T128 将执行 54 个端点及 74 个 T64→T128 配对审计；当前尚无 T128 执行结果。
 
 ## 2. 已完成并可引用的阶段证据
 
@@ -169,7 +184,7 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 ## 5. 当前禁止范围
 
-M2A v03 仅授权离散账本修复试验及其通过后的 54 端点 T64 门。不得覆盖 v01/v02 证据，不得把残差修正并入生产、放宽功率账本门或把 C0/C1 零差异写成容差收敛；不得进入 T128/T256。正式 identity gate、S5、重新校准、界面离散/共同投影修改、生产观测量替换和 1% 门槛修改尚未授权。仍不授权：M2B 三维、非匹配界面升级、A1 再周期化、B1/A2/B2、A3、A4、B3、B4、D1/F200N 完整周期、旧路线 T256、空间参数扫描、N1-2d、N1-3、原 EFE Node 2–4、GPU worker、新外部求解器、CFD、单向/双向 FSI、器官级几何扩展或大参数海。
+M2A v04 仅授权 54 端点 T128 数值阶段和 T64→T128 配对审计。不得覆盖 v01–v03 证据，不得把残差修正并入生产、放宽功率账本门、恢复 C0/C1 或用两个时间层宣称时间收敛；不得进入 T256。正式 identity gate、S5、重新校准、界面离散/共同投影修改、生产观测量替换和 1% 门槛修改尚未授权。仍不授权：M2B 三维、非匹配界面升级、A1 再周期化、B1/A2/B2、A3、A4、B3、B4、D1/F200N 完整周期、旧路线 T256、空间参数扫描、N1-2d、N1-3、原 EFE Node 2–4、GPU worker、新外部求解器、CFD、单向/双向 FSI、器官级几何扩展或大参数海。
 
 ## 6. 最新终局主线与空间/容差门之后的优先级
 

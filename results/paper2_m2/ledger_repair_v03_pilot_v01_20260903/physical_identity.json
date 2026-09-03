@@ -1,0 +1,134 @@
+{
+  "ID-LN__DCM__S2__T64__D0": {
+    "dissipation_exact_to_v02_C0": {
+      "total_drag_dissipation": true,
+      "total_sls_dissipation": true
+    },
+    "nonledger_arrays_exact": {
+      "activation_two_cycles": true,
+      "ecm_cell_centroids": true,
+      "ecm_internal_z_at_peak": true,
+      "ecm_strain_at_peak": true,
+      "ecm_stress_at_peak": true,
+      "endocardium_ecm_traction_two_cycles": true,
+      "free_shortening_two_cycles": true,
+      "limited_shortening_two_cycles": true,
+      "mean_endocardial_normal_displacement_two_cycles": true,
+      "mean_endocardial_tangential_displacement_two_cycles": true,
+      "myocardium_ecm_traction_two_cycles": true,
+      "state_two_cycles": true,
+      "time_two_cycles": true
+    },
+    "nonledger_summary_fields_exact_to_v02_C0": {
+      "cycle_state_relative_difference": true,
+      "endocardium_ecm_traction_l2": true,
+      "hotspot_traction": true,
+      "hotspot_x": true,
+      "interface_action_reaction_relative_error": true,
+      "manufactured_uniform_strain_relative_error": true,
+      "maximum_ecm_von_mises_proxy": true,
+      "maximum_endocardium_ecm_traction": true,
+      "maximum_myocardium_ecm_traction": true,
+      "maximum_state_norm": true,
+      "minimum_limited_shortening": true,
+      "myocardium_ecm_traction_l2": true,
+      "passive_tangent": true,
+      "peak_absolute_mean_endocardial_normal_displacement": true,
+      "peak_absolute_mean_endocardial_tangential_displacement": true,
+      "peak_free_shortening": true,
+      "peak_limited_shortening": true,
+      "shortening_fundamental_amplitude": true,
+      "shortening_phase_relative_to_activation_rad": true,
+      "shortening_waveform_l2": true
+    },
+    "pass": true
+  },
+  "ID-LN__DCM__S3__T64__D0": {
+    "dissipation_exact_to_v02_C0": {
+      "total_drag_dissipation": true,
+      "total_sls_dissipation": true
+    },
+    "nonledger_arrays_exact": {
+      "activation_two_cycles": true,
+      "ecm_cell_centroids": true,
+      "ecm_internal_z_at_peak": true,
+      "ecm_strain_at_peak": true,
+      "ecm_stress_at_peak": true,
+      "endocardium_ecm_traction_two_cycles": true,
+      "free_shortening_two_cycles": true,
+      "limited_shortening_two_cycles": true,
+      "mean_endocardial_normal_displacement_two_cycles": true,
+      "mean_endocardial_tangential_displacement_two_cycles": true,
+      "myocardium_ecm_traction_two_cycles": true,
+      "state_two_cycles": true,
+      "time_two_cycles": true
+    },
+    "nonledger_summary_fields_exact_to_v02_C0": {
+      "cycle_state_relative_difference": true,
+      "endocardium_ecm_traction_l2": true,
+      "hotspot_traction": true,
+      "hotspot_x": true,
+      "interface_action_reaction_relative_error": true,
+      "manufactured_uniform_strain_relative_error": true,
+      "maximum_ecm_von_mises_proxy": true,
+      "maximum_endocardium_ecm_traction": true,
+      "maximum_myocardium_ecm_traction": true,
+      "maximum_state_norm": true,
+      "minimum_limited_shortening": true,
+      "myocardium_ecm_traction_l2": true,
+      "passive_tangent": true,
+      "peak_absolute_mean_endocardial_normal_displacement": true,
+      "peak_absolute_mean_endocardial_tangential_displacement": true,
+      "peak_free_shortening": true,
+      "peak_limited_shortening": true,
+      "shortening_fundamental_amplitude": true,
+      "shortening_phase_relative_to_activation_rad": true,
+      "shortening_waveform_l2": true
+    },
+    "pass": true
+  },
+  "ID-LN__DCM__S4__T64__D0": {
+    "dissipation_exact_to_v02_C0": {
+      "total_drag_dissipation": true,
+      "total_sls_dissipation": true
+    },
+    "nonledger_arrays_exact": {
+      "activation_two_cycles": true,
+      "ecm_cell_centroids": true,
+      "ecm_internal_z_at_peak": true,
+      "ecm_strain_at_peak": true,
+      "ecm_stress_at_peak": true,
+      "endocardium_ecm_traction_two_cycles": true,
+      "free_shortening_two_cycles": true,
+      "limited_shortening_two_cycles": true,
+      "mean_endocardial_normal_displacement_two_cycles": true,
+      "mean_endocardial_tangential_displacement_two_cycles": true,
+      "myocardium_ecm_traction_two_cycles": true,
+      "state_two_cycles": true,
+      "time_two_cycles": true
+    },
+    "nonledger_summary_fields_exact_to_v02_C0": {
+      "cycle_state_relative_difference": true,
+      "endocardium_ecm_traction_l2": true,
+      "hotspot_traction": true,
+      "hotspot_x": true,
+      "interface_action_reaction_relative_error": true,
+      "manufactured_uniform_strain_relative_error": true,
+      "maximum_ecm_von_mises_proxy": true,
+      "maximum_endocardium_ecm_traction": true,
+      "maximum_myocardium_ecm_traction": true,
+      "maximum_state_norm": true,
+      "minimum_limited_shortening": true,
+      "myocardium_ecm_traction_l2": true,
+      "passive_tangent": true,
+      "peak_absolute_mean_endocardial_normal_displacement": true,
+      "peak_absolute_mean_endocardial_tangential_displacement": true,
+      "peak_free_shortening": true,
+      "peak_limited_shortening": true,
+      "shortening_fundamental_amplitude": true,
+      "shortening_phase_relative_to_activation_rad": true,
+      "shortening_waveform_l2": true
+    },
+    "pass": true
+  }
+}

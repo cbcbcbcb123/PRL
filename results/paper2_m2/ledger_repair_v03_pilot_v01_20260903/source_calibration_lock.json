@@ -1,0 +1,21 @@
+{
+  "checks": {
+    "config_digest": {
+      "actual": "431bf176833b975af26f6ac05810f6956f2d678dbe6da13f8c11e84d817f46f9",
+      "expected": "431bf176833b975af26f6ac05810f6956f2d678dbe6da13f8c11e84d817f46f9",
+      "pass": true
+    },
+    "dcm_active_scale": {
+      "actual": 0.8891803904091895,
+      "expected": 0.8891803904091895,
+      "pass": true
+    },
+    "dcm_passive_scale": {
+      "actual": 2.4532573887517564,
+      "expected": 2.4532573887517564,
+      "pass": true
+    }
+  },
+  "pass": true,
+  "schema": "paper2_m2a_v03_source_calibration_lock_v01"
+}
