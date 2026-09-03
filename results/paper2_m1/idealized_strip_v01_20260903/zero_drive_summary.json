@@ -1,0 +1,94 @@
+{
+  "config": {
+    "cycles": 4,
+    "ecm_drag": [
+      0.05,
+      0.05
+    ],
+    "ecm_equilibrium_modulus": [
+      1.0,
+      1.2
+    ],
+    "ecm_maxwell_modulus": [
+      0.7,
+      0.9
+    ],
+    "ecm_myocardium_interface_stiffness": [
+      8.0,
+      9.0
+    ],
+    "ecm_relaxation_time": [
+      0.22,
+      0.3
+    ],
+    "endocardial_connection_stiffness": [
+      0.8,
+      0.25
+    ],
+    "endocardial_drag": [
+      0.1,
+      0.1
+    ],
+    "endocardium_ecm_interface_stiffness": [
+      7.0,
+      8.0
+    ],
+    "length": 1.0,
+    "myocardial_drag": [
+      0.12,
+      0.12
+    ],
+    "myocardial_modulus": [
+      2.5,
+      0.8
+    ],
+    "node_count": 9,
+    "period": 1.0,
+    "steps_per_cycle": 128,
+    "support_stiffness": [
+      0.45,
+      0.6
+    ]
+  },
+  "drive": {
+    "activation_peak": 0.0,
+    "external_normal_peak": 0.0,
+    "external_tangential_amplitude": 0.0,
+    "pressure_peak": 0.0,
+    "shear_amplitude": 0.0
+  },
+  "summary": {
+    "case_name": "zero_drive",
+    "cycle_integrated_ledger_residual": 0.0,
+    "cycles": 4,
+    "dimension_statement": "1D P1 strip with 2D tangential/normal kinematics",
+    "integrated_dissipation": {
+      "ecm": 0.0,
+      "endocardium": 0.0,
+      "myocardium": 0.0
+    },
+    "integrated_work": {
+      "active": 0.0,
+      "external": 0.0,
+      "lumen": 0.0
+    },
+    "maximum_absolute_ecm_displacement": 0.0,
+    "maximum_absolute_ecm_internal_z": 0.0,
+    "maximum_absolute_ecm_myocardium_traction": 0.0,
+    "maximum_absolute_endocardial_connection_force": 0.0,
+    "maximum_absolute_endocardium_displacement": 0.0,
+    "maximum_absolute_endocardium_ecm_traction": 0.0,
+    "maximum_absolute_interface_power_residual": 0.0,
+    "maximum_absolute_myocardium_displacement": 0.0,
+    "maximum_absolute_step_ledger_residual": 0.0,
+    "maximum_action_reaction_error": 0.0,
+    "minimum_myocardial_shortening": -0.0,
+    "minimum_step_dissipation": 0.0,
+    "model_identity": "endocardial_DCM__viscoelastic_ECM_FEM__active_myocardial_FEM",
+    "node_count": 9,
+    "peak_myocardial_shortening": -0.0,
+    "steps_per_cycle": 128,
+    "transfer": {},
+    "units": "nondimensional_M1_verification"
+  }
+}

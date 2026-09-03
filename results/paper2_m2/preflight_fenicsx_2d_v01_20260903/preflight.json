@@ -1,0 +1,180 @@
+{
+  "candidate_nested_levels": [
+    {
+      "label": "S0",
+      "nx": 8,
+      "ny_per_layer": 2
+    },
+    {
+      "label": "S1",
+      "nx": 16,
+      "ny_per_layer": 4
+    },
+    {
+      "label": "S2",
+      "nx": 32,
+      "ny_per_layer": 8
+    }
+  ],
+  "geometry": {
+    "length": 4.0,
+    "plane_strain": true,
+    "total_thickness": 1.0
+  },
+  "levels": [
+    {
+      "level": {
+        "label": "S0",
+        "nx": 8,
+        "ny_per_layer": 2
+      },
+      "metadata": {
+        "assembled_nonzeros": 1040,
+        "assembled_vector_dofs": 90,
+        "assembly_seconds": 2.0945256950000157,
+        "estimated_m2a_state_dofs": 222,
+        "triangles_two_layer_probe": 64
+      },
+      "solves": {
+        "C0": {
+          "converged": true,
+          "iterations": 103,
+          "relative_residual": 5.1988505325170636e-08,
+          "solve_seconds": 0.005828858999961994,
+          "solver_info": 0
+        },
+        "C1": {
+          "converged": true,
+          "iterations": 107,
+          "relative_residual": 9.92322661138751e-09,
+          "solve_seconds": 0.00391402200000357,
+          "solver_info": 0
+        }
+      }
+    },
+    {
+      "level": {
+        "label": "S1",
+        "nx": 16,
+        "ny_per_layer": 4
+      },
+      "metadata": {
+        "assembled_nonzeros": 3872,
+        "assembled_vector_dofs": 306,
+        "assembly_seconds": 0.007193896000046607,
+        "estimated_m2a_state_dofs": 758,
+        "triangles_two_layer_probe": 256
+      },
+      "solves": {
+        "C0": {
+          "converged": true,
+          "iterations": 217,
+          "relative_residual": 8.75889368075377e-08,
+          "solve_seconds": 0.010505931000011515,
+          "solver_info": 0
+        },
+        "C1": {
+          "converged": true,
+          "iterations": 225,
+          "relative_residual": 9.911427906846216e-09,
+          "solve_seconds": 0.010592195000015181,
+          "solver_info": 0
+        }
+      }
+    },
+    {
+      "level": {
+        "label": "S2",
+        "nx": 32,
+        "ny_per_layer": 8
+      },
+      "metadata": {
+        "assembled_nonzeros": 14912,
+        "assembled_vector_dofs": 1122,
+        "assembly_seconds": 0.01095316300001059,
+        "estimated_m2a_state_dofs": 2790,
+        "triangles_two_layer_probe": 1024
+      },
+      "solves": {
+        "C0": {
+          "converged": true,
+          "iterations": 441,
+          "relative_residual": 9.137348748771899e-08,
+          "solve_seconds": 0.025279659999966952,
+          "solver_info": 0
+        },
+        "C1": {
+          "converged": true,
+          "iterations": 456,
+          "relative_residual": 9.204988742699176e-09,
+          "solve_seconds": 0.02638882899998407,
+          "solver_info": 0
+        }
+      }
+    }
+  ],
+  "provenance": {
+    "authorization": "project_control/paper2_m2a_execution_authorization_decision_v01.md",
+    "authorization_sha256": "2fc3cafeb27495e6a4a7f4bdfd0851613fcba0d18674ab0b531fbf786a3472e2",
+    "contract": "project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v01.md",
+    "contract_sha256": "e7ce3665574422e93e737487d69334fcfa1acf4941584a29ae45a48e4bf4dd29",
+    "dolfinx": "0.11.0.post0",
+    "logical_cpus_visible": 80,
+    "petsc": {
+      "authorinfo": [
+        "The PETSc Team",
+        "petsc-maint@mcs.anl.gov",
+        "https://petsc.org/"
+      ],
+      "date": "unknown",
+      "major": 3,
+      "minor": 25,
+      "release": true,
+      "subminor": 1
+    },
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "scipy": "1.17.1",
+    "script": "/workspace/scripts/preflight_paper2_m2a_fenicsx_2d_v01.py",
+    "script_sha256": "3254ea821853999271c443aa1d08c3a8e19fa77a79a365f432b790120ff8ce2f"
+  },
+  "purpose": "assembly_and_resource_probe_only_no_biological_case",
+  "resource_envelope": {
+    "cpu_processes": 1,
+    "endpoint_count": 324,
+    "estimated_seconds_per_finest_endpoint": 1.0,
+    "estimated_total_seconds": 324.0,
+    "execution_budget_seconds_per_endpoint": 30.0,
+    "execution_budget_seconds_total": 7200.0,
+    "gpu_used": false,
+    "maximum_resident_memory_budget_gib": 16.0,
+    "within_budget": true
+  },
+  "schema": "paper2_m2a_fenicsx_2d_preflight_v01",
+  "status": "PASS",
+  "time_ladder": [
+    64,
+    128,
+    256
+  ],
+  "tolerance_profiles": [
+    {
+      "coupling_tolerance": 0.0001,
+      "follower_tolerance": 1e-07,
+      "kkt_tolerance": 1e-05,
+      "label": "C0",
+      "lbfgs_gtol": 2e-07,
+      "maximum_coupling_iterations": 12,
+      "newton_fatol": 1e-07
+    },
+    {
+      "coupling_tolerance": 1e-05,
+      "follower_tolerance": 1e-08,
+      "kkt_tolerance": 1e-06,
+      "label": "C1",
+      "lbfgs_gtol": 2e-08,
+      "maximum_coupling_iterations": 24,
+      "newton_fatol": 1e-08
+    }
+  ]
+}

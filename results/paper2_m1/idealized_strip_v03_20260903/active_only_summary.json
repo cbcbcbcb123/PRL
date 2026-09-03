@@ -1,0 +1,216 @@
+{
+  "config": {
+    "cycles": 4,
+    "ecm_drag": [
+      0.05,
+      0.05
+    ],
+    "ecm_equilibrium_modulus": [
+      1.0,
+      1.2
+    ],
+    "ecm_maxwell_modulus": [
+      0.7,
+      0.9
+    ],
+    "ecm_myocardium_interface_stiffness": [
+      8.0,
+      9.0
+    ],
+    "ecm_relaxation_time": [
+      0.22,
+      0.3
+    ],
+    "endocardial_connection_stiffness": [
+      0.8,
+      0.25
+    ],
+    "endocardial_drag": [
+      0.1,
+      0.1
+    ],
+    "endocardium_ecm_interface_stiffness": [
+      7.0,
+      8.0
+    ],
+    "length": 1.0,
+    "myocardial_drag": [
+      0.12,
+      0.12
+    ],
+    "myocardial_modulus": [
+      2.5,
+      0.8
+    ],
+    "node_count": 9,
+    "period": 1.0,
+    "steps_per_cycle": 128,
+    "support_stiffness": [
+      0.45,
+      0.6
+    ]
+  },
+  "drive": {
+    "activation_peak": 0.1,
+    "external_normal_peak": 0.0,
+    "external_tangential_amplitude": 0.0,
+    "pressure_peak": 0.0,
+    "shear_amplitude": 0.0
+  },
+  "summary": {
+    "case_name": "active_only",
+    "cycle_ledgers": [
+      {
+        "cycle": 1,
+        "delta_stored_energy": 2.9462729831478096e-05,
+        "dissipation_ecm": 0.00017157643117638322,
+        "dissipation_endocardium": 5.92672019851103e-06,
+        "dissipation_myocardium": 0.0003309633951519696,
+        "numerical_residual": 2.2206418346294983e-19,
+        "work_active": 0.0005379292763583422,
+        "work_external": 0.0,
+        "work_lumen": 0.0
+      },
+      {
+        "cycle": 2,
+        "delta_stored_energy": 2.10665597401095e-06,
+        "dissipation_ecm": 0.00014188250875003268,
+        "dissipation_endocardium": 5.579773682287305e-06,
+        "dissipation_myocardium": 0.0003294348782890547,
+        "numerical_residual": -2.1196999505038866e-19,
+        "work_active": 0.00047900381669538535,
+        "work_external": 0.0,
+        "work_lumen": 0.0
+      },
+      {
+        "cycle": 3,
+        "delta_stored_energy": 7.567136704924308e-08,
+        "dissipation_ecm": 0.0001419073579228192,
+        "dissipation_endocardium": 5.5687809424183035e-06,
+        "dissipation_myocardium": 0.0003293818658757947,
+        "numerical_residual": -9.719703069743096e-20,
+        "work_active": 0.00047693367610808154,
+        "work_external": 0.0,
+        "work_lumen": 0.0
+      },
+      {
+        "cycle": 4,
+        "delta_stored_energy": 2.6906482814757727e-09,
+        "dissipation_ecm": 0.0001419095432523315,
+        "dissipation_endocardium": 5.568398445895222e-06,
+        "dissipation_myocardium": 0.0003293800129881597,
+        "numerical_residual": 8.478799802015546e-19,
+        "work_active": 0.0004768606453346687,
+        "work_external": 0.0,
+        "work_lumen": 0.0
+      }
+    ],
+    "cycles": 4,
+    "dimension_statement": "1D P1 strip with 2D tangential/normal kinematics",
+    "integrated_dissipation": {
+      "ecm": 0.0005972758411015666,
+      "endocardium": 2.2643673269111862e-05,
+      "myocardium": 0.0013191601523049787
+    },
+    "integrated_work": {
+      "active": 0.0019707274144964777,
+      "external": 0.0,
+      "lumen": 0.0
+    },
+    "maximum_absolute_cycle_integrated_ledger_residual": 8.478799802015546e-19,
+    "maximum_absolute_ecm_displacement": 0.011757985291914673,
+    "maximum_absolute_ecm_internal_z": 0.026370666126852377,
+    "maximum_absolute_ecm_myocardium_traction": 0.243358421183472,
+    "maximum_absolute_endocardial_connection_force": 0.012877155316030457,
+    "maximum_absolute_endocardium_displacement": 0.005376502563146566,
+    "maximum_absolute_endocardium_ecm_traction": 0.04469739651981468,
+    "maximum_absolute_interface_power_residual": 3.2526065174565133e-19,
+    "maximum_absolute_myocardium_displacement": 0.04189326538598293,
+    "maximum_absolute_step_ledger_residual": 5.499361410048545e-19,
+    "maximum_action_reaction_error": 0.0,
+    "minimum_myocardial_shortening": -0.0,
+    "minimum_step_dissipation": 9.164021979420495e-16,
+    "model_identity": "endocardial_DCM__viscoelastic_ECM_FEM__active_myocardial_FEM",
+    "node_count": 9,
+    "peak_ecm_shortening": 0.02351597058382915,
+    "peak_endocardial_shortening": 0.010753005126292941,
+    "peak_myocardial_shortening": 0.08378653077196564,
+    "run_integrated_ledger_residual": 7.607771379166848e-19,
+    "steps_per_cycle": 128,
+    "transfer": {
+      "activation": {
+        "input": {
+          "amplitude": 0.049999999999999996,
+          "offset": 0.05000000000000001,
+          "phase_rad_relative_to_sine": -1.5707963267948966
+        },
+        "responses": {
+          "ecm_mean_normal": {
+            "amplitude": 0.0,
+            "gain": 0.0,
+            "offset": 0.0,
+            "phase_lag_rad": 1.5707963267948966,
+            "phase_rad_relative_to_sine": 0.0
+          },
+          "ecm_mean_tangential": {
+            "amplitude": 3.2381377831044444e-17,
+            "gain": 6.4762755662088895e-16,
+            "offset": 8.622003122641152e-17,
+            "phase_lag_rad": -1.4469780496675178,
+            "phase_rad_relative_to_sine": -3.0177743764624143
+          },
+          "ecm_shortening": {
+            "amplitude": 0.010441348126747609,
+            "gain": 0.2088269625349522,
+            "offset": 0.013076222506327144,
+            "phase_lag_rad": -0.1788850472770429,
+            "phase_rad_relative_to_sine": -1.7496813740719397
+          },
+          "endocardial_shortening": {
+            "amplitude": 0.004784421529011648,
+            "gain": 0.09568843058023298,
+            "offset": 0.005969940854305406,
+            "phase_lag_rad": -0.2201431078990601,
+            "phase_rad_relative_to_sine": -1.7909394346939567
+          },
+          "endocardium_mean_normal": {
+            "amplitude": 0.0,
+            "gain": 0.0,
+            "offset": 0.0,
+            "phase_lag_rad": 1.5707963267948966,
+            "phase_rad_relative_to_sine": 0.0
+          },
+          "endocardium_mean_tangential": {
+            "amplitude": 3.2245044584062135e-17,
+            "gain": 6.449008916812428e-16,
+            "offset": 8.603585661311445e-17,
+            "phase_lag_rad": -1.5199112105888126,
+            "phase_rad_relative_to_sine": -3.090707537383709
+          },
+          "myocardial_shortening": {
+            "amplitude": 0.04156962531697482,
+            "gain": 0.8313925063394965,
+            "offset": 0.042225104001990116,
+            "phase_lag_rad": -0.02922750499117832,
+            "phase_rad_relative_to_sine": -1.600023831786075
+          },
+          "myocardium_mean_normal": {
+            "amplitude": 0.0,
+            "gain": 0.0,
+            "offset": 0.0,
+            "phase_lag_rad": 1.5707963267948966,
+            "phase_rad_relative_to_sine": 0.0
+          },
+          "myocardium_mean_tangential": {
+            "amplitude": 3.328101317238798e-17,
+            "gain": 6.656202634477597e-16,
+            "offset": 8.627766638132568e-17,
+            "phase_lag_rad": -1.35172242773845,
+            "phase_rad_relative_to_sine": -2.9225187545333466
+          }
+        }
+      }
+    },
+    "units": "nondimensional_M1_verification"
+  }
+}

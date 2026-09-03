@@ -1,0 +1,25 @@
+{
+  "S2_to_common_S2": {
+    "common_segments": 32,
+    "constant_field_max_abs_error": 0.0,
+    "discrete_interface_work_abs_error": 0.0,
+    "integrated_force_abs_error": 0.0,
+    "native_segments": 32,
+    "pass": true,
+    "sign_preserved": true,
+    "tolerance": 1e-12
+  },
+  "S3_to_common_S2": {
+    "common_segments": 32,
+    "constant_field_max_abs_error": 0.0,
+    "discrete_interface_work_abs_error": 0.0,
+    "integrated_force_abs_error": 0.0,
+    "native_segments": 64,
+    "pass": true,
+    "sign_preserved": true,
+    "tolerance": 1e-12
+  },
+  "definition": "exact integral average of native P1 nodal traction on each of the 32 S2 common segments",
+  "pass": true,
+  "schema": "paper2_m2a_common_interface_projection_checks_v01"
+}

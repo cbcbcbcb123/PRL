@@ -1,0 +1,79 @@
+{
+  "create_only": true,
+  "files": {
+    "active_only.npz": {
+      "bytes": 466127,
+      "sha256": "a4075c38bb61f8aba5e2159a7356b64ff7f2652d02f473d3f1ec7b0caea66367"
+    },
+    "active_only_N17.npz": {
+      "bytes": 804727,
+      "sha256": "dad1b1da420880e24216df8dea98ad706650f1c5a212d7a2245228e959993eb9"
+    },
+    "active_only_N17_summary.json": {
+      "bytes": 7250,
+      "sha256": "f81235e0ffb0cced65adf5965a9ab3937076536a21ad5114ca62e70c9b9629a9"
+    },
+    "active_only_T64.npz": {
+      "bytes": 240720,
+      "sha256": "566af81b38c9172a1caf3b595ddc9fd5a8f8c9fa878441030792fa67b6b5787b"
+    },
+    "active_only_T64_summary.json": {
+      "bytes": 7240,
+      "sha256": "898c330cbab3fa9ed1dc738d259351754cbfb5d34db3b4c2188715c5e0f060fb"
+    },
+    "active_only_summary.json": {
+      "bytes": 7237,
+      "sha256": "50e5a89a5860e72620160ff5b9b3a525b62afd117f84232619f8379a43c9b40e"
+    },
+    "external_port_only.npz": {
+      "bytes": 408206,
+      "sha256": "c3840d9ebe83a0b2de770670f3bbdceadb884cbdd03e3896d0d394b1e36b755f"
+    },
+    "external_port_only_summary.json": {
+      "bytes": 10457,
+      "sha256": "956dc1ee0d8d2706ff3efc7f1d508dd30f452b2649933196a7d26d197043a509"
+    },
+    "lumen_normal_only.npz": {
+      "bytes": 243860,
+      "sha256": "76ed8aca2015ec3af92d9ac54b3f9759927c4ed2dfc23cafe6adaf4edbb0cd70"
+    },
+    "lumen_normal_only_summary.json": {
+      "bytes": 6965,
+      "sha256": "af002e1adcfbf5c5315796a5799f94b752f6846a6ab507c09d483f339eaa1928"
+    },
+    "lumen_shear_only.npz": {
+      "bytes": 254930,
+      "sha256": "3bc31a2c6fd6f3f4b00820e05b06eee0f7ad9d3cfef57a2988c42f0abcc64d79"
+    },
+    "lumen_shear_only_summary.json": {
+      "bytes": 7234,
+      "sha256": "839825254a4b48d9ba10ad65d63e695ec66623f7bee7d7f9b35505b56e2fc556"
+    },
+    "m1_diagnostic_summary.png": {
+      "bytes": 375643,
+      "sha256": "cb8d977124c92e2a0c281bb44c9de666997acbb04d9322eeb334fae42a3c2057"
+    },
+    "passive_relaxation.npz": {
+      "bytes": 737090,
+      "sha256": "6f2396790322aa471434da760f4665f9f09a0e671f5c4dc0ed475204495a1ad2"
+    },
+    "passive_relaxation_summary.json": {
+      "bytes": 4386,
+      "sha256": "864b3194cc894afb2987be63db48522264090a693166361a5e69044fd5a840c2"
+    },
+    "validation_summary.json": {
+      "bytes": 37140,
+      "sha256": "639c370cbfaf3c586c6a7f71e9fd7e1b8114200eaf81f474a897844b3bfa9c5e"
+    },
+    "zero_drive.npz": {
+      "bytes": 12672,
+      "sha256": "b75a3556b163d2460cc7ef16e9c016782c467f3379c9714038e32526e63f0296"
+    },
+    "zero_drive_summary.json": {
+      "bytes": 3701,
+      "sha256": "4b15dfbe570dc4c58a32848584115eeb2e98fa848195321301d3a538fe9211e0"
+    }
+  },
+  "schema_version": "paper2_m1_idealized_strip_manifest_v01",
+  "status": "passed_m1_human_gate_candidate"
+}

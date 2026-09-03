@@ -1,0 +1,141 @@
+{
+  "config": {
+    "cycles": 4,
+    "ecm_drag": [
+      0.05,
+      0.05
+    ],
+    "ecm_equilibrium_modulus": [
+      1.0,
+      1.2
+    ],
+    "ecm_maxwell_modulus": [
+      0.7,
+      0.9
+    ],
+    "ecm_myocardium_interface_stiffness": [
+      8.0,
+      9.0
+    ],
+    "ecm_relaxation_time": [
+      0.22,
+      0.3
+    ],
+    "endocardial_connection_stiffness": [
+      0.8,
+      0.25
+    ],
+    "endocardial_drag": [
+      0.1,
+      0.1
+    ],
+    "endocardium_ecm_interface_stiffness": [
+      7.0,
+      8.0
+    ],
+    "length": 1.0,
+    "myocardial_drag": [
+      0.12,
+      0.12
+    ],
+    "myocardial_modulus": [
+      2.5,
+      0.8
+    ],
+    "node_count": 9,
+    "period": 1.0,
+    "steps_per_cycle": 128,
+    "support_stiffness": [
+      0.45,
+      0.6
+    ]
+  },
+  "drive": {
+    "activation_peak": 0.0,
+    "external_normal_peak": 0.0,
+    "external_tangential_amplitude": 0.0,
+    "pressure_peak": 0.0,
+    "shear_amplitude": 0.0
+  },
+  "summary": {
+    "case_name": "passive_relaxation",
+    "cycle_ledgers": [
+      {
+        "cycle": 1,
+        "delta_stored_energy": -0.0004783981469109292,
+        "dissipation_ecm": 6.178122213584166e-05,
+        "dissipation_endocardium": 0.0003985079563340244,
+        "dissipation_myocardium": 1.8108968441063278e-05,
+        "numerical_residual": 4.0363518760443815e-20,
+        "work_active": 0.0,
+        "work_external": 0.0,
+        "work_lumen": 0.0
+      },
+      {
+        "cycle": 2,
+        "delta_stored_energy": -4.699172620641341e-08,
+        "dissipation_ecm": 8.806326221908439e-09,
+        "dissipation_endocardium": 1.8400044672662043e-08,
+        "dissipation_myocardium": 1.9785355311840896e-08,
+        "numerical_residual": 2.0327834306519944e-21,
+        "work_active": 0.0,
+        "work_external": 0.0,
+        "work_lumen": 0.0
+      },
+      {
+        "cycle": 3,
+        "delta_stored_energy": -1.8278942468509434e-09,
+        "dissipation_ecm": 3.41929976812055e-10,
+        "dissipation_endocardium": 7.160273318399079e-10,
+        "dissipation_myocardium": 7.699369381989073e-10,
+        "numerical_residual": 7.30406943232859e-23,
+        "work_active": 0.0,
+        "work_external": 0.0,
+        "work_lumen": 0.0
+      },
+      {
+        "cycle": 4,
+        "delta_stored_energy": -7.112275039972176e-11,
+        "dissipation_ecm": 1.3297170938354083e-11,
+        "dissipation_endocardium": 2.7863850844017413e-11,
+        "dissipation_myocardium": 2.996172861734716e-11,
+        "numerical_residual": 3.109487739989492e-24,
+        "work_active": 0.0,
+        "work_external": 0.0,
+        "work_lumen": 0.0
+      }
+    ],
+    "cycles": 4,
+    "dimension_statement": "1D P1 strip with 2D tangential/normal kinematics",
+    "integrated_dissipation": {
+      "ecm": 6.179038368921132e-05,
+      "endocardium": 0.0003985271002698797,
+      "myocardium": 1.8129553695041936e-05
+    },
+    "integrated_work": {
+      "active": 0.0,
+      "external": 0.0,
+      "lumen": 0.0
+    },
+    "maximum_absolute_cycle_integrated_ledger_residual": 4.0363518760443815e-20,
+    "maximum_absolute_ecm_displacement": 0.003073072574929458,
+    "maximum_absolute_ecm_internal_z": 0.00011702509109673024,
+    "maximum_absolute_ecm_myocardium_traction": 0.01987390915441115,
+    "maximum_absolute_endocardial_connection_force": 0.02449173967136575,
+    "maximum_absolute_endocardium_displacement": 0.01,
+    "maximum_absolute_endocardium_ecm_traction": 0.07,
+    "maximum_absolute_interface_power_residual": 2.710505431213761e-20,
+    "maximum_absolute_myocardium_displacement": 0.0020798111315696493,
+    "maximum_absolute_step_ledger_residual": 5.421010862427522e-20,
+    "maximum_action_reaction_error": 0.0,
+    "minimum_myocardial_shortening": -8.673617379884035e-19,
+    "minimum_step_dissipation": 1.3827498576342401e-14,
+    "model_identity": "endocardial_DCM__viscoelastic_ECM_FEM__active_myocardial_FEM",
+    "node_count": 9,
+    "peak_myocardial_shortening": 2.6020852139652106e-18,
+    "run_integrated_ledger_residual": 4.2472452373159085e-20,
+    "steps_per_cycle": 128,
+    "transfer": {},
+    "units": "nondimensional_M1_verification"
+  }
+}

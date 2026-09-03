@@ -1,0 +1,282 @@
+{
+  "ID-A2__DCM__S2": {
+    "checks": {
+      "action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.2338159870240166e-16
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 5.835123836881955e-09
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 2.3304747731202314e-12
+      },
+      "solver_residual": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 6.917762326184568e-13
+      },
+      "ufl_manual_assembly": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 5.583771089420933e-16
+      }
+    },
+    "pass": true
+  },
+  "ID-A2__DCM__S3": {
+    "checks": {
+      "action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.230368012130851e-16
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 5.836424576133712e-09
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 3.920048221003644e-11
+      },
+      "solver_residual": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 9.401787476146254e-12
+      },
+      "ufl_manual_assembly": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 8.447645152316956e-16
+      }
+    },
+    "pass": true
+  },
+  "ID-A2__FEM__S2": {
+    "checks": {
+      "action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.2428891375706113e-16
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 3.3710704234705655e-09
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 4.717359229281304e-13
+      },
+      "solver_residual": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 2.171800424571023e-13
+      },
+      "ufl_manual_assembly": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 5.583771089420933e-16
+      }
+    },
+    "pass": true
+  },
+  "ID-A2__FEM__S3": {
+    "checks": {
+      "action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.2425646095306227e-16
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 3.3645566030318808e-09
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 6.681259793053503e-12
+      },
+      "solver_residual": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 3.4758369334634924e-12
+      },
+      "ufl_manual_assembly": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 8.447645152316956e-16
+      }
+    },
+    "pass": true
+  },
+  "ID-S1__DCM__S2": {
+    "checks": {
+      "action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.226315372579927e-16
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 6.425772969787303e-09
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 3.348426977365568e-12
+      },
+      "solver_residual": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 7.552175379914087e-13
+      },
+      "ufl_manual_assembly": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 5.583771089420933e-16
+      }
+    },
+    "pass": true
+  },
+  "ID-S1__DCM__S3": {
+    "checks": {
+      "action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.2229240119593815e-16
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 6.4596484967863356e-09
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 2.1428945210256667e-11
+      },
+      "solver_residual": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 9.430213778699762e-12
+      },
+      "ufl_manual_assembly": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 8.447645152316956e-16
+      }
+    },
+    "pass": true
+  },
+  "ID-S1__FEM__S2": {
+    "checks": {
+      "action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.23515130607048e-16
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 4.8618690018946485e-09
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 8.476546710536588e-13
+      },
+      "solver_residual": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 1.9197188264353313e-13
+      },
+      "ufl_manual_assembly": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 5.583771089420933e-16
+      }
+    },
+    "pass": true
+  },
+  "ID-S1__FEM__S3": {
+    "checks": {
+      "action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.234212263477321e-16
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 4.869266928601055e-09
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 7.816389539620127e-12
+      },
+      "solver_residual": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 2.9325780930650366e-12
+      },
+      "ufl_manual_assembly": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 8.447645152316956e-16
+      }
+    },
+    "pass": true
+  }
+}

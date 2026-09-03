@@ -1,0 +1,23 @@
+{
+  "active": {
+    "calibration_case": "ID-A1",
+    "dcm_active_scale": 0.8891803904091895,
+    "dcm_unit_total_active_work": 0.00015859793234606755,
+    "fem_total_active_work": 0.0001253941494231966,
+    "predicted_relative_work_mismatch_after_calibration": 0.0,
+    "spatial_label": "S1",
+    "steps_per_cycle": 128,
+    "tolerance_label": "C1"
+  },
+  "config_digest": "431bf176833b975af26f6ac05810f6956f2d678dbe6da13f8c11e84d817f46f9",
+  "held_out_quantities_used": [],
+  "passive": {
+    "calibration_case": "ID-P1",
+    "dcm_passive_scale": 2.4532573887517564,
+    "dcm_raw_passive_tangent": 0.2743604997025583,
+    "fem_passive_tangent": 0.6730769230769252,
+    "relative_tangent_mismatch_after_calibration": 0.0,
+    "spatial_level": "S1"
+  },
+  "schema": "paper2_m2a_two_quantity_calibration_v01"
+}

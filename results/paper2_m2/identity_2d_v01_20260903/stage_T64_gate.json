@@ -1,0 +1,5553 @@
+{
+  "comparisons": [
+    {
+      "case_id": "ID-P0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0,
+      "kind": "spatial",
+      "metric": "maximum_state_norm",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case_id": "ID-P0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0,
+      "kind": "spatial",
+      "metric": "maximum_state_norm",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case_id": "ID-P0",
+      "kind": "C0_C1",
+      "metric": "maximum_state_norm",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case_id": "ID-P0",
+      "kind": "C0_C1",
+      "metric": "maximum_state_norm",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case_id": "ID-P0",
+      "kind": "C0_C1",
+      "metric": "maximum_state_norm",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case_id": "ID-P0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0,
+      "kind": "spatial",
+      "metric": "maximum_state_norm",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case_id": "ID-P0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0,
+      "kind": "spatial",
+      "metric": "maximum_state_norm",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case_id": "ID-P0",
+      "kind": "C0_C1",
+      "metric": "maximum_state_norm",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case_id": "ID-P0",
+      "kind": "C0_C1",
+      "metric": "maximum_state_norm",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case_id": "ID-P0",
+      "kind": "C0_C1",
+      "metric": "maximum_state_norm",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case_id": "ID-P1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 9.072108144079738e-15,
+      "kind": "spatial",
+      "metric": "passive_tangent",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.6730769230769249,
+        0.6730769230769253,
+        0.6730769230769315
+      ]
+    },
+    {
+      "case_id": "ID-P1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 9.072108144079738e-15,
+      "kind": "spatial",
+      "metric": "passive_tangent",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.6730769230769249,
+        0.6730769230769253,
+        0.6730769230769315
+      ]
+    },
+    {
+      "case_id": "ID-P1",
+      "kind": "C0_C1",
+      "metric": "passive_tangent",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.6730769230769249,
+        0.6730769230769249
+      ]
+    },
+    {
+      "case_id": "ID-P1",
+      "kind": "C0_C1",
+      "metric": "passive_tangent",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.6730769230769253,
+        0.6730769230769253
+      ]
+    },
+    {
+      "case_id": "ID-P1",
+      "kind": "C0_C1",
+      "metric": "passive_tangent",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.6730769230769315,
+        0.6730769230769315
+      ]
+    },
+    {
+      "case_id": "ID-P1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.1051477193697236e-14,
+      "kind": "spatial",
+      "metric": "passive_tangent",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.6730769230769231,
+        0.6730769230769252,
+        0.6730769230769178
+      ]
+    },
+    {
+      "case_id": "ID-P1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.1051477193697236e-14,
+      "kind": "spatial",
+      "metric": "passive_tangent",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.6730769230769231,
+        0.6730769230769252,
+        0.6730769230769178
+      ]
+    },
+    {
+      "case_id": "ID-P1",
+      "kind": "C0_C1",
+      "metric": "passive_tangent",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.6730769230769231,
+        0.6730769230769231
+      ]
+    },
+    {
+      "case_id": "ID-P1",
+      "kind": "C0_C1",
+      "metric": "passive_tangent",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.6730769230769252,
+        0.6730769230769252
+      ]
+    },
+    {
+      "case_id": "ID-P1",
+      "kind": "C0_C1",
+      "metric": "passive_tangent",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.6730769230769178,
+        0.6730769230769178
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00017923567166271747,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.029487695088852024,
+        0.029506023249600655,
+        0.029511312729559386
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00018177350664433479,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.018382274049338666,
+        0.01839381625673657,
+        0.018397160373089885
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.019627083067393643,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0005496494921410318,
+        0.000583361081466995,
+        0.0005950399805945444
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0014381094539108277,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0005140252753287642,
+        0.0005157316308073632,
+        0.0005149899522734183
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0011359324627763622,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0001258441593799834,
+        0.0001252464842115725,
+        0.00012510421266430797
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00017923567166271747,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.029487695088852024,
+        0.029506023249600655,
+        0.029511312729559386
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00018177350664433479,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.018382274049338666,
+        0.01839381625673657,
+        0.018397160373089885
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.019627083067393643,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0005496494921410318,
+        0.000583361081466995,
+        0.0005950399805945444
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0014381094539108277,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0005140252753287642,
+        0.0005157316308073632,
+        0.0005149899522734183
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0011359324627763622,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0001258441593799834,
+        0.0001252464842115725,
+        0.00012510421266430797
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029487695088852024,
+        0.029487695088852024
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018382274049338666,
+        0.018382274049338666
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0005496494921410318,
+        0.0005496494921410318
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0005140252753287642,
+        0.0005140252753287642
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0001258441593799834,
+        0.0001258441593799834
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029506023249600655,
+        0.029506023249600655
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.01839381625673657,
+        0.01839381625673657
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.000583361081466995,
+        0.000583361081466995
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0005157316308073632,
+        0.0005157316308073632
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0001252464842115725,
+        0.0001252464842115725
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029511312729559386,
+        0.029511312729559386
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018397160373089885,
+        0.018397160373089885
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0005950399805945444,
+        0.0005950399805945444
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0005149899522734183,
+        0.0005149899522734183
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00012510421266430797,
+        0.00012510421266430797
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00020213178847024142,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.02965153457261379,
+        0.029671332126125084,
+        0.029677330858088453
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00020587630522199624,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.018486331910245676,
+        0.018498824538432514,
+        0.018502633792314552
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.088598813370759,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.00030790336247327454,
+        0.00040123985953321176,
+        0.00044024504841514605
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00753336805480286,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.00022395964339173697,
+        0.00023699114675923764,
+        0.00023879004001851824
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0010950365631545351,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.00012584339945544097,
+        0.0001252470167354609,
+        0.00012510986667270955
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00020213178847024142,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.02965153457261379,
+        0.029671332126125084,
+        0.029677330858088453
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00020587630522199624,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.018486331910245676,
+        0.018498824538432514,
+        0.018502633792314552
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.088598813370759,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.00030790336247327454,
+        0.00040123985953321176,
+        0.00044024504841514605
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00753336805480286,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.00022395964339173697,
+        0.00023699114675923764,
+        0.00023879004001851824
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0010950365631545351,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.00012584339945544097,
+        0.0001252470167354609,
+        0.00012510986667270955
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.02965153457261379,
+        0.02965153457261379
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018486331910245676,
+        0.018486331910245676
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00030790336247327454,
+        0.00030790336247327454
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00022395964339173697,
+        0.00022395964339173697
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00012584339945544097,
+        0.00012584339945544097
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029671332126125084,
+        0.029671332126125084
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018498824538432514,
+        0.018498824538432514
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00040123985953321176,
+        0.00040123985953321176
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00023699114675923764,
+        0.00023699114675923764
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0001252470167354609,
+        0.0001252470167354609
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029677330858088453,
+        0.029677330858088453
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018502633792314552,
+        0.018502633792314552
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00044024504841514605,
+        0.00044024504841514605
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00023879004001851824,
+        0.00023879004001851824
+      ]
+    },
+    {
+      "case_id": "ID-A1",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00012510986667270955,
+        0.00012510986667270955
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00017923567166271747,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.029487695088852024,
+        0.029506023249600655,
+        0.029511312729559386
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00018177350664433479,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.018382274049338666,
+        0.01839381625673657,
+        0.018397160373089885
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.019627083067393643,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0005496494921410318,
+        0.000583361081466995,
+        0.0005950399805945444
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0014381094539108277,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0005140252753287642,
+        0.0005157316308073632,
+        0.0005149899522734183
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0011359324627763622,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0001258441593799834,
+        0.0001252464842115725,
+        0.00012510421266430797
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00017923567166271747,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.029487695088852024,
+        0.029506023249600655,
+        0.029511312729559386
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00018177350664433479,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.018382274049338666,
+        0.01839381625673657,
+        0.018397160373089885
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.019627083067393643,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0005496494921410318,
+        0.000583361081466995,
+        0.0005950399805945444
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0014381094539108277,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0005140252753287642,
+        0.0005157316308073632,
+        0.0005149899522734183
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0011359324627763622,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0001258441593799834,
+        0.0001252464842115725,
+        0.00012510421266430797
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029487695088852024,
+        0.029487695088852024
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018382274049338666,
+        0.018382274049338666
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0005496494921410318,
+        0.0005496494921410318
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0005140252753287642,
+        0.0005140252753287642
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0001258441593799834,
+        0.0001258441593799834
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029506023249600655,
+        0.029506023249600655
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.01839381625673657,
+        0.01839381625673657
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.000583361081466995,
+        0.000583361081466995
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0005157316308073632,
+        0.0005157316308073632
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0001252464842115725,
+        0.0001252464842115725
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029511312729559386,
+        0.029511312729559386
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018397160373089885,
+        0.018397160373089885
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0005950399805945444,
+        0.0005950399805945444
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0005149899522734183,
+        0.0005149899522734183
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00012510421266430797,
+        0.00012510421266430797
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00020213178847024142,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.02965153457261379,
+        0.029671332126125084,
+        0.029677330858088453
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00020587630522199624,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.018486331910245676,
+        0.018498824538432514,
+        0.018502633792314552
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.088598813370759,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.00030790336247327454,
+        0.00040123985953321176,
+        0.00044024504841514605
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00753336805480286,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.00022395964339173697,
+        0.00023699114675923764,
+        0.00023879004001851824
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0010950365631545351,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.00012584339945544097,
+        0.0001252470167354609,
+        0.00012510986667270955
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00020213178847024142,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.02965153457261379,
+        0.029671332126125084,
+        0.029677330858088453
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00020587630522199624,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.018486331910245676,
+        0.018498824538432514,
+        0.018502633792314552
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.088598813370759,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.00030790336247327454,
+        0.00040123985953321176,
+        0.00044024504841514605
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00753336805480286,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.00022395964339173697,
+        0.00023699114675923764,
+        0.00023879004001851824
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0010950365631545351,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.00012584339945544097,
+        0.0001252470167354609,
+        0.00012510986667270955
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.02965153457261379,
+        0.02965153457261379
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018486331910245676,
+        0.018486331910245676
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00030790336247327454,
+        0.00030790336247327454
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00022395964339173697,
+        0.00022395964339173697
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00012584339945544097,
+        0.00012584339945544097
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029671332126125084,
+        0.029671332126125084
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018498824538432514,
+        0.018498824538432514
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00040123985953321176,
+        0.00040123985953321176
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00023699114675923764,
+        0.00023699114675923764
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0001252470167354609,
+        0.0001252470167354609
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029677330858088453,
+        0.029677330858088453
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018502633792314552,
+        0.018502633792314552
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00044024504841514605,
+        0.00044024504841514605
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00023879004001851824,
+        0.00023879004001851824
+      ]
+    },
+    {
+      "case_id": "ID-A2",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00012510986667270955,
+        0.00012510986667270955
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0001887062291550177,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        -0.0033924186952646804,
+        -0.0033945653846063763,
+        -0.003395206081143153
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00018513767377884003,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.006461513340852232,
+        0.006465631777421802,
+        0.006466829031105346
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 9.383757097818968e-07,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.042607648128970235,
+        0.04260779121793775,
+        0.042607831200091595
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 8.969303435488263e-07,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.042882314670131844,
+        0.042882478630589416,
+        0.042882517093220204
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.969495918968834e-06,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.004582118269631233,
+        0.004582041443865497,
+        0.004582023255470685
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0001887062291550177,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        -0.0033924186952646804,
+        -0.0033945653846063763,
+        -0.003395206081143153
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00018513767377884003,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.006461513340852232,
+        0.006465631777421802,
+        0.006466829031105346
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 9.383757097818968e-07,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.042607648128970235,
+        0.04260779121793775,
+        0.042607831200091595
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 8.969303435488263e-07,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.042882314670131844,
+        0.042882478630589416,
+        0.042882517093220204
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.969495918968834e-06,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.004582118269631233,
+        0.004582041443865497,
+        0.004582023255470685
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        -0.0033924186952646804,
+        -0.0033924186952646804
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.006461513340852232,
+        0.006461513340852232
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042607648128970235,
+        0.042607648128970235
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042882314670131844,
+        0.042882314670131844
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004582118269631233,
+        0.004582118269631233
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        -0.0033945653846063763,
+        -0.0033945653846063763
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.006465631777421802,
+        0.006465631777421802
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04260779121793775,
+        0.04260779121793775
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042882478630589416,
+        0.042882478630589416
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004582041443865497,
+        0.004582041443865497
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        -0.003395206081143153,
+        -0.003395206081143153
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.006466829031105346,
+        0.006466829031105346
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042607831200091595,
+        0.042607831200091595
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042882517093220204,
+        0.042882517093220204
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004582023255470685,
+        0.004582023255470685
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00022937557885972147,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        -0.004153087971295115,
+        -0.004156120988363824,
+        -0.004157074519738152
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0002104755089958443,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.007879511652347904,
+        0.007884924261864577,
+        0.007886584194687192
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.8580342117657457e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.04260157881034482,
+        0.042601774051723114,
+        0.04260185320742386
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 7.717551863288057e-07,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.042875739664190345,
+        0.042875885382126055,
+        0.042875918471838505
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.079170407300836e-06,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.004587656412485167,
+        0.004587610272547855,
+        0.004587600734124336
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00022937557885972147,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        -0.004153087971295115,
+        -0.004156120988363824,
+        -0.004157074519738152
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0002104755089958443,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.007879511652347904,
+        0.007884924261864577,
+        0.007886584194687192
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.8580342117657457e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.04260157881034482,
+        0.042601774051723114,
+        0.04260185320742386
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 7.717551863288057e-07,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.042875739664190345,
+        0.042875885382126055,
+        0.042875918471838505
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.079170407300836e-06,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.004587656412485167,
+        0.004587610272547855,
+        0.004587600734124336
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        -0.004153087971295115,
+        -0.004153087971295115
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.007879511652347904,
+        0.007879511652347904
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04260157881034482,
+        0.04260157881034482
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042875739664190345,
+        0.042875739664190345
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004587656412485167,
+        0.004587656412485167
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        -0.004156120988363824,
+        -0.004156120988363824
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.007884924261864577,
+        0.007884924261864577
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042601774051723114,
+        0.042601774051723114
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042875885382126055,
+        0.042875885382126055
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004587610272547855,
+        0.004587610272547855
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        -0.004157074519738152,
+        -0.004157074519738152
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.007886584194687192,
+        0.007886584194687192
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04260185320742386,
+        0.04260185320742386
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042875918471838505,
+        0.042875918471838505
+      ]
+    },
+    {
+      "case_id": "ID-LN",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004587600734124336,
+        0.004587600734124336
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.072376600750245e-10,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        -2.013122670245991e-16,
+        9.820629969900285e-16,
+        8.74825336915004e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.138429980731984e-10,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        2.420060018284192e-16,
+        9.28781990150708e-16,
+        5.149389920775097e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.142574159910962e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.025818601600201302,
+        0.025818822562287937,
+        0.025818877881148523
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.519425063001785e-06,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.025998899660467745,
+        0.025999369553072773,
+        0.025999487055806198
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.7195789832554544e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0021731068581374827,
+        0.002172957306870469,
+        0.0021729199411533047
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.072376600750245e-10,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        -2.013122670245991e-16,
+        9.820629969900285e-16,
+        8.74825336915004e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.138429980731984e-10,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        2.420060018284192e-16,
+        9.28781990150708e-16,
+        5.149389920775097e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.142574159910962e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.025818601600201302,
+        0.025818822562287937,
+        0.025818877881148523
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.519425063001785e-06,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.025998899660467745,
+        0.025999369553072773,
+        0.025999487055806198
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.7195789832554544e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0021731068581374827,
+        0.002172957306870469,
+        0.0021729199411533047
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        -2.013122670245991e-16,
+        -2.013122670245991e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        2.420060018284192e-16,
+        2.420060018284192e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.025818601600201302,
+        0.025818601600201302
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.025998899660467745,
+        0.025998899660467745
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0021731068581374827,
+        0.0021731068581374827
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        9.820629969900285e-16,
+        9.820629969900285e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        9.28781990150708e-16,
+        9.28781990150708e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.025818822562287937,
+        0.025818822562287937
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.025999369553072773,
+        0.025999369553072773
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.002172957306870469,
+        0.002172957306870469
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        8.74825336915004e-16,
+        8.74825336915004e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        5.149389920775097e-16,
+        5.149389920775097e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.025818877881148523,
+        0.025818877881148523
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.025999487055806198,
+        0.025999487055806198
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0021729199411533047,
+        0.0021729199411533047
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.6758540841541767e-09,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        -2.0082637321997295e-16,
+        7.034120204472347e-17,
+        2.7461952861989e-15
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.309282883457191e-09,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        2.3478393711582156e-16,
+        4.087680658648155e-17,
+        2.3501596900436725e-15
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.1524707567007503e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.025870760351874734,
+        0.025870879326013164,
+        0.0258709091414794
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.6760261642815797e-06,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.026050838592267967,
+        0.02605122155888695,
+        0.026051317324211048
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.4077827323329811e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.002147146239006247,
+        0.0021470252839404444,
+        0.0021469950584892383
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.6758540841541767e-09,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        -2.0082637321997295e-16,
+        7.034120204472347e-17,
+        2.7461952861989e-15
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.309282883457191e-09,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        2.3478393711582156e-16,
+        4.087680658648155e-17,
+        2.3501596900436725e-15
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.1524707567007503e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.025870760351874734,
+        0.025870879326013164,
+        0.0258709091414794
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.6760261642815797e-06,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.026050838592267967,
+        0.02605122155888695,
+        0.026051317324211048
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.4077827323329811e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.002147146239006247,
+        0.0021470252839404444,
+        0.0021469950584892383
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        -2.0082637321997295e-16,
+        -2.0082637321997295e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        2.3478393711582156e-16,
+        2.3478393711582156e-16
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.025870760351874734,
+        0.025870760351874734
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.026050838592267967,
+        0.026050838592267967
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.002147146239006247,
+        0.002147146239006247
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        7.034120204472347e-17,
+        7.034120204472347e-17
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        4.087680658648155e-17,
+        4.087680658648155e-17
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.025870879326013164,
+        0.025870879326013164
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.02605122155888695,
+        0.02605122155888695
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0021470252839404444,
+        0.0021470252839404444
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        2.7461952861989e-15,
+        2.7461952861989e-15
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        2.3501596900436725e-15,
+        2.3501596900436725e-15
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0258709091414794,
+        0.0258709091414794
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.026051317324211048,
+        0.026051317324211048
+      ]
+    },
+    {
+      "case_id": "ID-LS",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0021469950584892383,
+        0.0021469950584892383
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00017946651735735371,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.021608136216166453,
+        0.02162163333146544,
+        0.021625514387218575
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00017871266153562875,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.012748285331863993,
+        0.012756178442855853,
+        0.012758458540938796
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.6486781859902725e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.04263993342467599,
+        0.042640107412904034,
+        0.042640177712834876
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.688844801881067e-08,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.04292056131334902,
+        0.04292059737941024,
+        0.04292059939189053
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.266721407753106e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.004500572716176521,
+        0.004499810579379789,
+        0.00449961858499849
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00017946651735735371,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.021608136216166453,
+        0.02162163333146544,
+        0.021625514387218575
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00017871266153562875,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.012748285331863993,
+        0.012756178442855853,
+        0.012758458540938796
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 1.6486781859902725e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.04263993342467599,
+        0.042640107412904034,
+        0.042640177712834876
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.688844801881067e-08,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.04292056131334902,
+        0.04292059737941024,
+        0.04292059939189053
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.266721407753106e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.004500572716176521,
+        0.004499810579379789,
+        0.00449961858499849
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.021608136216166453,
+        0.021608136216166453
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.012748285331863993,
+        0.012748285331863993
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04263993342467599,
+        0.04263993342467599
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04292056131334902,
+        0.04292056131334902
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004500572716176521,
+        0.004500572716176521
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.02162163333146544,
+        0.02162163333146544
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.012756178442855853,
+        0.012756178442855853
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042640107412904034,
+        0.042640107412904034
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04292059737941024,
+        0.04292059737941024
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004499810579379789,
+        0.004499810579379789
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.021625514387218575,
+        0.021625514387218575
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.012758458540938796,
+        0.012758458540938796
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042640177712834876,
+        0.042640177712834876
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04292059939189053,
+        0.04292059939189053
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00449961858499849,
+        0.00449961858499849
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0001977324437589627,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.02017386220637816,
+        0.02018706532134996,
+        0.02019105774854066
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00020011415262556352,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.01176325416184307,
+        0.011771035372610693,
+        0.011773391394853203
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.2458270241273346e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.04262078023818278,
+        0.042620999994471304,
+        0.04262113833531391
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.629747619555024e-08,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0428757977185031,
+        0.04287579916191181,
+        0.04287579717687052
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.151072288781257e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.004690921088048589,
+        0.004690154137838833,
+        0.0046899594461501165
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0001977324437589627,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.02017386220637816,
+        0.02018706532134996,
+        0.02019105774854066
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00020011415262556352,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.01176325416184307,
+        0.011771035372610693,
+        0.011773391394853203
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.2458270241273346e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.04262078023818278,
+        0.042620999994471304,
+        0.04262113833531391
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.629747619555024e-08,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0428757977185031,
+        0.04287579916191181,
+        0.04287579717687052
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 4.151072288781257e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.004690921088048589,
+        0.004690154137838833,
+        0.0046899594461501165
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.02017386220637816,
+        0.02017386220637816
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.01176325416184307,
+        0.01176325416184307
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04262078023818278,
+        0.04262078023818278
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0428757977185031,
+        0.0428757977185031
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004690921088048589,
+        0.004690921088048589
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.02018706532134996,
+        0.02018706532134996
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.011771035372610693,
+        0.011771035372610693
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042620999994471304,
+        0.042620999994471304
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04287579916191181,
+        0.04287579916191181
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004690154137838833,
+        0.004690154137838833
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.02019105774854066,
+        0.02019105774854066
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.011773391394853203,
+        0.011773391394853203
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04262113833531391,
+        0.04262113833531391
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04287579717687052,
+        0.04287579717687052
+      ]
+    },
+    {
+      "case_id": "ID-C0",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0046899594461501165,
+        0.0046899594461501165
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0001748832196403714,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.021440360177881798,
+        0.021453344927165368,
+        0.02145709741344517
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00017922879756442466,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.012668786298491353,
+        0.01267665464550708,
+        0.012678927074361026
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.882912060199474e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.04277013005369314,
+        0.04277067070196931,
+        0.04277083677736726
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.2118260502213555e-06,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.043052195875153985,
+        0.0430525895858918,
+        0.0430526848109416
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.408755517666485e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0047079624290112185,
+        0.004707287928077185,
+        0.004707127468140204
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0001748832196403714,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.021440360177881798,
+        0.021453344927165368,
+        0.02145709741344517
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00017922879756442466,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.012668786298491353,
+        0.01267665464550708,
+        0.012678927074361026
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.882912060199474e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.04277013005369314,
+        0.04277067070196931,
+        0.04277083677736726
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.2118260502213555e-06,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.043052195875153985,
+        0.0430525895858918,
+        0.0430526848109416
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.408755517666485e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0047079624290112185,
+        0.004707287928077185,
+        0.004707127468140204
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.021440360177881798,
+        0.021440360177881798
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.012668786298491353,
+        0.012668786298491353
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04277013005369314,
+        0.04277013005369314
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.043052195875153985,
+        0.043052195875153985
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0047079624290112185,
+        0.0047079624290112185
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.021453344927165368,
+        0.021453344927165368
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.01267665464550708,
+        0.01267665464550708
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04277067070196931,
+        0.04277067070196931
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0430525895858918,
+        0.0430525895858918
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004707287928077185,
+        0.004707287928077185
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.02145709741344517,
+        0.02145709741344517
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.012678927074361026,
+        0.012678927074361026
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04277083677736726,
+        0.04277083677736726
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0430526848109416,
+        0.0430526848109416
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004707127468140204,
+        0.004707127468140204
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00019916215043666222,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.019836131144109318,
+        0.01984922416075895,
+        0.01985317816241478
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0002010467956032243,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.011590347621348508,
+        0.0115980517361772,
+        0.011600383956199362
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 5.942482057437998e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.04259870182589269,
+        0.04259936355926256,
+        0.042599616706720494
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.545544725331664e-06,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.04289922781229143,
+        0.04289965315102641,
+        0.04289976235429019
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.112517113653365e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.004713499811940603,
+        0.004712857289283342,
+        0.004712710600793671
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00019916215043666222,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.019836131144109318,
+        0.01984922416075895,
+        0.01985317816241478
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0002010467956032243,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.011590347621348508,
+        0.0115980517361772,
+        0.011600383956199362
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 5.942482057437998e-06,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.04259870182589269,
+        0.04259936355926256,
+        0.042599616706720494
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 2.545544725331664e-06,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.04289922781229143,
+        0.04289965315102641,
+        0.04289976235429019
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 3.112517113653365e-05,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.004713499811940603,
+        0.004712857289283342,
+        0.004712710600793671
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.019836131144109318,
+        0.019836131144109318
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.011590347621348508,
+        0.011590347621348508
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04259870182589269,
+        0.04259870182589269
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04289922781229143,
+        0.04289922781229143
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004713499811940603,
+        0.004713499811940603
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.01984922416075895,
+        0.01984922416075895
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0115980517361772,
+        0.0115980517361772
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04259936355926256,
+        0.04259936355926256
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04289965315102641,
+        0.04289965315102641
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004712857289283342,
+        0.004712857289283342
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.01985317816241478,
+        0.01985317816241478
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.011600383956199362,
+        0.011600383956199362
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.042599616706720494,
+        0.042599616706720494
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.04289976235429019,
+        0.04289976235429019
+      ]
+    },
+    {
+      "case_id": "ID-CQ",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004712710600793671,
+        0.004712710600793671
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00012260342490718568,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.02931715880510359,
+        0.029330279692410848,
+        0.02933387612608971
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00012538241574921866,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.018276144193658937,
+        0.018284470579618354,
+        0.01828676341819196
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.09201835191963817,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.006259739520935776,
+        0.005192798283974691,
+        0.004714965544032215
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.024036981715995477,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0015678064210225672,
+        0.0016343248076894819,
+        0.001674576574185206
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0003522623255333033,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0001311104594349613,
+        0.00013085013663868055,
+        0.00013089624645486032
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00012260342490718568,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.02931715880510359,
+        0.029330279692410848,
+        0.02933387612608971
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.00012538241574921866,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.018276144193658937,
+        0.018284470579618354,
+        0.01828676341819196
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.09201835191963817,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.006259739520935776,
+        0.005192798283974691,
+        0.004714965544032215
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.024036981715995477,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0015678064210225672,
+        0.0016343248076894819,
+        0.001674576574185206
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0003522623255333033,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "DCM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0001311104594349613,
+        0.00013085013663868055,
+        0.00013089624645486032
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.02931715880510359,
+        0.02931715880510359
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018276144193658937,
+        0.018276144193658937
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.006259739520935776,
+        0.006259739520935776
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0015678064210225672,
+        0.0015678064210225672
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0001311104594349613,
+        0.0001311104594349613
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029330279692410848,
+        0.029330279692410848
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018284470579618354,
+        0.018284470579618354
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.005192798283974691,
+        0.005192798283974691
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0016343248076894819,
+        0.0016343248076894819
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00013085013663868055,
+        0.00013085013663868055
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.02933387612608971,
+        0.02933387612608971
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.01828676341819196,
+        0.01828676341819196
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.004714965544032215,
+        0.004714965544032215
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.001674576574185206,
+        0.001674576574185206
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "DCM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00013089624645486032,
+        0.00013089624645486032
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 5.21046543521497e-05,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.029456663526764952,
+        0.029463400245376033,
+        0.029464935505656063
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 5.7239910388992476e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.01836486627218696,
+        0.018369292657463367,
+        0.01837034417431772
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.09453580216122513,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.007092215498315938,
+        0.005878323590589459,
+        0.005322611554589831
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.034576349712433896,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.0016357977326900033,
+        0.001765003724052541,
+        0.0018282167870310696
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0006125320609842832,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        0.00013206151746753138,
+        0.00013177396235822166,
+        0.00013185472760627285
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 5.21046543521497e-05,
+      "kind": "spatial",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.029456663526764952,
+        0.029463400245376033,
+        0.029464935505656063
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 5.7239910388992476e-05,
+      "kind": "spatial",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.01836486627218696,
+        0.018369292657463367,
+        0.01837034417431772
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.09453580216122513,
+      "kind": "spatial",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.007092215498315938,
+        0.005878323590589459,
+        0.005322611554589831
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.034576349712433896,
+      "kind": "spatial",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": false,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.0016357977326900033,
+        0.001765003724052541,
+        0.0018282167870310696
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "direction_consistent": true,
+      "finest_two_relative_difference": 0.0006125320609842832,
+      "kind": "spatial",
+      "metric": "total_dissipation",
+      "pass": true,
+      "representation": "FEM",
+      "threshold": 0.01,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        0.00013206151746753138,
+        0.00013177396235822166,
+        0.00013185472760627285
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029456663526764952,
+        0.029456663526764952
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.01836486627218696,
+        0.01836486627218696
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.007092215498315938,
+        0.007092215498315938
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0016357977326900033,
+        0.0016357977326900033
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S0",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00013206151746753138,
+        0.00013206151746753138
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029463400245376033,
+        0.029463400245376033
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.018369292657463367,
+        0.018369292657463367
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.005878323590589459,
+        0.005878323590589459
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.001765003724052541,
+        0.001765003724052541
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S1",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00013177396235822166,
+        0.00013177396235822166
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "peak_limited_shortening",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.029464935505656063,
+        0.029464935505656063
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "shortening_waveform_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.01837034417431772,
+        0.01837034417431772
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "myocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.005322611554589831,
+        0.005322611554589831
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "endocardium_ecm_traction_l2",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.0018282167870310696,
+        0.0018282167870310696
+      ]
+    },
+    {
+      "case_id": "ID-S1",
+      "kind": "C0_C1",
+      "metric": "total_dissipation",
+      "pass": true,
+      "relative_difference": 0.0,
+      "representation": "FEM",
+      "spatial_label": "S2",
+      "threshold": 0.005,
+      "values_C0_C1": [
+        0.00013185472760627285,
+        0.00013185472760627285
+      ]
+    },
+    {
+      "finest_two_absolute_jump": 0.0,
+      "kind": "hotspot_spatial",
+      "pass": true,
+      "representation": "DCM",
+      "threshold_one_finest_cell": 0.03125,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        -0.25000000000000006,
+        -0.25000000000000006,
+        -0.25000000000000006
+      ]
+    },
+    {
+      "finest_two_absolute_jump": 0.0,
+      "kind": "hotspot_spatial",
+      "pass": true,
+      "representation": "DCM",
+      "threshold_one_finest_cell": 0.03125,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        -0.25000000000000006,
+        -0.25000000000000006,
+        -0.25000000000000006
+      ]
+    },
+    {
+      "finest_two_absolute_jump": 0.0,
+      "kind": "hotspot_spatial",
+      "pass": true,
+      "representation": "FEM",
+      "threshold_one_finest_cell": 0.03125,
+      "tolerance_label": "C0",
+      "values_S0_S1_S2": [
+        -0.25000000000000006,
+        -0.25000000000000006,
+        -0.25000000000000006
+      ]
+    },
+    {
+      "finest_two_absolute_jump": 0.0,
+      "kind": "hotspot_spatial",
+      "pass": true,
+      "representation": "FEM",
+      "threshold_one_finest_cell": 0.03125,
+      "tolerance_label": "C1",
+      "values_S0_S1_S2": [
+        -0.25000000000000006,
+        -0.25000000000000006,
+        -0.25000000000000006
+      ]
+    }
+  ],
+  "failures": [
+    "spatial:ID-A1:DCM:C0:myocardium_ecm_traction_l2",
+    "spatial:ID-A1:DCM:C1:myocardium_ecm_traction_l2",
+    "spatial:ID-A1:FEM:C0:myocardium_ecm_traction_l2",
+    "spatial:ID-A1:FEM:C1:myocardium_ecm_traction_l2",
+    "spatial:ID-A2:DCM:C0:myocardium_ecm_traction_l2",
+    "spatial:ID-A2:DCM:C1:myocardium_ecm_traction_l2",
+    "spatial:ID-A2:FEM:C0:myocardium_ecm_traction_l2",
+    "spatial:ID-A2:FEM:C1:myocardium_ecm_traction_l2",
+    "spatial:ID-S1:DCM:C0:myocardium_ecm_traction_l2",
+    "spatial:ID-S1:DCM:C0:endocardium_ecm_traction_l2",
+    "spatial:ID-S1:DCM:C1:myocardium_ecm_traction_l2",
+    "spatial:ID-S1:DCM:C1:endocardium_ecm_traction_l2",
+    "spatial:ID-S1:FEM:C0:myocardium_ecm_traction_l2",
+    "spatial:ID-S1:FEM:C0:endocardium_ecm_traction_l2",
+    "spatial:ID-S1:FEM:C1:myocardium_ecm_traction_l2",
+    "spatial:ID-S1:FEM:C1:endocardium_ecm_traction_l2"
+  ],
+  "pass": false,
+  "runtime_seconds": 13.508444757000007,
+  "steps_per_cycle": 64
+}
