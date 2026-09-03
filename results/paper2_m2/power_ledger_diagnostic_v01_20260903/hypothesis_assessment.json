@@ -1,0 +1,42 @@
+{
+  "criteria_frozen_in_diagnostic": {
+    "H1": "linear improvement >=10, ledger improvement >=2, QoI change <=1e-6, closure mismatch ratio <=0.25",
+    "H2": "all C0/C1 state, solver-residual and ledger arrays are exactly equal",
+    "H3": "failed normalized residual, abs(raw)<=1e-12 and worst scale <=0.1 median",
+    "H4": "linear improvement >=10 without ledger improvement >=2, or closure mismatch ratio >=0.5",
+    "H5": "compensated/long-double improves >=10 and crosses the 1e-8 gate"
+  },
+  "diagnostics": {
+    "best_compensated_maximum_normalized_residual": 1.4651156298189916e-07,
+    "ledger_closure_mismatch_ratio": 0.9970477945140884,
+    "ledger_residual_improvement_factor": 1.0431152960333383,
+    "linear_residual_improvement_factor": 3.2757940649521617,
+    "maximum_corrected_qoi_relative_change": 2.4714077179119666e-09,
+    "summation_improvement_factor": 0.9999992873014851,
+    "worst_scale_to_median_ratio": 0.0881180081191589
+  },
+  "formal_label": "DISCRETE_LEDGER_MISMATCH_CONFIRMED",
+  "hypotheses": {
+    "H1": {
+      "confirmed": false,
+      "status": "FALSIFIED"
+    },
+    "H2": {
+      "confirmed": true,
+      "status": "CONFIRMED"
+    },
+    "H3": {
+      "confirmed": false,
+      "status": "FALSIFIED"
+    },
+    "H4": {
+      "confirmed": true,
+      "status": "CONFIRMED"
+    },
+    "H5": {
+      "confirmed": false,
+      "status": "FALSIFIED"
+    }
+  },
+  "schema": "paper2_m2a_v02_t64_power_ledger_hypotheses_v01"
+}

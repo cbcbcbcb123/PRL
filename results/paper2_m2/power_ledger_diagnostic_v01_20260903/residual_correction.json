@@ -1,0 +1,471 @@
+{
+  "levels": {
+    "S2": {
+      "branches": [
+        {
+          "corrections": 0,
+          "metrics": {
+            "cycle_integrated_ledger_residual": -1.1012747597072574e-15,
+            "endocardium_ecm_traction_l2": 0.042882517093220204,
+            "maximum_normalized_ledger_residual": 4.3024265918277313e-10,
+            "maximum_state_norm": 2.7578170266269333,
+            "myocardium_ecm_traction_l2": 0.042607831200091595,
+            "peak_limited_shortening": -0.003395206081143153,
+            "total_dissipation": 0.004582023255470685
+          },
+          "qoi_vs_production": {
+            "baseline": {
+              "endocardium_ecm_traction_l2": 0.042882517093220204,
+              "maximum_state_norm": 2.7578170266269333,
+              "myocardium_ecm_traction_l2": 0.042607831200091595,
+              "peak_limited_shortening": -0.003395206081143153,
+              "total_dissipation": 0.004582023255470685
+            },
+            "maximum_qoi_relative_difference": 0.0,
+            "relative_differences": {
+              "endocardium_ecm_traction_l2": 0.0,
+              "maximum_state_norm": 0.0,
+              "myocardium_ecm_traction_l2": 0.0,
+              "peak_limited_shortening": 0.0,
+              "total_dissipation": 0.0
+            },
+            "state_array_relative_difference": 0.0
+          }
+        },
+        {
+          "corrections": 1,
+          "metrics": {
+            "cycle_integrated_ledger_residual": -1.3870198144866465e-14,
+            "endocardium_ecm_traction_l2": 0.04288251709303971,
+            "maximum_normalized_ledger_residual": 5.016461380906598e-10,
+            "maximum_state_norm": 2.757817026626716,
+            "myocardium_ecm_traction_l2": 0.04260783119998659,
+            "peak_limited_shortening": -0.0033952060811330586,
+            "total_dissipation": 0.004582023255496078
+          },
+          "qoi_vs_production": {
+            "baseline": {
+              "endocardium_ecm_traction_l2": 0.042882517093220204,
+              "maximum_state_norm": 2.7578170266269333,
+              "myocardium_ecm_traction_l2": 0.042607831200091595,
+              "peak_limited_shortening": -0.003395206081143153,
+              "total_dissipation": 0.004582023255470685
+            },
+            "maximum_qoi_relative_difference": 5.541849271692383e-12,
+            "relative_differences": {
+              "endocardium_ecm_traction_l2": 4.20904649407745e-12,
+              "maximum_state_norm": 7.874330367823098e-14,
+              "myocardium_ecm_traction_l2": 2.464483135851382e-12,
+              "peak_limited_shortening": 2.9731202364335743e-12,
+              "total_dissipation": 5.541849271692383e-12
+            },
+            "state_array_relative_difference": 1.8333186949396635e-09
+          }
+        },
+        {
+          "corrections": 2,
+          "metrics": {
+            "cycle_integrated_ledger_residual": -1.67989658403721e-14,
+            "endocardium_ecm_traction_l2": 0.04288251709301517,
+            "maximum_normalized_ledger_residual": 6.537835571337946e-10,
+            "maximum_state_norm": 2.757817026625,
+            "myocardium_ecm_traction_l2": 0.04260783119996302,
+            "peak_limited_shortening": -0.003395206081132333,
+            "total_dissipation": 0.004582023255487545
+          },
+          "qoi_vs_production": {
+            "baseline": {
+              "endocardium_ecm_traction_l2": 0.042882517093220204,
+              "maximum_state_norm": 2.7578170266269333,
+              "myocardium_ecm_traction_l2": 0.042607831200091595,
+              "peak_limited_shortening": -0.003395206081143153,
+              "total_dissipation": 0.004582023255470685
+            },
+            "maximum_qoi_relative_difference": 4.781374552264131e-12,
+            "relative_differences": {
+              "endocardium_ecm_traction_l2": 4.781374552264131e-12,
+              "maximum_state_norm": 7.009603290620438e-13,
+              "myocardium_ecm_traction_l2": 3.017701216369927e-12,
+              "peak_limited_shortening": 3.1868180434259e-12,
+              "total_dissipation": 3.679737942090069e-12
+            },
+            "state_array_relative_difference": 1.833321435399889e-09
+          }
+        }
+      ],
+      "linear_systems": {
+        "dc": [
+          {
+            "corrections": 0,
+            "matrix_inf_norm": 10518.197500000002,
+            "normwise_backward_error": 2.789623584636062e-16,
+            "relative_residual": 1.0769095446269491e-10,
+            "residual_l2_norm": 7.614900417302327e-13,
+            "rhs_l2_norm": 0.007071067811865475,
+            "solution_l2_norm": 1.8515519005084786
+          },
+          {
+            "corrections": 1,
+            "matrix_inf_norm": 10518.197500000002,
+            "normwise_backward_error": 9.393950394226496e-17,
+            "relative_residual": 3.1269222128178585e-11,
+            "residual_l2_norm": 2.2110679009263526e-13,
+            "rhs_l2_norm": 0.007071067811865475,
+            "solution_l2_norm": 1.8515519005066403
+          },
+          {
+            "corrections": 2,
+            "matrix_inf_norm": 10518.197500000002,
+            "normwise_backward_error": 1.0980766830004506e-16,
+            "relative_residual": 3.2504141863896953e-11,
+            "residual_l2_norm": 2.298389912861108e-13,
+            "rhs_l2_norm": 0.007071067811865475,
+            "solution_l2_norm": 1.8515519005057515
+          }
+        ],
+        "harmonic": [
+          {
+            "corrections": 0,
+            "matrix_inf_norm": 10505.527870517446,
+            "normwise_backward_error": 4.57923276021412e-16,
+            "relative_residual": 5.983033209378791e-11,
+            "residual_l2_norm": 4.225547359215366e-13,
+            "rhs_l2_norm": 0.007062550401009888,
+            "solution_l2_norm": 0.9139369081355846
+          },
+          {
+            "corrections": 1,
+            "matrix_inf_norm": 10505.527870517446,
+            "normwise_backward_error": 1.7653849577961896e-16,
+            "relative_residual": 2.4407068398828134e-11,
+            "residual_l2_norm": 1.723761507076194e-13,
+            "rhs_l2_norm": 0.007062550401009888,
+            "solution_l2_norm": 0.9139369081383233
+          },
+          {
+            "corrections": 2,
+            "matrix_inf_norm": 10505.527870517446,
+            "normwise_backward_error": 2.0587865743461406e-16,
+            "relative_residual": 2.5016457396923287e-11,
+            "residual_l2_norm": 1.7667999122048735e-13,
+            "rhs_l2_norm": 0.007062550401009888,
+            "solution_l2_norm": 0.9139369081374752
+          }
+        ]
+      },
+      "state_size": 2753
+    },
+    "S3": {
+      "branches": [
+        {
+          "corrections": 0,
+          "metrics": {
+            "cycle_integrated_ledger_residual": -1.3070749749175748e-13,
+            "endocardium_ecm_traction_l2": 0.04288252603301361,
+            "maximum_normalized_ledger_residual": 5.5071162817565274e-09,
+            "maximum_state_norm": 5.27728289363042,
+            "myocardium_ecm_traction_l2": 0.04260784128727266,
+            "peak_limited_shortening": -0.0033953910565969045,
+            "total_dissipation": 0.0045820189684071975
+          },
+          "qoi_vs_production": {
+            "baseline": {
+              "endocardium_ecm_traction_l2": 0.04288252603301361,
+              "maximum_state_norm": 5.27728289363042,
+              "myocardium_ecm_traction_l2": 0.04260784128727266,
+              "peak_limited_shortening": -0.0033953910565969045,
+              "total_dissipation": 0.0045820189684071975
+            },
+            "maximum_qoi_relative_difference": 0.0,
+            "relative_differences": {
+              "endocardium_ecm_traction_l2": 0.0,
+              "maximum_state_norm": 0.0,
+              "myocardium_ecm_traction_l2": 0.0,
+              "peak_limited_shortening": 0.0,
+              "total_dissipation": 0.0
+            },
+            "state_array_relative_difference": 0.0
+          }
+        },
+        {
+          "corrections": 1,
+          "metrics": {
+            "cycle_integrated_ledger_residual": 1.5322191780265497e-13,
+            "endocardium_ecm_traction_l2": 0.042882526042176405,
+            "maximum_normalized_ledger_residual": 1.1126610786371059e-08,
+            "maximum_state_norm": 5.277282894005045,
+            "myocardium_ecm_traction_l2": 0.04260784129185931,
+            "peak_limited_shortening": -0.0033953910557666406,
+            "total_dissipation": 0.0045820189687661075
+          },
+          "qoi_vs_production": {
+            "baseline": {
+              "endocardium_ecm_traction_l2": 0.04288252603301361,
+              "maximum_state_norm": 5.27728289363042,
+              "myocardium_ecm_traction_l2": 0.04260784128727266,
+              "peak_limited_shortening": -0.0033953910565969045,
+              "total_dissipation": 0.0045820189684071975
+            },
+            "maximum_qoi_relative_difference": 2.4452671143130397e-10,
+            "relative_differences": {
+              "endocardium_ecm_traction_l2": 2.1367200974377699e-10,
+              "maximum_state_norm": 7.098819281999963e-11,
+              "myocardium_ecm_traction_l2": 1.0764803765644965e-10,
+              "peak_limited_shortening": 2.4452671143130397e-10,
+              "total_dissipation": 7.833008829021989e-11
+            },
+            "state_array_relative_difference": 4.634552208187607e-08
+          }
+        },
+        {
+          "corrections": 2,
+          "metrics": {
+            "cycle_integrated_ledger_residual": -3.3198751024933714e-14,
+            "endocardium_ecm_traction_l2": 0.04288252604099887,
+            "maximum_normalized_ledger_residual": 7.602258020711092e-09,
+            "maximum_state_norm": 5.277282893917611,
+            "myocardium_ecm_traction_l2": 0.04260784129065712,
+            "peak_limited_shortening": -0.0033953910554951187,
+            "total_dissipation": 0.004582018968954425
+          },
+          "qoi_vs_production": {
+            "baseline": {
+              "endocardium_ecm_traction_l2": 0.04288252603301361,
+              "maximum_state_norm": 5.27728289363042,
+              "myocardium_ecm_traction_l2": 0.04260784128727266,
+              "peak_limited_shortening": -0.0033953910565969045,
+              "total_dissipation": 0.0045820189684071975
+            },
+            "maximum_qoi_relative_difference": 3.2449451181130227e-10,
+            "relative_differences": {
+              "endocardium_ecm_traction_l2": 1.8621240456544535e-10,
+              "maximum_state_norm": 5.4420185808913306e-11,
+              "myocardium_ecm_traction_l2": 7.94327822508269e-11,
+              "peak_limited_shortening": 3.2449451181130227e-10,
+              "total_dissipation": 1.1942927295194852e-10
+            },
+            "state_array_relative_difference": 4.6345497052897504e-08
+          }
+        }
+      ],
+      "linear_systems": {
+        "dc": [
+          {
+            "corrections": 0,
+            "matrix_inf_norm": 83950.29875000002,
+            "normwise_backward_error": 2.9233539535891487e-16,
+            "relative_residual": 1.84440710573382e-09,
+            "residual_l2_norm": 9.2220355286691e-12,
+            "rhs_l2_norm": 0.005,
+            "solution_l2_norm": 3.5454614432952805
+          },
+          {
+            "corrections": 1,
+            "matrix_inf_norm": 83950.29875000002,
+            "normwise_backward_error": 1.0942696086869507e-16,
+            "relative_residual": 4.859378782343827e-10,
+            "residual_l2_norm": 2.4296893911719137e-12,
+            "rhs_l2_norm": 0.005,
+            "solution_l2_norm": 3.5454614435798613
+          },
+          {
+            "corrections": 2,
+            "matrix_inf_norm": 83950.29875000002,
+            "normwise_backward_error": 1.0147442024363212e-16,
+            "relative_residual": 5.068917240388479e-10,
+            "residual_l2_norm": 2.5344586201942395e-12,
+            "rhs_l2_norm": 0.005,
+            "solution_l2_norm": 3.5454614434564995
+          }
+        ],
+        "harmonic": [
+          {
+            "corrections": 0,
+            "matrix_inf_norm": 83849.1769385683,
+            "normwise_backward_error": 5.600559736111393e-16,
+            "relative_residual": 1.2473045530192932e-09,
+            "residual_l2_norm": 6.229010600298467e-12,
+            "rhs_l2_norm": 0.004993977281025861,
+            "solution_l2_norm": 1.7477625251613234
+          },
+          {
+            "corrections": 1,
+            "matrix_inf_norm": 83849.1769385683,
+            "normwise_backward_error": 1.5262111705907305e-16,
+            "relative_residual": 3.589522619749859e-10,
+            "residual_l2_norm": 1.7925994412759227e-12,
+            "rhs_l2_norm": 0.004993977281025861,
+            "solution_l2_norm": 1.7477625252433515
+          },
+          {
+            "corrections": 2,
+            "matrix_inf_norm": 83849.1769385683,
+            "normwise_backward_error": 1.4297379721886838e-16,
+            "relative_residual": 4.256997875831744e-10,
+            "residual_l2_norm": 2.1259350677279076e-12,
+            "rhs_l2_norm": 0.004993977281025861,
+            "solution_l2_norm": 1.7477625252792814
+          }
+        ]
+      },
+      "state_size": 10625
+    },
+    "S4": {
+      "branches": [
+        {
+          "corrections": 0,
+          "metrics": {
+            "cycle_integrated_ledger_residual": 1.2047435980511799e-12,
+            "endocardium_ecm_traction_l2": 0.04288252798333045,
+            "maximum_normalized_ledger_residual": 1.465114585633258e-07,
+            "maximum_state_norm": 10.307967228520138,
+            "myocardium_ecm_traction_l2": 0.04260784355934547,
+            "peak_limited_shortening": -0.003395443148265033,
+            "total_dissipation": 0.004582017965678392
+          },
+          "qoi_vs_production": {
+            "baseline": {
+              "endocardium_ecm_traction_l2": 0.04288252798333045,
+              "maximum_state_norm": 10.307967228520138,
+              "myocardium_ecm_traction_l2": 0.04260784355934547,
+              "peak_limited_shortening": -0.003395443148265033,
+              "total_dissipation": 0.004582017965678392
+            },
+            "maximum_qoi_relative_difference": 0.0,
+            "relative_differences": {
+              "endocardium_ecm_traction_l2": 0.0,
+              "maximum_state_norm": 0.0,
+              "myocardium_ecm_traction_l2": 0.0,
+              "peak_limited_shortening": 0.0,
+              "total_dissipation": 0.0
+            },
+            "state_array_relative_difference": 0.0
+          }
+        },
+        {
+          "corrections": 1,
+          "metrics": {
+            "cycle_integrated_ledger_residual": 4.170499659655866e-12,
+            "endocardium_ecm_traction_l2": 0.04288252802905482,
+            "maximum_normalized_ledger_residual": 4.1305583679915076e-08,
+            "maximum_state_norm": 10.307967239631571,
+            "myocardium_ecm_traction_l2": 0.042607843621811886,
+            "peak_limited_shortening": -0.0033954431499104436,
+            "total_dissipation": 0.004582017973457891
+          },
+          "qoi_vs_production": {
+            "baseline": {
+              "endocardium_ecm_traction_l2": 0.04288252798333045,
+              "maximum_state_norm": 10.307967228520138,
+              "myocardium_ecm_traction_l2": 0.04260784355934547,
+              "peak_limited_shortening": -0.003395443148265033,
+              "total_dissipation": 0.004582017965678392
+            },
+            "maximum_qoi_relative_difference": 1.6978325515234164e-09,
+            "relative_differences": {
+              "endocardium_ecm_traction_l2": 1.0662703631827183e-09,
+              "maximum_state_norm": 1.0779461452220956e-09,
+              "myocardium_ecm_traction_l2": 1.466077808122316e-09,
+              "peak_limited_shortening": 4.84593831052265e-10,
+              "total_dissipation": 1.6978325515234164e-09
+            },
+            "state_array_relative_difference": 8.993656428381631e-07
+          }
+        },
+        {
+          "corrections": 2,
+          "metrics": {
+            "cycle_integrated_ledger_residual": -9.923571181428448e-13,
+            "endocardium_ecm_traction_l2": 0.042882528027429645,
+            "maximum_normalized_ledger_residual": 1.4045567073981747e-07,
+            "maximum_state_norm": 10.307967240263304,
+            "myocardium_ecm_traction_l2": 0.04260784361995749,
+            "peak_limited_shortening": -0.0033954431481295947,
+            "total_dissipation": 0.004582017977002427
+          },
+          "qoi_vs_production": {
+            "baseline": {
+              "endocardium_ecm_traction_l2": 0.04288252798333045,
+              "maximum_state_norm": 10.307967228520138,
+              "myocardium_ecm_traction_l2": 0.04260784355934547,
+              "peak_limited_shortening": -0.003395443148265033,
+              "total_dissipation": 0.004582017965678392
+            },
+            "maximum_qoi_relative_difference": 2.4714077179119666e-09,
+            "relative_differences": {
+              "endocardium_ecm_traction_l2": 1.028372126020732e-09,
+              "maximum_state_norm": 1.139232029511165e-09,
+              "myocardium_ecm_traction_l2": 1.4225553385751783e-09,
+              "peak_limited_shortening": 3.9888195970892616e-11,
+              "total_dissipation": 2.4714077179119666e-09
+            },
+            "state_array_relative_difference": 8.993653406382118e-07
+          }
+        }
+      ],
+      "linear_systems": {
+        "dc": [
+          {
+            "corrections": 0,
+            "matrix_inf_norm": 671216.7493750001,
+            "normwise_backward_error": 2.983745644321627e-16,
+            "relative_residual": 2.5781233298002813e-08,
+            "residual_l2_norm": 9.115042446185105e-11,
+            "rhs_l2_norm": 0.003535533905932738,
+            "solution_l2_norm": 6.927911945077035
+          },
+          {
+            "corrections": 1,
+            "matrix_inf_norm": 671216.7493750001,
+            "normwise_backward_error": 1.0853495574044908e-16,
+            "relative_residual": 7.957937356578901e-09,
+            "residual_l2_norm": 2.813555734547345e-11,
+            "rhs_l2_norm": 0.003535533905932738,
+            "solution_l2_norm": 6.9279119541076515
+          },
+          {
+            "corrections": 2,
+            "matrix_inf_norm": 671216.7493750001,
+            "normwise_backward_error": 1.1426407388563087e-16,
+            "relative_residual": 7.870224069894122e-09,
+            "residual_l2_norm": 2.7825444046398615e-11,
+            "rhs_l2_norm": 0.003535533905932738,
+            "solution_l2_norm": 6.927911953404563
+          }
+        ],
+        "harmonic": [
+          {
+            "corrections": 0,
+            "matrix_inf_norm": 670408.2394045561,
+            "normwise_backward_error": 6.199055207360471e-16,
+            "relative_residual": 1.8500376536138935e-08,
+            "residual_l2_norm": 6.532992086207094e-11,
+            "rhs_l2_norm": 0.003531275200504942,
+            "solution_l2_norm": 3.4126002787906855
+          },
+          {
+            "corrections": 1,
+            "matrix_inf_norm": 670408.2394045561,
+            "normwise_backward_error": 1.4331363854653743e-16,
+            "relative_residual": 5.246979917959155e-09,
+            "residual_l2_norm": 1.8528530061836618e-11,
+            "rhs_l2_norm": 0.003531275200504942,
+            "solution_l2_norm": 3.412600281298135
+          },
+          {
+            "corrections": 2,
+            "matrix_inf_norm": 670408.2394045561,
+            "normwise_backward_error": 1.6533510534980317e-16,
+            "relative_residual": 5.7657957690466306e-09,
+            "residual_l2_norm": 2.0360611610410687e-11,
+            "rhs_l2_norm": 0.003531275200504942,
+            "solution_l2_norm": 3.4126002826179995
+          }
+        ]
+      },
+      "state_size": 41729
+    }
+  },
+  "schema": "paper2_m2a_v02_t64_same_superlu_residual_correction_v01",
+  "solver": "same_SuperLU_factor_per_DC_or_harmonic_system"
+}

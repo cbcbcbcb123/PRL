@@ -1,0 +1,72 @@
+{
+  "ledger_gate": 1e-08,
+  "records": {
+    "ID-LN__DCM__S2__T64__C0": {
+      "exact_paths": 10,
+      "failures": [],
+      "maximum_numeric_relative_difference": 0.0,
+      "numeric_paths": 35,
+      "pass": true,
+      "relative_tolerance": 1e-12,
+      "skipped_keys": [
+        "runtime_seconds"
+      ]
+    },
+    "ID-LN__DCM__S2__T64__C1": {
+      "exact_paths": 10,
+      "failures": [],
+      "maximum_numeric_relative_difference": 0.0,
+      "numeric_paths": 35,
+      "pass": true,
+      "relative_tolerance": 1e-12,
+      "skipped_keys": [
+        "runtime_seconds"
+      ]
+    },
+    "ID-LN__DCM__S3__T64__C0": {
+      "exact_paths": 10,
+      "failures": [],
+      "maximum_numeric_relative_difference": 0.0,
+      "numeric_paths": 38,
+      "pass": true,
+      "relative_tolerance": 1e-12,
+      "skipped_keys": [
+        "runtime_seconds"
+      ]
+    },
+    "ID-LN__DCM__S3__T64__C1": {
+      "exact_paths": 10,
+      "failures": [],
+      "maximum_numeric_relative_difference": 0.0,
+      "numeric_paths": 38,
+      "pass": true,
+      "relative_tolerance": 1e-12,
+      "skipped_keys": [
+        "runtime_seconds"
+      ]
+    },
+    "ID-LN__DCM__S4__T64__C0": {
+      "exact_paths": 10,
+      "failures": [],
+      "maximum_numeric_relative_difference": 0.0,
+      "numeric_paths": 38,
+      "pass": true,
+      "relative_tolerance": 1e-12,
+      "skipped_keys": [
+        "runtime_seconds"
+      ]
+    },
+    "ID-LN__DCM__S4__T64__C1": {
+      "pass": true,
+      "reason": "S4_C1_was_not_run_after_the_source_fail_closed_stop",
+      "source_available": false
+    }
+  },
+  "relative_difference": 0.0,
+  "relative_tolerance": 1e-12,
+  "replay_all_available_source_summaries_pass": true,
+  "reproduced_S4_C0_maximum_normalized_residual": 1.465114585633258e-07,
+  "reproducible": true,
+  "schema": "paper2_m2a_v02_t64_power_ledger_replay_v01",
+  "source_S4_C0_maximum_normalized_residual": 1.465114585633258e-07
+}

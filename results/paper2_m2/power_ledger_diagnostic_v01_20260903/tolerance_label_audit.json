@@ -1,0 +1,460 @@
+{
+  "all_state_and_ledger_arrays_exact": true,
+  "conclusion": "C0_C1_change_acceptance_threshold_only",
+  "records": {
+    "S2": {
+      "all_arrays_exact": true,
+      "arrays": {
+        "activation_two_cycles": {
+          "C0_sha256": "c9ef83632ee7239750a8eacd0f54bbdc2db6ee0a86bdf929ebb3e4e7e9496ab1",
+          "C1_sha256": "c9ef83632ee7239750a8eacd0f54bbdc2db6ee0a86bdf929ebb3e4e7e9496ab1",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ecm_cell_centroids": {
+          "C0_sha256": "8663a5986a58839b39f7a49b9c17f85b72ab58bffa148c2cbed5eda9e0ea307a",
+          "C1_sha256": "8663a5986a58839b39f7a49b9c17f85b72ab58bffa148c2cbed5eda9e0ea307a",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ecm_internal_z_at_peak": {
+          "C0_sha256": "61e81d5e4e452f8de816e5906f62413b2650abfdbe0945508ead11b264514adb",
+          "C1_sha256": "61e81d5e4e452f8de816e5906f62413b2650abfdbe0945508ead11b264514adb",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ecm_strain_at_peak": {
+          "C0_sha256": "f1a36e280e66e5f0b85b7592b91696e6bd00c17194ee091ba7e1d205fc48fe73",
+          "C1_sha256": "f1a36e280e66e5f0b85b7592b91696e6bd00c17194ee091ba7e1d205fc48fe73",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ecm_stress_at_peak": {
+          "C0_sha256": "c7a1e2eab3177ae6e3a04ed2afcb07f2944288a637550ba1b3bc12f6de1e6722",
+          "C1_sha256": "c7a1e2eab3177ae6e3a04ed2afcb07f2944288a637550ba1b3bc12f6de1e6722",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "endocardium_ecm_traction_two_cycles": {
+          "C0_sha256": "45b8442a8cf8a8ef4c8886f54f5c3ad4a53b7dc28ddd4311c83a39803ee51c3a",
+          "C1_sha256": "45b8442a8cf8a8ef4c8886f54f5c3ad4a53b7dc28ddd4311c83a39803ee51c3a",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "free_shortening_two_cycles": {
+          "C0_sha256": "c9ef83632ee7239750a8eacd0f54bbdc2db6ee0a86bdf929ebb3e4e7e9496ab1",
+          "C1_sha256": "c9ef83632ee7239750a8eacd0f54bbdc2db6ee0a86bdf929ebb3e4e7e9496ab1",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_active_work_steps": {
+          "C0_sha256": "0d8bd20e28816cd6d4bceeaa87382ba767a9f33c0f50cad37901ea1a1671051a",
+          "C1_sha256": "0d8bd20e28816cd6d4bceeaa87382ba767a9f33c0f50cad37901ea1a1671051a",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_drag_dissipation_steps": {
+          "C0_sha256": "eb954a7f87f1bc0749e302dd01bd0f2cd289345a96ea412344a46766897d4659",
+          "C1_sha256": "eb954a7f87f1bc0749e302dd01bd0f2cd289345a96ea412344a46766897d4659",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_energy": {
+          "C0_sha256": "27de191c33d9926f6b211354ab6136e3c8ef8a7aa96b5d58cc9d30b485d4c8e0",
+          "C1_sha256": "27de191c33d9926f6b211354ab6136e3c8ef8a7aa96b5d58cc9d30b485d4c8e0",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_external_support_work_steps": {
+          "C0_sha256": "9a3064a8d07f3d459ba3f756fe7eec5e348e90164507a9f158865c48f4841437",
+          "C1_sha256": "9a3064a8d07f3d459ba3f756fe7eec5e348e90164507a9f158865c48f4841437",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_lumen_work_steps": {
+          "C0_sha256": "47878a9714d836e4def4e8ad28f78265d40fe01bd0810cee0e901af557042e39",
+          "C1_sha256": "47878a9714d836e4def4e8ad28f78265d40fe01bd0810cee0e901af557042e39",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_normalized_residual_steps": {
+          "C0_sha256": "dfe40c969fd24b2d32d03ea8b74d97b6c2c5ebe54665750c4f341143a396c1a0",
+          "C1_sha256": "dfe40c969fd24b2d32d03ea8b74d97b6c2c5ebe54665750c4f341143a396c1a0",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_residual_steps": {
+          "C0_sha256": "1797b64eb71e101b9e4433cb18d22317b5b0ef7f633a29373ce1eabafda57ac7",
+          "C1_sha256": "1797b64eb71e101b9e4433cb18d22317b5b0ef7f633a29373ce1eabafda57ac7",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_sls_dissipation_steps": {
+          "C0_sha256": "b57c5fbc53d8b2d4313656e869bc040950bb34952f4e37998e10c6191ee731eb",
+          "C1_sha256": "b57c5fbc53d8b2d4313656e869bc040950bb34952f4e37998e10c6191ee731eb",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "limited_shortening_two_cycles": {
+          "C0_sha256": "82906570c63feb67d34af85d03088bd89da15c3e763d433e9e67257029b478e2",
+          "C1_sha256": "82906570c63feb67d34af85d03088bd89da15c3e763d433e9e67257029b478e2",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "mean_endocardial_normal_displacement_two_cycles": {
+          "C0_sha256": "2e87cb5595cf7fab8d6ffca3e0859a1e7a23e84e3b55d07755843f8df77311ab",
+          "C1_sha256": "2e87cb5595cf7fab8d6ffca3e0859a1e7a23e84e3b55d07755843f8df77311ab",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "mean_endocardial_tangential_displacement_two_cycles": {
+          "C0_sha256": "7a51650a2db0f4f67c3c786b6889d1032fee752374d77ff5244c1ba2e08bb1e7",
+          "C1_sha256": "7a51650a2db0f4f67c3c786b6889d1032fee752374d77ff5244c1ba2e08bb1e7",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "myocardium_ecm_traction_two_cycles": {
+          "C0_sha256": "b497911a78a6be59ad8e49489fa235e8864a1bbb5d7740c0d90b8f8dc0eaaca6",
+          "C1_sha256": "b497911a78a6be59ad8e49489fa235e8864a1bbb5d7740c0d90b8f8dc0eaaca6",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "state_two_cycles": {
+          "C0_sha256": "9ba397b24123b8cab7fbf430781be576ecadec4e14f208cd2276896838cfda11",
+          "C1_sha256": "9ba397b24123b8cab7fbf430781be576ecadec4e14f208cd2276896838cfda11",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "time_two_cycles": {
+          "C0_sha256": "d3f2f5c2e6637dcc1e7d6d71101cec4a67f3c278620eae20a5c7328da303a053",
+          "C1_sha256": "d3f2f5c2e6637dcc1e7d6d71101cec4a67f3c278620eae20a5c7328da303a053",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        }
+      },
+      "solver_residuals": {
+        "C0": {
+          "acceptance_tolerance": 1e-07,
+          "dc_relative_residual": 1.0769095446269491e-10,
+          "harmonic_relative_residual": 5.983033209378791e-11,
+          "maximum_relative_residual": 1.0769095446269491e-10,
+          "name": "scipy_superlu",
+          "pass": true
+        },
+        "C1": {
+          "acceptance_tolerance": 1e-08,
+          "dc_relative_residual": 1.0769095446269491e-10,
+          "harmonic_relative_residual": 5.983033209378791e-11,
+          "maximum_relative_residual": 1.0769095446269491e-10,
+          "name": "scipy_superlu",
+          "pass": true
+        },
+        "acceptance_thresholds_differ": true,
+        "residual_values_exact": true
+      }
+    },
+    "S3": {
+      "all_arrays_exact": true,
+      "arrays": {
+        "activation_two_cycles": {
+          "C0_sha256": "c9ef83632ee7239750a8eacd0f54bbdc2db6ee0a86bdf929ebb3e4e7e9496ab1",
+          "C1_sha256": "c9ef83632ee7239750a8eacd0f54bbdc2db6ee0a86bdf929ebb3e4e7e9496ab1",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ecm_cell_centroids": {
+          "C0_sha256": "6422ef0f16051112d75838997363e0b92253fb1c283e15b226b56734b05d7701",
+          "C1_sha256": "6422ef0f16051112d75838997363e0b92253fb1c283e15b226b56734b05d7701",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ecm_internal_z_at_peak": {
+          "C0_sha256": "332f49f81aaff2bc2d805ed35ce242ee5ad75bf5d9305caa3f6ad26586def35c",
+          "C1_sha256": "332f49f81aaff2bc2d805ed35ce242ee5ad75bf5d9305caa3f6ad26586def35c",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ecm_strain_at_peak": {
+          "C0_sha256": "1dc63369cda25194fcb5b8cf30328fbc0c16c839ccd4163262d80a97ea59a8a2",
+          "C1_sha256": "1dc63369cda25194fcb5b8cf30328fbc0c16c839ccd4163262d80a97ea59a8a2",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ecm_stress_at_peak": {
+          "C0_sha256": "037035bdad6eeea81718f75ea98f7d8e5acd05a99dd51f4911c36f445553ecb2",
+          "C1_sha256": "037035bdad6eeea81718f75ea98f7d8e5acd05a99dd51f4911c36f445553ecb2",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "endocardium_ecm_traction_two_cycles": {
+          "C0_sha256": "a16f8ae88a4ef3bfb0b688f1acddfebabce7248e22b08b2709b0b43d32a56aa6",
+          "C1_sha256": "a16f8ae88a4ef3bfb0b688f1acddfebabce7248e22b08b2709b0b43d32a56aa6",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "free_shortening_two_cycles": {
+          "C0_sha256": "c9ef83632ee7239750a8eacd0f54bbdc2db6ee0a86bdf929ebb3e4e7e9496ab1",
+          "C1_sha256": "c9ef83632ee7239750a8eacd0f54bbdc2db6ee0a86bdf929ebb3e4e7e9496ab1",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_active_work_steps": {
+          "C0_sha256": "0d8bd20e28816cd6d4bceeaa87382ba767a9f33c0f50cad37901ea1a1671051a",
+          "C1_sha256": "0d8bd20e28816cd6d4bceeaa87382ba767a9f33c0f50cad37901ea1a1671051a",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_drag_dissipation_steps": {
+          "C0_sha256": "73f555563b5887d7a615b3334f7725869ee3fbca470c3e413f974c6d9b6fc567",
+          "C1_sha256": "73f555563b5887d7a615b3334f7725869ee3fbca470c3e413f974c6d9b6fc567",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_energy": {
+          "C0_sha256": "f44c8eb65db9fbec07f780f92a1f2b25c54115b94a7c306eeee7cb47201211cc",
+          "C1_sha256": "f44c8eb65db9fbec07f780f92a1f2b25c54115b94a7c306eeee7cb47201211cc",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_external_support_work_steps": {
+          "C0_sha256": "ce7f5f67d9b524630c7ec03eda493f86581180b967b9e4ed07cc7884417e28bb",
+          "C1_sha256": "ce7f5f67d9b524630c7ec03eda493f86581180b967b9e4ed07cc7884417e28bb",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_lumen_work_steps": {
+          "C0_sha256": "4cea4a71911fc376dd3f29f350df4107d921cae5a1841603cb3258d9ff36448a",
+          "C1_sha256": "4cea4a71911fc376dd3f29f350df4107d921cae5a1841603cb3258d9ff36448a",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_normalized_residual_steps": {
+          "C0_sha256": "b688046d99a09b99cccbbf60a338e0ab993bff8f5bdd6b6cd381f3371d991fcc",
+          "C1_sha256": "b688046d99a09b99cccbbf60a338e0ab993bff8f5bdd6b6cd381f3371d991fcc",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_residual_steps": {
+          "C0_sha256": "e89170207c0425d09ca0eb2b6f7cff98416ead2b6e83291fe2404f03db748508",
+          "C1_sha256": "e89170207c0425d09ca0eb2b6f7cff98416ead2b6e83291fe2404f03db748508",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_sls_dissipation_steps": {
+          "C0_sha256": "23d13f6faa723c9b07e4ac1320ea77b22ec2ef543553c0de1adcab4a8bbd3ab9",
+          "C1_sha256": "23d13f6faa723c9b07e4ac1320ea77b22ec2ef543553c0de1adcab4a8bbd3ab9",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "limited_shortening_two_cycles": {
+          "C0_sha256": "ea605c73a71ab1825d581e6cfbc8d39c1039927c1f493d61c15ae9ee3889a2fe",
+          "C1_sha256": "ea605c73a71ab1825d581e6cfbc8d39c1039927c1f493d61c15ae9ee3889a2fe",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "mean_endocardial_normal_displacement_two_cycles": {
+          "C0_sha256": "01af69344be435e3d9194e6e20981c26dedf3df2e2657271f1b368a069df2144",
+          "C1_sha256": "01af69344be435e3d9194e6e20981c26dedf3df2e2657271f1b368a069df2144",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "mean_endocardial_tangential_displacement_two_cycles": {
+          "C0_sha256": "8dd9f37ea19262baf4684334cbfb85ad0d3a2140685011d227f02a7d150f21aa",
+          "C1_sha256": "8dd9f37ea19262baf4684334cbfb85ad0d3a2140685011d227f02a7d150f21aa",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "myocardium_ecm_traction_two_cycles": {
+          "C0_sha256": "ad6aaaa96dd46956aae510d3297cfec04f7ddb36e9b0f79c19ca82f499457457",
+          "C1_sha256": "ad6aaaa96dd46956aae510d3297cfec04f7ddb36e9b0f79c19ca82f499457457",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "state_two_cycles": {
+          "C0_sha256": "9152928e1fc569a625b515b0cf0e42bbeb048e74d56e96a171c174ea84fc3286",
+          "C1_sha256": "9152928e1fc569a625b515b0cf0e42bbeb048e74d56e96a171c174ea84fc3286",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "time_two_cycles": {
+          "C0_sha256": "d3f2f5c2e6637dcc1e7d6d71101cec4a67f3c278620eae20a5c7328da303a053",
+          "C1_sha256": "d3f2f5c2e6637dcc1e7d6d71101cec4a67f3c278620eae20a5c7328da303a053",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        }
+      },
+      "solver_residuals": {
+        "C0": {
+          "acceptance_tolerance": 1e-07,
+          "dc_relative_residual": 1.84440710573382e-09,
+          "harmonic_relative_residual": 1.2473045530192932e-09,
+          "maximum_relative_residual": 1.84440710573382e-09,
+          "name": "scipy_superlu",
+          "pass": true
+        },
+        "C1": {
+          "acceptance_tolerance": 1e-08,
+          "dc_relative_residual": 1.84440710573382e-09,
+          "harmonic_relative_residual": 1.2473045530192932e-09,
+          "maximum_relative_residual": 1.84440710573382e-09,
+          "name": "scipy_superlu",
+          "pass": true
+        },
+        "acceptance_thresholds_differ": true,
+        "residual_values_exact": true
+      }
+    },
+    "S4": {
+      "all_arrays_exact": true,
+      "arrays": {
+        "activation_two_cycles": {
+          "C0_sha256": "c9ef83632ee7239750a8eacd0f54bbdc2db6ee0a86bdf929ebb3e4e7e9496ab1",
+          "C1_sha256": "c9ef83632ee7239750a8eacd0f54bbdc2db6ee0a86bdf929ebb3e4e7e9496ab1",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ecm_cell_centroids": {
+          "C0_sha256": "3a65fa2d9df07e43a27f4a376d7689bd50d089890729e126f5f7ff7886021a8e",
+          "C1_sha256": "3a65fa2d9df07e43a27f4a376d7689bd50d089890729e126f5f7ff7886021a8e",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ecm_internal_z_at_peak": {
+          "C0_sha256": "31d4688be31e662660f62635e98d738e433c6e9ec616cb77fc590600272c04a0",
+          "C1_sha256": "31d4688be31e662660f62635e98d738e433c6e9ec616cb77fc590600272c04a0",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ecm_strain_at_peak": {
+          "C0_sha256": "22be91df556396199facb329f58f9cec52c9eb5c499b2358e06af480da459cf4",
+          "C1_sha256": "22be91df556396199facb329f58f9cec52c9eb5c499b2358e06af480da459cf4",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ecm_stress_at_peak": {
+          "C0_sha256": "97202361f0176eaeca29dd74c9f27aa7974ede4ba523960b3fe9081248a9f8e1",
+          "C1_sha256": "97202361f0176eaeca29dd74c9f27aa7974ede4ba523960b3fe9081248a9f8e1",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "endocardium_ecm_traction_two_cycles": {
+          "C0_sha256": "541de9ab04bfd5c05f99f210b3dd45283e229f8a8534946725755b24ce36a358",
+          "C1_sha256": "541de9ab04bfd5c05f99f210b3dd45283e229f8a8534946725755b24ce36a358",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "free_shortening_two_cycles": {
+          "C0_sha256": "c9ef83632ee7239750a8eacd0f54bbdc2db6ee0a86bdf929ebb3e4e7e9496ab1",
+          "C1_sha256": "c9ef83632ee7239750a8eacd0f54bbdc2db6ee0a86bdf929ebb3e4e7e9496ab1",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_active_work_steps": {
+          "C0_sha256": "0d8bd20e28816cd6d4bceeaa87382ba767a9f33c0f50cad37901ea1a1671051a",
+          "C1_sha256": "0d8bd20e28816cd6d4bceeaa87382ba767a9f33c0f50cad37901ea1a1671051a",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_drag_dissipation_steps": {
+          "C0_sha256": "7353253f81a96b23738edc9bf2c070d6883ad13f7cc2b71315de17f6f6218bff",
+          "C1_sha256": "7353253f81a96b23738edc9bf2c070d6883ad13f7cc2b71315de17f6f6218bff",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_energy": {
+          "C0_sha256": "6ec6af4159b15d45b68ce2a9c8e82a685a1c6970ec08cbd4c8bc3b1ddfdbe32d",
+          "C1_sha256": "6ec6af4159b15d45b68ce2a9c8e82a685a1c6970ec08cbd4c8bc3b1ddfdbe32d",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_external_support_work_steps": {
+          "C0_sha256": "58cdcb89a5f07a96e9c19e1bc66727908b33c7e26b8c27edac41692cd7266c5e",
+          "C1_sha256": "58cdcb89a5f07a96e9c19e1bc66727908b33c7e26b8c27edac41692cd7266c5e",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_lumen_work_steps": {
+          "C0_sha256": "739889e1195a89e2ef3e9b573ae63b9d3ee2017dc665a9a854a43cd2b4c3174d",
+          "C1_sha256": "739889e1195a89e2ef3e9b573ae63b9d3ee2017dc665a9a854a43cd2b4c3174d",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_normalized_residual_steps": {
+          "C0_sha256": "fa48d7fbc18219bc88341147aa9a628646c3563ceb64030b382bc0ae34569bd2",
+          "C1_sha256": "fa48d7fbc18219bc88341147aa9a628646c3563ceb64030b382bc0ae34569bd2",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_residual_steps": {
+          "C0_sha256": "6adc612a55a2eb78478058a5e87fd27eb0049d3af8754716bf36d59b29ccd5a2",
+          "C1_sha256": "6adc612a55a2eb78478058a5e87fd27eb0049d3af8754716bf36d59b29ccd5a2",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "ledger_sls_dissipation_steps": {
+          "C0_sha256": "0da8a4b341ca74cb9f0fc1f0ff5bbddfb93240ad174fe2b3b5961398cb4bc34e",
+          "C1_sha256": "0da8a4b341ca74cb9f0fc1f0ff5bbddfb93240ad174fe2b3b5961398cb4bc34e",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "limited_shortening_two_cycles": {
+          "C0_sha256": "854c76ff465df22d90fcf15e9deda0e2e5a9c127f10bcee0bd717f0d940a0a2e",
+          "C1_sha256": "854c76ff465df22d90fcf15e9deda0e2e5a9c127f10bcee0bd717f0d940a0a2e",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "mean_endocardial_normal_displacement_two_cycles": {
+          "C0_sha256": "d7a4dc8e4fde0827297f02291062ce33915373c91ef79a05b920420a2baeccd8",
+          "C1_sha256": "d7a4dc8e4fde0827297f02291062ce33915373c91ef79a05b920420a2baeccd8",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "mean_endocardial_tangential_displacement_two_cycles": {
+          "C0_sha256": "4e89983752ad387989570f9c68ed616d9350e66b8b65fa71b8f407f8a9ad2f4c",
+          "C1_sha256": "4e89983752ad387989570f9c68ed616d9350e66b8b65fa71b8f407f8a9ad2f4c",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "myocardium_ecm_traction_two_cycles": {
+          "C0_sha256": "53b9de8dd3f19c27b870451fed02683d9e05aca6d6087ff883e3fe228d27de45",
+          "C1_sha256": "53b9de8dd3f19c27b870451fed02683d9e05aca6d6087ff883e3fe228d27de45",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "state_two_cycles": {
+          "C0_sha256": "75b21811196969781d84ad5ba31f2668ec386445c13043578a29d02bdf709af0",
+          "C1_sha256": "75b21811196969781d84ad5ba31f2668ec386445c13043578a29d02bdf709af0",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        },
+        "time_two_cycles": {
+          "C0_sha256": "d3f2f5c2e6637dcc1e7d6d71101cec4a67f3c278620eae20a5c7328da303a053",
+          "C1_sha256": "d3f2f5c2e6637dcc1e7d6d71101cec4a67f3c278620eae20a5c7328da303a053",
+          "exact_equal": true,
+          "maximum_absolute_difference": 0.0
+        }
+      },
+      "solver_residuals": {
+        "C0": {
+          "acceptance_tolerance": 1e-07,
+          "dc_relative_residual": 2.5781233298002813e-08,
+          "harmonic_relative_residual": 1.8500376536138935e-08,
+          "maximum_relative_residual": 2.5781233298002813e-08,
+          "name": "scipy_superlu",
+          "pass": true
+        },
+        "C1": {
+          "acceptance_tolerance": 1e-08,
+          "dc_relative_residual": 2.5781233298002813e-08,
+          "harmonic_relative_residual": 1.8500376536138935e-08,
+          "maximum_relative_residual": 2.5781233298002813e-08,
+          "name": "scipy_superlu",
+          "pass": false
+        },
+        "acceptance_thresholds_differ": true,
+        "residual_values_exact": true
+      }
+    }
+  },
+  "schema": "paper2_m2a_v02_t64_tolerance_label_audit_v01"
+}
