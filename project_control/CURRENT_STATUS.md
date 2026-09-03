@@ -7,6 +7,7 @@ verified_commit: f26cb99ba4055d57de0a27731df94b2073dac5fc
 current_lifecycle: paper2_m2a_v03_ledger_repair_pilot_authorized_execution_pending
 current_contract: project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v03.md
 current_authorization: project_control/paper2_m2a_v02_diagnostic_acceptance_and_v03_repair_decision_v01.md
+current_clarification: project_control/paper2_m2a_v03_phase_r_endpoint_count_clarification_decision_v01.md
 execution_authorized: v03_ledger_repair_pilot_then_t64_full_gate
 current_execution_log: none_v03_execution_pending
 latest_completed_execution_log: project_control/paper2_m2a_v02_t64_power_ledger_diagnostic_execution_record_v01.md
@@ -27,7 +28,7 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 
 ## 1. 一句话状态
 
-Paper 2 M2A v02 的 T64 功率账本诊断已由 Supervisor 独立验收，正式标签为 `DISCRETE_LEDGER_MISMATCH_CONFIRMED`。v03 已授权使用与 Crank–Nicolson 一致的二次—双线性精确离散能量增量修复账本，并正式撤销对 SuperLU 不起作用的 C0/C1 伪收敛轴，改用单一直接解验证级 D0。当前先运行 ID-LN/DCM 的 S2/S3/S4 六端点修复试验；通过后自动进入 54 端点 T64 门。T128/T256、identity gate 和 M2B 均未启动。
+Paper 2 M2A v02 的 T64 功率账本诊断已由 Supervisor 独立验收，正式标签为 `DISCRETE_LEDGER_MISMATCH_CONFIRMED`。v03 已授权使用与 Crank–Nicolson 一致的二次—双线性精确离散能量增量修复账本，并正式撤销对 SuperLU 不起作用的 C0/C1 伪收敛轴，改用单一直接解验证级 D0。当前先运行 ID-LN/DCM 的 S2/S3/S4 三个唯一端点修复试验；通过后自动进入 54 端点 T64 门。T128/T256、identity gate 和 M2B 均未启动。
 
 旧 DCM–FEM–DCM Figure 2 路线仍原样保留：T128 时间离散阶段 FINAL 不变；A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。新 M1 不改判 A1，也不把旧时间离散结果迁移成新架构证据。
 
@@ -97,7 +98,9 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
   `project_control/paper2_m2a_v02_diagnostic_acceptance_and_v03_repair_decision_v01.md`；
 - 当前 v03 增量合同：
   `project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v03.md`；
-- v03 先执行六端点账本修复试验，通过后自动进入 54 端点 T64 门；当前尚无 v03 执行结果。
+- Phase R 端点数量澄清：
+  `project_control/paper2_m2a_v03_phase_r_endpoint_count_clarification_decision_v01.md`；
+- v03 先执行三个唯一端点账本修复试验，通过后自动进入 54 端点 T64 门；当前尚无 v03 执行结果。
 
 ## 2. 已完成并可引用的阶段证据
 
