@@ -1,0 +1,25 @@
+{
+  "S3_to_common_S3": {
+    "common_segments": 64,
+    "constant_field_max_abs_error": 0.0,
+    "discrete_interface_work_abs_error": 0.0,
+    "integrated_force_abs_error": 0.0,
+    "native_segments": 64,
+    "pass": true,
+    "sign_preserved": true,
+    "tolerance": 1e-12
+  },
+  "S4_to_common_S3": {
+    "common_segments": 64,
+    "constant_field_max_abs_error": 0.0,
+    "discrete_interface_work_abs_error": 1.3877787807814457e-17,
+    "integrated_force_abs_error": 0.0,
+    "native_segments": 128,
+    "pass": true,
+    "sign_preserved": true,
+    "tolerance": 1e-12
+  },
+  "definition": "exact integral average of native P1 nodal traction on each of the 64 frozen S3 common segments",
+  "pass": true,
+  "schema": "paper2_m2a_s4_common_interface_projection_checks_v01"
+}

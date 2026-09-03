@@ -3,24 +3,31 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-03
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: fc6094aca113ab1e183c51623eb4561b6745c483
-current_lifecycle: paper2_m2a_s3_traction_diagnostic_observable_dependent_human_gate
-current_contract: project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v01.md
-execution_authorized: none_waiting_human_decision_after_s3_diagnostic
-current_execution_log: project_control/paper2_m2a_s3_interface_traction_diagnostic_execution_record_v01.md
+verified_commit: 41d4b731d5d79153db478ee89fb76ff6444fa15a
+current_lifecycle: paper2_m2a_v02_t64_full_numerical_gate_authorized_execution_pending
+current_contract: project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v02.md
+current_authorization: project_control/paper2_m2a_s4_supervisor_acceptance_and_v02_ladder_decision_v01.md
+execution_authorized: paper2_m2a_v02_t64_full_numerical_gate_only
+current_execution_log: none_v02_t64_not_yet_executed
+latest_completed_execution_log: project_control/paper2_m2a_s4_terminal_spatial_diagnostic_execution_record_v01.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
 current_mainline: project_control/prl_independent_theory_mainline_plan_v02.md
 current_mainline_decision: project_control/prl_independent_theory_mainline_supplement_decision_v02.md
+standing_authority: project_control/paper2_autonomous_execution_and_chart_reporting_decision_v01.md
 ---
 
 # PRL 项目当前状态（单一入口）
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
+人类已授予 Paper 2 既定主线内的持续自主执行权：常规与科学阶段不再逐项等待批准，
+由 Supervisor 留下版本化决定后连续推进，并每 10 分钟用图表汇报。删除/覆盖既有证据
+及启动 GPU worker 仍须单独询问。
+
 ## 1. 一句话状态
 
-Paper 2 M2A 已完成授权的 S3 最小界面牵引诊断。八个 T64/C1 端点与全部结构门通过，但共同分段投影并未普遍消除空间差：A2-FEM myocardium–ECM 为 2.80%，S1 的 DCM/FEM myocardium–ECM 为 3.02%/3.13%，仍高于 1%。另有 S1-FEM endocardium–ECM 在节点量为 0.879%、投影量为 1.118%，形成边界观测量依赖。正式诊断标签为 `OBSERVABLE_DEPENDENT`；原 T64 fail-closed 不变，当前回到 Human Gate。T128/T256、完整矩阵和跨表示身份裁决均未启动，M2B 三维仍未授权。
+Paper 2 M2A 的 S4 终止型空间诊断已由 Supervisor 独立验收为 `DIAGNOSTIC_PASS`。生产空间梯度现按 v02 登记为 S2/S3/S4，生产 traction、1% 门和两项校准保持不变；当前已自主批准从头执行 108 个端点的 T64 全工况数值门。该阶段不计算跨表示身份结论；T128/T256、正式 identity gate 和 M2B 尚未启动。
 
 旧 DCM–FEM–DCM Figure 2 路线仍原样保留：T128 时间离散阶段 FINAL 不变；A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。新 M1 不改判 A1，也不把旧时间离散结果迁移成新架构证据。
 
@@ -58,6 +65,20 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
 - S3 诊断结果包：
   `results/paper2_m2/s3_interface_traction_diagnostic_v01_20260903/`；
 - 诊断为 `OBSERVABLE_DEPENDENT`，不得解释为 M2A 通过或自行替换生产 traction 指标。
+- S4 终止型诊断授权：
+  `project_control/paper2_m2a_s4_terminal_spatial_diagnostic_authorization_decision_v01.md`；
+  仅允许 T64/C1、ID-A2/ID-S1、DCM/FEM、S3/S4 与冻结共同投影比较，现已完成并停止；
+- S4 执行记录：
+  `project_control/paper2_m2a_s4_terminal_spatial_diagnostic_execution_record_v01.md`；
+- S4 create-only 结果包：
+  `results/paper2_m2/s4_terminal_spatial_diagnostic_v01_20260903/`；
+- S4 正式标签为 `DIAGNOSTIC_PASS`；原生量最大 S3→S4 差为 `0.9398%`，共同投影量
+  最大差为 `0.8800%`，四个新 S3 端点摘要对旧 S3 的逐项重放最大相对差为 `0`。
+- Supervisor 验收与 v02 梯度决定：
+  `project_control/paper2_m2a_s4_supervisor_acceptance_and_v02_ladder_decision_v01.md`；
+- 当前增量合同：
+  `project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v02.md`；
+  生产梯度为 S2/S3/S4，当前只授权 108 个端点的 T64 数值门。
 
 ## 2. 已完成并可引用的阶段证据
 
@@ -126,7 +147,7 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 ## 5. 当前禁止范围
 
-M2A 已完成唯一获批的 S3 诊断并回到 Human Gate。当前不授权继续 T128/T256、追加 S4、改界面离散/共同投影、替换生产观测量、修改 1% 门槛或重跑完整矩阵。仍不授权：M2B 三维、非匹配界面升级、A1 再周期化、B1/A2/B2、A3、A4、B3、B4、D1/F200N 完整周期、旧路线 T256、空间参数扫描、N1-2d、N1-3、原 EFE Node 2–4、GPU worker、新外部求解器、CFD、单向/双向 FSI、器官级几何扩展或大参数海。
+当前只授权 M2A v02 的 T64 全工况数值门。T128/T256、正式 identity gate、S5、重新校准、界面离散/共同投影修改、生产观测量替换和 1% 门槛修改尚未授权。仍不授权：M2B 三维、非匹配界面升级、A1 再周期化、B1/A2/B2、A3、A4、B3、B4、D1/F200N 完整周期、旧路线 T256、空间参数扫描、N1-2d、N1-3、原 EFE Node 2–4、GPU worker、新外部求解器、CFD、单向/双向 FSI、器官级几何扩展或大参数海。
 
 ## 6. 最新终局主线与空间/容差门之后的优先级
 

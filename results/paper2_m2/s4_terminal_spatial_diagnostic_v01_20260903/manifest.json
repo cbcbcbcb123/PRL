@@ -1,0 +1,57 @@
+{
+  "authorized_scope": {
+    "cases": [
+      "ID-A2",
+      "ID-S1"
+    ],
+    "common_segments": 64,
+    "levels": [
+      {
+        "label": "S3",
+        "nx": 64,
+        "ny_per_layer": 16
+      },
+      {
+        "label": "S4",
+        "nx": 128,
+        "ny_per_layer": 32
+      }
+    ],
+    "memory_budget_gib": 16.0,
+    "representations": [
+      "DCM",
+      "FEM"
+    ],
+    "runtime_budget_seconds": 900.0,
+    "steps_per_cycle": 64,
+    "tolerance": "C1"
+  },
+  "fixed_calibration": {
+    "dcm_active_scale": 0.8891803904091895,
+    "dcm_passive_scale": 2.4532573887517564
+  },
+  "frozen_config_digest": "431bf176833b975af26f6ac05810f6956f2d678dbe6da13f8c11e84d817f46f9",
+  "frozen_module_sha256_before": {
+    "src/paper2_m2/config.py": "6e5913a250f75cee7dbc1cba01468cf4b71d5f41f2d4c6f6f3f524e8c394380d",
+    "src/paper2_m2/identity_2d.py": "ee76c46ca15ee0ca69a216239c0f8b9c1c1c877ba0238edec245f93f389d32aa",
+    "src/paper2_m2/interface_projection.py": "17dc24b9f4d113faca7c9a3d4494420a4b267dd340940bb6bdb367bbe044ac5e"
+  },
+  "provenance": {
+    "authorization_sha256": "6d66b44953238aa1e447d4ea4f466d08920d67bcede8bd4d6b92740e6d4955ab",
+    "autonomous_decision_sha256": "7acfe91e9a06088cfe9cd1f509f75edc416e25b13362240cf6a83cb5a1be9e64",
+    "contract_sha256": "e7ce3665574422e93e737487d69334fcfa1acf4941584a29ae45a48e4bf4dd29",
+    "runner_sha256": "10ce4c9d94b9ce639e84277fbdf59aa7be6528fb51211638ceccde370571a853",
+    "s3_execution_record_sha256": "6fdc00576bcf7ffd6b039e6c4cecb10c5b23baedc73f2d46ba7ce59bd35b1c9a",
+    "source_calibration_sha256": "8e9afdc83e6a9473fb1bad7fcf3eeea13a12622fe62263a7efa1ebb2e3eb57cc",
+    "source_s3_endpoint_summaries_sha256": "d13a8273af626e3a8ee96b7f6cf841e9d53774dfbc8bf59a993503ab3fe6ebf8",
+    "source_s3_summary_sha256": "0e4e8d63ddb296c62289acba665eaa8e042a2d926a264c3b38686655965af74a"
+  },
+  "runtime": {
+    "cpu_processes": 1,
+    "dolfinx": "0.11.0.post0",
+    "gpu_used": false,
+    "network": "disabled_by_container",
+    "scipy": "1.17.1"
+  },
+  "schema": "paper2_m2a_s4_terminal_spatial_diagnostic_manifest_v01"
+}
