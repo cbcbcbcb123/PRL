@@ -3,13 +3,13 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-04
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 7c1c1fcbe8ec424f953b18daab7fe682b2c10cfc
-current_lifecycle: paper2_m2a_v07_accepted_model_architecture_human_gate
-current_contract: project_control/paper2_m2_active_myocardial_fem_identity_failure_diagnostic_contract_v07.md
-current_authorization: project_control/paper2_m2a_v07_supervisor_acceptance_and_model_architecture_human_gate_v01.md
+verified_commit: 34908b299475ee81d9cb2fccca0b191e22fa965a
+current_lifecycle: paper2_v08_myocardial_fem_only_architecture_migration_authorized
+current_contract: project_control/paper2_v08_myocardial_fem_only_architecture_migration_contract_v01.md
+current_authorization: project_control/paper2_myocardial_dcm_retirement_and_fem_only_architecture_decision_v01.md
 current_clarification: project_control/paper2_m2a_v03_phase_r_endpoint_count_clarification_decision_v01.md
-execution_authorized: none_pending_human_model_architecture_decision
-current_execution_log: project_control/paper2_m2a_v07_identity_no_go_diagnostic_execution_record_v01.md
+execution_authorized: v08_fem_only_active_architecture_migration_and_t64_parity_only
+current_execution_log: pending_paper2_v08_myocardial_fem_only_architecture_migration_execution_record_v01
 latest_completed_execution_log: project_control/paper2_m2a_v07_identity_no_go_diagnostic_execution_record_v01.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
@@ -28,12 +28,14 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 
 ## 1. 一句话状态
 
-Paper 2 M2A v07 已获 Supervisor 独立验收，正式标签为
-`MODE_SELECTIVE_CONSTITUTIVE_MISMATCH`，v06.1 `NO-GO-ID` 保持不变。下一步涉及重大模型
-架构选择，现停在 Human Gate；Supervisor 推荐固定“心内膜 DCM＋主动心肌 FEM＋黏弹
-ECM FEM”，把心肌 DCM 作为机制对照而不再强求 identity，但尚未获得人类选择。
+人类已决定从活跃项目完全去掉心肌 DCM。当前唯一生产架构固定为“心内膜 DCM＋主动
+心肌 FEM＋黏弹 ECM FEM”；心肌 DCM 不再作为 comparator，M2A identity 与 M2B 路线
+正式退役。v08 已获授权建立独立 FEM-only 活跃命名空间并完成六工况 T64 FEM→FEM
+迁移等价门；旧 v01–v07 仅作为不可改写的历史审计证据保留。
 
-旧 DCM–FEM–DCM Figure 2 路线仍原样保留：T128 时间离散阶段 FINAL 不变；A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。新 M1 不改判 A1，也不把旧时间离散结果迁移成新架构证据。
+旧 DCM–FEM–DCM Figure 2 路线只作为历史证据原样保留：T128 时间离散阶段 FINAL 不变；
+A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。它不属于新活跃
+架构，旧时间离散结果也不得迁移成 FEM-only 新模型证据。
 
 ## 1.1 Paper 2 M0–M1 最新证据
 
@@ -246,8 +248,16 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
   `project_control/paper2_m2a_v07_supervisor_acceptance_and_model_architecture_human_gate_v01.md`；
 - Supervisor 原始数组复算逐值重现 4/4 正式失败牵引、共同标量与 8 个有限坐标基结果；
   v07 的 22 项定向测试、74 项轻量回归和静态检查均独立通过；
-- 当前等待人类在三条路线中选择；推荐路线 A：固定心内膜 DCM、主动心肌 FEM、黏弹
-  ECM FEM，把心肌 DCM 降为 comparator，并将候选物理命题转为“主动驱动与粗粒化不对易”。
+- v07 Human Gate 已由人类最新决定关闭；“心肌 DCM comparator”方案未被采用。
+- 人类最新架构决定：
+  `project_control/paper2_myocardial_dcm_retirement_and_fem_only_architecture_decision_v01.md`；
+- 最新决定进一步否决“心肌 DCM comparator”：心肌 DCM 从活跃生产、理论、参数空间、
+  图件和器官级扩展中完全退役；只有历史证据保留；
+- 当前 v08 迁移合同：
+  `project_control/paper2_v08_myocardial_fem_only_architecture_migration_contract_v01.md`；
+- v08 将建立不导入旧双表示模块的 `src/paper2_hybrid/`，移除 representation 轴、心肌
+  DCM 参数/校准/identity 指标，并用六个冻结 T64 FEM 工况做严格 FEM→FEM 迁移等价门；
+- v08 不授权删除旧证据、重新标定、参数扫描、三维、整心房或流体。
 
 ## 2. 已完成并可引用的阶段证据
 
@@ -316,7 +326,8 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 ## 5. 当前禁止范围
 
-M2A v07 已独立验收并停止在模型架构 Human Gate，当前没有后续执行授权。不得删除、覆盖或续接 v06 v01 失败包与
+M2A 心肌 DCM identity 路线已整体退役；当前只授权 v08 FEM-only 活跃架构迁移与六工况
+T64 parity。不得删除、覆盖或续接 v06 v01 失败包与
 v06.1 v02 正式包；不得把 EOF 兼容规则扩展到其他文件或哈希，不得修改当前测试文件以
 迎合旧 manifest。不得重跑 DCM/FEM 求解器，不得覆盖或续接 v05 失败包及 v05.1 成功包，
 也不得修改 v01-v06.1 冻结实现。拟合比例、按工况校准、模型/映射/提取实现修改、S5、
