@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-04
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: d40f4813d0dcd5715f8db3011c49bcf0b635b2b5
-current_lifecycle: paper2_m2a_v05_1_t256_resource_repair_retry_authorized
-current_contract: project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v05.md
-current_authorization: project_control/paper2_m2a_v05_t256_runtime_budget_repair_and_retry_decision_v01.md
+verified_commit: 13d22257a7fcefebca037cd0537e8752f52e123a
+current_lifecycle: paper2_m2a_v06_identity_gate_authorized
+current_contract: project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v06.md
+current_authorization: project_control/paper2_m2a_v05_1_t256_supervisor_acceptance_and_identity_gate_decision_v01.md
 current_clarification: project_control/paper2_m2a_v03_phase_r_endpoint_count_clarification_decision_v01.md
-execution_authorized: v05_1_endpoint_runtime_gate_repair_and_full_t256_retry_only
-current_execution_log: pending_v05_1_retry_execution
-latest_completed_execution_log: project_control/paper2_m2a_v05_t256_execution_record_v01.md
+execution_authorized: v06_read_only_s4_t256_d0_identity_postprocessing_only
+current_execution_log: project_control/paper2_m2a_v05_1_t256_resource_repair_retry_execution_record_v01.md
+latest_completed_execution_log: project_control/paper2_m2a_v05_1_t256_resource_repair_retry_execution_record_v01.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
 current_mainline: project_control/prl_independent_theory_mainline_plan_v02.md
@@ -28,11 +28,10 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 
 ## 1. 一句话状态
 
-Paper 2 M2A v05 T256 已在第 18/54 个端点因 `30.3851 s > 30.0 s` 单端点资源门
-fail-closed；18/18 科学结构门均通过，尚无 T256 时间收敛结论。Supervisor 已独立接受
-失败并批准资源版 v05.1：只把 T256 单端点上限按时间步翻倍关系预注册为 `60.0 s`，总时间、
-内存和全部科学门保持不变；将在全新 v02 目录从第 1 个端点完整重试。identity gate 和 M2B
-仍未授权或启动。
+Paper 2 M2A v05.1 资源修复重试已由 Supervisor 独立验收，正式标签为
+`T256_TIME_CONVERGENCE_PASS_V05`：54/54 个 T256/D0 端点、74/74 个空间门、54/54 个
+周期门、2/2 个热点门及 74/74 个 T64/T128/T256 三层时间门全部通过。v06 identity gate
+现已授权，只允许对冻结 S4/T256/D0 证据作 CPU 只读后处理；不得重跑求解器，M2B 仍未授权。
 
 旧 DCM–FEM–DCM Figure 2 路线仍原样保留：T128 时间离散阶段 FINAL 不变；A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。新 M1 不改判 A1，也不把旧时间离散结果迁移成新架构证据。
 
@@ -159,6 +158,28 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
   `16 GiB`、科学实现和所有数值门不变；
 - 全量重试必须从第 1 个端点开始并写入新 create-only 目录
   `results/paper2_m2/identity_2d_v05_t256_v02_20260904/`，不得续接或覆盖 v01 失败包。
+- v05.1 资源修复重试执行记录：
+  `project_control/paper2_m2a_v05_1_t256_resource_repair_retry_execution_record_v01.md`；
+- v05.1 create-only 成功包：
+  `results/paper2_m2/identity_2d_v05_t256_v02_20260904/`；
+- 正式标签：`T256_TIME_CONVERGENCE_PASS_V05`。54/54 个端点、74/74 个空间门、
+  54/54 个周期门、2/2 个热点门和 74/74 个三层时间门通过；最大 `r_12` 为
+  `0.0004150504093643955 < 0.01`；
+- 最大直接相对残差为 `2.9681468104030423e-08 < 1e-07`，最大功率账本残差为
+  `2.515595272983527e-09 < 1e-08`，最大离散闭合相对误差为
+  `2.520540448406629e-14 < 1e-10`；
+- 原失败端点本次耗时 `30.62505569300265 s < 60.0 s`。全阶段耗时
+  `735.4341055739933 s < 5400 s`，峰值内存 `1.1175003051757812 GiB < 16 GiB`；
+- 成功包 16 个 JSON 和 12 个 NPZ（360 个数组）均为有限值，hash ledger 27/27 条目
+  复算一致；v05 首次失败包、v05 实现及 T64/T128 源证据保持只读；
+- 该结论不拟合收敛阶，也不构成 DCM-FEM identity、生理标定、三维或疾病机制证据。
+- v05.1 Supervisor 独立验收与 v06 identity gate 授权：
+  `project_control/paper2_m2a_v05_1_t256_supervisor_acceptance_and_identity_gate_decision_v01.md`；
+- 当前 v06 identity 合同：
+  `project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v06.md`；
+- v06 只允许读取冻结 T64/T128/T256 包并比较 S4/T256/D0 的 DCM–FEM 留出端点，输出
+  `GO-ID`、`MAYBE-ID`、`NO-GO-ID` 或 `BLOCKED` 后停止在 Supervisor Gate；
+- v06 不授权重新求解、改参数、改共同投影、改身份阈值、M2B、三维、流体或 GPU。
 
 ## 2. 已完成并可引用的阶段证据
 
@@ -227,10 +248,10 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 ## 5. 当前禁止范围
 
-M2A 当前只授权资源版 v05.1：新增资源协议与 runner，在 `60.0 s` T256 单端点门下从头
-重跑冻结的 54 个端点。不得覆盖或续接 v05 失败包，不得修改 v01-v05 冻结实现；若再次
-触发资源门，不再自动放宽。正式 identity gate、S5、重新校准、界面离散/共同投影修改、
-生产观测量替换和 1% 门槛修改尚未授权。仍不授权：M2B 三维、
+M2A v06 identity gate 已授权，但仅限冻结 S4/T256/D0 结果的 CPU 只读后处理。不得重跑
+DCM/FEM 求解器，不得覆盖或续接 v05 失败包及 v05.1 成功包，不得修改 v01-v05.1 冻结实现。
+S5、重新校准、界面离散/共同投影修改、生产观测量替换和身份/数值门槛修改均未授权。
+仍不授权：M2B 三维、
 非匹配界面升级、A1 再周期化、B1/A2/B2、A3、A4、B3、B4、D1/F200N 完整周期、旧路线
 T256、空间参数扫描、N1-2d、N1-3、原 EFE Node 2–4、GPU worker、新外部求解器、CFD、
 单向/双向 FSI、器官级几何扩展或大参数海。

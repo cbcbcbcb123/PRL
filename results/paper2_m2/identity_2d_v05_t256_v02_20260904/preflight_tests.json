@@ -1,0 +1,6 @@
+{
+  "frozen_dolfinx_cpu_container": "32 passed in 127.66s; dolfinx/dolfinx:v0.11.0; CPU=1; network=none; memory=16GiB",
+  "host": "16 passed in 5.03s; v03-v05.1 protocols, source replay and path gates",
+  "pass": true,
+  "schema": "paper2_m2a_v05_t256_preflight_tests_v01"
+}

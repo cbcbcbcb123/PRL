@@ -1,0 +1,113 @@
+{
+  "files": {
+    "T128_T256_time_node_nesting_audit.json": {
+      "bytes": 5853,
+      "sha256": "d3bd62d8c090a9ce499c9bf3ee2dbe59a7a0548a1ff7c980c4d689f64247dda3"
+    },
+    "T64_T128_T256_time_gate.json": {
+      "bytes": 66406,
+      "sha256": "da862eb027374d87a9c5f63ac14bda947f4c3539f60acc5d9c2a34505ef17399"
+    },
+    "assembly_probe.json": {
+      "bytes": 1003,
+      "sha256": "4c4913686dd808c67cb9de56ce6607935c3252000c741a9e08a49c6a16550c5d"
+    },
+    "endpoint_summaries.json": {
+      "bytes": 203994,
+      "sha256": "47e80c22c37493cfb4eb176494a903bc64bca5d57ce492be71e0410adb4a6576"
+    },
+    "finite_value_audit.json": {
+      "bytes": 60684,
+      "sha256": "8165b76e1ddbaf47081f6659cb9cb76258aa736ac851cbd7bb8e96cf8c30c3b9"
+    },
+    "global_structural_checks.json": {
+      "bytes": 590,
+      "sha256": "e7441e3eb738440e89047715989b8d40ccd4029d0bebfd8a27dfad2267e27dd2"
+    },
+    "pass_summary.json": {
+      "bytes": 35537,
+      "sha256": "d0d306433a8ca4ea61ad289ef7a94d7905a8383a42931c877dddd407a36ce97b"
+    },
+    "preflight_tests.json": {
+      "bytes": 275,
+      "sha256": "98061a023d3a294bf4a5f10b145cb0d8bac9fcc17060ec5df60e832543adb485"
+    },
+    "projection_preflight.json": {
+      "bytes": 710,
+      "sha256": "a333598597d7a4632314c500aed130a5842b9d62e6cbce1c7fb522a0e61383f6"
+    },
+    "run_manifest.json": {
+      "bytes": 29225,
+      "sha256": "fc65096b2c51fcaaba0c8d47405a3549a191be4d73a8cabf554019437884f123"
+    },
+    "selected_dynamic_holdouts/ID-A2__DCM__S4__T256__D0.npz": {
+      "bytes": 106270137,
+      "sha256": "18c7c75f71c51716f9f98a516ec22b9edea673473570c6f57cd5e8f9e7fae362"
+    },
+    "selected_dynamic_holdouts/ID-A2__FEM__S4__T256__D0.npz": {
+      "bytes": 106009464,
+      "sha256": "fef97d635b841e0b4cd3b8753d3b03aa28e5691591240ad29741579965363452"
+    },
+    "selected_dynamic_holdouts/ID-C0__DCM__S4__T256__D0.npz": {
+      "bytes": 107461662,
+      "sha256": "5a8c13c8c954611d0851c6b0b520ac740a4f6e9a2e30854c681d21fa32772824"
+    },
+    "selected_dynamic_holdouts/ID-C0__FEM__S4__T256__D0.npz": {
+      "bytes": 107582684,
+      "sha256": "ddff7d206ee58cd4a2f836270016ba5e5a2a3353db33dcc3f1bb56f616394df1"
+    },
+    "selected_dynamic_holdouts/ID-CQ__DCM__S4__T256__D0.npz": {
+      "bytes": 107445985,
+      "sha256": "ce57a9167415ad2b406d0adea8a022f7b0571aa17ad9564d1921ba1cee80d307"
+    },
+    "selected_dynamic_holdouts/ID-CQ__FEM__S4__T256__D0.npz": {
+      "bytes": 107476376,
+      "sha256": "aa74a829e19e620ecf0bf1eae9778121fbd377e569c9c028c29cfe2aa2e32203"
+    },
+    "selected_dynamic_holdouts/ID-LN__DCM__S4__T256__D0.npz": {
+      "bytes": 101404512,
+      "sha256": "056a27ade71c22972b6a125e7bfc01bf34ba6b6b6557bcccb743564a59421a80"
+    },
+    "selected_dynamic_holdouts/ID-LN__FEM__S4__T256__D0.npz": {
+      "bytes": 100983933,
+      "sha256": "3e5b0df5e92ff0dd71771c49599b0140e6d4abec2da52e7673b2f73bdd8a054c"
+    },
+    "selected_dynamic_holdouts/ID-LS__DCM__S4__T256__D0.npz": {
+      "bytes": 83337873,
+      "sha256": "47a229fe5987dfa5162d48c78a03fb028cdd316da68a02ffc3172f8482c242e4"
+    },
+    "selected_dynamic_holdouts/ID-LS__FEM__S4__T256__D0.npz": {
+      "bytes": 83103082,
+      "sha256": "937c49d572dc5c4b9a1eaef22e701288516e3904e433ecab13350b76e2d4bfc9"
+    },
+    "selected_dynamic_holdouts/ID-S1__DCM__S4__T256__D0.npz": {
+      "bytes": 106110119,
+      "sha256": "0047009cc681de3714679d974f5402a69f11de6d0e4b360d7c153fae63843c02"
+    },
+    "selected_dynamic_holdouts/ID-S1__FEM__S4__T256__D0.npz": {
+      "bytes": 106018430,
+      "sha256": "33c1500655b1bef3edcc262335ec8f6c01c51d840c84f565b270882ca43f028b"
+    },
+    "source_T128_lock.json": {
+      "bytes": 978,
+      "sha256": "d487933a8c9c8fe44eb4061f8c526c5b5b5f94a6a05ebdbf97532259d2fc0b09"
+    },
+    "source_T64_lock.json": {
+      "bytes": 918,
+      "sha256": "0b4c2a00fb8d40e26fdb627f9cb32afa81e1fea25bed988f68995287707e6546"
+    },
+    "source_calibration_lock.json": {
+      "bytes": 567,
+      "sha256": "0b2f99e90b6bb8373f78d756ebbedc0ceaac41133a581db2db5a349e6687008e"
+    },
+    "stage_T256_gate.json": {
+      "bytes": 56151,
+      "sha256": "38ce90532f4f2fdadfb32e73e1c6ab67b2a02578b26c9869f79c54b069ac1ff4"
+    },
+    "structural_gates.json": {
+      "bytes": 62011,
+      "sha256": "ad123439f230c87a5182b92db7ac12e9a0d7792a1cbb669fa1b16af9f8214de2"
+    }
+  },
+  "schema": "paper2_m2a_v05_1_t256_hash_ledger_v01"
+}
