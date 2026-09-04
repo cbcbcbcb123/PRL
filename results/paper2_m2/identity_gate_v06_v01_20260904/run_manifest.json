@@ -1,0 +1,74 @@
+{
+  "baseline_git_head": "3356bbdccb0d6ba2fa78e488c8598592509c8539",
+  "gpu_used": false,
+  "network_used": false,
+  "protocol": {
+    "calibration_audit_only_cases": [
+      "ID-P1",
+      "ID-A1"
+    ],
+    "coherence_amplitude_floor": 1e-10,
+    "combined_gain_operator_source": "scripts/run_paper2_m2_identity_2d_v01.py:545-568",
+    "combined_gain_operator_source_sha256": "6d637e1b67a69c8a8c16a01267194f0f4a87502433bacd7522d0d9841e09a1a4",
+    "combined_gain_relative_tolerance": 0.1,
+    "common_projection_segments": 64,
+    "cpu_processes": 1,
+    "dissipation_relative_tolerance": 0.1,
+    "energy_floor": 1e-10,
+    "first_cycle_repeated_endpoint_included": false,
+    "first_cycle_window": [
+      0,
+      256
+    ],
+    "gpu_used": false,
+    "holdout_cases": [
+      "ID-A2",
+      "ID-LN",
+      "ID-LS",
+      "ID-C0",
+      "ID-CQ",
+      "ID-S1"
+    ],
+    "hotspot_center_tolerance": 0.0078125,
+    "hotspot_equivalence_absolute_tolerance": 1e-12,
+    "hotspot_equivalence_relative_tolerance": 1e-12,
+    "identity_decisions": [
+      "GO-ID",
+      "MAYBE-ID",
+      "NO-GO-ID",
+      "BLOCKED"
+    ],
+    "no_go_phase_threshold_rad": 0.15,
+    "no_go_relative_threshold": 0.15,
+    "peak_memory_budget_gib": 8.0,
+    "phase_absolute_tolerance_rad": 0.05,
+    "phase_signal_by_case": {
+      "ID-A2": "limited_shortening",
+      "ID-C0": "limited_shortening",
+      "ID-CQ": "limited_shortening",
+      "ID-LN": "negative_mean_endocardial_normal_displacement",
+      "ID-LS": "mean_endocardial_tangential_displacement",
+      "ID-S1": "limited_shortening"
+    },
+    "representations": [
+      "DCM",
+      "FEM"
+    ],
+    "schema": "paper2_m2a_identity_gate_protocol_v06",
+    "shortening_floor": 1e-06,
+    "shortening_relative_tolerance": 0.05,
+    "solver_level": "D0",
+    "spatial_level": "S4",
+    "steps_per_cycle": 256,
+    "storage_absolute_tolerance": 1e-10,
+    "structural_control_cases": [
+      "ID-P0"
+    ],
+    "total_runtime_budget_seconds": 600.0,
+    "traction_floor": 1e-08,
+    "traction_relative_tolerance": 0.05,
+    "waveform_relative_tolerance": 0.05
+  },
+  "schema": "paper2_m2a_v06_identity_gate_manifest_blocked",
+  "solver_or_endpoint_run": false
+}

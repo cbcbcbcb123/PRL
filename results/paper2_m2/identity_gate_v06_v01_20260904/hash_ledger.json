@@ -1,0 +1,17 @@
+{
+  "files": {
+    "failure_summary.json": {
+      "bytes": 345,
+      "sha256": "866f1522855e8c7d8a8d59c0e534df62389358c10322d795ea2294d9a726a183"
+    },
+    "preflight.json": {
+      "bytes": 4315,
+      "sha256": "eae4fc4b67cab1afccf67183e668024255cfb65b36ee586e3a2997e082103589"
+    },
+    "run_manifest.json": {
+      "bytes": 2276,
+      "sha256": "050fc0623b1822cad92dbb00ad7fc28d6469bdac1ecc8ba78e3b08a29c316815"
+    }
+  },
+  "schema": "paper2_m2a_v06_hash_ledger"
+}
