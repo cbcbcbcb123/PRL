@@ -1,0 +1,890 @@
+{
+  "ID-A1__DCM__S2__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.2492663102954745e-16
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 5.521367432204611e-17
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 6.917762326184568e-13
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 2.6158877834068958e-15
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 1.0445033366493956e-09
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 7.647084847258911e-13
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-A1__DCM__S3__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.247256528977542e-16
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 4.452868622383223e-17
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 9.401787476146254e-12
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 9.764561669549461e-15
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 1.0460941775653964e-09
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 1.8171175829022246e-11
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-A1__DCM__S4__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.246427988670921e-16
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 6.233480759908881e-17
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 9.462387135741788e-11
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 9.463930749062545e-15
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 1.046513332311868e-09
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 4.1745657939556496e-11
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-A1__FEM__S2__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.2626369787962386e-16
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 2.0031211978902567e-17
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 2.171800424571023e-13
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 7.21317282036982e-16
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 4.398171636846033e-10
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 9.885918960303712e-14
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-A1__FEM__S3__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.258218807437394e-16
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 1.9660468037184658e-17
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 3.4758369334634924e-12
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 1.6010134021334153e-15
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 4.3962872373782306e-10
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 7.144865374250244e-12
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-A1__FEM__S4__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.256118719254593e-16
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 2.4755197436675512e-17
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 3.122497222609623e-11
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 2.743376042460784e-15
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 4.395893521778752e-10
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 1.1990711241050467e-11
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-P0__DCM__S2__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 0.0
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 0.0
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 0.0
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 0.0
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 0.0
+      },
+      "zero_state": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-P0__DCM__S3__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 0.0
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 0.0
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 0.0
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 0.0
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 0.0
+      },
+      "zero_state": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-P0__DCM__S4__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 0.0
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 0.0
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 0.0
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 0.0
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 0.0
+      },
+      "zero_state": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-P0__FEM__S2__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 0.0
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 0.0
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 0.0
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 0.0
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 0.0
+      },
+      "zero_state": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-P0__FEM__S3__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 0.0
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 0.0
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 0.0
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 0.0
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 0.0
+      },
+      "zero_state": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-P0__FEM__S4__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 0.0
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 0.0
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 0.0
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 0.0
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 0.0
+      },
+      "zero_state": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-P1__DCM__S2__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 0.0
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 0.0
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 0.0
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 0.0
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 0.0
+      },
+      "uniform_strain_manufactured_solution": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 5.583771089420933e-16
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-P1__DCM__S3__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 0.0
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 0.0
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 0.0
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 0.0
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 0.0
+      },
+      "uniform_strain_manufactured_solution": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 8.447645152316956e-16
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-P1__DCM__S4__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 0.0
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 0.0
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 0.0
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 0.0
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 0.0
+      },
+      "uniform_strain_manufactured_solution": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 1.03217118583013e-15
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-P1__FEM__S2__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 0.0
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 0.0
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 0.0
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 0.0
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 0.0
+      },
+      "uniform_strain_manufactured_solution": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 5.583771089420933e-16
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-P1__FEM__S3__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 0.0
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 0.0
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 0.0
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 0.0
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 0.0
+      },
+      "uniform_strain_manufactured_solution": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 8.447645152316956e-16
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  },
+  "ID-P1__FEM__S4__T256__D0": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 0.0
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 0.0
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 0.0
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 0.0
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 0.0
+      },
+      "uniform_strain_manufactured_solution": {
+        "pass": true,
+        "threshold": 1e-06,
+        "value": 1.03217118583013e-15
+      }
+    },
+    "pass": true,
+    "schema": "paper2_m2a_v05_endpoint_structural_gate_v01"
+  }
+}

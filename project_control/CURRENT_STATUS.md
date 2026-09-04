@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-04
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 1fe0ea7ff99455ef85373c0d428c0b21cfcd1a2e
-current_lifecycle: paper2_m2a_v05_t256_execution_authorized
+verified_commit: d40f4813d0dcd5715f8db3011c49bcf0b635b2b5
+current_lifecycle: paper2_m2a_v05_1_t256_resource_repair_retry_authorized
 current_contract: project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v05.md
-current_authorization: project_control/paper2_m2a_v04_t128_supervisor_acceptance_and_t256_decision_v01.md
+current_authorization: project_control/paper2_m2a_v05_t256_runtime_budget_repair_and_retry_decision_v01.md
 current_clarification: project_control/paper2_m2a_v03_phase_r_endpoint_count_clarification_decision_v01.md
-execution_authorized: v05_t256_full_numerical_and_three_level_time_gate_only
-current_execution_log: pending_v05_execution
-latest_completed_execution_log: project_control/paper2_m2a_v04_t128_path_repair_retry_execution_record_v01.md
+execution_authorized: v05_1_endpoint_runtime_gate_repair_and_full_t256_retry_only
+current_execution_log: pending_v05_1_retry_execution
+latest_completed_execution_log: project_control/paper2_m2a_v05_t256_execution_record_v01.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
 current_mainline: project_control/prl_independent_theory_mainline_plan_v02.md
@@ -28,9 +28,10 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 
 ## 1. 一句话状态
 
-Paper 2 M2A v04.1 路径修复与 T128 重试已由 Supervisor 独立验收，正式标签保持
-`T128_STAGE_PASS_V04`。v05 T256 与三层时间门已在持续授权下获批，尚未开始执行；范围只含
-54 个 T256/D0 端点、T256 内数值门和 74 个 T64/T128/T256 时间记录。identity gate 和 M2B
+Paper 2 M2A v05 T256 已在第 18/54 个端点因 `30.3851 s > 30.0 s` 单端点资源门
+fail-closed；18/18 科学结构门均通过，尚无 T256 时间收敛结论。Supervisor 已独立接受
+失败并批准资源版 v05.1：只把 T256 单端点上限按时间步翻倍关系预注册为 `60.0 s`，总时间、
+内存和全部科学门保持不变；将在全新 v02 目录从第 1 个端点完整重试。identity gate 和 M2B
 仍未授权或启动。
 
 旧 DCM–FEM–DCM Figure 2 路线仍原样保留：T128 时间离散阶段 FINAL 不变；A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。新 M1 不改判 A1，也不把旧时间离散结果迁移成新架构证据。
@@ -141,7 +142,23 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
 - 当前 v05 增量合同：
   `project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v05.md`；
 - v05 只授权完整 T256 数值阶段与 74 个三层时间门，create-only 目标为
-  `results/paper2_m2/identity_2d_v05_t256_v01_20260904/`；不得在本阶段计算跨表示 identity。
+  `results/paper2_m2/identity_2d_v05_t256_v01_20260904/`；不得在本阶段计算跨表示 identity；
+- v05 T256 执行记录：
+  `project_control/paper2_m2a_v05_t256_execution_record_v01.md`；
+- v05 create-only 失败包：
+  `results/paper2_m2/identity_2d_v05_t256_v01_20260904/`；
+- 正式失败分类：`T256_ENDPOINT_RUNTIME_BUDGET_EXCEEDED`。18/54 个 T256/D0 端点完成且
+  18/18 科学结构门通过；第 18 个端点耗时 `30.38510538799892 s`，超过冻结单端点预算
+  `30.0 s`。第 19 个端点、74/54/2 个 T256 汇总门、12 个动态留出和 74 个三层时间门
+  均未执行；
+- 失败包 12 个 JSON 均有限，hash ledger 11/11 条目复算一致；manifest 中 80 个冻结
+  v01-v04/T64/T128 文件当前哈希未变。
+- v05.1 资源门修复与重试决定：
+  `project_control/paper2_m2a_v05_t256_runtime_budget_repair_and_retry_decision_v01.md`；
+- v05.1 唯一合同变化是 T256 单端点资源上限 `30→60 s`；阶段总时间 `5400 s`、内存
+  `16 GiB`、科学实现和所有数值门不变；
+- 全量重试必须从第 1 个端点开始并写入新 create-only 目录
+  `results/paper2_m2/identity_2d_v05_t256_v02_20260904/`，不得续接或覆盖 v01 失败包。
 
 ## 2. 已完成并可引用的阶段证据
 
@@ -210,9 +227,10 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 ## 5. 当前禁止范围
 
-M2A v05 只允许 T256 的 54 个冻结端点、T256 内数值门和 74 个三层时间门。不得覆盖
-任何失败包或成功包，不得修改 v01-v04 冻结实现。正式 identity gate、S5、重新校准、
-界面离散/共同投影修改、生产观测量替换和 1% 门槛修改尚未授权。仍不授权：M2B 三维、
+M2A 当前只授权资源版 v05.1：新增资源协议与 runner，在 `60.0 s` T256 单端点门下从头
+重跑冻结的 54 个端点。不得覆盖或续接 v05 失败包，不得修改 v01-v05 冻结实现；若再次
+触发资源门，不再自动放宽。正式 identity gate、S5、重新校准、界面离散/共同投影修改、
+生产观测量替换和 1% 门槛修改尚未授权。仍不授权：M2B 三维、
 非匹配界面升级、A1 再周期化、B1/A2/B2、A3、A4、B3、B4、D1/F200N 完整周期、旧路线
 T256、空间参数扫描、N1-2d、N1-3、原 EFE Node 2–4、GPU worker、新外部求解器、CFD、
 单向/双向 FSI、器官级几何扩展或大参数海。
