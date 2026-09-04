@@ -3,15 +3,15 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-04
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: b6f1c16a1fcc04856d4ac10cd4745160ff666644
-current_lifecycle: paper2_figure1_three_layer_theory_contract_v02_accepted
-current_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
-current_authorization: project_control/paper2_figure1_three_layer_theory_v02_supervisor_acceptance_and_figure2_contract_decision_v01.md
+verified_commit: ade5f96d7b89a6ed6b629a37db795ed08853ba3f
+current_lifecycle: paper2_figure2_fem_only_numerical_credibility_contract_v03_accepted
+current_contract: project_control/paper2_figure2_fem_only_numerical_credibility_contract_v03.md
+current_authorization: project_control/paper2_figure2_fem_only_numerical_credibility_v03_supervisor_acceptance_and_execution_contract_decision_v01.md
 current_clarification: none
-execution_authorized: figure2_fem_only_numerical_credibility_contract_drafting_only
-current_execution_log: not_applicable_document_only_theory_stage
+execution_authorized: figure2_fem_only_numerical_credibility_execution_contract_drafting_only
+current_execution_log: not_applicable_document_only_contract_stage
 latest_completed_execution_log: project_control/paper2_v08_myocardial_fem_only_architecture_migration_execution_record_v01.md
-latest_supervisor_decision: project_control/paper2_figure1_three_layer_theory_v02_supervisor_acceptance_and_figure2_contract_decision_v01.md
+latest_supervisor_decision: project_control/paper2_figure2_fem_only_numerical_credibility_v03_supervisor_acceptance_and_execution_contract_decision_v01.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
@@ -31,10 +31,11 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 ## 1. 一句话状态
 
 Paper 2 v08 已通过独立 Supervisor 验收，唯一活跃生产架构冻结为“离散心内膜细胞链＋
-主动心肌 FEM＋黏弹 ECM FEM”。Figure 1 三层理论合同 v02 也已通过独立验收，冻结了
-几何、方程、能量/功率、双界面物理力、无量纲组、极限和否证边界。心肌 DCM 与
-identity/M2B 路线只作为退役历史保留，不得重新进入活跃源码、模型选择、论文比较或
-后续整心房架构。下一步只授权起草新 FEM-only Figure 2 数值可信度合同，不授权计算。
+主动心肌 FEM＋黏弹 ECM FEM”。Figure 1 三层理论合同 v02 和 Figure 2 FEM-only 数值
+可信度合同 v03 均已通过独立验收；后者冻结了无环验证梯、128×256 共同域、解析相位
+段平均、功率守恒映射和 S1 独立留出。心肌 DCM 与 identity/M2B 路线只作为退役历史
+保留，不得重新进入活跃源码、模型选择、论文比较或后续整心房架构。下一步只授权起草
+Figure 2 执行合同，不授权代码或计算。
 
 旧 DCM–FEM–DCM Figure 2 路线只作为历史证据原样保留：T128 时间离散阶段 FINAL 不变；
 A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。它不属于新活跃
@@ -278,6 +279,24 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
 - 该标签只证明代码提取迁移等价，不是生理验证或新机制结论。当前证据远未达到
   Nature Physics；该期刊仅作为后续问题设计标准和有条件战略目标。
 
+## 1.3 Paper 2 Figure 1–2 当前理论与数值合同门
+
+- Figure 1 已接受合同：
+  `project_control/paper2_figure1_three_layer_theory_contract_v02.md`；
+- Figure 2 已接受合同：
+  `project_control/paper2_figure2_fem_only_numerical_credibility_contract_v03.md`，SHA-256
+  `796de6a6cfa6167e30cae592128379206709ace720d4fcbe3ae80366fb504249`；
+- v03 Supervisor 验收与下一步决定：
+  `project_control/paper2_figure2_fem_only_numerical_credibility_v03_supervisor_acceptance_and_execution_contract_decision_v01.md`；
+- Figure 2 开发门唯一顺序为
+  `G0→G1→G2→G3→G4a→G5→G4b→G4→G6→G7→digest→S1`；
+- 共同域冻结为 128 个空间 P0 段 × 256 个周期中心化相位 P0 段；单频场取解析段平均，
+  逐步功/耗散独立按区间交叠守恒映射；
+- S1 是规则和开发结果 digest 后才解盲的独立空间异质留出；
+- 当前只有合同被接受，尚无 Figure 2 v03 数值 PASS。下一步只授权起草
+  `project_control/paper2_figure2_fem_only_numerical_credibility_execution_contract_v01.md`，
+  完成后再次停在 Supervisor Gate。
+
 ## 2. 已完成并可引用的阶段证据
 
 - X1-K v11 已得到 `passed_x1_k_v11_transactional_survivor_r1r_c1_f1`，并已由人类终审接受；v01–v10 的失败与修复链继续保留。
@@ -287,6 +306,8 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
 - 空间与容差合同 v02 已闭合 v01 的八项审阅阻塞，独立结论为 `PASS_FOR_HUMAN_REVIEW`；该结论不是执行授权。
 - v08 已建立并验证独立 `paper2_hybrid` 活跃命名空间；六工况迁移等价为逐值误差 `0`，
   并已通过独立 Supervisor 复核。
+- Figure 1 理论合同 v02 与 Figure 2 数值可信度合同 v03 已通过独立 Supervisor 复核；
+  两者是方程/验证规则证据，不是 Figure 2 计算通过证据。
 
 关键证据入口：
 
@@ -348,7 +369,8 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 ## 5. 当前禁止范围
 
-M2A 心肌 DCM identity 路线已整体退役；v08 已完成，当前没有后续执行授权。不得删除、
+M2A 心肌 DCM identity 路线已整体退役；v08 已完成。当前只授权起草 Figure 2 执行合同，
+不授权写代码或运行计算。不得删除、
 覆盖或续接 v06 v01 失败包与
 v06.1 v02 正式包；不得把 EOF 兼容规则扩展到其他文件或哈希，不得修改当前测试文件以
 迎合旧 manifest。不得重跑 DCM/FEM 求解器，不得覆盖或续接 v05 失败包及 v05.1 成功包，
