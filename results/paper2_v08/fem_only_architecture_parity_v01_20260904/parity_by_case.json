@@ -1,0 +1,4278 @@
+{
+  "absolute_tolerance": 1e-12,
+  "all_cases_pass": true,
+  "cases": {
+    "A2__S4__T64__D0": {
+      "array_records": {
+        "activation_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.692820323027551,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.692820323027551,
+          "shape": [
+            129
+          ]
+        },
+        "ecm_cell_centroids": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 30.468982406521054,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 30.468982406521054,
+          "shape": [
+            8192,
+            2
+          ]
+        },
+        "ecm_internal_z_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.2801555318457467,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.2801555318457467,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "ecm_strain_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 3.413452401029927,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 3.413452401029927,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "ecm_stress_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 4.167207797379726,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 4.167207797379726,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "endocardium_ecm_traction_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.03071828292157469,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.03071828292157469,
+          "shape": [
+            258,
+            129
+          ]
+        },
+        "free_shortening_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.6928203230275523,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.6928203230275523,
+          "shape": [
+            129
+          ]
+        },
+        "ledger_active_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0005922838757670514,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0005922838757670514,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_discrete_energy_change_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.000584404044856843,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.000584404044856843,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_drag_dissipation_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 7.289974229164317e-06,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 7.289974229164317e-06,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_endpoint_energy_change_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0005844040448568598,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0005844040448568598,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_endpoint_subtraction_gap_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.0280559859336422e-15,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.0280559859336422e-15,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_energy": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.007910666771948073,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.007910666771948073,
+          "shape": [
+            65
+          ]
+        },
+        "ledger_equilibrium_defect_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 3.339866808258854e-16,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 3.339866808258854e-16,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_external_support_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 4.604746396317706e-06,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 4.604746396317706e-06,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_ledger_minus_equilibrium_work_relative_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 4.7786635722030435e-15,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 4.7786635722030435e-15,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_ledger_minus_equilibrium_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 7.96168712364284e-19,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 7.96168712364284e-19,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_lumen_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_normalization_scale_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0011939220921200755,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0011939220921200755,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_normalized_residual_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.725638476529461e-11,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.725638476529461e-11,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_residual_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 3.3384972688948954e-16,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 3.3384972688948954e-16,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_sls_dissipation_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.1842185742375247e-05,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.1842185742375247e-05,
+          "shape": [
+            64
+          ]
+        },
+        "limited_shortening_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.20935558793927717,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.20935558793927717,
+          "shape": [
+            129
+          ]
+        },
+        "mean_endocardial_normal_displacement_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.01004388545977122,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.01004388545977122,
+          "shape": [
+            129
+          ]
+        },
+        "mean_endocardial_tangential_displacement_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.9821373072148593e-11,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.9821373072148593e-11,
+          "shape": [
+            129
+          ]
+        },
+        "myocardium_ecm_traction_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.05885280711080605,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.05885280711080605,
+          "shape": [
+            258,
+            129
+          ]
+        },
+        "state_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 22.108994077482354,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 22.108994077482354,
+          "shape": [
+            41729,
+            129
+          ]
+        },
+        "time_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 13.140467076934518,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 13.140467076934518,
+          "shape": [
+            129
+          ]
+        }
+      },
+      "case_id": "A2",
+      "endpoint_runtime_seconds": 26.04740300901176,
+      "forbidden_summary_keys": [],
+      "pass": true,
+      "projected_traction_norm_records": {
+        "endocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.00023843272955087006,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.00023843272955087006
+        },
+        "myocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.00045440732839382894,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.00045440732839382894
+        }
+      },
+      "projected_traction_records": {
+        "endocardium_ecm": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.015259694691255685,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.015259694691255685,
+          "shape": [
+            64,
+            2,
+            64
+          ]
+        },
+        "myocardium_ecm": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.029082069017205052,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.029082069017205052,
+          "shape": [
+            64,
+            2,
+            64
+          ]
+        }
+      },
+      "retired_reference_key": "ID-A2__FEM__S4__T64__D0",
+      "scalar_records": {
+        "cycle_state_relative_difference": {
+          "absolute_error": 0.0,
+          "new": 2.2411036409268314e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.2411036409268314e-16
+        },
+        "endocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.0002385720413352334,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0002385720413352334
+        },
+        "hotspot_traction": {
+          "absolute_error": 0.0,
+          "new": 0.0002871813063267531,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0002871813063267531
+        },
+        "hotspot_x": {
+          "absolute_error": 0.0,
+          "new": -0.35937500000000006,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.35937500000000006
+        },
+        "interface_action_reaction_relative_error": {
+          "absolute_error": 0.0,
+          "new": 0.0,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0
+        },
+        "ledger.cycle_discrete_energy_change": {
+          "absolute_error": 0.0,
+          "new": -1.3626007264243116e-17,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -1.3626007264243116e-17
+        },
+        "ledger.cycle_endpoint_energy_change": {
+          "absolute_error": 0.0,
+          "new": 9.486769009248164e-18,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 9.486769009248164e-18
+        },
+        "ledger.cycle_energy_change": {
+          "absolute_error": 0.0,
+          "new": -1.3626007264243116e-17,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -1.3626007264243116e-17
+        },
+        "ledger.maximum_absolute_endpoint_subtraction_gap": {
+          "absolute_error": 0.0,
+          "new": 3.4549457478966206e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.4549457478966206e-16
+        },
+        "ledger.maximum_ledger_minus_equilibrium_work_relative": {
+          "absolute_error": 0.0,
+          "new": 2.6614686906962037e-15,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.6614686906962037e-15
+        },
+        "ledger.maximum_normalized_residual": {
+          "absolute_error": 0.0,
+          "new": 7.828048231857312e-12,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 7.828048231857312e-12
+        },
+        "ledger.minimum_physical_dissipation": {
+          "absolute_error": 0.0,
+          "new": 3.3629007238518256e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.3629007238518256e-09
+        },
+        "ledger.total_active_work": {
+          "absolute_error": 0.0,
+          "new": 0.00012507075599397979,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.00012507075599397979
+        },
+        "ledger.total_drag_dissipation": {
+          "absolute_error": 0.0,
+          "new": 4.7654920635142815e-05,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.7654920635142815e-05
+        },
+        "ledger.total_external_support_work": {
+          "absolute_error": 0.0,
+          "new": -4.632211430296955e-22,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -4.632211430296955e-22
+        },
+        "ledger.total_lumen_work": {
+          "absolute_error": 0.0,
+          "new": 0.0,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0
+        },
+        "ledger.total_sls_dissipation": {
+          "absolute_error": 0.0,
+          "new": 7.741583536045144e-05,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 7.741583536045144e-05
+        },
+        "manufactured_uniform_strain_relative_error": {
+          "absolute_error": 0.0,
+          "new": 1.03217118583013e-15,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.03217118583013e-15
+        },
+        "maximum_ecm_von_mises_proxy": {
+          "absolute_error": 0.0,
+          "new": 0.04664497497909632,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.04664497497909632
+        },
+        "maximum_endocardium_ecm_traction": {
+          "absolute_error": 0.0,
+          "new": 0.0004896476520093187,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0004896476520093187
+        },
+        "maximum_myocardium_ecm_traction": {
+          "absolute_error": 0.0,
+          "new": 0.0012738093037648751,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0012738093037648751
+        },
+        "maximum_state_norm": {
+          "absolute_error": 0.0,
+          "new": 2.7728048170919006,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.7728048170919006
+        },
+        "minimum_limited_shortening": {
+          "absolute_error": 0.0,
+          "new": 0.0015113614737225708,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0015113614737225708
+        },
+        "myocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.00045471755248058205,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.00045471755248058205
+        },
+        "passive_tangent": {
+          "absolute_error": 0.0,
+          "new": 0.6730769230770624,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.6730769230770624
+        },
+        "peak_absolute_mean_endocardial_normal_displacement": {
+          "absolute_error": 0.0,
+          "new": 0.0010266518778762471,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0010266518778762471
+        },
+        "peak_absolute_mean_endocardial_tangential_displacement": {
+          "absolute_error": 0.0,
+          "new": 1.7687427670637574e-12,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.7687427670637574e-12
+        },
+        "peak_free_shortening": {
+          "absolute_error": 0.0,
+          "new": 0.10000000000000019,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.10000000000000019
+        },
+        "peak_limited_shortening": {
+          "absolute_error": 0.0,
+          "new": 0.0296795788790877,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0296795788790877
+        },
+        "shortening_fundamental_amplitude": {
+          "absolute_error": 0.0,
+          "new": 0.01408415805116472,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.01408415805116472
+        },
+        "shortening_phase_relative_to_activation_rad": {
+          "absolute_error": 0.0,
+          "new": -0.10082196935880898,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.10082196935880898
+        },
+        "shortening_waveform_l2": {
+          "absolute_error": 0.0,
+          "new": 0.01850406560808289,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.01850406560808289
+        },
+        "solver.dc_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 2.4755197436675512e-17,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.4755197436675512e-17
+        },
+        "solver.dc_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 3.122497222609623e-11,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.122497222609623e-11
+        },
+        "solver.harmonic_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 5.194913938185953e-18,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 5.194913938185953e-18
+        },
+        "solver.harmonic_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 5.845988043614336e-12,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 5.845988043614336e-12
+        },
+        "solver.maximum_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 2.4755197436675512e-17,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.4755197436675512e-17
+        },
+        "solver.maximum_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 3.122497222609623e-11,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.122497222609623e-11
+        }
+      },
+      "structural_gate": {
+        "checks": {
+          "cycle_state": {
+            "pass": true,
+            "threshold": 0.001,
+            "value": 2.2411036409268314e-16
+          },
+          "direct_normwise_backward_error": {
+            "pass": true,
+            "threshold": 1e-12,
+            "value": 2.4755197436675512e-17
+          },
+          "direct_relative_residual": {
+            "pass": true,
+            "threshold": 1e-07,
+            "value": 3.122497222609623e-11
+          },
+          "discrete_ledger_closure": {
+            "pass": true,
+            "threshold": 1e-10,
+            "value": 2.6614686906962037e-15
+          },
+          "finite_ledger": {
+            "pass": true,
+            "threshold": true,
+            "value": true
+          },
+          "interface_action_reaction": {
+            "pass": true,
+            "threshold": 1e-10,
+            "value": 0.0
+          },
+          "nonnegative_dissipation": {
+            "pass": true,
+            "threshold": -1e-12,
+            "value": 3.3629007238518256e-09
+          },
+          "power_ledger": {
+            "pass": true,
+            "threshold": 1e-08,
+            "value": 7.828048231857312e-12
+          }
+        },
+        "pass": true
+      }
+    },
+    "C0__S4__T64__D0": {
+      "array_records": {
+        "activation_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.692820323027551,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.692820323027551,
+          "shape": [
+            129
+          ]
+        },
+        "ecm_cell_centroids": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 30.468982406521054,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 30.468982406521054,
+          "shape": [
+            8192,
+            2
+          ]
+        },
+        "ecm_internal_z_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.1618762691354523,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.1618762691354523,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "ecm_strain_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.8319015022284026,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.8319015022284026,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "ecm_stress_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 8.500765994266335,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 8.500765994266335,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "endocardium_ecm_traction_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 5.515775463989541,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 5.515775463989541,
+          "shape": [
+            258,
+            129
+          ]
+        },
+        "free_shortening_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.6928203230275523,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.6928203230275523,
+          "shape": [
+            129
+          ]
+        },
+        "ledger_active_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0006101727681076492,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0006101727681076492,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_discrete_energy_change_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0007471767427780633,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0007471767427780633,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_drag_dissipation_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0007064834330510247,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0007064834330510247,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_endpoint_energy_change_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0007471767428717664,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0007471767428717664,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_endpoint_subtraction_gap_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.067488520346801e-11,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.067488520346801e-11,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_energy": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.011622670907712586,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.011622670907712586,
+          "shape": [
+            65
+          ]
+        },
+        "ledger_equilibrium_defect_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.770955708408734e-12,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.770955708408734e-12,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_external_support_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0007769452109800991,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0007769452109800991,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_ledger_minus_equilibrium_work_relative_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 7.723861305366989e-14,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 7.723861305366989e-14,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_ledger_minus_equilibrium_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.8250558724899236e-17,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.8250558724899236e-17,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_lumen_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0011982295726146387,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0011982295726146387,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_normalization_scale_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0036317356523084482,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0036317356523084482,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_normalized_residual_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.0838310499085726e-08,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.0838310499085726e-08,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_residual_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.7709780988099315e-12,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.7709780988099315e-12,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_sls_dissipation_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 8.147288840220847e-06,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 8.147288840220847e-06,
+          "shape": [
+            64
+          ]
+        },
+        "limited_shortening_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.13326987150129677,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.13326987150129677,
+          "shape": [
+            129
+          ]
+        },
+        "mean_endocardial_normal_displacement_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.0167510578722454,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.0167510578722454,
+          "shape": [
+            129
+          ]
+        },
+        "mean_endocardial_tangential_displacement_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.9081670957085013e-09,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.9081670957085013e-09,
+          "shape": [
+            129
+          ]
+        },
+        "myocardium_ecm_traction_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 5.4851659177672145,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 5.4851659177672145,
+          "shape": [
+            258,
+            129
+          ]
+        },
+        "state_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 83.49302302551338,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 83.49302302551338,
+          "shape": [
+            41729,
+            129
+          ]
+        },
+        "time_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 13.140467076934518,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 13.140467076934518,
+          "shape": [
+            129
+          ]
+        }
+      },
+      "case_id": "C0",
+      "endpoint_runtime_seconds": 25.74007069801155,
+      "forbidden_summary_keys": [],
+      "pass": true,
+      "projected_traction_norm_records": {
+        "endocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.042875794948667896,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.042875794948667896
+        },
+        "myocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.04262119405765073,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.04262119405765073
+        }
+      },
+      "projected_traction_records": {
+        "endocardium_ecm": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.7440508767147453,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.7440508767147453,
+          "shape": [
+            64,
+            2,
+            64
+          ]
+        },
+        "myocardium_ecm": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.7277564196896464,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.7277564196896464,
+          "shape": [
+            64,
+            2,
+            64
+          ]
+        }
+      },
+      "retired_reference_key": "ID-C0__FEM__S4__T64__D0",
+      "scalar_records": {
+        "cycle_state_relative_difference": {
+          "absolute_error": 0.0,
+          "new": 2.1999785709013937e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.1999785709013937e-16
+        },
+        "endocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.0428757953270122,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0428757953270122
+        },
+        "hotspot_traction": {
+          "absolute_error": 0.0,
+          "new": 0.00021108235885183152,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.00021108235885183152
+        },
+        "hotspot_x": {
+          "absolute_error": 0.0,
+          "new": -0.35937500000000006,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.35937500000000006
+        },
+        "interface_action_reaction_relative_error": {
+          "absolute_error": 0.0,
+          "new": 0.0,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0
+        },
+        "ledger.cycle_discrete_energy_change": {
+          "absolute_error": 0.0,
+          "new": 1.1874734187492311e-12,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.1874734187492311e-12
+        },
+        "ledger.cycle_endpoint_energy_change": {
+          "absolute_error": 0.0,
+          "new": -4.2898676147831716e-13,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -4.2898676147831716e-13
+        },
+        "ledger.cycle_energy_change": {
+          "absolute_error": 0.0,
+          "new": 1.1874734187492311e-12,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.1874734187492311e-12
+        },
+        "ledger.maximum_absolute_endpoint_subtraction_gap": {
+          "absolute_error": 0.0,
+          "new": 3.2052713890180773e-12,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.2052713890180773e-12
+        },
+        "ledger.maximum_ledger_minus_equilibrium_work_relative": {
+          "absolute_error": 0.0,
+          "new": 2.1453962054561936e-14,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.1453962054561936e-14
+        },
+        "ledger.maximum_normalized_residual": {
+          "absolute_error": 0.0,
+          "new": 3.8984084189343e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.8984084189343e-09
+        },
+        "ledger.minimum_physical_dissipation": {
+          "absolute_error": 0.0,
+          "new": 1.6374501595645075e-07,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.6374501595645075e-07
+        },
+        "ledger.total_active_work": {
+          "absolute_error": 0.0,
+          "new": 0.00011368465293402716,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.00011368465293402716
+        },
+        "ledger.total_drag_dissipation": {
+          "absolute_error": 0.0,
+          "new": 0.004633458116454819,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.004633458116454819
+        },
+        "ledger.total_external_support_work": {
+          "absolute_error": 0.0,
+          "new": -9.486769009248164e-20,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -9.486769009248164e-20
+        },
+        "ledger.total_lumen_work": {
+          "absolute_error": 0.0,
+          "new": 0.0045762123955545644,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0045762123955545644
+        },
+        "ledger.total_sls_dissipation": {
+          "absolute_error": 0.0,
+          "new": 5.6438929496154745e-05,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 5.6438929496154745e-05
+        },
+        "manufactured_uniform_strain_relative_error": {
+          "absolute_error": 0.0,
+          "new": 1.03217118583013e-15,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.03217118583013e-15
+        },
+        "maximum_ecm_von_mises_proxy": {
+          "absolute_error": 0.0,
+          "new": 0.020974454484618307,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.020974454484618307
+        },
+        "maximum_endocardium_ecm_traction": {
+          "absolute_error": 0.0,
+          "new": 0.062022849613091666,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.062022849613091666
+        },
+        "maximum_myocardium_ecm_traction": {
+          "absolute_error": 0.0,
+          "new": 0.0613262894497717,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0613262894497717
+        },
+        "maximum_state_norm": {
+          "absolute_error": 0.0,
+          "new": 10.435258081016109,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 10.435258081016109
+        },
+        "minimum_limited_shortening": {
+          "absolute_error": 0.0,
+          "new": -0.004041317333013409,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.004041317333013409
+        },
+        "myocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.04262119549192235,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.04262119549192235
+        },
+        "passive_tangent": {
+          "absolute_error": 0.0,
+          "new": 0.6730769230770624,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.6730769230770624
+        },
+        "peak_absolute_mean_endocardial_normal_displacement": {
+          "absolute_error": 0.0,
+          "new": 0.12690968489528634,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.12690968489528634
+        },
+        "peak_absolute_mean_endocardial_tangential_displacement": {
+          "absolute_error": 0.0,
+          "new": 1.7570759929707563e-10,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.7570759929707563e-10
+        },
+        "peak_free_shortening": {
+          "absolute_error": 0.0,
+          "new": 0.10000000000000019,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.10000000000000019
+        },
+        "peak_limited_shortening": {
+          "absolute_error": 0.0,
+          "new": 0.020192553448100493,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.020192553448100493
+        },
+        "shortening_fundamental_amplitude": {
+          "absolute_error": 0.0,
+          "new": 0.012117584506880644,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.012117584506880644
+        },
+        "shortening_phase_relative_to_activation_rad": {
+          "absolute_error": 0.0,
+          "new": 0.10852548119652299,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.10852548119652299
+        },
+        "shortening_waveform_l2": {
+          "absolute_error": 0.0,
+          "new": 0.011774274251605502,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.011774274251605502
+        },
+        "solver.dc_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 4.3565917288601426e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.3565917288601426e-16
+        },
+        "solver.dc_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 2.9400179017762638e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.9400179017762638e-09
+        },
+        "solver.harmonic_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 5.51435202854424e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 5.51435202854424e-16
+        },
+        "solver.harmonic_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 1.6864461853742913e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.6864461853742913e-09
+        },
+        "solver.maximum_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 5.51435202854424e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 5.51435202854424e-16
+        },
+        "solver.maximum_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 2.9400179017762638e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.9400179017762638e-09
+        }
+      },
+      "structural_gate": {
+        "checks": {
+          "cycle_state": {
+            "pass": true,
+            "threshold": 0.001,
+            "value": 2.1999785709013937e-16
+          },
+          "direct_normwise_backward_error": {
+            "pass": true,
+            "threshold": 1e-12,
+            "value": 5.51435202854424e-16
+          },
+          "direct_relative_residual": {
+            "pass": true,
+            "threshold": 1e-07,
+            "value": 2.9400179017762638e-09
+          },
+          "discrete_ledger_closure": {
+            "pass": true,
+            "threshold": 1e-10,
+            "value": 2.1453962054561936e-14
+          },
+          "finite_ledger": {
+            "pass": true,
+            "threshold": true,
+            "value": true
+          },
+          "interface_action_reaction": {
+            "pass": true,
+            "threshold": 1e-10,
+            "value": 0.0
+          },
+          "nonnegative_dissipation": {
+            "pass": true,
+            "threshold": -1e-12,
+            "value": 1.6374501595645075e-07
+          },
+          "power_ledger": {
+            "pass": true,
+            "threshold": 1e-08,
+            "value": 3.8984084189343e-09
+          }
+        },
+        "pass": true
+      }
+    },
+    "CQ__S4__T64__D0": {
+      "array_records": {
+        "activation_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.692820323027551,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.692820323027551,
+          "shape": [
+            129
+          ]
+        },
+        "ecm_cell_centroids": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 30.468982406521054,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 30.468982406521054,
+          "shape": [
+            8192,
+            2
+          ]
+        },
+        "ecm_internal_z_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.0465483719900577,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.0465483719900577,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "ecm_strain_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.7543280700547974,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.7543280700547974,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "ecm_stress_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 8.524668777932126,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 8.524668777932126,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "endocardium_ecm_traction_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 5.520766349810772,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 5.520766349810772,
+          "shape": [
+            258,
+            129
+          ]
+        },
+        "free_shortening_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.6928203230275523,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.6928203230275523,
+          "shape": [
+            129
+          ]
+        },
+        "ledger_active_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0006101704958569129,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0006101704958569129,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_discrete_energy_change_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0007627056245654956,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0007627056245654956,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_drag_dissipation_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0007105371161931587,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0007105371161931587,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_endpoint_energy_change_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.000762705624407883,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.000762705624407883,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_endpoint_subtraction_gap_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.5789946691936672e-11,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.5789946691936672e-11,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_energy": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.011766201410490253,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.011766201410490253,
+          "shape": [
+            65
+          ]
+        },
+        "ledger_equilibrium_defect_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.719080476033186e-12,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.719080476033186e-12,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_external_support_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0007615956737203464,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0007615956737203464,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_ledger_minus_equilibrium_work_relative_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 6.762493176785656e-14,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 6.762493176785656e-14,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_ledger_minus_equilibrium_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.938124890683672e-17,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.938124890683672e-17,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_lumen_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0011998716921051852,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0011998716921051852,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_normalization_scale_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.003711440384720494,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.003711440384720494,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_normalized_residual_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.0794285631150066e-08,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.0794285631150066e-08,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_residual_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.719103426116005e-12,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.719103426116005e-12,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_sls_dissipation_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 7.942394865947207e-06,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 7.942394865947207e-06,
+          "shape": [
+            64
+          ]
+        },
+        "limited_shortening_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.13129241924665422,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.13129241924665422,
+          "shape": [
+            129
+          ]
+        },
+        "mean_endocardial_normal_displacement_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.0161684661754395,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.0161684661754395,
+          "shape": [
+            129
+          ]
+        },
+        "mean_endocardial_tangential_displacement_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.9082105375579443e-09,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.9082105375579443e-09,
+          "shape": [
+            129
+          ]
+        },
+        "myocardium_ecm_traction_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 5.481478368265489,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 5.481478368265489,
+          "shape": [
+            258,
+            129
+          ]
+        },
+        "state_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 83.46823919973299,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 83.46823919973299,
+          "shape": [
+            41729,
+            129
+          ]
+        },
+        "time_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 13.140467076934518,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 13.140467076934518,
+          "shape": [
+            129
+          ]
+        }
+      },
+      "case_id": "CQ",
+      "endpoint_runtime_seconds": 25.890382455996587,
+      "forbidden_summary_keys": [],
+      "pass": true,
+      "projected_traction_norm_records": {
+        "endocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.042899797021385265,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.042899797021385265
+        },
+        "myocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.04259971069298431,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.04259971069298431
+        }
+      },
+      "projected_traction_records": {
+        "endocardium_ecm": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.745587009368657,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.745587009368657,
+          "shape": [
+            64,
+            2,
+            64
+          ]
+        },
+        "myocardium_ecm": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.7263814843509957,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.7263814843509957,
+          "shape": [
+            64,
+            2,
+            64
+          ]
+        }
+      },
+      "retired_reference_key": "ID-CQ__FEM__S4__T64__D0",
+      "scalar_records": {
+        "cycle_state_relative_difference": {
+          "absolute_error": 0.0,
+          "new": 1.9213993251989302e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.9213993251989302e-16
+        },
+        "endocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.04289979738479454,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.04289979738479454
+        },
+        "hotspot_traction": {
+          "absolute_error": 0.0,
+          "new": 0.00017931248662802352,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.00017931248662802352
+        },
+        "hotspot_x": {
+          "absolute_error": 0.0,
+          "new": -0.35937500000000006,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.35937500000000006
+        },
+        "interface_action_reaction_relative_error": {
+          "absolute_error": 0.0,
+          "new": 0.0,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0
+        },
+        "ledger.cycle_discrete_energy_change": {
+          "absolute_error": 0.0,
+          "new": -4.3964468779186653e-13,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -4.3964468779186653e-13
+        },
+        "ledger.cycle_endpoint_energy_change": {
+          "absolute_error": 0.0,
+          "new": -3.3347665449358355e-13,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -3.3347665449358355e-13
+        },
+        "ledger.cycle_energy_change": {
+          "absolute_error": 0.0,
+          "new": -4.3964468779186653e-13,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -4.3964468779186653e-13
+        },
+        "ledger.maximum_absolute_endpoint_subtraction_gap": {
+          "absolute_error": 0.0,
+          "new": 6.84765525532649e-12,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 6.84765525532649e-12
+        },
+        "ledger.maximum_ledger_minus_equilibrium_work_relative": {
+          "absolute_error": 0.0,
+          "new": 1.6806445852851297e-14,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.6806445852851297e-14
+        },
+        "ledger.maximum_normalized_residual": {
+          "absolute_error": 0.0,
+          "new": 3.810655301171427e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.810655301171427e-09
+        },
+        "ledger.minimum_physical_dissipation": {
+          "absolute_error": 0.0,
+          "new": 2.5581779498466406e-07,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.5581779498466406e-07
+        },
+        "ledger.total_active_work": {
+          "absolute_error": 0.0,
+          "new": 0.00013968763231789655,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.00013968763231789655
+        },
+        "ledger.total_drag_dissipation": {
+          "absolute_error": 0.0,
+          "new": 0.0046559255460171586,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0046559255460171586
+        },
+        "ledger.total_external_support_work": {
+          "absolute_error": 0.0,
+          "new": 8.555032767268433e-20,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 8.555032767268433e-20
+        },
+        "ledger.total_lumen_work": {
+          "absolute_error": 0.0,
+          "new": 0.004572981622709995,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.004572981622709995
+        },
+        "ledger.total_sls_dissipation": {
+          "absolute_error": 0.0,
+          "new": 5.6743707145280566e-05,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 5.6743707145280566e-05
+        },
+        "manufactured_uniform_strain_relative_error": {
+          "absolute_error": 0.0,
+          "new": 1.03217118583013e-15,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.03217118583013e-15
+        },
+        "maximum_ecm_von_mises_proxy": {
+          "absolute_error": 0.0,
+          "new": 0.022597336505681402,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.022597336505681402
+        },
+        "maximum_endocardium_ecm_traction": {
+          "absolute_error": 0.0,
+          "new": 0.06213898990864625,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.06213898990864625
+        },
+        "maximum_myocardium_ecm_traction": {
+          "absolute_error": 0.0,
+          "new": 0.06140121186883485,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.06140121186883485
+        },
+        "maximum_state_norm": {
+          "absolute_error": 0.0,
+          "new": 10.406668203946463,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 10.406668203946463
+        },
+        "minimum_limited_shortening": {
+          "absolute_error": 0.0,
+          "new": -0.003703421758327165,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.003703421758327165
+        },
+        "myocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.04259971208069856,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.04259971208069856
+        },
+        "passive_tangent": {
+          "absolute_error": 0.0,
+          "new": 0.6730769230770624,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.6730769230770624
+        },
+        "peak_absolute_mean_endocardial_normal_displacement": {
+          "absolute_error": 0.0,
+          "new": 0.12698607451516408,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.12698607451516408
+        },
+        "peak_absolute_mean_endocardial_tangential_displacement": {
+          "absolute_error": 0.0,
+          "new": 1.756955334385264e-10,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.756955334385264e-10
+        },
+        "peak_free_shortening": {
+          "absolute_error": 0.0,
+          "new": 0.10000000000000019,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.10000000000000019
+        },
+        "peak_limited_shortening": {
+          "absolute_error": 0.0,
+          "new": 0.019854657873414252,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.019854657873414252
+        },
+        "shortening_fundamental_amplitude": {
+          "absolute_error": 0.0,
+          "new": 0.011779097730231131,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.011779097730231131
+        },
+        "shortening_phase_relative_to_activation_rad": {
+          "absolute_error": 0.0,
+          "new": -0.29138848282730756,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.29138848282730756
+        },
+        "shortening_waveform_l2": {
+          "absolute_error": 0.0,
+          "new": 0.011601257633571086,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.011601257633571086
+        },
+        "solver.dc_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 4.3565917288601426e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.3565917288601426e-16
+        },
+        "solver.dc_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 2.9400179017762638e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.9400179017762638e-09
+        },
+        "solver.harmonic_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 4.713895555273279e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.713895555273279e-16
+        },
+        "solver.harmonic_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 1.7058453564618392e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.7058453564618392e-09
+        },
+        "solver.maximum_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 4.713895555273279e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.713895555273279e-16
+        },
+        "solver.maximum_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 2.9400179017762638e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.9400179017762638e-09
+        }
+      },
+      "structural_gate": {
+        "checks": {
+          "cycle_state": {
+            "pass": true,
+            "threshold": 0.001,
+            "value": 1.9213993251989302e-16
+          },
+          "direct_normwise_backward_error": {
+            "pass": true,
+            "threshold": 1e-12,
+            "value": 4.713895555273279e-16
+          },
+          "direct_relative_residual": {
+            "pass": true,
+            "threshold": 1e-07,
+            "value": 2.9400179017762638e-09
+          },
+          "discrete_ledger_closure": {
+            "pass": true,
+            "threshold": 1e-10,
+            "value": 1.6806445852851297e-14
+          },
+          "finite_ledger": {
+            "pass": true,
+            "threshold": true,
+            "value": true
+          },
+          "interface_action_reaction": {
+            "pass": true,
+            "threshold": 1e-10,
+            "value": 0.0
+          },
+          "nonnegative_dissipation": {
+            "pass": true,
+            "threshold": -1e-12,
+            "value": 2.5581779498466406e-07
+          },
+          "power_ledger": {
+            "pass": true,
+            "threshold": 1e-08,
+            "value": 3.810655301171427e-09
+          }
+        },
+        "pass": true
+      }
+    },
+    "LN__S4__T64__D0": {
+      "array_records": {
+        "activation_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0,
+          "shape": [
+            129
+          ]
+        },
+        "ecm_cell_centroids": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 30.468982406521054,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 30.468982406521054,
+          "shape": [
+            8192,
+            2
+          ]
+        },
+        "ecm_internal_z_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.7783781683841768,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.7783781683841768,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "ecm_strain_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.2111856982594789,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.2111856982594789,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "ecm_stress_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.700344502582203,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.700344502582203,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "endocardium_ecm_traction_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 5.5155949471454475,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 5.5155949471454475,
+          "shape": [
+            258,
+            129
+          ]
+        },
+        "free_shortening_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0,
+          "shape": [
+            129
+          ]
+        },
+        "ledger_active_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_discrete_energy_change_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.00021355719311737847,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.00021355719311737847,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_drag_dissipation_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0006993110834158363,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0006993110834158363,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_endpoint_energy_change_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.00021355719321001636,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.00021355719321001636,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_endpoint_subtraction_gap_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.6076327401161343e-11,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.6076327401161343e-11,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_energy": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.004003112383426019,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.004003112383426019,
+          "shape": [
+            65
+          ]
+        },
+        "ledger_equilibrium_defect_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.8052966233211948e-12,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.8052966233211948e-12,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_external_support_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0007669618057099142,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0007669618057099142,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_ledger_minus_equilibrium_work_relative_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.0744892432958574e-13,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.0744892432958574e-13,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_ledger_minus_equilibrium_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 3.083086319433114e-17,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 3.083086319433114e-17,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_lumen_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0012019089462650063,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0012019089462650063,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_normalization_scale_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.002717402011449202,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.002717402011449202,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_normalized_residual_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.5334002554642975e-08,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.5334002554642975e-08,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_residual_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.8053204645253645e-12,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.8053204645253645e-12,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_sls_dissipation_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.8301799056200555e-06,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.8301799056200555e-06,
+          "shape": [
+            64
+          ]
+        },
+        "limited_shortening_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.08940623761996982,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.08940623761996982,
+          "shape": [
+            129
+          ]
+        },
+        "mean_endocardial_normal_displacement_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.0265225394308084,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.0265225394308084,
+          "shape": [
+            129
+          ]
+        },
+        "mean_endocardial_tangential_displacement_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.9288314385498126e-09,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.9288314385498126e-09,
+          "shape": [
+            129
+          ]
+        },
+        "myocardium_ecm_traction_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 5.482058216205335,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 5.482058216205335,
+          "shape": [
+            258,
+            129
+          ]
+        },
+        "state_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 83.56292585426989,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 83.56292585426989,
+          "shape": [
+            41729,
+            129
+          ]
+        },
+        "time_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 13.140467076934518,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 13.140467076934518,
+          "shape": [
+            129
+          ]
+        }
+      },
+      "case_id": "LN",
+      "endpoint_runtime_seconds": 25.943242787005147,
+      "forbidden_summary_keys": [],
+      "pass": true,
+      "projected_traction_norm_records": {
+        "endocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.04287592674246183,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.04287592674246183
+        },
+        "myocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.04260188157832928,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.04260188157832928
+        }
+      },
+      "projected_traction_records": {
+        "endocardium_ecm": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.744059311517557,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.744059311517557,
+          "shape": [
+            64,
+            2,
+            64
+          ]
+        },
+        "myocardium_ecm": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.726520421013074,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.726520421013074,
+          "shape": [
+            64,
+            2,
+            64
+          ]
+        }
+      },
+      "retired_reference_key": "ID-LN__FEM__S4__T64__D0",
+      "scalar_records": {
+        "cycle_state_relative_difference": {
+          "absolute_error": 0.0,
+          "new": 2.1146219490921235e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.1146219490921235e-16
+        },
+        "endocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.042875926859256404,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.042875926859256404
+        },
+        "hotspot_traction": {
+          "absolute_error": 0.0,
+          "new": 6.0642537735411395e-05,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 6.0642537735411395e-05
+        },
+        "hotspot_x": {
+          "absolute_error": 0.0,
+          "new": 0.35156250000000006,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.35156250000000006
+        },
+        "interface_action_reaction_relative_error": {
+          "absolute_error": 0.0,
+          "new": 0.0,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0
+        },
+        "ledger.cycle_discrete_energy_change": {
+          "absolute_error": 0.0,
+          "new": 4.4851689501084965e-13,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.4851689501084965e-13
+        },
+        "ledger.cycle_endpoint_energy_change": {
+          "absolute_error": 0.0,
+          "new": -7.210375417392167e-14,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -7.210375417392167e-14
+        },
+        "ledger.cycle_energy_change": {
+          "absolute_error": 0.0,
+          "new": 4.4851689501084965e-13,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.4851689501084965e-13
+        },
+        "ledger.maximum_absolute_endpoint_subtraction_gap": {
+          "absolute_error": 0.0,
+          "new": 6.939540711818279e-12,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 6.939540711818279e-12
+        },
+        "ledger.maximum_ledger_minus_equilibrium_work_relative": {
+          "absolute_error": 0.0,
+          "new": 2.2742240107467266e-14,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.2742240107467266e-14
+        },
+        "ledger.maximum_normalized_residual": {
+          "absolute_error": 0.0,
+          "new": 4.5625235815361454e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.5625235815361454e-09
+        },
+        "ledger.minimum_physical_dissipation": {
+          "absolute_error": 0.0,
+          "new": 1.6305136976546559e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.6305136976546559e-09
+        },
+        "ledger.total_active_work": {
+          "absolute_error": 0.0,
+          "new": 0.0,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0
+        },
+        "ledger.total_drag_dissipation": {
+          "absolute_error": 0.0,
+          "new": 0.004569091343279163,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.004569091343279163
+        },
+        "ledger.total_external_support_work": {
+          "absolute_error": 0.0,
+          "new": -1.7618285302889447e-19,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -1.7618285302889447e-19
+        },
+        "ledger.total_lumen_work": {
+          "absolute_error": 0.0,
+          "new": 0.004587598498289432,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.004587598498289432
+        },
+        "ledger.total_sls_dissipation": {
+          "absolute_error": 0.0,
+          "new": 1.8507153100552602e-05,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.8507153100552602e-05
+        },
+        "manufactured_uniform_strain_relative_error": {
+          "absolute_error": 0.0,
+          "new": 1.03217118583013e-15,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.03217118583013e-15
+        },
+        "maximum_ecm_von_mises_proxy": {
+          "absolute_error": 0.0,
+          "new": 0.008205740037777737,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.008205740037777737
+        },
+        "maximum_endocardium_ecm_traction": {
+          "absolute_error": 0.0,
+          "new": 0.06197138104899813,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.06197138104899813
+        },
+        "maximum_myocardium_ecm_traction": {
+          "absolute_error": 0.0,
+          "new": 0.06101311525280739,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.06101311525280739
+        },
+        "maximum_state_norm": {
+          "absolute_error": 0.0,
+          "new": 10.337038643756868,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 10.337038643756868
+        },
+        "minimum_limited_shortening": {
+          "absolute_error": 0.0,
+          "new": -0.010882266383697254,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.010882266383697254
+        },
+        "myocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.042601882144520695,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.042601882144520695
+        },
+        "passive_tangent": {
+          "absolute_error": 0.0,
+          "new": 0.6730769230770624,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.6730769230770624
+        },
+        "peak_absolute_mean_endocardial_normal_displacement": {
+          "absolute_error": 0.0,
+          "new": 0.12792366144580875,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.12792366144580875
+        },
+        "peak_absolute_mean_endocardial_tangential_displacement": {
+          "absolute_error": 0.0,
+          "new": 1.7725317854690224e-10,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.7725317854690224e-10
+        },
+        "peak_free_shortening": {
+          "absolute_error": 0.0,
+          "new": 0.0,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0
+        },
+        "peak_limited_shortening": {
+          "absolute_error": 0.0,
+          "new": -0.0041574378540259575,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.0041574378540259575
+        },
+        "shortening_fundamental_amplitude": {
+          "absolute_error": 0.0,
+          "new": 0.003364491313720703,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.003364491313720703
+        },
+        "shortening_phase_relative_to_activation_rad": {
+          "absolute_error": null,
+          "new": null,
+          "normalized_error": null,
+          "pass": true,
+          "reference": null,
+          "status": "BOTH_NOT_APPLICABLE"
+        },
+        "shortening_waveform_l2": {
+          "absolute_error": 0.0,
+          "new": 0.00788720969605845,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.00788720969605845
+        },
+        "solver.dc_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 3.8358555640183127e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.8358555640183127e-16
+        },
+        "solver.dc_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 2.9681468104030423e-08,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.9681468104030423e-08
+        },
+        "solver.harmonic_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 4.427616887619626e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.427616887619626e-16
+        },
+        "solver.harmonic_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 1.6679511805199768e-08,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.6679511805199768e-08
+        },
+        "solver.maximum_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 4.427616887619626e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.427616887619626e-16
+        },
+        "solver.maximum_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 2.9681468104030423e-08,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.9681468104030423e-08
+        }
+      },
+      "structural_gate": {
+        "checks": {
+          "cycle_state": {
+            "pass": true,
+            "threshold": 0.001,
+            "value": 2.1146219490921235e-16
+          },
+          "direct_normwise_backward_error": {
+            "pass": true,
+            "threshold": 1e-12,
+            "value": 4.427616887619626e-16
+          },
+          "direct_relative_residual": {
+            "pass": true,
+            "threshold": 1e-07,
+            "value": 2.9681468104030423e-08
+          },
+          "discrete_ledger_closure": {
+            "pass": true,
+            "threshold": 1e-10,
+            "value": 2.2742240107467266e-14
+          },
+          "finite_ledger": {
+            "pass": true,
+            "threshold": true,
+            "value": true
+          },
+          "interface_action_reaction": {
+            "pass": true,
+            "threshold": 1e-10,
+            "value": 0.0
+          },
+          "nonnegative_dissipation": {
+            "pass": true,
+            "threshold": -1e-12,
+            "value": 1.6305136976546559e-09
+          },
+          "power_ledger": {
+            "pass": true,
+            "threshold": 1e-08,
+            "value": 4.5625235815361454e-09
+          }
+        },
+        "pass": true
+      }
+    },
+    "LS__S4__T64__D0": {
+      "array_records": {
+        "activation_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0,
+          "shape": [
+            129
+          ]
+        },
+        "ecm_cell_centroids": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 30.468982406521054,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 30.468982406521054,
+          "shape": [
+            8192,
+            2
+          ]
+        },
+        "ecm_internal_z_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 6.980042721025868,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 6.980042721025868,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "ecm_strain_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 5.771691763696487,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 5.771691763696487,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "ecm_stress_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.6652867460349634,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.6652867460349634,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "endocardium_ecm_traction_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 3.353279567258744,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 3.353279567258744,
+          "shape": [
+            258,
+            129
+          ]
+        },
+        "free_shortening_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0,
+          "shape": [
+            129
+          ]
+        },
+        "ledger_active_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_discrete_energy_change_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.00013979556449352732,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.00013979556449352732,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_drag_dissipation_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.00032235311663010775,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.00032235311663010775,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_endpoint_energy_change_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.00013979556449326535,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.00013979556449326535,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_endpoint_subtraction_gap_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.0819944271149494e-14,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.0819944271149494e-14,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_energy": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.003838290742794496,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.003838290742794496,
+          "shape": [
+            65
+          ]
+        },
+        "ledger_equilibrium_defect_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.4725027043237255e-15,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.4725027043237255e-15,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_external_support_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.00027866046382877884,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.00027866046382877884,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_ledger_minus_equilibrium_work_relative_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 6.34207623630251e-14,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 6.34207623630251e-14,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_ledger_minus_equilibrium_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 7.70290849526425e-18,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 7.70290849526425e-18,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_lumen_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.000529999388536387,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.000529999388536387,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_normalization_scale_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.001195859993839113,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.001195859993839113,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_normalized_residual_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.1168474039487274e-11,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.1168474039487274e-11,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_residual_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.4793899672461716e-15,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.4793899672461716e-15,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_sls_dissipation_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 6.162826113265467e-06,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 6.162826113265467e-06,
+          "shape": [
+            64
+          ]
+        },
+        "limited_shortening_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.9154133517720262e-13,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.9154133517720262e-13,
+          "shape": [
+            129
+          ]
+        },
+        "mean_endocardial_normal_displacement_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.1600755792942856e-13,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.1600755792942856e-13,
+          "shape": [
+            129
+          ]
+        },
+        "mean_endocardial_tangential_displacement_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.0393172120100773,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.0393172120100773,
+          "shape": [
+            129
+          ]
+        },
+        "myocardium_ecm_traction_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 3.331743530823392,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 3.331743530823392,
+          "shape": [
+            258,
+            129
+          ]
+        },
+        "state_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 104.66344125483671,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 104.66344125483671,
+          "shape": [
+            41729,
+            129
+          ]
+        },
+        "time_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 13.140467076934518,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 13.140467076934518,
+          "shape": [
+            129
+          ]
+        }
+      },
+      "case_id": "LS",
+      "endpoint_runtime_seconds": 26.027295015999698,
+      "forbidden_summary_keys": [],
+      "pass": true,
+      "projected_traction_norm_records": {
+        "endocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.02605134725292509,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.02605134725292509
+        },
+        "myocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.025870918464766874,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.025870918464766874
+        }
+      },
+      "projected_traction_records": {
+        "endocardium_ecm": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.6672862241872057,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.6672862241872057,
+          "shape": [
+            64,
+            2,
+            64
+          ]
+        },
+        "myocardium_ecm": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.65573878174508,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.65573878174508,
+          "shape": [
+            64,
+            2,
+            64
+          ]
+        }
+      },
+      "retired_reference_key": "ID-LS__FEM__S4__T64__D0",
+      "scalar_records": {
+        "cycle_state_relative_difference": {
+          "absolute_error": 0.0,
+          "new": 1.272649534620697e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.272649534620697e-16
+        },
+        "endocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.02605134725292509,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.02605134725292509
+        },
+        "hotspot_traction": {
+          "absolute_error": 0.0,
+          "new": -0.019481721827987686,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.019481721827987686
+        },
+        "hotspot_x": {
+          "absolute_error": 0.0,
+          "new": -0.35156250000000006,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.35156250000000006
+        },
+        "interface_action_reaction_relative_error": {
+          "absolute_error": 0.0,
+          "new": 0.0,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0
+        },
+        "ledger.cycle_discrete_energy_change": {
+          "absolute_error": 0.0,
+          "new": 1.251169307048272e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.251169307048272e-16
+        },
+        "ledger.cycle_endpoint_energy_change": {
+          "absolute_error": 0.0,
+          "new": -7.657719944265118e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -7.657719944265118e-16
+        },
+        "ledger.cycle_energy_change": {
+          "absolute_error": 0.0,
+          "new": 1.251169307048272e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.251169307048272e-16
+        },
+        "ledger.maximum_absolute_endpoint_subtraction_gap": {
+          "absolute_error": 0.0,
+          "new": 4.716464103494446e-15,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.716464103494446e-15
+        },
+        "ledger.maximum_ledger_minus_equilibrium_work_relative": {
+          "absolute_error": 0.0,
+          "new": 1.4818391009687354e-14,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.4818391009687354e-14
+        },
+        "ledger.maximum_normalized_residual": {
+          "absolute_error": 0.0,
+          "new": 5.434094178271734e-12,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 5.434094178271734e-12
+        },
+        "ledger.minimum_physical_dissipation": {
+          "absolute_error": 0.0,
+          "new": 5.2681846946034205e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 5.2681846946034205e-09
+        },
+        "ledger.total_active_work": {
+          "absolute_error": 0.0,
+          "new": 0.0,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0
+        },
+        "ledger.total_drag_dissipation": {
+          "absolute_error": 0.0,
+          "new": 0.0021066182780922873,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0021066182780922873
+        },
+        "ledger.total_external_support_work": {
+          "absolute_error": 0.0,
+          "new": -6.098637220230962e-20,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -6.098637220230962e-20
+        },
+        "ledger.total_lumen_work": {
+          "absolute_error": 0.0,
+          "new": 0.0021469856141263398,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0021469856141263398
+        },
+        "ledger.total_sls_dissipation": {
+          "absolute_error": 0.0,
+          "new": 4.036733603439548e-05,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.036733603439548e-05
+        },
+        "manufactured_uniform_strain_relative_error": {
+          "absolute_error": 0.0,
+          "new": 1.03217118583013e-15,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.03217118583013e-15
+        },
+        "maximum_ecm_von_mises_proxy": {
+          "absolute_error": 0.0,
+          "new": 0.03368809194942867,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.03368809194942867
+        },
+        "maximum_endocardium_ecm_traction": {
+          "absolute_error": 0.0,
+          "new": 0.03535486351048146,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.03535486351048146
+        },
+        "maximum_myocardium_ecm_traction": {
+          "absolute_error": 0.0,
+          "new": 0.034406664189015945,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.034406664189015945
+        },
+        "maximum_state_norm": {
+          "absolute_error": 0.0,
+          "new": 11.156751403948121,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 11.156751403948121
+        },
+        "minimum_limited_shortening": {
+          "absolute_error": 0.0,
+          "new": 1.474385301214093e-14,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.474385301214093e-14
+        },
+        "myocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.025870918464766874,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.025870918464766874
+        },
+        "passive_tangent": {
+          "absolute_error": 0.0,
+          "new": 0.6730769230770624,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.6730769230770624
+        },
+        "peak_absolute_mean_endocardial_normal_displacement": {
+          "absolute_error": 0.0,
+          "new": 2.84312929325373e-14,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.84312929325373e-14
+        },
+        "peak_absolute_mean_endocardial_tangential_displacement": {
+          "absolute_error": 0.0,
+          "new": 0.1186601942109154,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.1186601942109154
+        },
+        "peak_free_shortening": {
+          "absolute_error": 0.0,
+          "new": 0.0,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0
+        },
+        "peak_limited_shortening": {
+          "absolute_error": 0.0,
+          "new": 1.8876672214746468e-14,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.8876672214746468e-14
+        },
+        "shortening_fundamental_amplitude": {
+          "absolute_error": 0.0,
+          "new": 2.0673565527082103e-15,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.0673565527082103e-15
+        },
+        "shortening_phase_relative_to_activation_rad": {
+          "absolute_error": null,
+          "new": null,
+          "normalized_error": null,
+          "pass": true,
+          "reference": null,
+          "status": "BOTH_NOT_APPLICABLE"
+        },
+        "shortening_waveform_l2": {
+          "absolute_error": 0.0,
+          "new": 1.687370471150173e-14,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.687370471150173e-14
+        },
+        "solver.dc_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 3.165176635293213e-19,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.165176635293213e-19
+        },
+        "solver.dc_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 4.236377829970392e-11,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.236377829970392e-11
+        },
+        "solver.harmonic_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 3.043334324494036e-19,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.043334324494036e-19
+        },
+        "solver.harmonic_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 1.6017698413832795e-11,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.6017698413832795e-11
+        },
+        "solver.maximum_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 3.165176635293213e-19,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.165176635293213e-19
+        },
+        "solver.maximum_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 4.236377829970392e-11,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.236377829970392e-11
+        }
+      },
+      "structural_gate": {
+        "checks": {
+          "cycle_state": {
+            "pass": true,
+            "threshold": 0.001,
+            "value": 1.272649534620697e-16
+          },
+          "direct_normwise_backward_error": {
+            "pass": true,
+            "threshold": 1e-12,
+            "value": 3.165176635293213e-19
+          },
+          "direct_relative_residual": {
+            "pass": true,
+            "threshold": 1e-07,
+            "value": 4.236377829970392e-11
+          },
+          "discrete_ledger_closure": {
+            "pass": true,
+            "threshold": 1e-10,
+            "value": 1.4818391009687354e-14
+          },
+          "finite_ledger": {
+            "pass": true,
+            "threshold": true,
+            "value": true
+          },
+          "interface_action_reaction": {
+            "pass": true,
+            "threshold": 1e-10,
+            "value": 0.0
+          },
+          "nonnegative_dissipation": {
+            "pass": true,
+            "threshold": -1e-12,
+            "value": 5.2681846946034205e-09
+          },
+          "power_ledger": {
+            "pass": true,
+            "threshold": 1e-08,
+            "value": 5.434094178271734e-12
+          }
+        },
+        "pass": true
+      }
+    },
+    "S1__S4__T64__D0": {
+      "array_records": {
+        "activation_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.692820323027551,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.692820323027551,
+          "shape": [
+            129
+          ]
+        },
+        "ecm_cell_centroids": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 30.468982406521054,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 30.468982406521054,
+          "shape": [
+            8192,
+            2
+          ]
+        },
+        "ecm_internal_z_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 2.3185061938235694,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 2.3185061938235694,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "ecm_strain_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 3.4692353270926293,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 3.4692353270926293,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "ecm_stress_at_peak": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 4.203837179661181,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 4.203837179661181,
+          "shape": [
+            8192,
+            3
+          ]
+        },
+        "endocardium_ecm_traction_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.23810534120058024,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.23810534120058024,
+          "shape": [
+            258,
+            129
+          ]
+        },
+        "free_shortening_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.6928203230275513,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.6928203230275513,
+          "shape": [
+            129
+          ]
+        },
+        "ledger_active_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0006020191029553153,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0006020191029553153,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_discrete_energy_change_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0005896399710207427,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0005896399710207427,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_drag_dissipation_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 8.178936799262988e-06,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 8.178936799262988e-06,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_endpoint_energy_change_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0005896399710207549,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0005896399710207549,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_endpoint_subtraction_gap_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.0675258683753863e-15,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.0675258683753863e-15,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_energy": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.00798112822999808,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.00798112822999808,
+          "shape": [
+            65
+          ]
+        },
+        "ledger_equilibrium_defect_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 4.589125604297434e-16,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 4.589125604297434e-16,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_external_support_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 9.026215224527383e-06,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 9.026215224527383e-06,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_ledger_minus_equilibrium_work_relative_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 5.713683568315343e-15,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 5.713683568315343e-15,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_ledger_minus_equilibrium_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 9.36783018961031e-19,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 9.36783018961031e-19,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_lumen_work_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_normalization_scale_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.0012141489017971454,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.0012141489017971454,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_normalized_residual_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 6.730801150928783e-11,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 6.730801150928783e-11,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_residual_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 4.590435477072197e-16,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 4.590435477072197e-16,
+          "shape": [
+            64
+          ]
+        },
+        "ledger_sls_dissipation_steps": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.1999859234137799e-05,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.1999859234137799e-05,
+          "shape": [
+            64
+          ]
+        },
+        "limited_shortening_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.20784767190553327,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.20784767190553327,
+          "shape": [
+            129
+          ]
+        },
+        "mean_endocardial_normal_displacement_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.009609640516164933,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.009609640516164933,
+          "shape": [
+            129
+          ]
+        },
+        "mean_endocardial_tangential_displacement_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 1.888965668049406e-11,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 1.888965668049406e-11,
+          "shape": [
+            129
+          ]
+        },
+        "myocardium_ecm_traction_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.6522469294624315,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.6522469294624315,
+          "shape": [
+            258,
+            129
+          ]
+        },
+        "state_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 22.58758278190726,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 22.58758278190726,
+          "shape": [
+            41729,
+            129
+          ]
+        },
+        "time_two_cycles": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 13.140467076934518,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 13.140467076934518,
+          "shape": [
+            129
+          ]
+        }
+      },
+      "case_id": "S1",
+      "endpoint_runtime_seconds": 25.91451477300143,
+      "forbidden_summary_keys": [],
+      "pass": true,
+      "projected_traction_norm_records": {
+        "endocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.0018472380780072833,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0018472380780072833
+        },
+        "myocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.0050922161658284535,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0050922161658284535
+        }
+      },
+      "projected_traction_records": {
+        "endocardium_ecm": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.11822323699246613,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.11822323699246613,
+          "shape": [
+            64,
+            2,
+            64
+          ]
+        },
+        "myocardium_ecm": {
+          "difference_norm": 0.0,
+          "finite": true,
+          "maximum_absolute_error": 0.0,
+          "new_norm": 0.325901834613021,
+          "normalized_l2_error": 0.0,
+          "pass": true,
+          "reference_norm": 0.325901834613021,
+          "shape": [
+            64,
+            2,
+            64
+          ]
+        }
+      },
+      "retired_reference_key": "ID-S1__FEM__S4__T64__D0",
+      "scalar_records": {
+        "cycle_state_relative_difference": {
+          "absolute_error": 0.0,
+          "new": 2.2315649109739954e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.2315649109739954e-16
+        },
+        "endocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.0018483510255585852,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0018483510255585852
+        },
+        "hotspot_traction": {
+          "absolute_error": 0.0,
+          "new": 0.011979921404364713,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.011979921404364713
+        },
+        "hotspot_x": {
+          "absolute_error": 0.0,
+          "new": -0.25000000000000006,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.25000000000000006
+        },
+        "interface_action_reaction_relative_error": {
+          "absolute_error": 0.0,
+          "new": 0.0,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0
+        },
+        "ledger.cycle_discrete_energy_change": {
+          "absolute_error": 0.0,
+          "new": 3.7163570560782427e-19,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.7163570560782427e-19
+        },
+        "ledger.cycle_endpoint_energy_change": {
+          "absolute_error": 0.0,
+          "new": -1.1746652912522637e-17,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -1.1746652912522637e-17
+        },
+        "ledger.cycle_energy_change": {
+          "absolute_error": 0.0,
+          "new": 3.7163570560782427e-19,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.7163570560782427e-19
+        },
+        "ledger.maximum_absolute_endpoint_subtraction_gap": {
+          "absolute_error": 0.0,
+          "new": 3.916544822832324e-16,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.916544822832324e-16
+        },
+        "ledger.maximum_ledger_minus_equilibrium_work_relative": {
+          "absolute_error": 0.0,
+          "new": 2.9610323520401125e-15,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.9610323520401125e-15
+        },
+        "ledger.maximum_normalized_residual": {
+          "absolute_error": 0.0,
+          "new": 2.4781641808430584e-11,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.4781641808430584e-11
+        },
+        "ledger.minimum_physical_dissipation": {
+          "absolute_error": 0.0,
+          "new": 4.8711440321947444e-09,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 4.8711440321947444e-09
+        },
+        "ledger.total_active_work": {
+          "absolute_error": 0.0,
+          "new": 0.00013192569301202642,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.00013192569301202642
+        },
+        "ledger.total_drag_dissipation": {
+          "absolute_error": 0.0,
+          "new": 5.347439830554405e-05,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 5.347439830554405e-05
+        },
+        "ledger.total_external_support_work": {
+          "absolute_error": 0.0,
+          "new": 1.7503141761622066e-21,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.7503141761622066e-21
+        },
+        "ledger.total_lumen_work": {
+          "absolute_error": 0.0,
+          "new": 0.0,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0
+        },
+        "ledger.total_sls_dissipation": {
+          "absolute_error": 0.0,
+          "new": 7.845129470825465e-05,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 7.845129470825465e-05
+        },
+        "manufactured_uniform_strain_relative_error": {
+          "absolute_error": 0.0,
+          "new": 1.03217118583013e-15,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.03217118583013e-15
+        },
+        "maximum_ecm_von_mises_proxy": {
+          "absolute_error": 0.0,
+          "new": 0.0684427141216558,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0684427141216558
+        },
+        "maximum_endocardium_ecm_traction": {
+          "absolute_error": 0.0,
+          "new": 0.004013612855182597,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.004013612855182597
+        },
+        "maximum_myocardium_ecm_traction": {
+          "absolute_error": 0.0,
+          "new": 0.011986374587444865,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.011986374587444865
+        },
+        "maximum_state_norm": {
+          "absolute_error": 0.0,
+          "new": 2.8262757829018126,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 2.8262757829018126
+        },
+        "minimum_limited_shortening": {
+          "absolute_error": 0.0,
+          "new": 0.001500885561707242,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.001500885561707242
+        },
+        "myocardium_ecm_traction_l2": {
+          "absolute_error": 0.0,
+          "new": 0.005095288070384106,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.005095288070384106
+        },
+        "passive_tangent": {
+          "absolute_error": 0.0,
+          "new": 0.6730769230770624,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.6730769230770624
+        },
+        "peak_absolute_mean_endocardial_normal_displacement": {
+          "absolute_error": 0.0,
+          "new": 0.000971930192770517,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.000971930192770517
+        },
+        "peak_absolute_mean_endocardial_tangential_displacement": {
+          "absolute_error": 0.0,
+          "new": 1.7144525655450886e-12,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.7144525655450886e-12
+        },
+        "peak_free_shortening": {
+          "absolute_error": 0.0,
+          "new": 0.10000000000000005,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.10000000000000005
+        },
+        "peak_limited_shortening": {
+          "absolute_error": 0.0,
+          "new": 0.0294655855133365,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.0294655855133365
+        },
+        "shortening_fundamental_amplitude": {
+          "absolute_error": 0.0,
+          "new": 0.013982500689796468,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.013982500689796468
+        },
+        "shortening_phase_relative_to_activation_rad": {
+          "absolute_error": 0.0,
+          "new": -0.10281778166664603,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": -0.10281778166664603
+        },
+        "shortening_waveform_l2": {
+          "absolute_error": 0.0,
+          "new": 0.01837078510789508,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 0.01837078510789508
+        },
+        "solver.dc_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 1.4570364092851224e-17,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.4570364092851224e-17
+        },
+        "solver.dc_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 3.031233278218008e-11,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.031233278218008e-11
+        },
+        "solver.harmonic_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 5.2346122611849526e-18,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 5.2346122611849526e-18
+        },
+        "solver.harmonic_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 5.396505308663196e-12,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 5.396505308663196e-12
+        },
+        "solver.maximum_normwise_backward_error": {
+          "absolute_error": 0.0,
+          "new": 1.4570364092851224e-17,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 1.4570364092851224e-17
+        },
+        "solver.maximum_relative_residual": {
+          "absolute_error": 0.0,
+          "new": 3.031233278218008e-11,
+          "normalized_error": 0.0,
+          "pass": true,
+          "reference": 3.031233278218008e-11
+        }
+      },
+      "structural_gate": {
+        "checks": {
+          "cycle_state": {
+            "pass": true,
+            "threshold": 0.001,
+            "value": 2.2315649109739954e-16
+          },
+          "direct_normwise_backward_error": {
+            "pass": true,
+            "threshold": 1e-12,
+            "value": 1.4570364092851224e-17
+          },
+          "direct_relative_residual": {
+            "pass": true,
+            "threshold": 1e-07,
+            "value": 3.031233278218008e-11
+          },
+          "discrete_ledger_closure": {
+            "pass": true,
+            "threshold": 1e-10,
+            "value": 2.9610323520401125e-15
+          },
+          "finite_ledger": {
+            "pass": true,
+            "threshold": true,
+            "value": true
+          },
+          "interface_action_reaction": {
+            "pass": true,
+            "threshold": 1e-10,
+            "value": 0.0
+          },
+          "nonnegative_dissipation": {
+            "pass": true,
+            "threshold": -1e-12,
+            "value": 4.8711440321947444e-09
+          },
+          "power_ledger": {
+            "pass": true,
+            "threshold": 1e-08,
+            "value": 2.4781641808430584e-11
+          }
+        },
+        "pass": true
+      }
+    }
+  },
+  "completed_cases": 6,
+  "expected_cases": 6,
+  "normalized_l2_tolerance": 1e-10,
+  "schema": "paper2_v08_fem_to_fem_migration_parity"
+}

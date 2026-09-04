@@ -1,0 +1,15 @@
+{
+  "all_json_parse_and_finite": true,
+  "json_files_checked": [
+    "architecture_manifest.json",
+    "ecm_field_summary_audit.json",
+    "parity_by_case.json",
+    "pass_summary.json",
+    "preflight.json",
+    "provenance.json",
+    "structural_checks.json"
+  ],
+  "new_npz_created": false,
+  "pass": true,
+  "schema": "paper2_v08_finite_value_audit"
+}

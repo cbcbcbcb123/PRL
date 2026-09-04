@@ -1,0 +1,31 @@
+{
+  "active_implementation_unchanged": true,
+  "all_parity_cases_pass": true,
+  "all_structural_checks_pass": true,
+  "completed_cases": 6,
+  "evidence_boundary": "This migration gate tests whether the active code reproduces the frozen historical FEM-arm observables. It is not physiological validation, a new mechanistic result, or evidence for three-dimensional, atrial, fluid, EFE, experimental, or clinical claims.",
+  "expected_cases": 6,
+  "formal_label": "FEM_ONLY_ARCHITECTURE_PASS_V08",
+  "old_evidence_unchanged": true,
+  "resource": {
+    "budget_seconds": 1200.0,
+    "cpu_processes": 1,
+    "docker_socket_mounted": false,
+    "elapsed_seconds": 189.14686104100838,
+    "gpu_used": false,
+    "memory_budget_gib": 8.0,
+    "network_used": false,
+    "peak_memory_gib": 0.7554397583007812,
+    "within_budget": true
+  },
+  "schema": "paper2_v08_pass_summary",
+  "status": "COMPLETE_AT_SUPERVISOR_GATE",
+  "stop_boundary": {
+    "GPU_used": false,
+    "fluid_run": false,
+    "parameter_scan": false,
+    "retired_route_restored": false,
+    "three_dimensional_run": false,
+    "whole_atrium_run": false
+  }
+}

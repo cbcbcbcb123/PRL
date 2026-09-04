@@ -1,0 +1,66 @@
+{
+  "active_source_audit": {
+    "failures": [],
+    "files": {
+      "src/paper2_hybrid/__init__.py": {
+        "forbidden_tokens": [],
+        "retired_imports": [],
+        "sha256": "4626ee6f49cac099734728fe0dc2f3412ded11cf5066b32aff556cc39324783f"
+      },
+      "src/paper2_hybrid/config.py": {
+        "forbidden_tokens": [],
+        "retired_imports": [],
+        "sha256": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe"
+      },
+      "src/paper2_hybrid/model.py": {
+        "forbidden_tokens": [],
+        "retired_imports": [],
+        "sha256": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800"
+      },
+      "src/paper2_hybrid/numerics.py": {
+        "forbidden_tokens": [],
+        "retired_imports": [],
+        "sha256": "620381c4f0165801f2af03defe587e8381c9b6859f8bbd9d2f84198a555331e4"
+      },
+      "src/paper2_hybrid/projection.py": {
+        "forbidden_tokens": [],
+        "retired_imports": [],
+        "sha256": "3bd590f0deef1fbe47cfdf01dea48664b25ff5a8716a546e4758bc4a0642176c"
+      },
+      "src/paper2_hybrid/protocol.py": {
+        "forbidden_tokens": [],
+        "retired_imports": [],
+        "sha256": "f96d779cfcd6c76e9535f90a9941a6156b545d53a0270f04a564c68a304fe3ca"
+      },
+      "src/paper2_hybrid/roles.py": {
+        "forbidden_tokens": [],
+        "retired_imports": [],
+        "sha256": "beb447ab12b8c433973ca807bba07331b8640b9fb9d4c944e3595510a3a501ec"
+      },
+      "src/paper2_hybrid/validation.py": {
+        "forbidden_tokens": [],
+        "retired_imports": [],
+        "sha256": "6cfc1f383dbe92b6684eb1bd7f228610815ad67bd60ba1ecaaef8ab91cb1f0c5"
+      }
+    },
+    "pass": true,
+    "schema": "paper2_v08_active_source_audit"
+  },
+  "container_pytest_summary": "1 passed in 4.27s",
+  "execution_head": "b6f1c16a1fcc04856d4ac10cd4745160ff666644",
+  "expected_execution_head": "b6f1c16a1fcc04856d4ac10cd4745160ff666644",
+  "host_pytest_summary": "9 passed in 0.75s; ruff passed",
+  "pass": true,
+  "path_failures": [],
+  "reference_lock": {
+    "failures": [],
+    "file_set_match": true,
+    "ledger_entries": 23,
+    "pass": true,
+    "reference_dir": "results/paper2_m2/identity_2d_v03_t64_v01_20260903",
+    "schema": "paper2_v08_retired_reference_lock"
+  },
+  "retired_history_anchor": "34908b299475ee81d9cb2fccca0b191e22fa965a",
+  "schema": "paper2_v08_preflight",
+  "upstream_head": "b6f1c16a1fcc04856d4ac10cd4745160ff666644"
+}

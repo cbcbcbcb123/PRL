@@ -1,0 +1,37 @@
+{
+  "files": {
+    "architecture_manifest.json": {
+      "bytes": 2260,
+      "sha256": "a3f09ba772de06798434ecbddf6a29bf5662e18ccac2e3609e9a373cf986097f"
+    },
+    "ecm_field_summary_audit.json": {
+      "bytes": 16889,
+      "sha256": "d29dc2c3963e11a6c202818503eb30afca336b0b6d46ea8f954752eaca1f0b65"
+    },
+    "finite_value_audit.json": {
+      "bytes": 356,
+      "sha256": "06658055b7e9120a1c3d5cf2fab1a06396da1883c991781cca14814cdf63cf6b"
+    },
+    "parity_by_case.json": {
+      "bytes": 130712,
+      "sha256": "ee1d92723aaa4cf1028c8e16dddb2f6ed6ec2afb9e84a65e48747214c61ba5d5"
+    },
+    "pass_summary.json": {
+      "bytes": 1121,
+      "sha256": "558858ab56ca76ce7e9fe49952bf808c2add649c9cfea4409c5f97e19d57ac78"
+    },
+    "preflight.json": {
+      "bytes": 2422,
+      "sha256": "10acd355c16ee1f4b7727c672b377d9101cdb10320e4b43178e44c505704d175"
+    },
+    "provenance.json": {
+      "bytes": 29215,
+      "sha256": "891460cf72ade864527d26bf05128e56909eac93fbb5df2756c52bc6d2dbeb46"
+    },
+    "structural_checks.json": {
+      "bytes": 2066,
+      "sha256": "8154069b53f4da3a1609cd859574e25b8b05348ae0e21b61abc1b0a719cab91d"
+    }
+  },
+  "schema": "paper2_v08_hash_ledger"
+}

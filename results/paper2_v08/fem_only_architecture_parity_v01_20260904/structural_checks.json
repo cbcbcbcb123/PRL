@@ -1,0 +1,73 @@
+{
+  "common_projection_manufactured": {
+    "common_segments": 64,
+    "constant_field_max_abs_error": 0.0,
+    "discrete_interface_work_abs_error": 1.3877787807814457e-17,
+    "integrated_force_abs_error": 0.0,
+    "native_segments": 128,
+    "pass": true,
+    "sign_preserved": true,
+    "tolerance": 1e-12
+  },
+  "global_checks": {
+    "active_power_derivative": {
+      "analytic": 0.025892549306260615,
+      "central_difference": 0.025892550326034325,
+      "pass": true,
+      "relative_error": 3.9384830658998466e-08,
+      "threshold": 1e-07
+    },
+    "fixed_tissue_roles": {
+      "expected": {
+        "ecm": "viscoelastic_plane_strain_fem",
+        "endocardium": "discrete_cell_chain",
+        "fluid": "absent_in_v08",
+        "myocardium": "active_plane_strain_fem"
+      },
+      "pass": true,
+      "value": {
+        "ecm": "viscoelastic_plane_strain_fem",
+        "endocardium": "discrete_cell_chain",
+        "fluid": "absent_in_v08",
+        "myocardium": "active_plane_strain_fem"
+      }
+    },
+    "material_plus_support_matrix_symmetry": {
+      "pass": true,
+      "relative_error": 5.77902946605705e-21,
+      "threshold": 1e-12
+    },
+    "normal_and_traction_sign": {
+      "interface_traction": "positive_on_first_named_domain",
+      "lumen_normal": "negative_y_from_lumen_toward_wall",
+      "pass": true
+    },
+    "rate_matrix_symmetry": {
+      "pass": true,
+      "relative_error": 1.3492047304964419e-18,
+      "threshold": 1e-12
+    },
+    "rigid_body_mode_control": {
+      "pass": true,
+      "positive_support_diagonal_count": 257,
+      "support_nnz": 513
+    },
+    "ufl_manual_assembly": {
+      "pass": true,
+      "relative_error": 1.03217118583013e-15,
+      "threshold": 1e-06
+    },
+    "units": {
+      "pass": true,
+      "system": "nondimensional_active_hybrid_benchmark"
+    }
+  },
+  "interface_action_reaction_manufactured": {
+    "absolute_force_imbalance": 0.0,
+    "pass": true,
+    "relative_force_imbalance": 0.0,
+    "threshold": 1e-12
+  },
+  "pass": true,
+  "schema": "paper2_v08_structural_preflight"
+}

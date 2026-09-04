@@ -3,18 +3,19 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-04
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 34908b299475ee81d9cb2fccca0b191e22fa965a
-current_lifecycle: paper2_v08_myocardial_fem_only_architecture_migration_authorized
+verified_commit: b6f1c16a1fcc04856d4ac10cd4745160ff666644
+current_lifecycle: paper2_v08_myocardial_fem_only_architecture_accepted_and_frozen
 current_contract: project_control/paper2_v08_myocardial_fem_only_architecture_migration_contract_v01.md
-current_authorization: project_control/paper2_myocardial_dcm_retirement_and_fem_only_architecture_decision_v01.md
-current_clarification: project_control/paper2_m2a_v03_phase_r_endpoint_count_clarification_decision_v01.md
-execution_authorized: v08_fem_only_active_architecture_migration_and_t64_parity_only
-current_execution_log: pending_paper2_v08_myocardial_fem_only_architecture_migration_execution_record_v01
-latest_completed_execution_log: project_control/paper2_m2a_v07_identity_no_go_diagnostic_execution_record_v01.md
+current_authorization: project_control/paper2_v08_supervisor_acceptance_and_fem_only_architecture_freeze_v01.md
+current_clarification: none
+execution_authorized: none_pending_next_versioned_theory_contract
+current_execution_log: project_control/paper2_v08_myocardial_fem_only_architecture_migration_execution_record_v01.md
+latest_completed_execution_log: project_control/paper2_v08_myocardial_fem_only_architecture_migration_execution_record_v01.md
+latest_supervisor_decision: project_control/paper2_v08_supervisor_acceptance_and_fem_only_architecture_freeze_v01.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
-current_mainline: project_control/prl_independent_theory_mainline_plan_v02.md
-current_mainline_decision: project_control/prl_independent_theory_mainline_supplement_decision_v02.md
+current_mainline: project_control/prl_independent_theory_mainline_plan_v03.md
+current_mainline_decision: project_control/paper2_myocardial_dcm_retirement_and_fem_only_architecture_decision_v01.md
 standing_authority: project_control/paper2_autonomous_execution_and_chart_reporting_decision_v01.md
 ---
 
@@ -28,10 +29,12 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 
 ## 1. 一句话状态
 
-人类已决定从活跃项目完全去掉心肌 DCM。当前唯一生产架构固定为“心内膜 DCM＋主动
-心肌 FEM＋黏弹 ECM FEM”；心肌 DCM 不再作为 comparator，M2A identity 与 M2B 路线
-正式退役。v08 已获授权建立独立 FEM-only 活跃命名空间并完成六工况 T64 FEM→FEM
-迁移等价门；旧 v01–v07 仅作为不可改写的历史审计证据保留。
+Paper 2 v08 已通过独立 Supervisor 验收，正式标签为
+`FEM_ONLY_ARCHITECTURE_PASS_V08`。唯一活跃生产架构冻结为“离散心内膜细胞链＋主动
+心肌 FEM＋黏弹 ECM FEM”，六个 S4/T64/D0 工况对冻结旧 FEM 臂的全部规定标量、数组
+和共同投影均逐值误差 `0`；心肌 DCM 与 identity/M2B 路线只作为退役历史保留，不得
+重新进入活跃源码、模型选择、论文比较或后续整心房架构。下一步仅允许先形成 Figure 1
+版本化理论合同。
 
 旧 DCM–FEM–DCM Figure 2 路线只作为历史证据原样保留：T128 时间离散阶段 FINAL 不变；
 A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。它不属于新活跃
@@ -258,6 +261,22 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
 - v08 将建立不导入旧双表示模块的 `src/paper2_hybrid/`，移除 representation 轴、心肌
   DCM 参数/校准/identity 指标，并用六个冻结 T64 FEM 工况做严格 FEM→FEM 迁移等价门；
 - v08 不授权删除旧证据、重新标定、参数扫描、三维、整心房或流体。
+- v08 执行记录：
+  `project_control/paper2_v08_myocardial_fem_only_architecture_migration_execution_record_v01.md`；
+- 唯一活跃包：`src/paper2_hybrid/`；生产 import graph 不依赖 `paper2_m2`，公共 API 与
+  端点键均无心肌表示轴；
+- v08 create-only 正式结果包：
+  `results/paper2_v08/fem_only_architecture_parity_v01_20260904/`；
+- 正式标签：`FEM_ONLY_ARCHITECTURE_PASS_V08`。`A2/LN/LS/C0/CQ/S1` 六工况全部通过；
+  规定标量、每工况 28 个完整数组、原生/共同投影牵引的最大误差均为 `0`，ECM 场
+  24/24 组字节哈希相等；
+- 矩阵对称性、刚体模态处理、界面作用反作用、制造解、单位/符号、周期与离散功率账本
+  门全部通过；
+- 正式包 9/9 JSON 有限，hash ledger 8/8 一致，0 个新 NPZ；旧参考 24 项与退役代码
+  50 项前后锁一致；耗时 `189.14686104100838 s`，峰值内存
+  `0.7554397583007812 GiB`；未使用网络、GPU 或 Docker socket；
+- 该标签只证明代码提取迁移等价，不是生理验证或新机制结论。当前证据远未达到
+  Nature Physics；该期刊仅作为后续问题设计标准和有条件战略目标。
 
 ## 2. 已完成并可引用的阶段证据
 
@@ -266,6 +285,8 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
 - T16/T32/T64/T128 时间路径已经完成受控裁决；T128 Human Gate 于 2026-08-30 通过。
 - Figure 2 v02 已冻结为时间离散阶段 FINAL；它不是整篇论文的最终 Figure 2，也不证明空间、容差或共同极限收敛。
 - 空间与容差合同 v02 已闭合 v01 的八项审阅阻塞，独立结论为 `PASS_FOR_HUMAN_REVIEW`；该结论不是执行授权。
+- v08 已建立并验证独立 `paper2_hybrid` 活跃命名空间；六工况迁移等价为逐值误差 `0`，
+  并已通过独立 Supervisor 复核。
 
 关键证据入口：
 
@@ -277,8 +298,9 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
 
 ## 3. 尚缺的论文级证据
 
-1. Figure 2 的空间细化、代数容差、严格离散功率闭合及终局细网格时间触发证据；
-2. DCM–FEM 与 cell-resolved / homogenized all-FEM 的共同极限及适用域；
+1. 新 FEM-only Figure 2 的空间细化、时间细化、代数容差、严格离散功率闭合及终局
+   细网格时间触发证据；
+2. cell/meso-resolved active FEM 与 homogenized active FEM 的共同极限及粗粒化适用域；
 3. Figure 3 的最小、预注册 `De × H` 状态图，以及可被证伪的稳定传递律；
 4. 跨几何稳健性、独立预测和 Figure 5 验证；
 5. 可投稿正文、补充材料和完整 evidence inventory。
@@ -326,8 +348,8 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 ## 5. 当前禁止范围
 
-M2A 心肌 DCM identity 路线已整体退役；当前只授权 v08 FEM-only 活跃架构迁移与六工况
-T64 parity。不得删除、覆盖或续接 v06 v01 失败包与
+M2A 心肌 DCM identity 路线已整体退役；v08 已完成，当前没有后续执行授权。不得删除、
+覆盖或续接 v06 v01 失败包与
 v06.1 v02 正式包；不得把 EOF 兼容规则扩展到其他文件或哈希，不得修改当前测试文件以
 迎合旧 manifest。不得重跑 DCM/FEM 求解器，不得覆盖或续接 v05 失败包及 v05.1 成功包，
 也不得修改 v01-v06.1 冻结实现。拟合比例、按工况校准、模型/映射/提取实现修改、S5、
@@ -339,20 +361,20 @@ T256、空间参数扫描、N1-2d、N1-3、原 EFE Node 2–4、GPU worker、新
 
 ## 6. 最新终局主线与空间/容差门之后的优先级
 
-最新路线见 `project_control/prl_independent_theory_mainline_plan_v02.md`，依次为：
+最新路线见 `project_control/prl_independent_theory_mainline_plan_v03.md`，依次为：
 
 1. Figure 1 三层理论；
-2. Figure 2 数值可信度；
+2. Figure 2 新 FEM-only 架构数值可信度；
 3. Figure 3 最小、预登记的 `De × H` 传递律；
-4. Figure 4 DCM–FEM、cell-resolved all-FEM 与 homogenized all-FEM 的共同极限；
-5. Figure 5 H-FEM 整心房骨架＋预登记局部 DCM patch 的跨尺度预测与独立验证。
+4. Figure 4 cell/meso-resolved active FEM 与 homogenized active FEM 的共同极限和
+   粗粒化适用域；
+5. Figure 5 主动心肌 H-FEM＋黏弹 ECM＋离散心内膜的整心房预测与独立验证。
 
-整心房第一版只允许单向 `global H-FEM → local DCM patch`。只有局部修正使整器官
-QoI 改变超过 `5%`，或热点移动超过一个细胞直径，才提请批准双向功率共轭耦合。
-
-现实投稿目标为 **PRX Life**；只有获得简洁无量纲规律、跨几何稳健性和独立留出
-预测，才上探 **Physical Review Letters / Nature Physics**。ST2、ST3、`De×H`、
-N1-2d、GeometryAdapter 与整心房模型都需另立前瞻合同，不由本路线图自动授权。
+**Nature Physics** 是问题设计、机制深度与普适性的战略目标，不是当前成熟度结论。
+当前证据远未达到该期刊标准；只有获得简洁无量纲规律、跨几何稳健性和独立留出预测，
+才保留该目标，否则由后续证据门降档至 **PRX Life**，或在结果形态适合时评估
+**Physical Review Letters**。Figure 2 后续、`De×H`、FEM 家族粗粒化、整心房与流体
+都需另立前瞻合同，不由本路线图自动授权。
 
 ## 7. 仓库一致性待办
 
