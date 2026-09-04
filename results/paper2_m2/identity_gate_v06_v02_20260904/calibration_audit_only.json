@@ -1,0 +1,30 @@
+{
+  "cases": [
+    "ID-P1",
+    "ID-A1"
+  ],
+  "identity_gate_applied": false,
+  "records": [
+    {
+      "absolute_difference": 9.492406860545088e-14,
+      "case_id": "ID-P1",
+      "dcm": 0.6730769230769674,
+      "fem": 0.6730769230770624,
+      "gating_role": "calibration_audit_only_not_identity_evidence",
+      "metric": "passive_tangent",
+      "pass": null,
+      "relative_difference": 1.4103004478521212e-13
+    },
+    {
+      "absolute_difference": 7.943933754729626e-09,
+      "case_id": "ID-A1",
+      "dcm": 0.00012524664450683102,
+      "fem": 0.00012525458844058575,
+      "gating_role": "calibration_audit_only_not_identity_evidence",
+      "metric": "total_active_work",
+      "pass": null,
+      "relative_difference": 6.342229736755565e-05
+    }
+  ],
+  "schema": "paper2_m2a_v06_calibration_audit_only"
+}

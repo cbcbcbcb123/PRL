@@ -1,0 +1,45 @@
+{
+  "files": {
+    "calibration_audit_only.json": {
+      "bytes": 857,
+      "sha256": "f0cb1d137d474db083456f5e64a558b30e1c7dc261039134f79e1a3710edbc50"
+    },
+    "classification_audit.json": {
+      "bytes": 427,
+      "sha256": "50b4c76b7d365d7135f150e58ef28e1d184821a1b99ca8af088751267eb9a588"
+    },
+    "field_diagnostics_audit_only.json": {
+      "bytes": 9023,
+      "sha256": "a6197bef550136abf2f488830ab971c3d73c79511645cb192a7b31d71b9ff53b"
+    },
+    "finite_value_audit.json": {
+      "bytes": 494,
+      "sha256": "3bc8598a08acc902ae592f3d76cb32449b77aff4cb0cb5dab388f09dfbab5da4"
+    },
+    "identity_gate_by_case.json": {
+      "bytes": 24719,
+      "sha256": "110472bbe1a2bcc9a1d46582eb5241fa174c280ed6a68fa630e338cd3e7d660c"
+    },
+    "identity_gate_summary.json": {
+      "bytes": 1370,
+      "sha256": "dbdfc5da20aaad53d8db5f2defc9cc4346580443d0ded9a92ac752c2a84cd01c"
+    },
+    "numerical_change_envelope.json": {
+      "bytes": 50718,
+      "sha256": "387d9bbcbb6c5f337ccd6b90442b388053b850e9cb1339230b8e6140175cd905"
+    },
+    "pass_summary.json": {
+      "bytes": 2143,
+      "sha256": "1d8e201d6564ffb9347216c51618f7ffa250a9d0ccdfb51b3a8640b823afc0ed"
+    },
+    "preflight.json": {
+      "bytes": 11099,
+      "sha256": "1a0e80aae8cc08ff9e852c405a213b66d949062c801c381459cde344e7fdb128"
+    },
+    "run_manifest.json": {
+      "bytes": 27651,
+      "sha256": "8753d8259903d040a990760c156018c21252ed887f9f0e4a54db3558a8e48aab"
+    }
+  },
+  "schema": "paper2_m2a_v06_1_hash_ledger"
+}

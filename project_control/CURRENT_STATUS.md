@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-04
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 3356bbdccb0d6ba2fa78e488c8598592509c8539
-current_lifecycle: paper2_m2a_v06_1_exact_test_eof_compatibility_retry_authorized
-current_contract: project_control/paper2_m2_active_myocardial_fem_identity_conversion_contract_v06.md
-current_authorization: project_control/paper2_m2a_v06_t64_test_eof_hash_diagnosis_and_v06_1_retry_decision_v01.md
+verified_commit: 7ec88653a5fa880d4dd9f0168bacf9b2c2aeb073
+current_lifecycle: paper2_m2a_v07_identity_no_go_diagnostic_authorized
+current_contract: project_control/paper2_m2_active_myocardial_fem_identity_failure_diagnostic_contract_v07.md
+current_authorization: project_control/paper2_m2a_v06_1_no_go_identity_supervisor_acceptance_and_v07_diagnostic_decision_v01.md
 current_clarification: project_control/paper2_m2a_v03_phase_r_endpoint_count_clarification_decision_v01.md
-execution_authorized: v06_1_exact_test_eof_compatibility_then_identity_postprocessing_only
-current_execution_log: pending_v06_1_identity_gate_retry_execution
-latest_completed_execution_log: project_control/paper2_m2a_v06_identity_gate_execution_record_v01.md
+execution_authorized: v07_read_only_existing_evidence_discrepancy_decomposition_only
+current_execution_log: pending_paper2_m2a_v07_identity_no_go_diagnostic_execution_record_v01
+latest_completed_execution_log: project_control/paper2_m2a_v06_1_identity_gate_retry_execution_record_v01.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
 current_mainline: project_control/prl_independent_theory_mainline_plan_v02.md
@@ -28,11 +28,10 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 
 ## 1. 一句话状态
 
-Paper 2 M2A v06 identity gate 已在源锁前置检查中 fail-closed，正式决策为 `BLOCKED`。
-Supervisor 随后以字节级复核证明：唯一冲突是 T64 测试文件比当前版本多一个末尾 LF；
-当前字节流只追加该 LF 后可精确恢复旧 manifest 哈希，且 T128/T256 均封存当前版本。
-v06.1 因而获准用严格单例规则兼容该非语义 EOF 差异，并在新目录重试同一只读 identity
-后处理；没有重跑求解器，M2B 仍未授权。
+Paper 2 M2A v06.1 的 `NO-GO-ID` 已由 Supervisor 接受：45 条正式记录为
+`35 pass / 4 maybe / 6 no_go`，六个预注册留出中只有 `ID-LS` 全部通过。当前已授权 v07
+只读差异诊断，用既有 S4/T256/D0 证据区分归一化、坐标基、牵引提取与模式选择性本构
+失配；不重跑求解器、不修改模型或身份阈值，M2B 仍被禁止。
 
 旧 DCM–FEM–DCM Figure 2 路线仍原样保留：T128 时间离散阶段 FINAL 不变；A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。新 M1 不改判 A1，也不把旧时间离散结果迁移成新架构证据。
 
@@ -204,6 +203,28 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
   且必须同时核对 Git clean、T128/T256 当前哈希背书和其余全部源锁；
 - v06.1 新 create-only 目标为
   `results/paper2_m2/identity_gate_v06_v02_20260904/`，v01 失败包保持冻结。
+- v06.1 重试执行记录：
+  `project_control/paper2_m2a_v06_1_identity_gate_retry_execution_record_v01.md`；
+- 单例兼容正式标签：`ACCEPTED_TEST_EOF_FORMATTING_DELTA`；全部 18 项精确条件通过，
+  当前测试文件没有被修改；
+- v06.1 正式 identity 决策：`NO-GO-ID`。45 条正式记录为
+  `35 pass / 4 maybe / 6 no_go`；只有 `ID-LS` 全部门通过；
+- 主要 NO-GO：`ID-A2` 两侧界面牵引差 `80.4031% / 80.3362%`，`ID-LN` 峰值与
+  波形缩短差 `18.3367% / 18.0161%`，`ID-S1` 两侧界面牵引差
+  `15.0255% / 25.5128%`；
+- v06.1 create-only 正式结果包：
+  `results/paper2_m2/identity_gate_v06_v02_20260904/`；11/11 JSON 有限，hash ledger
+  10/10 一致，源包前后哈希逐项一致，未生成 NPZ；
+- 该 `NO-GO-ID` 只适用于冻结理想化二维六留出身份门，不证明任一模型错误，也不外推
+  到三维、整心房、生理、EFE、实验或流体。
+- v06.1 Supervisor 验收与 v07 诊断决定：
+  `project_control/paper2_m2a_v06_1_no_go_identity_supervisor_acceptance_and_v07_diagnostic_decision_v01.md`；
+- 当前 v07 只读诊断合同：
+  `project_control/paper2_m2_active_myocardial_fem_identity_failure_diagnostic_contract_v07.md`；
+- v07 只允许分解既有牵引的幅值、方向、分量、空间/时间模态，穷举一个共同的有限
+  signed-permutation 坐标基，审计纯模式/组合载荷与生产提取源码；
+- v07 不改变 `NO-GO-ID`，不允许拟合比例、按工况校准、修改实现、重跑端点或进入 M2B；
+  若诊断指向实现或模型修订，必须先向人类报告并形成新合同。
 
 ## 2. 已完成并可引用的阶段证据
 
@@ -272,10 +293,10 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 ## 5. 当前禁止范围
 
-M2A 当前只授权 v06.1：验证精确单例的 T64 测试 EOF 兼容规则后，在新 v02 目录重试
-同一只读 identity 后处理。不得删除、覆盖或续接 v06 v01 失败包；不得把兼容规则扩展到
-其他文件或哈希，不得修改当前测试文件以迎合旧 manifest。不得重跑 DCM/FEM 求解器，
-不得覆盖或续接 v05 失败包及 v05.1 成功包，也不得修改 v01-v06 冻结实现。S5、重新校准、
+M2A 当前只授权 v07 既有证据只读差异诊断。不得删除、覆盖或续接 v06 v01 失败包与
+v06.1 v02 正式包；不得把 EOF 兼容规则扩展到其他文件或哈希，不得修改当前测试文件以
+迎合旧 manifest。不得重跑 DCM/FEM 求解器，不得覆盖或续接 v05 失败包及 v05.1 成功包，
+也不得修改 v01-v06.1 冻结实现。拟合比例、按工况校准、模型/映射/提取实现修改、S5、
 界面离散/共同投影修改、生产观测量替换和身份/数值门槛修改均未授权。
 仍不授权：M2B 三维、
 非匹配界面升级、A1 再周期化、B1/A2/B2、A3、A4、B3、B4、D1/F200N 完整周期、旧路线

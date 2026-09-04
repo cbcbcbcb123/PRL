@@ -1,0 +1,65 @@
+{
+  "accepted_source_lock_compatibility": "ACCEPTED_TEST_EOF_FORMATTING_DELTA",
+  "all_formal_identity_thresholds_pass": false,
+  "candidate_identity_decision": "NO-GO-ID",
+  "decision": "NO-GO-ID",
+  "evidence_boundary": "The decision applies only to the six preregistered holdouts in the frozen idealized two-dimensional S4/T256/D0 benchmark. It is not physiological, three-dimensional, organ-scale, EFE, fluid, or experimental evidence.",
+  "formal_holdout_cases": [
+    "ID-A2",
+    "ID-LN",
+    "ID-LS",
+    "ID-C0",
+    "ID-CQ",
+    "ID-S1"
+  ],
+  "formal_record_count": 45,
+  "identity_gate_execution_complete": true,
+  "maybe_flags": [
+    "identity:ID-C0:peak_limited_shortening",
+    "identity:ID-C0:shortening_waveform_normalized_L2",
+    "identity:ID-CQ:peak_limited_shortening",
+    "identity:ID-CQ:shortening_waveform_normalized_L2"
+  ],
+  "no_go_failures": [
+    "identity:ID-A2:myocardium_ecm_common_traction_normalized_L2",
+    "identity:ID-A2:endocardium_ecm_common_traction_normalized_L2",
+    "identity:ID-LN:peak_limited_shortening",
+    "identity:ID-LN:shortening_waveform_normalized_L2",
+    "identity:ID-S1:myocardium_ecm_common_traction_normalized_L2",
+    "identity:ID-S1:endocardium_ecm_common_traction_normalized_L2"
+  ],
+  "nontransferable_cases": [
+    "ID-A2",
+    "ID-LN",
+    "ID-C0",
+    "ID-CQ",
+    "ID-S1"
+  ],
+  "preflight_pass": true,
+  "resource": {
+    "budget_seconds": 600.0,
+    "cpu_processes": 1,
+    "elapsed_seconds": 15.83884029998444,
+    "gpu_used": false,
+    "memory_budget_gib": 8.0,
+    "network_used": false,
+    "peak_memory_gib": 0.057636260986328125,
+    "solver_or_endpoint_run": false,
+    "within_budget": true
+  },
+  "schema": "paper2_m2a_v06_1_identity_gate_pass_summary",
+  "source_packages_unchanged": true,
+  "status": "COMPLETE_AT_SUPERVISOR_GATE",
+  "stop_boundary": {
+    "CFD_or_FSI_run": false,
+    "GPU_used": false,
+    "M2B_run": false,
+    "S5_run": false,
+    "new_solver_used": false,
+    "three_dimensional_run": false,
+    "whole_atrium_run": false
+  },
+  "transferable_cases": [
+    "ID-LS"
+  ]
+}

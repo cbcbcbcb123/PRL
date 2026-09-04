@@ -1,0 +1,1081 @@
+{
+  "cases": {
+    "ID-A2": {
+      "cycle_stored_energy_change_near_zero": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 1.9081958235744878e-17,
+            "S4_T128": -9.681343065144317e-17,
+            "S4_T256": 5.030698080332741e-16,
+            "absolute_change_sum": 1.0838710884822464e-15,
+            "relative_change_sum": 1.0838710884822464e-05,
+            "spatial_absolute_change": 4.839878497975292e-16,
+            "spatial_relative_change": 4.839878497975292e-06,
+            "temporal_absolute_change": 5.998832386847172e-16,
+            "temporal_relative_change": 5.998832386847172e-06
+          },
+          "FEM": {
+            "S3_T256": -6.505213034913027e-19,
+            "S4_T128": -2.834902807429896e-17,
+            "S4_T256": 8.890457814381136e-18,
+            "absolute_change_sum": 4.678046500655253e-17,
+            "relative_change_sum": 4.6780465006552533e-07,
+            "spatial_absolute_change": 9.540979117872439e-18,
+            "spatial_relative_change": 9.540979117872439e-08,
+            "temporal_absolute_change": 3.7239485888680094e-17,
+            "temporal_relative_change": 3.7239485888680094e-07
+          }
+        },
+        "combined_absolute_envelope": 1.130651553488799e-15,
+        "combined_relative_envelope": 1.130651553488799e-05,
+        "metric": "cycle_stored_energy_change_near_zero",
+        "subtracted_from_identity_difference": false
+      },
+      "endocardium_ecm_common_traction_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 0.00021055736420645265,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 0.00016203003216140084,
+            "temporal_T128_to_T256_common_traction_relative": 4.85273320450518e-05
+          },
+          "FEM": {
+            "relative_change_sum": 0.0003007123067480689,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 0.0001882922558599105,
+            "temporal_T128_to_T256_common_traction_relative": 0.0001124200508881584
+          }
+        },
+        "combined_relative_envelope": 0.0005112696709545215,
+        "metric": "endocardium_ecm_common_traction_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "fundamental_phase": {
+        "by_representation": {
+          "DCM": {
+            "available_component_sum_rad": 9.11100426709277e-06,
+            "frozen_summary_T128_to_T256_phase_abs_rad": 1.4202695845233482e-06,
+            "spatial_S3_to_S4_frozen_summary_phase_abs_rad": 7.690734682486156e-06,
+            "spatial_component_available": true,
+            "temporal_T128_to_T256_signal_phase_abs_rad": 1.420269584606615e-06
+          },
+          "FEM": {
+            "available_component_sum_rad": 8.986436482422144e-06,
+            "frozen_summary_T128_to_T256_phase_abs_rad": 1.5372587159612205e-06,
+            "spatial_S3_to_S4_frozen_summary_phase_abs_rad": 7.4491777665441905e-06,
+            "spatial_component_available": true,
+            "temporal_T128_to_T256_signal_phase_abs_rad": 1.5372587158779538e-06
+          }
+        },
+        "classification_uses_identity_gate_not_envelope": true,
+        "combined_available_component_envelope_rad": 1.8097440749514915e-05,
+        "incomplete_reason": null,
+        "metric": "fundamental_phase",
+        "spatial_component_complete": true,
+        "subtracted_from_identity_difference": false
+      },
+      "myocardium_ecm_common_traction_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 0.001656499756357966,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 0.0016283800559857117,
+            "temporal_T128_to_T256_common_traction_relative": 2.8119700372254142e-05
+          },
+          "FEM": {
+            "relative_change_sum": 0.007310431158314773,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 0.0072684562710194035,
+            "temporal_T128_to_T256_common_traction_relative": 4.197488729536933e-05
+          }
+        },
+        "combined_relative_envelope": 0.008966930914672738,
+        "metric": "myocardium_ecm_common_traction_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "peak_limited_shortening": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 0.02951344652208967,
+            "S4_T128": 0.029513738019850792,
+            "S4_T256": 0.0295138648885873,
+            "absolute_change_sum": 5.452352341422939e-07,
+            "relative_change_sum": 1.8473867661877473e-05,
+            "spatial_absolute_change": 4.183664976328827e-07,
+            "spatial_relative_change": 1.4175252858688141e-05,
+            "temporal_absolute_change": 1.2686873650941122e-07,
+            "temporal_relative_change": 4.298614803189332e-06
+          },
+          "FEM": {
+            "S3_T256": 0.029679721902765556,
+            "S4_T128": 0.029680090693386098,
+            "S4_T256": 0.02968021861644888,
+            "absolute_change_sum": 6.246367461049118e-07,
+            "relative_change_sum": 2.104555745282604e-05,
+            "spatial_absolute_change": 4.967136833233798e-07,
+            "spatial_relative_change": 1.6735512960409915e-05,
+            "temporal_absolute_change": 1.2792306278153198e-07,
+            "temporal_relative_change": 4.310044492416123e-06
+          }
+        },
+        "combined_absolute_envelope": 1.1698719802472057e-06,
+        "combined_relative_envelope": 3.9519425114703516e-05,
+        "metric": "peak_limited_shortening",
+        "subtracted_from_identity_difference": false
+      },
+      "shortening_waveform_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 1.9350498152704467e-05,
+            "spatial_S3_to_S4_scalar_proxy_relative": 1.4416180981398947e-05,
+            "temporal_T128_to_T256_normalized_L2": 4.934317171305519e-06
+          },
+          "FEM": {
+            "relative_change_sum": 2.2064198002387395e-05,
+            "spatial_S3_to_S4_scalar_proxy_relative": 1.7108473916758748e-05,
+            "temporal_T128_to_T256_normalized_L2": 4.955724085628648e-06
+          }
+        },
+        "combined_relative_envelope": 4.141469615509186e-05,
+        "metric": "shortening_waveform_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "total_dissipation": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 0.00012525476029674406,
+            "S4_T128": 0.00012520973470972523,
+            "S4_T256": 0.00012524664450885847,
+            "absolute_change_sum": 4.502558701883564e-08,
+            "relative_change_sum": 0.0003594911571406262,
+            "spatial_absolute_change": 8.115787885590482e-09,
+            "spatial_relative_change": 6.479424707183322e-05,
+            "temporal_absolute_change": 3.6909799133245155e-08,
+            "temporal_relative_change": 0.000294696910068793
+          },
+          "FEM": {
+            "S3_T256": 0.00012526198510601252,
+            "S4_T128": 0.0001252178093037415,
+            "S4_T256": 0.0001252545884396053,
+            "absolute_change_sum": 4.417580227100357e-08,
+            "relative_change_sum": 0.00035268460861479856,
+            "spatial_absolute_change": 7.39666640721501e-09,
+            "spatial_relative_change": 5.9049570394042664e-05,
+            "temporal_absolute_change": 3.677913586378856e-08,
+            "temporal_relative_change": 0.0002936350382207559
+          }
+        },
+        "combined_absolute_envelope": 8.92013892898392e-08,
+        "combined_relative_envelope": 0.0007121757657554248,
+        "metric": "total_dissipation",
+        "subtracted_from_identity_difference": false
+      }
+    },
+    "ID-C0": {
+      "combined_load_gain": {
+        "by_representation": {
+          "DCM": {
+            "gain_S3_T256": 0.7324849140954646,
+            "gain_S4_T128": 0.7325106602950988,
+            "gain_S4_T256": 0.7324848142219627,
+            "relative_change_sum": 3.542057686653459e-05,
+            "spatial_relative_change": 1.363488858148391e-07,
+            "temporal_relative_change": 3.5284227980719755e-05
+          },
+          "FEM": {
+            "gain_S3_T256": 0.6943241681965876,
+            "gain_S4_T128": 0.6943534941087169,
+            "gain_S4_T256": 0.694324076411335,
+            "relative_change_sum": 4.2499226635505834e-05,
+            "spatial_relative_change": 1.3219365942416517e-07,
+            "temporal_relative_change": 4.2367032976081666e-05
+          }
+        },
+        "combined_relative_envelope": 7.791980350204043e-05,
+        "metric": "combined_load_gain",
+        "operator_source": "scripts/run_paper2_m2_identity_2d_v01.py:545-568",
+        "subtracted_from_identity_difference": false
+      },
+      "cycle_stored_energy_change_near_zero": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": -8.222589276130066e-16,
+            "S4_T128": -1.0869743080339604e-13,
+            "S4_T256": -1.5794657248768829e-15,
+            "absolute_change_sum": 1.0787517187578304e-13,
+            "relative_change_sum": 0.0010787517187578304,
+            "spatial_absolute_change": 7.572067972638763e-16,
+            "spatial_relative_change": 7.572067972638763e-06,
+            "temporal_absolute_change": 1.0711796507851916e-13,
+            "temporal_relative_change": 0.0010711796507851916
+          },
+          "FEM": {
+            "S3_T256": -8.319300109915773e-15,
+            "S4_T128": 6.441058064920969e-13,
+            "S4_T256": 3.1178185033731154e-14,
+            "absolute_change_sum": 6.524251066020127e-13,
+            "relative_change_sum": 0.006524251066020127,
+            "spatial_absolute_change": 3.9497485143646927e-14,
+            "spatial_relative_change": 0.00039497485143646927,
+            "temporal_absolute_change": 6.129276214583658e-13,
+            "temporal_relative_change": 0.006129276214583658
+          }
+        },
+        "combined_absolute_envelope": 7.603002784777957e-13,
+        "combined_relative_envelope": 0.007603002784777957,
+        "metric": "cycle_stored_energy_change_near_zero",
+        "subtracted_from_identity_difference": false
+      },
+      "endocardium_ecm_common_traction_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 3.243754201276398e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 1.900024471244147e-09,
+            "temporal_T128_to_T256_common_traction_relative": 3.243564198829273e-05
+          },
+          "FEM": {
+            "relative_change_sum": 3.3093664558774245e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 4.2015062993964865e-09,
+            "temporal_T128_to_T256_common_traction_relative": 3.308946305247485e-05
+          }
+        },
+        "combined_relative_envelope": 6.553120657153822e-05,
+        "metric": "endocardium_ecm_common_traction_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "fundamental_phase": {
+        "by_representation": {
+          "DCM": {
+            "available_component_sum_rad": 2.5294109751647365e-05,
+            "frozen_summary_T128_to_T256_phase_abs_rad": 1.7557021562225605e-05,
+            "spatial_S3_to_S4_frozen_summary_phase_abs_rad": 7.737088189282981e-06,
+            "spatial_component_available": true,
+            "temporal_T128_to_T256_signal_phase_abs_rad": 1.7557021562364383e-05
+          },
+          "FEM": {
+            "available_component_sum_rad": 3.02758568018896e-05,
+            "frozen_summary_T128_to_T256_phase_abs_rad": 2.278715428995215e-05,
+            "spatial_S3_to_S4_frozen_summary_phase_abs_rad": 7.488702512173373e-06,
+            "spatial_component_available": true,
+            "temporal_T128_to_T256_signal_phase_abs_rad": 2.2787154289716227e-05
+          }
+        },
+        "classification_uses_identity_gate_not_envelope": true,
+        "combined_available_component_envelope_rad": 5.5569966553536965e-05,
+        "incomplete_reason": null,
+        "metric": "fundamental_phase",
+        "spatial_component_complete": true,
+        "subtracted_from_identity_difference": false
+      },
+      "myocardium_ecm_common_traction_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 3.7409740576550714e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 1.4523747357496624e-07,
+            "temporal_T128_to_T256_common_traction_relative": 3.726450310297575e-05
+          },
+          "FEM": {
+            "relative_change_sum": 3.828144640838495e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 3.12873855707228e-07,
+            "temporal_T128_to_T256_common_traction_relative": 3.796857255267772e-05
+          }
+        },
+        "combined_relative_envelope": 7.569118698493566e-05,
+        "metric": "myocardium_ecm_common_traction_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "peak_limited_shortening": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 0.021632037204908097,
+            "S4_T128": 0.021630996456366004,
+            "S4_T256": 0.021632340815679336,
+            "absolute_change_sum": 1.6479700845721534e-06,
+            "relative_change_sum": 7.61808487862621e-05,
+            "spatial_absolute_change": 3.0361077123924884e-07,
+            "spatial_relative_change": 1.4035040120077469e-05,
+            "temporal_absolute_change": 1.3443593133329046e-06,
+            "temporal_relative_change": 6.214580866618464e-05
+          },
+          "FEM": {
+            "S3_T256": 0.020191425795023532,
+            "S4_T128": 0.020191915841605342,
+            "S4_T256": 0.020191756401869404,
+            "absolute_change_sum": 4.900465818101496e-07,
+            "relative_change_sum": 2.4269573834306496e-05,
+            "spatial_absolute_change": 3.306068458719391e-07,
+            "spatial_relative_change": 1.6373357487679017e-05,
+            "temporal_absolute_change": 1.5943973593821048e-07,
+            "temporal_relative_change": 7.89621634662748e-06
+          }
+        },
+        "combined_absolute_envelope": 2.138016666382303e-06,
+        "combined_relative_envelope": 0.0001004504226205686,
+        "metric": "peak_limited_shortening",
+        "subtracted_from_identity_difference": false
+      },
+      "shortening_waveform_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 2.760916309882184e-05,
+            "spatial_S3_to_S4_scalar_proxy_relative": 1.414973050213103e-05,
+            "temporal_T128_to_T256_normalized_L2": 1.3459432596690809e-05
+          },
+          "FEM": {
+            "relative_change_sum": 3.563478376222911e-05,
+            "spatial_S3_to_S4_scalar_proxy_relative": 1.6572236753971313e-05,
+            "temporal_T128_to_T256_normalized_L2": 1.90625470082578e-05
+          }
+        },
+        "combined_relative_envelope": 6.324394686105095e-05,
+        "metric": "shortening_waveform_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "total_dissipation": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 0.004507943093391724,
+            "S4_T128": 0.004506255537034785,
+            "S4_T256": 0.0045079307794033,
+            "absolute_change_sum": 1.6875563569390337e-06,
+            "relative_change_sum": 0.0003743527587008047,
+            "spatial_absolute_change": 1.2313988424425548e-08,
+            "spatial_relative_change": 2.731620202232998e-06,
+            "temporal_absolute_change": 1.6752423685146081e-06,
+            "temporal_relative_change": 0.0003716211384985717
+          },
+          "FEM": {
+            "S3_T256": 0.004698635014038864,
+            "S4_T128": 0.0046968765711834755,
+            "S4_T256": 0.004698622271248765,
+            "absolute_change_sum": 1.7584428553887865e-06,
+            "relative_change_sum": 0.0003742464746719775,
+            "spatial_absolute_change": 1.2742790099148915e-08,
+            "spatial_relative_change": 2.7120195676138367e-06,
+            "temporal_absolute_change": 1.7457000652896376e-06,
+            "temporal_relative_change": 0.00037153445510436367
+          }
+        },
+        "combined_absolute_envelope": 3.44599921232782e-06,
+        "combined_relative_envelope": 0.0007485992333727822,
+        "metric": "total_dissipation",
+        "subtracted_from_identity_difference": false
+      }
+    },
+    "ID-CQ": {
+      "combined_load_gain": {
+        "by_representation": {
+          "DCM": {
+            "gain_S3_T256": 0.7226415190845086,
+            "gain_S4_T128": 0.7226608820229568,
+            "gain_S4_T256": 0.7226414618206175,
+            "relative_change_sum": 2.695243128445717e-05,
+            "spatial_relative_change": 7.924245917388906e-08,
+            "temporal_relative_change": 2.6873188825283282e-05
+          },
+          "FEM": {
+            "gain_S3_T256": 0.6749652087323544,
+            "gain_S4_T128": 0.6749865575527332,
+            "gain_S4_T256": 0.67496517052069,
+            "relative_change_sum": 3.1741735707766945e-05,
+            "spatial_relative_change": 5.661279113924446e-08,
+            "temporal_relative_change": 3.16851229166277e-05
+          }
+        },
+        "combined_relative_envelope": 5.8694166992224117e-05,
+        "metric": "combined_load_gain",
+        "operator_source": "scripts/run_paper2_m2_identity_2d_v01.py:545-568",
+        "subtracted_from_identity_difference": false
+      },
+      "cycle_stored_energy_change_near_zero": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 2.1687512896662042e-14,
+            "S4_T128": 2.406869149446686e-13,
+            "S4_T256": 4.130506700561476e-14,
+            "absolute_change_sum": 2.1899940204800654e-13,
+            "relative_change_sum": 0.0021899940204800654,
+            "spatial_absolute_change": 1.9617554108952717e-14,
+            "spatial_relative_change": 0.00019617554108952717,
+            "temporal_absolute_change": 1.9938184793905382e-13,
+            "temporal_relative_change": 0.001993818479390538
+          },
+          "FEM": {
+            "S3_T256": -7.0295332055270165e-15,
+            "S4_T128": -1.630656669263965e-14,
+            "S4_T256": -7.341783431202842e-15,
+            "absolute_change_sum": 9.277033487112632e-15,
+            "relative_change_sum": 9.277033487112632e-05,
+            "spatial_absolute_change": 3.122502256758253e-16,
+            "spatial_relative_change": 3.1225022567582528e-06,
+            "temporal_absolute_change": 8.964783261436807e-15,
+            "temporal_relative_change": 8.964783261436807e-05
+          }
+        },
+        "combined_absolute_envelope": 2.2827643553511917e-13,
+        "combined_relative_envelope": 0.0022827643553511917,
+        "metric": "cycle_stored_energy_change_near_zero",
+        "subtracted_from_identity_difference": false
+      },
+      "endocardium_ecm_common_traction_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 3.2365857024506964e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 1.4515819305103293e-07,
+            "temporal_T128_to_T256_common_traction_relative": 3.222069883145593e-05
+          },
+          "FEM": {
+            "relative_change_sum": 3.265235055765542e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 1.7421087413477183e-07,
+            "temporal_T128_to_T256_common_traction_relative": 3.2478139683520647e-05
+          }
+        },
+        "combined_relative_envelope": 6.501820758216239e-05,
+        "metric": "endocardium_ecm_common_traction_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "fundamental_phase": {
+        "by_representation": {
+          "DCM": {
+            "available_component_sum_rad": 2.8776148904008373e-05,
+            "frozen_summary_T128_to_T256_phase_abs_rad": 2.117429734765919e-05,
+            "spatial_S3_to_S4_frozen_summary_phase_abs_rad": 7.601851556515716e-06,
+            "spatial_component_available": true,
+            "temporal_T128_to_T256_signal_phase_abs_rad": 2.1174297347492658e-05
+          },
+          "FEM": {
+            "available_component_sum_rad": 3.517774398026363e-05,
+            "frozen_summary_T128_to_T256_phase_abs_rad": 2.782085282271307e-05,
+            "spatial_S3_to_S4_frozen_summary_phase_abs_rad": 7.356891157439538e-06,
+            "spatial_component_available": true,
+            "temporal_T128_to_T256_signal_phase_abs_rad": 2.7820852822824094e-05
+          }
+        },
+        "classification_uses_identity_gate_not_envelope": true,
+        "combined_available_component_envelope_rad": 6.3953892884272e-05,
+        "incomplete_reason": null,
+        "metric": "fundamental_phase",
+        "spatial_component_complete": true,
+        "subtracted_from_identity_difference": false
+      },
+      "myocardium_ecm_common_traction_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 3.770311275729521e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 2.9863100995891454e-07,
+            "temporal_T128_to_T256_common_traction_relative": 3.7404481747336294e-05
+          },
+          "FEM": {
+            "relative_change_sum": 3.82420703248359e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 4.998295000701568e-07,
+            "temporal_T128_to_T256_common_traction_relative": 3.774224082476574e-05
+          }
+        },
+        "combined_relative_envelope": 7.594518308213111e-05,
+        "metric": "myocardium_ecm_common_traction_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "peak_limited_shortening": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 0.02146651939121116,
+            "S4_T128": 0.021466832309768563,
+            "S4_T256": 0.02146682174000898,
+            "absolute_change_sum": 3.1291855740259167e-07,
+            "relative_change_sum": 1.4576845887488214e-05,
+            "spatial_absolute_change": 3.0234879782112256e-07,
+            "spatial_relative_change": 1.408446958208151e-05,
+            "temporal_absolute_change": 1.0569759581469107e-08,
+            "temporal_relative_change": 4.92376305406704e-07
+          },
+          "FEM": {
+            "S3_T256": 0.01985420350717887,
+            "S4_T128": 0.019854555829967355,
+            "S4_T256": 0.019854530447251013,
+            "absolute_change_sum": 3.523227884855151e-07,
+            "relative_change_sum": 1.7745207169288567e-05,
+            "spatial_absolute_change": 3.2694007214353893e-07,
+            "spatial_relative_change": 1.646677432196871e-05,
+            "temporal_absolute_change": 2.5382716341976197e-08,
+            "temporal_relative_change": 1.2784328473198553e-06
+          }
+        },
+        "combined_absolute_envelope": 6.652413458881068e-07,
+        "combined_relative_envelope": 3.232205305677678e-05,
+        "metric": "peak_limited_shortening",
+        "subtracted_from_identity_difference": false
+      },
+      "shortening_waveform_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 2.851213079500428e-05,
+            "spatial_S3_to_S4_scalar_proxy_relative": 1.4185365146991083e-05,
+            "temporal_T128_to_T256_normalized_L2": 1.4326765648013197e-05
+          },
+          "FEM": {
+            "relative_change_sum": 3.6679916678231415e-05,
+            "spatial_S3_to_S4_scalar_proxy_relative": 1.6641586613837074e-05,
+            "temporal_T128_to_T256_normalized_L2": 2.0038330064394345e-05
+          }
+        },
+        "combined_relative_envelope": 6.519204747323569e-05,
+        "metric": "shortening_waveform_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "total_dissipation": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 0.004715888022767538,
+            "S4_T128": 0.004714118457569274,
+            "S4_T256": 0.0047158788916041704,
+            "absolute_change_sum": 1.769565198264482e-06,
+            "relative_change_sum": 0.0003752355014321151,
+            "spatial_absolute_change": 9.131163367960549e-09,
+            "spatial_relative_change": 1.9362553402194414e-06,
+            "temporal_absolute_change": 1.7604340348965214e-06,
+            "temporal_relative_change": 0.00037329924609189567
+          },
+          "FEM": {
+            "S3_T256": 0.004721489948291013,
+            "S4_T128": 0.0047197189315232695,
+            "S4_T256": 0.0047214821921164035,
+            "absolute_change_sum": 1.7710167677436814e-06,
+            "relative_change_sum": 0.00037509762463139876,
+            "spatial_absolute_change": 7.756174609692412e-09,
+            "spatial_relative_change": 1.642738774123586e-06,
+            "temporal_absolute_change": 1.763260593133989e-06,
+            "temporal_relative_change": 0.0003734548858572752
+          }
+        },
+        "combined_absolute_envelope": 3.5405819660081633e-06,
+        "combined_relative_envelope": 0.0007503331260635138,
+        "metric": "total_dissipation",
+        "subtracted_from_identity_difference": false
+      }
+    },
+    "ID-LN": {
+      "cycle_stored_energy_change_near_zero": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 1.9525830605160444e-14,
+            "S4_T128": -4.3472459993246747e-14,
+            "S4_T256": -3.3474861337728923e-13,
+            "absolute_change_sum": 6.455505973664922e-13,
+            "relative_change_sum": 0.0064555059736649215,
+            "spatial_absolute_change": 3.5427444398244967e-13,
+            "spatial_relative_change": 0.0035427444398244967,
+            "temporal_absolute_change": 2.912761533840425e-13,
+            "temporal_relative_change": 0.002912761533840425
+          },
+          "FEM": {
+            "S3_T256": 9.308634592308795e-15,
+            "S4_T128": -3.866897850101497e-14,
+            "S4_T256": -1.0873853900639219e-13,
+            "absolute_change_sum": 1.881167341040782e-13,
+            "relative_change_sum": 0.001881167341040782,
+            "spatial_absolute_change": 1.1804717359870098e-13,
+            "spatial_relative_change": 0.0011804717359870098,
+            "temporal_absolute_change": 7.006956050537722e-14,
+            "temporal_relative_change": 0.0007006956050537722
+          }
+        },
+        "combined_absolute_envelope": 8.336673314705704e-13,
+        "combined_relative_envelope": 0.008336673314705704,
+        "metric": "cycle_stored_energy_change_near_zero",
+        "subtracted_from_identity_difference": false
+      },
+      "endocardium_ecm_common_traction_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 3.2734259805422586e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 4.667202653847128e-08,
+            "temporal_T128_to_T256_common_traction_relative": 3.268758777888412e-05
+          },
+          "FEM": {
+            "relative_change_sum": 3.269347918563493e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 3.373184889492271e-08,
+            "temporal_T128_to_T256_common_traction_relative": 3.265974733674001e-05
+          }
+        },
+        "combined_relative_envelope": 6.542773899105751e-05,
+        "metric": "endocardium_ecm_common_traction_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "fundamental_phase": {
+        "by_representation": {
+          "DCM": {
+            "available_component_sum_rad": 6.335718662109358e-05,
+            "frozen_summary_T128_to_T256_phase_abs_rad": null,
+            "spatial_S3_to_S4_frozen_summary_phase_abs_rad": null,
+            "spatial_component_available": false,
+            "temporal_T128_to_T256_signal_phase_abs_rad": 6.335718662109358e-05
+          },
+          "FEM": {
+            "available_component_sum_rad": 6.323660815521492e-05,
+            "frozen_summary_T128_to_T256_phase_abs_rad": null,
+            "spatial_S3_to_S4_frozen_summary_phase_abs_rad": null,
+            "spatial_component_available": false,
+            "temporal_T128_to_T256_signal_phase_abs_rad": 6.323660815521492e-05
+          }
+        },
+        "classification_uses_identity_gate_not_envelope": true,
+        "combined_available_component_envelope_rad": 0.0001265937947763085,
+        "incomplete_reason": "ID-LN/ID-LS custom phase signals have no frozen S3 dynamic archive",
+        "metric": "fundamental_phase",
+        "spatial_component_complete": false,
+        "subtracted_from_identity_difference": false
+      },
+      "myocardium_ecm_common_traction_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 3.7700905126881236e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 5.928806718397152e-08,
+            "temporal_T128_to_T256_common_traction_relative": 3.7641617059697265e-05
+          },
+          "FEM": {
+            "relative_change_sum": 3.7751154342766024e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 1.4752528651378983e-07,
+            "temporal_T128_to_T256_common_traction_relative": 3.760362905625224e-05
+          }
+        },
+        "combined_relative_envelope": 7.545205946964726e-05,
+        "metric": "myocardium_ecm_common_traction_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "peak_limited_shortening": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": -0.003391936200191023,
+            "S4_T128": -0.003392301679578619,
+            "S4_T256": -0.003391989319757675,
+            "absolute_change_sum": 3.654793875960266e-07,
+            "relative_change_sum": 0.00010773932089954624,
+            "spatial_absolute_change": 5.3119566652010813e-08,
+            "spatial_relative_change": 1.5660298911497072e-05,
+            "temporal_absolute_change": 3.123598209440158e-07,
+            "temporal_relative_change": 9.207902198804917e-05
+          },
+          "FEM": {
+            "S3_T256": -0.004153545243173183,
+            "S4_T128": -0.00415413751653338,
+            "S4_T256": -0.00415362508912045,
+            "absolute_change_sum": 5.922733601971056e-07,
+            "relative_change_sum": 0.00014257669813100485,
+            "spatial_absolute_change": 7.984594726714866e-08,
+            "spatial_relative_change": 1.9223195534976996e-05,
+            "temporal_absolute_change": 5.124274129299569e-07,
+            "temporal_relative_change": 0.00012335350259602785
+          }
+        },
+        "combined_absolute_envelope": 9.577527477931322e-07,
+        "combined_relative_envelope": 0.0002503160190305511,
+        "metric": "peak_limited_shortening",
+        "subtracted_from_identity_difference": false
+      },
+      "shortening_waveform_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 5.007468504972717e-05,
+            "spatial_S3_to_S4_scalar_proxy_relative": 1.470901446991229e-05,
+            "temporal_T128_to_T256_normalized_L2": 3.536567057981488e-05
+          },
+          "FEM": {
+            "relative_change_sum": 5.352314444464888e-05,
+            "spatial_S3_to_S4_scalar_proxy_relative": 1.7538243531675458e-05,
+            "temporal_T128_to_T256_normalized_L2": 3.598490091297342e-05
+          }
+        },
+        "combined_relative_envelope": 0.00010359782949437605,
+        "metric": "shortening_waveform_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "total_dissipation": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 0.004590633262499151,
+            "S4_T128": 0.004588908723308549,
+            "S4_T256": 0.0045906322468264454,
+            "absolute_change_sum": 1.7245391906017121e-06,
+            "relative_change_sum": 0.00037566485347833916,
+            "spatial_absolute_change": 1.0156727056620518e-09,
+            "spatial_relative_change": 2.2124893181057928e-07,
+            "temporal_absolute_change": 1.72352351789605e-06,
+            "temporal_relative_change": 0.0003754436045465286
+          },
+          "FEM": {
+            "S3_T256": 0.004596227963155482,
+            "S4_T128": 0.00459450112264267,
+            "S4_T256": 0.004596227603904726,
+            "absolute_change_sum": 1.7268405128117656e-06,
+            "relative_change_sum": 0.000375708224570221,
+            "spatial_absolute_change": 3.592507558797253e-10,
+            "spatial_relative_change": 7.816208394352274e-08,
+            "temporal_absolute_change": 1.7264812620558859e-06,
+            "temporal_relative_change": 0.0003756300624862775
+          }
+        },
+        "combined_absolute_envelope": 3.4513797034134777e-06,
+        "combined_relative_envelope": 0.0007513730780485602,
+        "metric": "total_dissipation",
+        "subtracted_from_identity_difference": false
+      }
+    },
+    "ID-LS": {
+      "cycle_stored_energy_change_near_zero": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 7.92009687000661e-17,
+            "S4_T128": 1.0962808623133508e-16,
+            "S4_T256": -1.091791587692903e-16,
+            "absolute_change_sum": 4.0718737246998177e-16,
+            "relative_change_sum": 4.071873724699818e-06,
+            "spatial_absolute_change": 1.883801274693564e-16,
+            "spatial_relative_change": 1.883801274693564e-06,
+            "temporal_absolute_change": 2.1880724500062537e-16,
+            "temporal_relative_change": 2.1880724500062537e-06
+          },
+          "FEM": {
+            "S3_T256": 1.452830911130576e-17,
+            "S4_T128": 1.4945726947712679e-16,
+            "S4_T256": 3.800128614561693e-17,
+            "absolute_change_sum": 1.3492896036582103e-16,
+            "relative_change_sum": 1.3492896036582103e-06,
+            "spatial_absolute_change": 2.347297703431117e-17,
+            "spatial_relative_change": 2.347297703431117e-07,
+            "temporal_absolute_change": 1.1145598333150986e-16,
+            "temporal_relative_change": 1.1145598333150986e-06
+          }
+        },
+        "combined_absolute_envelope": 5.421163328358028e-16,
+        "combined_relative_envelope": 5.421163328358028e-06,
+        "metric": "cycle_stored_energy_change_near_zero",
+        "subtracted_from_identity_difference": false
+      },
+      "endocardium_ecm_common_traction_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 2.47286961865427e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 2.82404357262046e-07,
+            "temporal_T128_to_T256_common_traction_relative": 2.4446291829280657e-05
+          },
+          "FEM": {
+            "relative_change_sum": 2.5279788764499048e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 2.2970120702819202e-07,
+            "temporal_T128_to_T256_common_traction_relative": 2.5050087557470855e-05
+          }
+        },
+        "combined_relative_envelope": 5.000848495104175e-05,
+        "metric": "endocardium_ecm_common_traction_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "fundamental_phase": {
+        "by_representation": {
+          "DCM": {
+            "available_component_sum_rad": 4.3875836160944814e-05,
+            "frozen_summary_T128_to_T256_phase_abs_rad": null,
+            "spatial_S3_to_S4_frozen_summary_phase_abs_rad": null,
+            "spatial_component_available": false,
+            "temporal_T128_to_T256_signal_phase_abs_rad": 4.3875836160944814e-05
+          },
+          "FEM": {
+            "available_component_sum_rad": 4.5080271270814265e-05,
+            "frozen_summary_T128_to_T256_phase_abs_rad": null,
+            "spatial_S3_to_S4_frozen_summary_phase_abs_rad": null,
+            "spatial_component_available": false,
+            "temporal_T128_to_T256_signal_phase_abs_rad": 4.5080271270814265e-05
+          }
+        },
+        "classification_uses_identity_gate_not_envelope": true,
+        "combined_available_component_envelope_rad": 8.895610743175908e-05,
+        "incomplete_reason": "ID-LN/ID-LS custom phase signals have no frozen S3 dynamic archive",
+        "metric": "fundamental_phase",
+        "spatial_component_complete": false,
+        "subtracted_from_identity_difference": false
+      },
+      "myocardium_ecm_common_traction_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 2.8555713154441043e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 1.3388773893521423e-07,
+            "temporal_T128_to_T256_common_traction_relative": 2.8421825415505827e-05
+          },
+          "FEM": {
+            "relative_change_sum": 2.9161183373599373e-05,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 7.20255826916415e-08,
+            "temporal_T128_to_T256_common_traction_relative": 2.9089157790907733e-05
+          }
+        },
+        "combined_relative_envelope": 5.771689652804042e-05,
+        "metric": "myocardium_ecm_common_traction_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "peak_limited_shortening": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 5.753291794318308e-15,
+            "S4_T128": 2.888307635461992e-15,
+            "S4_T256": 2.0221894291596406e-15,
+            "absolute_change_sum": 4.5972205714610186e-15,
+            "relative_change_sum": 4.597220571461019e-09,
+            "spatial_absolute_change": 3.731102365158667e-15,
+            "spatial_relative_change": 3.731102365158668e-09,
+            "temporal_absolute_change": 8.661182063023513e-16,
+            "temporal_relative_change": 8.661182063023513e-10
+          },
+          "FEM": {
+            "S3_T256": -1.2925656144616005e-15,
+            "S4_T128": 2.1790203613732057e-14,
+            "S4_T256": 1.832376832369552e-14,
+            "absolute_change_sum": 2.308276922819366e-14,
+            "relative_change_sum": 2.3082769228193662e-08,
+            "spatial_absolute_change": 1.9616333938157123e-14,
+            "spatial_relative_change": 1.9616333938157124e-08,
+            "temporal_absolute_change": 3.4664352900365365e-15,
+            "temporal_relative_change": 3.4664352900365368e-09
+          }
+        },
+        "combined_absolute_envelope": 2.7679989799654678e-14,
+        "combined_relative_envelope": 2.7679989799654682e-08,
+        "metric": "peak_limited_shortening",
+        "subtracted_from_identity_difference": false
+      },
+      "shortening_waveform_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 0.0001744876843791359,
+            "spatial_S3_to_S4_scalar_proxy_relative": 3.148728898106464e-09,
+            "temporal_T128_to_T256_normalized_L2": 0.0001744845356502378
+          },
+          "FEM": {
+            "relative_change_sum": 0.000375883902045793,
+            "spatial_S3_to_S4_scalar_proxy_relative": 1.4837527819455043e-08,
+            "temporal_T128_to_T256_normalized_L2": 0.00037586906451797357
+          }
+        },
+        "combined_relative_envelope": 0.0005503715864249289,
+        "metric": "shortening_waveform_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "total_dissipation": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 0.0021774270638603515,
+            "S4_T128": 0.0021765209822916464,
+            "S4_T256": 0.002177424723314418,
+            "absolute_change_sum": 9.06081568705086e-07,
+            "relative_change_sum": 0.0004161253229503099,
+            "spatial_absolute_change": 2.3405459332812018e-09,
+            "spatial_relative_change": 1.0749135859144037e-06,
+            "temporal_absolute_change": 9.037410227718048e-07,
+            "temporal_relative_change": 0.0004150504093643955
+          },
+          "FEM": {
+            "S3_T256": 0.0021514240646747845,
+            "S4_T128": 0.0021505344241178914,
+            "S4_T256": 0.0021514221713794957,
+            "absolute_change_sum": 8.896405568931294e-07,
+            "relative_change_sum": 0.0004135127763680865,
+            "spatial_absolute_change": 1.8932952887754095e-09,
+            "spatial_relative_change": 8.800195739474568e-07,
+            "temporal_absolute_change": 8.87747261604354e-07,
+            "temporal_relative_change": 0.00041263275679413904
+          }
+        },
+        "combined_absolute_envelope": 1.7957221255982155e-06,
+        "combined_relative_envelope": 0.0008296380993183963,
+        "metric": "total_dissipation",
+        "subtracted_from_identity_difference": false
+      }
+    },
+    "ID-S1": {
+      "common_grid_hotspot_center_and_split": {
+        "by_representation": {
+          "DCM": {
+            "absolute_shift_sum": 0.0,
+            "native_summary_hotspot_S3_T256": -0.25000000000000006,
+            "native_summary_hotspot_S4_T128": -0.25000000000000006,
+            "native_summary_hotspot_S4_T256": -0.25000000000000006,
+            "spatial_absolute_shift": 0.0,
+            "temporal_absolute_shift": 0.0
+          },
+          "FEM": {
+            "absolute_shift_sum": 0.0,
+            "native_summary_hotspot_S3_T256": -0.25000000000000006,
+            "native_summary_hotspot_S4_T128": -0.25000000000000006,
+            "native_summary_hotspot_S4_T256": -0.25000000000000006,
+            "spatial_absolute_shift": 0.0,
+            "temporal_absolute_shift": 0.0
+          }
+        },
+        "combined_absolute_envelope": 0.0,
+        "metric": "common_grid_hotspot_center_and_split",
+        "proxy_observable": "frozen_native_summary_hotspot_x",
+        "subtracted_from_identity_difference": false
+      },
+      "cycle_stored_energy_change_near_zero": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 3.469446951953614e-18,
+            "S4_T128": 2.3229063309237455e-16,
+            "S4_T256": -1.0018028073766061e-16,
+            "absolute_change_sum": 4.361206415196494e-16,
+            "relative_change_sum": 4.361206415196494e-06,
+            "spatial_absolute_change": 1.0364972768961422e-16,
+            "spatial_relative_change": 1.0364972768961422e-06,
+            "temporal_absolute_change": 3.3247091383003516e-16,
+            "temporal_relative_change": 3.3247091383003516e-06
+          },
+          "FEM": {
+            "S3_T256": 1.3010426069826053e-18,
+            "S4_T128": -4.520403081259387e-18,
+            "S4_T256": -3.469446951953614e-18,
+            "absolute_change_sum": 5.821445688241993e-18,
+            "relative_change_sum": 5.8214456882419927e-08,
+            "spatial_absolute_change": 4.7704895589362195e-18,
+            "spatial_relative_change": 4.7704895589362195e-08,
+            "temporal_absolute_change": 1.0509561293057731e-18,
+            "temporal_relative_change": 1.0509561293057731e-08
+          }
+        },
+        "combined_absolute_envelope": 4.4194208720789137e-16,
+        "combined_relative_envelope": 4.419420872078914e-06,
+        "metric": "cycle_stored_energy_change_near_zero",
+        "subtracted_from_identity_difference": false
+      },
+      "endocardium_ecm_common_traction_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 0.002223052708361707,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 0.002206884965347592,
+            "temporal_T128_to_T256_common_traction_relative": 1.6167743014115074e-05
+          },
+          "FEM": {
+            "relative_change_sum": 0.002740934589294414,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 0.002724730676535512,
+            "temporal_T128_to_T256_common_traction_relative": 1.6203912758901976e-05
+          }
+        },
+        "combined_relative_envelope": 0.0049639872976561215,
+        "metric": "endocardium_ecm_common_traction_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "fundamental_phase": {
+        "by_representation": {
+          "DCM": {
+            "available_component_sum_rad": 9.684792575626044e-06,
+            "frozen_summary_T128_to_T256_phase_abs_rad": 1.6842469587052822e-06,
+            "spatial_S3_to_S4_frozen_summary_phase_abs_rad": 8.000545616837496e-06,
+            "spatial_component_available": true,
+            "temporal_T128_to_T256_signal_phase_abs_rad": 1.684246958788549e-06
+          },
+          "FEM": {
+            "available_component_sum_rad": 9.046388156852547e-06,
+            "frozen_summary_T128_to_T256_phase_abs_rad": 1.8375762782241176e-06,
+            "spatial_S3_to_S4_frozen_summary_phase_abs_rad": 7.208811878600674e-06,
+            "spatial_component_available": true,
+            "temporal_T128_to_T256_signal_phase_abs_rad": 1.8375762782518732e-06
+          }
+        },
+        "classification_uses_identity_gate_not_envelope": true,
+        "combined_available_component_envelope_rad": 1.8731180732478592e-05,
+        "incomplete_reason": null,
+        "metric": "fundamental_phase",
+        "spatial_component_complete": true,
+        "subtracted_from_identity_difference": false
+      },
+      "myocardium_ecm_common_traction_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 0.008470019878799168,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 0.008461407128721902,
+            "temporal_T128_to_T256_common_traction_relative": 8.612750077265302e-06
+          },
+          "FEM": {
+            "relative_change_sum": 0.00880873994716295,
+            "spatial_S3_to_S4_common_traction_proxy_relative": 0.008799971373101116,
+            "temporal_T128_to_T256_common_traction_relative": 8.768574061834144e-06
+          }
+        },
+        "combined_relative_envelope": 0.017278759825962116,
+        "metric": "myocardium_ecm_common_traction_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "peak_limited_shortening": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 0.029335513896877594,
+            "S4_T128": 0.029335676171684474,
+            "S4_T256": 0.029335802361990612,
+            "absolute_change_sum": 4.146554191571117e-07,
+            "relative_change_sum": 1.4134790452991545e-05,
+            "spatial_absolute_change": 2.8846511301861e-07,
+            "spatial_relative_change": 9.833210268431734e-06,
+            "temporal_absolute_change": 1.2619030613850168e-07,
+            "temporal_relative_change": 4.30158018455981e-06
+          },
+          "FEM": {
+            "S3_T256": 0.029466054311007517,
+            "S4_T128": 0.029466093926086144,
+            "S4_T256": 0.0294662209988837,
+            "absolute_change_sum": 2.9376067373770853e-07,
+            "relative_change_sum": 9.969404415613301e-06,
+            "spatial_absolute_change": 1.6668787618245862e-07,
+            "spatial_relative_change": 5.656913935070718e-06,
+            "temporal_absolute_change": 1.2707279755524992e-07,
+            "temporal_relative_change": 4.312490480542583e-06
+          }
+        },
+        "combined_absolute_envelope": 7.084160928948202e-07,
+        "combined_relative_envelope": 2.4104194868604846e-05,
+        "metric": "peak_limited_shortening",
+        "subtracted_from_identity_difference": false
+      },
+      "shortening_waveform_normalized_L2": {
+        "by_representation": {
+          "DCM": {
+            "relative_change_sum": 1.4996811022560792e-05,
+            "spatial_S3_to_S4_scalar_proxy_relative": 1.0037022319235443e-05,
+            "temporal_T128_to_T256_normalized_L2": 4.95978870332535e-06
+          },
+          "FEM": {
+            "relative_change_sum": 1.106492415710167e-05,
+            "spatial_S3_to_S4_scalar_proxy_relative": 6.0793020620358266e-06,
+            "temporal_T128_to_T256_normalized_L2": 4.985622095065842e-06
+          }
+        },
+        "combined_relative_envelope": 2.606173517966246e-05,
+        "metric": "shortening_waveform_normalized_L2",
+        "subtracted_from_identity_difference": false
+      },
+      "total_dissipation": {
+        "by_representation": {
+          "DCM": {
+            "S3_T256": 0.00013112139935476713,
+            "S4_T128": 0.00013109478167131294,
+            "S4_T256": 0.00013113280495515717,
+            "absolute_change_sum": 4.942888423426482e-08,
+            "relative_change_sum": 0.00037693759583017967,
+            "spatial_absolute_change": 1.140560039003622e-08,
+            "spatial_relative_change": 8.697747595604728e-05,
+            "temporal_absolute_change": 3.8023283844228596e-08,
+            "temporal_relative_change": 0.0002899601198741324
+          },
+          "FEM": {
+            "S3_T256": 0.00013209906922789842,
+            "S4_T128": 0.00013207812505945315,
+            "S4_T256": 0.0001321162494132158,
+            "absolute_change_sum": 5.530453908001473e-08,
+            "relative_change_sum": 0.0004186051248475915,
+            "spatial_absolute_change": 1.7180185317373963e-08,
+            "spatial_relative_change": 0.0001300383971970022,
+            "temporal_absolute_change": 3.8124353762640766e-08,
+            "temporal_relative_change": 0.0002885667276505893
+          }
+        },
+        "combined_absolute_envelope": 1.0473342331427955e-07,
+        "combined_relative_envelope": 0.0007955427206777711,
+        "metric": "total_dissipation",
+        "subtracted_from_identity_difference": false
+      }
+    }
+  },
+  "identity_difference_reduced_by_envelope": false,
+  "interpretation": "The envelope is diagnostic context only and is never subtracted from an identity difference or used to change classification.",
+  "schema": "paper2_m2a_v06_numerical_change_envelope"
+}
