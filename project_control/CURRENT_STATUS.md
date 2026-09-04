@@ -3,15 +3,15 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-04
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: ade5f96d7b89a6ed6b629a37db795ed08853ba3f
-current_lifecycle: paper2_figure2_fem_only_numerical_credibility_contract_v03_accepted
-current_contract: project_control/paper2_figure2_fem_only_numerical_credibility_contract_v03.md
-current_authorization: project_control/paper2_figure2_fem_only_numerical_credibility_v03_supervisor_acceptance_and_execution_contract_decision_v01.md
+verified_commit: c52b2de7536a055699b2e23011fa221a6f2f1019
+current_lifecycle: paper2_figure2_execution_contract_v02_accepted_implementation_only_authorized
+current_contract: project_control/paper2_figure2_fem_only_numerical_credibility_execution_contract_v02.md
+current_authorization: project_control/paper2_figure2_fem_only_numerical_credibility_execution_contract_v02_supervisor_acceptance_and_implementation_authorization_decision_v01.md
 current_clarification: none
-execution_authorized: figure2_fem_only_numerical_credibility_execution_contract_drafting_only
-current_execution_log: not_applicable_document_only_contract_stage
+execution_authorized: exact_15_figure2_validation_files_implementation_only
+current_execution_log: not_started_implementation_candidate_stage
 latest_completed_execution_log: project_control/paper2_v08_myocardial_fem_only_architecture_migration_execution_record_v01.md
-latest_supervisor_decision: project_control/paper2_figure2_fem_only_numerical_credibility_v03_supervisor_acceptance_and_execution_contract_decision_v01.md
+latest_supervisor_decision: project_control/paper2_figure2_fem_only_numerical_credibility_execution_contract_v02_supervisor_acceptance_and_implementation_authorization_decision_v01.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
@@ -31,11 +31,12 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 ## 1. 一句话状态
 
 Paper 2 v08 已通过独立 Supervisor 验收，唯一活跃生产架构冻结为“离散心内膜细胞链＋
-主动心肌 FEM＋黏弹 ECM FEM”。Figure 1 三层理论合同 v02 和 Figure 2 FEM-only 数值
-可信度合同 v03 均已通过独立验收；后者冻结了无环验证梯、128×256 共同域、解析相位
-段平均、功率守恒映射和 S1 独立留出。心肌 DCM 与 identity/M2B 路线只作为退役历史
-保留，不得重新进入活跃源码、模型选择、论文比较或后续整心房架构。下一步只授权起草
-Figure 2 执行合同，不授权代码或计算。
+主动心肌 FEM＋黏弹 ECM FEM”。Figure 1 三层理论合同 v02、Figure 2 FEM-only 数值可信度
+合同 v03 和执行合同 v02 均已通过独立验收。执行合同冻结 39 个动态调用＋1 个 G0 P0
+复用、无环验证梯、128×256 共同域、第二周期精确账本、S1 独立留出以及 create-only
+事务。心肌 DCM 与 identity/M2B 路线只作为退役历史保留，不得重新进入活跃源码、模型
+选择、论文比较或后续整心房架构。当前只授权新增合同列出的 15 个实现/测试文件；不授权
+运行测试、solver、Docker 或正式 r01。
 
 旧 DCM–FEM–DCM Figure 2 路线只作为历史证据原样保留：T128 时间离散阶段 FINAL 不变；
 A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。它不属于新活跃
@@ -293,9 +294,15 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
 - 共同域冻结为 128 个空间 P0 段 × 256 个周期中心化相位 P0 段；单频场取解析段平均，
   逐步功/耗散独立按区间交叠守恒映射；
 - S1 是规则和开发结果 digest 后才解盲的独立空间异质留出；
-- 当前只有合同被接受，尚无 Figure 2 v03 数值 PASS。下一步只授权起草
-  `project_control/paper2_figure2_fem_only_numerical_credibility_execution_contract_v01.md`，
-  完成后再次停在 Supervisor Gate。
+- 已接受执行合同由
+  `project_control/paper2_figure2_fem_only_numerical_credibility_execution_contract_v01.md` 与
+  `project_control/paper2_figure2_fem_only_numerical_credibility_execution_contract_v02.md`
+  按 v02 优先级共同组成；v02 SHA-256 为
+  `11ebd843cf23c404c920a0274b409a907e01cd1755a2a5812de1eb8bdc66e253`；
+- 执行合同 Supervisor 接受与实现授权：
+  `project_control/paper2_figure2_fem_only_numerical_credibility_execution_contract_v02_supervisor_acceptance_and_implementation_authorization_decision_v01.md`；
+- 当前只有设计/执行合同被接受，尚无实现验收或 Figure 2 v03 数值 PASS。下一步仅新增
+  7 个验证模块、1 个 runner 和 7 个测试，完成后停在实现候选独立复核门。
 
 ## 2. 已完成并可引用的阶段证据
 
@@ -369,8 +376,8 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 ## 5. 当前禁止范围
 
-M2A 心肌 DCM identity 路线已整体退役；v08 已完成。当前只授权起草 Figure 2 执行合同，
-不授权写代码或运行计算。不得删除、
+M2A 心肌 DCM identity 路线已整体退役；v08 已完成。当前只授权实现 Figure 2 执行合同
+列出的 15 个新文件，不授权运行测试、solver、Docker、正式 r01 或创建结果目录。不得删除、
 覆盖或续接 v06 v01 失败包与
 v06.1 v02 正式包；不得把 EOF 兼容规则扩展到其他文件或哈希，不得修改当前测试文件以
 迎合旧 manifest。不得重跑 DCM/FEM 求解器，不得覆盖或续接 v05 失败包及 v05.1 成功包，
