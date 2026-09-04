@@ -4,14 +4,15 @@ status: current
 last_verified: 2026-09-04
 branch: codex/simucell3d-hybrid-feasibility
 verified_commit: b6f1c16a1fcc04856d4ac10cd4745160ff666644
-current_lifecycle: paper2_v08_myocardial_fem_only_architecture_accepted_and_frozen
-current_contract: project_control/paper2_v08_myocardial_fem_only_architecture_migration_contract_v01.md
-current_authorization: project_control/paper2_v08_supervisor_acceptance_and_fem_only_architecture_freeze_v01.md
+current_lifecycle: paper2_figure1_three_layer_theory_contract_v02_accepted
+current_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
+current_authorization: project_control/paper2_figure1_three_layer_theory_v02_supervisor_acceptance_and_figure2_contract_decision_v01.md
 current_clarification: none
-execution_authorized: none_pending_next_versioned_theory_contract
-current_execution_log: project_control/paper2_v08_myocardial_fem_only_architecture_migration_execution_record_v01.md
+execution_authorized: figure2_fem_only_numerical_credibility_contract_drafting_only
+current_execution_log: not_applicable_document_only_theory_stage
 latest_completed_execution_log: project_control/paper2_v08_myocardial_fem_only_architecture_migration_execution_record_v01.md
-latest_supervisor_decision: project_control/paper2_v08_supervisor_acceptance_and_fem_only_architecture_freeze_v01.md
+latest_supervisor_decision: project_control/paper2_figure1_three_layer_theory_v02_supervisor_acceptance_and_figure2_contract_decision_v01.md
+current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
 current_mainline: project_control/prl_independent_theory_mainline_plan_v03.md
@@ -29,12 +30,11 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 
 ## 1. 一句话状态
 
-Paper 2 v08 已通过独立 Supervisor 验收，正式标签为
-`FEM_ONLY_ARCHITECTURE_PASS_V08`。唯一活跃生产架构冻结为“离散心内膜细胞链＋主动
-心肌 FEM＋黏弹 ECM FEM”，六个 S4/T64/D0 工况对冻结旧 FEM 臂的全部规定标量、数组
-和共同投影均逐值误差 `0`；心肌 DCM 与 identity/M2B 路线只作为退役历史保留，不得
-重新进入活跃源码、模型选择、论文比较或后续整心房架构。下一步仅允许先形成 Figure 1
-版本化理论合同。
+Paper 2 v08 已通过独立 Supervisor 验收，唯一活跃生产架构冻结为“离散心内膜细胞链＋
+主动心肌 FEM＋黏弹 ECM FEM”。Figure 1 三层理论合同 v02 也已通过独立验收，冻结了
+几何、方程、能量/功率、双界面物理力、无量纲组、极限和否证边界。心肌 DCM 与
+identity/M2B 路线只作为退役历史保留，不得重新进入活跃源码、模型选择、论文比较或
+后续整心房架构。下一步只授权起草新 FEM-only Figure 2 数值可信度合同，不授权计算。
 
 旧 DCM–FEM–DCM Figure 2 路线只作为历史证据原样保留：T128 时间离散阶段 FINAL 不变；
 A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。它不属于新活跃
