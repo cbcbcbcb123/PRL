@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import inspect
 from pathlib import Path
+import tomllib
 
 import pytest
 
@@ -97,16 +98,45 @@ def test_model_builder_signature_is_fixed_by_static_ast() -> None:
     assert keyword_names == ("spatial_label", "active_profile", "config")
 
 
-def test_one_time_runner_does_not_import_retired_python_package() -> None:
-    runner = PROJECT_ROOT / "scripts" / "run_paper2_v08_fem_only_parity_v01.py"
-    tree = ast.parse(runner.read_text(encoding="utf-8"))
-    imports = []
-    for node in ast.walk(tree):
-        if isinstance(node, ast.ImportFrom):
-            imports.append(node.module or "")
-        elif isinstance(node, ast.Import):
-            imports.extend(name.name for name in node.names)
-    assert all(not name.startswith("paper2_m2") for name in imports)
+def test_retired_execution_namespaces_are_physically_absent() -> None:
+    retired_paths = (
+        "src/paper2_m2",
+        "src/hybrid",
+        "src/route_h",
+        "tests/paper2_m2",
+        "tests/hybrid",
+        "tests/route_h",
+        "tests/stage0_v06",
+        "tests/stage1",
+        "tests/stage2",
+        "results/paper2_m2",
+        "cpp",
+    )
+    assert all(not (PROJECT_ROOT / path).exists() for path in retired_paths)
+
+    remesh_contract = (
+        PROJECT_ROOT
+        / "external"
+        / "simucell3d"
+        / "include"
+        / "prl_cell_engine"
+        / "remesh_contract.hpp"
+    ).read_text(encoding="utf-8")
+    assert "MyocardialMaterialState" not in remesh_contract
+    assert "MyocardialCellMaterialState" not in remesh_contract
+
+
+def test_distribution_discovers_only_current_paper2_packages() -> None:
+    configuration = tomllib.loads(
+        (PROJECT_ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    )
+    package_find = configuration["tool"]["setuptools"]["packages"]["find"]
+    assert package_find["where"] == ["src"]
+    assert package_find["include"] == [
+        "paper2_m1*",
+        "paper2_hybrid*",
+        "paper2_figure2*",
+    ]
 
 
 def test_mainline_v03_retires_old_route_and_has_fem_family_figure4() -> None:

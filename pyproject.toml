@@ -20,6 +20,11 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+include = [
+  "paper2_m1*",
+  "paper2_hybrid*",
+  "paper2_figure2*",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

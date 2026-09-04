@@ -10,7 +10,6 @@
 namespace prl::core {
 
 using CellId = std::uint64_t;
-using MaterialPointId = std::uint64_t;
 using MeshRevision = std::uint64_t;
 using VertexId = std::uint64_t;
 
@@ -25,12 +24,6 @@ enum class RemeshCollapseMode : std::uint8_t {
     none,
     midpoint,
     endpoint_survivor,
-};
-
-enum class SurfaceRegion : std::uint8_t {
-    apical,
-    basal,
-    lateral,
 };
 
 struct SurfaceVertex {
@@ -79,26 +72,6 @@ struct RemeshPreparationToken {
         && event.after_revision == after.revision
         && event.after_revision > event.before_revision;
 }
-
-struct MyocardialMaterialState {
-    MaterialPointId material_point_id{};
-    SurfaceRegion region{};
-    std::array<double, 3> fiber_direction{};
-    std::vector<double> active_state{};
-};
-
-struct RemeshTransferAudit {
-    RemeshOperation operation{};
-    std::size_t point_count{};
-    double region_retention_fraction{};
-    double active_state_residual{};
-    double maximum_fiber_norm_error{};
-    double maximum_fiber_tangency_error{};
-    double minimum_fiber_alignment{};
-    double maximum_rebind_error{};
-    double id_retention_fraction{};
-    double reference_weight_residual{};
-};
 
 /**
  * Stable observer seam between the cell engine and PRL material-state owner.

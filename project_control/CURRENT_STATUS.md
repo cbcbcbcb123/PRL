@@ -17,6 +17,7 @@ preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
 current_mainline: project_control/prl_independent_theory_mainline_plan_v03.md
 current_mainline_decision: project_control/paper2_myocardial_dcm_retirement_and_fem_only_architecture_decision_v01.md
+current_physical_removal_record: project_control/paper2_myocardial_dcm_physical_removal_execution_record_v01.md
 standing_authority: project_control/paper2_autonomous_execution_and_chart_reporting_decision_v01.md
 ---
 
@@ -31,16 +32,19 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 ## 1. 一句话状态
 
 Paper 2 v08 已通过独立 Supervisor 验收，唯一活跃生产架构冻结为“离散心内膜细胞链＋
-主动心肌 FEM＋黏弹 ECM FEM”。Figure 1 三层理论合同 v02、Figure 2 FEM-only 数值可信度
+主动心肌 FEM＋黏弹 ECM FEM”。旧心肌 DCM 源码、测试、运行入口及
+`results/paper2_m2/` 已按人类确认从当前工作树物理删除；历史合同、决定和执行记录仅作
+审计。Figure 1 三层理论合同 v02、Figure 2 FEM-only 数值可信度
 合同 v03 和执行合同 v02 均已通过独立验收。执行合同冻结 39 个动态调用＋1 个 G0 P0
 复用、无环验证梯、128×256 共同域、第二周期精确账本、S1 独立留出以及 create-only
-事务。心肌 DCM 与 identity/M2B 路线只作为退役历史保留，不得重新进入活跃源码、模型
-选择、论文比较或后续整心房架构。当前只授权新增合同列出的 15 个实现/测试文件；不授权
+事务。心肌 DCM 与 identity/M2B 路线只在不可改写的文字记录中保留，不得重新进入活跃
+源码、模型选择、论文比较或后续整心房架构。当前只授权新增合同列出的 15 个实现/测试文件；不授权
 运行测试、solver、Docker 或正式 r01。
 
-旧 DCM–FEM–DCM Figure 2 路线只作为历史证据原样保留：T128 时间离散阶段 FINAL 不变；
-A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。它不属于新活跃
-架构，旧时间离散结果也不得迁移成 FEM-only 新模型证据。
+旧 DCM–FEM–DCM Figure 2 路线的文字证据链继续保留：T128 时间离散阶段 FINAL 不变；
+A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。其旧可执行源码和
+`results/paper2_m2/` 已物理删除，不能再运行或迁移成 FEM-only 新模型证据。Git 已跟踪
+历史仍可从删除前提交 `8f240cf38cb4db38f02b776d320562058439770f` 审计。
 
 ## 1.1 Paper 2 M0–M1 最新证据
 

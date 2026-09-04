@@ -1,6 +1,0 @@
-{
-  "frozen_dolfinx_cpu_container": "container_19_passed_4.36s",
-  "host": "host_19_passed_3.61s",
-  "pass": true,
-  "schema": "paper2_m2a_v02_t64_preflight_tests_v01"
-}
