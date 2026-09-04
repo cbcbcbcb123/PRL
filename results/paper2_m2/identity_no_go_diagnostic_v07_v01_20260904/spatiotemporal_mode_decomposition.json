@@ -1,0 +1,2410 @@
+{
+  "all_energy_closures_pass": true,
+  "maximum_parseval_relative_error": 4.1076386281334604e-16,
+  "maximum_spatial_orthogonality_closure_relative_error": 4.1316445308972675e-16,
+  "parseval_tolerance": 1e-12,
+  "record_count": 24,
+  "records": {
+    "ID-A2__endocardium_ecm__x": {
+      "case_id": "ID-A2",
+      "component": "x",
+      "full_component_difference": {
+        "absolute_difference_norm": 2.014495687270496e-05,
+        "dcm_norm": 0.00013548513094358578,
+        "fem_norm": 0.00015043001060138325,
+        "normalized_l2_difference": 0.1339158110284659,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "endocardium_ecm",
+      "record_id": "ID-A2__endocardium_ecm__x",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 0.0,
+        "dcm_energy_fractions": {
+          "heterogeneity": 1.0,
+          "mean": 2.0485288350685765e-18
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 1.0,
+          "mean": 1.6410930904596368e-17
+        },
+        "difference_localization": "heterogeneity",
+        "fem_energy_closure_relative_error": 0.0,
+        "fem_energy_fractions": {
+          "heterogeneity": 1.0,
+          "mean": 6.574569241528558e-19
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 2.0144956872704958e-05,
+          "dcm_norm": 0.00013548513094358578,
+          "fem_norm": 0.00015043001060138325,
+          "normalized_l2_difference": 0.1339158110284659,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 8.160804056786016e-14,
+          "dcm_norm": 1.939155677627866e-13,
+          "fem_norm": 1.2197424481184677e-13,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 1.681975486708265e-05,
+          "dcm_norm": 7.63893518394361e-05,
+          "fem_norm": 9.317408645449389e-05,
+          "normalized_l2_difference": 0.18051966493170177,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.31789403536030125,
+          "fundamental": 0.6821059646396986,
+          "higher_harmonics": 2.1428533454707388e-28
+        },
+        "dcm_parseval_relative_error": 0.0,
+        "difference_energy_shares": {
+          "dc": 0.6971185514593643,
+          "fundamental": 0.3028814485406356,
+          "higher_harmonics": 1.885365630635004e-26
+        },
+        "difference_localization": "dc",
+        "fem_energy_fractions": {
+          "dc": 0.3836377316005126,
+          "fundamental": 0.6163622683994874,
+          "higher_harmonics": 1.7337687100185708e-28
+        },
+        "fem_parseval_relative_error": 0.0,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 7.839487662289943e-06,
+          "absolute_phase_difference_rad": 0.0774632542905253,
+          "applicable": true,
+          "dcm_norm": 7.912296642679489e-05,
+          "fem_norm": 8.35098129051394e-05,
+          "fem_to_dcm_amplitude_ratio": 1.0554434025473913,
+          "normalized_complex_field_difference": 0.09387504760901555,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": -0.07737062984937075,
+            "real": 0.996805685743591
+          },
+          "weighted_complex_correlation_magnitude": 0.9998038755146127
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 1.1086709774066986e-05,
+          "dcm_norm": 0.0001118967722159644,
+          "fem_norm": 0.00011810071000168787,
+          "normalized_l2_difference": 0.09387504760901554,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 2.7660761680016594e-18,
+          "dcm_norm": 1.9832974802526947e-18,
+          "fem_norm": 1.980751833086517e-18,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-A2__endocardium_ecm__y": {
+      "case_id": "ID-A2",
+      "component": "y",
+      "full_component_difference": {
+        "absolute_difference_norm": 0.0004126616925391637,
+        "dcm_norm": 0.0004961130446541302,
+        "fem_norm": 0.00018493147569098305,
+        "normalized_l2_difference": 0.8317896434810631,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "endocardium_ecm",
+      "record_id": "ID-A2__endocardium_ecm__y",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 0.0,
+        "dcm_energy_fractions": {
+          "heterogeneity": 0.08213366237285563,
+          "mean": 0.9178663376271444
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.005585748042454303,
+          "mean": 0.9944142519575456
+        },
+        "difference_localization": "mean",
+        "fem_energy_closure_relative_error": 0.0,
+        "fem_energy_fractions": {
+          "heterogeneity": 0.8739942655990425,
+          "mean": 0.12600573440095764
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 3.084145270179764e-05,
+          "dcm_norm": 0.00014218089402306475,
+          "fem_norm": 0.00017288811005496617,
+          "normalized_l2_difference": 0.17838966885572546,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 0.0004115075664973003,
+          "dcm_norm": 0.00047530279449083086,
+          "fem_norm": 6.564565562827869e-05,
+          "normalized_l2_difference": 0.8657798171334732,
+          "status": "FINITE_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 2.5541481641124964e-05,
+          "dcm_norm": 0.00011832114155521943,
+          "fem_norm": 0.00014382056951517215,
+          "normalized_l2_difference": 0.17759268877342682,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.056880500519612937,
+          "fundamental": 0.943119499480387,
+          "higher_harmonics": 2.3499250336311244e-30
+        },
+        "dcm_parseval_relative_error": 0.0,
+        "difference_energy_shares": {
+          "dc": 0.0038309268841007563,
+          "fundamental": 0.9961690731158992,
+          "higher_harmonics": 3.771542097751338e-30
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.6048119144946613,
+          "fundamental": 0.3951880855053386,
+          "higher_harmonics": 1.964643645902437e-30
+        },
+        "fem_parseval_relative_error": 0.0,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 0.0002912364204601335,
+          "absolute_phase_difference_rad": 0.18266061771501685,
+          "applicable": true,
+          "dcm_norm": 0.0003406818607858809,
+          "fem_norm": 8.220491008928902e-05,
+          "fem_to_dcm_amplitude_ratio": 0.24129523626429566,
+          "normalized_complex_field_difference": 0.8548633020505194,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.12533012979645608,
+            "real": 0.6784885829500619
+          },
+          "weighted_complex_correlation_magnitude": 0.6899669547365146
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 0.00041187049567171396,
+          "dcm_norm": 0.00048179690797789545,
+          "fem_norm": 0.00011625529874193342,
+          "normalized_l2_difference": 0.8548633020505194,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 8.014079289635428e-19,
+          "dcm_norm": 7.605147654021351e-19,
+          "fem_norm": 2.592105831988407e-19,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-A2__myocardium_ecm__x": {
+      "case_id": "ID-A2",
+      "component": "x",
+      "full_component_difference": {
+        "absolute_difference_norm": 2.8492581300633183e-05,
+        "dcm_norm": 8.948880203007507e-05,
+        "fem_norm": 0.00011710736951504289,
+        "normalized_l2_difference": 0.24330305956512158,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "myocardium_ecm",
+      "record_id": "ID-A2__myocardium_ecm__x",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 4.1316445308972675e-16,
+        "dcm_energy_fractions": {
+          "heterogeneity": 1.0000000000000004,
+          "mean": 9.51283258253896e-17
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.9999999999999988,
+          "mean": 1.3236166755127466e-15
+        },
+        "difference_localization": "heterogeneity",
+        "fem_energy_closure_relative_error": 0.0,
+        "fem_energy_fractions": {
+          "heterogeneity": 1.0,
+          "mean": 2.0562615858181417e-18
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 2.8492581300633166e-05,
+          "dcm_norm": 8.948880203007508e-05,
+          "fem_norm": 0.00011710736951504289,
+          "normalized_l2_difference": 0.24330305956512144,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 1.036604073513257e-12,
+          "dcm_norm": 8.728178533759733e-13,
+          "fem_norm": 1.6792811268115568e-13,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 2.2301552757215e-05,
+          "dcm_norm": 6.507878764141417e-05,
+          "fem_norm": 8.694800572298449e-05,
+          "normalized_l2_difference": 0.25649297613872285,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.5288609722365507,
+          "fundamental": 0.47113902776344946,
+          "higher_harmonics": 3.633588985798383e-28
+        },
+        "dcm_parseval_relative_error": 2.0658222654486338e-16,
+        "difference_energy_shares": {
+          "dc": 0.6126417814231883,
+          "fundamental": 0.38735821857681174,
+          "higher_harmonics": 7.158457842674396e-27
+        },
+        "difference_localization": "dc",
+        "fem_energy_fractions": {
+          "dc": 0.5512527877882868,
+          "fundamental": 0.4487472122117133,
+          "higher_harmonics": 2.1059444471698984e-28
+        },
+        "fem_parseval_relative_error": 1.2063182294104766e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 1.2539296905934318e-05,
+          "absolute_phase_difference_rad": 0.03619397726313919,
+          "applicable": true,
+          "dcm_norm": 4.343384099928124e-05,
+          "fem_norm": 5.547152555829275e-05,
+          "fem_to_dcm_amplitude_ratio": 1.27714989699416,
+          "normalized_complex_field_difference": 0.22604925283255975,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.03611715117952751,
+            "real": 0.9974416001723513
+          },
+          "weighted_complex_correlation_magnitude": 0.9980952832088255
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 1.7733243746995303e-05,
+          "dcm_norm": 6.14247270071401e-05,
+          "fem_norm": 7.84485837700634e-05,
+          "normalized_l2_difference": 0.22604925283255975,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 2.41069091947374e-18,
+          "dcm_norm": 1.7058333251027488e-18,
+          "fem_norm": 1.6994472202995998e-18,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-A2__myocardium_ecm__y": {
+      "case_id": "ID-A2",
+      "component": "y",
+      "full_component_difference": {
+        "absolute_difference_norm": 0.00048064301090074054,
+        "dcm_norm": 0.0005921171910229807,
+        "fem_norm": 0.00043906268862811,
+        "normalized_l2_difference": 0.8117362883356756,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "myocardium_ecm",
+      "record_id": "ID-A2__myocardium_ecm__y",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 1.5099583930765396e-16,
+        "dcm_energy_fractions": {
+          "heterogeneity": 0.3633126876484844,
+          "mean": 0.6366873123515159
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.0278334972792908,
+          "mean": 0.9721665027207093
+        },
+        "difference_localization": "mean",
+        "fem_energy_closure_relative_error": 1.3730844858926795e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 0.9843687571461351,
+          "mean": 0.015631242853864653
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 8.018747180040324e-05,
+          "dcm_norm": 0.0003569011542493851,
+          "fem_norm": 0.0004356176251905436,
+          "normalized_l2_difference": 0.18407765701704198,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 0.00047390681921026306,
+          "dcm_norm": 0.0004724662252483258,
+          "fem_norm": 5.4893799000394504e-05,
+          "normalized_l2_difference": 1.0030490940620784,
+          "status": "FINITE_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 6.482687984846108e-05,
+          "dcm_norm": 0.0002904814851478329,
+          "fem_norm": 0.0003541326604285798,
+          "normalized_l2_difference": 0.183058178734506,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.2406697862595527,
+          "fundamental": 0.7593302137404473,
+          "higher_harmonics": 2.3198070732720563e-30
+        },
+        "dcm_parseval_relative_error": 0.0,
+        "difference_energy_shares": {
+          "dc": 0.018191351915615564,
+          "fundamental": 0.9818086480843844,
+          "higher_harmonics": 1.3763546385061438e-29
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.650547330598045,
+          "fundamental": 0.3494526694019549,
+          "higher_harmonics": 1.2129469172614987e-29
+        },
+        "fem_parseval_relative_error": 0.0,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 0.0003367604338226528,
+          "absolute_phase_difference_rad": 0.44585622956843085,
+          "applicable": true,
+          "dcm_norm": 0.0003648446756437967,
+          "fem_norm": 0.00018352943001480833,
+          "fem_to_dcm_amplitude_ratio": 0.5030344205817351,
+          "normalized_complex_field_difference": 0.9230241149289432,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": -0.1905369498196509,
+            "real": 0.3986507633869515
+          },
+          "weighted_complex_correlation_magnitude": 0.44184472430433674
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 0.0004762511727826427,
+          "dcm_norm": 0.0005159682884550701,
+          "fem_norm": 0.00025954980902154575,
+          "normalized_l2_difference": 0.9230241149289432,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 1.783149708740041e-18,
+          "dcm_norm": 9.018485354507443e-19,
+          "fem_norm": 1.529140637590739e-18,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-C0__endocardium_ecm__x": {
+      "case_id": "ID-C0",
+      "component": "x",
+      "full_component_difference": {
+        "absolute_difference_norm": 5.695594327071111e-06,
+        "dcm_norm": 0.00010842875572945417,
+        "fem_norm": 0.00011247290500713881,
+        "normalized_l2_difference": 0.05063970141706221,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "endocardium_ecm",
+      "record_id": "ID-C0__endocardium_ecm__x",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 2.81430647619764e-16,
+        "dcm_energy_fractions": {
+          "heterogeneity": 0.9999999999999969,
+          "mean": 2.8544275148626757e-15
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.9999999999992722,
+          "mean": 7.277155310893176e-13
+        },
+        "difference_localization": "heterogeneity",
+        "fem_energy_closure_relative_error": 1.3077794767783708e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 0.9999999999999946,
+          "mean": 5.6727179603365e-15
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 5.6955943270690395e-06,
+          "dcm_norm": 0.000108428755729454,
+          "fem_norm": 0.0001124729050071385,
+          "normalized_l2_difference": 0.050639701417043936,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 4.858697609092689e-12,
+          "dcm_norm": 5.7930060703975504e-12,
+          "fem_norm": 8.47117216465505e-12,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 2.3071945559325493e-06,
+          "dcm_norm": 4.6021029616310854e-05,
+          "fem_norm": 4.824703677318424e-05,
+          "normalized_l2_difference": 0.04782044059574019,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.18014562255347072,
+          "fundamental": 0.8198543774465293,
+          "higher_harmonics": 2.115958017398584e-28
+        },
+        "dcm_parseval_relative_error": 0.0,
+        "difference_energy_shares": {
+          "dc": 0.16409310730306823,
+          "fundamental": 0.8359068926969319,
+          "higher_harmonics": 1.3503713226632885e-25
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.18401171171605585,
+          "fundamental": 0.8159882882839442,
+          "higher_harmonics": 1.5238230895513212e-28
+        },
+        "fem_parseval_relative_error": 0.0,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 3.682162952643448e-06,
+          "absolute_phase_difference_rad": 0.03395641229955157,
+          "applicable": true,
+          "dcm_norm": 6.942211427957333e-05,
+          "fem_norm": 7.184141494761876e-05,
+          "fem_to_dcm_amplitude_ratio": 1.0348491355118132,
+          "normalized_complex_field_difference": 0.05125404274579222,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": -0.033943228592539766,
+            "real": 0.9992275198823382
+          },
+          "weighted_complex_correlation_magnitude": 0.999803870395336
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 5.207364786496125e-06,
+          "dcm_norm": 9.817769554278751e-05,
+          "fem_norm": 0.00010159910335899564,
+          "normalized_l2_difference": 0.051254042745792226,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 2.0929827645740684e-18,
+          "dcm_norm": 1.5772407801360683e-18,
+          "fem_norm": 1.3884018619006302e-18,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-C0__endocardium_ecm__y": {
+      "case_id": "ID-C0",
+      "component": "y",
+      "full_component_difference": {
+        "absolute_difference_norm": 0.0004248402236555689,
+        "dcm_norm": 0.042922957226814724,
+        "fem_norm": 0.04287816060250651,
+        "normalized_l2_difference": 0.009897738904861937,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "endocardium_ecm",
+      "record_id": "ID-C0__endocardium_ecm__y",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 3.5308742643445033e-16,
+        "dcm_energy_fractions": {
+          "heterogeneity": 5.355077195120166e-06,
+          "mean": 0.9999946449228052
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.001199872582804523,
+          "mean": 0.9988001274171955
+        },
+        "difference_localization": "mean",
+        "fem_energy_closure_relative_error": 2.3588372166774644e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 6.7223452817704165e-06,
+          "mean": 0.999993277654718
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 1.4716115701270694e-05,
+          "dcm_norm": 9.932818582612331e-05,
+          "fem_norm": 0.00011117229069881697,
+          "normalized_l2_difference": 0.13237215504661085,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 0.0004245852700864458,
+          "dcm_norm": 0.04292284229878617,
+          "fem_norm": 0.04287801648136399,
+          "normalized_l2_difference": 0.009891825595586263,
+          "status": "FINITE_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 3.2932959670034556e-06,
+          "dcm_norm": 0.04000006332291704,
+          "fem_norm": 0.040000069098947606,
+          "normalized_l2_difference": 8.233225694827866e-05,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.8684445350930071,
+          "fundamental": 0.13155546490699294,
+          "higher_harmonics": 3.48299723613168e-31
+        },
+        "dcm_parseval_relative_error": 1.1769580881148343e-16,
+        "difference_energy_shares": {
+          "dc": 6.0091115627493214e-05,
+          "fundamental": 0.9999399088843725,
+          "higher_harmonics": 7.615415784747677e-27
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.8702603356476869,
+          "fundamental": 0.12973966435231307,
+          "higher_harmonics": 3.953428059934789e-31
+        },
+        "fem_parseval_relative_error": 0.0,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 0.0003003983770240673,
+          "absolute_phase_difference_rad": 0.02618622975360455,
+          "applicable": true,
+          "dcm_norm": 0.011008523771550694,
+          "fem_norm": 0.010920877454072959,
+          "fem_to_dcm_amplitude_ratio": 0.9920383223675967,
+          "normalized_complex_field_difference": 0.027287798369513106,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": -0.026183223721534633,
+            "real": 0.9996566485317288
+          },
+          "weighted_complex_correlation_magnitude": 0.9999994880789391
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 0.00042482745890230235,
+          "dcm_norm": 0.015568403619433608,
+          "fem_norm": 0.015444453008564535,
+          "normalized_l2_difference": 0.027287798369513106,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 3.7074255511458907e-17,
+          "dcm_norm": 2.5331808745854176e-17,
+          "fem_norm": 2.6960197342816253e-17,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-C0__myocardium_ecm__x": {
+      "case_id": "ID-C0",
+      "component": "x",
+      "full_component_difference": {
+        "absolute_difference_norm": 1.6170195449770917e-05,
+        "dcm_norm": 6.664617833460415e-05,
+        "fem_norm": 8.112721963954764e-05,
+        "normalized_l2_difference": 0.1993189896266126,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "myocardium_ecm",
+      "record_id": "ID-C0__myocardium_ecm__x",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 3.724601731017013e-16,
+        "dcm_energy_fractions": {
+          "heterogeneity": 0.9999999999998312,
+          "mean": 1.6842438754350782e-13
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.9999999999925171,
+          "mean": 7.482834859343371e-12
+        },
+        "difference_localization": "heterogeneity",
+        "fem_energy_closure_relative_error": 1.2568028658974053e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 0.9999999999999508,
+          "mean": 4.923920339154479e-14
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 1.6170195449710415e-05,
+          "dcm_norm": 6.664617833459852e-05,
+          "fem_norm": 8.112721963954564e-05,
+          "normalized_l2_difference": 0.19931898962587172,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 4.423319904419922e-11,
+          "dcm_norm": 2.7351285276123907e-11,
+          "fem_norm": 1.8002055709305498e-11,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 6.30764196220362e-06,
+          "dcm_norm": 3.920680696460393e-05,
+          "fem_norm": 4.5023125361610455e-05,
+          "normalized_l2_difference": 0.14009782554060343,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.34607676866712167,
+          "fundamental": 0.6539232313328781,
+          "higher_harmonics": 3.444769727524691e-28
+        },
+        "dcm_parseval_relative_error": 1.8623008655085065e-16,
+        "difference_energy_shares": {
+          "dc": 0.1521610613383294,
+          "fundamental": 0.8478389386616705,
+          "higher_harmonics": 1.1021355328011167e-26
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.30799104799644217,
+          "fundamental": 0.6920089520035578,
+          "higher_harmonics": 1.8967607446700486e-28
+        },
+        "fem_parseval_relative_error": 0.0,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 1.0528268465432485e-05,
+          "absolute_phase_difference_rad": 0.07970102148352191,
+          "applicable": true,
+          "dcm_norm": 3.810865632797976e-05,
+          "fem_norm": 4.772077089232797e-05,
+          "fem_to_dcm_amplitude_ratio": 1.25222916498609,
+          "normalized_complex_field_difference": 0.22062234680129833,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.0794650206231786,
+            "real": 0.9949268806661924
+          },
+          "weighted_complex_correlation_magnitude": 0.9980952797077051
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 1.4889220052119593e-05,
+          "dcm_norm": 5.3893778622844247e-05,
+          "fem_norm": 6.748736140282944e-05,
+          "normalized_l2_difference": 0.22062234680129833,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 1.6975898558929007e-18,
+          "dcm_norm": 1.2369591253997446e-18,
+          "fem_norm": 1.1173078980253729e-18,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-C0__myocardium_ecm__y": {
+      "case_id": "ID-C0",
+      "component": "y",
+      "full_component_difference": {
+        "absolute_difference_norm": 0.00048608755371178336,
+        "dcm_norm": 0.04264277101676749,
+        "fem_norm": 0.04262374283751333,
+        "normalized_l2_difference": 0.011399061133261008,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "myocardium_ecm",
+      "record_id": "ID-C0__myocardium_ecm__y",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 1.1924754099924857e-16,
+        "dcm_energy_fractions": {
+          "heterogeneity": 3.5045544934290564e-05,
+          "mean": 0.9999649544550658
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.006764884800487458,
+          "mean": 0.9932351151995126
+        },
+        "difference_localization": "mean",
+        "fem_energy_closure_relative_error": 0.0,
+        "fem_energy_fractions": {
+          "heterogeneity": 4.472336954229115e-05,
+          "mean": 0.9999552766304577
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 3.9980176198030694e-05,
+          "dcm_norm": 0.00025244212480831274,
+          "fem_norm": 0.0002850485533522973,
+          "normalized_l2_difference": 0.14025742536787542,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 0.00048444060047097545,
+          "dcm_norm": 0.042642023790646806,
+          "fem_norm": 0.0426227896881551,
+          "normalized_l2_difference": 0.01136063810782906,
+          "status": "FINITE_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 1.082881159113033e-05,
+          "dcm_norm": 0.04000038259651872,
+          "fem_norm": 0.04000042008219237,
+          "normalized_l2_difference": 0.0002707174466887953,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.8799083803455867,
+          "fundamental": 0.12009161965441338,
+          "higher_harmonics": 3.947150171713453e-31
+        },
+        "dcm_parseval_relative_error": 1.1924754099924857e-16,
+        "difference_energy_shares": {
+          "dc": 0.0004962866499948983,
+          "fundamental": 0.9995037133500051,
+          "higher_harmonics": 6.24846319390906e-27
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.8806958273911984,
+          "fundamental": 0.11930417260880173,
+          "higher_harmonics": 4.229975649256317e-31
+        },
+        "fem_parseval_relative_error": 1.1935403423117468e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 0.00034363050411236013,
+          "absolute_phase_difference_rad": 0.03261572303240938,
+          "applicable": true,
+          "dcm_norm": 0.010449289739513123,
+          "fem_norm": 0.010410327726027893,
+          "fem_to_dcm_amplitude_ratio": 0.9962713242281053,
+          "normalized_complex_field_difference": 0.03288553697702054,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": -0.03260981242813633,
+            "real": 0.9994642245072737
+          },
+          "weighted_complex_correlation_magnitude": 0.9999960679605316
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 0.0004859669193608033,
+          "dcm_norm": 0.014777527266785485,
+          "fem_norm": 0.014722426658897309,
+          "normalized_l2_difference": 0.03288553697702054,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 3.842387042530441e-17,
+          "dcm_norm": 2.6790896288342485e-17,
+          "fem_norm": 2.772174195137405e-17,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-CQ__endocardium_ecm__x": {
+      "case_id": "ID-CQ",
+      "component": "x",
+      "full_component_difference": {
+        "absolute_difference_norm": 1.1511646878524607e-05,
+        "dcm_norm": 0.00010723561013086173,
+        "fem_norm": 0.0001099207502590914,
+        "normalized_l2_difference": 0.10472678590157725,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "endocardium_ecm",
+      "record_id": "ID-CQ__endocardium_ecm__x",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 1.4386405202959272e-16,
+        "dcm_energy_fractions": {
+          "heterogeneity": 0.9999999999999964,
+          "mean": 3.4020710235165004e-15
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.9999999999998521,
+          "mean": 1.4782191454549963e-13
+        },
+        "difference_localization": "heterogeneity",
+        "fem_energy_closure_relative_error": 2.738425752088974e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 0.9999999999999933,
+          "mean": 6.5008270508383044e-15
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 1.1511646878523754e-05,
+          "dcm_norm": 0.00010723561013086154,
+          "fem_norm": 0.00010992075025909104,
+          "normalized_l2_difference": 0.10472678590156984,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 4.425953741278607e-12,
+          "dcm_norm": 6.254760935308335e-12,
+          "fem_norm": 8.862657987006133e-12,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 2.3071945559325362e-06,
+          "dcm_norm": 4.602102961631088e-05,
+          "fem_norm": 4.824703677318424e-05,
+          "normalized_l2_difference": 0.04782044059573992,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.18417666615294306,
+          "fundamental": 0.8158233338470567,
+          "higher_harmonics": 2.1144561399943807e-28
+        },
+        "dcm_parseval_relative_error": 1.4386405202959272e-16,
+        "difference_energy_shares": {
+          "dc": 0.040169231065561514,
+          "fundamental": 0.9598307689344385,
+          "higher_harmonics": 3.410148509730631e-26
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.19265572636548411,
+          "fundamental": 0.8073442736345156,
+          "higher_harmonics": 1.5607380360226838e-28
+        },
+        "fem_parseval_relative_error": 4.1076386281334604e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 7.974799907738143e-06,
+          "absolute_phase_difference_rad": 0.11197687649817717,
+          "applicable": true,
+          "dcm_norm": 6.848919956165647e-05,
+          "fem_norm": 6.983836617550754e-05,
+          "fem_to_dcm_amplitude_ratio": 1.019698968924823,
+          "normalized_complex_field_difference": 0.11418938249066488,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": -0.11172109770968891,
+            "real": 0.9935422393556281
+          },
+          "weighted_complex_correlation_magnitude": 0.999803873295785
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 1.1278070186734989e-05,
+          "dcm_norm": 9.685835489617202e-05,
+          "fem_norm": 9.876636461938117e-05,
+          "normalized_l2_difference": 0.1141893824906649,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 2.125808334405936e-18,
+          "dcm_norm": 1.5593311965187728e-18,
+          "fem_norm": 1.3732344541056106e-18,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-CQ__endocardium_ecm__y": {
+      "case_id": "ID-CQ",
+      "component": "y",
+      "full_component_difference": {
+        "absolute_difference_norm": 0.00042775134957377816,
+        "dcm_norm": 0.04305509341767516,
+        "fem_norm": 0.04290213525418515,
+        "normalized_l2_difference": 0.009934976691937122,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "endocardium_ecm",
+      "record_id": "ID-CQ__endocardium_ecm__y",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 0.0,
+        "dcm_energy_fractions": {
+          "heterogeneity": 5.2533511554484535e-06,
+          "mean": 0.9999947466488446
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.0008575121978047707,
+          "mean": 0.9991424878021953
+        },
+        "difference_localization": "mean",
+        "fem_energy_closure_relative_error": 1.1781008068127674e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 6.511298562579011e-06,
+          "mean": 0.9999934887014373
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 1.2525975031030974e-05,
+          "dcm_norm": 9.868309271505908e-05,
+          "fem_norm": 0.00010947443499946976,
+          "normalized_l2_difference": 0.11441917951978144,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 0.00042756790923982,
+          "dcm_norm": 0.043054980325764255,
+          "fem_norm": 0.04290199557965198,
+          "normalized_l2_difference": 0.009930742181386199,
+          "status": "FINITE_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 3.2932959670039613e-06,
+          "dcm_norm": 0.04000006332291704,
+          "fem_norm": 0.040000069098947606,
+          "normalized_l2_difference": 8.233225694829131e-05,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.8631221978179423,
+          "fundamental": 0.13687780218205772,
+          "higher_harmonics": 3.261384062507541e-31
+        },
+        "dcm_parseval_relative_error": 1.1697449989071376e-16,
+        "difference_energy_shares": {
+          "dc": 5.927598067295062e-05,
+          "fundamental": 0.9999407240193271,
+          "higher_harmonics": 6.932926300888774e-27
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.8692879663886343,
+          "fundamental": 0.1307120336113655,
+          "higher_harmonics": 3.6500189905280807e-31
+        },
+        "fem_parseval_relative_error": 2.356201613625535e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 0.0003024569153316407,
+          "absolute_phase_difference_rad": 0.005642991197141079,
+          "applicable": true,
+          "dcm_norm": 0.011263569668789773,
+          "fem_norm": 0.010967854882514923,
+          "fem_to_dcm_amplitude_ratio": 0.9737459087154008,
+          "normalized_complex_field_difference": 0.026852669644306337,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.005642958984645568,
+            "real": 0.999983677180278
+          },
+          "weighted_complex_correlation_magnitude": 0.9999995988064659
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 0.0004277386716955372,
+          "dcm_norm": 0.015929092986336726,
+          "fem_norm": 0.015510889124992575,
+          "normalized_l2_difference": 0.026852669644306337,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 3.5616372121204e-17,
+          "dcm_norm": 2.4588130427342398e-17,
+          "fem_norm": 2.5919491059879388e-17,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-CQ__myocardium_ecm__x": {
+      "case_id": "ID-CQ",
+      "component": "x",
+      "full_component_difference": {
+        "absolute_difference_norm": 1.4413295685542509e-05,
+        "dcm_norm": 6.606188630402344e-05,
+        "fem_norm": 7.956878645547711e-05,
+        "normalized_l2_difference": 0.18114258527252391,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "myocardium_ecm",
+      "record_id": "ID-CQ__myocardium_ecm__x",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 1.8953892210100065e-16,
+        "dcm_energy_fractions": {
+          "heterogeneity": 0.9999999999998266,
+          "mean": 1.736804112156282e-13
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.9999999999905368,
+          "mean": 9.463186819655735e-12
+        },
+        "difference_localization": "heterogeneity",
+        "fem_energy_closure_relative_error": 1.306516437280757e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 0.9999999999999489,
+          "mean": 5.117208972500442e-14
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 1.441329568547431e-05,
+          "dcm_norm": 6.60618863040177e-05,
+          "fem_norm": 7.956878645547508e-05,
+          "normalized_l2_difference": 0.18114258527167146,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 4.433860276327132e-11,
+          "dcm_norm": 2.7531279126640104e-11,
+          "fem_norm": 1.7999453150856806e-11,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 6.307641962203631e-06,
+          "dcm_norm": 3.920680696460392e-05,
+          "fem_norm": 4.5023125361610475e-05,
+          "normalized_l2_difference": 0.14009782554060363,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.3522256736934537,
+          "fundamental": 0.6477743263065463,
+          "higher_harmonics": 3.4853781499564837e-28
+        },
+        "dcm_parseval_relative_error": 0.0,
+        "difference_energy_shares": {
+          "dc": 0.19151706389340745,
+          "fundamental": 0.8084829361065925,
+          "higher_harmonics": 1.339610675172839e-26
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.32017381377894366,
+          "fundamental": 0.6798261862210566,
+          "higher_harmonics": 2.0547578831909955e-28
+        },
+        "fem_parseval_relative_error": 2.613032874561514e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 9.16397144789109e-06,
+          "absolute_phase_difference_rad": 0.0016798445328085432,
+          "applicable": true,
+          "dcm_norm": 3.7596536474029124e-05,
+          "fem_norm": 4.63902466078271e-05,
+          "fem_to_dcm_amplitude_ratio": 1.2338968149332712,
+          "normalized_complex_field_difference": 0.197540908229294,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.001676644096245484,
+            "real": 0.9980938630952717
+          },
+          "weighted_complex_correlation_magnitude": 0.9980952713463122
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 1.2959812706807387e-05,
+          "dcm_norm": 5.316953177982673e-05,
+          "fem_norm": 6.560571591462155e-05,
+          "normalized_l2_difference": 0.197540908229294,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 1.6682172053773697e-18,
+          "dcm_norm": 1.233320420514964e-18,
+          "fem_norm": 1.1405729356702273e-18,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-CQ__myocardium_ecm__y": {
+      "case_id": "ID-CQ",
+      "component": "y",
+      "full_component_difference": {
+        "absolute_difference_norm": 0.0004926632708612658,
+        "dcm_norm": 0.04277349360264043,
+        "fem_norm": 0.042602245496908275,
+        "normalized_l2_difference": 0.011517957252639597,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "myocardium_ecm",
+      "record_id": "ID-CQ__myocardium_ecm__y",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 1.185197759571061e-16,
+        "dcm_energy_fractions": {
+          "heterogeneity": 3.4348663162161765e-05,
+          "mean": 0.9999656513368379
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.005225156144201911,
+          "mean": 0.9947748438557982
+        },
+        "difference_localization": "mean",
+        "fem_energy_closure_relative_error": 0.0,
+        "fem_energy_fractions": {
+          "heterogeneity": 4.332564049111078e-05,
+          "mean": 0.9999566743595089
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 3.561228353109036e-05,
+          "dcm_norm": 0.0002506857473863355,
+          "fem_norm": 0.0002804174182516595,
+          "normalized_l2_difference": 0.12699740177741117,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 0.0004913744638434339,
+          "dcm_norm": 0.04277275899017013,
+          "fem_norm": 0.04260132260212566,
+          "normalized_l2_difference": 0.011488023579595594,
+          "status": "FINITE_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 1.08288115911312e-05,
+          "dcm_norm": 0.04000038259651872,
+          "fem_norm": 0.04000042008219237,
+          "normalized_l2_difference": 0.00027071744668881703,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.8745383194274522,
+          "fundamental": 0.12546168057254795,
+          "higher_harmonics": 4.006017188206332e-31
+        },
+        "dcm_parseval_relative_error": 1.185197759571061e-16,
+        "difference_energy_shares": {
+          "dc": 0.0004831269046239434,
+          "fundamental": 0.9995168730953761,
+          "higher_harmonics": 5.9679663187048106e-27
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.8815848601031862,
+          "fundamental": 0.11841513989681382,
+          "higher_harmonics": 4.085141853827692e-31
+        },
+        "fem_parseval_relative_error": 0.0,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 0.0003482813771185913,
+          "absolute_phase_difference_rad": 0.001256059812244359,
+          "applicable": true,
+          "dcm_norm": 0.010713102891021927,
+          "fem_norm": 0.010366236410264398,
+          "fem_to_dcm_amplitude_ratio": 0.9676222207248454,
+          "normalized_complex_field_difference": 0.03250985084913794,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.0012560549106087392,
+            "real": 0.9999955717162858
+          },
+          "weighted_complex_correlation_magnitude": 0.9999963605564371
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 0.0004925442470430903,
+          "dcm_norm": 0.015150615403581622,
+          "fem_norm": 0.014660072122161699,
+          "normalized_l2_difference": 0.03250985084913794,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 3.8059525332792875e-17,
+          "dcm_norm": 2.7072672379148615e-17,
+          "fem_norm": 2.7229273963190022e-17,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-LN__endocardium_ecm__x": {
+      "case_id": "ID-LN",
+      "component": "x",
+      "full_component_difference": {
+        "absolute_difference_norm": 1.5996300336877205e-05,
+        "dcm_norm": 3.7580370295012666e-05,
+        "fem_norm": 5.30586993331585e-05,
+        "normalized_l2_difference": 0.30148308454445055,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "endocardium_ecm",
+      "record_id": "ID-LN__endocardium_ecm__x",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 1.464260157582543e-16,
+        "dcm_energy_fractions": {
+          "heterogeneity": 0.9999999999999586,
+          "mean": 4.1346474065165975e-14
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.99999999999993,
+          "mean": 7.010090583754027e-14
+        },
+        "difference_localization": "heterogeneity",
+        "fem_energy_closure_relative_error": 1.4691195972362172e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 0.999999999999969,
+          "mean": 3.0924887709437796e-14
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 1.5996300336876646e-05,
+          "dcm_norm": 3.758037029501189e-05,
+          "fem_norm": 5.305869933315768e-05,
+          "normalized_l2_difference": 0.30148308454444467,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 4.2352725605748816e-12,
+          "dcm_norm": 7.641529516450372e-12,
+          "fem_norm": 9.330623493708226e-12,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 1.4566475086358392e-05,
+          "dcm_norm": 3.0368318222639044e-05,
+          "fem_norm": 4.4927064880383914e-05,
+          "normalized_l2_difference": 0.3242249438092809,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.6530093100913901,
+          "fundamental": 0.34699068990861004,
+          "higher_harmonics": 3.4846422531913486e-28
+        },
+        "dcm_parseval_relative_error": 1.464260157582543e-16,
+        "difference_energy_shares": {
+          "dc": 0.8292201399103782,
+          "fundamental": 0.17077986008962173,
+          "higher_harmonics": 5.395668424889894e-27
+        },
+        "difference_localization": "dc",
+        "fem_energy_fractions": {
+          "dc": 0.7169731536766509,
+          "fundamental": 0.28302684632334907,
+          "higher_harmonics": 3.2609516671836763e-28
+        },
+        "fem_parseval_relative_error": 0.0,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 4.674367766130413e-06,
+          "absolute_phase_difference_rad": 0.10095906350905536,
+          "applicable": true,
+          "dcm_norm": 1.5653266110285094e-05,
+          "fem_norm": 1.9959764730079967e-05,
+          "fem_to_dcm_amplitude_ratio": 1.2751182142725637,
+          "normalized_complex_field_difference": 0.23418952223850614,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": -0.10076787784957549,
+            "real": 0.9947128550412915
+          },
+          "weighted_complex_correlation_magnitude": 0.9998038953668386
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 6.610554290381259e-06,
+          "dcm_norm": 2.2137061228600327e-05,
+          "fem_norm": 2.822736998305525e-05,
+          "normalized_l2_difference": 0.23418952223850617,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 1.175011660218418e-18,
+          "dcm_norm": 7.015201569902721e-19,
+          "fem_norm": 9.581395791874345e-19,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-LN__endocardium_ecm__y": {
+      "case_id": "ID-LN",
+      "component": "y",
+      "full_component_difference": {
+        "absolute_difference_norm": 3.11000911884547e-05,
+        "dcm_norm": 0.04288499320677329,
+        "fem_norm": 0.042878370565340065,
+        "normalized_l2_difference": 0.0007251975309522196,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "endocardium_ecm",
+      "record_id": "ID-LN__endocardium_ecm__y",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 1.1790428191380234e-16,
+        "dcm_energy_fractions": {
+          "heterogeneity": 1.3353470090490408e-06,
+          "mean": 0.9999986646529908
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.5707379676939774,
+          "mean": 0.4292620323060226
+        },
+        "difference_localization": "UNRESOLVED_MIXTURE",
+        "fem_energy_closure_relative_error": 1.1794070578314067e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 2.901740354927431e-06,
+          "mean": 0.9999970982596449
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 2.349524860305225e-05,
+          "dcm_norm": 4.955670408461153e-05,
+          "fem_norm": 7.304114086217406e-05,
+          "normalized_l2_difference": 0.32167143510787866,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 2.0376186223408174e-05,
+          "dcm_norm": 0.04288496457359002,
+          "fem_norm": 0.04287830835434582,
+          "normalized_l2_difference": 0.0004751358996331433,
+          "status": "FINITE_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 2.2318646051964373e-05,
+          "dcm_norm": 0.040000027454436614,
+          "fem_norm": 0.04000005988135533,
+          "normalized_l2_difference": 0.0005579653160061256,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.8699812397043759,
+          "fundamental": 0.13001876029562376,
+          "higher_harmonics": 3.995717358551109e-31
+        },
+        "dcm_parseval_relative_error": 3.53712845741407e-16,
+        "difference_energy_shares": {
+          "dc": 0.5150060902123308,
+          "fundamental": 0.48499390978766926,
+          "higher_harmonics": 1.5025785816325727e-24
+        },
+        "difference_localization": "UNRESOLVED_MIXTURE",
+        "fem_energy_fractions": {
+          "dc": 0.8702514117675588,
+          "fundamental": 0.1297485882324413,
+          "higher_harmonics": 4.103833811065624e-31
+        },
+        "fem_parseval_relative_error": 1.1794070578314067e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 1.5314922630188767e-05,
+          "absolute_phase_difference_rad": 0.0005569197391614669,
+          "applicable": true,
+          "dcm_norm": 0.01093435974324303,
+          "fem_norm": 0.01092130651127897,
+          "fem_to_dcm_amplitude_ratio": 0.9988062189034774,
+          "normalized_complex_field_difference": 0.00140062362953192,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": -0.0005569196471300346,
+            "real": 0.9999997313626833
+          },
+          "weighted_complex_correlation_magnitude": 0.9999998864424595
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 2.1658571290307573e-05,
+          "dcm_norm": 0.015463519844760687,
+          "fem_norm": 0.015445059787084311,
+          "normalized_l2_difference": 0.0014006236295319191,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 3.8122402238863124e-17,
+          "dcm_norm": 2.7108327625514383e-17,
+          "fem_norm": 2.7468386896207746e-17,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-LN__myocardium_ecm__x": {
+      "case_id": "ID-LN",
+      "component": "x",
+      "full_component_difference": {
+        "absolute_difference_norm": 1.7487041687422195e-05,
+        "dcm_norm": 2.8583721289962623e-05,
+        "fem_norm": 4.5926693852963095e-05,
+        "normalized_l2_difference": 0.3807598636080347,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "myocardium_ecm",
+      "record_id": "ID-LN__myocardium_ecm__x",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 0.0,
+        "dcm_energy_fractions": {
+          "heterogeneity": 0.9999999999991614,
+          "mean": 8.384959650627717e-13
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.999999999993471,
+          "mean": 6.529024885278589e-12
+        },
+        "difference_localization": "heterogeneity",
+        "fem_energy_closure_relative_error": 1.960830193321355e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 0.9999999999998163,
+          "mean": 1.8351729165335474e-13
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 1.7487041687365108e-05,
+          "dcm_norm": 2.858372128995064e-05,
+          "fem_norm": 4.592669385295888e-05,
+          "normalized_l2_difference": 0.3807598636068267,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 4.468281310941911e-11,
+          "dcm_norm": 2.617394931590766e-11,
+          "fem_norm": 1.9674498833008553e-11,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 1.616651933971069e-05,
+          "dcm_norm": 2.5871990727637936e-05,
+          "fem_norm": 4.1924882147498536e-05,
+          "normalized_l2_difference": 0.3856067927116468,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.8192607650650013,
+          "fundamental": 0.18073923493499852,
+          "higher_harmonics": 4.318910788818674e-28
+        },
+        "dcm_parseval_relative_error": 1.2655311014743816e-16,
+        "difference_energy_shares": {
+          "dc": 0.8546737422985011,
+          "fundamental": 0.14532625770149885,
+          "higher_harmonics": 3.0831021565757553e-27
+        },
+        "difference_localization": "dc",
+        "fem_energy_fractions": {
+          "dc": 0.8333229361044657,
+          "fundamental": 0.16667706389553405,
+          "higher_harmonics": 2.7393673906991083e-28
+        },
+        "fem_parseval_relative_error": 1.960830193321355e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 4.713824318767186e-06,
+          "absolute_phase_difference_rad": 0.012698495907349217,
+          "applicable": true,
+          "dcm_norm": 8.592706749659245e-06,
+          "fem_norm": 1.3258308059140813e-05,
+          "fem_to_dcm_amplitude_ratio": 1.5429722490723412,
+          "normalized_complex_field_difference": 0.355537395702409,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.012673969359761266,
+            "real": 0.9980148996742881
+          },
+          "weighted_complex_correlation_magnitude": 0.9980953709296579
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 6.66635428224467e-06,
+          "dcm_norm": 1.215192242286294e-05,
+          "fem_norm": 1.8750079071357445e-05,
+          "normalized_l2_difference": 0.35553739570240905,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 9.709800410453134e-19,
+          "dcm_norm": 5.940265897384873e-19,
+          "fem_norm": 7.601342889506071e-19,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-LN__myocardium_ecm__y": {
+      "case_id": "ID-LN",
+      "component": "y",
+      "full_component_difference": {
+        "absolute_difference_norm": 6.22830618435149e-05,
+        "dcm_norm": 0.0426104348369546,
+        "fem_norm": 0.04260445201994049,
+        "normalized_l2_difference": 0.0014616856664766747,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "myocardium_ecm",
+      "record_id": "ID-LN__myocardium_ecm__y",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 0.0,
+        "dcm_energy_fractions": {
+          "heterogeneity": 8.271741298680353e-06,
+          "mean": 0.9999917282587013
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.8953603617480316,
+          "mean": 0.10463963825196837
+        },
+        "difference_localization": "heterogeneity",
+        "fem_energy_closure_relative_error": 1.1946214303438839e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 1.8088935084804134e-05,
+          "mean": 0.9999819110649153
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 5.8934402706660074e-05,
+          "dcm_norm": 0.00012255031666962092,
+          "fem_norm": 0.0001812013729113689,
+          "normalized_l2_difference": 0.3252425837605915,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 2.0147356407537342e-05,
+          "dcm_norm": 0.042610258605343364,
+          "fem_norm": 0.042604066683614446,
+          "normalized_l2_difference": 0.0004728287756744768,
+          "status": "FINITE_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 5.553740404995964e-05,
+          "dcm_norm": 0.04000016647352366,
+          "fem_norm": 0.04000036422509459,
+          "normalized_l2_difference": 0.0013884224587914563,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.8812348529703207,
+          "fundamental": 0.11876514702967918,
+          "higher_harmonics": 4.082346589024923e-31
+        },
+        "dcm_parseval_relative_error": 1.1942859867049478e-16,
+        "difference_energy_shares": {
+          "dc": 0.7951173736494158,
+          "fundamental": 0.20488262635058407,
+          "higher_harmonics": 3.76005253091208e-25
+        },
+        "difference_localization": "dc",
+        "fem_energy_fractions": {
+          "dc": 0.8814910844603226,
+          "fundamental": 0.11850891553967749,
+          "higher_harmonics": 3.992073659849049e-31
+        },
+        "fem_parseval_relative_error": 2.3892428606877677e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 1.993459987050957e-05,
+          "absolute_phase_difference_rad": 0.0006200264140851063,
+          "applicable": true,
+          "dcm_norm": 0.010383540799860794,
+          "fem_norm": 0.010370877344255503,
+          "fem_to_dcm_amplitude_ratio": 0.9987804299275772,
+          "normalized_complex_field_difference": 0.0019198267965371526,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": -0.0006200258111776638,
+            "real": 0.9999988994659381
+          },
+          "weighted_complex_correlation_magnitude": 0.9999990916821344
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 2.8191781497355573e-05,
+          "dcm_norm": 0.014684544224617511,
+          "fem_norm": 0.014666635393953997,
+          "normalized_l2_difference": 0.001919826796537152,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 3.819151711707763e-17,
+          "dcm_norm": 2.7225188967061143e-17,
+          "fem_norm": 2.691871080849059e-17,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-LS__endocardium_ecm__x": {
+      "case_id": "ID-LS",
+      "component": "x",
+      "full_component_difference": {
+        "absolute_difference_norm": 0.00018686572872172338,
+        "dcm_norm": 0.026000395440410905,
+        "fem_norm": 0.026052264792690467,
+        "normalized_l2_difference": 0.0071727249131197475,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "endocardium_ecm",
+      "record_id": "ID-LS__endocardium_ecm__x",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 0.0,
+        "dcm_energy_fractions": {
+          "heterogeneity": 1.3971034087798584e-21,
+          "mean": 1.0
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 7.567102894510439e-17,
+          "mean": 1.0
+        },
+        "difference_localization": "mean",
+        "fem_energy_closure_relative_error": 0.0,
+        "fem_energy_fractions": {
+          "heterogeneity": 3.1208131979286245e-21,
+          "mean": 1.0
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 1.6255280891801902e-12,
+          "dcm_norm": 9.718387896422164e-13,
+          "fem_norm": 1.4553899466088742e-12,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 0.00018686572872172265,
+          "dcm_norm": 0.026000395440410905,
+          "fem_norm": 0.026052264792690467,
+          "normalized_l2_difference": 0.007172724913119719,
+          "status": "FINITE_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 1.6194814545786774e-12,
+          "dcm_norm": 0.02500000000008243,
+          "fem_norm": 0.02500000000011094,
+          "normalized_l2_difference": 6.477925818285963e-11,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.9245280900586141,
+          "fundamental": 0.075471909941386,
+          "higher_harmonics": 1.0470686976851333e-30
+        },
+        "dcm_parseval_relative_error": 1.6038005820141017e-16,
+        "difference_energy_shares": {
+          "dc": 7.510911425534221e-17,
+          "fundamental": 1.0,
+          "higher_harmonics": 3.825638191304885e-26
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.9208503341841893,
+          "fundamental": 0.0791496658158109,
+          "higher_harmonics": 9.229724945765724e-31
+        },
+        "fem_parseval_relative_error": 1.5974206925562237e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 0.0001321340239504964,
+          "absolute_phase_difference_rad": 0.0014789872500656413,
+          "applicable": true,
+          "dcm_norm": 0.005050770389436586,
+          "fem_norm": 0.0051826875664520025,
+          "fem_to_dcm_amplitude_ratio": 1.0261182288728299,
+          "normalized_complex_field_difference": 0.025495270987549334,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.0014789867108754387,
+            "real": 0.9999989062985565
+          },
+          "weighted_complex_correlation_magnitude": 1.0
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 0.00018686572872172338,
+          "dcm_norm": 0.0071428679851736595,
+          "fem_norm": 0.007329427046018833,
+          "normalized_l2_difference": 0.025495270987549334,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 3.654951395816796e-17,
+          "dcm_norm": 2.6605262084205042e-17,
+          "fem_norm": 2.5028790497543095e-17,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-LS__endocardium_ecm__y": {
+      "case_id": "ID-LS",
+      "component": "y",
+      "full_component_difference": {
+        "absolute_difference_norm": 1.4465868303784162e-12,
+        "dcm_norm": 8.578897251187924e-13,
+        "fem_norm": 1.0625442647119487e-12,
+        "normalized_l2_difference": null,
+        "status": "NEAR_ZERO_COMPONENT"
+      },
+      "interface": "endocardium_ecm",
+      "record_id": "ID-LS__endocardium_ecm__y",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 0.0,
+        "dcm_energy_fractions": {
+          "heterogeneity": 7.358621495954918e-05,
+          "mean": 1.1263086890543629e-08
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.00020917226259997845,
+          "mean": 8.908318244881855e-08
+        },
+        "difference_localization": "UNRESOLVED_MIXTURE",
+        "fem_energy_closure_relative_error": 1.836709923159824e-20,
+        "fem_energy_fractions": {
+          "heterogeneity": 0.0001128518083558468,
+          "mean": 4.8223091378741134e-08
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 1.4462788894261661e-12,
+          "dcm_norm": 8.578240784656793e-13,
+          "fem_norm": 1.0623173177344273e-12,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 2.984680593444105e-14,
+          "dcm_norm": 1.0612769144075278e-14,
+          "fem_norm": 2.1959756687800788e-14,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 1.442020771400892e-12,
+          "dcm_norm": 8.534107103512941e-13,
+          "fem_norm": 1.059357144406029e-12,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 7.283098405423002e-05,
+          "fundamental": 7.664939922096932e-07,
+          "higher_harmonics": 1.2514148118506606e-36
+        },
+        "dcm_parseval_relative_error": 0.0,
+        "difference_energy_shares": {
+          "dc": 0.00020794239051516233,
+          "fundamental": 1.3189552672649166e-06,
+          "higher_harmonics": 3.0008572641762992e-36
+        },
+        "difference_localization": "UNRESOLVED_MIXTURE",
+        "fem_energy_fractions": {
+          "dc": 0.0001122237559404096,
+          "fundamental": 6.762755068159958e-07,
+          "higher_harmonics": 1.7131161530457774e-36
+        },
+        "fem_parseval_relative_error": 5.510129769479473e-20,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 8.120822825505172e-14,
+          "absolute_phase_difference_rad": null,
+          "applicable": false,
+          "dcm_norm": 6.190694598385924e-14,
+          "fem_norm": 5.814961336139717e-14,
+          "fem_to_dcm_amplitude_ratio": 0.0005814961336139717,
+          "normalized_complex_field_difference": null,
+          "status": "NEAR_ZERO_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.0,
+            "real": 0.0
+          },
+          "weighted_complex_correlation_magnitude": 0.0
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 1.1484577777458415e-13,
+          "dcm_norm": 8.754964261547235e-14,
+          "fem_norm": 8.223597186243961e-14,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 1.732298260743888e-28,
+          "dcm_norm": 1.118666532909008e-28,
+          "fem_norm": 1.3088606316356901e-28,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-LS__myocardium_ecm__x": {
+      "case_id": "ID-LS",
+      "component": "x",
+      "full_component_difference": {
+        "absolute_difference_norm": 0.00021621603458939177,
+        "dcm_norm": 0.025819800525161956,
+        "fem_norm": 0.025871871935964092,
+        "normalized_l2_difference": 0.008357185561390831,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "myocardium_ecm",
+      "record_id": "ID-LS__myocardium_ecm__x",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 0.0,
+        "dcm_energy_fractions": {
+          "heterogeneity": 4.327625355139709e-22,
+          "mean": 1.0
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 2.135409187238735e-17,
+          "mean": 1.0
+        },
+        "difference_localization": "mean",
+        "fem_energy_closure_relative_error": 0.0,
+        "fem_energy_fractions": {
+          "heterogeneity": 1.0730134825457067e-21,
+          "mean": 1.0
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 9.99144843914306e-13,
+          "dcm_norm": 5.371278994459156e-13,
+          "fem_norm": 8.474819209628799e-13,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 0.00021621603458939166,
+          "dcm_norm": 0.025819800525161956,
+          "fem_norm": 0.025871871935964092,
+          "normalized_l2_difference": 0.008357185561390828,
+          "status": "FINITE_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 9.974322436584249e-13,
+          "dcm_norm": 0.025000000000022685,
+          "fem_norm": 0.0250000000000695,
+          "normalized_l2_difference": 3.989728974622608e-11,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.9375064231031479,
+          "fundamental": 0.06249357689685211,
+          "higher_harmonics": 9.530566284974287e-31
+        },
+        "dcm_parseval_relative_error": 0.0,
+        "difference_energy_shares": {
+          "dc": 2.1280949963378494e-17,
+          "fundamental": 1.0,
+          "higher_harmonics": 2.603552236127327e-26
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.9337364480703945,
+          "fundamental": 0.06626355192960566,
+          "higher_harmonics": 9.13500097424203e-31
+        },
+        "fem_parseval_relative_error": 1.619774536833906e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 0.00015288782425942402,
+          "absolute_phase_difference_rad": 0.010372193330734336,
+          "applicable": true,
+          "dcm_norm": 0.004564104466268241,
+          "fem_norm": 0.004709233348829266,
+          "fem_to_dcm_amplitude_ratio": 1.0317978879829819,
+          "normalized_complex_field_difference": 0.03246554437516513,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.010372007354168955,
+            "real": 0.9999462092850019
+          },
+          "weighted_complex_correlation_magnitude": 0.9999999999999999
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 0.00021621603458939174,
+          "dcm_norm": 0.006454618436284163,
+          "fem_norm": 0.006659861670294016,
+          "normalized_l2_difference": 0.03246554437516513,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 3.488759610651596e-17,
+          "dcm_norm": 2.52064819554741e-17,
+          "fem_norm": 2.4727610532781925e-17,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-LS__myocardium_ecm__y": {
+      "case_id": "ID-LS",
+      "component": "y",
+      "full_component_difference": {
+        "absolute_difference_norm": 6.977288176049841e-13,
+        "dcm_norm": 2.5809699509688214e-13,
+        "fem_norm": 6.118414816512109e-13,
+        "normalized_l2_difference": null,
+        "status": "NEAR_ZERO_COMPONENT"
+      },
+      "interface": "myocardium_ecm",
+      "record_id": "ID-LS__myocardium_ecm__y",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 1.14794370197489e-21,
+        "dcm_energy_fractions": {
+          "heterogeneity": 6.5102393374329344e-06,
+          "mean": 1.511665503710647e-07
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 4.866942504674444e-05,
+          "mean": 1.3125244900478182e-08
+        },
+        "difference_localization": "UNRESOLVED_MIXTURE",
+        "fem_energy_closure_relative_error": 0.0,
+        "fem_energy_fractions": {
+          "heterogeneity": 3.7340869817758e-05,
+          "mean": 9.413004915689496e-08
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 6.976347543431623e-13,
+          "dcm_norm": 2.5515170658713876e-13,
+          "fem_norm": 6.110717618885527e-13,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 1.1456546120222353e-14,
+          "dcm_norm": 3.888014279437059e-14,
+          "fem_norm": 3.068062078200097e-14,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 6.952386424305394e-13,
+          "dcm_norm": 2.5455204049835723e-13,
+          "fem_norm": 6.097535861541037e-13,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 6.479674132187729e-06,
+          "fundamental": 1.817317556162708e-07,
+          "higher_harmonics": 2.1726942281305277e-37
+        },
+        "dcm_parseval_relative_error": 1.14794370197489e-21,
+        "difference_energy_shares": {
+          "dc": 4.833567699286594e-05,
+          "fundamental": 3.4687329877898574e-07,
+          "higher_harmonics": 6.468559896551272e-37
+        },
+        "difference_localization": "UNRESOLVED_MIXTURE",
+        "fem_energy_fractions": {
+          "dc": 3.7179943582778994e-05,
+          "fundamental": 2.550562841359067e-07,
+          "higher_harmonics": 4.69200919889045e-37
+        },
+        "fem_parseval_relative_error": 0.0,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 4.1645725997933195e-14,
+          "absolute_phase_difference_rad": null,
+          "applicable": false,
+          "dcm_norm": 3.014396752389032e-14,
+          "fem_norm": 3.571108260301742e-14,
+          "fem_to_dcm_amplitude_ratio": 0.00035711082603017417,
+          "normalized_complex_field_difference": null,
+          "status": "NEAR_ZERO_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.0,
+            "real": 0.0
+          },
+          "weighted_complex_correlation_magnitude": 0.0
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 5.889595052115093e-14,
+          "dcm_norm": 4.263000769601981e-14,
+          "fem_norm": 5.0503097344213123e-14,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 8.042735788617747e-29,
+          "dcm_norm": 4.661216824103474e-29,
+          "fem_norm": 6.849824230511649e-29,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-S1__endocardium_ecm__x": {
+      "case_id": "ID-S1",
+      "component": "x",
+      "full_component_difference": {
+        "absolute_difference_norm": 8.978691658804706e-05,
+        "dcm_norm": 0.0006451573577881836,
+        "fem_norm": 0.0007341815798994995,
+        "normalized_l2_difference": 0.12229524554448479,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "endocardium_ecm",
+      "record_id": "ID-S1__endocardium_ecm__x",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 0.0,
+        "dcm_energy_fractions": {
+          "heterogeneity": 1.0,
+          "mean": 1.5865591889748482e-18
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 1.0,
+          "mean": 8.314091160056026e-17
+        },
+        "difference_localization": "heterogeneity",
+        "fem_energy_closure_relative_error": 0.0,
+        "fem_energy_fractions": {
+          "heterogeneity": 1.0,
+          "mean": 1.2136134142307243e-21
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 8.978691658804706e-05,
+          "dcm_norm": 0.0006451573577881836,
+          "fem_norm": 0.0007341815798994995,
+          "normalized_l2_difference": 0.12229524554448479,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 8.186918150918644e-13,
+          "dcm_norm": 8.126317640743535e-13,
+          "fem_norm": 2.5576650455927083e-14,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 7.056094631869676e-05,
+          "dcm_norm": 0.0005042571633512728,
+          "fem_norm": 0.0005748120485000064,
+          "normalized_l2_difference": 0.1227548143829417,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.6109038239337861,
+          "fundamental": 0.389096176066214,
+          "higher_harmonics": 9.357414132517239e-30
+        },
+        "dcm_parseval_relative_error": 1.2718884152235998e-16,
+        "difference_energy_shares": {
+          "dc": 0.6175934455788263,
+          "fundamental": 0.38240655442117366,
+          "higher_harmonics": 9.283766953710178e-28
+        },
+        "difference_localization": "dc",
+        "fem_energy_fractions": {
+          "dc": 0.6129778154810922,
+          "fundamental": 0.3870221845189078,
+          "higher_harmonics": 6.844781497362634e-30
+        },
+        "fem_parseval_relative_error": 0.0,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 3.92609427102745e-05,
+          "absolute_phase_difference_rad": 0.026207862985393383,
+          "applicable": true,
+          "dcm_norm": 0.00028456346349905684,
+          "fem_norm": 0.00032296571115441295,
+          "fem_to_dcm_amplitude_ratio": 1.134951434675251,
+          "normalized_complex_field_difference": 0.12156381112391053,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.02620435408482567,
+            "real": 0.9996371821554096
+          },
+          "weighted_complex_correlation_magnitude": 0.9999805818717734
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 5.55233576524233e-05,
+          "dcm_norm": 0.0004024335094362274,
+          "fem_norm": 0.0004567424888960424,
+          "normalized_l2_difference": 0.12156381112391053,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 2.735742218070547e-18,
+          "dcm_norm": 1.973529306129567e-18,
+          "fem_norm": 1.9208050047277544e-18,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-S1__endocardium_ecm__y": {
+      "case_id": "ID-S1",
+      "component": "y",
+      "full_component_difference": {
+        "absolute_difference_norm": 0.00046264863566894486,
+        "dcm_norm": 0.001559387952741627,
+        "fem_norm": 0.0016950631775370696,
+        "normalized_l2_difference": 0.2729388743735052,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "endocardium_ecm",
+      "record_id": "ID-S1__endocardium_ecm__y",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 1.741654308451466e-16,
+        "dcm_energy_fractions": {
+          "heterogeneity": 0.9092182465306368,
+          "mean": 0.09078175346936342
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.200562073512183,
+          "mean": 0.799437926487817
+        },
+        "difference_localization": "mean",
+        "fem_energy_closure_relative_error": 2.9480070937918293e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 0.9988355861673646,
+          "mean": 0.0011644138326357056
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 0.0002071932922303707,
+          "dcm_norm": 0.0014869222015971213,
+          "fem_norm": 0.001694076012580677,
+          "normalized_l2_difference": 0.12230460185475504,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 0.0004136601258776053,
+          "dcm_norm": 0.0004698437544049012,
+          "fem_norm": 5.7841502753829945e-05,
+          "normalized_l2_difference": 0.8804206121704067,
+          "status": "FINITE_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 0.0001640869591992396,
+          "dcm_norm": 0.0011906805251994017,
+          "fem_norm": 0.0013547628001715829,
+          "normalized_l2_difference": 0.12111858930467954,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.5830182523935902,
+          "fundamental": 0.41698174760641005,
+          "higher_harmonics": 2.688853253600903e-31
+        },
+        "dcm_parseval_relative_error": 1.741654308451466e-16,
+        "difference_energy_shares": {
+          "dc": 0.1257898392758225,
+          "fundamental": 0.8742101607241775,
+          "higher_harmonics": 3.448189590725853e-30
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.6387850549165816,
+          "fundamental": 0.36121494508341856,
+          "higher_harmonics": 3.9623110176052165e-32
+        },
+        "fem_parseval_relative_error": 1.4740035468959147e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 0.00030587516236782214,
+          "absolute_phase_difference_rad": 0.004032981136110626,
+          "applicable": true,
+          "dcm_norm": 0.0007120290282237797,
+          "fem_norm": 0.0007203668964886294,
+          "fem_to_dcm_amplitude_ratio": 1.0117100117191138,
+          "normalized_complex_field_difference": 0.4246102421679648,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": 0.0036654561528732263,
+            "real": 0.9088652181453835
+          },
+          "weighted_complex_correlation_magnitude": 0.9088726095131617
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 0.0004325728030136466,
+          "dcm_norm": 0.0010069611085174045,
+          "fem_norm": 0.001018752634898835,
+          "normalized_l2_difference": 0.42461024216796484,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 8.5910620151965255e-19,
+          "dcm_norm": 8.0860742544172855e-19,
+          "fem_norm": 3.374117253838988e-19,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-S1__myocardium_ecm__x": {
+      "case_id": "ID-S1",
+      "component": "x",
+      "full_component_difference": {
+        "absolute_difference_norm": 0.0005960952883208452,
+        "dcm_norm": 0.004485481741143901,
+        "fem_norm": 0.005081459865824992,
+        "normalized_l2_difference": 0.11730788081784192,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "myocardium_ecm",
+      "record_id": "ID-S1__myocardium_ecm__x",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 0.0,
+        "dcm_energy_fractions": {
+          "heterogeneity": 1.0,
+          "mean": 3.538256091445133e-20
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 1.0,
+          "mean": 2.912042150483094e-18
+        },
+        "difference_localization": "heterogeneity",
+        "fem_energy_closure_relative_error": 0.0,
+        "fem_energy_fractions": {
+          "heterogeneity": 1.0,
+          "mean": 1.2399946766349006e-21
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 0.0005960952883208452,
+          "dcm_norm": 0.004485481741143901,
+          "fem_norm": 0.005081459865824992,
+          "normalized_l2_difference": 0.11730788081784192,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 1.0172191265534657e-12,
+          "dcm_norm": 8.437304533102062e-13,
+          "fem_norm": 1.7893628240368115e-13,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 0.00046055412259241236,
+          "dcm_norm": 0.003459674622664637,
+          "fem_norm": 0.003920135245725901,
+          "normalized_l2_difference": 0.11748424320169862,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.5949114471528852,
+          "fundamental": 0.40508855284711487,
+          "higher_harmonics": 2.438624462084187e-31
+        },
+        "dcm_parseval_relative_error": 1.684000082911617e-16,
+        "difference_energy_shares": {
+          "dc": 0.5969390226981183,
+          "fundamental": 0.4030609773018818,
+          "higher_harmonics": 2.758614023817462e-29
+        },
+        "difference_localization": "UNRESOLVED_MIXTURE",
+        "fem_energy_fractions": {
+          "dc": 0.5951481685876752,
+          "fundamental": 0.4048518314123247,
+          "higher_harmonics": 2.047039936088089e-31
+        },
+        "fem_parseval_relative_error": 1.312149427378798e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 0.00026759997470239484,
+          "absolute_phase_difference_rad": 0.000396419607011701,
+          "applicable": true,
+          "dcm_norm": 0.002018687439331015,
+          "fem_norm": 0.0022862386165061243,
+          "fem_to_dcm_amplitude_ratio": 1.1325371981626708,
+          "normalized_complex_field_difference": 0.1170481387071252,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": -0.0003964185062527033,
+            "real": 0.9999971708651557
+          },
+          "weighted_complex_correlation_magnitude": 0.999997249439191
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 0.0003784435135148239,
+          "dcm_norm": 0.0028548551548941365,
+          "fem_norm": 0.003233229658284062,
+          "normalized_l2_difference": 0.11704813870712519,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 3.130842055518652e-18,
+          "dcm_norm": 2.2150399124923025e-18,
+          "fem_norm": 2.2990671575742654e-18,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    },
+    "ID-S1__myocardium_ecm__y": {
+      "case_id": "ID-S1",
+      "component": "y",
+      "full_component_difference": {
+        "absolute_difference_norm": 0.00047966343970826016,
+        "dcm_norm": 0.0005391496637583455,
+        "fem_norm": 0.0003294886979494933,
+        "normalized_l2_difference": 0.8896665841625231,
+        "status": "FINITE_COMPONENT"
+      },
+      "interface": "myocardium_ecm",
+      "record_id": "ID-S1__myocardium_ecm__y",
+      "spatial": {
+        "dcm_energy_closure_relative_error": 0.0,
+        "dcm_energy_fractions": {
+          "heterogeneity": 0.2504825411177239,
+          "mean": 0.749517458882276
+        },
+        "difference_energy_shares": {
+          "heterogeneity": 0.013950010600683987,
+          "mean": 0.9860499893993161
+        },
+        "difference_localization": "mean",
+        "fem_energy_closure_relative_error": 1.2190998710155003e-16,
+        "fem_energy_fractions": {
+          "heterogeneity": 0.9693419215635359,
+          "mean": 0.03065807843646423
+        },
+        "heterogeneity_difference": {
+          "absolute_difference_norm": 5.665312704258019e-05,
+          "dcm_norm": 0.00026983486834274747,
+          "fem_norm": 0.0003243986362103118,
+          "normalized_l2_difference": 0.17464045997360866,
+          "status": "FINITE_COMPONENT"
+        },
+        "mean_field_difference": {
+          "absolute_difference_norm": 0.0004763060345923165,
+          "dcm_norm": 0.0004667670765565939,
+          "fem_norm": 5.769165365407912e-05,
+          "normalized_l2_difference": 1.0204362272208503,
+          "status": "FINITE_COMPONENT"
+        }
+      },
+      "temporal": {
+        "dc_difference": {
+          "absolute_difference_norm": 3.6034410257831404e-05,
+          "dcm_norm": 0.00019052242067761383,
+          "fem_norm": 0.0002248928659483614,
+          "normalized_l2_difference": 0.160229227840893,
+          "status": "FINITE_COMPONENT"
+        },
+        "dcm_energy_fractions": {
+          "dc": 0.12487442578045266,
+          "fundamental": 0.8751255742195472,
+          "higher_harmonics": 2.7799849967384233e-30
+        },
+        "dcm_parseval_relative_error": 1.821216781644681e-16,
+        "difference_energy_shares": {
+          "dc": 0.005643669883378393,
+          "fundamental": 0.9943563301166216,
+          "higher_harmonics": 1.3669764332461014e-29
+        },
+        "difference_localization": "fundamental",
+        "fem_energy_fractions": {
+          "dc": 0.46587597397173214,
+          "fundamental": 0.534124026028268,
+          "higher_harmonics": 2.1405266118073922e-29
+        },
+        "fem_parseval_relative_error": 2.4381997420310005e-16,
+        "fundamental_complex_comparison": {
+          "absolute_complex_field_difference_norm": 0.00033821482571742037,
+          "absolute_phase_difference_rad": 0.5740364296694437,
+          "applicable": true,
+          "dcm_norm": 0.00035663957096057034,
+          "fem_norm": 0.00017027331106486533,
+          "fem_to_dcm_amplitude_ratio": 0.477438077345855,
+          "normalized_complex_field_difference": 0.9483379110357134,
+          "status": "FINITE_COMPONENT",
+          "weighted_complex_correlation": {
+            "imag": -0.22254187641644746,
+            "real": 0.34413083055594607
+          },
+          "weighted_complex_correlation_magnitude": 0.4098181490589194
+        },
+        "fundamental_difference": {
+          "absolute_difference_norm": 0.00047830799352522853,
+          "dcm_norm": 0.0005043645181313604,
+          "fem_norm": 0.00024080282581810536,
+          "normalized_l2_difference": 0.9483379110357134,
+          "status": "FINITE_COMPONENT"
+        },
+        "higher_harmonic_difference": {
+          "absolute_difference_norm": 1.7734425783585527e-18,
+          "dcm_norm": 8.989397084476618e-19,
+          "fem_norm": 1.5244066612850563e-18,
+          "normalized_l2_difference": null,
+          "status": "NEAR_ZERO_COMPONENT"
+        }
+      }
+    }
+  },
+  "schema": "paper2_m2a_v07_spatiotemporal_mode_decomposition"
+}

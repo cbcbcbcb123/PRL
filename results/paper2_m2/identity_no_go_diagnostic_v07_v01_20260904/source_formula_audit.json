@@ -1,0 +1,141 @@
+{
+  "coordinate_convention": {
+    "component_0": "x_tangential",
+    "component_1": "y_normal",
+    "evidence_supports_nonidentity_signed_permutation": false,
+    "shared_by_DCM_and_FEM": true
+  },
+  "evidence": {
+    "array_export": {
+      "line_end": 1403,
+      "line_start": 1190,
+      "path": "src/paper2_m2/identity_2d.py",
+      "sha256": "ee76c46ca15ee0ca69a216239c0f8b9c1c1c877ba0238edec245f93f389d32aa",
+      "symbol": "simulate_endpoint"
+    },
+    "common_projection": {
+      "line_end": 66,
+      "line_start": 31,
+      "path": "src/paper2_m2/interface_projection.py",
+      "sha256": "17dc24b9f4d113faca7c9a3d4494420a4b267dd340940bb6bdb367bbe044ac5e",
+      "symbol": "project_piecewise_linear_to_common_segments"
+    },
+    "common_space_time_norm": {
+      "line_end": 112,
+      "line_start": 92,
+      "path": "src/paper2_m2/interface_projection.py",
+      "sha256": "17dc24b9f4d113faca7c9a3d4494420a4b267dd340940bb6bdb367bbe044ac5e",
+      "symbol": "common_segment_space_time_l2"
+    },
+    "interface_energy_and_weights": {
+      "line_end": 436,
+      "line_start": 424,
+      "path": "src/paper2_m2/identity_2d.py",
+      "sha256": "ee76c46ca15ee0ca69a216239c0f8b9c1c1c877ba0238edec245f93f389d32aa",
+      "symbol": "_interface_matrix"
+    },
+    "load_components": {
+      "line_end": 1024,
+      "line_start": 985,
+      "path": "src/paper2_m2/identity_2d.py",
+      "sha256": "ee76c46ca15ee0ca69a216239c0f8b9c1c1c877ba0238edec245f93f389d32aa",
+      "symbol": "_case_components"
+    },
+    "representation_assembly": {
+      "line_end": 959,
+      "line_start": 667,
+      "path": "src/paper2_m2/identity_2d.py",
+      "sha256": "ee76c46ca15ee0ca69a216239c0f8b9c1c1c877ba0238edec245f93f389d32aa",
+      "symbol": "build_system_for_level"
+    },
+    "traction_extractor": {
+      "line_end": 1097,
+      "line_start": 1079,
+      "path": "src/paper2_m2/identity_2d.py",
+      "sha256": "ee76c46ca15ee0ca69a216239c0f8b9c1c1c877ba0238edec245f93f389d32aa",
+      "symbol": "_interface_tractions"
+    },
+    "units_and_sign": {
+      "line_end": 174,
+      "line_start": 127,
+      "path": "src/paper2_m2/identity_2d_v02.py",
+      "sha256": "df3a185e37d552630f7d333f8ae6f74faad7ec7c658be7a00bba41ace623d3ce",
+      "symbol": "global_structural_checks"
+    },
+    "v06_projection_entry": {
+      "line_end": 127,
+      "line_start": 103,
+      "path": "src/paper2_m2/identity_gate_v06.py",
+      "sha256": "9b1894cc84a1bee77ce17e055a3f68a048fd93f6827caa24f3a1c42166535dd4",
+      "symbol": "project_traction_first_cycle"
+    }
+  },
+  "extraction_audit_clean": true,
+  "interface_extraction_symmetry": {
+    "intentional_stiffness_values": {
+      "endocardium_ecm": 7.0,
+      "myocardium_ecm": 8.0
+    },
+    "same_displacement_jump_formula": true,
+    "same_reference_weights": true
+  },
+  "machine_checks": {
+    "combined_load_phase_rule_present": true,
+    "component_order_xy_present": true,
+    "conservative_common_projection_present": true,
+    "extractor_has_no_representation_branch": true,
+    "nondimensional_units_declared": true,
+    "reference_interface_weights_present": true,
+    "shared_penalty_traction_formula_present": true,
+    "sign_convention_declared": true,
+    "v06_first_cycle_and_64_segment_projection_present": true
+  },
+  "projection_conservation_check": {
+    "common_segments": 64,
+    "constant_field_max_abs_error": 0.0,
+    "discrete_interface_work_abs_error": 1.3877787807814457e-17,
+    "integrated_force_abs_error": 0.0,
+    "native_segments": 128,
+    "pass": true,
+    "sign_preserved": true,
+    "tolerance": 1e-12
+  },
+  "sampling_and_weights": {
+    "common_projection": "64_reference_segments_exact_P1_integral_average",
+    "exported_traction": "unweighted_nodal_traction_density",
+    "identity_norm": "reference_segment_length_and_equal_time_weight",
+    "interface_energy": "reference_trapezoidal_nodal_weights",
+    "native": "129_reference_interface_nodes_P1",
+    "reference_or_current_measure": "reference_interface_measure"
+  },
+  "schema": "paper2_m2a_v07_source_formula_audit",
+  "sign_and_interface_sides": {
+    "opposite_side_reaction": "implicit_negative_energy_gradient_pair",
+    "same_extractor_for_DCM_and_FEM": true,
+    "stored_sign": "positive_on_first_named_domain"
+  },
+  "source_sha256": {
+    "src/paper2_m2/config.py": "6e5913a250f75cee7dbc1cba01468cf4b71d5f41f2d4c6f6f3f524e8c394380d",
+    "src/paper2_m2/identity_2d.py": "ee76c46ca15ee0ca69a216239c0f8b9c1c1c877ba0238edec245f93f389d32aa",
+    "src/paper2_m2/identity_2d_v02.py": "df3a185e37d552630f7d333f8ae6f74faad7ec7c658be7a00bba41ace623d3ce",
+    "src/paper2_m2/identity_2d_v05.py": "1f06242f89b231b61ca73d31097cd35eca700f1fd6d4f36ca6c7f537ea1d0be7",
+    "src/paper2_m2/identity_gate_v06.py": "9b1894cc84a1bee77ce17e055a3f68a048fd93f6827caa24f3a1c42166535dd4",
+    "src/paper2_m2/interface_projection.py": "17dc24b9f4d113faca7c9a3d4494420a4b267dd340940bb6bdb367bbe044ac5e"
+  },
+  "stress_or_traction_measure": {
+    "Cauchy_or_Piola_conversion_used": false,
+    "formula_endocardium_ecm": "k_endo_ecm * (u_endo - u_ecm_top)",
+    "formula_myocardium_ecm": "k_myo_ecm * (u_myo - u_ecm_bottom)",
+    "interpretation": "The exported interface observable is the shared penalty-spring traction-like density, not a separately recovered continuum stress.",
+    "type": "shared_linear_penalty_interface_traction_density"
+  },
+  "unexpected_inconsistencies": [],
+  "units": {
+    "force": "traction_density_times_reference_interface_length",
+    "length": "nondimensional_length",
+    "out_of_plane_thickness": "implicit_unit_thickness_plane_strain",
+    "system": "nondimensional_M2A_identity_benchmark",
+    "time": "nondimensional_time_with_period_1",
+    "traction": "nondimensional_interface_traction_density"
+  }
+}

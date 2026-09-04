@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-04
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 7ec88653a5fa880d4dd9f0168bacf9b2c2aeb073
-current_lifecycle: paper2_m2a_v07_identity_no_go_diagnostic_authorized
+verified_commit: 7c1c1fcbe8ec424f953b18daab7fe682b2c10cfc
+current_lifecycle: paper2_m2a_v07_accepted_model_architecture_human_gate
 current_contract: project_control/paper2_m2_active_myocardial_fem_identity_failure_diagnostic_contract_v07.md
-current_authorization: project_control/paper2_m2a_v06_1_no_go_identity_supervisor_acceptance_and_v07_diagnostic_decision_v01.md
+current_authorization: project_control/paper2_m2a_v07_supervisor_acceptance_and_model_architecture_human_gate_v01.md
 current_clarification: project_control/paper2_m2a_v03_phase_r_endpoint_count_clarification_decision_v01.md
-execution_authorized: v07_read_only_existing_evidence_discrepancy_decomposition_only
-current_execution_log: pending_paper2_m2a_v07_identity_no_go_diagnostic_execution_record_v01
-latest_completed_execution_log: project_control/paper2_m2a_v06_1_identity_gate_retry_execution_record_v01.md
+execution_authorized: none_pending_human_model_architecture_decision
+current_execution_log: project_control/paper2_m2a_v07_identity_no_go_diagnostic_execution_record_v01.md
+latest_completed_execution_log: project_control/paper2_m2a_v07_identity_no_go_diagnostic_execution_record_v01.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
 current_mainline: project_control/prl_independent_theory_mainline_plan_v02.md
@@ -28,10 +28,10 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 
 ## 1. 一句话状态
 
-Paper 2 M2A v06.1 的 `NO-GO-ID` 已由 Supervisor 接受：45 条正式记录为
-`35 pass / 4 maybe / 6 no_go`，六个预注册留出中只有 `ID-LS` 全部通过。当前已授权 v07
-只读差异诊断，用既有 S4/T256/D0 证据区分归一化、坐标基、牵引提取与模式选择性本构
-失配；不重跑求解器、不修改模型或身份阈值，M2B 仍被禁止。
+Paper 2 M2A v07 已获 Supervisor 独立验收，正式标签为
+`MODE_SELECTIVE_CONSTITUTIVE_MISMATCH`，v06.1 `NO-GO-ID` 保持不变。下一步涉及重大模型
+架构选择，现停在 Human Gate；Supervisor 推荐固定“心内膜 DCM＋主动心肌 FEM＋黏弹
+ECM FEM”，把心肌 DCM 作为机制对照而不再强求 identity，但尚未获得人类选择。
 
 旧 DCM–FEM–DCM Figure 2 路线仍原样保留：T128 时间离散阶段 FINAL 不变；A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。新 M1 不改判 A1，也不把旧时间离散结果迁移成新架构证据。
 
@@ -225,6 +225,29 @@ M1 是一维 P1 条带加二维切向/法向运动学的身份与端口验证，
   signed-permutation 坐标基，审计纯模式/组合载荷与生产提取源码；
 - v07 不改变 `NO-GO-ID`，不允许拟合比例、按工况校准、修改实现、重跑端点或进入 M2B；
   若诊断指向实现或模型修订，必须先向人类报告并形成新合同。
+- v07 执行记录：
+  `project_control/paper2_m2a_v07_identity_no_go_diagnostic_execution_record_v01.md`；
+- v07 create-only 正式结果包：
+  `results/paper2_m2/identity_no_go_diagnostic_v07_v01_20260904/`；
+- 正式诊断标签：`MODE_SELECTIVE_CONSTITUTIVE_MISMATCH`。四个合同条件中只有该条件为真；
+  v06.1 `NO-GO-ID` 未改变；
+- 四条失败牵引的共同最优实标量为 `1.094511367664237`，但共同缩放后最大残差为
+  `1.9168933799157437`；8 个有限坐标基的共同最优仍是 identity，最大记录残差仍为
+  `0.804030579944649`；生产单位、符号、测度、权重、分量与共同投影审计干净；
+- 差异主要定位在 `ID-A2`：心肌–ECM 的 `x` 为“空间异质/DC”，两侧 `y` 为
+  “空间均值/基频”。C0/CQ 的 A2+LN DC/基频叠加最大残差仅
+  `0.0023057714266971428`，不改变 identity 失败；
+- 正式包 12/12 JSON 有限，hash ledger 11/11 一致，0 个 NPZ；耗时
+  `13.776534800010268 s`，峰值内存 `0.050426483154296875 GiB`；未使用 solver、
+  endpoint rerun、Docker、GPU 或网络；
+- 当前证据只支持冻结理想化二维基准中的表示级本构不等价，不判断哪种模型正确，也不
+  外推到三维、整心房、生理、EFE、实验或流体。
+- v07 Supervisor 独立验收与模型架构 Human Gate：
+  `project_control/paper2_m2a_v07_supervisor_acceptance_and_model_architecture_human_gate_v01.md`；
+- Supervisor 原始数组复算逐值重现 4/4 正式失败牵引、共同标量与 8 个有限坐标基结果；
+  v07 的 22 项定向测试、74 项轻量回归和静态检查均独立通过；
+- 当前等待人类在三条路线中选择；推荐路线 A：固定心内膜 DCM、主动心肌 FEM、黏弹
+  ECM FEM，把心肌 DCM 降为 comparator，并将候选物理命题转为“主动驱动与粗粒化不对易”。
 
 ## 2. 已完成并可引用的阶段证据
 
@@ -293,7 +316,7 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 ## 5. 当前禁止范围
 
-M2A 当前只授权 v07 既有证据只读差异诊断。不得删除、覆盖或续接 v06 v01 失败包与
+M2A v07 已独立验收并停止在模型架构 Human Gate，当前没有后续执行授权。不得删除、覆盖或续接 v06 v01 失败包与
 v06.1 v02 正式包；不得把 EOF 兼容规则扩展到其他文件或哈希，不得修改当前测试文件以
 迎合旧 manifest。不得重跑 DCM/FEM 求解器，不得覆盖或续接 v05 失败包及 v05.1 成功包，
 也不得修改 v01-v06.1 冻结实现。拟合比例、按工况校准、模型/映射/提取实现修改、S5、

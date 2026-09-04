@@ -1,0 +1,258 @@
+{
+  "candidate_count": 8,
+  "candidates": {
+    "noswap__x_+1__y_+1": {
+      "global_concatenated_residual": 0.2021687541469872,
+      "is_identity": true,
+      "matrix": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "maximum_record_residual": 0.804030579944649,
+      "per_record_normalized_l2": {
+        "ID-A2__endocardium_ecm": 0.8033615028482357,
+        "ID-A2__myocardium_ecm": 0.804030579944649,
+        "ID-S1__endocardium_ecm": 0.2551281841627887,
+        "ID-S1__myocardium_ecm": 0.15025510988677349
+      }
+    },
+    "noswap__x_+1__y_-1": {
+      "global_concatenated_residual": 0.651730025193091,
+      "is_identity": false,
+      "matrix": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          -1.0
+        ]
+      ],
+      "maximum_record_residual": 1.7461295109321635,
+      "per_record_normalized_l2": {
+        "ID-A2__endocardium_ecm": 1.215518500235379,
+        "ID-A2__myocardium_ecm": 1.5454857006940945,
+        "ID-S1__endocardium_ecm": 1.7461295109321635,
+        "ID-S1__myocardium_ecm": 0.18874523535701118
+      }
+    },
+    "noswap__x_-1__y_+1": {
+      "global_concatenated_residual": 1.785651801632707,
+      "is_identity": false,
+      "matrix": [
+        [
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "maximum_record_residual": 1.8811282605537483,
+      "per_record_normalized_l2": {
+        "ID-A2__endocardium_ecm": 0.9758318652358606,
+        "ID-A2__myocardium_ecm": 0.8735472934826825,
+        "ID-S1__endocardium_ecm": 0.7875647171959763,
+        "ID-S1__myocardium_ecm": 1.8811282605537483
+      }
+    },
+    "noswap__x_-1__y_-1": {
+      "global_concatenated_residual": 1.8900878755388533,
+      "is_identity": false,
+      "matrix": [
+        [
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          -1.0
+        ]
+      ],
+      "maximum_record_residual": 1.8984562313537736,
+      "per_record_normalized_l2": {
+        "ID-A2__endocardium_ecm": 1.335793153660247,
+        "ID-A2__myocardium_ecm": 1.582765223118927,
+        "ID-S1__endocardium_ecm": 1.8984562313537736,
+        "ID-S1__myocardium_ecm": 1.8845932448347729
+      }
+    },
+    "swap__x_from_y_+1__y_from_x_+1": {
+      "global_concatenated_residual": 1.3443748445025427,
+      "is_identity": false,
+      "matrix": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          0.0
+        ]
+      ],
+      "maximum_record_residual": 1.3542374002292126,
+      "per_record_normalized_l2": {
+        "ID-A2__endocardium_ecm": 1.102546197971491,
+        "ID-A2__myocardium_ecm": 1.2559057398859712,
+        "ID-S1__endocardium_ecm": 1.3542374002292126,
+        "ID-S1__myocardium_ecm": 1.3371542857700391
+      }
+    },
+    "swap__x_from_y_+1__y_from_x_-1": {
+      "global_concatenated_residual": 1.3443675850751464,
+      "is_identity": false,
+      "matrix": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          -1.0,
+          0.0
+        ]
+      ],
+      "maximum_record_residual": 1.3543197654363184,
+      "per_record_normalized_l2": {
+        "ID-A2__endocardium_ecm": 1.1022390924442425,
+        "ID-A2__myocardium_ecm": 1.2553160848215026,
+        "ID-S1__endocardium_ecm": 1.3543197654363184,
+        "ID-S1__myocardium_ecm": 1.337145214968159
+      }
+    },
+    "swap__x_from_y_-1__y_from_x_+1": {
+      "global_concatenated_residual": 1.3438676194519827,
+      "is_identity": false,
+      "matrix": [
+        [
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          0.0
+        ]
+      ],
+      "maximum_record_residual": 1.354638116128692,
+      "per_record_normalized_l2": {
+        "ID-A2__endocardium_ecm": 1.102180582623309,
+        "ID-A2__myocardium_ecm": 1.2553057206072353,
+        "ID-S1__endocardium_ecm": 1.354638116128692,
+        "ID-S1__myocardium_ecm": 1.3365294499604936
+      }
+    },
+    "swap__x_from_y_-1__y_from_x_-1": {
+      "global_concatenated_residual": 1.3438603572845966,
+      "is_identity": false,
+      "matrix": [
+        [
+          0.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          0.0
+        ]
+      ],
+      "maximum_record_residual": 1.3547204569728024,
+      "per_record_normalized_l2": {
+        "ID-A2__endocardium_ecm": 1.1018733751946155,
+        "ID-A2__myocardium_ecm": 1.2547157835630773,
+        "ID-S1__endocardium_ecm": 1.3547204569728024,
+        "ID-S1__myocardium_ecm": 1.3365203749179284
+      }
+    }
+  },
+  "common_best": {
+    "all_failed_traction_records_le_5pct": false,
+    "global_concatenated_residual": 0.2021687541469872,
+    "is_identity": true,
+    "is_nonidentity": false,
+    "matrix": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "matrix_name": "noswap__x_+1__y_+1",
+    "maximum_record_residual": 0.804030579944649,
+    "per_record_normalized_l2": {
+      "ID-A2__endocardium_ecm": 0.8033615028482357,
+      "ID-A2__myocardium_ecm": 0.804030579944649,
+      "ID-S1__endocardium_ecm": 0.2551281841627887,
+      "ID-S1__myocardium_ecm": 0.15025510988677349
+    }
+  },
+  "general_rotation_or_affine_search_used": false,
+  "matrices_applied_to": "complete_DCM_traction_vector_only",
+  "per_record_best": {
+    "ID-A2__endocardium_ecm": {
+      "matrix": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "matrix_name": "noswap__x_+1__y_+1",
+      "normalized_l2_residual": 0.8033615028482357
+    },
+    "ID-A2__myocardium_ecm": {
+      "matrix": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "matrix_name": "noswap__x_+1__y_+1",
+      "normalized_l2_residual": 0.804030579944649
+    },
+    "ID-S1__endocardium_ecm": {
+      "matrix": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "matrix_name": "noswap__x_+1__y_+1",
+      "normalized_l2_residual": 0.2551281841627887
+    },
+    "ID-S1__myocardium_ecm": {
+      "matrix": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "matrix_name": "noswap__x_+1__y_+1",
+      "normalized_l2_residual": 0.15025510988677349
+    }
+  },
+  "schema": "paper2_m2a_v07_signed_permutation_basis_audit"
+}
