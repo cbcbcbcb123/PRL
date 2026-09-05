@@ -2259,3 +2259,74 @@ t_1=T(H)a_0,\quad T=p_{1\epsilon}\chi+{\beta\over2}p_{1a}=rC+g .
 只选一项真正未回答、可证伪的科学问题；允许明确报告当前架构内未找到足够强候选。
 若需要新增物理，只能提出为何必要和最小假设变化，由总管另行决定，不在本任务实施。
 Nature Physics 目标不变；不因目标较高将当前经典基线包装成该水平成果。
+
+## 36. 文献约束重选的交接：反馈仍只是候选，先补齐反例与识别条件
+
+第19节理论任务已交接。接受的有限结论是：本次有界文献与模型对照，尚未在当前规定
+主动本征应变、线性有限层 ECM、被动心内膜链中找到足够强的创新候选；不是排除一切
+线性新规律的定理，也不降低 Nature Physics 目标。数值任务仍已完成，新增 FEM/求值/留出均为0。
+
+### 36.1 三篇新增原始来源及实际读取边界
+
+| 来源 | 理论 agent 实际读取 | 总管本轮独立核查 |
+|---|---|---|
+| Pritz, 1998, *Frequency dependences of complex moduli and complex Poisson's ratio of real solid materials*, [10.1006/jsvi.1998.1534](https://doi.org/10.1006/jsvi.1998.1534) | Elsevier 预览及完整摘要，未获正文 | 学术题录核实；未独立读全文，不据此引用具体方程 |
+| Rossi et al., 2012, *Orthotropic active strain models for the numerical simulation of cardiac biomechanics*, [10.1002/cnm.2473](https://doi.org/10.1002/cnm.2473) | Wiley summary/题录/参考文献及 EPFL 摘要，未获正文 | 学术来源完整摘要；其乘法分解与本项目小应变加性模型不等价，只作主动应变概念边界对照 |
+| Ioratim-Uba et al., 2023, *Mechanochemical Active Feedback Generates Convergence Extension in Epithelial Tissue*, [10.1103/PhysRevLett.131.238301](https://doi.org/10.1103/PhysRevLett.131.238301) | 6页主文 PDF，未读补充材料 | 学术来源完整摘要；APS 页面/PDF抽取失败，未独立读全文 |
+
+PRL 摘要已说明黏弹活性材料中的反馈阈值、振荡与空间图样，故这些现象本身不作为新颖性。
+三篇均不直接证明本项目心肌应力反馈的符号、增益、时间尺度或生物有效性。AnySearch 后续
+访问要求新凭据；未保存、使用该凭据或创建项目外文件，全文独立核查缺口保留。
+
+### 36.2 候选问题与总管纠错
+
+唯一保留、但未接受为机制的候选：心肌局部轴向应力反馈存在时，有限厚 ECM 能否选择
+一个心内膜局部牵引占优的临界模式，而宏观短缩响应尚不足以反映它？感受器及作用层
+均固定为心肌，心内膜只是输出；不引入心内膜到心肌的未说明跨层生物信号。
+
+总管读回当前 model.py 的主动能量、负号右端及 constitutive 组装，理论 agent 已确认其
+原闭环矩阵漏掉主动本征应变对应力的直接贡献。用 q 表示含宏观坐标及 ECM 内变量的状态，
+若将来把激活扩展为预先固定基底的局部场 a，则纸面模型应为
+
+\[
+G\dot q+Aq=f-H_a a,\quad \sigma^m_{xx}=Fq+D_a a,\quad
+\tau_a\dot a+a=a_{cmd}+\chi\sigma^m_{xx}/\sigma_* ,
+\]
+\[
+\det\begin{bmatrix}sG+A&H_a\\-\chi F/\sigma_*&(1+s\tau_a)I-\chi D_a/\sigma_*\end{bmatrix}=0.
+\]
+
+当前同一标量幅值乘轮廓 phi 时，直接项为 (lambda_m+2 mu_m) phi，而非0。
+当前代码仍只有规定标量激活，不能直接把局部应力向量接回标量；需明确投影或引入新的
+局部激活自由度，均未实现。正反馈符号不能为制造失稳而事后选择。生物范围未建立，
+后续可以讨论明确标注的理想体无量纲假设，但不能冒充生物校准或据任意增益宣称 EFE 机制。
+
+另一纠错是比例谱消融：保持剪切谱 G*=G0+G1 f 不变、令 K*/G*=kappa 为常数，会强制
+K0'=kappa G0、K1'=kappa G1；原谱不成比例时不能同时匹配 K(0) 与 K(infty)。
+一次这样的对照仅检验整体体积谱替换敏感性，不能唯一识别动态 Poisson 比或 ECM 记忆的因果作用。
+
+原建议的 P1>P0 也不是整体短缩正常的判据。对一般复时间幅值场 v(x)，应以同一归一化
+空间 L2 范数比较 |v_hat0| 与 sqrt(|v_hat1|^2+|v_hat_minus1|^2)；正负波数不必互为共轭。
+2|v_hat1| 仅在适当实空间谐波/共同相位约束下才是峰幅，不能直接用于一般复特征向量。
+宏观应变必须另行报告，不能把牵引均值小替代为整体功能未变。
+
+### 36.3 总管提出的最小经典反例（待下一步独立核查）
+
+在没有 ECM、没有空间模式的一个弹性元件和被动阻力中，令 q、a 为应变，
+E>0、eta>0、tau_a>0、sigma_*>0，能量密度 E(q+a)^2/2，应力 sigma=E(q+a)。齐次微扰满足
+
+\[
+\eta\dot q+E(q+a)=0,\qquad
+\tau_a\dot a+a=\chi\sigma/\sigma_*,\qquad g=\chi E/\sigma_* .
+\]
+
+消元得到
+\[
+\eta\tau_a s^2+[\eta(1-g)+E\tau_a]s+E=0.
+\]
+在 g=1+E tau_a/eta 时出现 s=+/-i sqrt(E/(eta tau_a))，此前正系数二阶系统稳定。
+此为总管纸面推导、未数值求值；下一步由同一理论 agent 核查。它拟排除的只是“加反馈后
+有振荡型线性临界即为 ECM 特异创新”，不是当前三层模型的反例，也不预测非线性饱和、
+极限环或真实生物失稳。研究还须给出这个经典反例不能回答的具体空间选择问题。
+
+当前决定为候选理论预可行性审查，不授权反馈实现、极点计算或扩算；具体预算见主计划第20节。

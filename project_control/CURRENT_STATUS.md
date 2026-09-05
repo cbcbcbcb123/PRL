@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 3a41dae3c108203c1faec7833d2ccee0ac4dc33f
-current_lifecycle: paper2_local_bound_not_established_literature_constrained_claim_selection
+verified_commit: 7a9a4cdcc73fe6c6d51ca24545f096e2c6eb6dd1
+current_lifecycle: paper2_feedback_candidate_theory_prefeasibility_not_implementation
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: literature_constrained_claim_selection_v04_section19_no_computation
+execution_authorized: feedback_candidate_null_and_identifiability_v04_section20_no_computation
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_transverse_notch/v02_20260905/first_mode_transfer_v01.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -100,8 +100,11 @@ S3第一模态幅值差0.518%–0.819%、相位差绝对值≤0.329°；四组et
 v04第18节下界候选已完成并收缩，验收见简报第34–35节：当前为NOT_ESTABLISHED，不是已证明固定域无下界。
 条件误差界成立，但缺全域系数/误差控制及宏观可达性；两弹簧例子不是同一三层Fourier模型的反例，已收紧。
 保持经典条件基线，不继续精修或扩算；总管补查两篇原始来源，记录读取层级，不能将“隐藏效应”本身当创新。
-下一步v04第19节授权同一理论agent最多45分钟、最多3篇新增原始论文的主张重选，只读消息交付、不计算/写文件。
-只能提出一个可证伪候选或如实报告没有足够强候选；新物理只许论证必要性，不实施。数值任务本批已完成。
+v04第19节已交接，接受及纠错见简报第36节：本次未在现架构内找到足够强候选，不是无创新可能的定理。
+局部心肌应力反馈仅为下一候选；补回主动应变到应力的直接项，保留标量到场的维数缺口及未校准生物假设。
+单次比例体/剪切谱替换不能隔离纯记忆作用；一般复空间模式须比较正负波数的同单位范数，不能冒充整体功能。
+总管给出无ECM单元反馈临界的纸面反例，下一步v04第20节由同一理论agent最多30分钟独立核查并选一项空间否证条件。
+只读/纸面/消息交付；不新增检索、文件、极点求值或FEM，不实施反馈。数值任务本批已完成，46例与原4留出均不动。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，
