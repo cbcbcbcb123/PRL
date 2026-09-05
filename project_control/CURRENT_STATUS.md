@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-06
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 166065db1d0db93bbc7c148efc2a325be57b4263
-current_lifecycle: paper2_soft_cell_scale_literature_checked_baseline_no_new_batch
+verified_commit: 333751b1979a7daeeda8f37df62171ccbabd3ca8
+current_lifecycle: paper2_muscle_side_input_correction_accepted_baseline
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section50_brief75_literature_check_complete_no_new_numerical_batch
+execution_authorized: v04_section51_brief76_input_check_complete_no_new_numerical_batch
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_cell_bloch_asymptotic_probe/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划50/简报75，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
+当前裁决（主计划51/简报76，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
 已完成并通过总管独立几何与解析输入重建；theta=0.02时领先系数误差分别约0.008558%和0.016599%。
 本批计算0.0750725000秒，独立复核0.0177348000秒且0新右端；没有新增FEM或解盲原四留出。
 长波连接伸长可写成普通应变—曲率恢复，alpha=-0.778458496485260，z_eff/b=0.49625，
@@ -89,7 +89,12 @@ theta=ka的长波展开是否非一致；只查法向输入、连接伸长Y与�
 两篇定向原始文献核查已完成：Nature Physics 2018的软转动长度与JMPS 2026作者稿的
 尺度分类提供直接基线，详见简报75。后者的接触弯曲刚度不能等同本项目胞内角刚度。
 数学推导保留，但本轮没有形成超出已有机制的具体差别；该尺度归为适用性基线，不自动扩算。
-两角色均完成，不重复查新或旧任务；下一科学任务仍须有具体问题和预算，尚无新增数值授权。
+主计划51/简报76.1纸面检查已完成：心肌侧法向加载诱发切向均值B_x=-ikAh，且P1法向
+高谐波与法切刚度产生同阶J_h源，不能只替换C_h就沿用规定细胞基底迹的软角零极限。
+总管发现并纠正初稿的二阶高谐波遗漏；已核对m=0闭合和软角系数，但不接受所有h固定符号。
+一个充分参数界可排除“所有有限h都为零”；未确认生理参数满足，也不是DCM独有或新机制证明。
+原理论agent在本次20分钟预算内交接并收口，不追全域厚度符号；未新增求值、查新或生产实现。
+下一步仍须筛出超出该经典加载修正的具体可检验预测才另行决定计算，不自动延长此证明链。
 数值任务保持完成，15例既有输出本轮只读核实仍全部检查通过；无新计算或原留出读取。
 这是独立理想边界研究，不是已实现三层耦合；不启动新FEM、扫描、原留出、流体或非线性。
 Nature Physics目标保持；生产心肌FEM/ECM黏弹FEM不变，现有链不追认为完整细胞DCM。
