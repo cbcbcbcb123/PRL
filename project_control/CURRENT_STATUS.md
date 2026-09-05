@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 72bd9bfb76092a69858c94215a58ca9562d37d2b
-current_lifecycle: paper2_cell_port_identifiability_accepted_finite_ecm_theory
+verified_commit: 4dc33384bfe03b83554502ace085d825b24abfda
+current_lifecycle: paper2_finite_ecm_port_accepted_tangential_response_theory
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section37_brief61_finite_ecm_static_boundary_theory_only
+execution_authorized: v04_section38_brief62_tangential_leading_response_theory_only
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_cell_bloch_asymptotic_probe/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划37/简报61，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
+当前裁决（主计划38/简报62，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
 已完成并通过总管独立几何与解析输入重建；theta=0.02时领先系数误差分别约0.008558%和0.016599%。
 本批计算0.0750725000秒，独立复核0.0177348000秒且0新右端；没有新增FEM或解盲原四留出。
 长波连接伸长可写成普通应变—曲率恢复，alpha=-0.778458496485260，z_eff/b=0.49625，
@@ -42,9 +42,12 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 完整基底端口含平均位移与一阶空间矩各法/切两分量；Y/W都有明确恢复式。
 已纠正“连接刚度必不可由形变识别”的过强说法：给定其他组合参数可反演，但当前固定理想点
 相对误差放大约75.94倍，提示独立连接力学测量可能更有信息；不是实验精度或普适不可识别定理。
-数值任务结束，无新求解。下一步复用理论agent一次20分钟，仅推导有限厚度静态ECM受细胞反作用的
-完整边界表达，检查胞尺度空间谐波及模式选择；这是独立理想边界研究，不是已实现三层耦合。
-不以两条标量传递函数冒充完整耦合，不启动新FEM、扫描、原留出、流体或非线性。
+第37节受载ECM边界已独立验收：必须保留P1诱发的全部Bloch谐波；约化刚度非负且受附着上界控制，
+但局部位移/应变不因此被禁止放大。k=0厚层中均值端口趋软、胞内坡度端口保持有限；
+均匀驱动却仍给Y=W=0，端口反差不是实际局部负荷增长或Nature Physics创新证明。
+数值任务结束，本轮0新求解。下一项20分钟纸面任务只核对非零长波切向驱动的实际领先响应，
+判断其是否由一个明确的厚度依赖坡度刚度控制；不先运行新波数/厚度点。
+这是独立理想边界研究，不是已实现三层耦合；不启动新FEM、扫描、原留出、流体或非线性。
 Nature Physics目标保持；生产心肌FEM/ECM黏弹FEM不变，现有链不追认为完整细胞DCM。
 
 以下为保留的阶段证据沿革；其中“当前”“只批准”等措辞仅适用于相应历史阶段。
