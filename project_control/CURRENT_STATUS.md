@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 0fa6805d888e2468b51298d46bb44ff154b499d6
-current_lifecycle: paper2_mean_normal_postprocess_accepted_notch_prediction_error_theory
+verified_commit: 0c14e456a3dfe737abb2b91d3128f8a98c547277
+current_lifecycle: paper2_impedance_shift_preregistered_twelve_endpoint_test_authorized
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: notch_position_and_macro_error_tolerance_theory_only_v04_section13
+execution_authorized: impedance_shift_twelve_endpoints_v04_section14_science_brief28
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_transverse_notch/v02_20260905/mean_normal_transfer_v01.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -77,8 +77,12 @@ chi0 直接套 S1 的相位差约 50.7°，该阴性项保留，不能外推为�
 第 12 节现有 8 例后处理与文献核查均已完成，验收见简报第 26 节。后处理 0.32019 秒，
 总管独立指数传播与交付系数/预测最大差 2.502e-16，输入摘要一致，全部阴性项保留；没有新 FEM。
 五个原始来源已记录读取层级，经典厚度传递/相消/可观测性不是创新证明；均值牵引低谷不能称作耗散低谷。
-当前按 v04 第 13 节仅让理论 agent 求完整法向传递下三个边界刚度的牵引驻点和宏观闭合误差容限，
-不把厚度变化驻点或训练残差保证直接移植，不授权新 FEM。原 4 留出仍锁定，累计完成 34。
+第 27 节牵引驻点已交接，总管以九个固定点的指数传播/解析导数复核，接受局部候选与条件容限；没有跨刚度独立误差保证。
+总管已纠正“充分条件失败就否定预测”和“S3-only 缺少 FEM 误差代理”的建议，并获理论 agent 独立逻辑核查。
+现按 v04 第 14 节/简报第 28 节另行授权第三批：K_nx=0.6/1.0 的中心 H=0.198283976/0.314541897，
+各中心±0.03及中心、每点S2/S3，共12个A1/T128/De=.2端点。源预测先冻结，实际整体应变不用于重定位。
+位置门与宏观闭合诊断分开；不重复K=.8训练点、不运行原4留出。当前已完成34，本批起始0/12，若全完成合计46。
+本批求解最多900秒、1CPU/8GiB、无网络/无GPU；正式结果以新目录及执行任务快照为准，不自动改门、补点或重试。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，
