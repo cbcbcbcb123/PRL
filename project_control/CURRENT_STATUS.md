@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: f7e2c12c2474e44e72b4ebedd4bd69792f3cd30b
-current_lifecycle: paper2_tangential_ecm_law_accepted_joint_observable_bound_check
+verified_commit: 0e3813f206b50a6b75b11d5f43975040bc339be2
+current_lifecycle: paper2_static_branch_closed_supervisor_scientific_hypothesis_screen
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section39_brief63_joint_observable_and_effect_bound_theory_only
+execution_authorized: v04_section39_brief64_supervisor_primary_literature_hypothesis_review_only
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_cell_bloch_asymptotic_probe/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划39/简报63，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
+当前裁决（主计划39/简报64，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
 已完成并通过总管独立几何与解析输入重建；theta=0.02时领先系数误差分别约0.008558%和0.016599%。
 本批计算0.0750725000秒，独立复核0.0177348000秒且0新右端；没有新增FEM或解盲原四留出。
 长波连接伸长可写成普通应变—曲率恢复，alpha=-0.778458496485260，z_eff/b=0.49625，
@@ -47,10 +47,12 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 均匀驱动却仍给Y=W=0，端口反差不是实际局部负荷增长或Nature Physics创新证明。
 第38节已独立验收：固定有限h取切向长波极限，原c1公式只需C替换为C_h=a^2*(K_D)_xx；
 C_h随厚度非增，所以|c1(h)|非增且有非零下界。这是限定经典响应律，不是厚层所有局部量都减小。
-总管由同一2x2系统提出待核对的Y/W共同关系及效应上界；固定理想参数下连接伸长相对变化的
-保守上界约0.264752%，不据此声称真实组织效应微小或实验不可测，也不增加扫描来救大效应。
-数值任务结束，本轮0新求解。下一项最多10分钟纸面核查只验算共同观测关系、绝对/相对尺度，
-明确能否构成不拟合ECM厚度响应的实验候选检验；不先运行新波数/厚度点。
+第39节Y/W共同关系与效应上界也已独立验收；固定理想参数下连接伸长的保守相对变化上界
+约0.264752%（以薄层幅值为分母）。不据此声称真实组织效应微小或实验不可测。
+Y/W关系是依赖独立细胞参数的模型必要检验，不是无参数规律；近零差分不取比，有限k须统一相位。
+本阶段收缩“强厚度效应/DCM独占”的创新主张，保留静态分支为基线，不增加扫描或重建平台。
+理论及数值任务均已完成。下一轮由总管用一次20分钟、最多3篇原始研究核对最接近解释，
+筛选0至2个具体可证伪候选；有明确假设后再下发新任务，不自动追加物理机制或参数点。
 这是独立理想边界研究，不是已实现三层耦合；不启动新FEM、扫描、原留出、流体或非线性。
 Nature Physics目标保持；生产心肌FEM/ECM黏弹FEM不变，现有链不追认为完整细胞DCM。
 
