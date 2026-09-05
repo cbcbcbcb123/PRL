@@ -1,0 +1,475 @@
+{
+  "B1": 0.00011512227247895083,
+  "actual_config": {
+    "action_reaction_relative_tolerance": 1e-10,
+    "activation_peak": 0.1,
+    "cases": [
+      "P0",
+      "P1",
+      "A1",
+      "A2",
+      "LN",
+      "LS",
+      "C0",
+      "CQ",
+      "S1"
+    ],
+    "config_digest": "ab8e3b6ba0f7ce2189dde208a5ea6ca9287dd3a4e4ac3c33d3bc05139cfc75c6",
+    "cycle_state_relative_tolerance": 0.001,
+    "direct_backward_error_tolerance": 1e-12,
+    "direct_relative_residual_tolerance": 1e-07,
+    "direct_solver": "scipy_superlu",
+    "discrete_ledger_closure_tolerance": 1e-10,
+    "dissipation_lower_tolerance": -1e-12,
+    "ecm_drag": 0.05,
+    "ecm_equilibrium_poisson_ratio": 0.45,
+    "ecm_equilibrium_young_modulus": 1.0,
+    "ecm_maxwell_poisson_ratio": 0.3,
+    "ecm_maxwell_young_modulus": 0.7,
+    "ecm_myocardium_interface_stiffness": 8.0,
+    "ecm_relaxation_time": 0.2,
+    "ecm_thickness": 0.314541897,
+    "endocardial_axial_stiffness": 1.0,
+    "endocardial_bending_stiffness": 0.02,
+    "endocardial_drag": 0.1,
+    "endocardial_transverse_stiffness": 0.25,
+    "endocardium_ecm_interface_stiffness": 7.0,
+    "length": 1.0,
+    "manufactured_solution_relative_tolerance": 1e-06,
+    "mesh_diagonal": "lower_left_to_upper_right",
+    "myocardium_drag": 0.12,
+    "myocardium_poisson_ratio": 0.3,
+    "myocardium_thickness": 0.2,
+    "myocardium_young_modulus": 2.5,
+    "normal_traction_peak": 0.08,
+    "passive_perturbation_strain": 0.0001,
+    "period": 1.0,
+    "power_ledger_relative_tolerance": 1e-08,
+    "schema": "paper2_hybrid_active_config_v08",
+    "spatial_activation_contrast": 0.35,
+    "spatial_levels": [
+      {
+        "label": "S2",
+        "nx": 32,
+        "ny_per_layer": 8
+      },
+      {
+        "label": "S3",
+        "nx": 64,
+        "ny_per_layer": 16
+      },
+      {
+        "label": "S4",
+        "nx": 128,
+        "ny_per_layer": 32
+      }
+    ],
+    "support_normal_stiffness": 0.6,
+    "support_tangential_stiffness": 0.45,
+    "tangential_traction_peak": 0.05,
+    "time_steps_per_cycle": [
+      64,
+      128,
+      256
+    ],
+    "x_boundary_condition": "affine_periodic_common_macro_strain",
+    "zero_state_absolute_tolerance": 1e-10
+  },
+  "arrays": {
+    "key_count": 50,
+    "path": "cases/impedance_shift__k1__de0p2__h0p314541897__a1__s2__t128__a0p1.npz",
+    "sha256": "92b247f3e225f88d7d1a2beec864722aa0f52ad23c4b940edb10037c6c1d7ca7"
+  },
+  "batch_cumulative_elapsed_seconds": 41.52196332899621,
+  "diagnostic": {
+    "actual_c0": {
+      "amplitude": 3.758364124301179e-05,
+      "imag": 2.861159142850238e-05,
+      "real": -2.4370205682592545e-05
+    },
+    "actual_macro_strain": {
+      "amplitude": 0.012700568089818912,
+      "imag": -0.0012041586104741958,
+      "real": 0.012643355244749997
+    },
+    "actual_minus_source_strain": {
+      "amplitude": 1.7180763606548437e-05,
+      "imag": 1.1272346952100835e-05,
+      "real": 1.2965833266534096e-05
+    },
+    "chi0": {
+      "amplitude": 0.25377471040116173,
+      "imag": -0.024308619148525886,
+      "real": 0.25260778822966923
+    },
+    "conditional_c0": {
+      "amplitude": 3.758251660844068e-05,
+      "imag": 2.861198114767385e-05,
+      "real": -2.4368013653740337e-05
+    },
+    "conditional_comparison": {
+      "absolute_complex_residual": 2.22640327019244e-09,
+      "floor": 1e-12,
+      "phase_interpretable": true,
+      "phase_prediction_minus_actual_deg": -0.002929308808680677,
+      "prediction": {
+        "amplitude": 3.758251660844068e-05,
+        "imag": 2.861198114767385e-05,
+        "real": -2.4368013653740337e-05
+      },
+      "prediction_minus_actual": {
+        "amplitude": 2.22640327019244e-09,
+        "imag": 3.8971917146795525e-10,
+        "real": 2.1920288522083646e-09
+      },
+      "relative_complex_residual_using_actual_c0": 5.9238626076615496e-05
+    },
+    "p_activation": {
+      "amplitude": 0.027572916942253677,
+      "imag": 0.0158486426966904,
+      "real": 0.022562940264448293
+    },
+    "p_epsilon": {
+      "amplitude": 0.10831487099713005,
+      "imag": 0.07259489048493727,
+      "real": 0.0803871454562537
+    },
+    "role": "post-hoc error attribution only; not used to relocate any frozen H or alter the position gate",
+    "source_c0": {
+      "amplitude": 3.634705310759869e-05,
+      "imag": 2.6764576107571997e-05,
+      "real": -2.4591985186002896e-05
+    },
+    "source_comparison": {
+      "absolute_complex_residual": 1.8602827053661796e-06,
+      "floor": 1e-12,
+      "phase_interpretable": true,
+      "phase_prediction_minus_actual_deg": 2.154575513462779,
+      "prediction": {
+        "amplitude": 3.634705310759869e-05,
+        "imag": 2.6764576107571997e-05,
+        "real": -2.4591985186002896e-05
+      },
+      "prediction_minus_actual": {
+        "amplitude": 1.8602827053661796e-06,
+        "imag": -1.8470153209303843e-06,
+        "real": -2.217795034103502e-07
+      },
+      "relative_complex_residual_using_actual_c0": 0.049497138750814254
+    },
+    "source_macro_strain": {
+      "amplitude": 0.012688735520058086,
+      "imag": -0.0012154309574262966,
+      "real": 0.012630389411483462
+    }
+  },
+  "endpoint_structural_gate": {
+    "checks": {
+      "cycle_state": {
+        "pass": true,
+        "threshold": 0.001,
+        "value": 2.382209448142375e-16
+      },
+      "direct_normwise_backward_error": {
+        "pass": true,
+        "threshold": 1e-12,
+        "value": 9.345596682375494e-18
+      },
+      "direct_relative_residual": {
+        "pass": true,
+        "threshold": 1e-07,
+        "value": 1.2148618042106848e-13
+      },
+      "discrete_ledger_closure": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 4.17516139700629e-16
+      },
+      "finite_ledger": {
+        "pass": true,
+        "threshold": true,
+        "value": true
+      },
+      "interface_action_reaction": {
+        "pass": true,
+        "threshold": 1e-10,
+        "value": 0.0
+      },
+      "nonnegative_dissipation": {
+        "pass": true,
+        "threshold": -1e-12,
+        "value": 1.268584719332127e-09
+      },
+      "power_ledger": {
+        "pass": true,
+        "threshold": 1e-08,
+        "value": 6.791945890944253e-13
+      }
+    },
+    "pass": true
+  },
+  "endpoint_summary": {
+    "base_endpoint_subtraction_ledger": {
+      "cycle_energy_change": 8.470329472543003e-20,
+      "maximum_normalized_residual": 1.3178824011536787e-12,
+      "minimum_physical_dissipation": 1.268584719332127e-09,
+      "total_active_work": 0.00010740663901793145,
+      "total_drag_dissipation": 3.937696650835764e-05,
+      "total_external_support_work": -6.964860757696493e-22,
+      "total_lumen_work": 0.0,
+      "total_sls_dissipation": 6.80296725095737e-05
+    },
+    "case_id": "A1",
+    "config_digest": "ab8e3b6ba0f7ce2189dde208a5ea6ca9287dd3a4e4ac3c33d3bc05139cfc75c6",
+    "cycle_state_relative_difference": 2.382209448142375e-16,
+    "endocardium_ecm_traction_l2": 0.0001893478324796602,
+    "hotspot_traction": 0.00022700071543289846,
+    "hotspot_x": -0.34375000000000006,
+    "interface_action_reaction_relative_error": 0.0,
+    "ledger": {
+      "all_arrays_finite": true,
+      "cycle_discrete_energy_change": 1.2790197503539935e-19,
+      "cycle_endpoint_energy_change": 8.470329472543003e-20,
+      "cycle_energy_change": 1.2790197503539935e-19,
+      "endpoint_energy_role": "audit_sidecar_only",
+      "energy_increment": "exact_midpoint_quadratic_bilinear",
+      "maximum_absolute_endpoint_subtraction_gap": 9.168284621080547e-18,
+      "maximum_ledger_minus_equilibrium_work_relative": 4.17516139700629e-16,
+      "maximum_normalized_residual": 6.791945890944253e-13,
+      "minimum_physical_dissipation": 1.268584719332127e-09,
+      "total_active_work": 0.00010740663901793145,
+      "total_drag_dissipation": 3.937696650835764e-05,
+      "total_external_support_work": -6.964860757696493e-22,
+      "total_lumen_work": 0.0,
+      "total_sls_dissipation": 6.80296725095737e-05
+    },
+    "manufactured_uniform_strain_relative_error": 6.306931008782972e-16,
+    "maximum_ecm_von_mises_proxy": 0.04131399336720413,
+    "maximum_endocardium_ecm_traction": 0.00034630535304491474,
+    "maximum_myocardium_ecm_traction": 0.0010149732654047422,
+    "maximum_state_norm": 0.6353750223462334,
+    "minimum_limited_shortening": 0.0011748909716860888,
+    "myocardium_ecm_traction_l2": 0.0003996989406965937,
+    "passive_tangent": 0.6730769230769178,
+    "peak_absolute_mean_endocardial_normal_displacement": 0.0005342659244857299,
+    "peak_absolute_mean_endocardial_tangential_displacement": 8.981097116000925e-15,
+    "peak_free_shortening": 0.1,
+    "peak_limited_shortening": 0.026575895405621913,
+    "shortening_fundamental_amplitude": 0.012700568089818912,
+    "shortening_phase_relative_to_activation_rad": -0.09495402171036206,
+    "shortening_waveform_l2": 0.01652812000929958,
+    "solver": {
+      "dc_normwise_backward_error": 9.345596682375494e-18,
+      "dc_relative_residual": 1.2148618042106848e-13,
+      "harmonic_normwise_backward_error": 1.0482810877468657e-18,
+      "harmonic_relative_residual": 1.557184631653501e-14,
+      "maximum_normwise_backward_error": 9.345596682375494e-18,
+      "maximum_relative_residual": 1.2148618042106848e-13,
+      "name": "scipy_superlu_direct",
+      "normwise_backward_error_pass": true,
+      "normwise_backward_error_tolerance": 1e-12,
+      "pass": true,
+      "relative_residual_pass": true,
+      "relative_residual_tolerance": 1e-07,
+      "residual_correction_steps": 0,
+      "solver_level": "D0"
+    },
+    "solver_level": "D0",
+    "spatial_level": "S2",
+    "state_size": 2753,
+    "steps_per_cycle": 128,
+    "tissue_roles": {
+      "ecm": "viscoelastic_plane_strain_fem",
+      "endocardium": "discrete_cell_chain",
+      "fluid": "absent_in_v08",
+      "myocardium": "active_plane_strain_fem"
+    }
+  },
+  "observables": {
+    "activation": {
+      "fundamental_amplitude": 0.05,
+      "fundamental_coefficient_imag": 8.239936510889834e-18,
+      "fundamental_coefficient_real": -0.05
+    },
+    "definitions": {
+      "active_work": "raw signed production discrete-ledger active work",
+      "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+      "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+      "phase_reference": "activation fundamental; omitted below amplitude floor",
+      "traction_sign": "production convention: positive on first named domain"
+    },
+    "endocardial_local_axial_strain_peak_fundamental": {
+      "amplitude": 0.012710473604160092,
+      "field_kind": "segment_axial_strain",
+      "phase_interpretable": true,
+      "phase_relative_to_activation_deg": 173.16662435250404,
+      "phase_relative_to_activation_rad": 3.0223277495153895,
+      "x": 0.015624999999999998
+    },
+    "endocardium_ecm_traction_peak_fundamental": {
+      "amplitude": 0.0001807705855366931,
+      "component": "y",
+      "field_kind": "nodal_vector_traction",
+      "phase_interpretable": true,
+      "phase_relative_to_activation_deg": -4.745190932442332,
+      "phase_relative_to_activation_rad": -0.08281920540689851,
+      "x": -4.530974155562894e-18
+    },
+    "existing_summary_observables": {
+      "maximum_ecm_von_mises_proxy": 0.04131399336720413,
+      "maximum_endocardium_ecm_traction": 0.00034630535304491474,
+      "maximum_myocardium_ecm_traction": 0.0010149732654047422,
+      "peak_absolute_mean_endocardial_normal_displacement": 0.0005342659244857299,
+      "peak_absolute_mean_endocardial_tangential_displacement": 8.981097116000925e-15
+    },
+    "myocardium_ecm_traction_peak_fundamental": {
+      "amplitude": 0.0004928076266040489,
+      "component": "y",
+      "field_kind": "nodal_vector_traction",
+      "phase_interpretable": true,
+      "phase_relative_to_activation_deg": -5.994171186649643,
+      "phase_relative_to_activation_rad": -0.10461802313521185,
+      "x": -0.49999999999999994
+    },
+    "overall_shortening": {
+      "amplitude": 0.012700568089818912,
+      "coefficient_imag": 0.0012041586104741958,
+      "coefficient_real": -0.012643355244749997,
+      "minimum": 0.0011748909716860888,
+      "peak": 0.026575895405621913,
+      "phase_interpretable": true,
+      "phase_relative_to_activation_deg": -5.440464691797336,
+      "phase_relative_to_activation_rad": -0.09495402171036206,
+      "waveform_l2": 0.01652812000929958
+    },
+    "state_fundamental_l2_amplitude": 0.2296915999593819,
+    "work_and_dissipation": {
+      "active_input_work_magnitude": 0.00010740663901793145,
+      "active_input_work_raw": 0.00010740663901793145,
+      "cycle_discrete_energy_change": 1.2790197503539935e-19,
+      "ecm_sls_dissipation": 6.80296725095737e-05,
+      "external_support_work": -6.964860757696493e-22,
+      "lumen_work": 0.0,
+      "other_drag_dissipation": 3.937696650835764e-05
+    }
+  },
+  "overall_shortening_fundamental": {
+    "amplitude": 0.012700568089818912,
+    "imag": 0.0012041586104741958,
+    "real": -0.012643355244749997
+  },
+  "project_fem_cumulative_elapsed_seconds": 145.97075112501625,
+  "raw_active_work": 0.00010740663901793145,
+  "runtime_seconds": 1.3376262829988264,
+  "schema": "paper2_impedance_shift_case_v01",
+  "spatial_modes": {
+    "B1": 0.00011512227247895083,
+    "c0": {
+      "amplitude": 3.758364124301179e-05,
+      "imag": 2.861159142850238e-05,
+      "real": -2.4370205682592545e-05
+    },
+    "c_cos": {
+      "amplitude": 0.00016278672837026227,
+      "imag": -2.1693375332361793e-05,
+      "real": -0.0001613347959994459
+    },
+    "c_sin": {
+      "amplitude": 2.599289891883719e-06,
+      "imag": 2.0366559429497213e-06,
+      "real": -1.6150357618630173e-06
+    },
+    "coordinate_domain": [
+      -0.49999999999999994,
+      0.5000000000000001
+    ],
+    "definition": {
+      "B1": "sqrt((|c_cos|^2+|c_sin|^2)/2)",
+      "c0": "L^-1 integral f dx",
+      "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+      "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+      "field": "time-fundamental complex y traction on the endocardium-ECM interface",
+      "integration": "exact analytic integration of the native piecewise-linear interpolant on every interface segment"
+    },
+    "node_count": 33,
+    "periodic_endpoint_check": {
+      "absolute_complex_mismatch": 0.0,
+      "note": "the finite-interval P1 integral remains the reported estimator even if endpoint samples differ",
+      "relative_to_peak_field": 0.0,
+      "used_as_assumption": false
+    },
+    "uniform_spacing_relative_error": 5.329070518200751e-15
+  },
+  "spec": {
+    "activation_peak": 0.1,
+    "active_profile": "uniform",
+    "case_id": "A1",
+    "de": 0.2,
+    "endocardial_axial_stiffness": 1.0,
+    "group": "impedance_shift",
+    "key": "impedance_shift__k1__de0p2__h0p314541897__a1__s2__t128__a0p1",
+    "spatial_label": "S2",
+    "steps_per_cycle": 128,
+    "thickness_ratio": 0.314541897
+  },
+  "status": "COMPLETED",
+  "system": {
+    "active_profile": "uniform",
+    "active_profile_average": 1.0,
+    "spatial_label": "S2",
+    "state_size": 2753
+  },
+  "system_checks": {
+    "active_power_derivative": {
+      "analytic": 0.024725872967710286,
+      "central_difference": 0.024725872946329552,
+      "pass": true,
+      "relative_error": 8.647109858062734e-10,
+      "threshold": 1e-07
+    },
+    "fixed_tissue_roles": {
+      "expected": {
+        "ecm": "viscoelastic_plane_strain_fem",
+        "endocardium": "discrete_cell_chain",
+        "fluid": "absent_in_v08",
+        "myocardium": "active_plane_strain_fem"
+      },
+      "pass": true,
+      "value": {
+        "ecm": "viscoelastic_plane_strain_fem",
+        "endocardium": "discrete_cell_chain",
+        "fluid": "absent_in_v08",
+        "myocardium": "active_plane_strain_fem"
+      }
+    },
+    "material_plus_support_matrix_symmetry": {
+      "pass": true,
+      "relative_error": 2.6748248091011777e-19,
+      "threshold": 1e-12
+    },
+    "normal_and_traction_sign": {
+      "interface_traction": "positive_on_first_named_domain",
+      "lumen_normal": "negative_y_from_lumen_toward_wall",
+      "pass": true
+    },
+    "rate_matrix_symmetry": {
+      "pass": true,
+      "relative_error": 2.8333648246483025e-18,
+      "threshold": 1e-12
+    },
+    "rigid_body_mode_control": {
+      "pass": true,
+      "positive_support_diagonal_count": 65,
+      "support_nnz": 129
+    },
+    "ufl_manual_assembly": {
+      "pass": true,
+      "relative_error": 6.306931008782972e-16,
+      "threshold": 1e-06
+    },
+    "units": {
+      "pass": true,
+      "system": "nondimensional_active_hybrid_benchmark"
+    }
+  }
+}

@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 0c14e456a3dfe737abb2b91d3128f8a98c547277
-current_lifecycle: paper2_impedance_shift_preregistered_twelve_endpoint_test_authorized
+verified_commit: 225c5a9dc7ecfc45e2c1b4a54d40a69f7dacecc9
+current_lifecycle: paper2_two_window_prediction_accepted_boundary_mode_theory_review
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: impedance_shift_twelve_endpoints_v04_section14_science_brief28
+execution_authorized: bounded_readonly_boundary_mode_theory_v04_section15_no_new_fem
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: results/paper2_transverse_notch/v02_20260905/mean_normal_transfer_v01.json
+latest_completed_execution_log: results/paper2_impedance_shift/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -35,7 +35,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 人类于 2026-09-05 明确批准实施 science-first v04：先判断全局收缩与心内膜局部负荷之间
 是否存在可预测、非平凡的关系。计算基础具备，核心科学贡献尚未得到证明；允许最多
-30 个首轮二维理想体 CPU 工况，首轮已在 26 个完成处收缩；另行授权的第二批已完成 8 个，累计 34 个。
+30 个首轮二维理想体 CPU 工况，首轮已在 26 个完成处收缩；另行授权的第二批完成 8 个、第三批完成 12 个，累计 46 个。
 原 4 个留出未运行。探索不必等待完整 Figure 2 认证或 C1 整理。
 唯一活跃架构仍为离散心内膜弹性链＋主动心肌 FEM＋黏弹 ECM FEM；器官方向为心室/EFE。
 不恢复心肌 DCM，不加入流体、真实三维几何或生物反馈，不把线性滤波当作相变或疾病机制。
@@ -79,10 +79,15 @@ chi0 直接套 S1 的相位差约 50.7°，该阴性项保留，不能外推为�
 五个原始来源已记录读取层级，经典厚度传递/相消/可观测性不是创新证明；均值牵引低谷不能称作耗散低谷。
 第 27 节牵引驻点已交接，总管以九个固定点的指数传播/解析导数复核，接受局部候选与条件容限；没有跨刚度独立误差保证。
 总管已纠正“充分条件失败就否定预测”和“S3-only 缺少 FEM 误差代理”的建议，并获理论 agent 独立逻辑核查。
-现按 v04 第 14 节/简报第 28 节另行授权第三批：K_nx=0.6/1.0 的中心 H=0.198283976/0.314541897，
-各中心±0.03及中心、每点S2/S3，共12个A1/T128/De=.2端点。源预测先冻结，实际整体应变不用于重定位。
-位置门与宏观闭合诊断分开；不重复K=.8训练点、不运行原4留出。当前已完成34，本批起始0/12，若全完成合计46。
-本批求解最多900秒、1CPU/8GiB、无网络/无GPU；正式结果以新目录及执行任务快照为准，不自动改门、补点或重试。
+第三批按 v04 第 14 节/简报第 28 节已完成12/12，总管独立验收见简报第29节。
+K_nx=0.6/1.0 的预报中心 H=0.198283976/0.314541897、各中心±0.03、每点S2/S3，
+四侧 D/(2E)=169.87/153.77/120.46/114.70，位置门 PASS；仅这两个预报窗口获支持，不外推全刚度单调定律。
+源预测先冻结，实际整体应变未用于重定位；事后宏观充分条件诊断四侧为正，不是严格连续误差界。
+两中心B1/|c0|=13.17/3.09，不是全场卸载；主动功不相等。独立原始数组DFT/投影复算最大差4.471e-18，
+12份JSON/NPZ和直接源码摘要匹配，96个记录结构子门通过、全部数组有限；不覆盖第一批旧空间失败。
+实际容器退出0，1CPU/8GiB、无网络/无GPU、只读项目与根文件系统。本批57.42秒，FEM加失败预扣累计161.87秒。
+实际总数46，K=.8未重跑、原4留出未运行。数值任务停止新算；v04第15节只读理论任务已交同一agent，
+核查均匀A1下局部空间模态的锚定/阻尼激发与ECM传递来源，提出一个最小可证伪预测，不自动扩扫。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，

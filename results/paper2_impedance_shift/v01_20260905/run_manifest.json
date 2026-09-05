@@ -1,0 +1,357 @@
+{
+  "budget": {
+    "batch_wall_seconds": 900.0,
+    "prior_fem_cumulative_seconds": 104.44878690800397,
+    "prior_small_matrix_and_postprocessing_time_separate": true,
+    "project_wall_seconds": 7200.0
+  },
+  "case_count": 12,
+  "cases": [
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "endocardial_axial_stiffness": 0.6,
+      "group": "impedance_shift",
+      "key": "impedance_shift__k0p6__de0p2__h0p168283976__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.168283976
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "endocardial_axial_stiffness": 0.6,
+      "group": "impedance_shift",
+      "key": "impedance_shift__k0p6__de0p2__h0p168283976__a1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.168283976
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "endocardial_axial_stiffness": 0.6,
+      "group": "impedance_shift",
+      "key": "impedance_shift__k0p6__de0p2__h0p198283976__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.198283976
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "endocardial_axial_stiffness": 0.6,
+      "group": "impedance_shift",
+      "key": "impedance_shift__k0p6__de0p2__h0p198283976__a1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.198283976
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "endocardial_axial_stiffness": 0.6,
+      "group": "impedance_shift",
+      "key": "impedance_shift__k0p6__de0p2__h0p228283976__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.228283976
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "endocardial_axial_stiffness": 0.6,
+      "group": "impedance_shift",
+      "key": "impedance_shift__k0p6__de0p2__h0p228283976__a1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.228283976
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "endocardial_axial_stiffness": 1.0,
+      "group": "impedance_shift",
+      "key": "impedance_shift__k1__de0p2__h0p284541897__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.284541897
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "endocardial_axial_stiffness": 1.0,
+      "group": "impedance_shift",
+      "key": "impedance_shift__k1__de0p2__h0p284541897__a1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.284541897
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "endocardial_axial_stiffness": 1.0,
+      "group": "impedance_shift",
+      "key": "impedance_shift__k1__de0p2__h0p314541897__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.314541897
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "endocardial_axial_stiffness": 1.0,
+      "group": "impedance_shift",
+      "key": "impedance_shift__k1__de0p2__h0p314541897__a1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.314541897
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "endocardial_axial_stiffness": 1.0,
+      "group": "impedance_shift",
+      "key": "impedance_shift__k1__de0p2__h0p344541897__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.344541897
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "endocardial_axial_stiffness": 1.0,
+      "group": "impedance_shift",
+      "key": "impedance_shift__k1__de0p2__h0p344541897__a1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.344541897
+    }
+  ],
+  "claim_boundary": {
+    "K0p8_not_rerun": true,
+    "actual_macro_strain_not_used_to_move_points": true,
+    "no_S1_or_frequency_axis_or_new_physics": true,
+    "not_continuous_unique_global_or_novelty_certification": true,
+    "position_gate_independent_of_macro_sufficient_condition": true
+  },
+  "container": {
+    "container_name": "prl-paper2-impedance-shift-v01-20260905",
+    "cpu_limit": 1,
+    "gpu": "not_requested",
+    "image": "dolfinx/dolfinx:v0.11.0",
+    "image_id": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+    "memory_limit_gib": 8,
+    "network": "none",
+    "only_writable_bind_mount": "/output",
+    "project_mount": "read_only",
+    "root_filesystem": "read_only"
+  },
+  "created_at_utc": "2026-09-05T04:17:35.628869+00:00",
+  "evidence_level": "preregistered_forward_exploratory_window_test",
+  "fourier_self_test": {
+    "normalization_checked": [
+      "constant",
+      "cos(2pi x/L)",
+      "sin(2pi x/L)"
+    ],
+    "p1_hat_factor": 0.9967913640449608,
+    "pass": true,
+    "spatial_exact_p1_errors": {
+      "constant": 0.0,
+      "cosine": 2.2887833992611187e-16,
+      "sine": 1.2412670766236366e-16
+    },
+    "temporal_fundamental_errors": {
+      "constant": 0.0,
+      "cosine": 1.4087017584950323e-16,
+      "sine": 1.5803862346158038e-16
+    },
+    "tolerance": 2e-13
+  },
+  "holdouts": "LOCKED_NOT_RUN",
+  "manufactured_interface_check": {
+    "absolute_force_imbalance": 0.0,
+    "pass": true,
+    "relative_force_imbalance": 0.0,
+    "threshold": 1e-12
+  },
+  "normal_transfer_self_test": {
+    "harmonic_errors": {
+      "constant": 0.0,
+      "cosine": 1.4087017584950323e-16,
+      "sine": 1.5803862346158038e-16
+    },
+    "pass": true,
+    "tolerance": 2e-13,
+    "zero_drag_layer_limit_error": 0.0
+  },
+  "prediction": {
+    "brief_path": "results/paper2_science_pilot/v01_20260905/science_brief.md",
+    "brief_sha256": "2b677d44a42a863e9e38456cb66520c88130c66983aa58bb60045441718bb319",
+    "commit": "225c5a9dc7ecfc45e2c1b4a54d40a69f7dacecc9",
+    "points": {
+      "0.6": [
+        0.168283976,
+        0.198283976,
+        0.228283976
+      ],
+      "1.0": [
+        0.284541897,
+        0.314541897,
+        0.344541897
+      ]
+    },
+    "source_amplitudes": {
+      "0.6": [
+        9.727928e-05,
+        2.038394e-05,
+        8.994924e-05
+      ],
+      "1.0": [
+        7.703323e-05,
+        3.634705e-05,
+        7.357345e-05
+      ]
+    }
+  },
+  "runner": {
+    "path": "scripts/run_paper2_impedance_shift_v01.py",
+    "sha256": "26ad7dc0ebf74bf5eb16f26a397054d3eeb4b514c0161559f815b0e2bc4fada8"
+  },
+  "runtime": {
+    "PYTHONPATH": "/workspace/src:/usr/local/dolfinx-real/lib/python3.12/dist-packages:/usr/local/lib:",
+    "dependency_import_regression": {
+      "checked_before_any_FEM": true,
+      "dolfinx_path": "/usr/local/dolfinx-real/lib/python3.12/dist-packages/dolfinx/__init__.py",
+      "paper2_hybrid_path": "/workspace/src/paper2_hybrid/__init__.py",
+      "pass": true
+    },
+    "dolfinx": "0.11.0.post0",
+    "numpy": "2.4.6",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "scipy": "1.17.1"
+  },
+  "runtime_source": {
+    "git_version_at_launch": "225c5a9dc7ecfc45e2c1b4a54d40a69f7dacecc9",
+    "source_hashes": {
+      "scripts/analyze_paper2_mean_normal_transfer_v01.py": "5b6e9e0ec423403e0d8c34a57be242b87bfcd0d7c5df3162fbe188ad36762bc3",
+      "scripts/run_paper2_science_pilot_v01.py": "2675b91436dacc43ed9ad3121b8a24dfd8826f93440db184bbd7abad597002e7",
+      "scripts/run_paper2_transverse_notch_v02.py": "13f0699cb28e7b2ee2c14e90811b75f55c43b0ab82279b2e1687d886a72e9d79",
+      "src/paper2_hybrid/config.py": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe",
+      "src/paper2_hybrid/model.py": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800",
+      "src/paper2_hybrid/numerics.py": "620381c4f0165801f2af03defe587e8381c9b6859f8bbd9d2f84198a555331e4",
+      "src/paper2_hybrid/validation.py": "6cfc1f383dbe92b6684eb1bd7f228610815ad67bd60ba1ecaaef8ab91cb1f0c5"
+    }
+  },
+  "schema": "paper2_impedance_shift_v01",
+  "source_point_preflight": {
+    "activation_fundamental_used": {
+      "amplitude": 0.05,
+      "imag": 0.0,
+      "real": -0.05
+    },
+    "note": "source-only check before FEM; no actual macro strain or response was used to move any point",
+    "pass": true,
+    "records": [
+      {
+        "endocardial_axial_stiffness": 0.6,
+        "expected_rounded_amplitude": 9.727928e-05,
+        "pass": true,
+        "relative_difference_from_rounded_table": 2.0338350714049366e-08,
+        "source_c0": {
+          "amplitude": 9.727928197850011e-05,
+          "imag": -7.694585200891397e-05,
+          "real": -5.951969893131892e-05
+        },
+        "thickness_ratio": 0.168283976
+      },
+      {
+        "endocardial_axial_stiffness": 0.6,
+        "expected_rounded_amplitude": 2.038394e-05,
+        "pass": true,
+        "relative_difference_from_rounded_table": 1.0582241473619372e-08,
+        "source_c0": {
+          "amplitude": 2.0383939784292224e-05,
+          "imag": -1.557406593699314e-05,
+          "real": 1.3151177563999403e-05
+        },
+        "thickness_ratio": 0.198283976
+      },
+      {
+        "endocardial_axial_stiffness": 0.6,
+        "expected_rounded_amplitude": 8.994924e-05,
+        "pass": true,
+        "relative_difference_from_rounded_table": 3.9759372947484396e-08,
+        "source_c0": {
+          "amplitude": 8.994924357632538e-05,
+          "imag": 4.097523231210874e-05,
+          "real": 8.007432020892737e-05
+        },
+        "thickness_ratio": 0.228283976
+      },
+      {
+        "endocardial_axial_stiffness": 1.0,
+        "expected_rounded_amplitude": 7.703323e-05,
+        "pass": true,
+        "relative_difference_from_rounded_table": 2.1394158023600095e-08,
+        "source_c0": {
+          "amplitude": 7.703323164806109e-05,
+          "imag": -1.912157584256849e-05,
+          "real": -7.462227626815429e-05
+        },
+        "thickness_ratio": 0.284541897
+      },
+      {
+        "endocardial_axial_stiffness": 1.0,
+        "expected_rounded_amplitude": 3.634705e-05,
+        "pass": true,
+        "relative_difference_from_rounded_table": 8.549796178018636e-08,
+        "source_c0": {
+          "amplitude": 3.634705310759869e-05,
+          "imag": 2.6764576107571997e-05,
+          "real": -2.4591985186002896e-05
+        },
+        "thickness_ratio": 0.314541897
+      },
+      {
+        "endocardial_axial_stiffness": 1.0,
+        "expected_rounded_amplitude": 7.357345e-05,
+        "pass": true,
+        "relative_difference_from_rounded_table": 5.657695027749929e-08,
+        "source_c0": {
+          "amplitude": 7.357345416256142e-05,
+          "imag": 7.006909100917098e-05,
+          "real": 2.24360344659889e-05
+        },
+        "thickness_ratio": 0.344541897
+      }
+    ]
+  },
+  "status": "STARTED_FAIL_CLOSED_WITH_FINAL_STATUS_IN_SUMMARY"
+}
