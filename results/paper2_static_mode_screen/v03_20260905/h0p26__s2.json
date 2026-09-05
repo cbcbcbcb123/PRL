@@ -1,0 +1,419 @@
+{
+  "claim_boundary": {
+    "drag_and_relaxation_rate_do_not_enter_static_solution": true,
+    "ecm_relaxation_time_recorded_but_not_a_memory_test": true,
+    "not_blind_and_no_holdout_read": true,
+    "not_continuous_spectrum_convergence": true,
+    "not_endocardial_traction_dominance_gate": true,
+    "not_equal_input_power_or_equal_macro_shortening": true,
+    "not_feedback_instability_or_dynamic_criticality": true,
+    "not_nature_physics_novelty_or_validation": true,
+    "static_only_s_equals_zero": true
+  },
+  "material_scalar": {
+    "d_C_xxxx": 3.365384615384615,
+    "lame_lambda_myocardium": 1.4423076923076923,
+    "myocardium_area_from_cells": 0.20000000000000007,
+    "nominal_L_times_h_m": 0.2,
+    "shear_modulus_myocardium": 0.9615384615384615
+  },
+  "npz": {
+    "bytes": 229274,
+    "path": "results/paper2_static_mode_screen/v03_20260905/h0p26__s2.npz",
+    "sha256": "14ee4126f0af46430bba4fcde23baf8d284457f1311f498eac467dca2f670d85"
+  },
+  "observations": {
+    "main_nonuniform": {
+      "endocardium_y_traction_metrics": {
+        "c0": -6.787214019976506e-15,
+        "c_cos": 0.006199601708799272,
+        "c_sin": -0.1911581820674565,
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "static y-traction derivative on the endocardium-ECM interface in code sign",
+          "integration": "exact analytic integration of the native real piecewise-linear interpolant",
+          "rms": "sqrt(sum dx*(f_left^2+f_left*f_right+f_right^2)/(3L))"
+        },
+        "node_count": 33,
+        "periodic_endpoint_check": {
+          "absolute_mismatch": 0.0,
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "spatial_rms": 0.13524045593411102,
+        "uniform_spacing_relative_error": 5.329070518200751e-15
+      },
+      "macro_strain": -1.6338786163782188e-13
+    },
+    "normalization": "each unit column divided by sqrt(W_jj); main z satisfies z^T W z=1",
+    "sign_convention": {
+      "physical_traction_on_endocardium": "negative of reported code-sign traction",
+      "reported": "t_y_code=k_upper*(u_y_endo-u_y_ecm_top)"
+    },
+    "unit_column_endocardium_y_traction_metrics_normalized": {
+      "cos_2k": {
+        "c0": -4.0090001630910255e-15,
+        "c_cos": 3.6239966231817894e-05,
+        "c_sin": 3.8536905990870906e-07,
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "static y-traction derivative on the endocardium-ECM interface in code sign",
+          "integration": "exact analytic integration of the native real piecewise-linear interpolant",
+          "rms": "sqrt(sum dx*(f_left^2+f_left*f_right+f_right^2)/(3L))"
+        },
+        "node_count": 33,
+        "periodic_endpoint_check": {
+          "absolute_mismatch": 0.0,
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "spatial_rms": 0.03110045559056164,
+        "uniform_spacing_relative_error": 5.329070518200751e-15
+      },
+      "cos_k": {
+        "c0": 2.3966289022792076e-15,
+        "c_cos": -0.19135100588745174,
+        "c_sin": -0.004324625522729013,
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "static y-traction derivative on the endocardium-ECM interface in code sign",
+          "integration": "exact analytic integration of the native real piecewise-linear interpolant",
+          "rms": "sqrt(sum dx*(f_left^2+f_left*f_right+f_right^2)/(3L))"
+        },
+        "node_count": 33,
+        "periodic_endpoint_check": {
+          "absolute_mismatch": 0.0,
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "spatial_rms": 0.13534028628971057,
+        "uniform_spacing_relative_error": 5.329070518200751e-15
+      },
+      "sin_2k": {
+        "c0": 3.3012600899468003e-16,
+        "c_cos": 1.126590103746794e-06,
+        "c_sin": 1.197995231951032e-08,
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "static y-traction derivative on the endocardium-ECM interface in code sign",
+          "integration": "exact analytic integration of the native real piecewise-linear interpolant",
+          "rms": "sqrt(sum dx*(f_left^2+f_left*f_right+f_right^2)/(3L))"
+        },
+        "node_count": 33,
+        "periodic_endpoint_check": {
+          "absolute_mismatch": 0.0,
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "spatial_rms": 0.031099582601081144,
+        "uniform_spacing_relative_error": 5.329070518200751e-15
+      },
+      "sin_k": {
+        "c0": -6.766505758482033e-15,
+        "c_cos": 0.004321738452036276,
+        "c_sin": -0.19120983726018465,
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "static y-traction derivative on the endocardium-ECM interface in code sign",
+          "integration": "exact analytic integration of the native real piecewise-linear interpolant",
+          "rms": "sqrt(sum dx*(f_left^2+f_left*f_right+f_right^2)/(3L))"
+        },
+        "node_count": 33,
+        "periodic_endpoint_check": {
+          "absolute_mismatch": 0.0,
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "spatial_rms": 0.13524044420614903,
+        "uniform_spacing_relative_error": 5.329070518200751e-15
+      },
+      "uniform": {
+        "c0": -3.744522256827164e-14,
+        "c_cos": 0.004895744567466557,
+        "c_sin": 5.206043973878496e-05,
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "static y-traction derivative on the endocardium-ECM interface in code sign",
+          "integration": "exact analytic integration of the native real piecewise-linear interpolant",
+          "rms": "sqrt(sum dx*(f_left^2+f_left*f_right+f_right^2)/(3L))"
+        },
+        "node_count": 33,
+        "periodic_endpoint_check": {
+          "absolute_mismatch": 0.0,
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "spatial_rms": 0.003464054104814255,
+        "uniform_spacing_relative_error": 5.329070518200751e-15
+      }
+    },
+    "unit_column_macro_strain_normalized": [
+      -0.3210237500582878,
+      0.009257675118665067,
+      9.086658531347333e-05,
+      -0.002376326969250602,
+      -7.38727633969497e-05
+    ]
+  },
+  "schema": "paper2_static_mode_screen_v03",
+  "solver": {
+    "factorization": "scipy.sparse.linalg.splu SuperLU",
+    "factorization_count": 1,
+    "maximum_normwise_backward_error": 1.2378284880326335e-17,
+    "maximum_relative_residual": 1.873315755654397e-13,
+    "normwise_backward_error_tolerance": 1e-12,
+    "normwise_backward_errors": [
+      1.2378284880326335e-17,
+      1.0915782737418753e-18,
+      9.125360639298626e-19,
+      5.689313239844032e-19,
+      1.1329407800193277e-19
+    ],
+    "relative_residual_tolerance": 1e-07,
+    "relative_residuals": [
+      1.873315755654397e-13,
+      9.690485192195867e-14,
+      7.128507123752408e-14,
+      1.6695677804667857e-14,
+      5.298602835373413e-15
+    ],
+    "rhs_count": 5
+  },
+  "source_definition": {
+    "basis": "[1,sqrt(2)cos(kx),sqrt(2)sin(kx),sqrt(2)cos(2kx),sqrt(2)sin(2kx)]",
+    "comparison": "same activation RMS under the true discrete W metric",
+    "k": 6.283185307179586,
+    "mode_labels": [
+      "uniform",
+      "cos_k",
+      "sin_k",
+      "cos_2k",
+      "sin_2k"
+    ],
+    "sampling": "existing myocardium triangle centroids and cell areas",
+    "unit_columns": "linear static response derivatives, not physiological unit activation"
+  },
+  "spectral_results": {
+    "Delta_lambda_nonuniform_minus_m0": -1.546495282504213,
+    "full_five_mode_generalized_eigenvalues": [
+      0.1409919187503572,
+      0.14106548989672793,
+      0.31767307333916317,
+      0.3188240854674942,
+      1.8657620674270303
+    ],
+    "full_lambda_max_is_trivial_containment_not_positive_gate": 1.8657620674270303,
+    "generalized_eigen_residuals": {
+      "constrained_residual_definition": "reduced Gram-subspace residual; the full-space residual may contain the discrete-mean constraint multiplier",
+      "full_five_mode": [
+        9.389172956882338e-16,
+        2.393845625908629e-16,
+        1.1248866900513724e-15,
+        8.932353509697072e-16,
+        7.150042632057826e-16
+      ],
+      "main_nonuniform": 7.364295964173748e-16,
+      "maximum_full": 1.1248866900513724e-15,
+      "n1": 1.2242261481671405e-17
+    },
+    "lambda_nonuniform": 0.3188240854674942,
+    "main_nonuniform_W_norm_squared": 1.0,
+    "main_nonuniform_coefficients_z": [
+      -3.1236668840539076e-18,
+      -0.009814797733352016,
+      0.9999518337127318,
+      1.1266356711893658e-14,
+      1.1501006108623384e-14
+    ],
+    "main_nonuniform_discrete_mean_W0z": -1.3650679821911264e-34,
+    "main_nonuniform_eigenvalue_gap": 0.0007333115208199015,
+    "main_nonuniform_near_degenerate": false,
+    "mean_nonmean_coupling_W_whitened_over_d": 0.007802868678208369,
+    "n1_lambda_max_after_discrete_mean_removal": 0.3188240854674944,
+    "n1_max_coefficients": [
+      -3.12366688405232e-18,
+      -0.009814797733352431,
+      0.9999518337127318,
+      0.0,
+      0.0
+    ],
+    "uniform_response_m0": 1.8653193679717073
+  },
+  "status": "COMPLETED_SYSTEM",
+  "structural_checks": {
+    "R_raw_relative_asymmetry": 3.8539161571321005e-14,
+    "R_raw_relative_asymmetry_definition": "||R-R^T||_F/max(||R||_F,d)",
+    "R_raw_relative_asymmetry_tolerance": 1e-10,
+    "W_condition_number": 1.0000000000000102,
+    "W_eigenvalues": [
+      0.9999999999999988,
+      0.9999999999999989,
+      0.9999999999999991,
+      1.0000000000000009,
+      1.0000000000000089
+    ],
+    "all_preregistered_gates_pass": true,
+    "gate_checks": {
+      "R_raw_relative_asymmetry": true,
+      "W_positive_definite": true,
+      "all_values_finite": true,
+      "five_mode_spectrum_bounds": true,
+      "normwise_backward_error": true,
+      "relative_residual": true,
+      "required_degrees_and_couplings_retained": true,
+      "three_identities": true
+    },
+    "identity_relative_errors": {
+      "D_raw_00_vs_production": 2.1443164704188733e-15,
+      "D_raw_over_area_vs_dW": 5.141707819829838e-15,
+      "uniform_H_column_vs_production": 0.0
+    },
+    "identity_tolerance": 1e-12,
+    "spectrum_bounds": [
+      -3.365384615384615e-08,
+      3.365384649038461
+    ]
+  },
+  "system": {
+    "active_profile_used_for_production_identity": "uniform",
+    "config": {
+      "action_reaction_relative_tolerance": 1e-10,
+      "activation_peak": 0.1,
+      "cases": [
+        "P0",
+        "P1",
+        "A1",
+        "A2",
+        "LN",
+        "LS",
+        "C0",
+        "CQ",
+        "S1"
+      ],
+      "cycle_state_relative_tolerance": 0.001,
+      "direct_backward_error_tolerance": 1e-12,
+      "direct_relative_residual_tolerance": 1e-07,
+      "direct_solver": "scipy_superlu",
+      "discrete_ledger_closure_tolerance": 1e-10,
+      "dissipation_lower_tolerance": -1e-12,
+      "ecm_drag": 0.05,
+      "ecm_equilibrium_poisson_ratio": 0.45,
+      "ecm_equilibrium_young_modulus": 1.0,
+      "ecm_maxwell_poisson_ratio": 0.3,
+      "ecm_maxwell_young_modulus": 0.7,
+      "ecm_myocardium_interface_stiffness": 8.0,
+      "ecm_relaxation_time": 0.2,
+      "ecm_thickness": 0.26,
+      "endocardial_axial_stiffness": 0.8,
+      "endocardial_bending_stiffness": 0.02,
+      "endocardial_drag": 0.1,
+      "endocardial_transverse_stiffness": 0.25,
+      "endocardium_ecm_interface_stiffness": 7.0,
+      "length": 1.0,
+      "manufactured_solution_relative_tolerance": 1e-06,
+      "mesh_diagonal": "lower_left_to_upper_right",
+      "myocardium_drag": 0.12,
+      "myocardium_poisson_ratio": 0.3,
+      "myocardium_thickness": 0.2,
+      "myocardium_young_modulus": 2.5,
+      "normal_traction_peak": 0.08,
+      "passive_perturbation_strain": 0.0001,
+      "period": 1.0,
+      "power_ledger_relative_tolerance": 1e-08,
+      "schema": "paper2_hybrid_active_config_v08",
+      "spatial_activation_contrast": 0.35,
+      "spatial_levels": [
+        {
+          "label": "S2",
+          "nx": 32,
+          "ny_per_layer": 8
+        },
+        {
+          "label": "S3",
+          "nx": 64,
+          "ny_per_layer": 16
+        },
+        {
+          "label": "S4",
+          "nx": 128,
+          "ny_per_layer": 32
+        }
+      ],
+      "support_normal_stiffness": 0.6,
+      "support_tangential_stiffness": 0.45,
+      "tangential_traction_peak": 0.05,
+      "time_steps_per_cycle": [
+        64,
+        128,
+        256
+      ],
+      "x_boundary_condition": "affine_periodic_common_macro_strain",
+      "zero_state_absolute_tolerance": 1e-10
+    },
+    "config_digest": "231345b1974ce2845a6f6430dbf678e1cf54415e5b6e464614aff1f30a54ac63",
+    "matrix_a_nnz": 32373,
+    "matrix_a_relative_asymmetry": 2.446981019585729e-19,
+    "matrix_a_shape": [
+      2753,
+      2753
+    ],
+    "mesh": {
+      "label": "S2",
+      "nx": 32,
+      "ny_per_layer": 8
+    },
+    "retention_checks": {
+      "ecm_internal_variables_retained": true,
+      "endocardium_ecm_interface_retained": true,
+      "macro_degree_retained": true,
+      "myocardium_ecm_interface_retained": true,
+      "support_retained": true
+    },
+    "spatial_label": "S2",
+    "state_size": 2753,
+    "thickness_ratio_H": 0.26
+  },
+  "timing": {
+    "assembly_seconds": 0.2080393060168717,
+    "batch_numerical_budget_seconds": 299.9481152329827,
+    "batch_numerical_elapsed_seconds_at_system_end": 4.506032126984792,
+    "factorization_seconds": 0.11277678899932653,
+    "five_rhs_solve_seconds": 0.006490314990514889
+  }
+}

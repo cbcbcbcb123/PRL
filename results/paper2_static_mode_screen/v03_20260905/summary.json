@@ -1,0 +1,194 @@
+{
+  "all_completed_system_structure_gates_pass": true,
+  "claim_boundary": {
+    "finite_five_mode_static_screen_only": true,
+    "full_five_dimensional_lambda_max_not_used_as_positive_gate": true,
+    "no_automatic_v02_extra_points_or_feedback": true,
+    "not_a_paper_pass_or_nature_physics_novelty": true,
+    "not_a_strict_discretization_error_bound": true,
+    "not_ecm_memory_selection": true,
+    "not_equal_power_or_equal_shortening": true,
+    "not_feedback_dynamics_or_pole_analysis": true,
+    "not_holdout_or_blind_prediction": true
+  },
+  "continuation_rule_result": "STOP_STATIC_PRIORITY_SMALL_SCOPE_CLAIM_PER_PREREGISTRATION",
+  "created_at_utc": "2026-09-05T07:59:24.220977+00:00",
+  "execution_count_ledger": {
+    "counts_are_not_equivalent_cases": true,
+    "new_completed_static_rhs": 30,
+    "new_completed_static_system_assemblies": 6,
+    "old_completed_periodic_cases": 46
+  },
+  "failure": null,
+  "frozen_inputs": {
+    "H": [
+      0.1,
+      0.26,
+      0.6
+    ],
+    "actual_checkout_at_launch": "476685b12e17a100abee1d571f8efd4f0e3db886",
+    "brief_path": "results/paper2_science_pilot/v01_20260905/science_brief.md",
+    "brief_sha256": "f5b377572af56e062ffde9069b530f19ceb4098bf91ca12dd655c8f172218c69",
+    "identity_drift_decision": "actual checkout differs only by the dispatched-task CURRENT_STATUS record; scientific files and direct production sources are byte-locked",
+    "mode_labels": [
+      "uniform",
+      "cos_k",
+      "sin_k",
+      "cos_2k",
+      "sin_2k"
+    ],
+    "plan_path": "project_control/prl_independent_theory_mainline_plan_v04.md",
+    "plan_sha256": "5b4bb166b56a4d40a9c36ca8b7d5484e55bc329a1cdb651dc2679e9ce0c0c2e3",
+    "preregistration_and_frozen_production_baseline": "2f1c9deebfb6d6a474ffe3ad52576b568cfc877c",
+    "s": 0.0,
+    "spatial_labels": [
+      "S2",
+      "S3"
+    ]
+  },
+  "next_gate": "SUPERVISOR_REVIEW_STOP",
+  "positive_candidate_count": 0,
+  "resource_accounting": {
+    "batch_budget_seconds": 299.9481152329827,
+    "batch_numerical_elapsed_seconds": 8.32065089099342,
+    "cpu_limit": 1,
+    "gpu": "not_used",
+    "memory_limit_gib": 8,
+    "network": "disabled_by_container",
+    "old_fem_and_failure_charge_seconds": 161.92011524902773,
+    "project_cumulative_fem_and_failure_charge_seconds": 170.24076614002115,
+    "project_stop_reestimate_seconds": 7200.0
+  },
+  "retry_provenance": {
+    "authorization": {
+      "record": "project_control/CURRENT_STATUS.md",
+      "scope": "one explicit-exec cache repair; no v04 on failure",
+      "sha256": "909c2c49fa161b5ba0f2a6b41e90329db72b9bedbae6aa073f5babff6cfebc55"
+    },
+    "budget": {
+      "original_static_numerical_budget_seconds": 300.0,
+      "v01_charged_seconds": 0.05188476701732725,
+      "v02_numerical_charge_seconds": 0.0,
+      "v03_remaining_budget_seconds": 299.9481152329827,
+      "v03_start_cumulative_fem_and_failure_charge_seconds": 161.92011524902773
+    },
+    "only_operational_change": {
+      "description": "explicit exec on the writable /root/.cache tmpfs",
+      "docker_requested_options": "rw,exec,nosuid,nodev,size=536870912",
+      "home_environment_not_changed": true,
+      "root_cache_mount_observed": {
+        "observed_destination": "/root/.cache",
+        "observed_device": "tmpfs",
+        "observed_filesystem": "tmpfs",
+        "observed_options": [
+          "nodev",
+          "nosuid",
+          "relatime",
+          "rw",
+          "size=524288k"
+        ],
+        "required_size_bytes": 536870912,
+        "rw_nosuid_nodev_and_exec_allowed": true
+      },
+      "scientific_matrices_metrics_thresholds_and_points_unchanged": true
+    },
+    "preserved_failed_attempts": {
+      "preserved_without_overwrite_or_container_removal": true,
+      "v01": {
+        "classification": "READ_ONLY_ROOT_CACHE_PATH_FAILURE_NOT_SCIENTIFIC_NEGATIVE",
+        "completed_assemblies": 0,
+        "completed_static_rhs": 0,
+        "manifest_sha256": "6b361b64b21788fdd6f8e4f4743271aee4facc0740d8317fc2ec05859cdcf987",
+        "numerical_charge_seconds": 0.05188476701732725,
+        "summary_sha256": "68535babafd6652d1b0de2b58c3d387b92fd7208222afdb9c7175d2fa9e37201"
+      },
+      "v02": {
+        "classification": "ROOT_CACHE_TMPFS_NOEXEC_OBSERVED_NOT_SCIENTIFIC_NEGATIVE",
+        "completed_assemblies": 0,
+        "completed_static_rhs": 0,
+        "container_wall_seconds_separate": 1.041608602,
+        "manifest_sha256": "d2920a46f3c9a16314b9e99ff0aa9dbb36ca3b245c03ee2ffb87f3d216bea953",
+        "numerical_charge_seconds": 0.0,
+        "summary_sha256": "093ea5739285df4f66f0fc90743334a43c2c534f4b7f46bb4d79b038bd91f375"
+      }
+    },
+    "version_identity": {
+      "actual_checkout_at_v03_launch": "476685b12e17a100abee1d571f8efd4f0e3db886",
+      "scientific_preregistration_and_production_baseline": "2f1c9deebfb6d6a474ffe3ad52576b568cfc877c",
+      "v01_scientific_core": {
+        "not_claimed_to_exist_in_frozen_production_baseline": true,
+        "path": "scripts/run_paper2_static_mode_screen_v01.py",
+        "sha256": "50d8df82a03e8969493c4eeda64a233873cc2a7ca623cef92568b7ddafa3a3ca",
+        "unchanged_for_v02_and_v03": true
+      },
+      "v02_operational_adapter": {
+        "path": "scripts/run_paper2_static_mode_screen_v02.py",
+        "sha256": "cfaa421e60714c609dd58cb76582c032aff73a8d3e3ac2ae5b8467d410846435"
+      },
+      "v03_operational_adapter": {
+        "imports_v01_directly_not_v02": true,
+        "not_part_of_frozen_scientific_baseline": true,
+        "path": "scripts/run_paper2_static_mode_screen_v03.py",
+        "sha256": "92c6cb5bb4278dd83e3fbd28bbd7ba14c89ffd7c27ab568921279330fe527a61"
+      }
+    }
+  },
+  "schema": "paper2_static_mode_screen_v03",
+  "scientific_question": "Does a finite zero-discrete-mean activation subspace have a larger static energy-conjugate mean-myocardial-stress response than uniform activation?",
+  "self_test": {
+    "p1_errors": {
+      "constant": 0.0,
+      "cosine": 0.0,
+      "sine": 1.1102230246251565e-16
+    },
+    "pass": true,
+    "spectral_checks": {
+      "discrete_mean": 6.8949875778082075e-18,
+      "residual": 1.5901334697759455e-16,
+      "w_norm": 2.220446049250313e-16
+    },
+    "tolerance": 3e-12
+  },
+  "status": "COMPLETED_STATIC_SCREEN_NO_SCIENTIFIC_PASS_GATE",
+  "three_state_decisions": [
+    {
+      "Delta_S2": -1.430833738998816,
+      "Delta_S3": -1.4360117928328975,
+      "E_delta": 0.005320719493146664,
+      "classification": "UNIFORM_DOMINANT_IN_TESTED_SUBSPACE",
+      "floor_1e_minus_12_d": 3.365384615384615e-12,
+      "lambda_non_S2": 0.317389764865758,
+      "lambda_non_S3": 0.31214037820214385,
+      "m0_S2": 1.748223503864574,
+      "m0_S3": 1.7481521710350414,
+      "thickness_ratio_H": 0.1,
+      "two_times_max_error_or_floor": 0.010641438986293328
+    },
+    {
+      "Delta_S2": -1.546495282504213,
+      "Delta_S3": -1.5573277694229146,
+      "E_delta": 0.010945314289497465,
+      "classification": "UNIFORM_DOMINANT_IN_TESTED_SUBSPACE",
+      "floor_1e_minus_12_d": 3.365384615384615e-12,
+      "lambda_non_S2": 0.3188240854674942,
+      "lambda_non_S3": 0.3079351848633947,
+      "m0_S2": 1.8653193679717073,
+      "m0_S3": 1.8652629542863093,
+      "thickness_ratio_H": 0.26,
+      "two_times_max_error_or_floor": 0.02189062857899493
+    },
+    {
+      "Delta_S2": -1.698331471947612,
+      "Delta_S3": -1.7295849264995038,
+      "E_delta": 0.03132706619155923,
+      "classification": "UNIFORM_DOMINANT_IN_TESTED_SUBSPACE",
+      "floor_1e_minus_12_d": 3.365384615384615e-12,
+      "lambda_non_S2": 0.342858759545052,
+      "lambda_non_S3": 0.31156849917332646,
+      "m0_S2": 2.041190231492664,
+      "m0_S3": 2.0411534256728303,
+      "thickness_ratio_H": 0.6,
+      "two_times_max_error_or_floor": 0.06265413238311845
+    }
+  ]
+}

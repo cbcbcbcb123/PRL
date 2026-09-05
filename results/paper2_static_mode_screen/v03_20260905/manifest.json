@@ -1,0 +1,211 @@
+{
+  "actual_checkout_at_launch": "476685b12e17a100abee1d571f8efd4f0e3db886",
+  "container_contract": {
+    "container_name": "prl-paper2-static-mode-screen-v03-20260905",
+    "cpu_limit": 1,
+    "docker_socket": "not_mounted",
+    "gpu": "not_used",
+    "image": "dolfinx/dolfinx:v0.11.0",
+    "image_id": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+    "memory_limit_gib": 8,
+    "network": "none",
+    "project_mount": "read_only_except_exact_result_bind",
+    "pythonpath": "/workspace/src:/usr/local/dolfinx-real/lib/python3.12/dist-packages:/usr/local/lib:",
+    "root_filesystem": "read_only"
+  },
+  "created_at_utc": "2026-09-05T07:59:24.452306+00:00",
+  "evidence_boundary": {
+    "no_feedback_implementation": true,
+    "no_periodic_or_frequency_solution": true,
+    "no_plot_or_extra_report_tree": true,
+    "no_production_api_or_default_change": true,
+    "npz_not_for_git": true,
+    "original_four_holdouts": "LOCKED_NOT_READ"
+  },
+  "frozen_code_version": "2f1c9deebfb6d6a474ffe3ad52576b568cfc877c",
+  "result_ledger_excluding_manifest": {
+    "h0p1__s2.json": {
+      "bytes": 14894,
+      "sha256": "c1cfd42126ebb84bfc81699db84b2afc407125eb9277ab5e60cafcad70387983"
+    },
+    "h0p1__s2.npz": {
+      "bytes": 231519,
+      "sha256": "f0fabdaa90cbb7b7bc06ebac41766421926007bf61b0b3f0fc4389eb5b90bbca"
+    },
+    "h0p1__s3.json": {
+      "bytes": 14896,
+      "sha256": "276e95536ec7cc628f2afbe5dbf05b8b4e603b4027795d77316e0476bf1bcc8b"
+    },
+    "h0p1__s3.npz": {
+      "bytes": 840924,
+      "sha256": "0b43470a569c555ba28e469dfda52fbfc75818bc6b504489b2b853ba9009665b"
+    },
+    "h0p26__s2.json": {
+      "bytes": 14888,
+      "sha256": "f816d344526ec743ef84e0c76947ebd4531796717cb3128cc90ddab4952c4d3f"
+    },
+    "h0p26__s2.npz": {
+      "bytes": 229274,
+      "sha256": "14ee4126f0af46430bba4fcde23baf8d284457f1311f498eac467dca2f670d85"
+    },
+    "h0p26__s3.json": {
+      "bytes": 14919,
+      "sha256": "4e821e848b327cd366adac0ed54c54b300c73c4cdc26f164af923414491c8a99"
+    },
+    "h0p26__s3.npz": {
+      "bytes": 833968,
+      "sha256": "6962ac6c5a61d87f2d6821d83155c444cf588d09693a6f75dede9f316dd8362d"
+    },
+    "h0p6__s2.json": {
+      "bytes": 14900,
+      "sha256": "9b0a8dd5972b79ad4322dbaf47ffbed3936b2118634b853bb46c494dab95d202"
+    },
+    "h0p6__s2.npz": {
+      "bytes": 230819,
+      "sha256": "ae5686166dd52f7e98c26b58fd637d338d19b98aa74dbe0a4e7f75c25e6de2b7"
+    },
+    "h0p6__s3.json": {
+      "bytes": 14915,
+      "sha256": "d9aa5b2767f600c0ad7033b9aeb2e45c39e3b3642c9ddbe3825a772cb89631b9"
+    },
+    "h0p6__s3.npz": {
+      "bytes": 837513,
+      "sha256": "7f1ef7f89373c24752d31ca37bc53702ccb815d4f0979fbdbaa20923ddd57953"
+    },
+    "summary.json": {
+      "bytes": 7757,
+      "sha256": "9cb3fd0296411994e1aa0ac094ec5ea0f5caaea6c93e7e4b4e8ed987b3696cab"
+    }
+  },
+  "retry_provenance": {
+    "authorization": {
+      "record": "project_control/CURRENT_STATUS.md",
+      "scope": "one explicit-exec cache repair; no v04 on failure",
+      "sha256": "909c2c49fa161b5ba0f2a6b41e90329db72b9bedbae6aa073f5babff6cfebc55"
+    },
+    "budget": {
+      "original_static_numerical_budget_seconds": 300.0,
+      "v01_charged_seconds": 0.05188476701732725,
+      "v02_numerical_charge_seconds": 0.0,
+      "v03_remaining_budget_seconds": 299.9481152329827,
+      "v03_start_cumulative_fem_and_failure_charge_seconds": 161.92011524902773
+    },
+    "only_operational_change": {
+      "description": "explicit exec on the writable /root/.cache tmpfs",
+      "docker_requested_options": "rw,exec,nosuid,nodev,size=536870912",
+      "home_environment_not_changed": true,
+      "root_cache_mount_observed": {
+        "observed_destination": "/root/.cache",
+        "observed_device": "tmpfs",
+        "observed_filesystem": "tmpfs",
+        "observed_options": [
+          "nodev",
+          "nosuid",
+          "relatime",
+          "rw",
+          "size=524288k"
+        ],
+        "required_size_bytes": 536870912,
+        "rw_nosuid_nodev_and_exec_allowed": true
+      },
+      "scientific_matrices_metrics_thresholds_and_points_unchanged": true
+    },
+    "preserved_failed_attempts": {
+      "preserved_without_overwrite_or_container_removal": true,
+      "v01": {
+        "classification": "READ_ONLY_ROOT_CACHE_PATH_FAILURE_NOT_SCIENTIFIC_NEGATIVE",
+        "completed_assemblies": 0,
+        "completed_static_rhs": 0,
+        "manifest_sha256": "6b361b64b21788fdd6f8e4f4743271aee4facc0740d8317fc2ec05859cdcf987",
+        "numerical_charge_seconds": 0.05188476701732725,
+        "summary_sha256": "68535babafd6652d1b0de2b58c3d387b92fd7208222afdb9c7175d2fa9e37201"
+      },
+      "v02": {
+        "classification": "ROOT_CACHE_TMPFS_NOEXEC_OBSERVED_NOT_SCIENTIFIC_NEGATIVE",
+        "completed_assemblies": 0,
+        "completed_static_rhs": 0,
+        "container_wall_seconds_separate": 1.041608602,
+        "manifest_sha256": "d2920a46f3c9a16314b9e99ff0aa9dbb36ca3b245c03ee2ffb87f3d216bea953",
+        "numerical_charge_seconds": 0.0,
+        "summary_sha256": "093ea5739285df4f66f0fc90743334a43c2c534f4b7f46bb4d79b038bd91f375"
+      }
+    },
+    "version_identity": {
+      "actual_checkout_at_v03_launch": "476685b12e17a100abee1d571f8efd4f0e3db886",
+      "scientific_preregistration_and_production_baseline": "2f1c9deebfb6d6a474ffe3ad52576b568cfc877c",
+      "v01_scientific_core": {
+        "not_claimed_to_exist_in_frozen_production_baseline": true,
+        "path": "scripts/run_paper2_static_mode_screen_v01.py",
+        "sha256": "50d8df82a03e8969493c4eeda64a233873cc2a7ca623cef92568b7ddafa3a3ca",
+        "unchanged_for_v02_and_v03": true
+      },
+      "v02_operational_adapter": {
+        "path": "scripts/run_paper2_static_mode_screen_v02.py",
+        "sha256": "cfaa421e60714c609dd58cb76582c032aff73a8d3e3ac2ae5b8467d410846435"
+      },
+      "v03_operational_adapter": {
+        "imports_v01_directly_not_v02": true,
+        "not_part_of_frozen_scientific_baseline": true,
+        "path": "scripts/run_paper2_static_mode_screen_v03.py",
+        "sha256": "92c6cb5bb4278dd83e3fbd28bbd7ba14c89ffd7c27ab568921279330fe527a61"
+      }
+    }
+  },
+  "runtime": {
+    "numpy": "2.4.6",
+    "python": "3.12.3",
+    "pythonpath_observed": "/workspace/src:/usr/local/dolfinx-real/lib/python3.12/dist-packages:/usr/local/lib:",
+    "scipy": "1.17.1",
+    "thread_environment": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    }
+  },
+  "schema": "paper2_static_mode_screen_v03",
+  "source_ledger": {
+    "project_control/CURRENT_STATUS.md": {
+      "sha256": "909c2c49fa161b5ba0f2a6b41e90329db72b9bedbae6aa073f5babff6cfebc55"
+    },
+    "project_control/prl_independent_theory_mainline_plan_v04.md": {
+      "sha256": "5b4bb166b56a4d40a9c36ca8b7d5484e55bc329a1cdb651dc2679e9ce0c0c2e3"
+    },
+    "results/paper2_science_pilot/v01_20260905/science_brief.md": {
+      "sha256": "f5b377572af56e062ffde9069b530f19ceb4098bf91ca12dd655c8f172218c69"
+    },
+    "results/paper2_static_mode_screen/v01_20260905/manifest.json": {
+      "sha256": "6b361b64b21788fdd6f8e4f4743271aee4facc0740d8317fc2ec05859cdcf987"
+    },
+    "results/paper2_static_mode_screen/v01_20260905/summary.json": {
+      "sha256": "68535babafd6652d1b0de2b58c3d387b92fd7208222afdb9c7175d2fa9e37201"
+    },
+    "results/paper2_static_mode_screen/v02_20260905/manifest.json": {
+      "sha256": "d2920a46f3c9a16314b9e99ff0aa9dbb36ca3b245c03ee2ffb87f3d216bea953"
+    },
+    "results/paper2_static_mode_screen/v02_20260905/summary.json": {
+      "sha256": "093ea5739285df4f66f0fc90743334a43c2c534f4b7f46bb4d79b038bd91f375"
+    },
+    "scripts/run_paper2_static_mode_screen_v01.py": {
+      "sha256": "50d8df82a03e8969493c4eeda64a233873cc2a7ca623cef92568b7ddafa3a3ca"
+    },
+    "scripts/run_paper2_static_mode_screen_v02.py": {
+      "sha256": "cfaa421e60714c609dd58cb76582c032aff73a8d3e3ac2ae5b8467d410846435"
+    },
+    "scripts/run_paper2_static_mode_screen_v03.py": {
+      "sha256": "92c6cb5bb4278dd83e3fbd28bbd7ba14c89ffd7c27ab568921279330fe527a61"
+    },
+    "src/paper2_hybrid/config.py": {
+      "sha256": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe"
+    },
+    "src/paper2_hybrid/model.py": {
+      "sha256": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800"
+    }
+  },
+  "status": "COMPLETED_STATIC_SCREEN_NO_SCIENTIFIC_PASS_GATE",
+  "trial_runner_identity": {
+    "not_claimed_to_exist_in_frozen_baseline": true,
+    "path": "scripts/run_paper2_static_mode_screen_v01.py",
+    "sha256": "50d8df82a03e8969493c4eeda64a233873cc2a7ca623cef92568b7ddafa3a3ca"
+  }
+}

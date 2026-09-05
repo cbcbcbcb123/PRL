@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 78b5d1997082fc2e5c2cf6ab5ad30c6073a2ec33
-current_lifecycle: paper2_static_noexec_failure_accepted_explicit_exec_retry_authorized
+verified_commit: 476685b12e17a100abee1d571f8efd4f0e3db886
+current_lifecycle: paper2_static_candidate_rejected_negative_explanation_theory_only
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: same_static_science_explicit_exec_retry_v03_current_status_section_1
+execution_authorized: v04_section24_bounded_theory_explanation_no_new_computation
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: results/paper2_static_mode_screen/v02_20260905/summary.json
+latest_completed_execution_log: results/paper2_static_mode_screen/v03_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -137,6 +137,12 @@ v02补充裁决：容器运行时给/root/.cache默认增加noexec，适配层�
 计算仍使用原剩余299.9481152329827秒，累计起点161.92011524902773秒；不重置或扩大科学预算。
 v01/v02入口、失败目录及容器均原样保留；本次实际checkout及两次失败身份在原有summary/manifest中记录。
 不改科学文档、参数、阈值或源码，不关掉noexec检查；若仍失败/超限则留存停止，不自动v04或换运行环境。
+
+v03已完成并由总管独立验收，见简报第41节：6装配/30静态右端全部完成，三厚度均为
+UNIFORM_DOMINANT_IN_TESTED_SUBSPACE，负差/比较门=134.95/71.14/27.61。停止该静态优先候选。
+13个结果/12个来源摘要及原始矩阵复算一致；结构门通过不等于全面收敛，厚层lambda_non网格变化10.04%。
+本批数值8.32065秒，累计计费170.24076614秒；原46周期例及4个未运行留出不变。
+数值任务本批结束；同一理论agent已下发v04第24节20分钟阴性解释与下一问题筛选，不进行新数值计算。
 
 主量为零均值子空间最大响应减均匀响应，排除完整空间Rayleigh包含造成的平凡阳性；不是等功或记忆实验。
 旧46周期工况与新静态右端分开计数；不实施反馈/动态极点，不读原4留出，不修改生产API或正式Figure 2。
