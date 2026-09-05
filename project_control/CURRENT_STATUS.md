@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 5ba44386c28cf75964d168b34dc69d08adc1ea9a
-current_lifecycle: paper2_static_cache_failure_accepted_single_retry_authorized
+verified_commit: 78b5d1997082fc2e5c2cf6ab5ad30c6073a2ec33
+current_lifecycle: paper2_static_noexec_failure_accepted_explicit_exec_retry_authorized
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: same_static_science_single_cache_repair_retry_v02_current_status_section_1
+execution_authorized: same_static_science_explicit_exec_retry_v03_current_status_section_1
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: results/paper2_static_mode_screen/v01_20260905/summary.json
+latest_completed_execution_log: results/paper2_static_mode_screen/v02_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -126,6 +126,17 @@ v04第22节已交接验收，见简报第39节：有限维完整能量/频率界
 - 用首次原定装配检查真实JIT路径是否恢复，不另加FEM烟测。任何再次失败/超限即保存停止，不自动v03。
   v02在原有manifest/summary中记录失败包身份、两次预算、缓存修复、实际启动提交和两个入口SHA256。
   两份科学文档仍使用2f1c9dee对应冻结摘要；运行提交可包含本条操作裁决与已封存失败证据，不能伪记。
+
+v02补充裁决：容器运行时给/root/.cache默认增加noexec，适配层预检因而停止，尚未进入build_system。
+总管复核错误日志、启动选项、失败JSON及入口摘要；0装配/0右端，数值计费0，容器墙钟1.041608602秒另记。
+本次仍不是科学阴性；前述“不能自动v03”保持为执行者边界。现由总管明确批准一次v03操作修正：
+将/root/.cache挂载选项显式设为rw,exec,nosuid,nodev,size=536870912，继续保留真实挂载预检。
+唯一新入口scripts/run_paper2_static_mode_screen_v03.py，可机械调整既有小适配层但必须复用未改的v01计算；
+唯一新结果results/paper2_static_mode_screen/v03_20260905/，唯一容器prl-paper2-static-mode-screen-v03-20260905。
+三个目标授权前已核查未占用。准备最多10分钟，不另建诊断容器或FEM烟测；检查通过即执行原定6系统/30右端。
+计算仍使用原剩余299.9481152329827秒，累计起点161.92011524902773秒；不重置或扩大科学预算。
+v01/v02入口、失败目录及容器均原样保留；本次实际checkout及两次失败身份在原有summary/manifest中记录。
+不改科学文档、参数、阈值或源码，不关掉noexec检查；若仍失败/超限则留存停止，不自动v04或换运行环境。
 
 主量为零均值子空间最大响应减均匀响应，排除完整空间Rayleigh包含造成的平凡阳性；不是等功或记忆实验。
 旧46周期工况与新静态右端分开计数；不实施反馈/动态极点，不读原4留出，不修改生产API或正式Figure 2。

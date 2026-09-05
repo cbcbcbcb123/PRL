@@ -1,0 +1,75 @@
+{
+  "all_completed_system_structure_gates_pass": false,
+  "claim_boundary": {
+    "finite_five_mode_static_screen_not_reached": true,
+    "no_automatic_v03_or_third_launch": true,
+    "not_a_scientific_negative": true,
+    "not_a_paper_pass_or_nature_physics_result": true,
+    "not_feedback_dynamics_or_pole_analysis": true,
+    "not_holdout_or_blind_prediction": true
+  },
+  "continuation_rule_result": "STOPPED_FAIL_CLOSED_BEFORE_FIRST_BUILD_SYSTEM",
+  "created_at_utc": "2026-09-05T07:50:55.613850679+00:00",
+  "execution_count_ledger": {
+    "counts_are_not_equivalent_cases": true,
+    "new_completed_static_rhs": 0,
+    "new_completed_static_system_assemblies": 0,
+    "old_completed_periodic_cases": 46
+  },
+  "failure": {
+    "classification": "ROOT_CACHE_TMPFS_NOEXEC_OBSERVED",
+    "message": "/root/.cache was a writable tmpfs but the in-container mount options included noexec; the approved JIT-load condition was not met",
+    "no_automatic_retry_or_extension": true,
+    "stopped_before_first_build_system": true,
+    "type": "RuntimeError"
+  },
+  "frozen_inputs": {
+    "actual_checkout_at_retry_launch": "78b5d1997082fc2e5c2cf6ab5ad30c6073a2ec33",
+    "brief_sha256": "f5b377572af56e062ffde9069b530f19ceb4098bf91ca12dd655c8f172218c69",
+    "main_plan_sha256": "5b4bb166b56a4d40a9c36ca8b7d5484e55bc329a1cdb651dc2679e9ce0c0c2e3",
+    "production_config_sha256": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe",
+    "production_model_sha256": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800",
+    "scientific_preregistration_and_production_baseline": "2f1c9deebfb6d6a474ffe3ad52576b568cfc877c"
+  },
+  "next_gate": "SUPERVISOR_REVIEW_STOP",
+  "resource_accounting": {
+    "actual_container_wall_seconds": 1.041608602,
+    "batch_numerical_charge_seconds": 0.0,
+    "cpu_limit": 1,
+    "gpu": "not_used",
+    "memory_limit_gib": 8,
+    "network": "none",
+    "original_two_attempt_static_budget_seconds": 300.0,
+    "project_cumulative_fem_and_failure_charge_seconds": 161.92011524902773,
+    "project_stop_reestimate_seconds": 7200.0,
+    "v01_charged_seconds": 0.05188476701732725,
+    "v02_remaining_numerical_budget_seconds_at_stop": 299.9481152329827
+  },
+  "retry_provenance": {
+    "authorization": {
+      "current_status_sha256": "af6363358000ef97832cf49f9a6be0eb49ba15bc0c60c57be249ed5f37e4ec70",
+      "scope": "one minimal cache-mount retry; no v03 on failure"
+    },
+    "only_attempted_operational_change": {
+      "docker_requested_options": "rw,nosuid,nodev,size=536870912",
+      "in_container_observation": "tmpfs mount also contained noexec",
+      "path": "/root/.cache",
+      "scientific_matrices_metrics_thresholds_and_points_unchanged": true,
+      "size_bytes": 536870912
+    },
+    "v01_failed_attempt": {
+      "completed_assemblies": 0,
+      "completed_static_rhs": 0,
+      "manifest_sha256": "6b361b64b21788fdd6f8e4f4743271aee4facc0740d8317fc2ec05859cdcf987",
+      "preserved_without_overwrite_or_container_removal": true,
+      "summary_sha256": "68535babafd6652d1b0de2b58c3d387b92fd7208222afdb9c7175d2fa9e37201"
+    },
+    "version_identity": {
+      "v01_core_sha256": "50d8df82a03e8969493c4eeda64a233873cc2a7ca623cef92568b7ddafa3a3ca",
+      "v02_adapter_sha256": "cfaa421e60714c609dd58cb76582c032aff73a8d3e3ac2ae5b8467d410846435"
+    }
+  },
+  "schema": "paper2_static_mode_screen_v02",
+  "status": "ABORTED_FAIL_CLOSED",
+  "three_state_decisions": []
+}

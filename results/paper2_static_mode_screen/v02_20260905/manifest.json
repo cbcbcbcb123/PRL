@@ -1,0 +1,74 @@
+{
+  "actual_checkout_at_launch": "78b5d1997082fc2e5c2cf6ab5ad30c6073a2ec33",
+  "container_actual": {
+    "container_name": "prl-paper2-static-mode-screen-v02-20260905",
+    "exit_code": 1,
+    "finished_at_utc": "2026-09-05T07:50:55.613850679Z",
+    "image": "dolfinx/dolfinx:v0.11.0",
+    "image_id": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+    "memory_bytes": 8589934592,
+    "nano_cpus": 1000000000,
+    "network_mode": "none",
+    "project_mount_read_only": true,
+    "result_subdirectory_mount_read_write": true,
+    "root_cache_tmpfs_docker_requested": "rw,nosuid,nodev,size=536870912",
+    "root_cache_tmpfs_in_container_observed_noexec": true,
+    "root_filesystem_read_only": true,
+    "started_at_utc": "2026-09-05T07:50:54.572242077Z",
+    "status": "exited",
+    "tmp_tmpfs_docker_requested": "rw,nosuid,nodev,size=536870912"
+  },
+  "evidence_boundary": {
+    "no_feedback_implementation": true,
+    "no_periodic_or_frequency_solution": true,
+    "no_plot_or_extra_report_tree": true,
+    "no_production_api_or_default_change": true,
+    "no_static_assembly_or_rhs_completed": true,
+    "original_four_holdouts": "LOCKED_NOT_READ",
+    "v01_and_v02_containers_preserved": true
+  },
+  "frozen_code_version": "2f1c9deebfb6d6a474ffe3ad52576b568cfc877c",
+  "result_ledger_excluding_manifest": {
+    "summary.json": {
+      "bytes": 3439,
+      "sha256": "093ea5739285df4f66f0fc90743334a43c2c534f4b7f46bb4d79b038bd91f375"
+    }
+  },
+  "retry_decision": {
+    "authorization_sha256": "af6363358000ef97832cf49f9a6be0eb49ba15bc0c60c57be249ed5f37e4ec70",
+    "failure_classification": "ROOT_CACHE_TMPFS_NOEXEC_OBSERVED",
+    "no_automatic_v03": true,
+    "only_authorized_change_attempted": "/root/.cache 512 MiB tmpfs"
+  },
+  "schema": "paper2_static_mode_screen_v02",
+  "source_ledger": {
+    "project_control/CURRENT_STATUS.md": {
+      "sha256": "af6363358000ef97832cf49f9a6be0eb49ba15bc0c60c57be249ed5f37e4ec70"
+    },
+    "project_control/prl_independent_theory_mainline_plan_v04.md": {
+      "sha256": "5b4bb166b56a4d40a9c36ca8b7d5484e55bc329a1cdb651dc2679e9ce0c0c2e3"
+    },
+    "results/paper2_science_pilot/v01_20260905/science_brief.md": {
+      "sha256": "f5b377572af56e062ffde9069b530f19ceb4098bf91ca12dd655c8f172218c69"
+    },
+    "results/paper2_static_mode_screen/v01_20260905/manifest.json": {
+      "sha256": "6b361b64b21788fdd6f8e4f4743271aee4facc0740d8317fc2ec05859cdcf987"
+    },
+    "results/paper2_static_mode_screen/v01_20260905/summary.json": {
+      "sha256": "68535babafd6652d1b0de2b58c3d387b92fd7208222afdb9c7175d2fa9e37201"
+    },
+    "scripts/run_paper2_static_mode_screen_v01.py": {
+      "sha256": "50d8df82a03e8969493c4eeda64a233873cc2a7ca623cef92568b7ddafa3a3ca"
+    },
+    "scripts/run_paper2_static_mode_screen_v02.py": {
+      "sha256": "cfaa421e60714c609dd58cb76582c032aff73a8d3e3ac2ae5b8467d410846435"
+    },
+    "src/paper2_hybrid/config.py": {
+      "sha256": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe"
+    },
+    "src/paper2_hybrid/model.py": {
+      "sha256": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800"
+    }
+  },
+  "status": "ABORTED_FAIL_CLOSED"
+}
