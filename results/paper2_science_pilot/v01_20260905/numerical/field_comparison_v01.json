@@ -1,0 +1,4527 @@
+{
+  "aggregate": {
+    "all_source_hashes_match": true,
+    "compute_budget_seconds": 120.0,
+    "equal_power_scale_range": [
+      0.950816853048662,
+      0.979903494264938
+    ],
+    "equal_power_scaled_S1_over_A1_macro_shortening_amplitude_range": [
+      0.943960496407723,
+      0.9729927924024088
+    ],
+    "equal_power_scaled_S1_over_A1_weighted_field_rms_range": [
+      1.0530953659631166,
+      8.115773283070807
+    ],
+    "maximum_shortening_fundamental_recompute_error": 1.788112030672749e-18,
+    "maximum_traction_fundamental_recompute_error": 4.6317137111987765e-19,
+    "postprocessing_elapsed_seconds": 0.37257489998592064,
+    "raw_S1_over_A1_weighted_field_rms_range": [
+      1.0863477826524097,
+      8.32832178403184
+    ]
+  },
+  "analyzer": {
+    "path": "scripts/analyze_paper2_science_pilot_fields_v01.py",
+    "sha256": "b1e2c78b8c754667c2153b5fba9defe066370f8f553867ac8b4211741c34a111"
+  },
+  "claim_boundary": {
+    "holdouts_remain_unrun": true,
+    "no_new_fem": true,
+    "not_a_novelty_test": true,
+    "not_equal_motion_and_equal_power": true,
+    "not_formal_figure2_certification": true,
+    "not_physiological_or_EFE_validation": true
+  },
+  "code_version_at_analysis": "20d9b9d4c159d203f2d7a07da77cbea3638ffd03",
+  "created_at_utc": "2026-09-05T01:56:49.744187+00:00",
+  "definitions": {
+    "amplitude_floor": 1e-12,
+    "common_x_over_L": [
+      -0.25,
+      0.0,
+      0.25
+    ],
+    "complex_fundamental": "2/N times first rFFT coefficient after removing the temporal mean over the first cycle",
+    "equal_active_power_scale": "g=sqrt(P_A1/P_S1), applied to the S1 linear complex response; g^2 P_S1=P_A1 algebraically",
+    "field": "endocardium-ECM interface traction y component",
+    "interpolation": "piecewise-linear interpolation of real and imaginary complex coefficients separately; exact_native_node is also reported",
+    "near_zero_rule": "ratios are omitted when the denominator is at or below the amplitude floor; phase is omitted when response or activation amplitude is at or below the floor",
+    "power_floor": 1e-14,
+    "weighted_complex_amplitude_rms": "sqrt(sum_i w_i |q_i|^2 / sum_i w_i)",
+    "weighted_complex_difference_rms": "sqrt(sum_i w_i |q_S_i-q_A_i|^2 / sum_i w_i)",
+    "weights": "trapezoidal nodal quadrature on the full x/L interval; endpoints receive half adjacent spacing and interior nodes half the sum of adjacent spacings"
+  },
+  "evidence_level": "existing_data_postprocessing_not_independent_validation",
+  "groups": [
+    {
+      "active_work": {
+        "P_A1": 8.337252830013144e-05,
+        "P_S1": 9.201912318193095e-05,
+        "equal_power_S1_scale_sqrt_P_A1_over_P_S1": 0.9518586054097892,
+        "power_floor": 1e-14,
+        "scaled_S1_power_algebraic": 8.337252830013144e-05
+      },
+      "common_point_comparisons": [
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.00045316907362630005,
+              "imag": -0.00025068105665479305,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 33.5849919242458,
+              "phase_relative_to_activation_rad": 0.5861686883337952,
+              "real": -0.00037751982348713215
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 2.029174208584171
+            },
+            "scaled_S1": {
+              "amplitude": 0.00042292649461405654,
+              "imag": -0.000246280242973237,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 35.61416613282997,
+              "phase_relative_to_activation_rad": 0.6215844593701392,
+              "real": -0.00034382097342596326
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 3.3984991636087147e-05,
+              "imag": 4.400813681556051e-06,
+              "real": 3.369885006116889e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9332642477778996
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.00045316907362630005,
+              "imag": -0.00025068105665479305,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 33.5849919242458,
+              "phase_relative_to_activation_rad": 0.5861686883337952,
+              "real": -0.00037751982348713215
+            },
+            "S1": {
+              "amplitude": 0.0004443165110977596,
+              "imag": -0.0002587361626753479,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 35.61416613282997,
+              "phase_relative_to_activation_rad": 0.6215844593701392,
+              "real": -0.0003612101329671157
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 1.819040235566802e-05,
+              "imag": -8.055106020554833e-06,
+              "real": 1.6309690520016434e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9804652103514006
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 2.029174208584171
+            }
+          },
+          "x_over_L": -0.25
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0008196139623305183,
+              "imag": -0.0002163075546491157,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 15.30242925877158,
+              "phase_relative_to_activation_rad": 0.26707777411907946,
+              "real": -0.000790555557218373
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 158.33720302426963
+            },
+            "scaled_S1": {
+              "amplitude": 0.0019359310889198401,
+              "imag": -0.00021446535492445674,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 173.6396322830412,
+              "phase_relative_to_activation_rad": 3.0305832952913074,
+              "real": 0.0019240150188040333
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 0.002714571201111963,
+              "imag": 1.842199724658958e-06,
+              "real": 0.0027145705760224063
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 2.3620035503240424
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0008196139623305183,
+              "imag": -0.0002163075546491157,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 15.30242925877158,
+              "phase_relative_to_activation_rad": 0.26707777411907946,
+              "real": -0.000790555557218373
+            },
+            "S1": {
+              "amplitude": 0.002033843133756608,
+              "imag": -0.00022531219837228477,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 173.6396322830412,
+              "phase_relative_to_activation_rad": 3.0305832952913074,
+              "real": 0.0020213243940529553
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 0.002811894369276739,
+              "imag": -9.004643723169072e-06,
+              "real": 0.0028118799512713284
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 2.4814647227012934
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 158.33720302426963
+            }
+          },
+          "x_over_L": 0.0
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.00045519453517731714,
+              "imag": -0.0002471975510621896,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 32.892131320579736,
+              "phase_relative_to_activation_rad": 0.5740759895424669,
+              "real": -0.00038222432628516725
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 1.0894814473246905
+            },
+            "scaled_S1": {
+              "amplitude": 0.00045537095587900044,
+              "imag": -0.00023997826317341891,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 31.802649873255042,
+              "phase_relative_to_activation_rad": 0.5550609511472578,
+              "real": -0.00038700534965607883
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 8.658885730517153e-06,
+              "imag": 7.21928788877067e-06,
+              "real": -4.781023370911577e-06
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.0003875720995081
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.00045519453517731714,
+              "imag": -0.0002471975510621896,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 32.892131320579736,
+              "phase_relative_to_activation_rad": 0.5740759895424669,
+              "real": -0.00038222432628516725
+            },
+            "S1": {
+              "amplitude": 0.0004784018900401247,
+              "imag": -0.00025211545266232556,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 31.80264987325505,
+              "phase_relative_to_activation_rad": 0.555060951147258,
+              "real": -0.00040657861100017824
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 2.484586364223304e-05,
+              "imag": -4.917901600135974e-06,
+              "real": -2.4354284715010985e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.0509833775877107
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 1.089481447324684
+            }
+          },
+          "x_over_L": 0.25
+        }
+      ],
+      "de": 0.02,
+      "full_field_y_traction": {
+        "equal_active_power": {
+          "A1_peak": {
+            "first_maximum_x_over_L": -4.530974155562894e-18,
+            "maximum": {
+              "amplitude": 0.0008196139623305183,
+              "imag": -0.0002163075546491157,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 15.30242925877158,
+              "phase_relative_to_activation_rad": 0.26707777411907946,
+              "real": -0.000790555557218373
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -4.530974155562894e-18
+            ]
+          },
+          "A1_weighted_complex_amplitude_rms": 0.0005417670790333688,
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.5299457491177852
+          },
+          "scaled_S1_minus_A1_weighted_complex_rms": 0.0019124083976457993,
+          "scaled_S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 2.9851167639813996
+          },
+          "scaled_S1_peak": {
+            "first_maximum_x_over_L": -0.49999999999999994,
+            "maximum": {
+              "amplitude": 0.0025054235368441122,
+              "imag": -0.00022971268483732663,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 5.260618568781346,
+              "phase_relative_to_activation_rad": 0.09181511471678626,
+              "real": -0.0024948705740773986
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -0.49999999999999994,
+              0.5000000000000001
+            ]
+          },
+          "scaled_S1_weighted_complex_amplitude_rms": 0.001617237989795745
+        },
+        "raw": {
+          "A1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.00045316907362630005,
+                  "imag": -0.00025068105665479305,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 33.5849919242458,
+                  "phase_relative_to_activation_rad": 0.5861686883337952,
+                  "real": -0.00037751982348713215
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0008196139623305183,
+                  "imag": -0.0002163075546491157,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 15.30242925877158,
+                  "phase_relative_to_activation_rad": 0.26707777411907946,
+                  "real": -0.000790555557218373
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.00045519453517731714,
+                  "imag": -0.0002471975510621896,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 32.892131320579736,
+                  "phase_relative_to_activation_rad": 0.5740759895424669,
+                  "real": -0.00038222432628516725
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -4.530974155562894e-18,
+              "maximum": {
+                "amplitude": 0.0008196139623305183,
+                "imag": -0.0002163075546491157,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": 15.30242925877158,
+                "phase_relative_to_activation_rad": 0.26707777411907946,
+                "real": -0.000790555557218373
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -4.530974155562894e-18
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.0005417670790333688
+          },
+          "S1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.0004443165110977596,
+                  "imag": -0.0002587361626753479,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 35.61416613282997,
+                  "phase_relative_to_activation_rad": 0.6215844593701392,
+                  "real": -0.0003612101329671157
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.002033843133756608,
+                  "imag": -0.00022531219837228477,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 173.6396322830412,
+                  "phase_relative_to_activation_rad": 3.0305832952913074,
+                  "real": 0.0020213243940529553
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0004784018900401247,
+                  "imag": -0.00025211545266232556,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 31.80264987325505,
+                  "phase_relative_to_activation_rad": 0.555060951147258,
+                  "real": -0.00040657861100017824
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -0.49999999999999994,
+              "maximum": {
+                "amplitude": 0.002632138347654577,
+                "imag": -0.00024133068034661717,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": 5.260618568781347,
+                "phase_relative_to_activation_rad": 0.09181511471678629,
+                "real": -0.002621051656094783
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -0.49999999999999994,
+                0.5000000000000001
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.001699031747577152
+          },
+          "S1_minus_A1_weighted_complex_rms": 0.0019915832938770875,
+          "S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.136092637095257
+          },
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.6760876970053413
+          }
+        }
+      },
+      "interpretation_boundary": {
+        "equal_active_power": "positive algebraic scaling of the linear S1 complex response by sqrt(P_A1/P_S1); no new solve",
+        "not_equal_motion_and_power": true,
+        "raw_comparison": "uses the actual activation amplitude in both source simulations but does not impose equal active work"
+      },
+      "macro_shortening_fundamental": {
+        "equal_active_power": {
+          "A1": {
+            "amplitude": 0.018172897586482065,
+            "imag": 0.0009106083477863698,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -2.8721822043233276,
+            "phase_relative_to_activation_rad": -0.05012903618263058,
+            "real": -0.018150068846307647
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.1341974500717205
+          },
+          "interpretation": "scaled S1 macro shortening is a consequence of equal-active-power algebraic normalization; it is not constrained to equal A1 motion",
+          "scaled_S1": {
+            "amplitude": 0.017175257526343225,
+            "imag": 0.0009007932956956341,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -3.0063796543950483,
+            "phase_relative_to_activation_rad": -0.0524712235341628,
+            "real": -0.017151619239437407
+          },
+          "scaled_S1_minus_A1": {
+            "absolute_amplitude": 0.00099849784812331,
+            "imag": -9.815052090735737e-06,
+            "real": 0.00099844960687024
+          },
+          "scaled_S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9451028623591136
+          }
+        },
+        "raw": {
+          "A1": {
+            "amplitude": 0.018172897586482065,
+            "imag": 0.0009106083477863698,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -2.8721822043233276,
+            "phase_relative_to_activation_rad": -0.05012903618263058,
+            "real": -0.018150068846307647
+          },
+          "S1": {
+            "amplitude": 0.01804391684723912,
+            "imag": 0.0009463520007867443,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -3.0063796543950483,
+            "phase_relative_to_activation_rad": -0.05247122353416281,
+            "real": -0.018019083025522874
+          },
+          "S1_minus_A1": {
+            "absolute_amplitude": 0.00013577515964443573,
+            "imag": 3.574365300037445e-05,
+            "real": 0.0001309858207847736
+          },
+          "S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9929025771135755
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.13419745007172088
+          }
+        }
+      },
+      "source_cases": {
+        "A1": "basic__de0p02__h0p1__a1__s2__t128__a0p1",
+        "S1": "basic__de0p02__h0p1__s1__s2__t128__a0p1"
+      },
+      "thickness_ratio_H": 0.1
+    },
+    {
+      "active_work": {
+        "P_A1": 8.352237525725073e-05,
+        "P_S1": 9.033569365824083e-05,
+        "equal_power_S1_scale_sqrt_P_A1_over_P_S1": 0.9615496772245655,
+        "power_floor": 1e-14,
+        "scaled_S1_power_algebraic": 8.352237525725075e-05
+      },
+      "common_point_comparisons": [
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0003241359429891516,
+              "imag": 0.0002741673019678409,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -122.23790139789854,
+              "phase_relative_to_activation_rad": -2.1334538501215086,
+              "real": 0.00017290575487571622
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 11.62921703138421
+            },
+            "scaled_S1": {
+              "amplitude": 0.0002757011631296522,
+              "imag": 0.0002580579969531993,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -110.60868436651432,
+              "phase_relative_to_activation_rad": -1.9304857234948534,
+              "real": 9.704226687142905e-05
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 7.755500319277525e-05,
+              "imag": -1.6109305014641573e-05,
+              "real": -7.586348800428717e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.8505726350097482
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0003241359429891516,
+              "imag": 0.0002741673019678409,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -122.23790139789854,
+              "phase_relative_to_activation_rad": -2.1334538501215086,
+              "real": 0.00017290575487571622
+            },
+            "S1": {
+              "amplitude": 0.0002867258651944443,
+              "imag": 0.000268377186395676,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -110.60868436651432,
+              "phase_relative_to_activation_rad": -1.9304857234948534,
+              "real": 0.00010092278035133204
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 7.221546967040489e-05,
+              "imag": -5.790115572164886e-06,
+              "real": -7.198297452438418e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.8845852223307449
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 11.62921703138421
+            }
+          },
+          "x_over_L": -0.25
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0002545462216338491,
+              "imag": 0.0002534418444076206,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -84.66087401837562,
+              "phase_relative_to_activation_rad": -1.477610999236777,
+              "real": -2.3685659191418682e-05
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 89.39779262081193
+            },
+            "scaled_S1": {
+              "amplitude": 0.002031891293593744,
+              "imag": 0.00021032125434668715,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -174.05866663918755,
+              "phase_relative_to_activation_rad": -3.0378968244850357,
+              "real": 0.0020209767932740084
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 0.0020451170944004986,
+              "imag": -4.312059006093347e-05,
+              "real": 0.002044662452465427
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 7.982406026503544
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0002545462216338491,
+              "imag": 0.0002534418444076206,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -84.66087401837562,
+              "phase_relative_to_activation_rad": -1.477610999236777,
+              "real": -2.3685659191418682e-05
+            },
+            "S1": {
+              "amplitude": 0.0021131422969831695,
+              "imag": 0.00021873155316713564,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -174.05866663918755,
+              "phase_relative_to_activation_rad": -3.0378968244850357,
+              "real": 0.0021017913490516604
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 0.0021257604090978714,
+              "imag": -3.471029124048499e-05,
+              "real": 0.002125477008243079
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 8.301605435034938
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 89.39779262081193
+            }
+          },
+          "x_over_L": 0.0
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.00032701024170233775,
+              "imag": 0.00027997107270217767,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -121.112559718352,
+              "phase_relative_to_activation_rad": -2.1138129326034987,
+              "real": 0.00016897306480091225
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 9.412483495652218
+            },
+            "scaled_S1": {
+              "amplitude": 0.00033565041060483735,
+              "imag": 0.00025513527079898515,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -130.52504321400423,
+              "phase_relative_to_activation_rad": -2.2780917603922552,
+              "real": 0.0002180990411109697
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 5.504705809206289e-05,
+              "imag": -2.483580190319252e-05,
+              "real": 4.9125976310057445e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.0264217073371187
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.00032701024170233775,
+              "imag": 0.00027997107270217767,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -121.112559718352,
+              "phase_relative_to_activation_rad": -2.1138129326034987,
+              "real": 0.00016897306480091225
+            },
+            "S1": {
+              "amplitude": 0.00034907235533962716,
+              "imag": 0.00026533758665013774,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -130.52504321400426,
+              "phase_relative_to_activation_rad": -2.2780917603922557,
+              "real": 0.00022682035705164473
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 5.9669490820493035e-05,
+              "imag": -1.4633486052039932e-05,
+              "real": 5.784729225073249e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.0674661243710266
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 9.412483495652243
+            }
+          },
+          "x_over_L": 0.25
+        }
+      ],
+      "de": 0.02,
+      "full_field_y_traction": {
+        "equal_active_power": {
+          "A1_peak": {
+            "first_maximum_x_over_L": -0.49999999999999994,
+            "maximum": {
+              "amplitude": 0.0005527099855492537,
+              "imag": 0.00038232108064673286,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -136.23350754428498,
+              "phase_relative_to_activation_rad": -2.3777232581883077,
+              "real": 0.0003991477413426896
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -0.49999999999999994,
+              0.5000000000000001
+            ]
+          },
+          "A1_weighted_complex_amplitude_rms": 0.0003769695903684714,
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.864131164536178
+          },
+          "scaled_S1_minus_A1_weighted_complex_rms": 0.0014566599422252474,
+          "scaled_S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.5745692410291894
+          },
+          "scaled_S1_peak": {
+            "first_maximum_x_over_L": -4.530974155562894e-18,
+            "maximum": {
+              "amplitude": 0.002031891293593744,
+              "imag": 0.00021032125434668715,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -174.05866663918755,
+              "phase_relative_to_activation_rad": -3.0378968244850357,
+              "real": 0.0020209767932740084
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -4.530974155562894e-18
+            ]
+          },
+          "scaled_S1_weighted_complex_amplitude_rms": 0.0013475039025345112
+        },
+        "raw": {
+          "A1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.0003241359429891516,
+                  "imag": 0.0002741673019678409,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -122.23790139789854,
+                  "phase_relative_to_activation_rad": -2.1334538501215086,
+                  "real": 0.00017290575487571622
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0002545462216338491,
+                  "imag": 0.0002534418444076206,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -84.66087401837562,
+                  "phase_relative_to_activation_rad": -1.477610999236777,
+                  "real": -2.3685659191418682e-05
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.00032701024170233775,
+                  "imag": 0.00027997107270217767,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -121.112559718352,
+                  "phase_relative_to_activation_rad": -2.1138129326034987,
+                  "real": 0.00016897306480091225
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -0.49999999999999994,
+              "maximum": {
+                "amplitude": 0.0005527099855492537,
+                "imag": 0.00038232108064673286,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": -136.23350754428498,
+                "phase_relative_to_activation_rad": -2.3777232581883077,
+                "real": 0.0003991477413426896
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -0.49999999999999994,
+                0.5000000000000001
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.0003769695903684714
+          },
+          "S1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.0002867258651944443,
+                  "imag": 0.000268377186395676,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -110.60868436651432,
+                  "phase_relative_to_activation_rad": -1.9304857234948534,
+                  "real": 0.00010092278035133204
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0021131422969831695,
+                  "imag": 0.00021873155316713564,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -174.05866663918755,
+                  "phase_relative_to_activation_rad": -3.0378968244850357,
+                  "real": 0.0021017913490516604
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.00034907235533962716,
+                  "imag": 0.00026533758665013774,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -130.52504321400426,
+                  "phase_relative_to_activation_rad": -2.2780917603922557,
+                  "real": 0.00022682035705164473
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -4.530974155562894e-18,
+              "maximum": {
+                "amplitude": 0.0021131422969831695,
+                "imag": 0.00021873155316713564,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": -174.05866663918755,
+                "phase_relative_to_activation_rad": -3.0378968244850357,
+                "real": 0.0021017913490516604
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -4.530974155562894e-18
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.0014013877124102118
+          },
+          "S1_minus_A1_weighted_complex_rms": 0.0015088195270087446,
+          "S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.7175086484838635
+          },
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 4.002496661690772
+          }
+        }
+      },
+      "interpretation_boundary": {
+        "equal_active_power": "positive algebraic scaling of the linear S1 complex response by sqrt(P_A1/P_S1); no new solve",
+        "not_equal_motion_and_power": true,
+        "raw_comparison": "uses the actual activation amplitude in both source simulations but does not impose equal active work"
+      },
+      "macro_shortening_fundamental": {
+        "equal_active_power": {
+          "A1": {
+            "amplitude": 0.015485831912240627,
+            "imag": 0.0009669471782248792,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -3.5799210927360567,
+            "phase_relative_to_activation_rad": -0.062481410029837446,
+            "real": -0.015455613969321734
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.11631960159459837
+          },
+          "interpretation": "scaled S1 macro shortening is a consequence of equal-active-power algebraic normalization; it is not constrained to equal A1 motion",
+          "scaled_S1": {
+            "amplitude": 0.014784990103444728,
+            "imag": 0.000953141482192214,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -3.696240694330655,
+            "phase_relative_to_activation_rad": -0.06451157006227123,
+            "real": -0.014754235109753504
+          },
+          "scaled_S1_minus_A1": {
+            "absolute_amplitude": 0.0007015147196546748,
+            "imag": -1.3805696032665187e-05,
+            "real": 0.0007013788595682299
+          },
+          "scaled_S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9547430313871659
+          }
+        },
+        "raw": {
+          "A1": {
+            "amplitude": 0.015485831912240627,
+            "imag": 0.0009669471782248792,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -3.5799210927360567,
+            "phase_relative_to_activation_rad": -0.062481410029837446,
+            "real": -0.015455613969321734
+          },
+          "S1": {
+            "amplitude": 0.015376210354643758,
+            "imag": 0.000991255579164021,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -3.696240694330655,
+            "phase_relative_to_activation_rad": -0.06451157006227123,
+            "real": -0.015344225534285858
+          },
+          "S1_minus_A1": {
+            "absolute_amplitude": 0.00011401000752547821,
+            "imag": 2.4308400939141708e-05,
+            "real": 0.00011138843503587584
+          },
+          "S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9929211708987865
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.11631960159459837
+          }
+        }
+      },
+      "source_cases": {
+        "A1": "basic__de0p02__h0p3__a1__s2__t128__a0p1",
+        "S1": "basic__de0p02__h0p3__s1__s2__t128__a0p1"
+      },
+      "thickness_ratio_H": 0.3
+    },
+    {
+      "active_work": {
+        "P_A1": 8.653884735172074e-05,
+        "P_S1": 9.209021087540356e-05,
+        "equal_power_S1_scale_sqrt_P_A1_over_P_S1": 0.9693906341778462,
+        "power_floor": 1e-14,
+        "scaled_S1_power_algebraic": 8.653884735172072e-05
+      },
+      "common_point_comparisons": [
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0010099304788398632,
+              "imag": 0.0007714135146664829,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -130.1971322816525,
+              "phase_relative_to_activation_rad": -2.272368634969433,
+              "real": 0.0006518287823344558
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 2.4923064422001064
+            },
+            "scaled_S1": {
+              "amplitude": 0.0009356168337278232,
+              "imag": 0.0007402338632831195,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -127.70482583945238,
+              "phase_relative_to_activation_rad": -2.2288696815843756,
+              "real": 0.0005722173426276288
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 8.549942685528262e-05,
+              "imag": -3.1179651383363366e-05,
+              "real": -7.961143970682699e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.926417068630896
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0010099304788398632,
+              "imag": 0.0007714135146664829,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -130.1971322816525,
+              "phase_relative_to_activation_rad": -2.272368634969433,
+              "real": 0.0006518287823344558
+            },
+            "S1": {
+              "amplitude": 0.0009651597619584318,
+              "imag": 0.0007636074015826677,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -127.70482583945238,
+              "phase_relative_to_activation_rad": -2.2288696815843756,
+              "real": 0.0005902856108290487
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 6.203625843344576e-05,
+              "imag": -7.806113083815166e-06,
+              "real": -6.154317150540716e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9556695061497097
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 2.4923064422001064
+            }
+          },
+          "x_over_L": -0.25
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0009418354341587871,
+              "imag": 0.0007220593825019586,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -129.9458743497125,
+              "phase_relative_to_activation_rad": -2.267983356785329,
+              "real": 0.0006047183089488537
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 22.667013976992543
+            },
+            "scaled_S1": {
+              "amplitude": 0.0014369698527676223,
+              "imag": 0.0006610062251485996,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -152.61288832670508,
+              "phase_relative_to_activation_rad": -2.663597382279423,
+              "real": 0.001275912664753274
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 0.0006739653932410217,
+              "imag": -6.105315735335901e-05,
+              "real": 0.0006711943558044204
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.5257122429791263
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0009418354341587871,
+              "imag": 0.0007220593825019586,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -129.9458743497125,
+              "phase_relative_to_activation_rad": -2.267983356785329,
+              "real": 0.0006047183089488537
+            },
+            "S1": {
+              "amplitude": 0.001482343445567056,
+              "imag": 0.000681878080768965,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -152.61288832670508,
+              "phase_relative_to_activation_rad": -2.663597382279423,
+              "real": 0.00131620073453195
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 0.0007126161511799773,
+              "imag": -4.018130173299365e-05,
+              "real": 0.0007114824255830964
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.5738879551617537
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 22.667013976992543
+            }
+          },
+          "x_over_L": 0.0
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.001017811151616293,
+              "imag": 0.0007777173632152869,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -130.17232355505533,
+              "phase_relative_to_activation_rad": -2.2719356410070857,
+              "real": 0.0006565784365237305
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 2.4843906296618434
+            },
+            "scaled_S1": {
+              "amplitude": 0.0010003544805332802,
+              "imag": 0.0007356874158961206,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -132.65671418471717,
+              "phase_relative_to_activation_rad": -2.31529643740038,
+              "real": 0.0006778444606361383
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 4.710371804010177e-05,
+              "imag": -4.202994731916632e-05,
+              "real": 2.1266024112407854e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9828488113386344
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.001017811151616293,
+              "imag": 0.0007777173632152869,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -130.17232355505533,
+              "phase_relative_to_activation_rad": -2.2719356410070857,
+              "real": 0.0006565784365237305
+            },
+            "S1": {
+              "amplitude": 0.0010319415571635833,
+              "imag": 0.0007589173961022094,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -132.65671418471717,
+              "phase_relative_to_activation_rad": -2.31529643740038,
+              "real": 0.0006992479984201908
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 4.6627569911894945e-05,
+              "imag": -1.8799967113077454e-05,
+              "real": 4.2669561896460304e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.013883130996208
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 2.4843906296618434
+            }
+          },
+          "x_over_L": 0.25
+        }
+      ],
+      "de": 0.02,
+      "full_field_y_traction": {
+        "equal_active_power": {
+          "A1_peak": {
+            "first_maximum_x_over_L": -0.49999999999999994,
+            "maximum": {
+              "amplitude": 0.0011537883556443514,
+              "imag": 0.0009047611618666813,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -128.35642591396248,
+              "phase_relative_to_activation_rad": -2.240242248290817,
+              "real": 0.0007159852020804266
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -0.49999999999999994,
+              0.5000000000000001
+            ]
+          },
+          "A1_weighted_complex_amplitude_rms": 0.0010306936411548207,
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 0.4842780550389605
+          },
+          "scaled_S1_minus_A1_weighted_complex_rms": 0.0004991423118794808,
+          "scaled_S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 1.0530953659631166
+          },
+          "scaled_S1_peak": {
+            "first_maximum_x_over_L": -4.530974155562894e-18,
+            "maximum": {
+              "amplitude": 0.0014369698527676223,
+              "imag": 0.0006610062251485996,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -152.61288832670508,
+              "phase_relative_to_activation_rad": -2.663597382279423,
+              "real": 0.001275912664753274
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -4.530974155562894e-18
+            ]
+          },
+          "scaled_S1_weighted_complex_amplitude_rms": 0.001085418697227793
+        },
+        "raw": {
+          "A1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.0010099304788398632,
+                  "imag": 0.0007714135146664829,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -130.1971322816525,
+                  "phase_relative_to_activation_rad": -2.272368634969433,
+                  "real": 0.0006518287823344558
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0009418354341587871,
+                  "imag": 0.0007220593825019586,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -129.9458743497125,
+                  "phase_relative_to_activation_rad": -2.267983356785329,
+                  "real": 0.0006047183089488537
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.001017811151616293,
+                  "imag": 0.0007777173632152869,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -130.17232355505533,
+                  "phase_relative_to_activation_rad": -2.2719356410070857,
+                  "real": 0.0006565784365237305
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -0.49999999999999994,
+              "maximum": {
+                "amplitude": 0.0011537883556443514,
+                "imag": 0.0009047611618666813,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": -128.35642591396248,
+                "phase_relative_to_activation_rad": -2.240242248290817,
+                "real": 0.0007159852020804266
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -0.49999999999999994,
+                0.5000000000000001
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.0010306936411548207
+          },
+          "S1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.0009651597619584318,
+                  "imag": 0.0007636074015826677,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -127.70482583945238,
+                  "phase_relative_to_activation_rad": -2.2288696815843756,
+                  "real": 0.0005902856108290487
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.001482343445567056,
+                  "imag": 0.000681878080768965,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -152.61288832670508,
+                  "phase_relative_to_activation_rad": -2.663597382279423,
+                  "real": 0.00131620073453195
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0010319415571635833,
+                  "imag": 0.0007589173961022094,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -132.65671418471717,
+                  "phase_relative_to_activation_rad": -2.31529643740038,
+                  "real": 0.0006992479984201908
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -4.530974155562894e-18,
+              "maximum": {
+                "amplitude": 0.001482343445567056,
+                "imag": 0.000681878080768965,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": -152.61288832670508,
+                "phase_relative_to_activation_rad": -2.663597382279423,
+                "real": 0.00131620073453195
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -4.530974155562894e-18
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.0011196917516624778
+          },
+          "S1_minus_A1_weighted_complex_rms": 0.0005117042376485367,
+          "S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 1.0863477826524097
+          },
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 0.49646589172240124
+          }
+        }
+      },
+      "interpretation_boundary": {
+        "equal_active_power": "positive algebraic scaling of the linear S1 complex response by sqrt(P_A1/P_S1); no new solve",
+        "not_equal_motion_and_power": true,
+        "raw_comparison": "uses the actual activation amplitude in both source simulations but does not impose equal active work"
+      },
+      "macro_shortening_fundamental": {
+        "equal_active_power": {
+          "A1": {
+            "amplitude": 0.0125663291296442,
+            "imag": 0.0010369815353477893,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -4.733467070029758,
+            "phase_relative_to_activation_rad": -0.08261458540674828,
+            "real": -0.01252346985024087
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.11054571423797616
+          },
+          "interpretation": "scaled S1 macro shortening is a consequence of equal-active-power algebraic normalization; it is not constrained to equal A1 motion",
+          "scaled_S1": {
+            "amplitude": 0.012096304751565569,
+            "imag": 0.0010214518002304549,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -4.844012784267734,
+            "phase_relative_to_activation_rad": -0.08454397209416974,
+            "real": -0.012053100217892231
+          },
+          "scaled_S1_minus_A1": {
+            "absolute_amplitude": 0.00047062592757795245,
+            "imag": -1.552973511733443e-05,
+            "real": 0.0004703696323486387
+          },
+          "scaled_S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9625965249493718
+          }
+        },
+        "raw": {
+          "A1": {
+            "amplitude": 0.0125663291296442,
+            "imag": 0.0010369815353477893,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -4.733467070029758,
+            "phase_relative_to_activation_rad": -0.08261458540674828,
+            "real": -0.01252346985024087
+          },
+          "S1": {
+            "amplitude": 0.012478256262321552,
+            "imag": 0.0010537050433716666,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -4.844012784267734,
+            "phase_relative_to_activation_rad": -0.08454397209416972,
+            "real": -0.0124336875073222
+          },
+          "S1_minus_A1": {
+            "absolute_amplitude": 9.132658331827705e-05,
+            "imag": 1.672350802387726e-05,
+            "real": 8.978234291866921e-05
+          },
+          "S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9929913607694006
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.11054571423797536
+          }
+        }
+      },
+      "source_cases": {
+        "A1": "basic__de0p02__h0p6__a1__s2__t128__a0p1",
+        "S1": "basic__de0p02__h0p6__s1__s2__t128__a0p1"
+      },
+      "thickness_ratio_H": 0.6
+    },
+    {
+      "active_work": {
+        "P_A1": 0.00010847886132881016,
+        "P_S1": 0.00011754824661293726,
+        "equal_power_S1_scale_sqrt_P_A1_over_P_S1": 0.9606484386407943,
+        "power_floor": 1e-14,
+        "scaled_S1_power_algebraic": 0.00010847886132881017
+      },
+      "common_point_comparisons": [
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0005160130423496058,
+              "imag": -0.00031644099523089257,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 37.82430923700943,
+              "phase_relative_to_activation_rad": 0.6601587334783188,
+              "real": -0.00040759607016282464
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 1.8225126304613466
+            },
+            "scaled_S1": {
+              "amplitude": 0.0004879405977060764,
+              "imag": -0.0003113321754117012,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 39.64682186747078,
+              "phase_relative_to_activation_rad": 0.691967579539052,
+              "real": -0.0003757103983697826
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 3.229235367139656e-05,
+              "imag": 5.108819819191353e-06,
+              "real": 3.1885671793042037e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9455974125853395
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0005160130423496058,
+              "imag": -0.00031644099523089257,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 37.82430923700943,
+              "phase_relative_to_activation_rad": 0.6601587334783188,
+              "real": -0.00040759607016282464
+            },
+            "S1": {
+              "amplitude": 0.0005079283722112279,
+              "imag": -0.0003240854436324281,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 39.64682186747078,
+              "phase_relative_to_activation_rad": 0.691967579539052,
+              "real": -0.00039110082654313067
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 1.818050201278264e-05,
+              "imag": -7.64444840153553e-06,
+              "real": 1.6495243619693968e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9843324306270144
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 1.8225126304613466
+            }
+          },
+          "x_over_L": -0.25
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0008473357590300849,
+              "imag": -0.0002701142980423705,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 18.58920364179977,
+              "phase_relative_to_activation_rad": 0.3244428088731266,
+              "real": -0.0008031289775149242
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 155.30562280112014
+            },
+            "scaled_S1": {
+              "amplitude": 0.0021357446382847967,
+              "imag": -0.00022714467610947492,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 173.8948264429199,
+              "phase_relative_to_activation_rad": 3.0350372736130518,
+              "real": 0.002123631431316974
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 0.002927075823943568,
+              "imag": 4.296962193289561e-05,
+              "real": 0.002926760408831898
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 2.5205411379421867
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0008473357590300849,
+              "imag": -0.0002701142980423705,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 18.58920364179977,
+              "phase_relative_to_activation_rad": 0.3244428088731266,
+              "real": -0.0008031289775149242
+            },
+            "S1": {
+              "amplitude": 0.0022232323005767093,
+              "imag": -0.0002364493262809631,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 173.8948264429199,
+              "phase_relative_to_activation_rad": 3.0350372736130518,
+              "real": 0.0022106228937629514
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 0.003013939891894759,
+              "imag": 3.3664971761407435e-05,
+              "real": 0.0030137518712778756
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 2.623791427286822
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 155.30562280112014
+            }
+          },
+          "x_over_L": 0.0
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0005175703884713649,
+              "imag": -0.00031291050815737367,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 37.19831967291126,
+              "phase_relative_to_activation_rad": 0.6492331545016816,
+              "real": -0.00041226947607977683
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 1.2085308787395146
+            },
+            "scaled_S1": {
+              "amplitude": 0.0005186950826852292,
+              "imag": -0.00030480652853145457,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 35.989788794171744,
+              "phase_relative_to_activation_rad": 0.6281403115556567,
+              "real": -0.00041968746582003177
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 1.0986403304259283e-05,
+              "imag": 8.103979625919094e-06,
+              "real": -7.417989740254936e-06
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.0021730265852073
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0005175703884713649,
+              "imag": -0.00031291050815737367,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 37.19831967291126,
+              "phase_relative_to_activation_rad": 0.6492331545016816,
+              "real": -0.00041226947607977683
+            },
+            "S1": {
+              "amplitude": 0.0005399426697857568,
+              "imag": -0.0003172924831509853,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 35.98978879417174,
+              "phase_relative_to_activation_rad": 0.6281403115556566,
+              "real": -0.00043687935038320643
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 2.4996952175720194e-05,
+              "imag": -4.381974993611642e-06,
+              "real": -2.4609874303429603e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.043225582090328
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 1.2085308787395208
+            }
+          },
+          "x_over_L": 0.25
+        }
+      ],
+      "de": 0.2,
+      "full_field_y_traction": {
+        "equal_active_power": {
+          "A1_peak": {
+            "first_maximum_x_over_L": -4.530974155562894e-18,
+            "maximum": {
+              "amplitude": 0.0008473357590300849,
+              "imag": -0.0002701142980423705,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 18.58920364179977,
+              "phase_relative_to_activation_rad": 0.3244428088731266,
+              "real": -0.0008031289775149242
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -4.530974155562894e-18
+            ]
+          },
+          "A1_weighted_complex_amplitude_rms": 0.0005882974613216899,
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.507744909958488
+          },
+          "scaled_S1_minus_A1_weighted_complex_rms": 0.0020635974254926584,
+          "scaled_S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.053114580067984
+          },
+          "scaled_S1_peak": {
+            "first_maximum_x_over_L": -0.49999999999999994,
+            "maximum": {
+              "amplitude": 0.002789420158724583,
+              "imag": -0.0003721543504432087,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 7.667056998092359,
+              "phase_relative_to_activation_rad": 0.13381538855478425,
+              "real": -0.002764482946473946
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -0.49999999999999994,
+              0.5000000000000001
+            ]
+          },
+          "scaled_S1_weighted_complex_amplitude_rms": 0.0017961395565782325
+        },
+        "raw": {
+          "A1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.0005160130423496058,
+                  "imag": -0.00031644099523089257,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 37.82430923700943,
+                  "phase_relative_to_activation_rad": 0.6601587334783188,
+                  "real": -0.00040759607016282464
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0008473357590300849,
+                  "imag": -0.0002701142980423705,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 18.58920364179977,
+                  "phase_relative_to_activation_rad": 0.3244428088731266,
+                  "real": -0.0008031289775149242
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0005175703884713649,
+                  "imag": -0.00031291050815737367,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 37.19831967291126,
+                  "phase_relative_to_activation_rad": 0.6492331545016816,
+                  "real": -0.00041226947607977683
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -4.530974155562894e-18,
+              "maximum": {
+                "amplitude": 0.0008473357590300849,
+                "imag": -0.0002701142980423705,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": 18.58920364179977,
+                "phase_relative_to_activation_rad": 0.3244428088731266,
+                "real": -0.0008031289775149242
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -4.530974155562894e-18
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.0005882974613216899
+          },
+          "S1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.0005079283722112279,
+                  "imag": -0.0003240854436324281,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 39.64682186747078,
+                  "phase_relative_to_activation_rad": 0.691967579539052,
+                  "real": -0.00039110082654313067
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0022232323005767093,
+                  "imag": -0.0002364493262809631,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 173.8948264429199,
+                  "phase_relative_to_activation_rad": 3.0350372736130518,
+                  "real": 0.0022106228937629514
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0005399426697857568,
+                  "imag": -0.0003172924831509853,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 35.98978879417174,
+                  "phase_relative_to_activation_rad": 0.6281403115556566,
+                  "real": -0.00043687935038320643
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -0.49999999999999994,
+              "maximum": {
+                "amplitude": 0.0029036846847648947,
+                "imag": -0.0003873991103027907,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": 7.667056998092359,
+                "phase_relative_to_activation_rad": 0.13381538855478425,
+                "real": -0.0028777259560067237
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -0.49999999999999994,
+                0.5000000000000001
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.001869715792303333
+          },
+          "S1_minus_A1_weighted_complex_rms": 0.0021345407704341625,
+          "S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.178180963254139
+          },
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.6283358517961775
+          }
+        }
+      },
+      "interpretation_boundary": {
+        "equal_active_power": "positive algebraic scaling of the linear S1 complex response by sqrt(P_A1/P_S1); no new solve",
+        "not_equal_motion_and_power": true,
+        "raw_comparison": "uses the actual activation amplitude in both source simulations but does not impose equal active work"
+      },
+      "macro_shortening_fundamental": {
+        "equal_active_power": {
+          "A1": {
+            "amplitude": 0.017532862103540468,
+            "imag": 0.0011907940682485659,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -3.894403367294228,
+            "phase_relative_to_activation_rad": -0.06797016116003833,
+            "real": -0.017492377283513796
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.1326886688361107
+          },
+          "interpretation": "scaled S1 macro shortening is a consequence of equal-active-power algebraic normalization; it is not constrained to equal A1 motion",
+          "scaled_S1": {
+            "amplitude": 0.016721372815846104,
+            "imag": 0.0011743112343728184,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -4.027092036130338,
+            "phase_relative_to_activation_rad": -0.07028601531131685,
+            "real": -0.016680086989321816
+          },
+          "scaled_S1_minus_A1": {
+            "absolute_amplitude": 0.0008124575101819595,
+            "imag": -1.6482833875747487e-05,
+            "real": 0.00081229029419198
+          },
+          "scaled_S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9537160970694855
+          }
+        },
+        "raw": {
+          "A1": {
+            "amplitude": 0.017532862103540468,
+            "imag": 0.0011907940682485659,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -3.894403367294228,
+            "phase_relative_to_activation_rad": -0.06797016116003833,
+            "real": -0.017492377283513796
+          },
+          "S1": {
+            "amplitude": 0.017406339450782748,
+            "imag": 0.0012224151803487363,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -4.027092036130339,
+            "phase_relative_to_activation_rad": -0.07028601531131687,
+            "real": -0.01736336241062568
+          },
+          "S1_minus_A1": {
+            "absolute_amplitude": 0.00013283347528687304,
+            "imag": 3.1621112100170415e-05,
+            "real": 0.00012901487288811617
+          },
+          "S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9927836851729889
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.13268866883611147
+          }
+        }
+      },
+      "source_cases": {
+        "A1": "basic__de0p2__h0p1__a1__s2__t128__a0p1",
+        "S1": "basic__de0p2__h0p1__s1__s2__t128__a0p1"
+      },
+      "thickness_ratio_H": 0.1
+    },
+    {
+      "active_work": {
+        "P_A1": 0.00012887259802729441,
+        "P_S1": 0.00013571122313361635,
+        "equal_power_S1_scale_sqrt_P_A1_over_P_S1": 0.9744788318135645,
+        "power_floor": 1e-14,
+        "scaled_S1_power_algebraic": 0.00012887259802729444
+      },
+      "common_point_comparisons": [
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 9.0404048615028e-05,
+              "imag": 6.357842797081031e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -135.3100754476018,
+              "phase_relative_to_activation_rad": -2.3616063276825914,
+              "real": 6.427033143487617e-05
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 37.10990710601908
+            },
+            "scaled_S1": {
+              "amplitude": 6.236684416672694e-05,
+              "imag": 6.17291938172282e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -98.20016834158272,
+              "phase_relative_to_activation_rad": -1.713916263573318,
+              "real": 8.895497849579762e-06
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 5.540570242812599e-05,
+              "imag": -1.8492341535821189e-06,
+              "real": -5.537483358529641e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.6898678225386424
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 9.0404048615028e-05,
+              "imag": 6.357842797081031e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -135.3100754476018,
+              "phase_relative_to_activation_rad": -2.3616063276825914,
+              "real": 6.427033143487617e-05
+            },
+            "S1": {
+              "amplitude": 6.400020414056449e-05,
+              "imag": 6.334585401136565e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -98.20016834158272,
+              "phase_relative_to_activation_rad": -1.713916263573318,
+              "real": 9.128466990939862e-06
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 5.5142354909815554e-05,
+              "imag": -2.3257395944466285e-07,
+              "real": -5.514186444393631e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.7079351546864865
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 37.10990710601908
+            }
+          },
+          "x_over_L": -0.25
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.00013321481515684823,
+              "imag": 6.960488770556275e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -31.50017049238271,
+              "phase_relative_to_activation_rad": -0.5497816900316417,
+              "real": -0.00011358409477021525
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 147.92771496604385
+            },
+            "scaled_S1": {
+              "amplitude": 0.0020278993060859306,
+              "imag": 2.024881085793742e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -179.42788545842657,
+              "phase_relative_to_activation_rad": -3.131607371140799,
+              "real": 0.002027798210198105
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 0.0021419510261332366,
+              "imag": -4.935607684762533e-05,
+              "real": 0.0021413823049683204
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 15.222776113139256
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.00013321481515684823,
+              "imag": 6.960488770556275e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -31.50017049238271,
+              "phase_relative_to_activation_rad": -0.5497816900316417,
+              "real": -0.00011358409477021525
+            },
+            "S1": {
+              "amplitude": 0.002081009089044947,
+              "imag": 2.0779118229026228e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -179.42788545842657,
+              "phase_relative_to_activation_rad": -3.131607371140799,
+              "real": 0.0020809053455006802
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 0.002195032541723572,
+              "imag": -4.882576947653652e-05,
+              "real": 0.0021944894402708957
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 15.621453864532633
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 147.92771496604385
+            }
+          },
+          "x_over_L": 0.0
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 9.122879162618271e-05,
+              "imag": 6.85025811603126e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -131.33266471966712,
+              "phase_relative_to_activation_rad": -2.292187414775987,
+              "real": 6.025021822324174e-05
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 21.77458029282516
+            },
+            "scaled_S1": {
+              "amplitude": 0.00011115922426996368,
+              "imag": 5.0279755804136796e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -153.10724501249229,
+              "phase_relative_to_activation_rad": -2.672225534125657,
+              "real": 9.913788023039657e-05
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 4.294556578209673e-05,
+              "imag": -1.8222825356175802e-05,
+              "real": 3.888766200715483e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.2184664763011168
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 9.122879162618271e-05,
+              "imag": 6.85025811603126e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -131.33266471966712,
+              "phase_relative_to_activation_rad": -2.292187414775987,
+              "real": 6.025021822324174e-05
+            },
+            "S1": {
+              "amplitude": 0.00011407043502739776,
+              "imag": 5.1596560297326424e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -153.10724501249229,
+              "phase_relative_to_activation_rad": -2.672225534125657,
+              "real": 0.00010173425732182907
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 4.479664096059934e-05,
+              "imag": -1.6906020862986174e-05,
+              "real": 4.1484039098587335e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.2503775726287214
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 21.77458029282516
+            }
+          },
+          "x_over_L": 0.25
+        }
+      ],
+      "de": 0.2,
+      "full_field_y_traction": {
+        "equal_active_power": {
+          "A1_peak": {
+            "first_maximum_x_over_L": -0.49999999999999994,
+            "maximum": {
+              "amplitude": 0.0002955492004695191,
+              "imag": 0.00011159635601126297,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -157.81553256061798,
+              "phase_relative_to_activation_rad": -2.7544006539711012,
+              "real": 0.0002736705742734857
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -0.49999999999999994,
+              0.5000000000000001
+            ]
+          },
+          "A1_weighted_complex_amplitude_rms": 0.00017113821317417738,
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 8.887712187280913
+          },
+          "scaled_S1_minus_A1_weighted_complex_rms": 0.0015210271829376152,
+          "scaled_S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 8.115773283070807
+          },
+          "scaled_S1_peak": {
+            "first_maximum_x_over_L": -4.530974155562894e-18,
+            "maximum": {
+              "amplitude": 0.0020278993060859306,
+              "imag": 2.024881085793742e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -179.42788545842657,
+              "phase_relative_to_activation_rad": -3.131607371140799,
+              "real": 0.002027798210198105
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -4.530974155562894e-18
+            ]
+          },
+          "scaled_S1_weighted_complex_amplitude_rms": 0.001388918938191465
+        },
+        "raw": {
+          "A1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 9.0404048615028e-05,
+                  "imag": 6.357842797081031e-05,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -135.3100754476018,
+                  "phase_relative_to_activation_rad": -2.3616063276825914,
+                  "real": 6.427033143487617e-05
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.00013321481515684823,
+                  "imag": 6.960488770556275e-05,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -31.50017049238271,
+                  "phase_relative_to_activation_rad": -0.5497816900316417,
+                  "real": -0.00011358409477021525
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 9.122879162618271e-05,
+                  "imag": 6.85025811603126e-05,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -131.33266471966712,
+                  "phase_relative_to_activation_rad": -2.292187414775987,
+                  "real": 6.025021822324174e-05
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -0.49999999999999994,
+              "maximum": {
+                "amplitude": 0.0002955492004695191,
+                "imag": 0.00011159635601126297,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": -157.81553256061798,
+                "phase_relative_to_activation_rad": -2.7544006539711012,
+                "real": 0.0002736705742734857
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -0.49999999999999994,
+                0.5000000000000001
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.00017113821317417738
+          },
+          "S1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 6.400020414056449e-05,
+                  "imag": 6.334585401136565e-05,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -98.20016834158272,
+                  "phase_relative_to_activation_rad": -1.713916263573318,
+                  "real": 9.128466990939862e-06
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.002081009089044947,
+                  "imag": 2.0779118229026228e-05,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -179.42788545842657,
+                  "phase_relative_to_activation_rad": -3.131607371140799,
+                  "real": 0.0020809053455006802
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.00011407043502739776,
+                  "imag": 5.1596560297326424e-05,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -153.10724501249229,
+                  "phase_relative_to_activation_rad": -2.672225534125657,
+                  "real": 0.00010173425732182907
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -4.530974155562894e-18,
+              "maximum": {
+                "amplitude": 0.002081009089044947,
+                "imag": 2.0779118229026228e-05,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": -179.42788545842657,
+                "phase_relative_to_activation_rad": -3.131607371140799,
+                "real": 0.0020809053455006802
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -4.530974155562894e-18
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.001425294108858786
+          },
+          "S1_minus_A1_weighted_complex_rms": 0.0015573028348049806,
+          "S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 8.32832178403184
+          },
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 9.099679176970383
+          }
+        }
+      },
+      "interpretation_boundary": {
+        "equal_active_power": "positive algebraic scaling of the linear S1 complex response by sqrt(P_A1/P_S1); no new solve",
+        "not_equal_motion_and_power": true,
+        "raw_comparison": "uses the actual activation amplitude in both source simulations but does not impose equal active work"
+      },
+      "macro_shortening_fundamental": {
+        "equal_active_power": {
+          "A1": {
+            "amplitude": 0.014161698190901588,
+            "imag": 0.0014600343447919808,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -5.917561006839802,
+            "phase_relative_to_activation_rad": -0.10328092325698522,
+            "real": -0.014086234250580004
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.11444779148745171
+          },
+          "interpretation": "scaled S1 macro shortening is a consequence of equal-active-power algebraic normalization; it is not constrained to equal A1 motion",
+          "scaled_S1": {
+            "amplitude": 0.013701426467703589,
+            "imag": 0.001439801321737299,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -6.0320087983272535,
+            "phase_relative_to_activation_rad": -0.10527841404007719,
+            "real": -0.013625566388367566
+          },
+          "scaled_S1_minus_A1": {
+            "absolute_amplitude": 0.0004611119760939953,
+            "imag": -2.0233023054681788e-05,
+            "real": 0.00046066786221243827
+          },
+          "scaled_S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9674988326263224
+          }
+        },
+        "raw": {
+          "A1": {
+            "amplitude": 0.014161698190901588,
+            "imag": 0.0014600343447919808,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -5.917561006839802,
+            "phase_relative_to_activation_rad": -0.10328092325698522,
+            "real": -0.014086234250580004
+          },
+          "S1": {
+            "amplitude": 0.014060260746972203,
+            "imag": 0.0014775090794509522,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -6.0320087983272535,
+            "phase_relative_to_activation_rad": -0.10527841404007719,
+            "real": -0.013982413925820796
+          },
+          "S1_minus_A1": {
+            "absolute_amplitude": 0.00010528070186177974,
+            "imag": 1.7474734658971423e-05,
+            "real": 0.00010382032475920837
+          },
+          "S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.992837197731374
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.11444779148745171
+          }
+        }
+      },
+      "source_cases": {
+        "A1": "basic__de0p2__h0p3__a1__s2__t128__a0p1",
+        "S1": "basic__de0p2__h0p3__s1__s2__t128__a0p1"
+      },
+      "thickness_ratio_H": 0.3
+    },
+    {
+      "active_work": {
+        "P_A1": 0.00013330415473615043,
+        "P_S1": 0.0001388280018033983,
+        "equal_power_S1_scale_sqrt_P_A1_over_P_S1": 0.979903494264938,
+        "power_floor": 1e-14,
+        "scaled_S1_power_algebraic": 0.00013330415473615043
+      },
+      "common_point_comparisons": [
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.00059048552777895,
+              "imag": 0.0003975711060628394,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -137.67809325036714,
+              "phase_relative_to_activation_rad": -2.402936035086688,
+              "real": 0.00043658948010729206
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 2.9681832819548335
+            },
+            "scaled_S1": {
+              "amplitude": 0.0005454302783597268,
+              "imag": 0.000387625191905706,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -134.7099099684123,
+              "phase_relative_to_activation_rad": -2.351131464013925,
+              "real": 0.00038371981855467633
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 5.379704751293699e-05,
+              "imag": -9.945914157133374e-06,
+              "real": -5.286966155261573e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9236979615932438
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.00059048552777895,
+              "imag": 0.0003975711060628394,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -137.67809325036714,
+              "phase_relative_to_activation_rad": -2.402936035086688,
+              "real": 0.00043658948010729206
+            },
+            "S1": {
+              "amplitude": 0.0005566163214560985,
+              "imag": 0.00039557486443752107,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -134.7099099684123,
+              "phase_relative_to_activation_rad": -2.351131464013925,
+              "real": 0.0003915893971196815
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 4.504433870663982e-05,
+              "imag": -1.9962416253183177e-06,
+              "real": -4.5000082987610554e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.942641767275403
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 2.9681832819548335
+            }
+          },
+          "x_over_L": -0.25
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0005401311101953165,
+              "imag": 0.0003715347490456482,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -136.53902894848756,
+              "phase_relative_to_activation_rad": -2.383055612626959,
+              "real": 0.000392050438658615
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 27.128796882483105
+            },
+            "scaled_S1": {
+              "amplitude": 0.0010972456023509182,
+              "imag": 0.00030855165039756155,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -163.66782583097066,
+              "phase_relative_to_activation_rad": -2.8565424403310624,
+              "real": 0.0010529690360667641
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 0.0006639128430112418,
+              "imag": -6.298309864808662e-05,
+              "real": 0.0006609185974081491
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 2.0314430730608053
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0005401311101953165,
+              "imag": 0.0003715347490456482,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -136.53902894848756,
+              "phase_relative_to_activation_rad": -2.383055612626959,
+              "real": 0.000392050438658615
+            },
+            "S1": {
+              "amplitude": 0.0011197486372614713,
+              "imag": 0.0003148796307018148,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -163.66782583097066,
+              "phase_relative_to_activation_rad": -2.8565424403310624,
+              "real": 0.001074564018017545
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 0.0006848609993596454,
+              "imag": -5.6655118343833396e-05,
+              "real": 0.00068251357935893
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 2.0731052444962104
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 27.128796882483105
+            }
+          },
+          "x_over_L": 0.0
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0005955487716638979,
+              "imag": 0.00040197380213611824,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -137.54866867670017,
+              "phase_relative_to_activation_rad": -2.40067715014321,
+              "real": 0.00043942621886570505
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 3.077466199202839
+            },
+            "scaled_S1": {
+              "amplitude": 0.0005920386671034769,
+              "imag": 0.0003755762894402913,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -140.626134875903,
+              "phase_relative_to_activation_rad": -2.454389067938135,
+              "real": 0.0004576595177158715
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 3.208242296781564e-05,
+              "imag": -2.6397512695826926e-05,
+              "real": 1.8233298850166442e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9941061005791109
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0005955487716638979,
+              "imag": 0.00040197380213611824,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -137.54866867670017,
+              "phase_relative_to_activation_rad": -2.40067715014321,
+              "real": 0.00043942621886570505
+            },
+            "S1": {
+              "amplitude": 0.000604180585709195,
+              "imag": 0.0003832788551509606,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -140.626134875903,
+              "phase_relative_to_activation_rad": -2.454389067938135,
+              "real": 0.0004670455002910046
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 3.335154792851079e-05,
+              "imag": -1.8694946985157643e-05,
+              "real": 2.7619281425299562e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.0144938827112022
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 3.077466199202839
+            }
+          },
+          "x_over_L": 0.25
+        }
+      ],
+      "de": 0.2,
+      "full_field_y_traction": {
+        "equal_active_power": {
+          "A1_peak": {
+            "first_maximum_x_over_L": -0.49999999999999994,
+            "maximum": {
+              "amplitude": 0.0006908092495178032,
+              "imag": 0.0004747863770132929,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -136.58402008839568,
+              "phase_relative_to_activation_rad": -2.383840856152581,
+              "real": 0.0005017921037859622
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -0.49999999999999994,
+              0.5000000000000001
+            ]
+          },
+          "A1_weighted_complex_amplitude_rms": 0.000604736862570237,
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 0.7971690784277308
+          },
+          "scaled_S1_minus_A1_weighted_complex_rms": 0.00048207752742639306,
+          "scaled_S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 1.2080843529307972
+          },
+          "scaled_S1_peak": {
+            "first_maximum_x_over_L": -4.530974155562894e-18,
+            "maximum": {
+              "amplitude": 0.0010972456023509182,
+              "imag": 0.00030855165039756155,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -163.66782583097066,
+              "phase_relative_to_activation_rad": -2.8565424403310624,
+              "real": 0.0010529690360667641
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -4.530974155562894e-18
+            ]
+          },
+          "scaled_S1_weighted_complex_amplitude_rms": 0.0007305731413115651
+        },
+        "raw": {
+          "A1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.00059048552777895,
+                  "imag": 0.0003975711060628394,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -137.67809325036714,
+                  "phase_relative_to_activation_rad": -2.402936035086688,
+                  "real": 0.00043658948010729206
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0005401311101953165,
+                  "imag": 0.0003715347490456482,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -136.53902894848756,
+                  "phase_relative_to_activation_rad": -2.383055612626959,
+                  "real": 0.000392050438658615
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0005955487716638979,
+                  "imag": 0.00040197380213611824,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -137.54866867670017,
+                  "phase_relative_to_activation_rad": -2.40067715014321,
+                  "real": 0.00043942621886570505
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -0.49999999999999994,
+              "maximum": {
+                "amplitude": 0.0006908092495178032,
+                "imag": 0.0004747863770132929,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": -136.58402008839568,
+                "phase_relative_to_activation_rad": -2.383840856152581,
+                "real": 0.0005017921037859622
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -0.49999999999999994,
+                0.5000000000000001
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.000604736862570237
+          },
+          "S1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.0005566163214560985,
+                  "imag": 0.00039557486443752107,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -134.7099099684123,
+                  "phase_relative_to_activation_rad": -2.351131464013925,
+                  "real": 0.0003915893971196815
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0011197486372614713,
+                  "imag": 0.0003148796307018148,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -163.66782583097066,
+                  "phase_relative_to_activation_rad": -2.8565424403310624,
+                  "real": 0.001074564018017545
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.000604180585709195,
+                  "imag": 0.0003832788551509606,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -140.626134875903,
+                  "phase_relative_to_activation_rad": -2.454389067938135,
+                  "real": 0.0004670455002910046
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -4.530974155562894e-18,
+              "maximum": {
+                "amplitude": 0.0011197486372614713,
+                "imag": 0.0003148796307018148,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": -163.66782583097066,
+                "phase_relative_to_activation_rad": -2.8565424403310624,
+                "real": 0.001074564018017545
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -4.530974155562894e-18
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.0007455562160839065
+          },
+          "S1_minus_A1_weighted_complex_rms": 0.000490749936539384,
+          "S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 1.2328605418812453
+          },
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 0.811509876301589
+          }
+        }
+      },
+      "interpretation_boundary": {
+        "equal_active_power": "positive algebraic scaling of the linear S1 complex response by sqrt(P_A1/P_S1); no new solve",
+        "not_equal_motion_and_power": true,
+        "raw_comparison": "uses the actual activation amplitude in both source simulations but does not impose equal active work"
+      },
+      "macro_shortening_fundamental": {
+        "equal_active_power": {
+          "A1": {
+            "amplitude": 0.010915318041900492,
+            "imag": 0.001524182629241107,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -8.026843481903175,
+            "phase_relative_to_activation_rad": -0.14009484730145627,
+            "real": -0.010808378012845316
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.10934697524593391
+          },
+          "interpretation": "scaled S1 macro shortening is a consequence of equal-active-power algebraic normalization; it is not constrained to equal A1 motion",
+          "scaled_S1": {
+            "amplitude": 0.010620525781549152,
+            "imag": 0.0015030863193096367,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -8.136190457149109,
+            "phase_relative_to_activation_rad": -0.14200331204659455,
+            "real": -0.010513624465105002
+          },
+          "scaled_S1_minus_A1": {
+            "absolute_amplitude": 0.00029550754338633346,
+            "imag": -2.1096309931470207e-05,
+            "real": 0.0002947535477403132
+          },
+          "scaled_S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9729927924024088
+          }
+        },
+        "raw": {
+          "A1": {
+            "amplitude": 0.010915318041900492,
+            "imag": 0.001524182629241107,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -8.026843481903175,
+            "phase_relative_to_activation_rad": -0.14009484730145627,
+            "real": -0.010808378012845316
+          },
+          "S1": {
+            "amplitude": 0.010838338513647208,
+            "imag": 0.0015339126027274325,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -8.13619045714911,
+            "phase_relative_to_activation_rad": -0.14200331204659458,
+            "real": -0.010729244794653644
+          },
+          "S1_minus_A1": {
+            "absolute_amplitude": 7.972915781202829e-05,
+            "imag": 9.72997348632561e-06,
+            "real": 7.913321819167166e-05
+          },
+          "S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9929475689157399
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.10934697524593551
+          }
+        }
+      },
+      "source_cases": {
+        "A1": "basic__de0p2__h0p6__a1__s2__t128__a0p1",
+        "S1": "basic__de0p2__h0p6__s1__s2__t128__a0p1"
+      },
+      "thickness_ratio_H": 0.6
+    },
+    {
+      "active_work": {
+        "P_A1": 7.119844287402938e-05,
+        "P_S1": 7.875474938112456e-05,
+        "equal_power_S1_scale_sqrt_P_A1_over_P_S1": 0.950816853048662,
+        "power_floor": 1e-14,
+        "scaled_S1_power_algebraic": 7.119844287402937e-05
+      },
+      "common_point_comparisons": [
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0005494387186741824,
+              "imag": -0.0003066057260201282,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 33.91997466163692,
+              "phase_relative_to_activation_rad": 0.5920152400386137,
+              "real": -0.0004559340241197157
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 1.6354544794294734
+            },
+            "scaled_S1": {
+              "amplitude": 0.0005133764003668961,
+              "imag": -0.00029852338489871997,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 35.55542914106639,
+              "phase_relative_to_activation_rad": 0.6205593054711479,
+              "real": -0.00041765909199044415
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 3.911898091084619e-05,
+              "imag": 8.082341121408215e-06,
+              "real": 3.8274932129271535e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9343651674306714
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0005494387186741824,
+              "imag": -0.0003066057260201282,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 33.91997466163692,
+              "phase_relative_to_activation_rad": 0.5920152400386137,
+              "real": -0.0004559340241197157
+            },
+            "S1": {
+              "amplitude": 0.0005399319529526912,
+              "imag": -0.0003139651805093128,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 35.55542914106639,
+              "phase_relative_to_activation_rad": 0.6205593054711479,
+              "real": -0.00043926345084363864
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 1.8222776509945844e-05,
+              "imag": -7.359454489184645e-06,
+              "real": 1.6670573276077042e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9826973138252225
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 1.6354544794294734
+            }
+          },
+          "x_over_L": -0.25
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0008836131129013452,
+              "imag": -0.0002702025881433899,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 17.805871105106196,
+              "phase_relative_to_activation_rad": 0.3107710769698244,
+              "real": -0.0008412863333323673
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 153.80695771537134
+            },
+            "scaled_S1": {
+              "amplitude": 0.0021286567424807262,
+              "imag": -0.00031048911169038155,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 171.61282882047752,
+              "phase_relative_to_activation_rad": 2.9952089015787493,
+              "real": 0.002105890794611718
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 0.002947452463985849,
+              "imag": -4.0286523546991676e-05,
+              "real": 0.0029471771279440855
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 2.4090370676950212
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0008836131129013452,
+              "imag": -0.0002702025881433899,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 17.805871105106196,
+              "phase_relative_to_activation_rad": 0.3107710769698244,
+              "real": -0.0008412863333323673
+            },
+            "S1": {
+              "amplitude": 0.0022387663151483736,
+              "imag": -0.0003265498615162756,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 171.61282882047752,
+              "phase_relative_to_activation_rad": 2.9952089015787493,
+              "real": 0.0022148227472614437
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 0.0030566284902985032,
+              "imag": -5.634727337288574e-05,
+              "real": 0.0030561090805938107
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 2.53364994527682
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 153.80695771537134
+            }
+          },
+          "x_over_L": 0.0
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0005514338759988508,
+              "imag": -0.00030318497207857347,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 33.35411756565776,
+              "phase_relative_to_activation_rad": 0.5821391706180038,
+              "real": -0.0004606063311601682
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9493288062304668
+            },
+            "scaled_S1": {
+              "amplitude": 0.0005459044387564015,
+              "imag": -0.0002925487484774047,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 32.40478875942729,
+              "phase_relative_to_activation_rad": 0.5655702572652549,
+              "real": -0.0004608979127944126
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 1.0640219562748155e-05,
+              "imag": 1.0636223601168788e-05,
+              "real": -2.915816342443766e-07
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9899726195957159
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0005514338759988508,
+              "imag": -0.00030318497207857347,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 33.35411756565776,
+              "phase_relative_to_activation_rad": 0.5821391706180038,
+              "real": -0.0004606063311601682
+            },
+            "S1": {
+              "amplitude": 0.0005741425775174628,
+              "imag": -0.00030768149253916546,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 32.40478875942729,
+              "phase_relative_to_activation_rad": 0.5655702572652549,
+              "real": -0.0004847388972088657
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 2.4547900935665962e-05,
+              "imag": -4.496520460591988e-06,
+              "real": -2.4132566048697503e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.0411811869147107
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9493288062304668
+            }
+          },
+          "x_over_L": 0.25
+        }
+      ],
+      "de": 2.0,
+      "full_field_y_traction": {
+        "equal_active_power": {
+          "A1_peak": {
+            "first_maximum_x_over_L": -4.530974155562894e-18,
+            "maximum": {
+              "amplitude": 0.0008836131129013452,
+              "imag": -0.0002702025881433899,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 17.805871105106196,
+              "phase_relative_to_activation_rad": 0.3107710769698244,
+              "real": -0.0008412863333323673
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -4.530974155562894e-18
+            ]
+          },
+          "A1_weighted_complex_amplitude_rms": 0.0006102881771297297,
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.3978926133870524
+          },
+          "scaled_S1_minus_A1_weighted_complex_rms": 0.0020736936891065576,
+          "scaled_S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 2.988243707745102
+          },
+          "scaled_S1_peak": {
+            "first_maximum_x_over_L": -0.49999999999999994,
+            "maximum": {
+              "amplitude": 0.002858606142833631,
+              "imag": -0.0002612495641282425,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": 5.243608985192057,
+              "phase_relative_to_activation_rad": 0.09151824147875998,
+              "real": -0.0028466432416249443
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -0.49999999999999994,
+              0.5000000000000001
+            ]
+          },
+          "scaled_S1_weighted_complex_amplitude_rms": 0.001823689805219143
+        },
+        "raw": {
+          "A1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.0005494387186741824,
+                  "imag": -0.0003066057260201282,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 33.91997466163692,
+                  "phase_relative_to_activation_rad": 0.5920152400386137,
+                  "real": -0.0004559340241197157
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0008836131129013452,
+                  "imag": -0.0002702025881433899,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 17.805871105106196,
+                  "phase_relative_to_activation_rad": 0.3107710769698244,
+                  "real": -0.0008412863333323673
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0005514338759988508,
+                  "imag": -0.00030318497207857347,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 33.35411756565776,
+                  "phase_relative_to_activation_rad": 0.5821391706180038,
+                  "real": -0.0004606063311601682
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -4.530974155562894e-18,
+              "maximum": {
+                "amplitude": 0.0008836131129013452,
+                "imag": -0.0002702025881433899,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": 17.805871105106196,
+                "phase_relative_to_activation_rad": 0.3107710769698244,
+                "real": -0.0008412863333323673
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -4.530974155562894e-18
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.0006102881771297297
+          },
+          "S1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.0005399319529526912,
+                  "imag": -0.0003139651805093128,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 35.55542914106639,
+                  "phase_relative_to_activation_rad": 0.6205593054711479,
+                  "real": -0.00043926345084363864
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0022387663151483736,
+                  "imag": -0.0003265498615162756,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 171.61282882047752,
+                  "phase_relative_to_activation_rad": 2.9952089015787493,
+                  "real": 0.0022148227472614437
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0005741425775174628,
+                  "imag": -0.00030768149253916546,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": 32.40478875942729,
+                  "phase_relative_to_activation_rad": 0.5655702572652549,
+                  "real": -0.0004847388972088657
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -0.49999999999999994,
+              "maximum": {
+                "amplitude": 0.00300647399514208,
+                "imag": -0.0002747632872625071,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": 5.243608985192056,
+                "phase_relative_to_activation_rad": 0.09151824147875996,
+                "real": -0.0029938922858777466
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -0.49999999999999994,
+                0.5000000000000001
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.001918024274992324
+          },
+          "S1_minus_A1_weighted_complex_rms": 0.002164327435779373,
+          "S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.142817355586109
+          },
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 3.546402366761398
+          }
+        }
+      },
+      "interpretation_boundary": {
+        "equal_active_power": "positive algebraic scaling of the linear S1 complex response by sqrt(P_A1/P_S1); no new solve",
+        "not_equal_motion_and_power": true,
+        "raw_comparison": "uses the actual activation amplitude in both source simulations but does not impose equal active work"
+      },
+      "macro_shortening_fundamental": {
+        "equal_active_power": {
+          "A1": {
+            "amplitude": 0.017203562078999368,
+            "imag": 0.0007613164094636812,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -2.5363623464381817,
+            "phase_relative_to_activation_rad": -0.04426787396895534,
+            "real": -0.017186708397208185
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.1286606422397617
+          },
+          "interpretation": "scaled S1 macro shortening is a consequence of equal-active-power algebraic normalization; it is not constrained to equal A1 motion",
+          "scaled_S1": {
+            "amplitude": 0.016239483000073322,
+            "imag": 0.000755081649010024,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -2.665022988677943,
+            "phase_relative_to_activation_rad": -0.04651342579376967,
+            "real": -0.016221919116214293
+          },
+          "scaled_S1_minus_A1": {
+            "absolute_amplitude": 0.0009648094262384802,
+            "imag": -6.23476045365722e-06,
+            "real": 0.000964789280993892
+          },
+          "scaled_S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.943960496407723
+          }
+        },
+        "raw": {
+          "A1": {
+            "amplitude": 0.017203562078999368,
+            "imag": 0.0007613164094636812,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -2.5363623464381817,
+            "phase_relative_to_activation_rad": -0.04426787396895534,
+            "real": -0.017186708397208185
+          },
+          "S1": {
+            "amplitude": 0.017079506897678218,
+            "imag": 0.0007941399509158464,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -2.6650229886779435,
+            "phase_relative_to_activation_rad": -0.04651342579376968,
+            "real": -0.01706103448229905
+          },
+          "S1_minus_A1": {
+            "absolute_amplitude": 0.00012988963685394743,
+            "imag": 3.282354145216519e-05,
+            "real": 0.00012567391490913432
+          },
+          "S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9927889828425367
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.1286606422397621
+          }
+        }
+      },
+      "source_cases": {
+        "A1": "basic__de2__h0p1__a1__s2__t128__a0p1",
+        "S1": "basic__de2__h0p1__s1__s2__t128__a0p1"
+      },
+      "thickness_ratio_H": 0.1
+    },
+    {
+      "active_work": {
+        "P_A1": 5.589242544981539e-05,
+        "P_S1": 6.165472061318928e-05,
+        "equal_power_S1_scale_sqrt_P_A1_over_P_S1": 0.9521235584400534,
+        "power_floor": 1e-14,
+        "scaled_S1_power_algebraic": 5.5892425449815385e-05
+      },
+      "common_point_comparisons": [
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.00013096745065722297,
+              "imag": 0.00010051317045310945,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -50.12695163446838,
+              "phase_relative_to_activation_rad": -0.8748803500094262,
+              "real": -8.396175139381204e-05
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 15.361376877383234
+            },
+            "scaled_S1": {
+              "amplitude": 0.00015544138059029233,
+              "imag": 8.863579810325741e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -34.76557475708514,
+              "phase_relative_to_activation_rad": -0.6067737458593635,
+              "real": -0.0001276938451704494
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 4.5316310529715824e-05,
+              "imag": -1.1877372349852037e-05,
+              "real": -4.3732093776637355e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.1868703239641138
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.00013096745065722297,
+              "imag": 0.00010051317045310945,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -50.12695163446838,
+              "phase_relative_to_activation_rad": -0.8748803500094262,
+              "real": -8.396175139381204e-05
+            },
+            "S1": {
+              "amplitude": 0.00016325757220519304,
+              "imag": 9.309274759305098e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -34.76557475708513,
+              "phase_relative_to_activation_rad": -0.6067737458593634,
+              "real": -0.00013411478377833787
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 5.0699007216960126e-05,
+              "imag": -7.420422860058472e-06,
+              "real": -5.0153032384525826e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.2465507374995182
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 15.361376877383242
+            }
+          },
+          "x_over_L": -0.25
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.00026160347119519057,
+              "imag": 9.577485025968706e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -21.475722491172274,
+              "phase_relative_to_activation_rad": -0.374822066715555,
+              "real": -0.00024344106925313036
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 157.3394754080156
+            },
+            "scaled_S1": {
+              "amplitude": 0.0018406785771377884,
+              "imag": 3.806012314831786e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -178.81519789918787,
+              "phase_relative_to_activation_rad": -3.1209139559460755,
+              "real": 0.001840285046225157
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 0.0020845252490799366,
+              "imag": -5.77147271113692e-05,
+              "real": 0.0020837261154782872
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 7.036139729829503
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.00026160347119519057,
+              "imag": 9.577485025968706e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -21.475722491172274,
+              "phase_relative_to_activation_rad": -0.374822066715555,
+              "real": -0.00024344106925313036
+            },
+            "S1": {
+              "amplitude": 0.0019332349891158368,
+              "imag": 3.9973932806236894e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -178.81519789918787,
+              "phase_relative_to_activation_rad": -3.1209139559460755,
+              "real": 0.001932821669952433
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 0.0021769780091776647,
+              "imag": -5.580091745345017e-05,
+              "real": 0.0021762627392055635
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 7.389943949456961
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 157.3394754080156
+            }
+          },
+          "x_over_L": 0.0
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.00013725300196063074,
+              "imag": 0.0001049794381045029,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -49.894607957090564,
+              "phase_relative_to_activation_rad": -0.8708251878429919,
+              "real": -8.84177817097203e-05
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 12.563504019811461
+            },
+            "scaled_S1": {
+              "amplitude": 0.00010243660594616876,
+              "imag": 9.082777466838787e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -62.45811197690202,
+              "phase_relative_to_activation_rad": -1.0900996985762448,
+              "real": -4.736637611807786e-05
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 4.3422200301903257e-05,
+              "imag": -1.4151663436115026e-05,
+              "real": 4.105140559164244e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.7463341747202833
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.00013725300196063074,
+              "imag": 0.0001049794381045029,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -49.894607957090564,
+              "phase_relative_to_activation_rad": -0.8708251878429919,
+              "real": -8.84177817097203e-05
+            },
+            "S1": {
+              "amplitude": 0.00010758751323620176,
+              "imag": 9.53949451867349e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -62.45811197690202,
+              "phase_relative_to_activation_rad": -1.0900996985762448,
+              "real": -4.974814003728918e-05
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 3.983972504379224e-05,
+              "imag": -9.584492917767999e-06,
+              "real": 3.8669641672431124e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.7838627330501803
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 12.563504019811461
+            }
+          },
+          "x_over_L": 0.25
+        }
+      ],
+      "de": 2.0,
+      "full_field_y_traction": {
+        "equal_active_power": {
+          "A1_peak": {
+            "first_maximum_x_over_L": -4.530974155562894e-18,
+            "maximum": {
+              "amplitude": 0.00026160347119519057,
+              "imag": 9.577485025968706e-05,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -21.475722491172274,
+              "phase_relative_to_activation_rad": -0.374822066715555,
+              "real": -0.00024344106925313036
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -4.530974155562894e-18
+            ]
+          },
+          "A1_weighted_complex_amplitude_rms": 0.0001827730438135477,
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 8.072245229039298
+          },
+          "scaled_S1_minus_A1_weighted_complex_rms": 0.001475388830920901,
+          "scaled_S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 7.464388732510958
+          },
+          "scaled_S1_peak": {
+            "first_maximum_x_over_L": -0.49999999999999994,
+            "maximum": {
+              "amplitude": 0.0020052413396393232,
+              "imag": 0.00018365181616146259,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -5.254848849288566,
+              "phase_relative_to_activation_rad": -0.09171441411472075,
+              "real": -0.0019968136719832183
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -0.49999999999999994,
+              0.5000000000000001
+            ]
+          },
+          "scaled_S1_weighted_complex_amplitude_rms": 0.0013642890488485772
+        },
+        "raw": {
+          "A1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.00013096745065722297,
+                  "imag": 0.00010051317045310945,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -50.12695163446838,
+                  "phase_relative_to_activation_rad": -0.8748803500094262,
+                  "real": -8.396175139381204e-05
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.00026160347119519057,
+                  "imag": 9.577485025968706e-05,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -21.475722491172274,
+                  "phase_relative_to_activation_rad": -0.374822066715555,
+                  "real": -0.00024344106925313036
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.00013725300196063074,
+                  "imag": 0.0001049794381045029,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -49.894607957090564,
+                  "phase_relative_to_activation_rad": -0.8708251878429919,
+                  "real": -8.84177817097203e-05
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -4.530974155562894e-18,
+              "maximum": {
+                "amplitude": 0.00026160347119519057,
+                "imag": 9.577485025968706e-05,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": -21.475722491172274,
+                "phase_relative_to_activation_rad": -0.374822066715555,
+                "real": -0.00024344106925313036
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -4.530974155562894e-18
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.0001827730438135477
+          },
+          "S1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.00016325757220519304,
+                  "imag": 9.309274759305098e-05,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -34.76557475708513,
+                  "phase_relative_to_activation_rad": -0.6067737458593634,
+                  "real": -0.00013411478377833787
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0019332349891158368,
+                  "imag": 3.9973932806236894e-05,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -178.81519789918787,
+                  "phase_relative_to_activation_rad": -3.1209139559460755,
+                  "real": 0.001932821669952433
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.00010758751323620176,
+                  "imag": 9.53949451867349e-05,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -62.45811197690202,
+                  "phase_relative_to_activation_rad": -1.0900996985762448,
+                  "real": -4.974814003728918e-05
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -0.49999999999999994,
+              "maximum": {
+                "amplitude": 0.002106072601464335,
+                "imag": 0.00019288653718678623,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": -5.254848849288566,
+                "phase_relative_to_activation_rad": -0.09171441411472075,
+                "real": -0.0020972211582021678
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -0.49999999999999994,
+                0.5000000000000001
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.0014328907595604612
+          },
+          "S1_minus_A1_weighted_complex_rms": 0.0015436475221682056,
+          "S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 7.839726962265815
+          },
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 8.445706707948284
+          }
+        }
+      },
+      "interpretation_boundary": {
+        "equal_active_power": "positive algebraic scaling of the linear S1 complex response by sqrt(P_A1/P_S1); no new solve",
+        "not_equal_motion_and_power": true,
+        "raw_comparison": "uses the actual activation amplitude in both source simulations but does not impose equal active work"
+      },
+      "macro_shortening_fundamental": {
+        "equal_active_power": {
+          "A1": {
+            "amplitude": 0.013560907553398073,
+            "imag": 0.0006241570623527132,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -2.638039056045914,
+            "phase_relative_to_activation_rad": -0.046042467324204424,
+            "real": -0.01354653614889519
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.11191663560251959
+          },
+          "interpretation": "scaled S1 macro shortening is a consequence of equal-active-power algebraic normalization; it is not constrained to equal A1 motion",
+          "scaled_S1": {
+            "amplitude": 0.0128193088658481,
+            "imag": 0.0006150365462240092,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -2.7499556916484336,
+            "phase_relative_to_activation_rad": -0.0479957811032231,
+            "real": -0.01280454645213256
+          },
+          "scaled_S1_minus_A1": {
+            "absolute_amplitude": 0.000742045749207117,
+            "imag": -9.12051612870406e-06,
+            "real": 0.0007419896967626287
+          },
+          "scaled_S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9453134913994643
+          }
+        },
+        "raw": {
+          "A1": {
+            "amplitude": 0.013560907553398073,
+            "imag": 0.0006241570623527132,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -2.638039056045914,
+            "phase_relative_to_activation_rad": -0.046042467324204424,
+            "real": -0.01354653614889519
+          },
+          "S1": {
+            "amplitude": 0.013463913115280002,
+            "imag": 0.0006459629538330896,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -2.749955691648433,
+            "phase_relative_to_activation_rad": -0.04799578110322309,
+            "real": -0.013448408390515365
+          },
+          "S1_minus_A1": {
+            "absolute_amplitude": 0.00010052140999758758,
+            "imag": 2.1805891480376348e-05,
+            "real": 9.812775837982415e-05
+          },
+          "S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9928474965457775
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.11191663560251919
+          }
+        }
+      },
+      "source_cases": {
+        "A1": "basic__de2__h0p3__a1__s2__t128__a0p1",
+        "S1": "basic__de2__h0p3__s1__s2__t128__a0p1"
+      },
+      "thickness_ratio_H": 0.3
+    },
+    {
+      "active_work": {
+        "P_A1": 4.6057832075559424e-05,
+        "P_S1": 5.0732558443103393e-05,
+        "equal_power_S1_scale_sqrt_P_A1_over_P_S1": 0.9528145135951862,
+        "power_floor": 1e-14,
+        "scaled_S1_power_algebraic": 4.6057832075559424e-05
+      },
+      "common_point_comparisons": [
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0005036952752574356,
+              "imag": 0.0004690533350393645,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -111.37351056662429,
+              "phase_relative_to_activation_rad": -1.9438344588922893,
+              "real": 0.00018356987553820887
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 4.030933286279237
+            },
+            "scaled_S1": {
+              "amplitude": 0.00045936378168233975,
+              "imag": 0.00043848089862640586,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -107.34257728034505,
+              "phase_relative_to_activation_rad": -1.8734814011184815,
+              "real": 0.00013692912568653853
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 5.576767356587942e-05,
+              "imag": -3.0572436412958646e-05,
+              "real": -4.664074985167034e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9119874738701126
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0005036952752574356,
+              "imag": 0.0004690533350393645,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -111.37351056662429,
+              "phase_relative_to_activation_rad": -1.9438344588922893,
+              "real": 0.00018356987553820887
+            },
+            "S1": {
+              "amplitude": 0.00048211249422414396,
+              "imag": 0.0004601954445172309,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -107.34257728034505,
+              "phase_relative_to_activation_rad": -1.8734814011184815,
+              "real": 0.00014371015946206965
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 4.083208530276816e-05,
+              "imag": -8.8578905221336e-06,
+              "real": -3.985971607613922e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9571511147841106
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 4.030933286279237
+            }
+          },
+          "x_over_L": -0.25
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.00046863170088345886,
+              "imag": 0.0004434194668425856,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -108.87965409890468,
+              "phase_relative_to_activation_rad": -1.9003084524584264,
+              "real": 0.00015164052063337412
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 44.31466688331126
+            },
+            "scaled_S1": {
+              "amplitude": 0.0008696992183804144,
+              "imag": 0.00039220478589278076,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -153.19432098221594,
+              "phase_relative_to_activation_rad": -2.6737452964967017,
+              "real": 0.0007762423180774814
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 0.0006266979726432821,
+              "imag": -5.1214680949804845e-05,
+              "real": 0.0006246017974441073
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.8558266902150833
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.00046863170088345886,
+              "imag": 0.0004434194668425856,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -108.87965409890468,
+              "phase_relative_to_activation_rad": -1.9003084524584264,
+              "real": 0.00015164052063337412
+            },
+            "S1": {
+              "amplitude": 0.0009127686511604877,
+              "imag": 0.0004116276361208046,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -153.19432098221594,
+              "phase_relative_to_activation_rad": -2.6737452964967017,
+              "real": 0.0008146835580290882
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 0.0006638047830044437,
+              "imag": -3.1791830721781004e-05,
+              "real": 0.000663043037395714
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 1.947731340922407
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 44.31466688331126
+            }
+          },
+          "x_over_L": 0.0
+        },
+        {
+          "equal_active_power": {
+            "A1": {
+              "amplitude": 0.0005087245536150627,
+              "imag": 0.0004738412272055074,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -111.34119154249848,
+              "phase_relative_to_activation_rad": -1.9432703855102624,
+              "real": 0.00018513552563250387
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 3.244128994454505
+            },
+            "scaled_S1": {
+              "amplitude": 0.00048404748080058287,
+              "imag": 0.0004401650588069609,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -114.58532053695299,
+              "phase_relative_to_activation_rad": -1.9998911178229064,
+              "real": 0.00020138690293774154
+            },
+            "scaled_S1_minus_A1": {
+              "absolute_amplitude": 3.739240006103457e-05,
+              "imag": -3.3676168398546525e-05,
+              "real": 1.6251377305237676e-05
+            },
+            "scaled_S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9514922709369514
+            }
+          },
+          "exact_native_node": true,
+          "raw": {
+            "A1": {
+              "amplitude": 0.0005087245536150627,
+              "imag": 0.0004738412272055074,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -111.34119154249848,
+              "phase_relative_to_activation_rad": -1.9432703855102624,
+              "real": 0.00018513552563250387
+            },
+            "S1": {
+              "amplitude": 0.0005080185848283958,
+              "imag": 0.000461963008042476,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -114.585320536953,
+              "phase_relative_to_activation_rad": -1.9998911178229066,
+              "real": 0.0002113600286984115
+            },
+            "S1_minus_A1": {
+              "absolute_amplitude": 2.878917594407324e-05,
+              "imag": -1.1878219163031416e-05,
+              "real": 2.6224503065907628e-05
+            },
+            "S1_over_A1_amplitude": {
+              "defined": true,
+              "reason": null,
+              "value": 0.9986122769548863
+            },
+            "absolute_phase_difference_deg": {
+              "defined": true,
+              "reason": null,
+              "value": 3.2441289944545177
+            }
+          },
+          "x_over_L": 0.25
+        }
+      ],
+      "de": 2.0,
+      "full_field_y_traction": {
+        "equal_active_power": {
+          "A1_peak": {
+            "first_maximum_x_over_L": -0.49999999999999994,
+            "maximum": {
+              "amplitude": 0.0005833487963401113,
+              "imag": 0.00053994944185101,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -112.24052950482938,
+              "phase_relative_to_activation_rad": -1.9589667940411133,
+              "real": 0.00022079496922765136
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -0.49999999999999994,
+              0.5000000000000001
+            ]
+          },
+          "A1_weighted_complex_amplitude_rms": 0.0005161524490230915,
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 0.8807436376133458
+          },
+          "scaled_S1_minus_A1_weighted_complex_rms": 0.00045459798551563465,
+          "scaled_S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 1.248178579818656
+          },
+          "scaled_S1_peak": {
+            "first_maximum_x_over_L": -4.530974155562894e-18,
+            "maximum": {
+              "amplitude": 0.0008696992183804144,
+              "imag": 0.00039220478589278076,
+              "phase_interpretable": true,
+              "phase_relative_to_activation_deg": -153.19432098221594,
+              "phase_relative_to_activation_rad": -2.6737452964967017,
+              "real": 0.0007762423180774814
+            },
+            "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+            "tied_maximum_x_over_L": [
+              -4.530974155562894e-18
+            ]
+          },
+          "scaled_S1_weighted_complex_amplitude_rms": 0.0006442504307915635
+        },
+        "raw": {
+          "A1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.0005036952752574356,
+                  "imag": 0.0004690533350393645,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -111.37351056662429,
+                  "phase_relative_to_activation_rad": -1.9438344588922893,
+                  "real": 0.00018356987553820887
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.00046863170088345886,
+                  "imag": 0.0004434194668425856,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -108.87965409890468,
+                  "phase_relative_to_activation_rad": -1.9003084524584264,
+                  "real": 0.00015164052063337412
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0005087245536150627,
+                  "imag": 0.0004738412272055074,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -111.34119154249848,
+                  "phase_relative_to_activation_rad": -1.9432703855102624,
+                  "real": 0.00018513552563250387
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -0.49999999999999994,
+              "maximum": {
+                "amplitude": 0.0005833487963401113,
+                "imag": 0.00053994944185101,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": -112.24052950482938,
+                "phase_relative_to_activation_rad": -1.9589667940411133,
+                "real": 0.00022079496922765136
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -0.49999999999999994,
+                0.5000000000000001
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.0005161524490230915
+          },
+          "S1": {
+            "common_points": [
+              {
+                "coefficient": {
+                  "amplitude": 0.00048211249422414396,
+                  "imag": 0.0004601954445172309,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -107.34257728034505,
+                  "phase_relative_to_activation_rad": -1.8734814011184815,
+                  "real": 0.00014371015946206965
+                },
+                "exact_native_node": true,
+                "x_over_L": -0.25
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0009127686511604877,
+                  "imag": 0.0004116276361208046,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -153.19432098221594,
+                  "phase_relative_to_activation_rad": -2.6737452964967017,
+                  "real": 0.0008146835580290882
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.0
+              },
+              {
+                "coefficient": {
+                  "amplitude": 0.0005080185848283958,
+                  "imag": 0.000461963008042476,
+                  "phase_interpretable": true,
+                  "phase_relative_to_activation_deg": -114.585320536953,
+                  "phase_relative_to_activation_rad": -1.9998911178229066,
+                  "real": 0.0002113600286984115
+                },
+                "exact_native_node": true,
+                "x_over_L": 0.25
+              }
+            ],
+            "peak": {
+              "first_maximum_x_over_L": -4.530974155562894e-18,
+              "maximum": {
+                "amplitude": 0.0009127686511604877,
+                "imag": 0.0004116276361208046,
+                "phase_interpretable": true,
+                "phase_relative_to_activation_deg": -153.19432098221594,
+                "phase_relative_to_activation_rad": -2.6737452964967017,
+                "real": 0.0008146835580290882
+              },
+              "tie_rule": "all nodes within rtol=1e-10 and atol=1e-14 of maximum amplitude; first listed node is the representative",
+              "tied_maximum_x_over_L": [
+                -4.530974155562894e-18
+              ]
+            },
+            "weight_sum": 1.0,
+            "weighted_complex_amplitude_rms": 0.0006761551399554777
+          },
+          "S1_minus_A1_weighted_complex_rms": 0.0004746290234643569,
+          "S1_over_A1_weighted_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 1.309991149388556
+          },
+          "difference_rms_over_A1_rms": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9195520129036975
+          }
+        }
+      },
+      "interpretation_boundary": {
+        "equal_active_power": "positive algebraic scaling of the linear S1 complex response by sqrt(P_A1/P_S1); no new solve",
+        "not_equal_motion_and_power": true,
+        "raw_comparison": "uses the actual activation amplitude in both source simulations but does not impose equal active work"
+      },
+      "macro_shortening_fundamental": {
+        "equal_active_power": {
+          "A1": {
+            "amplitude": 0.010256184604721986,
+            "imag": 0.0005351938454347853,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -2.9911983281097085,
+            "phase_relative_to_activation_rad": -0.05220625940566407,
+            "real": -0.010242211196511473
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.1081275265766155
+          },
+          "interpretation": "scaled S1 macro shortening is a consequence of equal-active-power algebraic normalization; it is not constrained to equal A1 motion",
+          "scaled_S1": {
+            "amplitude": 0.009703403709512394,
+            "imag": 0.0005246345507704429,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -3.0993258546863243,
+            "phase_relative_to_activation_rad": -0.05409344075646368,
+            "real": -0.009689210604477373
+          },
+          "scaled_S1_minus_A1": {
+            "absolute_amplitude": 0.0005531013953100044,
+            "imag": -1.0559294664342451e-05,
+            "real": 0.0005530005920341002
+          },
+          "scaled_S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9461026769199251
+          }
+        },
+        "raw": {
+          "A1": {
+            "amplitude": 0.010256184604721986,
+            "imag": 0.0005351938454347853,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -2.9911983281097085,
+            "phase_relative_to_activation_rad": -0.05220625940566407,
+            "real": -0.010242211196511473
+          },
+          "S1": {
+            "amplitude": 0.010183937766543081,
+            "imag": 0.0005506156164549564,
+            "phase_interpretable": true,
+            "phase_relative_to_activation_deg": -3.0993258546863247,
+            "phase_relative_to_activation_rad": -0.05409344075646369,
+            "real": -0.010169041787491014
+          },
+          "S1_minus_A1": {
+            "absolute_amplitude": 7.477695793359003e-05,
+            "imag": 1.542177102017105e-05,
+            "real": 7.316940902045953e-05
+          },
+          "S1_over_A1_amplitude": {
+            "defined": true,
+            "reason": null,
+            "value": 0.9929557782973562
+          },
+          "absolute_phase_difference_deg": {
+            "defined": true,
+            "reason": null,
+            "value": 0.1081275265766159
+          }
+        }
+      },
+      "source_cases": {
+        "A1": "basic__de2__h0p6__a1__s2__t128__a0p1",
+        "S1": "basic__de2__h0p6__s1__s2__t128__a0p1"
+      },
+      "thickness_ratio_H": 0.6
+    }
+  ],
+  "schema": "paper2_science_pilot_field_comparison_v01",
+  "source": {
+    "basic_case_count": 18,
+    "holdout_case_count_used": 0,
+    "new_fem_case_count": 0,
+    "resolution_case_count_used": 0,
+    "source_audits": [
+      {
+        "arrays": "cases/basic__de0p02__h0p1__a1__s2__t128__a0p1.npz",
+        "arrays_sha256": "f31224c8ac4310cdd6e60208d5a5ce222239bdaf81098396acb2c75b89bd5fcf",
+        "case": "basic__de0p02__h0p1__a1__s2__t128__a0p1",
+        "case_json": "cases/basic__de0p02__h0p1__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "71d1771a11d66b35803057873687feed564da6628ce2183e1ee0377292a5110a",
+        "shortening_fundamental_absolute_recompute_error": 6.505213034913027e-19,
+        "traction_fundamental_max_absolute_recompute_error": 1.21217487951527e-19
+      },
+      {
+        "arrays": "cases/basic__de0p02__h0p1__s1__s2__t128__a0p1.npz",
+        "arrays_sha256": "21d800ee95666ebdd602f02aded5b40bacd5bf7a5689bc34bcc3cb34a3c4ea8e",
+        "case": "basic__de0p02__h0p1__s1__s2__t128__a0p1",
+        "case_json": "cases/basic__de0p02__h0p1__s1__s2__t128__a0p1.json",
+        "case_json_sha256": "f6aa496bbf01991cd7f87cd40c01aa0379f98b836f304c9aa0555415314f5f21",
+        "shortening_fundamental_absolute_recompute_error": 8.673617379884035e-19,
+        "traction_fundamental_max_absolute_recompute_error": 4.6317137111987765e-19
+      },
+      {
+        "arrays": "cases/basic__de0p02__h0p3__a1__s2__t128__a0p1.npz",
+        "arrays_sha256": "fbd248f2a1d0b927610373d7e7ddcda4ae24ae490aa6d2da51fe9810449cbe14",
+        "case": "basic__de0p02__h0p3__a1__s2__t128__a0p1",
+        "case_json": "cases/basic__de0p02__h0p3__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "28de784b7127b065bcc3a2c0e9a48c8ee6b619320a02fecf588ea627d16bf801",
+        "shortening_fundamental_absolute_recompute_error": 8.673617379884035e-19,
+        "traction_fundamental_max_absolute_recompute_error": 7.666467083416871e-20
+      },
+      {
+        "arrays": "cases/basic__de0p02__h0p3__s1__s2__t128__a0p1.npz",
+        "arrays_sha256": "5c651bbf0060def1575146946031bc9f271fcbe6e0a5e5a8ab2291cd747ff772",
+        "case": "basic__de0p02__h0p3__s1__s2__t128__a0p1",
+        "case_json": "cases/basic__de0p02__h0p3__s1__s2__t128__a0p1.json",
+        "case_json_sha256": "1b65114056bfa8a399b6f5e5059187d883befe919dcc2f088a95c706faafb919",
+        "shortening_fundamental_absolute_recompute_error": 8.673617379884035e-19,
+        "traction_fundamental_max_absolute_recompute_error": 2.42434975903054e-19
+      },
+      {
+        "arrays": "cases/basic__de0p02__h0p6__a1__s2__t128__a0p1.npz",
+        "arrays_sha256": "10f24c8cc92c218b4d6653c375018434dd7177757bd64a0ca9fde1486d861a36",
+        "case": "basic__de0p02__h0p6__a1__s2__t128__a0p1",
+        "case_json": "cases/basic__de0p02__h0p6__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "54679419e2e20ba74a81634daa34f348c71eb2374d68a5ea81d7ef1ac5e4d4f5",
+        "shortening_fundamental_absolute_recompute_error": 6.505213034913027e-19,
+        "traction_fundamental_max_absolute_recompute_error": 2.168404344971009e-19
+      },
+      {
+        "arrays": "cases/basic__de0p02__h0p6__s1__s2__t128__a0p1.npz",
+        "arrays_sha256": "34376f32ad61aa1e6d65ed4c4ee42094dbfba3143feb6b7132519d217ba260ed",
+        "case": "basic__de0p02__h0p6__s1__s2__t128__a0p1",
+        "case_json": "cases/basic__de0p02__h0p6__s1__s2__t128__a0p1.json",
+        "case_json_sha256": "51502414f82b65d8643f57d6ddb198db479f97763ffab7e516234f27714e7d39",
+        "shortening_fundamental_absolute_recompute_error": 4.336808689942018e-19,
+        "traction_fundamental_max_absolute_recompute_error": 2.168404344971009e-19
+      },
+      {
+        "arrays": "cases/basic__de0p2__h0p1__a1__s2__t128__a0p1.npz",
+        "arrays_sha256": "3d3962e1c0360c1af2e69ff2effb5d26f61f23d15f01839ffc2e114b630d2c2f",
+        "case": "basic__de0p2__h0p1__a1__s2__t128__a0p1",
+        "case_json": "cases/basic__de0p2__h0p1__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "e5dc03d4c20efc0d55832cc89504efc8610395ae313629b6271716603cbf4be2",
+        "shortening_fundamental_absolute_recompute_error": 6.505213034913027e-19,
+        "traction_fundamental_max_absolute_recompute_error": 1.0889563095643743e-19
+      },
+      {
+        "arrays": "cases/basic__de0p2__h0p1__s1__s2__t128__a0p1.npz",
+        "arrays_sha256": "ee59613eaf6e7a98073394328612956782f738abb916268bb83d9388acaed336",
+        "case": "basic__de0p2__h0p1__s1__s2__t128__a0p1",
+        "case_json": "cases/basic__de0p2__h0p1__s1__s2__t128__a0p1.json",
+        "case_json_sha256": "24b549ba5a058286b77fb8a08a0e64bb84804db0cf7fa006802bdcfc7996a26f",
+        "shortening_fundamental_absolute_recompute_error": 1.0842021724855044e-18,
+        "traction_fundamental_max_absolute_recompute_error": 4.6317137111987765e-19
+      },
+      {
+        "arrays": "cases/basic__de0p2__h0p3__a1__s2__t128__a0p1.npz",
+        "arrays_sha256": "39006a9738eed18c77a5f3dd398049412a4ccf511cdeb98dc4909943e36461bc",
+        "case": "basic__de0p2__h0p3__a1__s2__t128__a0p1",
+        "case_json": "cases/basic__de0p2__h0p3__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "1484c0e3ffbdc3b6fd144df1943a2a418c5e5f68cb1beb5810bc2a395f8580a0",
+        "shortening_fundamental_absolute_recompute_error": 1.788112030672749e-18,
+        "traction_fundamental_max_absolute_recompute_error": 3.030437198788175e-20
+      },
+      {
+        "arrays": "cases/basic__de0p2__h0p3__s1__s2__t128__a0p1.npz",
+        "arrays_sha256": "2795cf0318cd9075728ba9951b3c4b43fe2de72d6dfd4a567a7895426953eaef",
+        "case": "basic__de0p2__h0p3__s1__s2__t128__a0p1",
+        "case_json": "cases/basic__de0p2__h0p3__s1__s2__t128__a0p1.json",
+        "case_json_sha256": "61d5b104989204808310e539892b29b1a9ea657da32c42624b1685a1df12a9d7",
+        "shortening_fundamental_absolute_recompute_error": 6.505213034913027e-19,
+        "traction_fundamental_max_absolute_recompute_error": 2.3158568555993882e-19
+      },
+      {
+        "arrays": "cases/basic__de0p2__h0p6__a1__s2__t128__a0p1.npz",
+        "arrays_sha256": "eab0e48c955629b79574b43eec691834a712d66227a0f2a97558b6d3104bb190",
+        "case": "basic__de0p2__h0p6__a1__s2__t128__a0p1",
+        "case_json": "cases/basic__de0p2__h0p6__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "6bc56c13c1fa91d23fcc6fc90718283f676ac7469525f7da98d6c5688a0f1347",
+        "shortening_fundamental_absolute_recompute_error": 2.168404344971009e-19,
+        "traction_fundamental_max_absolute_recompute_error": 1.21217487951527e-19
+      },
+      {
+        "arrays": "cases/basic__de0p2__h0p6__s1__s2__t128__a0p1.npz",
+        "arrays_sha256": "a43100aaf9215b98671e9c38f4cdbbb2a40d2f78d44a1ea65098e113dbb239c7",
+        "case": "basic__de0p2__h0p6__s1__s2__t128__a0p1",
+        "case_json": "cases/basic__de0p2__h0p6__s1__s2__t128__a0p1.json",
+        "case_json_sha256": "c2f6cdbb454b491a67c71d6a87b4583201791374efe2ada59a0490b253377ca0",
+        "shortening_fundamental_absolute_recompute_error": 1.788112030672749e-18,
+        "traction_fundamental_max_absolute_recompute_error": 1.21217487951527e-19
+      },
+      {
+        "arrays": "cases/basic__de2__h0p1__a1__s2__t128__a0p1.npz",
+        "arrays_sha256": "33f8c7258add09bbe1028787074dfb4b90b572cfeb80251b5ee7dc40ffdbd0bc",
+        "case": "basic__de2__h0p1__a1__s2__t128__a0p1",
+        "case_json": "cases/basic__de2__h0p1__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "017796590fc0a32c13eef3a363d34fe9bf8a72699d2b257b722b94cd7a9fa0ad",
+        "shortening_fundamental_absolute_recompute_error": 6.505213034913027e-19,
+        "traction_fundamental_max_absolute_recompute_error": 1.5332934166833742e-19
+      },
+      {
+        "arrays": "cases/basic__de2__h0p1__s1__s2__t128__a0p1.npz",
+        "arrays_sha256": "064988cba3799926fbdf7453ebc21879936503204a8c80932db07001efdbe6c0",
+        "case": "basic__de2__h0p1__s1__s2__t128__a0p1",
+        "case_json": "cases/basic__de2__h0p1__s1__s2__t128__a0p1.json",
+        "case_json_sha256": "e4e617633b66efd2a96ee48d84a1bfa21fe813b701aebacbf0d20eb69e3232f4",
+        "shortening_fundamental_absolute_recompute_error": 8.673617379884035e-19,
+        "traction_fundamental_max_absolute_recompute_error": 4.6317137111987765e-19
+      },
+      {
+        "arrays": "cases/basic__de2__h0p3__a1__s2__t128__a0p1.npz",
+        "arrays_sha256": "0072bf62186d6a21ec1b3094753eae4ef9bbb8ac8492f6b065081624ba7b3286",
+        "case": "basic__de2__h0p3__a1__s2__t128__a0p1",
+        "case_json": "cases/basic__de2__h0p3__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "d659b646e4d6d16cd3b54be4123e826b30d10955d408ab52da9f906bcfd41731",
+        "shortening_fundamental_absolute_recompute_error": 5.421010862427522e-19,
+        "traction_fundamental_max_absolute_recompute_error": 5.421010862427522e-20
+      },
+      {
+        "arrays": "cases/basic__de2__h0p3__s1__s2__t128__a0p1.npz",
+        "arrays_sha256": "17c91f267f6dbab834252ac45a4909beb8792150d1b5f171c1b9ebef17a5a5e0",
+        "case": "basic__de2__h0p3__s1__s2__t128__a0p1",
+        "case_json": "cases/basic__de2__h0p3__s1__s2__t128__a0p1.json",
+        "case_json_sha256": "8c12828c9819ec745f2301adaaf25f3d9ae84c86a027de62ddf1bf359cc9bacf",
+        "shortening_fundamental_absolute_recompute_error": 1.7649532655793076e-18,
+        "traction_fundamental_max_absolute_recompute_error": 2.2718175287815495e-19
+      },
+      {
+        "arrays": "cases/basic__de2__h0p6__a1__s2__t128__a0p1.npz",
+        "arrays_sha256": "497523a1ff6a8312db4cea013fb822d6540c7a66343a7ffc5e8dd50bb3d59b31",
+        "case": "basic__de2__h0p6__a1__s2__t128__a0p1",
+        "case_json": "cases/basic__de2__h0p6__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "4d733ba6ab82e9e6822183e567158fbf4b9e52633c82ba50770791202b3395bb",
+        "shortening_fundamental_absolute_recompute_error": 1.788112030672749e-18,
+        "traction_fundamental_max_absolute_recompute_error": 2.1852793414608445e-19
+      },
+      {
+        "arrays": "cases/basic__de2__h0p6__s1__s2__t128__a0p1.npz",
+        "arrays_sha256": "0d68d0cc4bf40a565d83a8e39a3f22ee5811be9ec666f076d128e253c3a77071",
+        "case": "basic__de2__h0p6__s1__s2__t128__a0p1",
+        "case_json": "cases/basic__de2__h0p6__s1__s2__t128__a0p1.json",
+        "case_json_sha256": "a6228a6b6dc6f9b900541f16aebb7dd294c7b2b076fbfa3ea515547b685188ce",
+        "shortening_fundamental_absolute_recompute_error": 1.7649532655793076e-18,
+        "traction_fundamental_max_absolute_recompute_error": 1.21217487951527e-19
+      }
+    ],
+    "source_status": "COMPLETED_WITH_RECORDED_CHECK_FAILURES",
+    "summary_path": "results/paper2_science_pilot/v01_20260905/numerical/summary.json",
+    "summary_sha256": "8b6ee96662319efa541c187ec3e063484da9979e1710f0ee6c8db6b9f6da6122"
+  },
+  "status": "COMPLETED"
+}

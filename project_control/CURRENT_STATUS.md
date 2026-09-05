@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 0344b0169692e1539a2923ef2aa48f359878d83b
-current_lifecycle: paper2_science_first_classical_counterexample_mechanism_attribution
+verified_commit: 20d9b9d4c159d203f2d7a07da77cbea3638ffd03
+current_lifecycle: paper2_science_first_field_comparison_reviewed_transverse_cancellation_hypothesis
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
 execution_authorized: bounded_science_pilot_max_30_cases_cpu_only
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: results/paper2_science_pilot/v01_20260905/numerical/run_notes.md
+latest_completed_execution_log: results/paper2_science_pilot/v01_20260905/numerical/field_comparison_v01.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -56,7 +56,12 @@ P0 为构造零状态，endpoint 的作用反作用为结构恒等，二者不�
 无 ECM 的两个对称 Kelvin–Voigt 支路构成反例：等 DC/复基频整体运动与等主动功，仍可有有限的固定位置牵引差。
 总管复核配对和功公式后接受其为排除“现象本身是 ECM 特异创新”的反例，而非已解释现有模型全部结果。
 第 15.7 节提出的集总对照优化尚未获准：当前阻抗是多端口/多分量，不能预设三个标量 SLS 参数能够完整匹配。
-下一步为简报第 17 节的机制归因：数值执行任务只后处理既有数组（新增 FEM 为 0）；理论 agent 只核查对照可实现性与经典解释。
+第 17 节两项任务均已交接。既有 18 个基础数组的后处理已完成，9 对等周期主动功的全场 y 牵引 RMS 比为 1.05310–8.11577，
+但整体短缩比变为 0.943960–0.972993，不是双约束。最大倍率来自低 A1 基线，不是最大绝对负荷。
+总管独立直接 DFT/梯形积分复算最大差 1.776e-15；此为后处理一致性，不是新增空间收敛。
+第 18 节理论稿经纠错补回 macro 体应力/drag 功项、内部状态允许集和离散功因子；当前集总容量对照不再开发，
+但不以 Schur 表示等价否定全部线性新规律。下一步为第 20 节总管提出的“主动/被动层横向变形抵消”候选纯理论核查，
+最多 45 分钟、一页级交付；新增 FEM/扫描仍为 0，数值任务完成待命。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，
