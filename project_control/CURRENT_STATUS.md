@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: fb92ab370f882568c7eb184c9c595958ffe80abb
-current_lifecycle: paper2_periodic_kinematics_corrected_prescribed_trace_coefficients_theory
+verified_commit: 93f5a33dbd54ca08d58d7b65d7777146c1d492f6
+current_lifecycle: paper2_prescribed_trace_coefficients_accepted_bounded_bloch_probe
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section34_brief58_readonly_prescribed_trace_coefficients_no_model_solves
+execution_authorized: v04_section35_brief59_fifteen_complex_cell_rhs_only
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_closed_cell_ritz_probe/v02_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -40,8 +40,11 @@ v01失败入口及182字节文件保持不变；数值任务停止新算例。�
 两坐标确实删去了剪切/转动—配对开口模式，但这是当前理想模型的内部柔顺性，不是新机制证明。
 第33节周期单胞推导已交接并定点纠错（简报57）：相位项、运动学与实际可达响应、内部量消元及
 单向/自洽端口边界已区分；不接受未经证明的O(1)长波遗漏或ka=O(1)必要门。
-第34节/简报58仅授权一次30分钟规定基底Fourier位移的系数推导，检查实际切向一阶/法向二阶
-响应是否非零；不新模拟、扫描、增加机制或启动ECM耦合。
+第34节系数推导已完成并恢复完整交接，总管验收见简报59：当前严格正理想参数下，
+切向一阶c1=-0.155691699297052、法向二阶c2=-0.0154524011552324，均非零。
+这只是规定迹的普通线性应变/曲率传递，不是ECM耦合、DCM必要性或Nature Physics创新证明。
+第35节/简报59授权冻结后执行15个8自由度复代数右端，检验渐近、奇偶、旧特例和零耦合极限；
+只用单线程CPU/8GiB，准备30分钟、执行30秒，不新FEM、留出、机制或广扫描。
 生产三层架构、旧46周期+30静态FEM及原四留出不变；下列逐阶段记录为历史，不重复执行。
 
 人类于 2026-09-05 明确批准实施 science-first v04：先判断全局收缩与心内膜局部负荷之间
