@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: e5cfb0e07060046ad945b1c868cd618ec8f9e10d
-current_lifecycle: paper2_two_coordinate_cell_response_boundary_check
+verified_commit: c013cab308ffd4e402c95a597563f0539320bc58
+current_lifecycle: paper2_spatial_cell_structure_increment_check
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section29_brief50_fifteen_minute_theory_only
+execution_authorized: v04_section30_brief52_thirty_minute_theory_only
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_cell_mode_drive_overlap/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,9 +33,10 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-最新进展：三个旧case驱动投影已独立验收（简报49），只支持规定ECM场对指定模式有可分辨输入，
-不支持DCM必要性。当前推进v04第29节/简报50的15分钟两形状坐标纸面推导，检查顶面释放后
-共同连接长度响应是否存留；无新模型运行或留出授权。下列逐阶段记录保留为历史，不重复执行。
+最新进展：两坐标响应已完成并验收（简报51）；释放顶面可降低连接伸长，但仍为普通内部柔顺性。
+不对该2x2恒等式新增模拟。现推进v04第30节/简报52的一次30分钟空间细胞结构理论增量检查，
+以已找到的基底传力及线性模态原始研究为直接对照，决定最小DCM原型是否有科学信息增益。
+尚未建立DCM必要性或Nature Physics创新；无新模型运行或留出授权。下列逐阶段记录为历史，不重复执行。
 
 人类于 2026-09-05 明确批准实施 science-first v04：先判断全局收缩与心内膜局部负荷之间
 是否存在可预测、非平凡的关系。计算基础具备，核心科学贡献尚未得到证明；允许最多
