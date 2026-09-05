@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 7a9a4cdcc73fe6c6d51ca24545f096e2c6eb6dd1
-current_lifecycle: paper2_feedback_candidate_theory_prefeasibility_not_implementation
+verified_commit: 125d039c1c471ae0d018e3291721e5a3c30e7bbf
+current_lifecycle: paper2_feedback_classical_null_accepted_short_wave_theory_only
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: feedback_candidate_null_and_identifiability_v04_section20_no_computation
+execution_authorized: feedback_candidate_short_wave_limit_v04_section21_no_computation
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_transverse_notch/v02_20260905/first_mode_transfer_v01.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -103,7 +103,10 @@ v04第18节下界候选已完成并收缩，验收见简报第34–35节：当�
 v04第19节已交接，接受及纠错见简报第36节：本次未在现架构内找到足够强候选，不是无创新可能的定理。
 局部心肌应力反馈仅为下一候选；补回主动应变到应力的直接项，保留标量到场的维数缺口及未校准生物假设。
 单次比例体/剪切谱替换不能隔离纯记忆作用；一般复空间模式须比较正负波数的同单位范数，不能冒充整体功能。
-总管给出无ECM单元反馈临界的纸面反例，下一步v04第20节由同一理论agent最多30分钟独立核查并选一项空间否证条件。
+v04第20节已交接验收，见简报第37节：无ECM单元反馈临界反例成立，能量由隐含主动执行器供给。
+均值控制器对照只能识别特定控制器家族中的非均匀反馈优势，不能单独识别ECM记忆或证明整体功能正常。
+下一步v04第21节最多30分钟：固定候选a(x,t)厚度均匀及心肌轴向应力厚度平均，仅纸面核查短波极限。
+要判断空间尺度是否可能独立于网格；总管O(k^-2)尺度猜想尚未证明，不提前宣称有限模式选择。
 只读/纸面/消息交付；不新增检索、文件、极点求值或FEM，不实施反馈。数值任务本批已完成，46例与原4留出均不动。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
