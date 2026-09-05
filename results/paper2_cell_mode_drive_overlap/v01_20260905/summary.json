@@ -1,0 +1,551 @@
+{
+  "A1_role": "descriptive S2 record only; no spatial-resolution classification",
+  "S1_two_grid_decision": {
+    "E_p_absolute_complex_difference": 1.6460099381127833e-06,
+    "absolute_p_S3": 0.00013739535576278575,
+    "classification": "RESOLVED_BASELINE_DRIVE_PROJECTION",
+    "classification_is_not_mechanism_or_numerical_pass": true,
+    "floor_1e_minus_12_L": 1e-12,
+    "p_S2": {
+      "amplitude": 0.00013593838115032327,
+      "imag": -4.063562278798517e-06,
+      "real": 0.00013587763219668236
+    },
+    "p_S3": {
+      "amplitude": 0.00013739535576278575,
+      "imag": -3.337423397099113e-06,
+      "real": 0.0001373548156791416
+    },
+    "two_times_max_error_or_floor": 3.2920198762255667e-06
+  },
+  "analysis_definition": {
+    "cell_mode": "v(-L/2)=1, v(0)=-1, v(L/2)=1; P1 on each half",
+    "generalized_force": "F_delta=k_ce*L*p",
+    "projection": "p=L^-1 integral v*u_ecm_y_hat dx using exact native-P1 product integration",
+    "time_fundamental": "2/N first rFFT coefficient after temporal mean removal",
+    "time_window": "first 128 samples of the first cycle; repeated endpoint excluded",
+    "traction_code_sign": "t_y_code=k_ce*(u_endo_y-u_ecm_y)"
+  },
+  "claim_boundary": {
+    "no_parameter_extension_or_next_stage_authorized": true,
+    "nonblind_existing_data_probe": true,
+    "not_DCM_necessity_mechanism_or_paper_pass": true,
+    "not_a_holdout_prediction": true,
+    "not_cell_deformation_attachment_force_or_closed_cell_model": true,
+    "not_equal_active_work_or_equal_global_motion": true,
+    "not_new_DCM_FEM_or_state_solution": true,
+    "prescribed_one_way_basis_field": true
+  },
+  "created_at_utc": "2026-09-05T10:04:03.714048+00:00",
+  "existing_compute_ledger_unchanged": {
+    "completed_periodic_cases": 46,
+    "completed_static_rhs": 30,
+    "fem_and_failure_seconds": 170.24076614002115,
+    "this_postprocess_seconds_recorded_separately": 0.1977506999974139
+  },
+  "holdouts": "ORIGINAL_FOUR_LOCKED_NOT_READ",
+  "next_gate": "SUPERVISOR_INDEPENDENT_RECOMPUTATION_STOP",
+  "preregistration": {
+    "frozen_analysis_commit_with_source_clarification": "e5cfb0e07060046ad945b1c868cd618ec8f9e10d",
+    "main_plan": {
+      "path": "project_control/prl_independent_theory_mainline_plan_v04.md",
+      "section": 28,
+      "sha256": "418c958c8a6dfeb4191cd80559c0713eec59c993bed27d21c7ecb0958e00bf26"
+    },
+    "prior_analysis_commit_before_clarification": "5e56203972f9360c02454e502aef509059d8b09c",
+    "science_brief": {
+      "path": "results/paper2_science_pilot/v01_20260905/science_brief.md",
+      "sections": [
+        48,
+        48.1
+      ],
+      "sha256": "2796f4fec314253f9551064cfce1f55b9eb27f7ae051ba712e2d5918df7032cc"
+    }
+  },
+  "records": [
+    {
+      "activation_reference_alpha": {
+        "amplitude": 0.05,
+        "imag": 5.7462715141731735e-18,
+        "real": -0.05
+      },
+      "case_key": "basic__de0p2__h0p3__a1__s2__t128__a0p1",
+      "cell_mode": {
+        "P1_mean": 4.5102810375396984e-17,
+        "P1_mean_square": 0.3333333333333334,
+        "definition": "v(-L/2)=1, v(0)=-1, v(L/2)=1; linear on each half",
+        "not_measured_endocardial_cell_scale": true,
+        "physical_cell_width_a": 0.5
+      },
+      "configuration": {
+        "actual_config": {
+          "activation_peak": 0.1,
+          "config_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69",
+          "ecm_relaxation_time": 0.2,
+          "ecm_thickness": 0.3,
+          "length": 1.0,
+          "period": 1.0
+        },
+        "reconstructed_k_ce": 7.0
+      },
+      "generalized_force_F_delta": {
+        "amplitude": 9.093414336105678e-05,
+        "definition": "k_ce*L*p with the production code-sign convention",
+        "imag": -7.123673329453729e-06,
+        "phase": {
+          "activation_floor": 1e-12,
+          "interpretable": true,
+          "relative_to_activation_deg": 4.493087331382231,
+          "relative_to_activation_rad": 0.07841916751226548,
+          "value_floor": 7e-12
+        },
+        "real": -9.065468386743432e-05
+      },
+      "input_checks": {
+        "all_selected_arrays_finite": true,
+        "loaded_array_bytes": 276824,
+        "periodic_y_endpoint_maximum_absolute_mismatches": {
+          "endocardial_y": 0.0,
+          "recovered_ecm_y": 0.0,
+          "traction_y_code": 0.0
+        },
+        "raw_to_recorded_activation_fundamental_absolute_error": 2.4936649967166602e-18,
+        "raw_to_stored_traction_fundamental_maximum_absolute_error": 2.710505431213761e-20,
+        "selected_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardial_displacement_two_cycles": [
+            33,
+            2,
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            66,
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            33
+          ]
+        },
+        "time_axis_maximum_absolute_error": 0.0,
+        "x_strictly_increasing_contains_zero_and_endpoints_match": true
+      },
+      "projection_p": {
+        "amplitude": 1.2990591908722397e-05,
+        "imag": -1.0176676184933898e-06,
+        "phase": {
+          "activation_floor": 1e-12,
+          "interpretable": true,
+          "relative_to_activation_deg": 4.493087331382232,
+          "relative_to_activation_rad": 0.07841916751226549,
+          "value_floor": 1e-12
+        },
+        "real": -1.2950669123919189e-05
+      },
+      "projection_p_over_activation_alpha": {
+        "amplitude": 0.0002598118381744479,
+        "imag": 2.0353352369867825e-05,
+        "real": 0.00025901338247838376
+      },
+      "recovered_ecm_y_first_fundamental": {
+        "P1_spatial_mean": {
+          "amplitude": 0.00016559759695135493,
+          "imag": 0.0001010870631140531,
+          "real": -0.000131163904284063
+        },
+        "P1_zero_spatial_mean_RMS": 2.269722271543459e-05,
+        "near_zero_rule": "normalized overlap is null when denominator <=1e-12*L",
+        "normalized_overlap_absolute": 0.9913268018910362,
+        "normalized_overlap_denominator": 1.3104247644613048e-05
+      },
+      "sign_and_evidence_boundary": {
+        "F_delta": "hypothetical conservative attachment cross-load for a prescribed basis displacement",
+        "not_cell_deformation_attachment_force_or_DCM_solution": true,
+        "recovery": "u_ecm_y=u_endo_y-t_y_code/k_ce",
+        "t_y_code": "k_ce*(u_endo_y-u_ecm_y)"
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "basic",
+        "key": "basic__de0p2__h0p3__a1__s2__t128__a0p1",
+        "spatial_label": "S2",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.3
+      }
+    },
+    {
+      "activation_reference_alpha": {
+        "amplitude": 0.05,
+        "imag": 5.7462715141731735e-18,
+        "real": -0.05
+      },
+      "case_key": "basic__de0p2__h0p3__s1__s2__t128__a0p1",
+      "cell_mode": {
+        "P1_mean": 4.5102810375396984e-17,
+        "P1_mean_square": 0.3333333333333334,
+        "definition": "v(-L/2)=1, v(0)=-1, v(L/2)=1; linear on each half",
+        "not_measured_endocardial_cell_scale": true,
+        "physical_cell_width_a": 0.5
+      },
+      "configuration": {
+        "actual_config": {
+          "activation_peak": 0.1,
+          "config_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69",
+          "ecm_relaxation_time": 0.2,
+          "ecm_thickness": 0.3,
+          "length": 1.0,
+          "period": 1.0
+        },
+        "reconstructed_k_ce": 7.0
+      },
+      "generalized_force_F_delta": {
+        "amplitude": 0.0009515686680522629,
+        "definition": "k_ce*L*p with the production code-sign convention",
+        "imag": -2.8444935951589615e-05,
+        "phase": {
+          "activation_floor": 1e-12,
+          "interpretable": true,
+          "relative_to_activation_deg": 178.287020526038,
+          "relative_to_activation_rad": 3.1116955217500757,
+          "value_floor": 7e-12
+        },
+        "real": 0.0009511434253767766
+      },
+      "input_checks": {
+        "all_selected_arrays_finite": true,
+        "loaded_array_bytes": 276824,
+        "periodic_y_endpoint_maximum_absolute_mismatches": {
+          "endocardial_y": 0.0,
+          "recovered_ecm_y": 0.0,
+          "traction_y_code": 0.0
+        },
+        "raw_to_recorded_activation_fundamental_absolute_error": 2.4936649967166602e-18,
+        "raw_to_stored_traction_fundamental_maximum_absolute_error": 2.3158568555993882e-19,
+        "selected_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardial_displacement_two_cycles": [
+            33,
+            2,
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            66,
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            33
+          ]
+        },
+        "time_axis_maximum_absolute_error": 0.0,
+        "x_strictly_increasing_contains_zero_and_endpoints_match": true
+      },
+      "projection_p": {
+        "amplitude": 0.00013593838115032327,
+        "imag": -4.063562278798517e-06,
+        "phase": {
+          "activation_floor": 1e-12,
+          "interpretable": true,
+          "relative_to_activation_deg": 178.287020526038,
+          "relative_to_activation_rad": 3.1116955217500757,
+          "value_floor": 1e-12
+        },
+        "real": 0.00013587763219668236
+      },
+      "projection_p_over_activation_alpha": {
+        "amplitude": 0.0027187676230064654,
+        "imag": 8.127124557597003e-05,
+        "real": -0.002717552643933647
+      },
+      "recovered_ecm_y_first_fundamental": {
+        "P1_spatial_mean": {
+          "amplitude": 0.00014799978959092357,
+          "imag": 9.139691372967285e-05,
+          "real": -0.00011640679481734899
+        },
+        "P1_zero_spatial_mean_RMS": 0.00023726189697428841,
+        "near_zero_rule": "normalized overlap is null when denominator <=1e-12*L",
+        "normalized_overlap_absolute": 0.9923725041974976,
+        "normalized_overlap_denominator": 0.00013698322008654667
+      },
+      "sign_and_evidence_boundary": {
+        "F_delta": "hypothetical conservative attachment cross-load for a prescribed basis displacement",
+        "not_cell_deformation_attachment_force_or_DCM_solution": true,
+        "recovery": "u_ecm_y=u_endo_y-t_y_code/k_ce",
+        "t_y_code": "k_ce*(u_endo_y-u_ecm_y)"
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "S1",
+        "case_id": "S1",
+        "de": 0.2,
+        "group": "basic",
+        "key": "basic__de0p2__h0p3__s1__s2__t128__a0p1",
+        "spatial_label": "S2",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.3
+      }
+    },
+    {
+      "activation_reference_alpha": {
+        "amplitude": 0.05,
+        "imag": 5.7462715141731735e-18,
+        "real": -0.05
+      },
+      "case_key": "space__de0p2__h0p3__s1__s3__t128__a0p1",
+      "cell_mode": {
+        "P1_mean": 4.336808689942018e-17,
+        "P1_mean_square": 0.3333333333333334,
+        "definition": "v(-L/2)=1, v(0)=-1, v(L/2)=1; linear on each half",
+        "not_measured_endocardial_cell_scale": true,
+        "physical_cell_width_a": 0.5
+      },
+      "configuration": {
+        "actual_config": {
+          "activation_peak": 0.1,
+          "config_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69",
+          "ecm_relaxation_time": 0.2,
+          "ecm_thickness": 0.3,
+          "length": 1.0,
+          "period": 1.0
+        },
+        "reconstructed_k_ce": 7.0
+      },
+      "generalized_force_F_delta": {
+        "amplitude": 0.0009617674903395003,
+        "definition": "k_ce*L*p with the production code-sign convention",
+        "imag": -2.336196377969379e-05,
+        "phase": {
+          "activation_floor": 1e-12,
+          "interpretable": true,
+          "relative_to_activation_deg": 178.60811099830016,
+          "relative_to_activation_rad": 3.117299607687834,
+          "value_floor": 7e-12
+        },
+        "real": 0.0009614837097539912
+      },
+      "input_checks": {
+        "all_selected_arrays_finite": true,
+        "loaded_array_bytes": 541272,
+        "periodic_y_endpoint_maximum_absolute_mismatches": {
+          "endocardial_y": 0.0,
+          "recovered_ecm_y": 0.0,
+          "traction_y_code": 0.0
+        },
+        "raw_to_recorded_activation_fundamental_absolute_error": 2.4936649967166602e-18,
+        "raw_to_stored_traction_fundamental_maximum_absolute_error": 4.439357777371059e-19,
+        "selected_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardial_displacement_two_cycles": [
+            65,
+            2,
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            130,
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            65
+          ]
+        },
+        "time_axis_maximum_absolute_error": 0.0,
+        "x_strictly_increasing_contains_zero_and_endpoints_match": true
+      },
+      "projection_p": {
+        "amplitude": 0.00013739535576278575,
+        "imag": -3.337423397099113e-06,
+        "phase": {
+          "activation_floor": 1e-12,
+          "interpretable": true,
+          "relative_to_activation_deg": 178.60811099830016,
+          "relative_to_activation_rad": 3.117299607687834,
+          "value_floor": 1e-12
+        },
+        "real": 0.0001373548156791416
+      },
+      "projection_p_over_activation_alpha": {
+        "amplitude": 0.002747907115255715,
+        "imag": 6.674846794198195e-05,
+        "real": -0.0027470963135828317
+      },
+      "recovered_ecm_y_first_fundamental": {
+        "P1_spatial_mean": {
+          "amplitude": 0.00014804352383315092,
+          "imag": 9.137542086206044e-05,
+          "real": -0.00011647925742902922
+        },
+        "P1_zero_spatial_mean_RMS": 0.00023974558167218996,
+        "near_zero_rule": "normalized overlap is null when denominator <=1e-12*L",
+        "normalized_overlap_absolute": 0.9926178211306366,
+        "normalized_overlap_denominator": 0.00013841717611546227
+      },
+      "sign_and_evidence_boundary": {
+        "F_delta": "hypothetical conservative attachment cross-load for a prescribed basis displacement",
+        "not_cell_deformation_attachment_force_or_DCM_solution": true,
+        "recovery": "u_ecm_y=u_endo_y-t_y_code/k_ce",
+        "t_y_code": "k_ce*(u_endo_y-u_ecm_y)"
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "S1",
+        "case_id": "S1",
+        "de": 0.2,
+        "group": "space",
+        "key": "space__de0p2__h0p3__s1__s3__t128__a0p1",
+        "spatial_label": "S3",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.3
+      }
+    }
+  ],
+  "runtime": {
+    "bytecode_cache": "disabled",
+    "cpu_threads": 1,
+    "entry_path": "scripts/run_paper2_cell_mode_drive_overlap_v01.py",
+    "entry_sha256": "c25c1bf718def4f90a37a3a320795b3e63dc06c2bb088a9dee95e31432acf764",
+    "gpu": "not_used",
+    "network": "not_used",
+    "new_container": "not_used",
+    "numpy": "2.2.6",
+    "postprocess_budget_seconds": 30.0,
+    "postprocess_elapsed_seconds": 0.1977506999974139,
+    "project_memory_limit_gib": 8,
+    "python": "3.13.7",
+    "python_executable": "F:\\python\\python.exe",
+    "selected_array_load_bytes": 1094920,
+    "selected_array_load_limit_bytes": 536870912
+  },
+  "schema": "paper2_cell_mode_drive_overlap_v01",
+  "scientific_question": "Do three preserved ECM-top motion fields have a resolvable conservative drive projection onto one prescribed two-cell triangular mode?",
+  "self_test": {
+    "pass": true,
+    "spatial_errors": {
+      "constant_projection": 0.0,
+      "mode_mean": 0.0,
+      "mode_mean_square": 5.551115123125783e-17,
+      "mode_projection": 5.551115123125783e-17
+    },
+    "temporal_errors": {
+      "constant": 0.0,
+      "unit_cosine": 1.1831877066180474e-16
+    },
+    "tolerance": 3e-14
+  },
+  "source_provenance": {
+    "actual_config_k_ce_field_was_absent_and_section_48_1_clarified_source": true,
+    "code_symbol_checks": {
+      "model_t_code_equals_kce_times_endo_minus_ecm": true,
+      "package_model_and_runner_not_imported": true,
+      "pilot_three_replacements_and_digest_serialization": true
+    },
+    "direct_source_count": 10,
+    "direct_source_ledger": {
+      "results/paper2_science_pilot/v01_20260905/numerical/cases/basic__de0p2__h0p3__a1__s2__t128__a0p1.json": {
+        "bytes": 10478,
+        "sha256": "1484c0e3ffbdc3b6fd144df1943a2a418c5e5f68cb1beb5810bc2a395f8580a0"
+      },
+      "results/paper2_science_pilot/v01_20260905/numerical/cases/basic__de0p2__h0p3__a1__s2__t128__a0p1.npz": {
+        "bytes": 3727138,
+        "sha256": "39006a9738eed18c77a5f3dd398049412a4ccf511cdeb98dc4909943e36461bc"
+      },
+      "results/paper2_science_pilot/v01_20260905/numerical/cases/basic__de0p2__h0p3__s1__s2__t128__a0p1.json": {
+        "bytes": 10452,
+        "sha256": "61d5b104989204808310e539892b29b1a9ea657da32c42624b1685a1df12a9d7"
+      },
+      "results/paper2_science_pilot/v01_20260905/numerical/cases/basic__de0p2__h0p3__s1__s2__t128__a0p1.npz": {
+        "bytes": 3731778,
+        "sha256": "2795cf0318cd9075728ba9951b3c4b43fe2de72d6dfd4a567a7895426953eaef"
+      },
+      "results/paper2_science_pilot/v01_20260905/numerical/cases/space__de0p2__h0p3__s1__s3__t128__a0p1.json": {
+        "bytes": 10477,
+        "sha256": "c13bb55c64e4a1303cb12a14e3442d0a723b98aafdeb298757960596da33f203"
+      },
+      "results/paper2_science_pilot/v01_20260905/numerical/cases/space__de0p2__h0p3__s1__s3__t128__a0p1.npz": {
+        "bytes": 13833617,
+        "sha256": "01aca7b4e3069b81e008b8a1ec8a92ed827fb646e0b7ec98a28ed7c61e1efb62"
+      },
+      "results/paper2_science_pilot/v01_20260905/numerical/run_manifest.json": {
+        "bytes": 9761,
+        "sha256": "bf571f576525439baa1385f76fb0cdc96fca4ed39caf4cfae85a7c6776a4c621"
+      },
+      "scripts/run_paper2_science_pilot_v01.py": {
+        "bytes": 38672,
+        "sha256": "2675b91436dacc43ed9ad3121b8a24dfd8826f93440db184bbd7abad597002e7"
+      },
+      "src/paper2_hybrid/config.py": {
+        "bytes": 4555,
+        "sha256": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe"
+      },
+      "src/paper2_hybrid/model.py": {
+        "bytes": 42954,
+        "sha256": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800"
+      }
+    },
+    "original_run_manifest_code_version": "740f2da07b6bfd4000ca900e5c27dcc9e3041483",
+    "original_run_manifest_source_hashes": {
+      "scripts/run_paper2_science_pilot_v01.py": "2675b91436dacc43ed9ad3121b8a24dfd8826f93440db184bbd7abad597002e7",
+      "src/paper2_hybrid/config.py": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe",
+      "src/paper2_hybrid/model.py": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800",
+      "src/paper2_hybrid/numerics.py": "620381c4f0165801f2af03defe587e8381c9b6859f8bbd9d2f84198a555331e4",
+      "src/paper2_hybrid/validation.py": "6cfc1f383dbe92b6684eb1bd7f228610815ad67bd60ba1ecaaef8ab91cb1f0c5"
+    },
+    "per_case_reconstructed_config": {
+      "basic__de0p2__h0p3__a1__s2__t128__a0p1": {
+        "activation_peak": 0.1,
+        "actual_config_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.3,
+        "endocardium_ecm_interface_stiffness_k_ce": 7.0,
+        "endpoint_summary_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69",
+        "length": 1.0,
+        "pass": true,
+        "period": 1.0,
+        "reconstructed_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69"
+      },
+      "basic__de0p2__h0p3__s1__s2__t128__a0p1": {
+        "activation_peak": 0.1,
+        "actual_config_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.3,
+        "endocardium_ecm_interface_stiffness_k_ce": 7.0,
+        "endpoint_summary_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69",
+        "length": 1.0,
+        "pass": true,
+        "period": 1.0,
+        "reconstructed_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69"
+      },
+      "space__de0p2__h0p3__s1__s3__t128__a0p1": {
+        "activation_peak": 0.1,
+        "actual_config_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.3,
+        "endocardium_ecm_interface_stiffness_k_ce": 7.0,
+        "endpoint_summary_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69",
+        "length": 1.0,
+        "pass": true,
+        "period": 1.0,
+        "reconstructed_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69"
+      }
+    },
+    "reconstructed_k_ce": 7.0,
+    "total_direct_source_file_bytes": 21419882
+  },
+  "status": "COMPLETED_BOUNDED_NONBLIND_POSTPROCESS_NO_MECHANISM_PASS"
+}
