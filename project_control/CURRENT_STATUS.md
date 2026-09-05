@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: beacb2c17abb1b6abceb954efa0b8a6a8aab0ae3
-current_lifecycle: paper2_bloch_verified_cell_observable_continuum_comparison
+verified_commit: 72bd9bfb76092a69858c94215a58ca9562d37d2b
+current_lifecycle: paper2_cell_port_identifiability_accepted_finite_ecm_theory
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section36_brief60_bounded_continuum_comparator_theory_only
+execution_authorized: v04_section37_brief61_finite_ecm_static_boundary_theory_only
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_cell_bloch_asymptotic_probe/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,15 +33,19 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划36/简报60，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
+当前裁决（主计划37/简报61，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
 已完成并通过总管独立几何与解析输入重建；theta=0.02时领先系数误差分别约0.008558%和0.016599%。
 本批计算0.0750725000秒，独立复核0.0177348000秒且0新右端；没有新增FEM或解盲原四留出。
 长波连接伸长可写成普通应变—曲率恢复，alpha=-0.778458496485260，z_eff/b=0.49625，
 严格正参数下0<z_eff<b/2。z_eff是输出恢复高度，不是机械中性面；这些结果不证明DCM独有创新。
-数值任务本批结束，不再补点。下一步仅复用理论agent一次20分钟，明确两表面连续强对照是否可
-由既有能量独立确定，并共同定义连接伸长Y与顶底坡度差W及实验观测接口；不先启动新数值或拟合。
-若对照仍不唯一或不可公平匹配，就明确缺口，不制造“连续体失败”。Nature Physics目标保持，
-优先验证细胞内部变量的预测价值；生产心肌FEM/ECM黏弹FEM不变，现有链不追认为完整细胞DCM。
+连续对照推导已验收：保留精确平移算子只是当前离散胞链的等价重写，无须再计算两者差异。
+完整基底端口含平均位移与一阶空间矩各法/切两分量；Y/W都有明确恢复式。
+已纠正“连接刚度必不可由形变识别”的过强说法：给定其他组合参数可反演，但当前固定理想点
+相对误差放大约75.94倍，提示独立连接力学测量可能更有信息；不是实验精度或普适不可识别定理。
+数值任务结束，无新求解。下一步复用理论agent一次20分钟，仅推导有限厚度静态ECM受细胞反作用的
+完整边界表达，检查胞尺度空间谐波及模式选择；这是独立理想边界研究，不是已实现三层耦合。
+不以两条标量传递函数冒充完整耦合，不启动新FEM、扫描、原留出、流体或非线性。
+Nature Physics目标保持；生产心肌FEM/ECM黏弹FEM不变，现有链不追认为完整细胞DCM。
 
 以下为保留的阶段证据沿革；其中“当前”“只批准”等措辞仅适用于相应历史阶段。
 
