@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 20d9b9d4c159d203f2d7a07da77cbea3638ffd03
-current_lifecycle: paper2_science_first_field_comparison_reviewed_transverse_cancellation_hypothesis
+verified_commit: ed2354215f1ca501ba835f5b7bceede994da5549
+current_lifecycle: paper2_transverse_notch_batch2_8_endpoints_authorized
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: bounded_science_pilot_max_30_cases_cpu_only
+execution_authorized: transverse_notch_batch2_max_8_endpoints_cpu_only_v04_section10
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_science_pilot/v01_20260905/numerical/field_comparison_v01.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -60,8 +60,11 @@ P0 为构造零状态，endpoint 的作用反作用为结构恒等，二者不�
 但整体短缩比变为 0.943960–0.972993，不是双约束。最大倍率来自低 A1 基线，不是最大绝对负荷。
 总管独立直接 DFT/梯形积分复算最大差 1.776e-15；此为后处理一致性，不是新增空间收敛。
 第 18 节理论稿经纠错补回 macro 体应力/drag 功项、内部状态允许集和离散功因子；当前集总容量对照不再开发，
-但不以 Schur 表示等价否定全部线性新规律。下一步为第 20 节总管提出的“主动/被动层横向变形抵消”候选纯理论核查，
-最多 45 分钟、一页级交付；新增 FEM/扫描仍为 0，数值任务完成待命。
+但不以 Schur 表示等价否定全部线性新规律。第 21 节横向抵消约化已独立复算，预测 H_min^(0)=0.26044558，尚未获 FEM 支持。
+总管已按 v04 第 10 节/简报第 22 节单独授权第二批最多 8 个定向端点：固定 De=0.2，A1 三厚度与 S1 中心各做 S2/S3，
+CPU1/8GiB，计算累计 900 秒封顶；生产物理和 API 不变，不扩充扫描。首轮仍为 26 个完成+4 个锁定，第二批起始0/8，实时完成数以新目录结果和任务快照为准。
+第二批若完成，两批实际计算为26+8，不能写成首轮仍不超过30；原4留出不替换、不重标、不运行。
+两侧与中心分别测网格误差，使用 PASS/FAIL/INCONCLUSIVE；新预测执行前提交并记录SHA256，执行中不改简报。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，
