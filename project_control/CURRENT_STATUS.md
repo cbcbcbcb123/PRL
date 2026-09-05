@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 0e0b9edbf52d3f9a48b12494a55568f4f8318dec
-current_lifecycle: paper2_operator_bound_accepted_static_mode_screen_authorized_pending_dispatch
+verified_commit: 2f1c9deebfb6d6a474ffe3ad52576b568cfc877c
+current_lifecycle: paper2_static_mode_screen_dispatched_preparation
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: bounded_static_mode_screen_v04_section23_after_frozen_commit
+execution_authorized: bounded_static_mode_screen_v04_section23_frozen_2f1c9dee
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_transverse_notch/v02_20260905/first_mode_transfer_v01.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -109,7 +109,9 @@ v04第21节已交接，简报第38节仅接受有条件的同波数O(k^-2)估计
 总管指出标量闭环结论遗漏跨波数耦合，保留全算子、统一余项及频率范围缺口，不报告已排除网格风险。
 v04第22节已交接验收，见简报第39节：有限维完整能量/频率界成立；连续尾界仍需统一条件，不继续精修。
 下一步v04第23节/简报第40节为静态有限模式筛查：H={0.1,0.26,0.6}各S2/S3，五个固定源导数。
-理论判据核查已完成；冻结提交后最多6次装配/30个静态右端解，串行1CPU/8GiB、计算300秒；尚未运行。
+理论判据核查已完成；预登记冻结于2f1c9deebfb6d6a474ffe3ad52576b568cfc877c并已同步远端。
+已下发既有数值任务，执行回合01a07078-1f17-7823-b747-73ee7667cefe当前准备中，不重复下发。
+最多6次装配/30个静态右端解，串行1CPU/8GiB、计算300秒；尚无本批计算结果。
 主量为零均值子空间最大响应减均匀响应，排除完整空间Rayleigh包含造成的平凡阳性；不是等功或记忆实验。
 旧46周期工况与新静态右端分开计数；不实施反馈/动态极点，不读原4留出，不修改生产API或正式Figure 2。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
