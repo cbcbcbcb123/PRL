@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 2f625b2968dbda5c0c371fdc5b5e82a4a0d09907
+verified_commit: 5e56203972f9360c02454e502aef509059d8b09c
 current_lifecycle: paper2_cell_mode_baseline_drive_projection_postprocessing
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section28_three_existing_cases_projection_no_new_fem
+execution_authorized: v04_section28_brief48_1_verified_source_config_projection_no_new_fem
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_static_mode_screen/v03_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -59,6 +59,10 @@ ECM基底驱动、在线性连接长度上观察。它是待检查的具体材�
 并对共同连接长度可见；这只是材料/观测选择证据，未证明耦合后软模、实际驱动或DCM必要性。
 总管设定第28节/简报48的三个旧case投影后处理，冻结后下发数值任务：准备25分钟、CPU后处理30秒，
 只新增一个入口和一个JSON。不解新FEM/DCM、不读留出、不加扫描；原模拟计数/预算保持，后处理另记。
+
+准备阶段发现旧actual_config未单列k_ce，数值任务在零写入/零后处理处停止。总管已核对原运行
+源码哈希并重建三个完整配置摘要，均吻合且k_ce=7，批准简报48.1限定的四项补充只读来源。
+冻结该澄清后恢复原三个case后处理；算法、阈值、输出与资源上限不变，不把缺失字段伪称原有记录。
 
 本轮以前的运行基础为 P5 r03：68 项宿主测试通过、182 项 Linux 测试通过及 2 项预期平台
 跳过；不是正式 Figure 2 数值 PASS。证据入口：

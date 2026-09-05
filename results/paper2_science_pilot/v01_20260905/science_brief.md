@@ -2893,3 +2893,41 @@ A1只有S2，描述性记录，不冒称同样的空间复核。此门不是机�
 只写上述入口/新结果，原六个JSON/NPZ只读；摘要记录六个输入哈希、入口版本、冻结分析提交和实际耗时。
 不另建manifest、图件、报告树或通用模块，不改生产API/默认参数/正式Figure 2，不提交/推送或清理。
 总管冻结本分析后下发既有数值任务，验收时独立复算；理论agent不再重复第27节。
+
+### 48.1 输入来源澄清：以原运行源码哈希和完整配置摘要核对界面刚度
+
+执行任务在准备阶段发现第48节的配置读取要求不可按字面执行：三个case的actual_config均未
+单列k_ce，只保存五个数值参数与完整config_digest。任务正确停止，未新建入口/结果、未执行投影。
+总管承认该预登记的输入结构假设有误；保留原文，本澄清只修订参数来源，不改变物理参数或判据。
+
+总管于2026-09-05作无文件输出的独立核查：原numerical/run_manifest.json记录的三个相关源码
+SHA256与冻结提交5e56203972f9360c02454e502aef509059d8b09c中的Git blob字节以及当前本地字节一致。
+只加载纯配置模块、不加载FEM，按原runner仅替换ecm_thickness、ecm_relaxation_time、activation_peak，
+三个case重建出的完整config_digest均为
+`e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69`，
+与各自actual_config和endpoint_summary的摘要同时一致；重建配置的
+endocardium_ecm_interface_stiffness=7.0。不是未经核对地采用当前默认值，也不是参数实测。
+
+本次允许在原六个只读case文件之外，增加以下四个直接来源；只核对相关元数据/代码，不读取其他case：
+
+| 来源（相对项目根目录） | SHA256（原始文件字节） |
+|---|---|
+| results/paper2_science_pilot/v01_20260905/numerical/run_manifest.json | bf571f576525439baa1385f76fb0cdc96fca4ed39caf4cfae85a7c6776a4c621 |
+| src/paper2_hybrid/config.py | 0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe |
+| scripts/run_paper2_science_pilot_v01.py | 2675b91436dacc43ed9ad3121b8a24dfd8826f93440db184bbd7abad597002e7 |
+| src/paper2_hybrid/model.py | d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800 |
+
+原manifest的code_version=740f2da07b6bfd4000ca900e5c27dcc9e3041483照实保留；本次使用其逐文件
+source_hashes绑定实际执行源码，不冒称当时所有文件已纳入该提交。冻结提交5e562039中的上述源码
+只是与原运行哈希吻合的可复取副本，不能仅凭当前HEAD追认历史身份。
+
+执行入口先核对四来源字节哈希、manifest对应source_hashes及六case来源，再从已核对的纯配置模块
+独立加载ACTIVE_CONFIG，严格按原三项替换规则重建配置并核对三个完整digest及L/period/De/H。
+允许在内存使用runpy.run_path直接加载config.py或等价独立模块；禁用字节码缓存，不导入
+paper2_hybrid包初始化、model、原runner，不创建ModelSystem或任何求解器。代码只读符号核查。
+唯一summary补记上述来源哈希、逐case摘要比较、重建k_ce与本澄清冻结提交；来源不同即停止。
+
+这次澄清在投影结果产生前完成，原分析仍是非盲后处理。新文件仍仅原指定入口和summary，
+原六源、旧证据、生产默认值和正式Figure 2均不改；零新FEM/DCM、原四留出不读、三case不扩展。
+有效准备累计仍限25分钟（不因重派而重置，等待澄清时间单记），纯后处理仍限30秒，资源上限不变。
+由既有数值任务继续第48节，不要求人类重复批准这项既定研究范围内的来源澄清。
