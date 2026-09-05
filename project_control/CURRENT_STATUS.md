@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-06
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 333751b1979a7daeeda8f37df62171ccbabd3ca8
-current_lifecycle: paper2_muscle_side_input_correction_accepted_baseline
+verified_commit: a69c25738f3fe567ee012107cec5275e93b98978
+current_lifecycle: paper2_ecm_only_memory_bound_accepted_negative_candidate
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section51_brief76_input_check_complete_no_new_numerical_batch
+execution_authorized: v04_section52_brief77_memory_bound_complete_no_new_numerical_batch
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_cell_bloch_asymptotic_probe/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划51/简报76，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
+当前裁决（主计划52/简报77，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
 已完成并通过总管独立几何与解析输入重建；theta=0.02时领先系数误差分别约0.008558%和0.016599%。
 本批计算0.0750725000秒，独立复核0.0177348000秒且0新右端；没有新增FEM或解盲原四留出。
 长波连接伸长可写成普通应变—曲率恢复，alpha=-0.778458496485260，z_eff/b=0.49625，
@@ -94,7 +94,11 @@ theta=ka的长波展开是否非一致；只查法向输入、连接伸长Y与�
 总管发现并纠正初稿的二阶高谐波遗漏；已核对m=0闭合和软角系数，但不接受所有h固定符号。
 一个充分参数界可排除“所有有限h都为零”；未确认生理参数满足，也不是DCM独有或新机制证明。
 原理论agent在本次20分钟预算内交接并收口，不追全域厚度符号；未新增求值、查新或生产实现。
-下一步仍须筛出超出该经典加载修正的具体可检验预测才另行决定计算，不自动延长此证明链。
+主计划52/简报77.1已完成并独立验收：零额外drag且C_M<=R*C_eq的诊断对照中，
+松弛时间均在[tau,tau*(1+R)]，静态细胞软化不能单独产生无界长记忆；允许多个极点。
+R来自完整张量比较，不能用杨氏模量比替代；精确无动力学零模不是无限慢松弛，近零相消不作证据。
+生产含三类drag，故该上界不直接用于其长尾；未改变默认参数、执行数值或新增胞黏性。
+此无界长记忆候选收口；下一动态主张必须说明如何区别现有drag，不以软空间尺度自动推慢时间。
 数值任务保持完成，15例既有输出本轮只读核实仍全部检查通过；无新计算或原留出读取。
 这是独立理想边界研究，不是已实现三层耦合；不启动新FEM、扫描、原留出、流体或非线性。
 Nature Physics目标保持；生产心肌FEM/ECM黏弹FEM不变，现有链不追认为完整细胞DCM。
