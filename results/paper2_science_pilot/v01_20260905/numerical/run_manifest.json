@@ -1,0 +1,358 @@
+{
+  "case_count": 26,
+  "cases": [
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.02,
+      "group": "basic",
+      "key": "basic__de0p02__h0p1__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.1
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 0.02,
+      "group": "basic",
+      "key": "basic__de0p02__h0p1__s1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.1
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.02,
+      "group": "basic",
+      "key": "basic__de0p02__h0p3__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.3
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 0.02,
+      "group": "basic",
+      "key": "basic__de0p02__h0p3__s1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.3
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.02,
+      "group": "basic",
+      "key": "basic__de0p02__h0p6__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.6
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 0.02,
+      "group": "basic",
+      "key": "basic__de0p02__h0p6__s1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.6
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "group": "basic",
+      "key": "basic__de0p2__h0p1__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.1
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 0.2,
+      "group": "basic",
+      "key": "basic__de0p2__h0p1__s1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.1
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "group": "basic",
+      "key": "basic__de0p2__h0p3__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.3
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 0.2,
+      "group": "basic",
+      "key": "basic__de0p2__h0p3__s1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.3
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "group": "basic",
+      "key": "basic__de0p2__h0p6__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.6
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 0.2,
+      "group": "basic",
+      "key": "basic__de0p2__h0p6__s1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.6
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 2.0,
+      "group": "basic",
+      "key": "basic__de2__h0p1__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.1
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 2.0,
+      "group": "basic",
+      "key": "basic__de2__h0p1__s1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.1
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 2.0,
+      "group": "basic",
+      "key": "basic__de2__h0p3__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.3
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 2.0,
+      "group": "basic",
+      "key": "basic__de2__h0p3__s1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.3
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 2.0,
+      "group": "basic",
+      "key": "basic__de2__h0p6__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.6
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 2.0,
+      "group": "basic",
+      "key": "basic__de2__h0p6__s1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.6
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 0.02,
+      "group": "space",
+      "key": "space__de0p02__h0p1__s1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.1
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 0.02,
+      "group": "time",
+      "key": "time__de0p02__h0p1__s1__s2__t256__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 256,
+      "thickness_ratio": 0.1
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 0.2,
+      "group": "space",
+      "key": "space__de0p2__h0p3__s1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.3
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 0.2,
+      "group": "time",
+      "key": "time__de0p2__h0p3__s1__s2__t256__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 256,
+      "thickness_ratio": 0.3
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 2.0,
+      "group": "space",
+      "key": "space__de2__h0p6__s1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.6
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 2.0,
+      "group": "time",
+      "key": "time__de2__h0p6__s1__s2__t256__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 256,
+      "thickness_ratio": 0.6
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "P0",
+      "de": 0.2,
+      "group": "zero",
+      "key": "zero__de0p2__h0p3__p0__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.3
+    },
+    {
+      "activation_peak": 0.05,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "group": "half",
+      "key": "half__de0p2__h0p3__a1__s2__t128__a0p05",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.3
+    }
+  ],
+  "code_version": "740f2da07b6bfd4000ca900e5c27dcc9e3041483",
+  "container": {
+    "container_name": "prl-paper2-science-pilot-v01-20260905",
+    "cpu_limit": 1,
+    "image": "dolfinx/dolfinx:v0.11.0",
+    "image_id": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+    "memory_limit_gib": 8,
+    "network": "none",
+    "root_filesystem": "read_only"
+  },
+  "created_at_utc": "2026-09-05T01:04:25.091780+00:00",
+  "evidence_level": "exploratory_scientific_feasibility",
+  "holdouts": {
+    "signatures": [
+      [
+        0.07,
+        0.2,
+        "A1"
+      ],
+      [
+        0.07,
+        0.2,
+        "S1"
+      ],
+      [
+        0.7,
+        0.45,
+        "A1"
+      ],
+      [
+        0.7,
+        0.45,
+        "S1"
+      ]
+    ],
+    "status": "LOCKED_NOT_RUN"
+  },
+  "parameter_rule": {
+    "ecm_relaxation_time": "De * period",
+    "ecm_thickness": "H * length",
+    "not_a_frequency_scan": true,
+    "period_fixed": 1.0
+  },
+  "runtime": {
+    "dolfinx": "0.11.0.post0",
+    "numpy": "2.4.6",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "scipy": "1.17.1"
+  },
+  "schema": "paper2_science_pilot_v01",
+  "scientific_cautions": {
+    "a1_s1_equality": "not assumed and not used as a pass condition",
+    "interface_action_reaction": "structural identity check; the production endpoint summary uses a fixed zero numerator rather than an independent force-balance measurement",
+    "p0": "constructed zero state and output-pipeline check, not an independent solve validation",
+    "translation_invariance": "not assumed; affine macro displacement, bottom support and body drag require separate theoretical interpretation",
+    "uniform_activation_uniform_field": "not assumed"
+  },
+  "source_hashes": {
+    "scripts/run_paper2_science_pilot_v01.py": "2675b91436dacc43ed9ad3121b8a24dfd8826f93440db184bbd7abad597002e7",
+    "src/paper2_hybrid/config.py": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe",
+    "src/paper2_hybrid/model.py": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800",
+    "src/paper2_hybrid/numerics.py": "620381c4f0165801f2af03defe587e8381c9b6859f8bbd9d2f84198a555331e4",
+    "src/paper2_hybrid/validation.py": "6cfc1f383dbe92b6684eb1bd7f228610815ad67bd60ba1ecaaef8ab91cb1f0c5"
+  },
+  "status": "RUNNING",
+  "wall_budget_seconds": 7200.0
+}

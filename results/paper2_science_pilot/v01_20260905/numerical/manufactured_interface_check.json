@@ -1,0 +1,6 @@
+{
+  "absolute_force_imbalance": 0.0,
+  "pass": true,
+  "relative_force_imbalance": 0.0,
+  "threshold": 1e-12
+}

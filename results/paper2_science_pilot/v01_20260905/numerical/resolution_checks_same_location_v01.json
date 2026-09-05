@@ -1,0 +1,667 @@
+{
+  "comparisons": [
+    {
+      "candidate_case": "space__de0p02__h0p1__s1__s3__t128__a0p1",
+      "comparison": "S2_T128_to_S3_T128",
+      "de": 0.02,
+      "metrics": {
+        "endocardial_local_axial_strain": {
+          "absolute_phase_change_deg": 0.0005437585846159918,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.018312399875068074,
+          "candidate_phase_relative_to_activation_rad": 3.059122920997399,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": null,
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": 0.015624999999999998
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.007812499999999999,
+            "candidate_component": null,
+            "candidate_independent_peak_amplitude": 0.018313518161616558,
+            "candidate_peak_x": 0.007812499999999999,
+            "component_changed": false,
+            "reference_component": null,
+            "reference_peak_x": 0.015624999999999998
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.01831689398294778,
+          "reference_phase_relative_to_activation_rad": 3.0591324113750367,
+          "relative_amplitude_change": 0.00024535316325408144
+        },
+        "endocardium_ecm_traction": {
+          "absolute_phase_change_deg": 0.09304301634572842,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.00265691778139522,
+          "candidate_phase_relative_to_activation_rad": 0.09019120773556642,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": "y",
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -0.49999999999999994
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": "y",
+            "candidate_independent_peak_amplitude": 0.0026569177813952193,
+            "candidate_peak_x": -0.49999999999999994,
+            "component_changed": false,
+            "reference_component": "y",
+            "reference_peak_x": -0.49999999999999994
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.002632138347654577,
+          "reference_phase_relative_to_activation_rad": 0.09181511471678629,
+          "relative_amplitude_change": 0.009326383343195067
+        },
+        "myocardium_ecm_traction": {
+          "absolute_phase_change_deg": 0.020566936963514297,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.005742436839851337,
+          "candidate_phase_relative_to_activation_rad": 0.030780050729326585,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": "x",
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -0.25000000000000006
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": "x",
+            "candidate_independent_peak_amplitude": 0.005742436839851337,
+            "candidate_peak_x": -0.25000000000000006,
+            "component_changed": false,
+            "reference_component": "x",
+            "reference_peak_x": -0.25000000000000006
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.005795056719644517,
+          "reference_phase_relative_to_activation_rad": 0.030421089962263136,
+          "relative_amplitude_change": 0.009080131970892642
+        },
+        "overall_shortening": {
+          "absolute_phase_change_deg": 0.0022631100002929263,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.01804462169199427,
+          "candidate_phase_relative_to_activation_rad": -0.05243172481332289,
+          "fixed_reference_location": null,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.01804391684723912,
+          "reference_phase_relative_to_activation_rad": -0.05247122353416281,
+          "relative_amplitude_change": 3.906120988198033e-05
+        }
+      },
+      "pass": true,
+      "reference_case": "basic__de0p02__h0p1__s1__s2__t128__a0p1",
+      "thickness_ratio": 0.1
+    },
+    {
+      "candidate_case": "time__de0p02__h0p1__s1__s2__t256__a0p1",
+      "comparison": "S2_T128_to_S2_T256",
+      "de": 0.02,
+      "metrics": {
+        "endocardial_local_axial_strain": {
+          "absolute_phase_change_deg": 0.0007249316985465352,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.018316907607008565,
+          "candidate_phase_relative_to_activation_rad": 3.0591450638200284,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": null,
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": 0.015624999999999998
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": null,
+            "candidate_independent_peak_amplitude": 0.018316907607008565,
+            "candidate_peak_x": 0.015624999999999998,
+            "component_changed": false,
+            "reference_component": null,
+            "reference_peak_x": 0.015624999999999998
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.01831689398294778,
+          "reference_phase_relative_to_activation_rad": 3.0591324113750367,
+          "relative_amplitude_change": 7.437969922701353e-07
+        },
+        "endocardium_ecm_traction": {
+          "absolute_phase_change_deg": 0.0003162787195783493,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.0026321083450168334,
+          "candidate_phase_relative_to_activation_rad": 0.09182063482179692,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": "y",
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -0.49999999999999994
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": "y",
+            "candidate_independent_peak_amplitude": 0.0026321083450168334,
+            "candidate_peak_x": -0.49999999999999994,
+            "component_changed": false,
+            "reference_component": "y",
+            "reference_peak_x": -0.49999999999999994
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.002632138347654577,
+          "reference_phase_relative_to_activation_rad": 0.09181511471678629,
+          "relative_amplitude_change": 1.139857932251638e-05
+        },
+        "myocardium_ecm_traction": {
+          "absolute_phase_change_deg": 0.00023770956289751965,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.005795044747271991,
+          "candidate_phase_relative_to_activation_rad": 0.030416941147727097,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": "x",
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -0.25000000000000006
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": "x",
+            "candidate_independent_peak_amplitude": 0.005795044747271991,
+            "candidate_peak_x": -0.25000000000000006,
+            "component_changed": false,
+            "reference_component": "x",
+            "reference_peak_x": -0.25000000000000006
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.005795056719644517,
+          "reference_phase_relative_to_activation_rad": 0.030421089962263136,
+          "relative_amplitude_change": 2.0659629587307737e-06
+        },
+        "overall_shortening": {
+          "absolute_phase_change_deg": 0.00046669604573990465,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.018043928491151367,
+          "candidate_phase_relative_to_activation_rad": -0.05246307815155861,
+          "fixed_reference_location": null,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.01804391684723912,
+          "reference_phase_relative_to_activation_rad": -0.05247122353416281,
+          "relative_amplitude_change": 6.453091550046185e-07
+        }
+      },
+      "pass": true,
+      "reference_case": "basic__de0p02__h0p1__s1__s2__t128__a0p1",
+      "thickness_ratio": 0.1
+    },
+    {
+      "candidate_case": "space__de0p2__h0p3__s1__s3__t128__a0p1",
+      "comparison": "S2_T128_to_S3_T128",
+      "de": 0.2,
+      "metrics": {
+        "endocardial_local_axial_strain": {
+          "absolute_phase_change_deg": 0.010142377012495346,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.014270819813464371,
+          "candidate_phase_relative_to_activation_rad": 3.0925885624302123,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": null,
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -0.484375
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0078125,
+            "candidate_component": null,
+            "candidate_independent_peak_amplitude": 0.014274118697678839,
+            "candidate_peak_x": -0.4921875,
+            "component_changed": false,
+            "reference_component": null,
+            "reference_peak_x": -0.484375
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.014261022408897503,
+          "reference_phase_relative_to_activation_rad": 3.0924115445573657,
+          "relative_amplitude_change": 0.0006865341091073638
+        },
+        "endocardium_ecm_traction": {
+          "absolute_phase_change_deg": 0.2915510458728173,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.002099076423503426,
+          "candidate_phase_relative_to_activation_rad": -3.126518845452685,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": "y",
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -4.530974155562894e-18
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 2.265487077781447e-18,
+            "candidate_component": "y",
+            "candidate_independent_peak_amplitude": 0.002099076423503426,
+            "candidate_peak_x": -2.265487077781447e-18,
+            "component_changed": false,
+            "reference_component": "y",
+            "reference_peak_x": -4.530974155562894e-18
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.002081009089044947,
+          "reference_phase_relative_to_activation_rad": -3.131607371140799,
+          "relative_amplitude_change": 0.008607278065809453
+        },
+        "myocardium_ecm_traction": {
+          "absolute_phase_change_deg": 0.2582143238567155,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.0064694397301463735,
+          "candidate_phase_relative_to_activation_rad": 0.06219579724135464,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": "x",
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -0.25000000000000006
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": "x",
+            "candidate_independent_peak_amplitude": 0.0064694397301463735,
+            "candidate_peak_x": -0.25000000000000006,
+            "component_changed": false,
+            "reference_component": "x",
+            "reference_peak_x": -0.25000000000000006
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.006652876373427922,
+          "reference_phase_relative_to_activation_rad": 0.05768910711424401,
+          "relative_amplitude_change": 0.02757253148641205
+        },
+        "overall_shortening": {
+          "absolute_phase_change_deg": 0.0016945425006861478,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.014060433736004196,
+          "candidate_phase_relative_to_activation_rad": -0.10524883869412524,
+          "fixed_reference_location": null,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.014060260746972203,
+          "reference_phase_relative_to_activation_rad": -0.10527841404007719,
+          "relative_amplitude_change": 1.2303250044851756e-05
+        }
+      },
+      "pass": true,
+      "reference_case": "basic__de0p2__h0p3__s1__s2__t128__a0p1",
+      "thickness_ratio": 0.3
+    },
+    {
+      "candidate_case": "time__de0p2__h0p3__s1__s2__t256__a0p1",
+      "comparison": "S2_T128_to_S2_T256",
+      "de": 0.2,
+      "metrics": {
+        "endocardial_local_axial_strain": {
+          "absolute_phase_change_deg": 0.00032099269973346397,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.014261148952443702,
+          "candidate_phase_relative_to_activation_rad": 3.0924059421778805,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": null,
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -0.484375
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": null,
+            "candidate_independent_peak_amplitude": 0.014261148952443702,
+            "candidate_peak_x": -0.484375,
+            "component_changed": false,
+            "reference_component": null,
+            "reference_peak_x": -0.484375
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.014261022408897503,
+          "reference_phase_relative_to_activation_rad": 3.0924115445573657,
+          "relative_amplitude_change": 8.873306535185167e-06
+        },
+        "endocardium_ecm_traction": {
+          "absolute_phase_change_deg": 9.481550405733429e-05,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.0020810273674015814,
+          "candidate_phase_relative_to_activation_rad": -3.1316090259835265,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": "y",
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -4.530974155562894e-18
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": "y",
+            "candidate_independent_peak_amplitude": 0.0020810273674015814,
+            "candidate_peak_x": -4.530974155562894e-18,
+            "component_changed": false,
+            "reference_component": "y",
+            "reference_peak_x": -4.530974155562894e-18
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.002081009089044947,
+          "reference_phase_relative_to_activation_rad": -3.131607371140799,
+          "relative_amplitude_change": 8.783333136590476e-06
+        },
+        "myocardium_ecm_traction": {
+          "absolute_phase_change_deg": 0.00045052960373087586,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.00665281924044432,
+          "candidate_phase_relative_to_activation_rad": 0.05769697033920682,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": "x",
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -0.25000000000000006
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": "x",
+            "candidate_independent_peak_amplitude": 0.00665281924044432,
+            "candidate_peak_x": -0.25000000000000006,
+            "component_changed": false,
+            "reference_component": "x",
+            "reference_peak_x": -0.25000000000000006
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.006652876373427922,
+          "reference_phase_relative_to_activation_rad": 0.05768910711424401,
+          "relative_amplitude_change": 8.587711599468455e-06
+        },
+        "overall_shortening": {
+          "absolute_phase_change_deg": 0.00014383834430802916,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.014060397549389508,
+          "candidate_phase_relative_to_activation_rad": -0.1052759035873784,
+          "fixed_reference_location": null,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.014060260746972203,
+          "reference_phase_relative_to_activation_rad": -0.10527841404007719,
+          "relative_amplitude_change": 9.729626550402245e-06
+        }
+      },
+      "pass": true,
+      "reference_case": "basic__de0p2__h0p3__s1__s2__t128__a0p1",
+      "thickness_ratio": 0.3
+    },
+    {
+      "candidate_case": "space__de2__h0p6__s1__s3__t128__a0p1",
+      "comparison": "S2_T128_to_S3_T128",
+      "de": 2.0,
+      "metrics": {
+        "endocardial_local_axial_strain": {
+          "absolute_phase_change_deg": 0.017815757058662864,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.010291305215388544,
+          "candidate_phase_relative_to_activation_rad": -3.1408455378700464,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": null,
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -0.484375
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0078125,
+            "candidate_component": null,
+            "candidate_independent_peak_amplitude": 0.010293333633180015,
+            "candidate_peak_x": -0.4921875,
+            "component_changed": false,
+            "reference_component": null,
+            "reference_peak_x": -0.484375
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.010293932524315838,
+          "reference_phase_relative_to_activation_rad": -3.1411564814894555,
+          "relative_amplitude_change": 0.00025522888566514325
+        },
+        "endocardium_ecm_traction": {
+          "absolute_phase_change_deg": 1.0601806750858191,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.0008917222611543274,
+          "candidate_phase_relative_to_activation_rad": -2.655241653050438,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": "y",
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -4.530974155562894e-18
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 2.265487077781447e-18,
+            "candidate_component": "y",
+            "candidate_independent_peak_amplitude": 0.0008917222611543273,
+            "candidate_peak_x": -2.265487077781447e-18,
+            "component_changed": false,
+            "reference_component": "y",
+            "reference_peak_x": -4.530974155562894e-18
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.0009127686511604877,
+          "reference_phase_relative_to_activation_rad": -2.6737452964967017,
+          "relative_amplitude_change": 0.02305774850987936
+        },
+        "myocardium_ecm_traction": {
+          "absolute_phase_change_deg": 0.11035383310095685,
+          "amplitude_pass": false,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.006913115414967876,
+          "candidate_phase_relative_to_activation_rad": 0.00043065180701949306,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": "x",
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -0.25000000000000006
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": "x",
+            "candidate_independent_peak_amplitude": 0.006913115414967876,
+            "candidate_peak_x": -0.25000000000000006,
+            "component_changed": false,
+            "reference_component": "x",
+            "reference_peak_x": -0.25000000000000006
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.007379600876200846,
+          "reference_phase_relative_to_activation_rad": -0.001495385922788508,
+          "relative_amplitude_change": 0.06321283075584509
+        },
+        "overall_shortening": {
+          "absolute_phase_change_deg": 0.0009222662086529906,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.01018373722521146,
+          "candidate_phase_relative_to_activation_rad": -0.05407734417454281,
+          "fixed_reference_location": null,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.010183937766543081,
+          "reference_phase_relative_to_activation_rad": -0.05409344075646369,
+          "relative_amplitude_change": 1.9691924304519294e-05
+        }
+      },
+      "pass": false,
+      "reference_case": "basic__de2__h0p6__s1__s2__t128__a0p1",
+      "thickness_ratio": 0.6
+    },
+    {
+      "candidate_case": "time__de2__h0p6__s1__s2__t256__a0p1",
+      "comparison": "S2_T128_to_S2_T256",
+      "de": 2.0,
+      "metrics": {
+        "endocardial_local_axial_strain": {
+          "absolute_phase_change_deg": 0.0002760340372501732,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.010293934027705603,
+          "candidate_phase_relative_to_activation_rad": -3.141161299192253,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": null,
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -0.484375
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": null,
+            "candidate_independent_peak_amplitude": 0.010293934027705605,
+            "candidate_peak_x": -0.484375,
+            "component_changed": false,
+            "reference_component": null,
+            "reference_peak_x": -0.484375
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.010293932524315838,
+          "reference_phase_relative_to_activation_rad": -3.1411564814894555,
+          "relative_amplitude_change": 1.4604618225283942e-07
+        },
+        "endocardium_ecm_traction": {
+          "absolute_phase_change_deg": 0.0025663596519009124,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.0009127297682150987,
+          "candidate_phase_relative_to_activation_rad": -2.6737900879224177,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": "y",
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -4.530974155562894e-18
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": "y",
+            "candidate_independent_peak_amplitude": 0.0009127297682150988,
+            "candidate_peak_x": -4.530974155562894e-18,
+            "component_changed": false,
+            "reference_component": "y",
+            "reference_peak_x": -4.530974155562894e-18
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.0009127686511604877,
+          "reference_phase_relative_to_activation_rad": -2.6737452964967017,
+          "relative_amplitude_change": 4.2598905362956644e-05
+        },
+        "myocardium_ecm_traction": {
+          "absolute_phase_change_deg": 0.00016134683013974125,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.007379600625253163,
+          "candidate_phase_relative_to_activation_rad": -0.0014925698893649135,
+          "fixed_reference_location": {
+            "candidate_interpolation": "linear interpolation of real and imaginary harmonic coefficients",
+            "component": "x",
+            "selection": "maximum reference amplitude, then held fixed for candidate comparison",
+            "x": -0.25000000000000006
+          },
+          "independent_peak_location_diagnostic": {
+            "absolute_x_shift": 0.0,
+            "candidate_component": "x",
+            "candidate_independent_peak_amplitude": 0.007379600625253163,
+            "candidate_peak_x": -0.25000000000000006,
+            "component_changed": false,
+            "reference_component": "x",
+            "reference_peak_x": -0.25000000000000006
+          },
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.007379600876200846,
+          "reference_phase_relative_to_activation_rad": -0.001495385922788508,
+          "relative_amplitude_change": 3.400559025481312e-08
+        },
+        "overall_shortening": {
+          "absolute_phase_change_deg": 0.00019148372778192947,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude_same_location_component": 0.010183945963969663,
+          "candidate_phase_relative_to_activation_rad": -0.0540900987349499,
+          "fixed_reference_location": null,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.010183937766543081,
+          "reference_phase_relative_to_activation_rad": -0.05409344075646369,
+          "relative_amplitude_change": 8.049361819365264e-07
+        }
+      },
+      "pass": true,
+      "reference_case": "basic__de2__h0p6__s1__s2__t128__a0p1",
+      "thickness_ratio": 0.6
+    }
+  ],
+  "method": {
+    "candidate_evaluation": "same physical x and same vector component; linear interpolation for S3",
+    "evidence_level": "exploratory_resolution_diagnostic_not_formal_figure2_certification",
+    "peak_location_change": "reported separately and not used as a phase comparison",
+    "purpose": "replace cross-grid phase comparisons taken at independently selected argmax locations",
+    "reference_location": "argmax of the S2/T128 reference amplitude",
+    "thresholds": {
+      "absolute_phase_deg": 5.0,
+      "relative_amplitude": 0.05
+    }
+  },
+  "schema": "paper2_science_pilot_same_location_resolution_diagnostic_v01",
+  "source_runner_sha256": "2675b91436dacc43ed9ad3121b8a24dfd8826f93440db184bbd7abad597002e7",
+  "source_summary_sha256": "8b6ee96662319efa541c187ec3e063484da9979e1710f0ee6c8db6b9f6da6122",
+  "status": "RECORDED_EXPLORATORY_DIFFERENCE"
+}

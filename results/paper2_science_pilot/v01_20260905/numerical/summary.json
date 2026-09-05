@@ -1,0 +1,2637 @@
+{
+  "all_resolution_checks_pass": false,
+  "all_structural_pass": true,
+  "case_count": 26,
+  "cases": [
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de0p02__h0p1__a1__s2__t128__a0p1.npz",
+        "sha256": "f31224c8ac4310cdd6e60208d5a5ce222239bdaf81098396acb2c75b89bd5fcf"
+      },
+      "case_json": {
+        "path": "cases/basic__de0p02__h0p1__a1__s2__t128__a0p1.json",
+        "sha256": "71d1771a11d66b35803057873687feed564da6628ce2183e1ee0377292a5110a"
+      },
+      "group": "basic",
+      "key": "basic__de0p02__h0p1__a1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.0182054702280665,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 175.36092103903493,
+          "phase_relative_to_activation_rad": 3.060625451460955,
+          "x": -0.01562500000000001
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0008196139623305183,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 15.30242925877158,
+          "phase_relative_to_activation_rad": 0.26707777411907946,
+          "x": -4.530974155562894e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.04663127669039672,
+          "maximum_endocardium_ecm_traction": 0.001272822155192307,
+          "maximum_myocardium_ecm_traction": 0.0014340349022654436,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0019002635468267717,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.1485766764768313e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0009187993256696242,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -161.45260148739857,
+          "phase_relative_to_activation_rad": -2.817879481865399,
+          "x": -4.530974155562894e-18
+        },
+        "overall_shortening": {
+          "amplitude": 0.018172897586482065,
+          "coefficient_imag": 0.0009106083477863698,
+          "coefficient_real": -0.018150068846307647,
+          "minimum": 9.444502311665298e-06,
+          "peak": 0.03635521995701595,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -2.8721822043233276,
+          "phase_relative_to_activation_rad": -0.05012903618263058,
+          "waveform_l2": 0.02226486713758369
+        },
+        "state_fundamental_l2_amplitude": 0.5294022468035285,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 8.337252830013144e-05,
+          "active_input_work_raw": 8.337252830013144e-05,
+          "cycle_discrete_energy_change": -1.1285936472387752e-18,
+          "ecm_sls_dissipation": 1.174301810628491e-05,
+          "external_support_work": 1.163015941249557e-21,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 7.16295101940312e-05
+        }
+      },
+      "runtime_seconds": 4.317624946997967,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de0p02__h0p1__s1__s2__t128__a0p1.npz",
+        "sha256": "21d800ee95666ebdd602f02aded5b40bacd5bf7a5689bc34bcc3cb34a3c4ea8e"
+      },
+      "case_json": {
+        "path": "cases/basic__de0p02__h0p1__s1__s2__t128__a0p1.json",
+        "sha256": "f6aa496bbf01991cd7f87cd40c01aa0379f98b836f304c9aa0555415314f5f21"
+      },
+      "group": "basic",
+      "key": "basic__de0p02__h0p1__s1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.018316893982947783,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 175.27537614346795,
+          "phase_relative_to_activation_rad": 3.0591324113750367,
+          "x": 0.015624999999999998
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.002632138347654577,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 5.2606185687813465,
+          "phase_relative_to_activation_rad": 0.09181511471678627,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.06561194509910379,
+          "maximum_endocardium_ecm_traction": 0.004901767187506818,
+          "maximum_myocardium_ecm_traction": 0.011547665807277618,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0019337057534724918,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.1595840390329903e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.005795056719644517,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 1.7430000630254703,
+          "phase_relative_to_activation_rad": 0.030421089962263132,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.018043916847239116,
+          "coefficient_imag": 0.0009463520007867443,
+          "coefficient_real": -0.018019083025522874,
+          "minimum": 9.257132018932607e-06,
+          "peak": 0.03609688421731834,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -3.0063796543950483,
+          "phase_relative_to_activation_rad": -0.05247122353416281,
+          "waveform_l2": 0.02210666931900011
+        },
+        "state_fundamental_l2_amplitude": 0.5569295224748387,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 9.201912318193095e-05,
+          "active_input_work_raw": 9.201912318193095e-05,
+          "cycle_discrete_energy_change": -2.1904900673261747e-19,
+          "ecm_sls_dissipation": 1.2464306629178718e-05,
+          "external_support_work": -1.4144788474656773e-21,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 7.955481655294626e-05
+        }
+      },
+      "runtime_seconds": 1.5168593880080152,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de0p02__h0p3__a1__s2__t128__a0p1.npz",
+        "sha256": "fbd248f2a1d0b927610373d7e7ddcda4ae24ae490aa6d2da51fe9810449cbe14"
+      },
+      "case_json": {
+        "path": "cases/basic__de0p02__h0p3__a1__s2__t128__a0p1.json",
+        "sha256": "28de784b7127b065bcc3a2c0e9a48c8ee6b619320a02fecf588ea627d16bf801"
+      },
+      "group": "basic",
+      "key": "basic__de0p02__h0p3__a1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.015505679522462205,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 174.6789384205752,
+          "phase_relative_to_activation_rad": 3.0487226093274606,
+          "x": 0.015624999999999998
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0005527099855492537,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -136.23350754428498,
+          "phase_relative_to_activation_rad": -2.3777232581883077,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.0398719839440174,
+          "maximum_endocardium_ecm_traction": 0.0007613078738804208,
+          "maximum_myocardium_ecm_traction": 0.0014200802884064903,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0014259914002915952,
+          "peak_absolute_mean_endocardial_tangential_displacement": 2.068524930336213e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.000832529040949028,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 19.394614907957543,
+          "phase_relative_to_activation_rad": 0.3384998873002361,
+          "x": -0.49999999999999994
+        },
+        "overall_shortening": {
+          "amplitude": 0.015485831912240627,
+          "coefficient_imag": 0.0009669471782248792,
+          "coefficient_real": -0.015455613969321734,
+          "minimum": 0.00010977941969890839,
+          "peak": 0.03107866512900429,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -3.5799210927360567,
+          "phase_relative_to_activation_rad": -0.062481410029837446,
+          "waveform_l2": 0.01905479633449197
+        },
+        "state_fundamental_l2_amplitude": 0.45097285967930273,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 8.352237525725073e-05,
+          "active_input_work_raw": 8.352237525725073e-05,
+          "cycle_discrete_energy_change": -2.474097212146106e-19,
+          "ecm_sls_dissipation": 2.5419746282038887e-05,
+          "external_support_work": -7.887167140693119e-22,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 5.810262897518638e-05
+        }
+      },
+      "runtime_seconds": 1.525355938996654,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de0p02__h0p3__s1__s2__t128__a0p1.npz",
+        "sha256": "5c651bbf0060def1575146946031bc9f271fcbe6e0a5e5a8ab2291cd747ff772"
+      },
+      "case_json": {
+        "path": "cases/basic__de0p02__h0p3__s1__s2__t128__a0p1.json",
+        "sha256": "1b65114056bfa8a399b6f5e5059187d883befe919dcc2f088a95c706faafb919"
+      },
+      "group": "basic",
+      "key": "basic__de0p02__h0p3__s1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.01556654209632035,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 179.5316097856748,
+          "phase_relative_to_activation_rad": 3.1334177021656964,
+          "x": -0.484375
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0021131422969831695,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -174.05866663918755,
+          "phase_relative_to_activation_rad": -3.0378968244850357,
+          "x": -4.530974155562894e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.05735905749009341,
+          "maximum_endocardium_ecm_traction": 0.004043069866129681,
+          "maximum_myocardium_ecm_traction": 0.011662373879529453,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0013691753361700777,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.9949211553516033e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.005847179635515938,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 1.022087581122031,
+          "phase_relative_to_activation_rad": 0.017838793534324077,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.015376210354643758,
+          "coefficient_imag": 0.000991255579164021,
+          "coefficient_real": -0.015344225534285858,
+          "minimum": 0.00010843347062610038,
+          "peak": 0.03085719616775761,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -3.696240694330655,
+          "phase_relative_to_activation_rad": -0.06451157006227123,
+          "waveform_l2": 0.018919077069469162
+        },
+        "state_fundamental_l2_amplitude": 0.4597760706087589,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 9.033569365824083e-05,
+          "active_input_work_raw": 9.033569365824083e-05,
+          "cycle_discrete_energy_change": -6.187079371325132e-19,
+          "ecm_sls_dissipation": 2.5932249834536297e-05,
+          "external_support_work": 7.641080908458593e-22,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 6.440344382365351e-05
+        }
+      },
+      "runtime_seconds": 1.5711157339974307,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de0p02__h0p6__a1__s2__t128__a0p1.npz",
+        "sha256": "10f24c8cc92c218b4d6653c375018434dd7177757bd64a0ca9fde1486d861a36"
+      },
+      "case_json": {
+        "path": "cases/basic__de0p02__h0p6__a1__s2__t128__a0p1.json",
+        "sha256": "54679419e2e20ba74a81634daa34f348c71eb2374d68a5ea81d7ef1ac5e4d4f5"
+      },
+      "group": "basic",
+      "key": "basic__de0p02__h0p6__a1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.012590215139640093,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 178.47126866612047,
+          "phase_relative_to_activation_rad": 3.1149112584351903,
+          "x": 0.4843750000000001
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0011537883556443516,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -128.35642591396248,
+          "phase_relative_to_activation_rad": -2.240242248290817,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.03245543634671031,
+          "maximum_endocardium_ecm_traction": 0.0011963990996262824,
+          "maximum_myocardium_ecm_traction": 0.0018492344136706723,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.004760153727226153,
+          "peak_absolute_mean_endocardial_tangential_displacement": 5.080752984130965e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.001370046122354019,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 24.239830916802905,
+          "phase_relative_to_activation_rad": 0.42306485962492635,
+          "x": -0.49999999999999994
+        },
+        "overall_shortening": {
+          "amplitude": 0.0125663291296442,
+          "coefficient_imag": 0.0010369815353477893,
+          "coefficient_real": -0.01252346985024087,
+          "minimum": 0.00028552990225990185,
+          "peak": 0.025415145671397514,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -4.733467070029758,
+          "phase_relative_to_activation_rad": -0.08261458540674828,
+          "waveform_l2": 0.015623299751744825
+        },
+        "state_fundamental_l2_amplitude": 0.36868192393972765,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 8.653884735172074e-05,
+          "active_input_work_raw": 8.653884735172074e-05,
+          "cycle_discrete_energy_change": 3.913080458078054e-18,
+          "ecm_sls_dissipation": 3.319330899076678e-05,
+          "external_support_work": 1.0360437172226672e-22,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 5.334553836102811e-05
+        }
+      },
+      "runtime_seconds": 1.6101451059803367,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de0p02__h0p6__s1__s2__t128__a0p1.npz",
+        "sha256": "34376f32ad61aa1e6d65ed4c4ee42094dbfba3143feb6b7132519d217ba260ed"
+      },
+      "case_json": {
+        "path": "cases/basic__de0p02__h0p6__s1__s2__t128__a0p1.json",
+        "sha256": "51502414f82b65d8643f57d6ddb198db479f97763ffab7e516234f27714e7d39"
+      },
+      "group": "basic",
+      "key": "basic__de0p02__h0p6__s1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.01260471141936386,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 178.34434175007553,
+          "phase_relative_to_activation_rad": 3.1126959658408038,
+          "x": -0.484375
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.001482343445567056,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -152.61288832670508,
+          "phase_relative_to_activation_rad": -2.663597382279423,
+          "x": -4.530974155562894e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.047369298227062505,
+          "maximum_endocardium_ecm_traction": 0.0021621833765667047,
+          "maximum_myocardium_ecm_traction": 0.012617957560422097,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.004681151086574917,
+          "peak_absolute_mean_endocardial_tangential_displacement": 5.0745838737695226e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.00632304362632108,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 0.9743541541570222,
+          "phase_relative_to_activation_rad": 0.01700568807052443,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.012478256262321552,
+          "coefficient_imag": 0.0010537050433716666,
+          "coefficient_real": -0.0124336875073222,
+          "minimum": 0.0002813638159765777,
+          "peak": 0.02523555793318474,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -4.844012784267734,
+          "phase_relative_to_activation_rad": -0.08454397209416972,
+          "waveform_l2": 0.015512310065309069
+        },
+        "state_fundamental_l2_amplitude": 0.37306069817001325,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 9.209021087540356e-05,
+          "active_input_work_raw": 9.209021087540356e-05,
+          "cycle_discrete_energy_change": 2.531596190885892e-18,
+          "ecm_sls_dissipation": 3.355704207647911e-05,
+          "external_support_work": -4.880365614062863e-23,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 5.8533168799067894e-05
+        }
+      },
+      "runtime_seconds": 1.5221138650085777,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de0p2__h0p1__a1__s2__t128__a0p1.npz",
+        "sha256": "3d3962e1c0360c1af2e69ff2effb5d26f61f23d15f01839ffc2e114b630d2c2f"
+      },
+      "case_json": {
+        "path": "cases/basic__de0p2__h0p1__a1__s2__t128__a0p1.json",
+        "sha256": "e5dc03d4c20efc0d55832cc89504efc8610395ae313629b6271716603cbf4be2"
+      },
+      "group": "basic",
+      "key": "basic__de0p2__h0p1__a1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.017558439119211323,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 174.37220830818907,
+          "phase_relative_to_activation_rad": 3.0433691589513105,
+          "x": -0.01562500000000001
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0008473357590300849,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 18.58920364179977,
+          "phase_relative_to_activation_rad": 0.3244428088731266,
+          "x": -4.530974155562894e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.055758032018208066,
+          "maximum_endocardium_ecm_traction": 0.0013005801973831022,
+          "maximum_myocardium_ecm_traction": 0.0014716081098308104,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0020101659252719935,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.206904720477478e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0009562508115321384,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -158.14276450250242,
+          "phase_relative_to_activation_rad": -2.7601119287746796,
+          "x": -4.530974155562894e-18
+        },
+        "overall_shortening": {
+          "amplitude": 0.017532862103540468,
+          "coefficient_imag": 0.0011907940682485659,
+          "coefficient_real": -0.017492377283513796,
+          "minimum": 0.0006525957851318091,
+          "peak": 0.03571206867419581,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -3.894403367294228,
+          "phase_relative_to_activation_rad": -0.06797016116003833,
+          "waveform_l2": 0.02200676786992479
+        },
+        "state_fundamental_l2_amplitude": 0.3138350403599543,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 0.00010847886132881016,
+          "active_input_work_raw": 0.00010847886132881016,
+          "cycle_discrete_energy_change": 1.425079994196157e-18,
+          "ecm_sls_dissipation": 4.134714405383034e-05,
+          "external_support_work": 3.8050308177439273e-22,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 6.713171727507385e-05
+        }
+      },
+      "runtime_seconds": 1.4397919260081835,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de0p2__h0p1__s1__s2__t128__a0p1.npz",
+        "sha256": "ee59613eaf6e7a98073394328612956782f738abb916268bb83d9388acaed336"
+      },
+      "case_json": {
+        "path": "cases/basic__de0p2__h0p1__s1__s2__t128__a0p1.json",
+        "sha256": "24b549ba5a058286b77fb8a08a0e64bb84804db0cf7fa006802bdcfc7996a26f"
+      },
+      "group": "basic",
+      "key": "basic__de0p2__h0p1__s1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.017661480245377642,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 174.2561931222585,
+          "phase_relative_to_activation_rad": 3.041344311974509,
+          "x": 0.015624999999999998
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0029036846847648942,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 7.667056998092359,
+          "phase_relative_to_activation_rad": 0.13381538855478425,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.07663860693308755,
+          "maximum_endocardium_ecm_traction": 0.005173104241437167,
+          "maximum_myocardium_ecm_traction": 0.012353978833468518,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0020433361850922716,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.1881514110252678e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.006601146870999394,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 3.6970700278105504,
+          "phase_relative_to_activation_rad": 0.06452604466209243,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.017406339450782748,
+          "coefficient_imag": 0.0012224151803487363,
+          "coefficient_real": -0.01736336241062568,
+          "minimum": 0.0006506421245297753,
+          "peak": 0.0354554992248075,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -4.027092036130339,
+          "phase_relative_to_activation_rad": -0.07028601531131687,
+          "waveform_l2": 0.021849569499706824
+        },
+        "state_fundamental_l2_amplitude": 0.3248138721216729,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 0.00011754824661293726,
+          "active_input_work_raw": 0.00011754824661293726,
+          "cycle_discrete_energy_change": -4.743384504624082e-20,
+          "ecm_sls_dissipation": 4.2876644890537585e-05,
+          "external_support_work": -1.0124690697649059e-21,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 7.467160172248865e-05
+        }
+      },
+      "runtime_seconds": 1.4833852610026952,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de0p2__h0p3__a1__s2__t128__a0p1.npz",
+        "sha256": "39006a9738eed18c77a5f3dd398049412a4ccf511cdeb98dc4909943e36461bc"
+      },
+      "case_json": {
+        "path": "cases/basic__de0p2__h0p3__a1__s2__t128__a0p1.json",
+        "sha256": "1484c0e3ffbdc3b6fd144df1943a2a418c5e5f68cb1beb5810bc2a395f8580a0"
+      },
+      "group": "basic",
+      "key": "basic__de0p2__h0p3__a1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.014178762260691953,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 177.28513182159972,
+          "phase_relative_to_activation_rad": 3.0942092651190873,
+          "x": 0.4843750000000001
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0002955492004695191,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -157.81553256061798,
+          "phase_relative_to_activation_rad": -2.7544006539711012,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.04623136222799485,
+          "maximum_endocardium_ecm_traction": 0.0005042706893455472,
+          "maximum_myocardium_ecm_traction": 0.0012473933990232167,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0010435323335749966,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.966208771318756e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0006599460239259369,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 1.0684771978573315,
+          "phase_relative_to_activation_rad": 0.018648445085093335,
+          "x": -0.49999999999999994
+        },
+        "overall_shortening": {
+          "amplitude": 0.01416169819090159,
+          "coefficient_imag": 0.0014600343447919808,
+          "coefficient_real": -0.014086234250580004,
+          "minimum": 0.0014327087005881443,
+          "peak": 0.029755735848115056,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -5.917561006839802,
+          "phase_relative_to_activation_rad": -0.10328092325698522,
+          "waveform_l2": 0.018532582555245133
+        },
+        "state_fundamental_l2_amplitude": 0.2552338023372613,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 0.00012887259802729441,
+          "active_input_work_raw": 0.00012887259802729441,
+          "cycle_discrete_energy_change": -1.9026477577699721e-19,
+          "ecm_sls_dissipation": 8.058173240341035e-05,
+          "external_support_work": 2.4070955825293105e-22,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 4.8290865623897757e-05
+        }
+      },
+      "runtime_seconds": 1.572557740000775,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de0p2__h0p3__s1__s2__t128__a0p1.npz",
+        "sha256": "2795cf0318cd9075728ba9951b3c4b43fe2de72d6dfd4a567a7895426953eaef"
+      },
+      "case_json": {
+        "path": "cases/basic__de0p2__h0p3__s1__s2__t128__a0p1.json",
+        "sha256": "61d5b104989204808310e539892b29b1a9ea657da32c42624b1685a1df12a9d7"
+      },
+      "group": "basic",
+      "key": "basic__de0p2__h0p3__s1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.014261022408897504,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 177.18213002066918,
+          "phase_relative_to_activation_rad": 3.0924115445573657,
+          "x": -0.484375
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0020810090890449476,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -179.42788545842657,
+          "phase_relative_to_activation_rad": -3.131607371140799,
+          "x": -4.530974155562894e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.06554511147866585,
+          "maximum_endocardium_ecm_traction": 0.00401086512106111,
+          "maximum_myocardium_ecm_traction": 0.01246875482461221,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0009890921470687344,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.8828580188035016e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.006652876373427922,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 3.305342361524314,
+          "phase_relative_to_activation_rad": 0.05768910711424401,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.014060260746972203,
+          "coefficient_imag": 0.0014775090794509522,
+          "coefficient_real": -0.013982413925820796,
+          "minimum": 0.0014229088234276235,
+          "peak": 0.02954272081495609,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -6.0320087983272535,
+          "phase_relative_to_activation_rad": -0.10527841404007719,
+          "waveform_l2": 0.018400082088453045
+        },
+        "state_fundamental_l2_amplitude": 0.2597865826649429,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 0.00013571122313361635,
+          "active_input_work_raw": 0.00013571122313361635,
+          "cycle_discrete_energy_change": 1.1519648082658485e-19,
+          "ecm_sls_dissipation": 8.159686815267805e-05,
+          "external_support_work": -2.7421037306132867e-21,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 5.4114354980941896e-05
+        }
+      },
+      "runtime_seconds": 1.4911617239995394,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de0p2__h0p6__a1__s2__t128__a0p1.npz",
+        "sha256": "eab0e48c955629b79574b43eec691834a712d66227a0f2a97558b6d3104bb190"
+      },
+      "case_json": {
+        "path": "cases/basic__de0p2__h0p6__a1__s2__t128__a0p1.json",
+        "sha256": "6bc56c13c1fa91d23fcc6fc90718283f676ac7469525f7da98d6c5688a0f1347"
+      },
+      "group": "basic",
+      "key": "basic__de0p2__h0p6__a1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.010939047035616992,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 175.13945792433162,
+          "phase_relative_to_activation_rad": 3.0567601909376605,
+          "x": 0.4843750000000001
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0006908092495178032,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -136.58402008839568,
+          "phase_relative_to_activation_rad": -2.383840856152581,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.03664081065840843,
+          "maximum_endocardium_ecm_traction": 0.0007334435270634388,
+          "maximum_myocardium_ecm_traction": 0.0014340525927767148,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.004082887019340214,
+          "peak_absolute_mean_endocardial_tangential_displacement": 4.0666892054362636e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0009547205456904091,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 7.6235470197880035,
+          "phase_relative_to_activation_rad": 0.13305599617590197,
+          "x": -0.49999999999999994
+        },
+        "overall_shortening": {
+          "amplitude": 0.010915318041900492,
+          "coefficient_imag": 0.001524182629241107,
+          "coefficient_real": -0.010808378012845316,
+          "minimum": 0.0019353001053571354,
+          "peak": 0.02376537546830028,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -8.026843481903175,
+          "phase_relative_to_activation_rad": -0.14009484730145627,
+          "waveform_l2": 0.014990105577130434
+        },
+        "state_fundamental_l2_amplitude": 0.20216932461825798,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 0.00013330415473615043,
+          "active_input_work_raw": 0.00013330415473615043,
+          "cycle_discrete_energy_change": 6.924494343803905e-19,
+          "ecm_sls_dissipation": 9.520977575941483e-05,
+          "external_support_work": 1.4723814903443893e-22,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 3.809437897673147e-05
+        }
+      },
+      "runtime_seconds": 1.579050747997826,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de0p2__h0p6__s1__s2__t128__a0p1.npz",
+        "sha256": "a43100aaf9215b98671e9c38f4cdbbb2a40d2f78d44a1ea65098e113dbb239c7"
+      },
+      "case_json": {
+        "path": "cases/basic__de0p2__h0p6__s1__s2__t128__a0p1.json",
+        "sha256": "c2f6cdbb454b491a67c71d6a87b4583201791374efe2ada59a0490b253377ca0"
+      },
+      "group": "basic",
+      "key": "basic__de0p2__h0p6__s1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.010957389932296755,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 175.0227261478124,
+          "phase_relative_to_activation_rad": 3.0547228370956976,
+          "x": -0.484375
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0011197486372614713,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -163.66782583097066,
+          "phase_relative_to_activation_rad": -2.8565424403310624,
+          "x": -4.530974155562894e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.05301136475912693,
+          "maximum_endocardium_ecm_traction": 0.0017996612425841274,
+          "maximum_myocardium_ecm_traction": 0.013408844800809755,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.004008514745769558,
+          "peak_absolute_mean_endocardial_tangential_displacement": 4.084406424187392e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.007113191342314925,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 3.214113707875461,
+          "phase_relative_to_activation_rad": 0.056096866735909995,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.010838338513647208,
+          "coefficient_imag": 0.0015339126027274325,
+          "coefficient_real": -0.010729244794653644,
+          "minimum": 0.0019202722300761168,
+          "peak": 0.023596649519085203,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -8.13619045714911,
+          "phase_relative_to_activation_rad": -0.14200331204659458,
+          "waveform_l2": 0.014883316658474
+        },
+        "state_fundamental_l2_amplitude": 0.20554172122252548,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 0.0001388280018033983,
+          "active_input_work_raw": 0.0001388280018033983,
+          "cycle_discrete_energy_change": -2.4851946672441172e-18,
+          "ecm_sls_dissipation": 9.59994884818397e-05,
+          "external_support_work": -1.1439907871608373e-21,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 4.2828513321561266e-05
+        }
+      },
+      "runtime_seconds": 1.6751659920264501,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de2__h0p1__a1__s2__t128__a0p1.npz",
+        "sha256": "33f8c7258add09bbe1028787074dfb4b90b572cfeb80251b5ee7dc40ffdbd0bc"
+      },
+      "case_json": {
+        "path": "cases/basic__de2__h0p1__a1__s2__t128__a0p1.json",
+        "sha256": "017796590fc0a32c13eef3a363d34fe9bf8a72699d2b257b722b94cd7a9fa0ad"
+      },
+      "group": "basic",
+      "key": "basic__de2__h0p1__a1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.017234022911331717,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 175.74769198146672,
+          "phase_relative_to_activation_rad": 3.0673758778574314,
+          "x": -0.01562500000000001
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0008836131129013451,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 17.8058711051062,
+          "phase_relative_to_activation_rad": 0.3107710769698245,
+          "x": -4.530974155562894e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.06035128602536398,
+          "maximum_endocardium_ecm_traction": 0.0013368966061193,
+          "maximum_myocardium_ecm_traction": 0.0015123880418573474,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0020649877593652936,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.0133875075896137e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0009971909140113514,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -159.1080029477973,
+          "phase_relative_to_activation_rad": -2.7769585177119063,
+          "x": -4.530974155562894e-18
+        },
+        "overall_shortening": {
+          "amplitude": 0.017203562078999368,
+          "coefficient_imag": 0.0007613164094636812,
+          "coefficient_real": -0.017186708397208185,
+          "minimum": 0.000978969949769308,
+          "peak": 0.03538569450955831,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -2.5363623464381817,
+          "phase_relative_to_activation_rad": -0.04426787396895534,
+          "waveform_l2": 0.02187643662511936
+        },
+        "state_fundamental_l2_amplitude": 0.05306208401519675,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 7.119844287402938e-05,
+          "active_input_work_raw": 7.119844287402938e-05,
+          "cycle_discrete_energy_change": 1.0947636145465815e-18,
+          "ecm_sls_dissipation": 6.3528702050545345e-06,
+          "external_support_work": -1.3995895964397228e-21,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 6.484557266897385e-05
+        }
+      },
+      "runtime_seconds": 1.4643818689801265,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de2__h0p1__s1__s2__t128__a0p1.npz",
+        "sha256": "064988cba3799926fbdf7453ebc21879936503204a8c80932db07001efdbe6c0"
+      },
+      "case_json": {
+        "path": "cases/basic__de2__h0p1__s1__s2__t128__a0p1.json",
+        "sha256": "e4e617633b66efd2a96ee48d84a1bfa21fe813b701aebacbf0d20eb69e3232f4"
+      },
+      "group": "basic",
+      "key": "basic__de2__h0p1__s1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.017324831068056365,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 175.65895614460976,
+          "phase_relative_to_activation_rad": 3.0658271453397647,
+          "x": 0.015624999999999998
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.00300647399514208,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 5.243608985192056,
+          "phase_relative_to_activation_rad": 0.09151824147875996,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.08203244764295294,
+          "maximum_endocardium_ecm_traction": 0.0052760894562733215,
+          "maximum_myocardium_ecm_traction": 0.01258446901883574,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.002097452181084202,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.0008920775517183e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0068308913181179395,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 0.19838098420901512,
+          "phase_relative_to_activation_rad": 0.0034624013477941927,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.017079506897678218,
+          "coefficient_imag": 0.0007941399509158464,
+          "coefficient_real": -0.01706103448229905,
+          "minimum": 0.0009736203551066504,
+          "peak": 0.03513252099423063,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -2.6650229886779435,
+          "phase_relative_to_activation_rad": -0.04651342579376968,
+          "waveform_l2": 0.021720224186653776
+        },
+        "state_fundamental_l2_amplitude": 0.06132974358503792,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 7.875474938112456e-05,
+          "active_input_work_raw": 7.875474938112456e-05,
+          "cycle_discrete_energy_change": 4.0359796447687326e-19,
+          "ecm_sls_dissipation": 6.541559416509019e-06,
+          "external_support_work": -3.3616620094155045e-21,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 7.221318996461433e-05
+        }
+      },
+      "runtime_seconds": 1.5501535380026326,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de2__h0p3__a1__s2__t128__a0p1.npz",
+        "sha256": "0072bf62186d6a21ec1b3094753eae4ef9bbb8ac8492f6b065081624ba7b3286"
+      },
+      "case_json": {
+        "path": "cases/basic__de2__h0p3__a1__s2__t128__a0p1.json",
+        "sha256": "d659b646e4d6d16cd3b54be4123e826b30d10955d408ab52da9f906bcfd41731"
+      },
+      "group": "basic",
+      "key": "basic__de2__h0p3__a1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.013577657701955565,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 175.6740939983435,
+          "phase_relative_to_activation_rad": 3.0660913507291037,
+          "x": 0.015624999999999998
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0002616034711951905,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -21.475722491172274,
+          "phase_relative_to_activation_rad": -0.374822066715555,
+          "x": -4.530974155562894e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.04912147287332996,
+          "maximum_endocardium_ecm_traction": 0.0004589441621226213,
+          "maximum_myocardium_ecm_traction": 0.001066588865919857,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.001098991401545556,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.9733970317223348e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0005007761190890933,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -173.86875549794672,
+          "phase_relative_to_activation_rad": -3.034582249784163,
+          "x": -4.530974155562894e-18
+        },
+        "overall_shortening": {
+          "amplitude": 0.013560907553398071,
+          "coefficient_imag": 0.0006241570623527132,
+          "coefficient_real": -0.01354653614889519,
+          "minimum": 0.0020333775860512902,
+          "peak": 0.02915506696265191,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -2.638039056045914,
+          "phase_relative_to_activation_rad": -0.046042467324204424,
+          "waveform_l2": 0.01830652548076199
+        },
+        "state_fundamental_l2_amplitude": 0.05223826370330916,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 5.589242544981539e-05,
+          "active_input_work_raw": 5.589242544981539e-05,
+          "cycle_discrete_energy_change": -3.739650462127736e-19,
+          "ecm_sls_dissipation": 1.1810561343080604e-05,
+          "external_support_work": -8.95009422782376e-22,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 4.408186410673482e-05
+        }
+      },
+      "runtime_seconds": 1.5088579340081196,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de2__h0p3__s1__s2__t128__a0p1.npz",
+        "sha256": "17c91f267f6dbab834252ac45a4909beb8792150d1b5f171c1b9ebef17a5a5e0"
+      },
+      "case_json": {
+        "path": "cases/basic__de2__h0p3__s1__s2__t128__a0p1.json",
+        "sha256": "8c12828c9819ec745f2301adaaf25f3d9ae84c86a027de62ddf1bf359cc9bacf"
+      },
+      "group": "basic",
+      "key": "basic__de2__h0p3__s1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.013658167745637207,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -179.60485867076997,
+          "phase_relative_to_activation_rad": -3.1346961363840222,
+          "x": -0.484375
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0021060726014643346,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -5.254848849288565,
+          "phase_relative_to_activation_rad": -0.09171441411472074,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.06916136002419884,
+          "maximum_endocardium_ecm_traction": 0.00402472598878875,
+          "maximum_myocardium_ecm_traction": 0.012728241160100726,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0010569925082189388,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.8833404887702576e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.00691216975391528,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -0.22472177801638224,
+          "phase_relative_to_activation_rad": -0.003922134927321682,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.013463913115280002,
+          "coefficient_imag": 0.0006459629538330896,
+          "coefficient_real": -0.013448408390515365,
+          "minimum": 0.002018909725707332,
+          "peak": 0.028946719912676378,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -2.749955691648433,
+          "phase_relative_to_activation_rad": -0.04799578110322309,
+          "waveform_l2": 0.018175698966292644
+        },
+        "state_fundamental_l2_amplitude": 0.059997442671746004,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 6.165472061318928e-05,
+          "active_input_work_raw": 6.165472061318928e-05,
+          "cycle_discrete_energy_change": 1.6763311421754638e-19,
+          "ecm_sls_dissipation": 1.1932126081185101e-05,
+          "external_support_work": 1.7701665108634792e-21,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 4.9722594532004034e-05
+        }
+      },
+      "runtime_seconds": 1.4203552959952503,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de2__h0p6__a1__s2__t128__a0p1.npz",
+        "sha256": "497523a1ff6a8312db4cea013fb822d6540c7a66343a7ffc5e8dd50bb3d59b31"
+      },
+      "case_json": {
+        "path": "cases/basic__de2__h0p6__a1__s2__t128__a0p1.json",
+        "sha256": "4d733ba6ab82e9e6822183e567158fbf4b9e52633c82ba50770791202b3395bb"
+      },
+      "group": "basic",
+      "key": "basic__de2__h0p6__a1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.010274733252630041,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -179.83977191348816,
+          "phase_relative_to_activation_rad": -3.1387961459259914,
+          "x": 0.4843750000000001
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0005833487963401113,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -112.24052950482938,
+          "phase_relative_to_activation_rad": -1.9589667940411133,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.03839630848596259,
+          "maximum_endocardium_ecm_traction": 0.0006261358745363703,
+          "maximum_myocardium_ecm_traction": 0.0011699109100204441,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.003942663440455647,
+          "peak_absolute_mean_endocardial_tangential_displacement": 3.909952873623612e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0006905972124305446,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 21.455791928290356,
+          "phase_relative_to_activation_rad": 0.3744742127714898,
+          "x": -0.49999999999999994
+        },
+        "overall_shortening": {
+          "amplitude": 0.010256184604721984,
+          "coefficient_imag": 0.0005351938454347853,
+          "coefficient_real": -0.010242211196511473,
+          "minimum": 0.0025942030649494744,
+          "peak": 0.02310647250870794,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -2.9911983281097085,
+          "phase_relative_to_activation_rad": -0.05220625940566407,
+          "waveform_l2": 0.014755535996996716
+        },
+        "state_fundamental_l2_amplitude": 0.058365117922783434,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 4.6057832075559424e-05,
+          "active_input_work_raw": 4.6057832075559424e-05,
+          "cycle_discrete_energy_change": 1.4185684284141395e-18,
+          "ecm_sls_dissipation": 1.346466522839547e-05,
+          "external_support_work": 8.197359870400504e-22,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 3.259316684716364e-05
+        }
+      },
+      "runtime_seconds": 1.6266243150166702,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/basic__de2__h0p6__s1__s2__t128__a0p1.npz",
+        "sha256": "0d68d0cc4bf40a565d83a8e39a3f22ee5811be9ec666f076d128e253c3a77071"
+      },
+      "case_json": {
+        "path": "cases/basic__de2__h0p6__s1__s2__t128__a0p1.json",
+        "sha256": "a6228a6b6dc6f9b900541f16aebb7dd294c7b2b076fbfa3ea515547b685188ce"
+      },
+      "group": "basic",
+      "key": "basic__de2__h0p6__s1__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.010293932524315838,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -179.9750091795093,
+          "phase_relative_to_activation_rad": -3.1411564814894555,
+          "x": -0.484375
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0009127686511604877,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -153.19432098221594,
+          "phase_relative_to_activation_rad": -2.6737452964967017,
+          "x": -4.530974155562894e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.0552923996038391,
+          "maximum_endocardium_ecm_traction": 0.0015924895364399622,
+          "maximum_myocardium_ecm_traction": 0.013675420828542131,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0038704086961009136,
+          "peak_absolute_mean_endocardial_tangential_displacement": 3.929652827097674e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.007379600876200846,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -0.0856793021190575,
+          "phase_relative_to_activation_rad": -0.001495385922788508,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.010183937766543081,
+          "coefficient_imag": 0.0005506156164549564,
+          "coefficient_real": -0.010169041787491014,
+          "minimum": 0.002574650715526306,
+          "peak": 0.02294227103363501,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -3.0993258546863247,
+          "phase_relative_to_activation_rad": -0.05409344075646369,
+          "waveform_l2": 0.014650413581350417
+        },
+        "state_fundamental_l2_amplitude": 0.06502915420256954,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 5.0732558443103393e-05,
+          "active_input_work_raw": 5.0732558443103393e-05,
+          "cycle_discrete_energy_change": 2.21162949506058e-18,
+          "ecm_sls_dissipation": 1.3562691264989399e-05,
+          "external_support_work": -1.1688062055374281e-21,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 3.716986717811378e-05
+        }
+      },
+      "runtime_seconds": 1.4928668919892516,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/space__de0p02__h0p1__s1__s3__t128__a0p1.npz",
+        "sha256": "9740c5fff53d045cb0267ec6b4ae2e3a4ef3734eb394fa4a27f648c971fedcde"
+      },
+      "case_json": {
+        "path": "cases/space__de0p02__h0p1__s1__s3__t128__a0p1.json",
+        "sha256": "bece67000a2e7ab35b9e0c91d835849050521c806901df2b09012aef6d965772"
+      },
+      "group": "space",
+      "key": "space__de0p02__h0p1__s1__s3__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.018313518161616558,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 175.27002009574963,
+          "phase_relative_to_activation_rad": 3.059038930707458,
+          "x": 0.007812499999999999
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0026569177813952193,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 5.16757555243562,
+          "phase_relative_to_activation_rad": 0.09019120773556645,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.06613575467044319,
+          "maximum_endocardium_ecm_traction": 0.004951755020798421,
+          "maximum_myocardium_ecm_traction": 0.011442351051463878,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0019335216951273215,
+          "peak_absolute_mean_endocardial_tangential_displacement": 3.943106556330775e-13
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.005742436839851337,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 1.7635669999889847,
+          "phase_relative_to_activation_rad": 0.030780050729326585,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.01804462169199427,
+          "coefficient_imag": 0.0009456772086144142,
+          "coefficient_real": -0.018019824267297875,
+          "minimum": 9.270314543726593e-06,
+          "peak": 0.036098311876711656,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -3.0041165443947557,
+          "phase_relative_to_activation_rad": -0.05243172481332289,
+          "waveform_l2": 0.022107545294042956
+        },
+        "state_fundamental_l2_amplitude": 1.1136221559354953,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 9.197426992147941e-05,
+          "active_input_work_raw": 9.197426992147941e-05,
+          "cycle_discrete_energy_change": -6.575599487596389e-18,
+          "ecm_sls_dissipation": 1.2468323108738715e-05,
+          "external_support_work": -3.7884872054928668e-22,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 7.950594681244758e-05
+        }
+      },
+      "runtime_seconds": 6.871473954990506,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/time__de0p02__h0p1__s1__s2__t256__a0p1.npz",
+        "sha256": "fb733a5e2475f5276ed568efcf42227c9853ee30f1a12f0f6d1b7f57df6b4741"
+      },
+      "case_json": {
+        "path": "cases/time__de0p02__h0p1__s1__s2__t256__a0p1.json",
+        "sha256": "7184229fea76842649ac079a7362ea99e177775c334af615268571a87f70ae2a"
+      },
+      "group": "time",
+      "key": "time__de0p02__h0p1__s1__s2__t256__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 6.938893903907228e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.018316907607008565,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 175.2761010751665,
+          "phase_relative_to_activation_rad": 3.0591450638200284,
+          "x": 0.015624999999999998
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0026321083450168334,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 5.260934847500925,
+          "phase_relative_to_activation_rad": 0.09182063482179692,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.0656118324734362,
+          "maximum_endocardium_ecm_traction": 0.004901737277837787,
+          "maximum_myocardium_ecm_traction": 0.01154856344318611,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0019338043899753275,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.1080248047204422e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.005795044747271991,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 1.742762353462573,
+          "phase_relative_to_activation_rad": 0.030416941147727097,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.018043928491151367,
+          "coefficient_imag": 0.0009462058390252224,
+          "coefficient_real": -0.018019102361215962,
+          "minimum": 9.24499143425267e-06,
+          "peak": 0.03609689635790302,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -3.0059129583493087,
+          "phase_relative_to_activation_rad": -0.05246307815155861,
+          "waveform_l2": 0.02210667407100111
+        },
+        "state_fundamental_l2_amplitude": 0.5569314112408285,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 9.203343080949706e-05,
+          "active_input_work_raw": 9.203343080949706e-05,
+          "cycle_discrete_energy_change": 1.5178830414797062e-18,
+          "ecm_sls_dissipation": 1.246626284810946e-05,
+          "external_support_work": 0.0,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 7.956716796130438e-05
+        }
+      },
+      "runtime_seconds": 2.1621484000061173,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/space__de0p2__h0p3__s1__s3__t128__a0p1.npz",
+        "sha256": "01aca7b4e3069b81e008b8a1ec8a92ed827fb646e0b7ec98a28ed7c61e1efb62"
+      },
+      "case_json": {
+        "path": "cases/space__de0p2__h0p3__s1__s3__t128__a0p1.json",
+        "sha256": "c13bb55c64e4a1303cb12a14e3442d0a723b98aafdeb298757960596da33f203"
+      },
+      "group": "space",
+      "key": "space__de0p2__h0p3__s1__s3__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.014274118697678839,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 177.35807971513535,
+          "phase_relative_to_activation_rad": 3.0954824460436785,
+          "x": -0.4921875
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.002099076423503426,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -179.13633441255377,
+          "phase_relative_to_activation_rad": -3.126518845452685,
+          "x": -2.265487077781447e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.06718123573124635,
+          "maximum_endocardium_ecm_traction": 0.0040229736048176075,
+          "maximum_myocardium_ecm_traction": 0.012063283583918047,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0009892414782190315,
+          "peak_absolute_mean_endocardial_tangential_displacement": 7.254822285453211e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0064694397301463735,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 3.5635566853810294,
+          "phase_relative_to_activation_rad": 0.06219579724135464,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.014060433736004196,
+          "coefficient_imag": 0.001477113717375133,
+          "coefficient_real": -0.013982629649336605,
+          "minimum": 0.001423048849399403,
+          "peak": 0.029543212705903966,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -6.030314255826567,
+          "phase_relative_to_activation_rad": -0.10524883869412524,
+          "waveform_l2": 0.018400414046975882
+        },
+        "state_fundamental_l2_amplitude": 0.5188469173629883,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 0.00013576982533278193,
+          "active_input_work_raw": 0.00013576982533278193,
+          "cycle_discrete_energy_change": 1.913765065202685e-18,
+          "ecm_sls_dissipation": 8.16775306375957e-05,
+          "external_support_work": -1.5137405209720406e-22,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 5.409229469533458e-05
+        }
+      },
+      "runtime_seconds": 6.447949569002958,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/time__de0p2__h0p3__s1__s2__t256__a0p1.npz",
+        "sha256": "90a5a19c42a2a6701da377a8e61e36b4ae61a06c88ae5bc577f20fc5ff9684a8"
+      },
+      "case_json": {
+        "path": "cases/time__de0p2__h0p3__s1__s2__t256__a0p1.json",
+        "sha256": "1c21f0191004613259952c807d700223d8ab0a13094ad27826d9ae5a66fcdcd0"
+      },
+      "group": "time",
+      "key": "time__de0p2__h0p3__s1__s2__t256__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 6.938893903907228e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.014261148952443702,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 177.18180902796945,
+          "phase_relative_to_activation_rad": 3.0924059421778805,
+          "x": -0.484375
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0020810273674015814,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -179.42798027393061,
+          "phase_relative_to_activation_rad": -3.1316090259835265,
+          "x": -4.530974155562894e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.06554434711523613,
+          "maximum_endocardium_ecm_traction": 0.004010883432890147,
+          "maximum_myocardium_ecm_traction": 0.012468697243563531,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0009891368448342534,
+          "peak_absolute_mean_endocardial_tangential_displacement": 1.9006606184757135e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.00665281924044432,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 3.305792891128044,
+          "phase_relative_to_activation_rad": 0.057696970339206816,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.014060397549389508,
+          "coefficient_imag": 0.001477488352667424,
+          "coefficient_real": -0.013982553680018918,
+          "minimum": 0.001422771773764214,
+          "peak": 0.0295428578646195,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -6.031864959982945,
+          "phase_relative_to_activation_rad": -0.1052759035873784,
+          "waveform_l2": 0.018400134356814524
+        },
+        "state_fundamental_l2_amplitude": 0.25981269559932635,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 0.0001357496833834114,
+          "active_input_work_raw": 0.0001357496833834114,
+          "cycle_discrete_energy_change": 2.168404344971009e-19,
+          "ecm_sls_dissipation": 8.162611639246387e-05,
+          "external_support_work": 0.0,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 5.4123566990954875e-05
+        }
+      },
+      "runtime_seconds": 2.1991206939856056,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/space__de2__h0p6__s1__s3__t128__a0p1.npz",
+        "sha256": "ef87e3c64410faaf433e70b827b1ee045cd54a0aa7d43deea37f6ebe7d03075e"
+      },
+      "case_json": {
+        "path": "cases/space__de2__h0p6__s1__s3__t128__a0p1.json",
+        "sha256": "0d4961a8fd242ea867a5a00845dff318bbf519c410bf19a52aa444240214f873"
+      },
+      "group": "space",
+      "key": "space__de2__h0p6__s1__s3__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 8.239936510889834e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.010293333633180015,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -179.7910861310842,
+          "phase_relative_to_activation_rad": -3.1379464187241326,
+          "x": -0.4921875
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0008917222611543273,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -152.1341403071301,
+          "phase_relative_to_activation_rad": -2.655241653050438,
+          "x": -2.265487077781447e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.05860242499243013,
+          "maximum_endocardium_ecm_traction": 0.001500566581881243,
+          "maximum_myocardium_ecm_traction": 0.012583059228605156,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.003870325744320631,
+          "peak_absolute_mean_endocardial_tangential_displacement": 5.079229137977537e-13
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.006913115414967876,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 0.024674530981899354,
+          "phase_relative_to_activation_rad": 0.00043065180701949306,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.01018373722521146,
+          "coefficient_imag": 0.0005504410901117116,
+          "coefficient_real": -0.010168850401027357,
+          "minimum": 0.00257474222612554,
+          "peak": 0.022941963105170143,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -3.0984035884776717,
+          "phase_relative_to_activation_rad": -0.05407734417454281,
+          "waveform_l2": 0.01465024964555629
+        },
+        "state_fundamental_l2_amplitude": 0.12446057649319654,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 5.0799702476039306e-05,
+          "active_input_work_raw": 5.0799702476039306e-05,
+          "cycle_discrete_energy_change": -2.3493279355265673e-17,
+          "ecm_sls_dissipation": 1.3600040783863745e-05,
+          "external_support_work": -3.730584562614155e-22,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 3.719966169219475e-05
+        }
+      },
+      "runtime_seconds": 6.154819382005371,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/time__de2__h0p6__s1__s2__t256__a0p1.npz",
+        "sha256": "441943a3fedb48b18f2af2cbe87f3f716af019c67db943a2e9c6627fb5f5b827"
+      },
+      "case_json": {
+        "path": "cases/time__de2__h0p6__s1__s2__t256__a0p1.json",
+        "sha256": "a1480d00f0b6f9d0fe396a9d27fafcfb6ef54aaafe53ed34fe2efb395ff834a0"
+      },
+      "group": "time",
+      "key": "time__de2__h0p6__s1__s2__t256__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.05,
+          "fundamental_coefficient_imag": 6.938893903907228e-18,
+          "fundamental_coefficient_real": -0.05
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.010293934027705605,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -179.97528521354656,
+          "phase_relative_to_activation_rad": -3.141161299192253,
+          "x": -0.484375
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0009127297682150988,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -153.19688734186784,
+          "phase_relative_to_activation_rad": -2.6737900879224177,
+          "x": -4.530974155562894e-18
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.05529241071411322,
+          "maximum_endocardium_ecm_traction": 0.0015926916372697815,
+          "maximum_myocardium_ecm_traction": 0.013675420608641367,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.003870565972693306,
+          "peak_absolute_mean_endocardial_tangential_displacement": 3.964532966239248e-14
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.007379600625253163,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -0.08551795528891774,
+          "phase_relative_to_activation_rad": -0.0014925698893649133,
+          "x": -0.25000000000000006
+        },
+        "overall_shortening": {
+          "amplitude": 0.010183945963969663,
+          "coefficient_imag": 0.0005505820744788857,
+          "coefficient_real": -0.010169051813041199,
+          "minimum": 0.0025746423478790956,
+          "peak": 0.022942279401282222,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -3.099134370958543,
+          "phase_relative_to_activation_rad": -0.0540900987349499,
+          "waveform_l2": 0.014650416430488672
+        },
+        "state_fundamental_l2_amplitude": 0.06503029208773947,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 5.074436918731107e-05,
+          "active_input_work_raw": 5.074436918731107e-05,
+          "cycle_discrete_energy_change": 4.336808689942018e-19,
+          "ecm_sls_dissipation": 1.3568819596512765e-05,
+          "external_support_work": 0.0,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 3.71755495907974e-05
+        }
+      },
+      "runtime_seconds": 1.9638771059981082,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/zero__de0p2__h0p3__p0__s2__t128__a0p1.npz",
+        "sha256": "e5709732da48f56e80b60519afbd4e7b7fa90e00f235b905b9e5a7835139a738"
+      },
+      "case_json": {
+        "path": "cases/zero__de0p2__h0p3__p0__s2__t128__a0p1.json",
+        "sha256": "ec281110d5bb14ba9d19009453f31f2095268f3d7f1c14e9ad66d6a0f51b05d8"
+      },
+      "group": "zero",
+      "key": "zero__de0p2__h0p3__p0__s2__t128__a0p1",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.0,
+          "fundamental_coefficient_imag": 0.0,
+          "fundamental_coefficient_real": 0.0
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.0,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": false,
+          "phase_relative_to_activation_deg": null,
+          "phase_relative_to_activation_rad": null,
+          "x": -0.484375
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": false,
+          "phase_relative_to_activation_deg": null,
+          "phase_relative_to_activation_rad": null,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.0,
+          "maximum_endocardium_ecm_traction": 0.0,
+          "maximum_myocardium_ecm_traction": 0.0,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0,
+          "peak_absolute_mean_endocardial_tangential_displacement": 0.0
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.0,
+          "component": "x",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": false,
+          "phase_relative_to_activation_deg": null,
+          "phase_relative_to_activation_rad": null,
+          "x": -0.49999999999999994
+        },
+        "overall_shortening": {
+          "amplitude": 0.0,
+          "coefficient_imag": 0.0,
+          "coefficient_real": 0.0,
+          "minimum": -0.0,
+          "peak": -0.0,
+          "phase_interpretable": false,
+          "phase_relative_to_activation_deg": null,
+          "phase_relative_to_activation_rad": null,
+          "waveform_l2": 0.0
+        },
+        "state_fundamental_l2_amplitude": 0.0,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 0.0,
+          "active_input_work_raw": 0.0,
+          "cycle_discrete_energy_change": 0.0,
+          "ecm_sls_dissipation": 0.0,
+          "external_support_work": 0.0,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 0.0
+        }
+      },
+      "runtime_seconds": 0.4680278419982642,
+      "structural_pass": true
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/half__de0p2__h0p3__a1__s2__t128__a0p05.npz",
+        "sha256": "731431fa85229f87db61e6d1212706d31a3dd7c256befde3a4c3643709272436"
+      },
+      "case_json": {
+        "path": "cases/half__de0p2__h0p3__a1__s2__t128__a0p05.json",
+        "sha256": "d8eb8ed74c3ab1ccbf93dff32bb44c453a0d685ce623cd6323d1f5e661c22bee"
+      },
+      "group": "half",
+      "key": "half__de0p2__h0p3__a1__s2__t128__a0p05",
+      "observables": {
+        "activation": {
+          "fundamental_amplitude": 0.025,
+          "fundamental_coefficient_imag": 4.119968255444917e-18,
+          "fundamental_coefficient_real": -0.025
+        },
+        "definitions": {
+          "active_work": "raw signed production discrete-ledger active work",
+          "endocardial_local_strain": "first difference of axial chain displacement divided by reference segment length",
+          "fundamental": "2/N times first rFFT coefficient after temporal mean removal",
+          "phase_reference": "activation fundamental; omitted below amplitude floor",
+          "traction_sign": "production convention: positive on first named domain"
+        },
+        "endocardial_local_axial_strain_peak_fundamental": {
+          "amplitude": 0.007089381130345977,
+          "field_kind": "segment_axial_strain",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 177.28513182159972,
+          "phase_relative_to_activation_rad": 3.0942092651190873,
+          "x": 0.4843750000000001
+        },
+        "endocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.00014777460023475956,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -157.81553256061798,
+          "phase_relative_to_activation_rad": -2.7544006539711012,
+          "x": -0.49999999999999994
+        },
+        "existing_summary_observables": {
+          "maximum_ecm_von_mises_proxy": 0.023115681113997425,
+          "maximum_endocardium_ecm_traction": 0.0002521353446727736,
+          "maximum_myocardium_ecm_traction": 0.0006236966995116083,
+          "peak_absolute_mean_endocardial_normal_displacement": 0.0005217661667874983,
+          "peak_absolute_mean_endocardial_tangential_displacement": 9.83104385659378e-15
+        },
+        "myocardium_ecm_traction_peak_fundamental": {
+          "amplitude": 0.00032997301196296844,
+          "component": "y",
+          "field_kind": "nodal_vector_traction",
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": 1.0684771978573315,
+          "phase_relative_to_activation_rad": 0.018648445085093335,
+          "x": -0.49999999999999994
+        },
+        "overall_shortening": {
+          "amplitude": 0.007080849095450795,
+          "coefficient_imag": 0.0007300171723959904,
+          "coefficient_real": -0.007043117125290002,
+          "minimum": 0.0007163543502940722,
+          "peak": 0.014877867924057528,
+          "phase_interpretable": true,
+          "phase_relative_to_activation_deg": -5.917561006839802,
+          "phase_relative_to_activation_rad": -0.10328092325698522,
+          "waveform_l2": 0.009266291277622567
+        },
+        "state_fundamental_l2_amplitude": 0.12761690116863064,
+        "work_and_dissipation": {
+          "active_input_work_magnitude": 3.2218149506823604e-05,
+          "active_input_work_raw": 3.2218149506823604e-05,
+          "cycle_discrete_energy_change": -4.7566193944249303e-20,
+          "ecm_sls_dissipation": 2.0145433100852587e-05,
+          "external_support_work": 6.017738956323276e-23,
+          "lumen_work": 0.0,
+          "other_drag_dissipation": 1.2072716405974439e-05
+        }
+      },
+      "runtime_seconds": 1.596672182000475,
+      "structural_pass": true
+    }
+  ],
+  "claim_boundary": {
+    "a1_s1_equality_not_assumed": true,
+    "not_continuous_time_analytic_truth": true,
+    "not_disease_prediction": true,
+    "not_formal_figure2_certification": true,
+    "not_frequency_scan": true,
+    "not_physiological_calibration": true,
+    "p0_and_interface_balance_are_not_independent_solve_measurements": true,
+    "s1_is_now_seen_exploratory_control": true,
+    "translation_invariance_requires_separate_theory_check": true,
+    "uniform_activation_uniform_field_not_assumed": true
+  },
+  "completed_at_utc": "2026-09-05T01:05:27.801397+00:00",
+  "evidence_level": "exploratory_scientific_feasibility",
+  "group_counts": {
+    "basic": 18,
+    "half": 1,
+    "space": 3,
+    "time": 3,
+    "zero": 1
+  },
+  "half_amplitude_scaling": {
+    "amplitude_checks": {
+      "endocardial_local_axial_strain_peak": {
+        "absolute_error": 0.0,
+        "expected_ratio": 0.5,
+        "full": 0.014178762260691953,
+        "half": 0.007089381130345977,
+        "pass": true,
+        "ratio": 0.5
+      },
+      "endocardium_ecm_traction_peak": {
+        "absolute_error": 0.0,
+        "expected_ratio": 0.5,
+        "full": 0.0002955492004695191,
+        "half": 0.00014777460023475956,
+        "pass": true,
+        "ratio": 0.5
+      },
+      "myocardium_ecm_traction_peak": {
+        "absolute_error": 0.0,
+        "expected_ratio": 0.5,
+        "full": 0.0006599460239259369,
+        "half": 0.00032997301196296844,
+        "pass": true,
+        "ratio": 0.5
+      },
+      "overall_shortening": {
+        "absolute_error": 0.0,
+        "expected_ratio": 0.5,
+        "full": 0.01416169819090159,
+        "half": 0.007080849095450795,
+        "pass": true,
+        "ratio": 0.5
+      },
+      "state_fundamental_l2_amplitude": {
+        "absolute_error": 0.0,
+        "expected_ratio": 0.5,
+        "full": 0.2552338023372613,
+        "half": 0.12761690116863064,
+        "pass": true,
+        "ratio": 0.5
+      }
+    },
+    "pass": true,
+    "work_and_dissipation_checks": {
+      "active_input_work_raw": {
+        "absolute_error": 0.0,
+        "expected_ratio": 0.25,
+        "full_magnitude": 0.00012887259802729441,
+        "half_magnitude": 3.2218149506823604e-05,
+        "pass": true,
+        "ratio": 0.25
+      },
+      "ecm_sls_dissipation": {
+        "absolute_error": 0.0,
+        "expected_ratio": 0.25,
+        "full_magnitude": 8.058173240341035e-05,
+        "half_magnitude": 2.0145433100852587e-05,
+        "pass": true,
+        "ratio": 0.25
+      },
+      "other_drag_dissipation": {
+        "absolute_error": 0.0,
+        "expected_ratio": 0.25,
+        "full_magnitude": 4.8290865623897757e-05,
+        "half_magnitude": 1.2072716405974439e-05,
+        "pass": true,
+        "ratio": 0.25
+      }
+    }
+  },
+  "holdouts": "LOCKED_NOT_RUN",
+  "overview_plot": {
+    "path": "science_pilot_overview.png",
+    "sha256": "c547114b9cded24ea94d766675693705b799e4c09d30f12d05c7233d8a04b75e"
+  },
+  "resolution_checks": [
+    {
+      "comparison": "S2_T128_to_S3_T128",
+      "de": 0.02,
+      "metrics": {
+        "endocardial_local_axial_strain_peak": {
+          "absolute_phase_change_deg": 0.005356047718327756,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.018313518161616558,
+          "candidate_phase_rad": 3.059038930707458,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.018316893982947783,
+          "reference_phase_rad": 3.0591324113750367,
+          "relative_amplitude_change": 0.00018430097015181176
+        },
+        "endocardium_ecm_traction_peak": {
+          "absolute_phase_change_deg": 0.09304301634572604,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.0026569177813952193,
+          "candidate_phase_rad": 0.09019120773556645,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.002632138347654577,
+          "reference_phase_rad": 0.09181511471678627,
+          "relative_amplitude_change": 0.009326383343194744
+        },
+        "myocardium_ecm_traction_peak": {
+          "absolute_phase_change_deg": 0.020566936963514495,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.005742436839851337,
+          "candidate_phase_rad": 0.030780050729326585,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.005795056719644517,
+          "reference_phase_rad": 0.030421089962263132,
+          "relative_amplitude_change": 0.009080131970892642
+        },
+        "overall_shortening": {
+          "absolute_phase_change_deg": 0.0022631100002929263,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.01804462169199427,
+          "candidate_phase_rad": -0.05243172481332289,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.018043916847239116,
+          "reference_phase_rad": -0.05247122353416281,
+          "relative_amplitude_change": 3.90612098821726e-05
+        }
+      },
+      "pass": true,
+      "thickness_ratio": 0.1
+    },
+    {
+      "comparison": "S2_T128_to_S2_T256",
+      "de": 0.02,
+      "metrics": {
+        "endocardial_local_axial_strain_peak": {
+          "absolute_phase_change_deg": 0.0007249316985465352,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.018316907607008565,
+          "candidate_phase_rad": 3.0591450638200284,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.018316893982947783,
+          "reference_phase_rad": 3.0591324113750367,
+          "relative_amplitude_change": 7.437969920807231e-07
+        },
+        "endocardium_ecm_traction_peak": {
+          "absolute_phase_change_deg": 0.00031627871957914445,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.0026321083450168334,
+          "candidate_phase_rad": 0.09182063482179692,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.002632138347654577,
+          "reference_phase_rad": 0.09181511471678627,
+          "relative_amplitude_change": 1.139857932251638e-05
+        },
+        "myocardium_ecm_traction_peak": {
+          "absolute_phase_change_deg": 0.00023770956289732086,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.005795044747271991,
+          "candidate_phase_rad": 0.030416941147727097,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.005795056719644517,
+          "reference_phase_rad": 0.030421089962263132,
+          "relative_amplitude_change": 2.0659629587307737e-06
+        },
+        "overall_shortening": {
+          "absolute_phase_change_deg": 0.00046669604573990465,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.018043928491151367,
+          "candidate_phase_rad": -0.05246307815155861,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.018043916847239116,
+          "reference_phase_rad": -0.05247122353416281,
+          "relative_amplitude_change": 6.453091551968964e-07
+        }
+      },
+      "pass": true,
+      "thickness_ratio": 0.1
+    },
+    {
+      "comparison": "S2_T128_to_S3_T128",
+      "de": 0.2,
+      "metrics": {
+        "endocardial_local_axial_strain_peak": {
+          "absolute_phase_change_deg": 0.1759496944661772,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.014274118697678839,
+          "candidate_phase_rad": 3.0954824460436785,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.014261022408897504,
+          "reference_phase_rad": 3.0924115445573657,
+          "relative_amplitude_change": 0.0009174849291020804
+        },
+        "endocardium_ecm_traction_peak": {
+          "absolute_phase_change_deg": 0.2915510458728173,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.002099076423503426,
+          "candidate_phase_rad": -3.126518845452685,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.0020810090890449476,
+          "reference_phase_rad": -3.131607371140799,
+          "relative_amplitude_change": 0.008607278065809245
+        },
+        "myocardium_ecm_traction_peak": {
+          "absolute_phase_change_deg": 0.2582143238567155,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.0064694397301463735,
+          "candidate_phase_rad": 0.06219579724135464,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.006652876373427922,
+          "reference_phase_rad": 0.05768910711424401,
+          "relative_amplitude_change": 0.02757253148641205
+        },
+        "overall_shortening": {
+          "absolute_phase_change_deg": 0.0016945425006861478,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.014060433736004196,
+          "candidate_phase_rad": -0.10524883869412524,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.014060260746972203,
+          "reference_phase_rad": -0.10527841404007719,
+          "relative_amplitude_change": 1.2303250044851756e-05
+        }
+      },
+      "pass": true,
+      "thickness_ratio": 0.3
+    },
+    {
+      "comparison": "S2_T128_to_S2_T256",
+      "de": 0.2,
+      "metrics": {
+        "endocardial_local_axial_strain_peak": {
+          "absolute_phase_change_deg": 0.00032099269973346397,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.014261148952443702,
+          "candidate_phase_rad": 3.0924059421778805,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.014261022408897504,
+          "reference_phase_rad": 3.0924115445573657,
+          "relative_amplitude_change": 8.873306535063527e-06
+        },
+        "endocardium_ecm_traction_peak": {
+          "absolute_phase_change_deg": 9.481550405733429e-05,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.0020810273674015814,
+          "candidate_phase_rad": -3.1316090259835265,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.0020810090890449476,
+          "reference_phase_rad": -3.131607371140799,
+          "relative_amplitude_change": 8.783333136382079e-06
+        },
+        "myocardium_ecm_traction_peak": {
+          "absolute_phase_change_deg": 0.0004505296037304783,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.00665281924044432,
+          "candidate_phase_rad": 0.057696970339206816,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.006652876373427922,
+          "reference_phase_rad": 0.05768910711424401,
+          "relative_amplitude_change": 8.587711599468455e-06
+        },
+        "overall_shortening": {
+          "absolute_phase_change_deg": 0.00014383834430802916,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.014060397549389508,
+          "candidate_phase_rad": -0.1052759035873784,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.014060260746972203,
+          "reference_phase_rad": -0.10527841404007719,
+          "relative_amplitude_change": 9.729626550402245e-06
+        }
+      },
+      "pass": true,
+      "thickness_ratio": 0.3
+    },
+    {
+      "comparison": "S2_T128_to_S3_T128",
+      "de": 2.0,
+      "metrics": {
+        "endocardial_local_axial_strain_peak": {
+          "absolute_phase_change_deg": 0.1839230484250947,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.010293333633180015,
+          "candidate_phase_rad": -3.1379464187241326,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.010293932524315838,
+          "reference_phase_rad": -3.1411564814894555,
+          "relative_amplitude_change": 5.8179042305520415e-05
+        },
+        "endocardium_ecm_traction_peak": {
+          "absolute_phase_change_deg": 1.0601806750858191,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.0008917222611543273,
+          "candidate_phase_rad": -2.655241653050438,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.0009127686511604877,
+          "reference_phase_rad": -2.6737452964967017,
+          "relative_amplitude_change": 0.02305774850987948
+        },
+        "myocardium_ecm_traction_peak": {
+          "absolute_phase_change_deg": 0.11035383310095685,
+          "amplitude_pass": false,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.006913115414967876,
+          "candidate_phase_rad": 0.00043065180701949306,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.007379600876200846,
+          "reference_phase_rad": -0.001495385922788508,
+          "relative_amplitude_change": 0.06321283075584509
+        },
+        "overall_shortening": {
+          "absolute_phase_change_deg": 0.0009222662086529906,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.01018373722521146,
+          "candidate_phase_rad": -0.05407734417454281,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.010183937766543081,
+          "reference_phase_rad": -0.05409344075646369,
+          "relative_amplitude_change": 1.9691924304519294e-05
+        }
+      },
+      "pass": false,
+      "thickness_ratio": 0.6
+    },
+    {
+      "comparison": "S2_T128_to_S2_T256",
+      "de": 2.0,
+      "metrics": {
+        "endocardial_local_axial_strain_peak": {
+          "absolute_phase_change_deg": 0.0002760340372501732,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.010293934027705605,
+          "candidate_phase_rad": -3.141161299192253,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.010293932524315838,
+          "reference_phase_rad": -3.1411564814894555,
+          "relative_amplitude_change": 1.460461824213584e-07
+        },
+        "endocardium_ecm_traction_peak": {
+          "absolute_phase_change_deg": 0.0025663596519009124,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.0009127297682150988,
+          "candidate_phase_rad": -2.6737900879224177,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.0009127686511604877,
+          "reference_phase_rad": -2.6737452964967017,
+          "relative_amplitude_change": 4.259890536283786e-05
+        },
+        "myocardium_ecm_traction_peak": {
+          "absolute_phase_change_deg": 0.0001613468301397537,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.007379600625253163,
+          "candidate_phase_rad": -0.0014925698893649133,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.007379600876200846,
+          "reference_phase_rad": -0.001495385922788508,
+          "relative_amplitude_change": 3.400559025481312e-08
+        },
+        "overall_shortening": {
+          "absolute_phase_change_deg": 0.00019148372778192947,
+          "amplitude_pass": true,
+          "amplitude_tolerance": 0.05,
+          "candidate_amplitude": 0.010183945963969663,
+          "candidate_phase_rad": -0.0540900987349499,
+          "phase_interpretable": true,
+          "phase_pass": true,
+          "phase_tolerance_deg": 5.0,
+          "reference_amplitude": 0.010183937766543081,
+          "reference_phase_rad": -0.05409344075646369,
+          "relative_amplitude_change": 8.049361819365264e-07
+        }
+      },
+      "pass": true,
+      "thickness_ratio": 0.6
+    }
+  ],
+  "schema": "paper2_science_pilot_summary_v01",
+  "scientific_checks_pass": false,
+  "status": "COMPLETED_WITH_RECORDED_CHECK_FAILURES",
+  "structural_failures": [],
+  "total_elapsed_seconds": 62.71693008200964,
+  "wall_budget_seconds": 7200.0,
+  "zero_drive_check": {
+    "case_key": "zero__de0p2__h0p3__p0__s2__t128__a0p1",
+    "evidence_role": "constructed zero response and output-pipeline check; not an independent solver validation",
+    "maximum_state_norm": 0.0,
+    "pass": true,
+    "threshold": 1e-10
+  }
+}

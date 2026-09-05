@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: c62e383d1c7ae9e189605e1eaf52dec92087105d
-current_lifecycle: paper2_science_first_theory_and_numerics_in_progress
+verified_commit: 740f2da07b6bfd4000ca900e5c27dcc9e3041483
+current_lifecycle: paper2_science_first_26_cases_completed_scientific_review
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
-current_clarification: none
+current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
 execution_authorized: bounded_science_pilot_max_30_cases_cpu_only
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: project_control/paper2_v08_myocardial_fem_only_architecture_migration_execution_record_v01.md
+latest_completed_execution_log: results/paper2_science_pilot/v01_20260905/numerical/run_notes.md
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -39,13 +39,26 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 唯一活跃架构仍为离散心内膜弹性链＋主动心肌 FEM＋黏弹 ECM FEM；器官方向为心室/EFE。
 不恢复心肌 DCM，不加入流体、真实三维几何或生物反馈，不把线性滤波当作相变或疾病机制。
 
-最新已有运行证据为 P5 r03：68 项宿主测试通过、182 项 Linux 测试通过及 2 项预期平台
+本轮以前的运行基础为 P5 r03：68 项宿主测试通过、182 项 Linux 测试通过及 2 项预期平台
 跳过；不是正式 Figure 2 数值 PASS。证据入口：
 `tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/p5_linux_cpu_precheck_r03_evidence_v01.md`。
 C0 已提交同步（c62e383d）；31 个 C1 候选尚未提交，不作为本轮推导及探索前置门。
-首轮已向数值执行任务派发；理论子 agent `/root/paper2_theory` 同时推导反例和留出预测。
-2026-09-05 启动快照为 0/30，数值任务已确认进入 runner 准备；4 个留出仍锁定。
-后续进度以任务回报和本轮 numerical 实际输出为准，不从本行启动快照推断当前完成数。
+首轮 26 个非留出工况已完成，结果为 `COMPLETED_WITH_RECORDED_CHECK_FAILURES`。
+numerical/summary.json 记录总耗时约 62.72 秒；26/26 单工况结构门与半幅缩放检查通过。
+三个代表点中 De=2、H=0.6 的心肌–ECM 牵引峰值 S2→S3 幅值差约 6.32%，超过探索性 5% 门；
+不能报告全面收敛。同位置/同分量的既有数组诊断已确认该幅值失败仍成立，
+3/3 时间复核及 2/3 空间代表点通过，全部可解释同点相位差小于约 1.061°。
+P0 为构造零状态，endpoint 的作用反作用为结构恒等，二者不冒称独立求解测量。
+理论源级复核已撤回“当前模型严格平移不变、A1/S1整体短缩必然相同”的初始假设：
+对总位移的仿射支撑与阻尼存在宏观—空间模态耦合；原预测及修正在 science_brief.md 中保留。
+4 个留出仍未释放/未运行：修正后尚无足够辨别力的端点独立预测，不用能量恒等过关冒充新机制验证。
+数值任务已完成并停止新模拟，理论子 agent `/root/paper2_theory` 进行独立科学核查与下一假设分析。
+初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
+心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，
+不得将其直接解释为细胞形变、EFE 因果或已达到 Nature Physics 的新机制。
+总管已独立核验全部 26 个 case JSON/NPZ 与记录摘要一致，5 项源码输入版本匹配，
+容器正常退出且符合 1 CPU/8 GiB/无网络/无 GPU/只读代码边界；没有清理任何旧文件或容器。
+后续进度以任务回报和本轮 numerical 实际输出为准；不自动重跑26工况、不扩大本轮预算。
 自动化 `prl-paper-2` 已更新并读回核验为 ACTIVE、每 10 分钟、绑定本总管任务；
 旧 PRECHECK-only 提示已替换为 science-first 监督规则。
 用户随后追加：总管可在研究目标不变时自主探索理论创新，目标期刊固定 Nature Physics；
