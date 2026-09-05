@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: c7a363b25531fd54e6169f570ab6b2f5c14de3a5
-current_lifecycle: paper2_closed_cell_v02_and_four_coordinate_explanation_verified_periodic_cell_theory
+verified_commit: fb92ab370f882568c7eb184c9c595958ffe80abb
+current_lifecycle: paper2_periodic_kinematics_corrected_prescribed_trace_coefficients_theory
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section33_brief56_readonly_periodic_cell_theory_no_new_model_solves
+execution_authorized: v04_section34_brief58_readonly_prescribed_trace_coefficients_no_model_solves
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_closed_cell_ritz_probe/v02_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -38,8 +38,10 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 这是特定理想子模型的简化误差，不是全场15%误差、真实细胞DCM必要性或Nature Physics创新证明。
 v01失败入口及182字节文件保持不变；数值任务停止新算例。四坐标解释已推导并独立核对：
 两坐标确实删去了剪切/转动—配对开口模式，但这是当前理想模型的内部柔顺性，不是新机制证明。
-第33节/简报56下一项为一次30分钟只读周期细胞理论，检查物理细胞尺度能否形成具体可证伪问题，
-不重复这6个右端，不扫描或新增模型机制。
+第33节周期单胞推导已交接并定点纠错（简报57）：相位项、运动学与实际可达响应、内部量消元及
+单向/自洽端口边界已区分；不接受未经证明的O(1)长波遗漏或ka=O(1)必要门。
+第34节/简报58仅授权一次30分钟规定基底Fourier位移的系数推导，检查实际切向一阶/法向二阶
+响应是否非零；不新模拟、扫描、增加机制或启动ECM耦合。
 生产三层架构、旧46周期+30静态FEM及原四留出不变；下列逐阶段记录为历史，不重复执行。
 
 人类于 2026-09-05 明确批准实施 science-first v04：先判断全局收缩与心内膜局部负荷之间
