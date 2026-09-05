@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 225c5a9dc7ecfc45e2c1b4a54d40a69f7dacecc9
-current_lifecycle: paper2_two_window_prediction_accepted_boundary_mode_theory_review
+verified_commit: 892ad0df8f863efe4a82c2c79e86b00b2f9b1c28
+current_lifecycle: paper2_boundary_source_review_accepted_first_mode_transfer_derivation
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: bounded_readonly_boundary_mode_theory_v04_section15_no_new_fem
+execution_authorized: first_spatial_mode_conditional_theory_v04_section16_no_new_fem
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_impedance_shift/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -86,8 +86,12 @@ K_nx=0.6/1.0 的预报中心 H=0.198283976/0.314541897、各中心±0.03、每�
 两中心B1/|c0|=13.17/3.09，不是全场卸载；主动功不相等。独立原始数组DFT/投影复算最大差4.471e-18，
 12份JSON/NPZ和直接源码摘要匹配，96个记录结构子门通过、全部数组有限；不覆盖第一批旧空间失败。
 实际容器退出0，1CPU/8GiB、无网络/无GPU、只读项目与根文件系统。本批57.42秒，FEM加失败预扣累计161.87秒。
-实际总数46，K=.8未重跑、原4留出未运行。数值任务停止新算；v04第15节只读理论任务已交同一agent，
-核查均匀A1下局部空间模态的锚定/阻尼激发与ECM传递来源，提出一个最小可证伪预测，不自动扩扫。
+实际总数46，K=.8未重跑、原4留出未运行。数值任务停止新算；v04第15节理论复核已验收，见简报第30节。
+连续均匀A1的非零空间直接源来自总位移的仿射切向支撑与x向drag交叉项；ECM负责传播和法切转换。
+六个既有物理点的sin/cos比随细化缩小3.89–3.93倍，cos幅值变化0.66%–1.98%；仅为镜像误差解释的一致性证据，
+不证明唯一误差来源或各锚定项贡献。零耦合极限须规约刚体零模，未进行相应退化FEM。
+v04第16节授权同一理论agent推导第一空间模态的条件传递，分列宏观锚定与异质激活输入；
+最多45分钟、只推导、不新增数值求值/FEM/扫描，交接后才决定是否对第二批8例作进一步后处理。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，
