@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: ed2354215f1ca501ba835f5b7bceede994da5549
-current_lifecycle: paper2_transverse_notch_batch2_8_endpoints_authorized
+verified_commit: 9842b3bfab7f11e947d0c355fa8b0202a368138f
+current_lifecycle: paper2_transverse_notch_import_failure_one_v02_retry_authorized
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: transverse_notch_batch2_max_8_endpoints_cpu_only_v04_section10
+execution_authorized: transverse_notch_v02_one_startup_retry_original_8_endpoints_v04_section10_1
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_science_pilot/v01_20260905/numerical/field_comparison_v01.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -65,6 +65,10 @@ P0 为构造零状态，endpoint 的作用反作用为结构恒等，二者不�
 CPU1/8GiB，计算累计 900 秒封顶；生产物理和 API 不变，不扩充扫描。首轮仍为 26 个完成+4 个锁定，第二批起始0/8，实时完成数以新目录结果和任务快照为准。
 第二批若完成，两批实际计算为26+8，不能写成首轮仍不超过30；原4留出不替换、不重标、不运行。
 两侧与中心分别测网格误差，使用 PASS/FAIL/INCONCLUSIVE；新预测执行前提交并记录SHA256，执行中不改简报。
+第二批 v01 启动已失败，FEM仍为0/8；失败为 PYTHONPATH 覆盖镜像运行库导致无法导入 dolfinx，不形成科学门结果。
+总管已独立核对容器/镜像实际环境与日志，按 v04 第10.1节授权仅一次v02启动修复重试，输出为
+results/paper2_transverse_notch/v02_20260905/；原v01失败包和容器保留。保守预扣启动3秒，剩余计算最多897秒，资源不变。
+修复必须先在实际运行容器验证依赖导入，预测SHA和工况/判据不改；不允许自动v03。后续以v02实际输出和任务快照为准。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，

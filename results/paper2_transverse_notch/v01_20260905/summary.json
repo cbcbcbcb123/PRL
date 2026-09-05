@@ -1,0 +1,13 @@
+{
+  "claim_boundary": {
+    "no_automatic_retry_or_parameter_adjustment": true,
+    "no_scientific_gate_result_after_abort": true
+  },
+  "completed_at_utc": "2026-09-05T02:35:32.445778+00:00",
+  "completed_case_count": 0,
+  "error_message": "No module named 'dolfinx'",
+  "error_type": "ModuleNotFoundError",
+  "holdouts": "LOCKED_NOT_RUN",
+  "schema": "paper2_transverse_notch_summary_v01",
+  "status": "ABORTED_FAIL_CLOSED"
+}
