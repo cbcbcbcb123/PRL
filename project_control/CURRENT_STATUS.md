@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-06
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: e489ea6a907927bd28273da1f79659968f91a0a7
-current_lifecycle: paper2_bounded_candidate_selection_complete_no_case
+verified_commit: e0f1464832a8a90ec8c24df100a82473854bfd23
+current_lifecycle: paper2_dissipation_timescale_attribution_complete_baseline
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section57_brief82_complete_no_new_case
+execution_authorized: v04_section58_brief83_complete_no_new_case
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_cell_bloch_asymptotic_probe/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划57/简报82，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
+当前裁决（主计划58/简报83，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
 已完成并通过总管独立几何与解析输入重建；theta=0.02时领先系数误差分别约0.008558%和0.016599%。
 本批计算0.0750725000秒，独立复核0.0177348000秒且0新右端；没有新增FEM或解盲原四留出。
 长波连接伸长可写成普通应变—曲率恢复，alpha=-0.778458496485260，z_eff/b=0.49625，
@@ -125,6 +125,12 @@ R来自完整张量比较，不能用杨氏模量比替代；精确无动力学�
 已纠正输入敏感度和过严筛选标准：等价连续表示不自动否定物理创新，理想组织不必等实验提供。
 本次筛选收口，当前无新模型或数值授权；下一任务须有具体假设再下发，不重复头脑风暴。
 数值任务保持完成，15例既有输出本轮只读核实仍全部检查通过；无新计算或原留出读取。
+主计划58/简报83已在20分钟预算内完成并独立验收：固定生产刚度时，简单有限极点对
+四块耗散倍率的时间敏感度等于模态耗散份额，和为1；局部拟合时间与循环耗散比例不自动满足此式。
+源/观测不移动给定A/G的极点，角色过宽表述已纠正。总管纠正初始后向Euler假设，实际是
+梯形/中点周期解；其假想衰减的离散限制不代表已观察到伪长尾或生产bug。
+本结果归为经典来源判据，不是细胞新记忆或Nature Physics机制，完成收口不自动开展衰减扫描。
+生产参数不改，辅助闭合胞未增加动力学；0新计算/查新/实验/原留出。
 这是独立理想边界研究，不是已实现三层耦合；不启动新FEM、扫描、原留出、流体或非线性。
 Nature Physics目标保持；生产心肌FEM/ECM黏弹FEM不变，现有链不追认为完整细胞DCM。
 
