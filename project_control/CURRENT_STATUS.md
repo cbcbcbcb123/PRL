@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 408cc130609a1bf25987c2dfccf6d29f3bbe30bb
-current_lifecycle: paper2_endocardial_cell_dcm_necessity_theory_design
+verified_commit: ef1d0172ce0e09f139ccbdf4d3428b7b2dce1273
+current_lifecycle: paper2_cell_mechanics_candidate_not_established_next_hypothesis_selection
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section26_bounded_cell_mechanics_theory_no_implementation
+execution_authorized: supervisor_cell_mechanics_hypothesis_selection_no_new_runs
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_static_mode_screen/v03_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -46,6 +46,9 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 不改生产源码或数值预算；心肌仅FEM、ECM黏弹FEM、Nature Physics和心室/EFE目标不变。
 首次概念交接已回，总管排除以仿射残差自动归零作为阳性门，要求补全ECM直接内部载荷；
 仅再作一次15分钟纸面补齐，见简报45.4。共同连接伸长复响应只是候选，未冻结独立预测或批准数值。
+该补齐现已完成并验收（简报45.5）：共同观测和完整载荷投影明确，但候选仍为NOT_ESTABLISHED。
+两任务本阶段结束；下一步由总管筛选细胞形变/连接几何与ECM耦合的具体可区分假设，不重复第26节，
+不以实验尚未到位停止理论工作，也不自动启动DCM实现或增加参数扫描。
 
 本轮以前的运行基础为 P5 r03：68 项宿主测试通过、182 项 Linux 测试通过及 2 项预期平台
 跳过；不是正式 Figure 2 数值 PASS。证据入口：
