@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 663a638df4ac4d2cfa78764ddf9d94aa75760c5f
-current_lifecycle: paper2_cell_energy_soft_mode_drivability_observability_theory_check
+verified_commit: 2f625b2968dbda5c0c371fdc5b5e82a4a0d09907
+current_lifecycle: paper2_cell_mode_baseline_drive_projection_postprocessing
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section27_bounded_cell_energy_theory_no_new_runs
+execution_authorized: v04_section28_three_existing_cases_projection_no_new_fem
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_static_mode_screen/v03_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -54,6 +54,11 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 30分钟纸面任务：两细胞周期截面的总周长与逐边弹性，是否允许不同的低刚度形变，且能否同时被
 ECM基底驱动、在线性连接长度上观察。它是待检查的具体材料/观测选择，不是已证明的软模机制。
 不重复第26节，不运行模型或原四留出；已完成46周期工况+30静态右端，累计数值170.24076614秒。
+
+第27节已完成并验收（简报47）：两细胞交替底边形变可在总周长能下二次软、逐边能下二次硬，
+并对共同连接长度可见；这只是材料/观测选择证据，未证明耦合后软模、实际驱动或DCM必要性。
+总管设定第28节/简报48的三个旧case投影后处理，冻结后下发数值任务：准备25分钟、CPU后处理30秒，
+只新增一个入口和一个JSON。不解新FEM/DCM、不读留出、不加扫描；原模拟计数/预算保持，后处理另记。
 
 本轮以前的运行基础为 P5 r03：68 项宿主测试通过、182 项 Linux 测试通过及 2 项预期平台
 跳过；不是正式 Figure 2 数值 PASS。证据入口：
