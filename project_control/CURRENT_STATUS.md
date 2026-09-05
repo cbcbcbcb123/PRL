@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: e8b68db3b6ca76b2ff865f2fc9966369251b6e24
-current_lifecycle: paper2_short_wave_diagonal_estimate_operator_gap_theory_only
+verified_commit: 0e0b9edbf52d3f9a48b12494a55568f4f8318dec
+current_lifecycle: paper2_operator_bound_accepted_static_mode_screen_authorized_pending_dispatch
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: feedback_candidate_operator_energy_bound_v04_section22_no_computation
+execution_authorized: bounded_static_mode_screen_v04_section23_after_frozen_commit
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_transverse_notch/v02_20260905/first_mode_transfer_v01.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -107,8 +107,11 @@ v04第20节已交接验收，见简报第37节：无ECM单元反馈临界反例�
 均值控制器对照只能识别特定控制器家族中的非均匀反馈优势，不能单独识别ECM记忆或证明整体功能正常。
 v04第21节已交接，简报第38节仅接受有条件的同波数O(k^-2)估计与功共轭；未证明完整闭环短波稳定。
 总管指出标量闭环结论遗漏跨波数耦合，保留全算子、统一余项及频率范围缺口，不报告已排除网格风险。
-下一步v04第22节最多30分钟：独立检查完整能量算子、固定增益频率界及高波数尾估计，仅纸面/源码核查。
-只读/纸面/消息交付；不新增检索、文件、极点求值或FEM，不实施反馈。数值任务本批已完成，46例与原4留出均不动。
+v04第22节已交接验收，见简报第39节：有限维完整能量/频率界成立；连续尾界仍需统一条件，不继续精修。
+下一步v04第23节/简报第40节为静态有限模式筛查：H={0.1,0.26,0.6}各S2/S3，五个固定源导数。
+理论判据核查已完成；冻结提交后最多6次装配/30个静态右端解，串行1CPU/8GiB、计算300秒；尚未运行。
+主量为零均值子空间最大响应减均匀响应，排除完整空间Rayleigh包含造成的平凡阳性；不是等功或记忆实验。
+旧46周期工况与新静态右端分开计数；不实施反馈/动态极点，不读原4留出，不修改生产API或正式Figure 2。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，
@@ -466,7 +469,9 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 不恢复已退役心肌 DCM；不覆盖旧结果或已封存证据，不修改生产 API、默认参数、
 正式 Figure 2 数值门或观测量以制造通过。当前允许 v04 的独立试验配置、必要 runner、
-CPU Docker/FEniCSx、最多 30 个工况及项目内新结果；不执行正式 Figure 2 大批量计算。
+CPU Docker/FEniCSx及项目内新结果；首批最多30个周期工况已在26个处收缩，另两批已完成8和12个。
+当前另行授权v04第23节/简报第40节的6次静态装配、最多30个右端解，冻结后由既有数值任务执行；
+静态右端数不与既有46个周期工况混同。不执行正式 Figure 2 大批量计算。
 未释放的 4 个留出工况不得提前运行；先存预测，再由总管释放。
 不授权 GPU、新外部求解器、CFD、FSI、器官几何扩展、生物反馈、大参数海或历史路线重跑。
 删除、项目外写入、GPU、虚拟盘符及不可逆外部动作仍需用户明确确认。
