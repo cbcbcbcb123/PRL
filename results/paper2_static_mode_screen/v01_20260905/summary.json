@@ -1,0 +1,85 @@
+{
+  "all_completed_system_structure_gates_pass": false,
+  "claim_boundary": {
+    "finite_five_mode_static_screen_only": true,
+    "full_five_dimensional_lambda_max_not_used_as_positive_gate": true,
+    "no_automatic_v02_extra_points_or_feedback": true,
+    "not_a_paper_pass_or_nature_physics_novelty": true,
+    "not_a_strict_discretization_error_bound": true,
+    "not_ecm_memory_selection": true,
+    "not_equal_power_or_equal_shortening": true,
+    "not_feedback_dynamics_or_pole_analysis": true,
+    "not_holdout_or_blind_prediction": true
+  },
+  "continuation_rule_result": "STOPPED_FAIL_CLOSED_BEFORE_THREE_STATE_DECISION",
+  "created_at_utc": "2026-09-05T07:42:25.384905+00:00",
+  "execution_count_ledger": {
+    "counts_are_not_equivalent_cases": true,
+    "new_completed_static_rhs": 0,
+    "new_completed_static_system_assemblies": 0,
+    "old_completed_periodic_cases": 46
+  },
+  "failure": {
+    "message": "[Errno 30] Read-only file system: '/root/.cache'",
+    "no_automatic_retry_or_extension": true,
+    "stopped_after_completed_systems": 0,
+    "type": "OSError"
+  },
+  "frozen_inputs": {
+    "H": [
+      0.1,
+      0.26,
+      0.6
+    ],
+    "actual_checkout_at_launch": "5ba44386c28cf75964d168b34dc69d08adc1ea9a",
+    "brief_path": "results/paper2_science_pilot/v01_20260905/science_brief.md",
+    "brief_sha256": "f5b377572af56e062ffde9069b530f19ceb4098bf91ca12dd655c8f172218c69",
+    "identity_drift_decision": "actual checkout differs only by the dispatched-task CURRENT_STATUS record; scientific files and direct production sources are byte-locked",
+    "mode_labels": [
+      "uniform",
+      "cos_k",
+      "sin_k",
+      "cos_2k",
+      "sin_2k"
+    ],
+    "plan_path": "project_control/prl_independent_theory_mainline_plan_v04.md",
+    "plan_sha256": "5b4bb166b56a4d40a9c36ca8b7d5484e55bc329a1cdb651dc2679e9ce0c0c2e3",
+    "preregistration_and_frozen_production_baseline": "2f1c9deebfb6d6a474ffe3ad52576b568cfc877c",
+    "s": 0.0,
+    "spatial_labels": [
+      "S2",
+      "S3"
+    ]
+  },
+  "next_gate": "SUPERVISOR_REVIEW_STOP",
+  "positive_candidate_count": 0,
+  "resource_accounting": {
+    "batch_budget_seconds": 300.0,
+    "batch_numerical_elapsed_seconds": 0.05188476701732725,
+    "cpu_limit": 1,
+    "gpu": "not_used",
+    "memory_limit_gib": 8,
+    "network": "disabled_by_container",
+    "old_fem_and_failure_charge_seconds": 161.8682304820104,
+    "project_cumulative_fem_and_failure_charge_seconds": 161.92011524902773,
+    "project_stop_reestimate_seconds": 7200.0
+  },
+  "schema": "paper2_static_mode_screen_v01",
+  "scientific_question": "Does a finite zero-discrete-mean activation subspace have a larger static energy-conjugate mean-myocardial-stress response than uniform activation?",
+  "self_test": {
+    "p1_errors": {
+      "constant": 0.0,
+      "cosine": 0.0,
+      "sine": 1.1102230246251565e-16
+    },
+    "pass": true,
+    "spectral_checks": {
+      "discrete_mean": 6.8949875778082075e-18,
+      "residual": 1.5901334697759455e-16,
+      "w_norm": 2.220446049250313e-16
+    },
+    "tolerance": 3e-12
+  },
+  "status": "ABORTED_FAIL_CLOSED",
+  "three_state_decisions": []
+}

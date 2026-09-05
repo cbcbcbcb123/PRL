@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 2f1c9deebfb6d6a474ffe3ad52576b568cfc877c
-current_lifecycle: paper2_static_mode_screen_dispatched_preparation
+verified_commit: 5ba44386c28cf75964d168b34dc69d08adc1ea9a
+current_lifecycle: paper2_static_cache_failure_accepted_single_retry_authorized
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: bounded_static_mode_screen_v04_section23_frozen_2f1c9dee
+execution_authorized: same_static_science_single_cache_repair_retry_v02_current_status_section_1
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: results/paper2_transverse_notch/v02_20260905/first_mode_transfer_v01.json
+latest_completed_execution_log: results/paper2_static_mode_screen/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -110,8 +110,23 @@ v04第21节已交接，简报第38节仅接受有条件的同波数O(k^-2)估计
 v04第22节已交接验收，见简报第39节：有限维完整能量/频率界成立；连续尾界仍需统一条件，不继续精修。
 下一步v04第23节/简报第40节为静态有限模式筛查：H={0.1,0.26,0.6}各S2/S3，五个固定源导数。
 理论判据核查已完成；预登记冻结于2f1c9deebfb6d6a474ffe3ad52576b568cfc877c并已同步远端。
-已下发既有数值任务，执行回合01a07078-1f17-7823-b747-73ee7667cefe当前准备中，不重复下发。
-最多6次装配/30个静态右端解，串行1CPU/8GiB、计算300秒；尚无本批计算结果。
+已下发既有数值任务；v01容器因FEniCSx/JIT试图写只读/root/.cache而退出1，0/6装配、0/30右端完成。
+总管核对summary/manifest及实际容器状态后接受其为启动失败，不是科学阴性；失败目录、入口与容器均保留。
+原两份科学文档与生产源码未变；冻结基线2f1c9dee和实际运行5ba44386分开记录。
+本批已计费0.05188476701732725秒，连旧账本累计161.92011524902773秒。
+总管依持续自主权限仅批准一次缓存修复重试，不另建科学合同，不释放额外科学点：
+
+- 唯一新入口scripts/run_paper2_static_mode_screen_v02.py，优先以小适配层复用原v01计算，
+  不复制整套求解代码或改原v01。唯一新结果results/paper2_static_mode_screen/v02_20260905/；
+  唯一新容器prl-paper2-static-mode-screen-v02-20260905。授权前确认这三个目标未占用。
+- 只新增容器内/root/.cache的512MiB tmpfs（rw,nosuid,nodev，需允许JIT共享库加载）；
+  保留既有/tmp内存缓存、1CPU/8GiB、无网络/GPU、只读根/项目和仅本批结果可写。不改HOME或盘符。
+- 修复准备最多15分钟；原科学输入、矩阵、观测及第40节判据完全不变，仍最多6装配/30右端。
+  v02计算剩余预算299.9481152329827秒，两次合计不超过原300秒；项目7200秒停止重估规则不变。
+- 用首次原定装配检查真实JIT路径是否恢复，不另加FEM烟测。任何再次失败/超限即保存停止，不自动v03。
+  v02在原有manifest/summary中记录失败包身份、两次预算、缓存修复、实际启动提交和两个入口SHA256。
+  两份科学文档仍使用2f1c9dee对应冻结摘要；运行提交可包含本条操作裁决与已封存失败证据，不能伪记。
+
 主量为零均值子空间最大响应减均匀响应，排除完整空间Rayleigh包含造成的平凡阳性；不是等功或记忆实验。
 旧46周期工况与新静态右端分开计数；不实施反馈/动态极点，不读原4留出，不修改生产API或正式Figure 2。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
