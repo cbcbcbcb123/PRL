@@ -1,24 +1,26 @@
 ---
 document_id: PRL-CURRENT-STATUS
 status: current
-last_verified: 2026-09-04
+last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: c52b2de7536a055699b2e23011fa221a6f2f1019
-current_lifecycle: paper2_figure2_execution_contract_v02_accepted_implementation_only_authorized
-current_contract: project_control/paper2_figure2_fem_only_numerical_credibility_execution_contract_v02.md
-current_authorization: project_control/paper2_figure2_fem_only_numerical_credibility_execution_contract_v02_supervisor_acceptance_and_implementation_authorization_decision_v01.md
+verified_commit: c62e383d1c7ae9e189605e1eaf52dec92087105d
+current_lifecycle: paper2_science_first_theory_and_numerics_in_progress
+current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
+current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: none
-execution_authorized: exact_15_figure2_validation_files_implementation_only
-current_execution_log: not_started_implementation_candidate_stage
+execution_authorized: bounded_science_pilot_max_30_cases_cpu_only
+current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: project_control/paper2_v08_myocardial_fem_only_architecture_migration_execution_record_v01.md
-latest_supervisor_decision: project_control/paper2_figure2_fem_only_numerical_credibility_execution_contract_v02_supervisor_acceptance_and_implementation_authorization_decision_v01.md
+latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
-current_mainline: project_control/prl_independent_theory_mainline_plan_v03.md
-current_mainline_decision: project_control/paper2_myocardial_dcm_retirement_and_fem_only_architecture_decision_v01.md
+current_mainline: project_control/prl_independent_theory_mainline_plan_v04.md
+current_mainline_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_physical_removal_record: project_control/paper2_myocardial_dcm_physical_removal_execution_record_v01.md
 standing_authority: project_control/paper2_autonomous_execution_and_chart_reporting_decision_v01.md
+supervisor_thread_id: 01a067cf-d740-7d50-9ada-4743e9f19141
+executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 ---
 
 # PRL 项目当前状态（单一入口）
@@ -31,15 +33,27 @@ standing_authority: project_control/paper2_autonomous_execution_and_chart_report
 
 ## 1. 一句话状态
 
-Paper 2 v08 已通过独立 Supervisor 验收，唯一活跃生产架构冻结为“离散心内膜细胞链＋
-主动心肌 FEM＋黏弹 ECM FEM”。旧心肌 DCM 源码、测试、运行入口及
-`results/paper2_m2/` 已按人类确认从当前工作树物理删除；历史合同、决定和执行记录仅作
-审计。Figure 1 三层理论合同 v02、Figure 2 FEM-only 数值可信度
-合同 v03 和执行合同 v02 均已通过独立验收。执行合同冻结 39 个动态调用＋1 个 G0 P0
-复用、无环验证梯、128×256 共同域、第二周期精确账本、S1 独立留出以及 create-only
-事务。心肌 DCM 与 identity/M2B 路线只在不可改写的文字记录中保留，不得重新进入活跃
-源码、模型选择、论文比较或后续整心房架构。当前只授权新增合同列出的 15 个实现/测试文件；不授权
-运行测试、solver、Docker 或正式 r01。
+人类于 2026-09-05 明确批准实施 science-first v04：先判断全局收缩与心内膜局部负荷之间
+是否存在可预测、非平凡的关系。计算基础具备，核心科学贡献尚未得到证明；允许最多
+30 个二维理想体 CPU 工况，不必等待完整 Figure 2 认证或 C1 整理后才开展探索。
+唯一活跃架构仍为离散心内膜弹性链＋主动心肌 FEM＋黏弹 ECM FEM；器官方向为心室/EFE。
+不恢复心肌 DCM，不加入流体、真实三维几何或生物反馈，不把线性滤波当作相变或疾病机制。
+
+最新已有运行证据为 P5 r03：68 项宿主测试通过、182 项 Linux 测试通过及 2 项预期平台
+跳过；不是正式 Figure 2 数值 PASS。证据入口：
+`tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/p5_linux_cpu_precheck_r03_evidence_v01.md`。
+C0 已提交同步（c62e383d）；31 个 C1 候选尚未提交，不作为本轮推导及探索前置门。
+首轮已向数值执行任务派发；理论子 agent `/root/paper2_theory` 同时推导反例和留出预测。
+2026-09-05 启动快照为 0/30，数值任务已确认进入 runner 准备；4 个留出仍锁定。
+后续进度以任务回报和本轮 numerical 实际输出为准，不从本行启动快照推断当前完成数。
+自动化 `prl-paper-2` 已更新并读回核验为 ACTIVE、每 10 分钟、绑定本总管任务；
+旧 PRECHECK-only 提示已替换为 science-first 监督规则。
+用户随后追加：总管可在研究目标不变时自主探索理论创新，目标期刊固定 Nature Physics；
+不自动降档。首轮范围与安全例外不变，下一轮新假设与预算由总管记录后有界下发。
+
+第 1.1–2 节保留的是历史阶段记录，不构成当前执行限制；旧实施-only/PRECHECK-only、
+逐图人类门和整心房路线由 v04 对本轮的明确授权替代。正式 Figure 2 标准仍保留，
+本轮已用 S1 不得再标为未见留出。历史版本和失败证据不改写。
 
 旧 DCM–FEM–DCM Figure 2 路线的文字证据链继续保留：T128 时间离散阶段 FINAL 不变；
 A1 已完成 128 个接受事务，但因 ECM 黏弹内变量未达到周期门而失败。其旧可执行源码和
@@ -380,34 +394,20 @@ ST1 不包含 A3、A4、B3、B4、D1/F200N 完整周期或细网格 T128。
 
 ## 5. 当前禁止范围
 
-M2A 心肌 DCM identity 路线已整体退役；v08 已完成。当前只授权实现 Figure 2 执行合同
-列出的 15 个新文件，不授权运行测试、solver、Docker、正式 r01 或创建结果目录。不得删除、
-覆盖或续接 v06 v01 失败包与
-v06.1 v02 正式包；不得把 EOF 兼容规则扩展到其他文件或哈希，不得修改当前测试文件以
-迎合旧 manifest。不得重跑 DCM/FEM 求解器，不得覆盖或续接 v05 失败包及 v05.1 成功包，
-也不得修改 v01-v06.1 冻结实现。拟合比例、按工况校准、模型/映射/提取实现修改、S5、
-界面离散/共同投影修改、生产观测量替换和身份/数值门槛修改均未授权。
-仍不授权：M2B 三维、
-非匹配界面升级、A1 再周期化、B1/A2/B2、A3、A4、B3、B4、D1/F200N 完整周期、旧路线
-T256、空间参数扫描、N1-2d、N1-3、原 EFE Node 2–4、GPU worker、新外部求解器、CFD、
-单向/双向 FSI、器官级几何扩展或大参数海。
+不恢复已退役心肌 DCM；不覆盖旧结果或已封存证据，不修改生产 API、默认参数、
+正式 Figure 2 数值门或观测量以制造通过。当前允许 v04 的独立试验配置、必要 runner、
+CPU Docker/FEniCSx、最多 30 个工况及项目内新结果；不执行正式 Figure 2 大批量计算。
+未释放的 4 个留出工况不得提前运行；先存预测，再由总管释放。
+不授权 GPU、新外部求解器、CFD、FSI、器官几何扩展、生物反馈、大参数海或历史路线重跑。
+删除、项目外写入、GPU、虚拟盘符及不可逆外部动作仍需用户明确确认。
 
 ## 6. 最新终局主线与空间/容差门之后的优先级
 
-最新路线见 `project_control/prl_independent_theory_mainline_plan_v03.md`，依次为：
-
-1. Figure 1 三层理论；
-2. Figure 2 新 FEM-only 架构数值可信度；
-3. Figure 3 最小、预登记的 `De × H` 传递律；
-4. Figure 4 cell/meso-resolved active FEM 与 homogenized active FEM 的共同极限和
-   粗粒化适用域；
-5. Figure 5 主动心肌 H-FEM＋黏弹 ECM＋离散心内膜的整心房预测与独立验证。
-
-**Nature Physics** 是问题设计、机制深度与普适性的战略目标，不是当前成熟度结论。
-当前证据远未达到该期刊标准；只有获得简洁无量纲规律、跨几何稳健性和独立留出预测，
-才保留该目标，否则由后续证据门降档至 **PRX Life**，或在结果形态适合时评估
-**Physical Review Letters**。Figure 2 后续、`De×H`、FEM 家族粗粒化、整心房与流体
-都需另立前瞻合同，不由本路线图自动授权。
+最新路线见 `project_control/prl_independent_theory_mainline_plan_v04.md`：
+先推导与反例、有限探索和留出预测，再裁决继续/收缩/暂停；有证据后才完善正式数值
+可信度与稳健性、理想心室、实验校准与独立验证。流体分级后置且每一级需有科学必要性。
+Nature Physics 为固定目标，不预设达到，也不自动降档；研究目标内的理论创新与有界
+推进由总管自主决定，研究目标或期刊变更再由人类决定。每 10 分钟图表监督，以科学问题和证据衡量进展。
 
 ## 7. 仓库一致性待办
 
