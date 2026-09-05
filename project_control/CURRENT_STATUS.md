@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 892ad0df8f863efe4a82c2c79e86b00b2f9b1c28
-current_lifecycle: paper2_boundary_source_review_accepted_first_mode_transfer_derivation
+verified_commit: 8318031b70e980c589453b0add6dfdcf703d2705
+current_lifecycle: paper2_first_mode_formula_accepted_existing_eight_case_postprocessing
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: first_spatial_mode_conditional_theory_v04_section16_no_new_fem
+execution_authorized: existing_eight_case_first_mode_postprocessing_v04_section17_no_new_fem
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_impedance_shift/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -90,8 +90,11 @@ K_nx=0.6/1.0 的预报中心 H=0.198283976/0.314541897、各中心±0.03、每�
 连续均匀A1的非零空间直接源来自总位移的仿射切向支撑与x向drag交叉项；ECM负责传播和法切转换。
 六个既有物理点的sin/cos比随细化缩小3.89–3.93倍，cos幅值变化0.66%–1.98%；仅为镜像误差解释的一致性证据，
 不证明唯一误差来源或各锚定项贡献。零耦合极限须规约刚体零模，未进行相应退化FEM。
-v04第16节授权同一理论agent推导第一空间模态的条件传递，分列宏观锚定与异质激活输入；
-最多45分钟、只推导、不新增数值求值/FEM/扫描，交接后才决定是否对第二批8例作进一步后处理。
+v04第16节第一空间模态推导已交接；总管独立复核本构/平衡与边界符号，接受为待检验连续约化，见简报第31–32节。
+公式分列实际宏观应变的锚定项与异质激活项，按复数相加；不闭合宏观行，不宣称已经解释FEM或创新成立。
+现按v04第17节授权原数值任务后处理第二批既有8例：新增一个简短入口与一个JSON，最多120秒、1CPU/8GiB。
+只计算条件残差/幅相与双网格诊断，不新增FEM，不拟合或以离散修正调小残差；原四留出仍锁定。
+理论agent此阶段完成，结果交回后由总管验收；当前后处理0/8，不能把已算过8例误写成新FEM进度。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，

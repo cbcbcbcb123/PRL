@@ -1942,3 +1942,139 @@ _interface_matrix、_endocardial_full_stiffness 及支撑/drag 组装；均匀�
 先分开局部牵引的宏观锚定输入与非均匀激活输入，才能判断均值低谷附近保留的局部负荷意味着什么。
 主计划第 16 节仅授权第一空间模态的条件传递推导，不新增 FEM；目标是一个可计算、可否证的分量预测，
 而非把线性分解本身包装成 Nature Physics 创新。当前 46 个 FEM 端点及原四留出的锁定状态不变。
+
+## 31. 第一空间模态的双输入条件传递：宏观锚定与异质激活
+
+### 31.1 结论、规范与证据边界
+
+取生产 midpoint 基频
+\[s_N={2\over\Delta t}{\zeta-1\over\zeta+1}=i\omega_N,\quad
+\zeta=e^{i2\pi/N},\quad k={2\pi\over L}.\]
+并用空间规范 \(\hat f(x,y)=\sum_n f_n(y)e^{inkx}\)、
+\(f_1=L^{-1}\int_{-L/2}^{L/2}\hat f e^{-ikx}dx\)。因此仿射函数的第一系数
+\(X_1=L^{-1}\int xe^{-ikx}dx=-iL/(2\pi)\)，生产输出满足
+\(t_{y,1}=(c_{\cos}-ic_{\sin})/2\)。以下状态是**周期涨落**，不把仿射函数当成
+周期位移后再求导；仿射项只进入依赖绝对位移/速度的支撑和 drag。
+给定实际宏观复应变 \(\hat{\bar\epsilon}\) 与异质激活谱 \(\hat a_1\) 后，连续层模型给出
+\[\boxed{\ t_{y,1}=p_\epsilon\hat{\bar\epsilon}+p_a\hat a_1\ }.\]
+这是条件式，不闭合宏观行。两项必须按复数相干相加；
+\(|p_\epsilon\hat{\bar\epsilon}|/|t_{y,1}|\) 与
+\(|p_a\hat a_1|/|t_{y,1}|\) 不是可相加的贡献百分比。
+
+### 31.2 含 SLS、法切耦合与体 drag 的层内状态
+
+令 \(\mathbf y=(U,V,T,S)^\mathsf T\)，其中 \((U,V)\) 是涨落位移第一模态，
+\((T,S)=(\sigma_{xy},\sigma_{yy})\) 是正 \(y\) 截面的牵引。对每层令
+\(M_j=\lambda_j+2\mu_j\)、\(Q_j=M_j-\lambda_j^2/M_j\)。心肌使用实 Lamé 常数；ECM 使用
+\[(\lambda_e^*,\mu_e^*)=(\lambda_{eq},\mu_{eq})+
+{s_N\tau\over1+s_N\tau}(\lambda_{ve},\mu_{ve}),\]
+并在下式中以星号量代入。生产强式
+\(-\nabla\!\cdot\sigma+s_N\gamma_j u=0\) 及
+\(\sigma=C:(\varepsilon+a\,\mathbf e_x\mathbf e_x)\) 给
+\[\mathbf y'=\mathbf N_j\mathbf y+\mathbf b_{j\epsilon}\hat{\bar\epsilon}
++\mathbf b_{ja}\hat a_1,\]
+\[
+\mathbf N_j=\begin{bmatrix}
+0&-ik&1/\mu_j&0\\
+-ik\lambda_j/M_j&0&0&1/M_j\\
+s_N\gamma_j+k^2Q_j&0&0&-ik\lambda_j/M_j\\
+0&s_N\gamma_j&-ik&0
+\end{bmatrix},\quad
+\mathbf b_{j\epsilon}=\begin{bmatrix}0\\0\\s_N\gamma_jX_1\\0\end{bmatrix},
+\quad \mathbf b_{ma}=\begin{bmatrix}0\\-\lambda_m/M_m\\-ikQ_m\\0\end{bmatrix},
+\quad \mathbf b_{ea}=0 .
+\]
+故一层厚度 \(h_j\) 的可计算传递为
+\(\mathbf y_j^+=\mathbf P_j\mathbf y_j^-+\mathbf q_{j\epsilon}\hat{\bar\epsilon}
++\mathbf q_{ja}\hat a_1\)，其中 \(\mathbf P_j=e^{\mathbf N_jh_j}\)、
+\(\mathbf q_{j\nu}=\int_0^{h_j}e^{\mathbf N_j(h_j-y)}\mathbf b_{j\nu}dy\)；
+该积分可用增广矩阵指数，不要求 \(\mathbf N_j\) 可逆。
+
+### 31.3 支撑、两界面与顶链的 2×2 边界闭合
+
+令 \(\mathbf u_0=(U_m(0),V_m(0))^\mathsf T\)。底面条件为
+\(T_m(0)=k_{sx}[U_m(0)+X_1\hat{\bar\epsilon}]\)、
+\(S_m(0)=k_{sy}V_m(0)\)，即
+\[\mathbf y_m^-=\mathbf B_0\mathbf u_0+\mathbf d_0\hat{\bar\epsilon},\quad
+\mathbf B_0=\begin{bmatrix}1&0\\0&1\\k_{sx}&0\\0&k_{sy}\end{bmatrix},\quad
+\mathbf d_0=(0,0,k_{sx}X_1,0)^\mathsf T .\]
+下界面标量弹簧 \(k_\ell\) 给 \(\mathbf y_e^-=\mathbf J_\ell\mathbf y_m^+\)，其中
+\[\mathbf J_\ell=\begin{bmatrix}1&0&1/k_\ell&0\\0&1&0&1/k_\ell\\
+0&0&1&0\\0&0&0&1\end{bmatrix}.\]
+共同仿射位移在两界面跳量中逐节点精确抵消。令
+\(\mathbf E_u=[I_2\ 0]\)、\(\mathbf E_t=[0\ I_2]\)，上界面刚度为 \(k_uI_2\)。
+顶链连续符号为
+\[\mathbf Z_n=\operatorname{diag}(K_{nx}k^2+s_N\gamma_n,
+K_{ny}k^2+B_nk^4+s_N\gamma_n).\]
+由 \(\mathbf u_n=\mathbf E_u\mathbf y_t+k_u^{-1}\mathbf E_t\mathbf y_t\) 及链平衡得到
+\(\mathbf L\mathbf y_t=-\mathbf d_n\hat{\bar\epsilon}\)，其中
+\[\mathbf L=\mathbf Z_n\mathbf E_u+(I_2+\mathbf Z_n/k_u)\mathbf E_t,\qquad
+\mathbf d_n=s_N\gamma_nX_1(1,0)^\mathsf T .\]
+定义
+\[\mathcal V=\mathbf P_e\mathbf J_\ell\mathbf P_m\mathbf B_0,\quad
+\mathbf w_a=\mathbf P_e\mathbf J_\ell\mathbf q_{ma},\quad
+\mathbf w_\epsilon=\mathbf P_e\mathbf J_\ell
+(\mathbf P_m\mathbf d_0+\mathbf q_{m\epsilon})+\mathbf q_{e\epsilon}.\]
+若 \(\mathbf L\mathcal V\) 可逆，则消去 \(\mathbf u_0\) 后
+\[p_a=\mathbf e_y^\mathsf T\mathbf E_t
+[\mathbf w_a-\mathcal V(\mathbf L\mathcal V)^{-1}\mathbf L\mathbf w_a],\]
+\[
+p_\epsilon=\mathbf e_y^\mathsf T\mathbf E_t
+[\mathbf w_\epsilon-\mathcal V(\mathbf L\mathcal V)^{-1}
+(\mathbf L\mathbf w_\epsilon+\mathbf d_n)],\qquad \mathbf e_y=(0,1)^\mathsf T .
+\]
+这保留了两层体 drag、ECM SLS、法切耦合、底部双向支撑、双界面滑移以及顶链轴向、横向、
+弯曲和 drag；链 drag 的仿射源 \(\mathbf d_n\) 不能并入层内项后遗漏。
+
+### 31.4 连续式、生产离散式与一个既有数据否证式
+
+连续 S1 为 \(a(x)=\bar a[1+\beta\cos(kx)]\)，故
+\(\hat a_1=\beta\hat{\bar a}/2\)；A1 有 \(\hat a_1=0\)。生产实现却在每个三角形**重心**采样该函数，
+形成单元常值本征应变，再由三角 P1 应变算子组装；固定同向对角线还不保持镜像对称。
+因此 \(\beta\hat{\bar a}/2\) 是连续目标，不等同于有限网格完整主动载荷向量。
+生产离散链按每单位长度写成
+\(k\mapsto\tilde k=2\sin(k\Delta x/2)/\Delta x\)，即
+\(Z_{nx}^{h}=K_{nx}\tilde k^2+s_N\gamma_n\)、
+\(Z_{ny}^{h}=K_{ny}\tilde k^2+B_n\tilde k^4+s_N\gamma_n\)；
+层内指数传递则应由三角 P1 动态刚度的 Schur 补替代。离散链节点不是细胞数。
+用既有第二批 8 例可检验同一个复残差族
+\[R_q^C=t_{y,1,q}^C-p_\epsilon(H)\hat{\bar\epsilon}_q^C
+-p_a(H)\hat a_1^C,\qquad
+\eta_q^C={|R_q^C|\over
+|p_\epsilon\hat{\bar\epsilon}_q^C|+|p_a\hat a_1^C|+f},
+\]
+其中 \(q\in\{S2,S3\}\)、\(C\) 为三点 A1 与中心 S1、\(f\) 是预先固定的牵引 floor，
+且必须由已存 \((c_{\cos},c_{\sin})\) 组成复数 \(t_{y,1}\)，不能只比 B1 模长。
+令操作性输入感知差 \(D_{23}^C=|t_{y,1,S3}^C-t_{y,1,S2}^C|
++|p_\epsilon||\hat{\bar\epsilon}_{S3}^C-\hat{\bar\epsilon}_{S2}^C|\)。
+连续条件式预期 \(R_q^C\to0\)；若 \(\eta_{S3}\) 不下降且 \(|R_{S3}^C|>D_{23}^C\)，
+则否定“该连续第一模态约化已解释现有分辨率”的主张。双网格差不是严格误差界；失败不否定完整离散线性系统，
+而应优先检查重心采样、P1 层传递和离散链符号。当前未作该数值检验。
+极限检查：两输入均零则 \(t_{y,1}=0\)；\(\hat a_1=0\) 只余宏观锚定项；
+\(\hat{\bar\epsilon}=0\) 只余异质激活项。再令 \(k_{sx}=\gamma_m=\gamma_e=\gamma_n=0\) 时，
+先规约完整系统的共同切向刚体 \(k=0\) 模并要求非零模态块可逆，才有 \(p_\epsilon=0\)。
+这些都是经典线性传递与干涉恒等，不构成 Nature Physics 创新认证。
+
+## 32. 第一模态公式的源级验收与已有数据检验决定（总管）
+
+第 31 节已交接。总管独立从本构关系得到
+sigma_xx=ik Q U+(lambda/M)S+Q a_1、V'=−ik(lambda/M)U+S/M−(lambda/M)a_1，
+再代入 T'=s gamma(U+X_1 epsilon)−ik sigma_xx 与 S'=s gamma V−ik T，
+复现四行状态方程。底部向外法线为 −y，故正 y 截面牵引为正支撑项；
+界面向上位移跳为 traction/k，顶链平衡为 traction+Z u_n+d_n epsilon=0，
+与第 31.3 节边界闭合一致。midpoint 频率、正本征应变的本构符号、链与界面定义均已对照生产源码。
+这只接受公式为可以检验的连续空间约化，不代表已与 FEM 定量一致。
+
+允许复用第二批 v02 已有八例的原始数组计算第 31.4 节残差；新建文件范围与预算见主计划第 17 节。
+主检验仅用连续层矩阵和连续链符号 k²、k⁴，不在看到残差后改成离散链、重心校正或拟合参数。
+观测始终为 t_y1=(c_cos−i c_sin)/2，而不是 B1；给定的是实际宏观复应变，不是自主源闭合。
+激活 Fourier 源使用连续目标，生产重心采样误差作为明确限制保留。固定牵引 floor=1e-12。
+
+同时保存复数两源贡献、其和、实际响应、绝对复残差、eta、可解释幅值/相位差和四组 D23。
+第 31.4 节的“eta_S3 不下降且 abs(R_S3)>D23”只报告是否触发了预先写出的探索性警示，
+不是严格否证连续方程的定理；未触发也不是 PASS 或定量解释成功，残差绝对大小仍须逐项裁决。
+如果正/余弦、相位或归一化自检不符，先停止，不把提取错误解释成物理失败。
+不删失败点、不用相干贡献模长比例充当可加百分比，不做等功或新颖性推断。
+
+本次是已见数据的无拟合诊断，不是独立留出预测，亦不新增 FEM。原四留出继续锁定；
+理论 agent 此阶段已交接，数值执行任务完成后再由总管独立复核并决定是否保留该定量解释。
