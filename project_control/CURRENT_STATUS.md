@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-06
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 15a999d227555b21498c147fb4b4a869d4d2a835
-current_lifecycle: paper2_classical_baseline_milestone_accepted_junction_hypothesis_review
+verified_commit: 6b8b89186526f2bbfe91c7a47e7772f6d8531a77
+current_lifecycle: paper2_junction_state_boundary_accepted_spatial_hypothesis_review
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section43_brief69_supervisor_junction_hypothesis_review_only
+execution_authorized: v04_section44_brief70_4_supervisor_spatial_hypothesis_review_only
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_cell_bloch_asymptotic_probe/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划43/简报69，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
+当前裁决（主计划44/简报70，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
 已完成并通过总管独立几何与解析输入重建；theta=0.02时领先系数误差分别约0.008558%和0.016599%。
 本批计算0.0750725000秒，独立复核0.0177348000秒且0新右端；没有新增FEM或解盲原四留出。
 长波连接伸长可写成普通应变—曲率恢复，alpha=-0.778458496485260，z_eff/b=0.49625，
@@ -63,8 +63,12 @@ Y/W关系是依赖独立细胞参数的模型必要检验，不是无参数规�
 第42节科学综合已完成，总管接受‘经典基线已建立，核心新机制未确认，暂无足够强下一数值假设’。
 一般法切传递、相消和压缩路线不再扩算；旧FEM局部峰6.3213%分辨率失败仍保留，非全部验证通过。
 不把EFE特异实验残差作为理论探索前置门，也不因等价增强连续体吻合而终止全部细胞物理研究。
-理论和数值任务均完成。下一轮由总管最多20分钟/3篇原始研究，仅审查受力依赖细胞间连接周转
-与ECM记忆的候选及黏附簇反例；这是新假设提案，不是已批准的新状态方程、脱黏或反馈实现。
+三篇连接周转原始研究已核对：一般黏弹恢复促重连、负荷分享与有限簇涨落已有经典解释。
+FRAP更新不是承载键占据或单键解离率，不直接据此采用n_j反馈；目前仍0项新机制确认。
+原理论agent的最小状态核查已完成，总管独立验收同n/F/机械能乃至同总交换通量的条件反例；
+差异来自三阶力矩，属于经典状态闭合边界，不是新机制或DCM唯一性。数学危险率未被采纳为本构。
+两角色均完成。下一轮总管最多20分钟/2篇，仅核对ECM介导的跨连接空间相关候选，见简报70.4；
+若仍无合格预测则本周转方向收口并汇总缺口，不无限延长查新链。不实现新状态、脱黏或反馈。
 数值任务保持完成，15例既有输出本轮只读核实仍全部检查通过；无新计算或原留出读取。
 这是独立理想边界研究，不是已实现三层耦合；不启动新FEM、扫描、原留出、流体或非线性。
 Nature Physics目标保持；生产心肌FEM/ECM黏弹FEM不变，现有链不追认为完整细胞DCM。
