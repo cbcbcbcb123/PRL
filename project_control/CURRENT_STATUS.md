@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 8318031b70e980c589453b0add6dfdcf703d2705
-current_lifecycle: paper2_first_mode_formula_accepted_existing_eight_case_postprocessing
+verified_commit: bfd70488971527d4246372ca010604f2764f76d6
+current_lifecycle: paper2_classical_conditional_baseline_accepted_local_load_bound_theory
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: existing_eight_case_first_mode_postprocessing_v04_section17_no_new_fem
+execution_authorized: bounded_local_load_lower_bound_theory_v04_section18_no_new_fem
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: results/paper2_impedance_shift/v01_20260905/summary.json
+latest_completed_execution_log: results/paper2_transverse_notch/v02_20260905/first_mode_transfer_v01.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -92,9 +92,13 @@ K_nx=0.6/1.0 的预报中心 H=0.198283976/0.314541897、各中心±0.03、每�
 不证明唯一误差来源或各锚定项贡献。零耦合极限须规约刚体零模，未进行相应退化FEM。
 v04第16节第一空间模态推导已交接；总管独立复核本构/平衡与边界符号，接受为待检验连续约化，见简报第31–32节。
 公式分列实际宏观应变的锚定项与异质激活项，按复数相加；不闭合宏观行，不宣称已经解释FEM或创新成立。
-现按v04第17节授权原数值任务后处理第二批既有8例：新增一个简短入口与一个JSON，最多120秒、1CPU/8GiB。
-只计算条件残差/幅相与双网格诊断，不新增FEM，不拟合或以离散修正调小残差；原四留出仍锁定。
-理论agent此阶段完成，结果交回后由总管验收；当前后处理0/8，不能把已算过8例误写成新FEM进度。
+v04第17节既有8例后处理已完成并验收，详见简报第33节；新增一个入口与一个JSON，没有新FEM。
+总管另用不同状态排序及10未知量边界系统复算，系数最大差1.053e-14，原始观测最大差3.879e-18。
+S3第一模态幅值差0.518%–0.819%、相位差绝对值≤0.329°；四组eta随细化下降、操作警示未触发。
+保留为k=0/1的经典条件基线，不是盲预测、全场/实验认证或创新成立；停止继续精修同一基线。
+后处理0.325443秒，总管复算约0.492秒单列；累计FEM仍46、FEM加失败预扣161.8682秒，原四留出锁定。
+下一步v04第18节仅授权同一理论agent审查“均值小是否保证第一模态非零下界”，最多45分钟、不求值/扫描/FEM。
+须保留有限均值、误差与实际宏观闭合可达性；一般行列式/三角不等式不认证创新，数值任务本批已完成。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，

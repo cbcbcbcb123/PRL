@@ -1,0 +1,1655 @@
+{
+  "aggregate": {
+    "all_json_extraction_consistency_pass": true,
+    "all_values_finite": true,
+    "eta_range": [
+      0.006392437734318005,
+      0.03219273773825168
+    ],
+    "maximum_absolute_complex_residual": 3.347149878745375e-05,
+    "warning_trigger_count": 0
+  },
+  "claim_boundary": {
+    "B1_is_not_t_y1": true,
+    "coherent_contribution_magnitudes_are_not_additive_percentages": true,
+    "no_fit_scan_root_or_discrete_chain_correction": true,
+    "no_holdout_read": true,
+    "no_new_fem_or_system_build": true,
+    "not_a_new_blind_prediction": true,
+    "not_novelty_or_experimental_validation": true,
+    "warning_not_triggered_is_not_PASS": true,
+    "warning_triggered_is_not_a_theorem_against_full_discrete_system": true
+  },
+  "created_at_utc": "2026-09-05T05:16:17.269331+00:00",
+  "direct_input_count": 8,
+  "evidence_level": "post_hoc_existing_array_no_fit_first_mode_diagnostic",
+  "formula": {
+    "activation_first": "A1:0; S1:beta*activation_bar/2 continuous target",
+    "boundary_solution": "linear solve of the 2x2 boundary system; no explicit inverse",
+    "brief_path": "results/paper2_science_pilot/v01_20260905/science_brief.md",
+    "brief_sha256": "4abc44dc79039d5740e3e7082fd6e4fa14eccbdf4fce772ceb4c218cd55ff67d",
+    "chain_symbols": "continuous k^2 and k^4",
+    "code_version": "bfd70488971527d4246372ca010604f2764f76d6",
+    "layer_propagation": "augmented matrix exponential of the continuous spatial state matrix",
+    "observable": "t_y1=(c_cos-i*c_sin)/2 from raw time fundamental and native P1 spatial integration",
+    "residual": "actual t_y1 subtracted from coherent conditional prediction",
+    "state": "(U,V,T,S) periodic fluctuation first mode",
+    "version": "science_brief_section_31_at_bfd70488"
+  },
+  "holdouts": "LOCKED_NOT_READ",
+  "paired_D23_diagnostics": [
+    {
+      "D23": 3.5793887343527282e-06,
+      "absolute_residual_S2": 4.779143718334707e-06,
+      "absolute_residual_S3": 1.2198479378696772e-06,
+      "absolute_residual_S3_exceeds_D23": false,
+      "case_id": "A1",
+      "definition": "|t_y1,S3-t_y1,S2| + |p_epsilon|*|epsilon_S3-epsilon_S2|",
+      "eta_S2": 0.03219273773825168,
+      "eta_S3": 0.008216505429361816,
+      "eta_S3_not_decreased": false,
+      "section_31_4_warning_triggered": false,
+      "thickness_ratio": 0.21,
+      "warning_role": "exploratory warning only; triggered is not a theorem against the full discrete system, and not triggered is not a scientific PASS"
+    },
+    {
+      "D23": 2.6944177106243133e-06,
+      "absolute_residual_S2": 3.5910805721523457e-06,
+      "absolute_residual_S3": 9.11602972830519e-07,
+      "absolute_residual_S3_exceeds_D23": false,
+      "case_id": "A1",
+      "definition": "|t_y1,S3-t_y1,S2| + |p_epsilon|*|epsilon_S3-epsilon_S2|",
+      "eta_S2": 0.030639097488235994,
+      "eta_S3": 0.0077773464299691585,
+      "eta_S3_not_decreased": false,
+      "section_31_4_warning_triggered": false,
+      "thickness_ratio": 0.26,
+      "warning_role": "exploratory warning only; triggered is not a theorem against the full discrete system, and not triggered is not a scientific PASS"
+    },
+    {
+      "D23": 1.951029515530626e-06,
+      "absolute_residual_S2": 2.5905671389782056e-06,
+      "absolute_residual_S3": 6.504139780341578e-07,
+      "absolute_residual_S3_exceeds_D23": false,
+      "case_id": "A1",
+      "definition": "|t_y1,S3-t_y1,S2| + |p_epsilon|*|epsilon_S3-epsilon_S2|",
+      "eta_S2": 0.027990991739728355,
+      "eta_S3": 0.007027313791067075,
+      "eta_S3_not_decreased": false,
+      "section_31_4_warning_triggered": false,
+      "thickness_ratio": 0.31,
+      "warning_role": "exploratory warning only; triggered is not a theorem against the full discrete system, and not triggered is not a scientific PASS"
+    },
+    {
+      "D23": 2.4685371253279328e-05,
+      "absolute_residual_S2": 3.347149878745375e-05,
+      "absolute_residual_S3": 8.789377092634542e-06,
+      "absolute_residual_S3_exceeds_D23": false,
+      "case_id": "S1",
+      "definition": "|t_y1,S3-t_y1,S2| + |p_epsilon|*|epsilon_S3-epsilon_S2|",
+      "eta_S2": 0.024343563883643962,
+      "eta_S3": 0.006392437734318005,
+      "eta_S3_not_decreased": false,
+      "section_31_4_warning_triggered": false,
+      "thickness_ratio": 0.26,
+      "warning_role": "exploratory warning only; triggered is not a theorem against the full discrete system, and not triggered is not a scientific PASS"
+    }
+  ],
+  "records": [
+    {
+      "case_key": "transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1",
+      "coherent_decomposition": {
+        "actual_t_y1": {
+          "amplitude": 0.0001437281772288827,
+          "imag": 4.849493753911638e-06,
+          "real": -0.0001436463411990291
+        },
+        "coherent_complex_sum": {
+          "amplitude": 0.00014845409312496435,
+          "imag": 4.286414492718146e-06,
+          "real": -0.000148392197963209
+        },
+        "comparison": {
+          "absolute_complex_residual": 4.779143718334707e-06,
+          "eta": 0.03219273773825168,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 0.2789990894454649,
+          "prediction_minus_actual": {
+            "amplitude": 4.779143718334707e-06,
+            "imag": -5.630792611934926e-07,
+            "real": -4.745856764179875e-06
+          },
+          "signed_relative_amplitude_difference_using_actual_t_y1": 0.032880928341251954
+        },
+        "p_activation_times_activation_first": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": -0.0
+        },
+        "p_epsilon_times_macro_strain": {
+          "amplitude": 0.00014845409312496435,
+          "imag": 4.286414492718146e-06,
+          "real": -0.000148392197963209
+        },
+        "warning": "contribution magnitudes are not additive percentages; only the complex sum is physical"
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "d983354bc5b0e1a0f910e26962d76f391f5762589e40cb536ac926b5ab616d57",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1.npz",
+        "npz_sha256": "be720279537b456f12cafe71a015043db829d5e0fd0544ab8330d1656e063999",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            33,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            33
+          ]
+        },
+        "time_axis_check": {
+          "maximum_absolute_error": 0.0,
+          "pass": true,
+          "tolerance": 5e-14
+        }
+      },
+      "paired_D23": {
+        "D23": 3.5793887343527282e-06,
+        "section_31_4_warning_triggered": false
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0,
+        "config_digest": "447046b401dd442cf0ec873a24492c4c6f76092eb920a9ead4c52afddf8ebfad",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.21,
+        "endocardial_axial_stiffness": 0.8,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "spatial_activation_contrast": 0.35,
+        "steps_per_cycle": 128
+      },
+      "raw_extraction": {
+        "activation_bar": {
+          "amplitude": 0.05,
+          "imag": 5.7462715141731735e-18,
+          "real": -0.05
+        },
+        "activation_first_continuous_target": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        },
+        "actual_t_y1_equals_half_c_cos_minus_i_c_sin": {
+          "amplitude": 0.0001437281772288827,
+          "imag": 4.849493753911638e-06,
+          "real": -0.0001436463411990291
+        },
+        "c_cos": {
+          "amplitude": 0.0002900096265654985,
+          "imag": 7.034901009325953e-06,
+          "real": -0.0002899242895454758
+        },
+        "c_sin": {
+          "amplitude": 3.7446913156914566e-06,
+          "imag": 2.631607147417578e-06,
+          "real": -2.664086498497324e-06
+        },
+        "json_consistency": {
+          "activation_bar": {
+            "absolute_complex_difference": 2.4936649967166602e-18,
+            "pass": true,
+            "relative_difference": 4.9873299934333204e-17,
+            "tolerance": 1e-11
+          },
+          "c_cos": {
+            "absolute_complex_difference": 5.679543821953874e-20,
+            "pass": true,
+            "relative_difference": 1.9583983777418345e-16,
+            "tolerance": 1e-11
+          },
+          "c_sin": {
+            "absolute_complex_difference": 1.727615010682274e-20,
+            "pass": true,
+            "relative_difference": 4.613504465489603e-15,
+            "tolerance": 1e-11
+          },
+          "macro_strain": {
+            "absolute_complex_difference": 8.673617379884035e-19,
+            "pass": true,
+            "relative_difference": 5.590779696658088e-17,
+            "tolerance": 1e-11
+          },
+          "t_y1": {
+            "absolute_complex_difference": 3.196357137050946e-20,
+            "pass": true,
+            "relative_difference": 2.2238904010873573e-16,
+            "tolerance": 1e-11
+          }
+        },
+        "macro_strain_equals_negative_shortening": {
+          "amplitude": 0.015514146238079684,
+          "imag": -0.0013767646516157752,
+          "real": 0.015452936697941375
+        },
+        "recorded_B1_not_used_as_t_y1": 0.00020508486805918873
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1",
+        "spatial_label": "S2",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.21
+      },
+      "transfer": {
+        "affine_first_coefficient_X1": {
+          "amplitude": 0.15915494309189535,
+          "imag": -0.15915494309189535,
+          "real": 0.0
+        },
+        "boundary_matrix_condition_number": 30.5948968694299,
+        "p_activation": {
+          "amplitude": 0.1630568763502696,
+          "imag": 7.96035287953245e-06,
+          "real": -0.16305687615595943
+        },
+        "p_epsilon": {
+          "amplitude": 0.009568950224317325,
+          "imag": -0.000573618211822946,
+          "real": -0.009551741754388443
+        },
+        "spectral_rate_sN": {
+          "amplitude": 6.284447259884914,
+          "imag": 6.284447259884914,
+          "real": 1.582067810090848e-15
+        },
+        "wavenumber": 6.283185307179586,
+        "zero_two_input_response": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        }
+      }
+    },
+    {
+      "case_key": "transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1",
+      "coherent_decomposition": {
+        "actual_t_y1": {
+          "amplitude": 0.00014725782233474826,
+          "imag": 4.433839884162284e-06,
+          "real": -0.00014719105714225267
+        },
+        "coherent_complex_sum": {
+          "amplitude": 0.00014846310759973765,
+          "imag": 4.281518092276939e-06,
+          "real": -0.00014840135754431893
+        },
+        "comparison": {
+          "absolute_complex_residual": 1.2198479378696772e-06,
+          "eta": 0.008216505429361816,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 0.07282199075486248,
+          "prediction_minus_actual": {
+            "amplitude": 1.2198479378696772e-06,
+            "imag": -1.5232179188534527e-07,
+            "real": -1.2103004020662562e-06
+          },
+          "signed_relative_amplitude_difference_using_actual_t_y1": 0.008184864110305274
+        },
+        "p_activation_times_activation_first": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": -0.0
+        },
+        "p_epsilon_times_macro_strain": {
+          "amplitude": 0.00014846310759973765,
+          "imag": 4.281518092276939e-06,
+          "real": -0.00014840135754431893
+        },
+        "warning": "contribution magnitudes are not additive percentages; only the complex sum is physical"
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1.json",
+        "case_json_sha256": "f046e6838b9e1073bbc73ac98da88722d705b02f96b4275bd94cb43a38e1e5a8",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1.npz",
+        "npz_sha256": "f884c646912469213b958d2251f3fe814301c08ad107032653c83ebc478e910c",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            65,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            65
+          ]
+        },
+        "time_axis_check": {
+          "maximum_absolute_error": 0.0,
+          "pass": true,
+          "tolerance": 5e-14
+        }
+      },
+      "paired_D23": {
+        "D23": 3.5793887343527282e-06,
+        "section_31_4_warning_triggered": false
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0000000000000007,
+        "config_digest": "447046b401dd442cf0ec873a24492c4c6f76092eb920a9ead4c52afddf8ebfad",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.21,
+        "endocardial_axial_stiffness": 0.8,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "spatial_activation_contrast": 0.35,
+        "steps_per_cycle": 128
+      },
+      "raw_extraction": {
+        "activation_bar": {
+          "amplitude": 0.05000000000000004,
+          "imag": 5.746271514173177e-18,
+          "real": -0.05000000000000004
+        },
+        "activation_first_continuous_target": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        },
+        "actual_t_y1_equals_half_c_cos_minus_i_c_sin": {
+          "amplitude": 0.00014725782233474826,
+          "imag": 4.433839884162284e-06,
+          "real": -0.00014719105714225267
+        },
+        "c_cos": {
+          "amplitude": 0.00029517639335543597,
+          "imag": 8.170713203667675e-06,
+          "real": -0.0002950632858219851
+        },
+        "c_sin": {
+          "amplitude": 9.745547987271736e-07,
+          "imag": 6.811715374797528e-07,
+          "real": -6.969665646568936e-07
+        },
+        "json_consistency": {
+          "activation_bar": {
+            "absolute_complex_difference": 2.4936649967166625e-18,
+            "pass": true,
+            "relative_difference": 4.987329993433321e-17,
+            "tolerance": 1e-11
+          },
+          "c_cos": {
+            "absolute_complex_difference": 5.587850095852341e-20,
+            "pass": true,
+            "relative_difference": 1.893054533369728e-16,
+            "tolerance": 1e-11
+          },
+          "c_sin": {
+            "absolute_complex_difference": 1.0874151443381013e-20,
+            "pass": true,
+            "relative_difference": 1.1158070800721904e-14,
+            "tolerance": 1e-11
+          },
+          "macro_strain": {
+            "absolute_complex_difference": 6.505213034913027e-19,
+            "pass": true,
+            "relative_difference": 4.192830174179446e-17,
+            "tolerance": 1e-11
+          },
+          "t_y1": {
+            "absolute_complex_difference": 2.715794227328107e-20,
+            "pass": true,
+            "relative_difference": 1.844244457964706e-16,
+            "tolerance": 1e-11
+          }
+        },
+        "macro_strain_equals_negative_shortening": {
+          "amplitude": 0.015515088292804808,
+          "imag": -0.0013763112563569344,
+          "real": 0.01545392286958732
+        },
+        "recorded_B1_not_used_as_t_y1": 0.00020872236697510254
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1",
+        "spatial_label": "S3",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.21
+      },
+      "transfer": {
+        "affine_first_coefficient_X1": {
+          "amplitude": 0.15915494309189535,
+          "imag": -0.15915494309189535,
+          "real": 0.0
+        },
+        "boundary_matrix_condition_number": 30.5948968694299,
+        "p_activation": {
+          "amplitude": 0.1630568763502696,
+          "imag": 7.96035287953245e-06,
+          "real": -0.16305687615595943
+        },
+        "p_epsilon": {
+          "amplitude": 0.009568950224317325,
+          "imag": -0.000573618211822946,
+          "real": -0.009551741754388443
+        },
+        "spectral_rate_sN": {
+          "amplitude": 6.284447259884914,
+          "imag": 6.284447259884914,
+          "real": 1.582067810090848e-15
+        },
+        "wavenumber": 6.283185307179586,
+        "zero_two_input_response": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        }
+      }
+    },
+    {
+      "case_key": "transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1",
+      "coherent_decomposition": {
+        "actual_t_y1": {
+          "amplitude": 0.00011363584437844839,
+          "imag": -1.856167773406326e-06,
+          "real": -0.00011362068371911828
+        },
+        "coherent_complex_sum": {
+          "amplitude": 0.0001172058198806952,
+          "imag": -2.309236643693945e-06,
+          "real": -0.00011718306891368474
+        },
+        "comparison": {
+          "absolute_complex_residual": 3.5910805721523457e-06,
+          "eta": 0.030639097488235994,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 0.19300675640061038,
+          "prediction_minus_actual": {
+            "amplitude": 3.5910805721523457e-06,
+            "imag": -4.5306887028761925e-07,
+            "real": -3.5623851945664603e-06
+          },
+          "signed_relative_amplitude_difference_using_actual_t_y1": 0.0314159279739014
+        },
+        "p_activation_times_activation_first": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": -0.0
+        },
+        "p_epsilon_times_macro_strain": {
+          "amplitude": 0.0001172058198806952,
+          "imag": -2.309236643693945e-06,
+          "real": -0.00011718306891368474
+        },
+        "warning": "contribution magnitudes are not additive percentages; only the complex sum is physical"
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "35a6ca1cd33013ee7602b6651da9912c5489becdfa39efe0f30cd7447dd43fcf",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1.npz",
+        "npz_sha256": "002859ef5fe79173dd2005a358fbb663ac5693f4bb492c7ed66106b03926c710",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            33,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            33
+          ]
+        },
+        "time_axis_check": {
+          "maximum_absolute_error": 0.0,
+          "pass": true,
+          "tolerance": 5e-14
+        }
+      },
+      "paired_D23": {
+        "D23": 2.6944177106243133e-06,
+        "section_31_4_warning_triggered": false
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0,
+        "config_digest": "231345b1974ce2845a6f6430dbf678e1cf54415e5b6e464614aff1f30a54ac63",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.26,
+        "endocardial_axial_stiffness": 0.8,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "spatial_activation_contrast": 0.35,
+        "steps_per_cycle": 128
+      },
+      "raw_extraction": {
+        "activation_bar": {
+          "amplitude": 0.05,
+          "imag": 5.7462715141731735e-18,
+          "real": -0.05
+        },
+        "activation_first_continuous_target": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        },
+        "actual_t_y1_equals_half_c_cos_minus_i_c_sin": {
+          "amplitude": 0.00011363584437844839,
+          "imag": -1.856167773406326e-06,
+          "real": -0.00011362068371911828
+        },
+        "c_cos": {
+          "amplitude": 0.00023004954292495013,
+          "imag": -5.978221768471008e-06,
+          "real": -0.00022997185276564926
+        },
+        "c_sin": {
+          "amplitude": 3.548209477006285e-06,
+          "imag": 2.730485327412699e-06,
+          "real": -2.265886221658356e-06
+        },
+        "json_consistency": {
+          "activation_bar": {
+            "absolute_complex_difference": 2.4936649967166602e-18,
+            "pass": true,
+            "relative_difference": 4.9873299934333204e-17,
+            "tolerance": 1e-11
+          },
+          "c_cos": {
+            "absolute_complex_difference": 8.470329472543003e-21,
+            "pass": true,
+            "relative_difference": 3.681958835843594e-17,
+            "tolerance": 1e-11
+          },
+          "c_sin": {
+            "absolute_complex_difference": 8.565090612733343e-21,
+            "pass": true,
+            "relative_difference": 2.413919095881542e-15,
+            "tolerance": 1e-11
+          },
+          "macro_strain": {
+            "absolute_complex_difference": 6.505213034913027e-19,
+            "pass": true,
+            "relative_difference": 4.414974221164834e-17,
+            "tolerance": 1e-11
+          },
+          "t_y1": {
+            "absolute_complex_difference": 8.470329472543003e-21,
+            "pass": true,
+            "relative_difference": 7.453923996317348e-17,
+            "tolerance": 1e-11
+          }
+        },
+        "macro_strain_equals_negative_shortening": {
+          "amplitude": 0.014734430393110448,
+          "imag": -0.0014288240263293274,
+          "real": 0.0146649889502584
+        },
+        "recorded_B1_not_used_as_t_y1": 0.00016268893937583954
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1",
+        "spatial_label": "S2",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.26
+      },
+      "transfer": {
+        "affine_first_coefficient_X1": {
+          "amplitude": 0.15915494309189535,
+          "imag": -0.15915494309189535,
+          "real": 0.0
+        },
+        "boundary_matrix_condition_number": 38.388865614524114,
+        "p_activation": {
+          "amplitude": 0.1438398347840354,
+          "imag": 0.0010196158497972618,
+          "real": -0.14383622093971127
+        },
+        "p_epsilon": {
+          "amplitude": 0.007954553841151436,
+          "imag": -0.0009272027892540669,
+          "real": -0.007900330486718676
+        },
+        "spectral_rate_sN": {
+          "amplitude": 6.284447259884914,
+          "imag": 6.284447259884914,
+          "real": 1.582067810090848e-15
+        },
+        "wavenumber": 6.283185307179586,
+        "zero_two_input_response": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        }
+      }
+    },
+    {
+      "case_key": "transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1",
+      "coherent_decomposition": {
+        "actual_t_y1": {
+          "amplitude": 0.00011630694189024694,
+          "imag": -2.1917502046187357e-06,
+          "real": -0.00011628628880010676
+        },
+        "coherent_complex_sum": {
+          "amplitude": 0.00011721259600066287,
+          "imag": -2.313175534243753e-06,
+          "real": -0.00011718976866673296
+        },
+        "comparison": {
+          "absolute_complex_residual": 9.11602972830519e-07,
+          "eta": 0.0077773464299691585,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 0.051022041715850674,
+          "prediction_minus_actual": {
+            "amplitude": 9.11602972830519e-07,
+            "imag": -1.2142532962501724e-07,
+            "real": -9.034798666262e-07
+          },
+          "signed_relative_amplitude_difference_using_actual_t_y1": 0.0077867588614835255
+        },
+        "p_activation_times_activation_first": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": -0.0
+        },
+        "p_epsilon_times_macro_strain": {
+          "amplitude": 0.00011721259600066287,
+          "imag": -2.313175534243753e-06,
+          "real": -0.00011718976866673296
+        },
+        "warning": "contribution magnitudes are not additive percentages; only the complex sum is physical"
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1.json",
+        "case_json_sha256": "a60002e8f3ecca35d828b0a93aaf4f3d2f0c7657d87e38ee7b1aba2dc5d7d575",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1.npz",
+        "npz_sha256": "a24a2bad02b19a0fb135d340cd147f0dbc1999a2be9a0c566d27adcf0c7f7657",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            65,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            65
+          ]
+        },
+        "time_axis_check": {
+          "maximum_absolute_error": 0.0,
+          "pass": true,
+          "tolerance": 5e-14
+        }
+      },
+      "paired_D23": {
+        "D23": 2.6944177106243133e-06,
+        "section_31_4_warning_triggered": false
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0000000000000007,
+        "config_digest": "231345b1974ce2845a6f6430dbf678e1cf54415e5b6e464614aff1f30a54ac63",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.26,
+        "endocardial_axial_stiffness": 0.8,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "spatial_activation_contrast": 0.35,
+        "steps_per_cycle": 128
+      },
+      "raw_extraction": {
+        "activation_bar": {
+          "amplitude": 0.05000000000000004,
+          "imag": 5.746271514173177e-18,
+          "real": -0.05000000000000004
+        },
+        "activation_first_continuous_target": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        },
+        "actual_t_y1_equals_half_c_cos_minus_i_c_sin": {
+          "amplitude": 0.00011630694189024694,
+          "imag": -2.1917502046187357e-06,
+          "real": -0.00011628628880010676
+        },
+        "c_cos": {
+          "amplitude": 0.00023333555673343376,
+          "imag": -4.974238358621457e-06,
+          "real": -0.00023328253039791279
+        },
+        "c_sin": {
+          "amplitude": 9.235823189101398e-07,
+          "imag": 7.099527976992801e-07,
+          "real": -5.907379493839857e-07
+        },
+        "json_consistency": {
+          "activation_bar": {
+            "absolute_complex_difference": 2.4936649967166625e-18,
+            "pass": true,
+            "relative_difference": 4.987329993433321e-17,
+            "tolerance": 1e-11
+          },
+          "c_cos": {
+            "absolute_complex_difference": 2.839771910976937e-20,
+            "pass": true,
+            "relative_difference": 1.2170335077654444e-16,
+            "tolerance": 1e-11
+          },
+          "c_sin": {
+            "absolute_complex_difference": 3.5998900258307764e-21,
+            "pass": true,
+            "relative_difference": 3.897746797577033e-15,
+            "tolerance": 1e-11
+          },
+          "macro_strain": {
+            "absolute_complex_difference": 4.336808689942018e-19,
+            "pass": true,
+            "relative_difference": 2.943145992835285e-17,
+            "tolerance": 1e-11
+          },
+          "t_y1": {
+            "absolute_complex_difference": 1.4792794468556757e-20,
+            "pass": true,
+            "relative_difference": 1.271875455423459e-16,
+            "tolerance": 1e-11
+          }
+        },
+        "macro_strain_equals_negative_shortening": {
+          "amplitude": 0.014735282247293976,
+          "imag": -0.0014284304026835038,
+          "real": 0.014665883181455744
+        },
+        "recorded_B1_not_used_as_t_y1": 0.00016499444693746706
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1",
+        "spatial_label": "S3",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.26
+      },
+      "transfer": {
+        "affine_first_coefficient_X1": {
+          "amplitude": 0.15915494309189535,
+          "imag": -0.15915494309189535,
+          "real": 0.0
+        },
+        "boundary_matrix_condition_number": 38.388865614524114,
+        "p_activation": {
+          "amplitude": 0.1438398347840354,
+          "imag": 0.0010196158497972618,
+          "real": -0.14383622093971127
+        },
+        "p_epsilon": {
+          "amplitude": 0.007954553841151436,
+          "imag": -0.0009272027892540669,
+          "real": -0.007900330486718676
+        },
+        "spectral_rate_sN": {
+          "amplitude": 6.284447259884914,
+          "imag": 6.284447259884914,
+          "real": 1.582067810090848e-15
+        },
+        "wavenumber": 6.283185307179586,
+        "zero_two_input_response": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        }
+      }
+    },
+    {
+      "case_key": "transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1",
+      "coherent_decomposition": {
+        "actual_t_y1": {
+          "amplitude": 8.996032849550892e-05,
+          "imag": -7.673319198903823e-06,
+          "real": -8.963247667833133e-05
+        },
+        "coherent_complex_sum": {
+          "amplitude": 9.255002949075054e-05,
+          "imag": -7.826516329596797e-06,
+          "real": -9.221851007732314e-05
+        },
+        "comparison": {
+          "absolute_complex_residual": 2.5905671389782056e-06,
+          "eta": 0.027990991739728355,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.042061034452886004,
+          "prediction_minus_actual": {
+            "amplitude": 2.5905671389782056e-06,
+            "imag": -1.5319713069297463e-07,
+            "real": -2.586033398991816e-06
+          },
+          "signed_relative_amplitude_difference_using_actual_t_y1": 0.02878714471758405
+        },
+        "p_activation_times_activation_first": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": -0.0
+        },
+        "p_epsilon_times_macro_strain": {
+          "amplitude": 9.255002949075054e-05,
+          "imag": -7.826516329596797e-06,
+          "real": -9.221851007732314e-05
+        },
+        "warning": "contribution magnitudes are not additive percentages; only the complex sum is physical"
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "f37dcb0f0274e33465ea46eaac6a6c4e6c53a32a836af391ab345147c6821170",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1.npz",
+        "npz_sha256": "0b482b0e9df03799c4e09ff0e3d729ec546eba7654fb99d8ccee946ddcce8101",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            33,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            33
+          ]
+        },
+        "time_axis_check": {
+          "maximum_absolute_error": 0.0,
+          "pass": true,
+          "tolerance": 5e-14
+        }
+      },
+      "paired_D23": {
+        "D23": 1.951029515530626e-06,
+        "section_31_4_warning_triggered": false
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0,
+        "config_digest": "4959a734621a8154a8c31cb98868078a808bada25a91c4070f430cfca2b48491",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.31,
+        "endocardial_axial_stiffness": 0.8,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "spatial_activation_contrast": 0.35,
+        "steps_per_cycle": 128
+      },
+      "raw_extraction": {
+        "activation_bar": {
+          "amplitude": 0.05,
+          "imag": 5.7462715141731735e-18,
+          "real": -0.05
+        },
+        "activation_first_continuous_target": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        },
+        "actual_t_y1_equals_half_c_cos_minus_i_c_sin": {
+          "amplitude": 8.996032849550892e-05,
+          "imag": -7.673319198903823e-06,
+          "real": -8.963247667833133e-05
+        },
+        "c_cos": {
+          "amplitude": 0.00018281234116988363,
+          "imag": -1.7033248672559044e-05,
+          "real": -0.00018201708854850057
+        },
+        "c_sin": {
+          "amplitude": 3.2278324512046316e-06,
+          "imag": 2.7521351918379135e-06,
+          "real": -1.6866102747514e-06
+        },
+        "json_consistency": {
+          "activation_bar": {
+            "absolute_complex_difference": 2.4936649967166602e-18,
+            "pass": true,
+            "relative_difference": 4.9873299934333204e-17,
+            "tolerance": 1e-11
+          },
+          "c_cos": {
+            "absolute_complex_difference": 6.776263578034403e-21,
+            "pass": true,
+            "relative_difference": 3.706677314381836e-17,
+            "tolerance": 1e-11
+          },
+          "c_sin": {
+            "absolute_complex_difference": 5.082197683525802e-21,
+            "pass": true,
+            "relative_difference": 1.5744924063915167e-15,
+            "tolerance": 1e-11
+          },
+          "macro_strain": {
+            "absolute_complex_difference": 6.505213034913027e-19,
+            "pass": true,
+            "relative_difference": 4.6383050362767456e-17,
+            "tolerance": 1e-11
+          },
+          "t_y1": {
+            "absolute_complex_difference": 3.3881317890172014e-21,
+            "pass": true,
+            "relative_difference": 3.766251019399453e-17,
+            "tolerance": 1e-11
+          }
+        },
+        "macro_strain_equals_negative_shortening": {
+          "amplitude": 0.014024978918020629,
+          "imag": -0.0014666037797224217,
+          "real": 0.013948086141267805
+        },
+        "recorded_B1_not_used_as_t_y1": 0.0001292879943891678
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1",
+        "spatial_label": "S2",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.31
+      },
+      "transfer": {
+        "affine_first_coefficient_X1": {
+          "amplitude": 0.15915494309189535,
+          "imag": -0.15915494309189535,
+          "real": 0.0
+        },
+        "boundary_matrix_condition_number": 47.13435041308867,
+        "p_activation": {
+          "amplitude": 0.12308496188213722,
+          "imag": 0.0016313459746610803,
+          "real": -0.12307415062407756
+        },
+        "p_epsilon": {
+          "amplitude": 0.006598942503352603,
+          "imag": -0.0012425668407600732,
+          "real": -0.006480900385656074
+        },
+        "spectral_rate_sN": {
+          "amplitude": 6.284447259884914,
+          "imag": 6.284447259884914,
+          "real": 1.582067810090848e-15
+        },
+        "wavenumber": 6.283185307179586,
+        "zero_two_input_response": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        }
+      }
+    },
+    {
+      "case_key": "transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1",
+      "coherent_decomposition": {
+        "actual_t_y1": {
+          "amplitude": 9.190500441083149e-05,
+          "imag": -7.793849526613721e-06,
+          "real": -9.157393594965468e-05
+        },
+        "coherent_complex_sum": {
+          "amplitude": 9.255513420129782e-05,
+          "imag": -7.829759199884534e-06,
+          "real": -9.222335787582271e-05
+        },
+        "comparison": {
+          "absolute_complex_residual": 6.504139780341578e-07,
+          "eta": 0.007027313791067075,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.011943120647928854,
+          "prediction_minus_actual": {
+            "amplitude": 6.504139780341578e-07,
+            "imag": -3.590967327081315e-08,
+            "real": -6.494219261680355e-07
+          },
+          "signed_relative_amplitude_difference_using_actual_t_y1": 0.007073932422222981
+        },
+        "p_activation_times_activation_first": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": -0.0
+        },
+        "p_epsilon_times_macro_strain": {
+          "amplitude": 9.255513420129782e-05,
+          "imag": -7.829759199884534e-06,
+          "real": -9.222335787582271e-05
+        },
+        "warning": "contribution magnitudes are not additive percentages; only the complex sum is physical"
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1.json",
+        "case_json_sha256": "620c9e3379ec77d9698b5042d69a87bb8a6c07c3cda75f7517f3ddbef6af2c4a",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1.npz",
+        "npz_sha256": "faac01eb24f888f090c34a9ee8f9fe7a78bc773e5172bc0e95ba16ca53a75465",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            65,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            65
+          ]
+        },
+        "time_axis_check": {
+          "maximum_absolute_error": 0.0,
+          "pass": true,
+          "tolerance": 5e-14
+        }
+      },
+      "paired_D23": {
+        "D23": 1.951029515530626e-06,
+        "section_31_4_warning_triggered": false
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0000000000000007,
+        "config_digest": "4959a734621a8154a8c31cb98868078a808bada25a91c4070f430cfca2b48491",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.31,
+        "endocardial_axial_stiffness": 0.8,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "spatial_activation_contrast": 0.35,
+        "steps_per_cycle": 128
+      },
+      "raw_extraction": {
+        "activation_bar": {
+          "amplitude": 0.05000000000000004,
+          "imag": 5.746271514173177e-18,
+          "real": -0.05000000000000004
+        },
+        "activation_first_continuous_target": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        },
+        "actual_t_y1_equals_half_c_cos_minus_i_c_sin": {
+          "amplitude": 9.190500441083149e-05,
+          "imag": -7.793849526613721e-06,
+          "real": -9.157393594965468e-05
+        },
+        "c_cos": {
+          "amplitude": 0.00018456432524330914,
+          "imag": -1.602065640004742e-05,
+          "real": -0.00018386769352180828
+        },
+        "c_sin": {
+          "amplitude": 8.399971621275793e-07,
+          "imag": 7.198216224989302e-07,
+          "real": -4.329573468199776e-07
+        },
+        "json_consistency": {
+          "activation_bar": {
+            "absolute_complex_difference": 2.4936649967166625e-18,
+            "pass": true,
+            "relative_difference": 4.987329993433321e-17,
+            "tolerance": 1e-11
+          },
+          "c_cos": {
+            "absolute_complex_difference": 2.7939250479261703e-20,
+            "pass": true,
+            "relative_difference": 1.5137947402581565e-16,
+            "tolerance": 1e-11
+          },
+          "c_sin": {
+            "absolute_complex_difference": 3.389785746542619e-21,
+            "pass": true,
+            "relative_difference": 4.035472855594915e-15,
+            "tolerance": 1e-11
+          },
+          "macro_strain": {
+            "absolute_complex_difference": 4.336808689942018e-19,
+            "pass": true,
+            "relative_difference": 3.0920328126503885e-17,
+            "tolerance": 1e-11
+          },
+          "t_y1": {
+            "absolute_complex_difference": 1.3969625239630852e-20,
+            "pass": true,
+            "relative_difference": 1.5200070256440204e-16,
+            "tolerance": 1e-11
+          }
+        },
+        "macro_strain_equals_negative_shortening": {
+          "amplitude": 0.014025752482958448,
+          "imag": -0.0014662594773498616,
+          "real": 0.013948900166618757
+        },
+        "recorded_B1_not_used_as_t_y1": 0.0001305080375834193
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1",
+        "spatial_label": "S3",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.31
+      },
+      "transfer": {
+        "affine_first_coefficient_X1": {
+          "amplitude": 0.15915494309189535,
+          "imag": -0.15915494309189535,
+          "real": 0.0
+        },
+        "boundary_matrix_condition_number": 47.13435041308867,
+        "p_activation": {
+          "amplitude": 0.12308496188213722,
+          "imag": 0.0016313459746610803,
+          "real": -0.12307415062407756
+        },
+        "p_epsilon": {
+          "amplitude": 0.006598942503352603,
+          "imag": -0.0012425668407600732,
+          "real": -0.006480900385656074
+        },
+        "spectral_rate_sN": {
+          "amplitude": 6.284447259884914,
+          "imag": 6.284447259884914,
+          "real": 1.582067810090848e-15
+        },
+        "wavenumber": 6.283185307179586,
+        "zero_two_input_response": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        }
+      }
+    },
+    {
+      "case_key": "transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1",
+      "coherent_decomposition": {
+        "actual_t_y1": {
+          "amplitude": 0.0011195103479695028,
+          "imag": -3.5048058349849604e-05,
+          "real": 0.001118961595773824
+        },
+        "coherent_complex_sum": {
+          "amplitude": 0.001142273455398399,
+          "imag": -1.0978256584404869e-05,
+          "real": 0.0011422206988100701
+        },
+        "comparison": {
+          "absolute_complex_residual": 3.347149878745375e-05,
+          "eta": 0.024343563883643962,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 1.2433574537107346,
+          "prediction_minus_actual": {
+            "amplitude": 3.347149878745375e-05,
+            "imag": 2.4069801765444735e-05,
+            "real": 2.325910303624607e-05
+          },
+          "signed_relative_amplitude_difference_using_actual_t_y1": 0.020333092472242388
+        },
+        "p_activation_times_activation_first": {
+          "amplitude": 0.0012585985543603095,
+          "imag": -8.921638685726183e-06,
+          "real": 0.0012585669332224735
+        },
+        "p_epsilon_times_macro_strain": {
+          "amplitude": 0.00011636441010518238,
+          "imag": -2.0566178986786854e-06,
+          "real": -0.00011634623441240333
+        },
+        "warning": "contribution magnitudes are not additive percentages; only the complex sum is physical"
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1.json",
+        "case_json_sha256": "7a11eb8fe4b0c5e8e8d9070c8b29494002708445f756019c8c173b929328ede6",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1.npz",
+        "npz_sha256": "c2822d2cbea3cf126ef4d6247b650af72c7304440919f79297883c5b5c6417d0",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            33,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            33
+          ]
+        },
+        "time_axis_check": {
+          "maximum_absolute_error": 0.0,
+          "pass": true,
+          "tolerance": 5e-14
+        }
+      },
+      "paired_D23": {
+        "D23": 2.4685371253279328e-05,
+        "section_31_4_warning_triggered": false
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0,
+        "config_digest": "231345b1974ce2845a6f6430dbf678e1cf54415e5b6e464614aff1f30a54ac63",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.26,
+        "endocardial_axial_stiffness": 0.8,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "spatial_activation_contrast": 0.35,
+        "steps_per_cycle": 128
+      },
+      "raw_extraction": {
+        "activation_bar": {
+          "amplitude": 0.05,
+          "imag": 5.7462715141731735e-18,
+          "real": -0.05
+        },
+        "activation_first_continuous_target": {
+          "amplitude": 0.008749999999999999,
+          "imag": 1.0055975149803052e-18,
+          "real": -0.008749999999999999
+        },
+        "actual_t_y1_equals_half_c_cos_minus_i_c_sin": {
+          "amplitude": 0.0011195103479695028,
+          "imag": -3.5048058349849604e-05,
+          "real": 0.001118961595773824
+        },
+        "c_cos": {
+          "amplitude": 0.0022419954809162965,
+          "imag": -3.349616579401575e-05,
+          "real": 0.002241745244965671
+        },
+        "c_sin": {
+          "amplitude": 3.6798974151851825e-05,
+          "imag": -3.822053418022667e-06,
+          "real": 3.6599950905683465e-05
+        },
+        "json_consistency": {
+          "activation_bar": {
+            "absolute_complex_difference": 2.4936649967166602e-18,
+            "pass": true,
+            "relative_difference": 4.9873299934333204e-17,
+            "tolerance": 1e-11
+          },
+          "c_cos": {
+            "absolute_complex_difference": 1.0164395367051604e-19,
+            "pass": true,
+            "relative_difference": 4.533637758670882e-17,
+            "tolerance": 1e-11
+          },
+          "c_sin": {
+            "absolute_complex_difference": 2.757739477467668e-20,
+            "pass": true,
+            "relative_difference": 7.494066182627249e-16,
+            "tolerance": 1e-11
+          },
+          "macro_strain": {
+            "absolute_complex_difference": 4.336808689942018e-19,
+            "pass": true,
+            "relative_difference": 2.964598728402856e-17,
+            "tolerance": 1e-11
+          },
+          "t_y1": {
+            "absolute_complex_difference": 4.0657581468206416e-20,
+            "pass": true,
+            "relative_difference": 3.6317289556053296e-17,
+            "tolerance": 1e-11
+          }
+        },
+        "macro_strain_equals_negative_shortening": {
+          "amplitude": 0.014628653275711364,
+          "imag": -0.0014481026940495953,
+          "real": 0.014556802370317017
+        },
+        "recorded_B1_not_used_as_t_y1": 0.0015855437396911705
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "S1",
+        "case_id": "S1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1",
+        "spatial_label": "S2",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.26
+      },
+      "transfer": {
+        "affine_first_coefficient_X1": {
+          "amplitude": 0.15915494309189535,
+          "imag": -0.15915494309189535,
+          "real": 0.0
+        },
+        "boundary_matrix_condition_number": 38.388865614524114,
+        "p_activation": {
+          "amplitude": 0.1438398347840354,
+          "imag": 0.0010196158497972618,
+          "real": -0.14383622093971127
+        },
+        "p_epsilon": {
+          "amplitude": 0.007954553841151436,
+          "imag": -0.0009272027892540669,
+          "real": -0.007900330486718676
+        },
+        "spectral_rate_sN": {
+          "amplitude": 6.284447259884914,
+          "imag": 6.284447259884914,
+          "real": 1.582067810090848e-15
+        },
+        "wavenumber": 6.283185307179586,
+        "zero_two_input_response": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        }
+      }
+    },
+    {
+      "case_key": "transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1",
+      "coherent_decomposition": {
+        "actual_t_y1": {
+          "amplitude": 0.0011363894829533676,
+          "imag": -1.743892716752406e-05,
+          "real": 0.0011362556669985272
+        },
+        "coherent_complex_sum": {
+          "amplitude": 0.0011422716857124723,
+          "imag": -1.0981909721385244e-05,
+          "real": 0.001142218893925015
+        },
+        "comparison": {
+          "absolute_complex_residual": 8.789377092634542e-06,
+          "eta": 0.006392437734318005,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 0.32843459541684483,
+          "prediction_minus_actual": {
+            "amplitude": 8.789377092634542e-06,
+            "imag": 6.457017446138815e-06,
+            "real": 5.963226926487689e-06
+          },
+          "signed_relative_amplitude_difference_using_actual_t_y1": 0.005176220694877768
+        },
+        "p_activation_times_activation_first": {
+          "amplitude": 0.00125859855436031,
+          "imag": -8.921638685726188e-06,
+          "real": 0.001258566933222474
+        },
+        "p_epsilon_times_macro_strain": {
+          "amplitude": 0.00011636627932998226,
+          "imag": -2.0602710356590556e-06,
+          "real": -0.00011634803929745908
+        },
+        "warning": "contribution magnitudes are not additive percentages; only the complex sum is physical"
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1.json",
+        "case_json_sha256": "7c8dd6604c66345ebe531cc36ae958b21405dc548845f319393c85cfcc23a6d5",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1.npz",
+        "npz_sha256": "2de887af9dda076ea7140975281baed375f307a0f8dadc008d28d8c2a79eaff4",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            65,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            65
+          ]
+        },
+        "time_axis_check": {
+          "maximum_absolute_error": 0.0,
+          "pass": true,
+          "tolerance": 5e-14
+        }
+      },
+      "paired_D23": {
+        "D23": 2.4685371253279328e-05,
+        "section_31_4_warning_triggered": false
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0000000000000002,
+        "config_digest": "231345b1974ce2845a6f6430dbf678e1cf54415e5b6e464614aff1f30a54ac63",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.26,
+        "endocardial_axial_stiffness": 0.8,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "spatial_activation_contrast": 0.35,
+        "steps_per_cycle": 128
+      },
+      "raw_extraction": {
+        "activation_bar": {
+          "amplitude": 0.05000000000000002,
+          "imag": 5.746271514173175e-18,
+          "real": -0.05000000000000002
+        },
+        "activation_first_continuous_target": {
+          "amplitude": 0.008750000000000003,
+          "imag": 1.0055975149803056e-18,
+          "real": -0.008750000000000003
+        },
+        "actual_t_y1_equals_half_c_cos_minus_i_c_sin": {
+          "amplitude": 0.0011363894829533676,
+          "imag": -1.743892716752406e-05,
+          "real": 0.0011362556669985272
+        },
+        "c_cos": {
+          "amplitude": 0.0022737229700975255,
+          "imag": -2.5099379789590678e-05,
+          "real": 0.0022735844312194104
+        },
+        "c_sin": {
+          "amplitude": 9.837179579777302e-06,
+          "imag": -1.0730972223561177e-06,
+          "real": 9.778474545457443e-06
+        },
+        "json_consistency": {
+          "activation_bar": {
+            "absolute_complex_difference": 2.4936649967166602e-18,
+            "pass": true,
+            "relative_difference": 4.9873299934333185e-17,
+            "tolerance": 1e-11
+          },
+          "c_cos": {
+            "absolute_complex_difference": 1.0503208545953324e-19,
+            "pass": true,
+            "relative_difference": 4.6193879747376684e-17,
+            "tolerance": 1e-11
+          },
+          "c_sin": {
+            "absolute_complex_difference": 3.1763735522036263e-21,
+            "pass": true,
+            "relative_difference": 3.228947409614671e-16,
+            "tolerance": 1e-11
+          },
+          "macro_strain": {
+            "absolute_complex_difference": 6.505213034913027e-19,
+            "pass": true,
+            "relative_difference": 4.446826660809394e-17,
+            "tolerance": 1e-11
+          },
+          "t_y1": {
+            "absolute_complex_difference": 5.421010862427522e-20,
+            "pass": true,
+            "relative_difference": 4.770381056624031e-17,
+            "tolerance": 1e-11
+          }
+        },
+        "macro_strain_equals_negative_shortening": {
+          "amplitude": 0.014628888263724167,
+          "imag": -0.0014476730215652461,
+          "real": 0.014557081254673233
+        },
+        "recorded_B1_not_used_as_t_y1": 0.0016077799779278255
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "S1",
+        "case_id": "S1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1",
+        "spatial_label": "S3",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.26
+      },
+      "transfer": {
+        "affine_first_coefficient_X1": {
+          "amplitude": 0.15915494309189535,
+          "imag": -0.15915494309189535,
+          "real": 0.0
+        },
+        "boundary_matrix_condition_number": 38.388865614524114,
+        "p_activation": {
+          "amplitude": 0.1438398347840354,
+          "imag": 0.0010196158497972618,
+          "real": -0.14383622093971127
+        },
+        "p_epsilon": {
+          "amplitude": 0.007954553841151436,
+          "imag": -0.0009272027892540669,
+          "real": -0.007900330486718676
+        },
+        "spectral_rate_sN": {
+          "amplitude": 6.284447259884914,
+          "imag": 6.284447259884914,
+          "real": 1.582067810090848e-15
+        },
+        "wavenumber": 6.283185307179586,
+        "zero_two_input_response": {
+          "amplitude": 0.0,
+          "imag": 0.0,
+          "real": 0.0
+        }
+      }
+    }
+  ],
+  "runtime": {
+    "budget_seconds": 120.0,
+    "cpu_limit": 1,
+    "elapsed_seconds": 0.3254431000095792,
+    "extraction_self_test": {
+      "B1_not_used": true,
+      "errors": {
+        "c_cos": 1.1102230246251565e-16,
+        "c_sin": 2.7755575615628914e-17,
+        "t_y1": 1.3877787807814457e-17,
+        "time_complex_field": 2.220446049250313e-16
+      },
+      "known_t_y1": {
+        "amplitude": 0.6563781740308955,
+        "imag": -0.09492372141622696,
+        "real": 0.6494780939005003
+      },
+      "pass": true,
+      "recovered_t_y1": {
+        "amplitude": 0.6563781740308955,
+        "imag": -0.09492372141622697,
+        "real": 0.6494780939005003
+      },
+      "tolerance": 3e-13
+    },
+    "gpu": "not_used",
+    "memory_limit_gib": 8,
+    "numpy": "2.2.6",
+    "python": "3.13.7",
+    "scipy_expm": true,
+    "script_path": "scripts/analyze_paper2_first_mode_transfer_v01.py",
+    "script_sha256": "e59bb0dc7d5a9533d2fa6bdca451424907b4ab051de1a69b94266ccfa1e4607f",
+    "zero_two_input_checks_pass": true
+  },
+  "schema": "paper2_first_mode_transfer_v01",
+  "source_runner_summary": {
+    "path": "scripts/run_paper2_transverse_notch_v02.py",
+    "runtime_version": "7cf40e211ccbd01b5baa60693834ea7907b89405",
+    "sha256": "13f0699cb28e7b2ee2c14e90811b75f55c43b0ab82279b2e1687d886a72e9d79",
+    "source_case_count": 8,
+    "source_endpoint_status": "accepted completed v02 cases"
+  },
+  "status": "COMPLETED_DIAGNOSTIC_NO_SCIENTIFIC_PASS_GATE"
+}
