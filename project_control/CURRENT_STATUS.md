@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 59e9c67eef43b52618bc7e253a25e7cc3c489834
-current_lifecycle: paper2_static_negative_explained_source_bound_independent_check
+verified_commit: 408cc130609a1bf25987c2dfccf6d29f3bbe30bb
+current_lifecycle: paper2_endocardial_cell_dcm_necessity_theory_design
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section25_bounded_source_bound_check_no_new_computation
+execution_authorized: v04_section26_bounded_cell_mechanics_theory_no_implementation
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_static_mode_screen/v03_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -39,6 +39,13 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 原 4 个留出未运行。探索不必等待完整 Figure 2 认证或 C1 整理。
 唯一活跃架构仍为离散心内膜弹性链＋主动心肌 FEM＋黏弹 ECM FEM；器官方向为心室/EFE。
 不恢复心肌 DCM，不加入流体、真实三维几何或生物反馈，不把线性滤波当作相变或疾病机制。
+
+最新用户优先级：创新应尽可能突出显式心内膜细胞DCM的必要性，并可由后续实验区分预测。
+当前只批准主计划v04第26节/简报第45节的30分钟理论概念筛选；现有链没有独立物理细胞数及
+闭合形状，不追认为完整细胞DCM。拟议扩展、局部/增强连续对照与实验接口均尚未实现，
+不改生产源码或数值预算；心肌仅FEM、ECM黏弹FEM、Nature Physics和心室/EFE目标不变。
+首次概念交接已回，总管排除以仿射残差自动归零作为阳性门，要求补全ECM直接内部载荷；
+仅再作一次15分钟纸面补齐，见简报45.4。共同连接伸长复响应只是候选，未冻结独立预测或批准数值。
 
 本轮以前的运行基础为 P5 r03：68 项宿主测试通过、182 项 Linux 测试通过及 2 项预期平台
 跳过；不是正式 Figure 2 数值 PASS。证据入口：
@@ -149,6 +156,10 @@ v04第24节解释已完成并验收，见简报第42节：共同宏观伸长与�
 总管新增简报第43节/主计划第25节的一次20分钟纸面核查：均匀增益下界500/307与
 全部零均值连续源上界169/(16pi^2)是否成立。候选尚待独立验收；不增加FEM/参数求值或读取留出。
 成立也仅为当前源参数的静态停线条件，不证明动态机制或Nature Physics贡献。
+
+第25节已完成并验收，见简报第44节：固定参数的两条连续静态界成立，关闭零均值源扫波数/厚度方向。
+不追认离散全谱、动态或疾病结论。理论agent现已下发第26节，科学主张转向检验细胞级形变/连接
+自由度是否对共同可测预测确有必要；必须与公平、可增强的连续对照比较，不能预定DCM胜出。
 
 主量为零均值子空间最大响应减均匀响应，排除完整空间Rayleigh包含造成的平凡阳性；不是等功或记忆实验。
 旧46周期工况与新静态右端分开计数；不实施反馈/动态极点，不读原4留出，不修改生产API或正式Figure 2。
