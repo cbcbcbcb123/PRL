@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 93f5a33dbd54ca08d58d7b65d7777146c1d492f6
-current_lifecycle: paper2_prescribed_trace_coefficients_accepted_bounded_bloch_probe
+verified_commit: beacb2c17abb1b6abceb954efa0b8a6a8aab0ae3
+current_lifecycle: paper2_bloch_verified_cell_observable_continuum_comparison
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section35_brief59_fifteen_complex_cell_rhs_only
+execution_authorized: v04_section36_brief60_bounded_continuum_comparator_theory_only
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: results/paper2_closed_cell_ritz_probe/v02_20260905/summary.json
+latest_completed_execution_log: results/paper2_cell_bloch_asymptotic_probe/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -32,6 +32,18 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 及启动 GPU worker 仍须单独询问。
 
 ## 1. 一句话状态
+
+当前裁决（主计划36/简报60，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
+已完成并通过总管独立几何与解析输入重建；theta=0.02时领先系数误差分别约0.008558%和0.016599%。
+本批计算0.0750725000秒，独立复核0.0177348000秒且0新右端；没有新增FEM或解盲原四留出。
+长波连接伸长可写成普通应变—曲率恢复，alpha=-0.778458496485260，z_eff/b=0.49625，
+严格正参数下0<z_eff<b/2。z_eff是输出恢复高度，不是机械中性面；这些结果不证明DCM独有创新。
+数值任务本批结束，不再补点。下一步仅复用理论agent一次20分钟，明确两表面连续强对照是否可
+由既有能量独立确定，并共同定义连接伸长Y与顶底坡度差W及实验观测接口；不先启动新数值或拟合。
+若对照仍不唯一或不可公平匹配，就明确缺口，不制造“连续体失败”。Nature Physics目标保持，
+优先验证细胞内部变量的预测价值；生产心肌FEM/ECM黏弹FEM不变，现有链不追认为完整细胞DCM。
+
+以下为保留的阶段证据沿革；其中“当前”“只批准”等措辞仅适用于相应历史阶段。
 
 最新进展：两个闭合细胞16自由度原型v02完成6个小型代数右端，并经总管独立几何/解析源复算验收。
 相同能量和法向输入下，两坐标Ritz对共同连接相对伸长幅值高估约15.0008%，compliance差约2.4245%。
