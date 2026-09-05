@@ -1,0 +1,244 @@
+{
+  "budgets": {
+    "failed_startup_budget_debit_seconds": 3.0,
+    "original_batch_wall_seconds": 900.0,
+    "prior_batch_elapsed_seconds": 62.71693008200964,
+    "project_cumulative_wall_seconds": 7200.0,
+    "v02_available_wall_seconds": 897.0
+  },
+  "case_count": 8,
+  "cases": [
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "group": "transverse_notch",
+      "key": "transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.21
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "group": "transverse_notch",
+      "key": "transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.21
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "group": "transverse_notch",
+      "key": "transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.26
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "group": "transverse_notch",
+      "key": "transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.26
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "group": "transverse_notch",
+      "key": "transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.31
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "uniform",
+      "case_id": "A1",
+      "de": 0.2,
+      "group": "transverse_notch",
+      "key": "transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.31
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 0.2,
+      "group": "transverse_notch",
+      "key": "transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1",
+      "spatial_label": "S2",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.26
+    },
+    {
+      "activation_peak": 0.1,
+      "active_profile": "S1",
+      "case_id": "S1",
+      "de": 0.2,
+      "group": "transverse_notch",
+      "key": "transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1",
+      "spatial_label": "S3",
+      "steps_per_cycle": 128,
+      "thickness_ratio": 0.26
+    }
+  ],
+  "container": {
+    "container_name": "prl-paper2-transverse-notch-v02-20260905",
+    "cpu_limit": 1,
+    "gpu": "not_requested",
+    "image": "dolfinx/dolfinx:v0.11.0",
+    "image_id": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+    "memory_limit_gib": 8,
+    "network": "none",
+    "only_writable_bind_mount": "/output",
+    "project_mount": "read_only",
+    "root_filesystem": "read_only"
+  },
+  "created_at_utc": "2026-09-05T02:45:56.134468+00:00",
+  "evidence_level": "preregistered_bounded_exploratory_test_after_training_pilot",
+  "failed_attempt": {
+    "budget_debit_seconds": 3.0,
+    "completed_fem_endpoint_count": 0,
+    "failure_reason": "PYTHONPATH override made dolfinx unavailable",
+    "failure_stage": "dependency import before FEM",
+    "path": "results/paper2_transverse_notch/v01_20260905",
+    "status": "ABORTED_FAIL_CLOSED",
+    "summary_path": "results/paper2_transverse_notch/v01_20260905/summary.json",
+    "summary_sha256": "62049eaaf52c1a701c5b4bb9b539cfaaa56c23c9cfdfa9b294b25e7299453f3d"
+  },
+  "fixed_rules": {
+    "activation_peak": 0.1,
+    "de": 0.2,
+    "no_equal_power_claim": true,
+    "no_fit_no_threshold_change_no_holdout": true,
+    "steps_per_cycle": 128
+  },
+  "fourier_normalization_self_test": {
+    "normalization_checked": [
+      "constant",
+      "cos(2pi x/L)",
+      "sin(2pi x/L)"
+    ],
+    "p1_hat_factor": 0.9967913640449608,
+    "pass": true,
+    "spatial_exact_p1_errors": {
+      "constant": 0.0,
+      "cosine": 2.2887833992611187e-16,
+      "sine": 1.2412670766236366e-16
+    },
+    "temporal_fundamental_errors": {
+      "constant": 0.0,
+      "cosine": 1.4087017584950323e-16,
+      "sine": 1.5803862346158038e-16
+    },
+    "tolerance": 2e-13
+  },
+  "holdouts": {
+    "signatures": [
+      [
+        0.07,
+        0.2,
+        "A1"
+      ],
+      [
+        0.07,
+        0.2,
+        "S1"
+      ],
+      [
+        0.7,
+        0.45,
+        "A1"
+      ],
+      [
+        0.7,
+        0.45,
+        "S1"
+      ]
+    ],
+    "status": "LOCKED_NOT_RUN"
+  },
+  "manufactured_interface_check": {
+    "absolute_force_imbalance": 0.0,
+    "pass": true,
+    "relative_force_imbalance": 0.0,
+    "threshold": 1e-12
+  },
+  "output_boundary": "results/paper2_transverse_notch/v02_20260905",
+  "prediction": {
+    "failed_attempt": {
+      "budget_debit_seconds": 3.0,
+      "completed_fem_endpoint_count": 0,
+      "failure_reason": "PYTHONPATH override made dolfinx unavailable",
+      "failure_stage": "dependency import before FEM",
+      "path": "results/paper2_transverse_notch/v01_20260905",
+      "status": "ABORTED_FAIL_CLOSED",
+      "summary_path": "results/paper2_transverse_notch/v01_20260905/summary.json",
+      "summary_sha256": "62049eaaf52c1a701c5b4bb9b539cfaaa56c23c9cfdfa9b294b25e7299453f3d"
+    },
+    "prediction_commit": "9842b3bfab7f11e947d0c355fa8b0202a368138f",
+    "prediction_path": "results/paper2_science_pilot/v01_20260905/science_brief.md",
+    "prediction_sha256": "097c60e179136f02c30511a5f60e7fd5f852b63df1038641e1cce46b1f7465f2",
+    "prior_completed_case_count": 26,
+    "prior_elapsed_seconds": 62.71693008200964,
+    "prior_holdouts": "LOCKED_NOT_RUN",
+    "prior_summary_path": "results/paper2_science_pilot/v01_20260905/numerical/summary.json",
+    "prior_summary_sha256": "8b6ee96662319efa541c187ec3e063484da9979e1710f0ee6c8db6b9f6da6122",
+    "production_source_hashes": {
+      "scripts/run_paper2_science_pilot_v01.py": "2675b91436dacc43ed9ad3121b8a24dfd8826f93440db184bbd7abad597002e7",
+      "src/paper2_hybrid/config.py": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe",
+      "src/paper2_hybrid/model.py": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800",
+      "src/paper2_hybrid/numerics.py": "620381c4f0165801f2af03defe587e8381c9b6859f8bbd9d2f84198a555331e4",
+      "src/paper2_hybrid/validation.py": "6cfc1f383dbe92b6684eb1bd7f228610815ad67bd60ba1ecaaef8ab91cb1f0c5"
+    }
+  },
+  "runner": {
+    "path": "scripts/run_paper2_transverse_notch_v02.py",
+    "sha256": "13f0699cb28e7b2ee2c14e90811b75f55c43b0ab82279b2e1687d886a72e9d79"
+  },
+  "runtime": {
+    "PYTHONPATH": "/workspace/src:/usr/local/dolfinx-real/lib/python3.12/dist-packages:/usr/local/lib:",
+    "dependency_import_regression": {
+      "checked_before_any_FEM": true,
+      "dolfinx_expected_root": "/usr/local/dolfinx-real/lib/python3.12/dist-packages/dolfinx",
+      "dolfinx_path": "/usr/local/dolfinx-real/lib/python3.12/dist-packages/dolfinx/__init__.py",
+      "paper2_hybrid_expected_root": "/workspace/src/paper2_hybrid",
+      "paper2_hybrid_path": "/workspace/src/paper2_hybrid/__init__.py",
+      "pass": true
+    },
+    "dolfinx": "0.11.0.post0",
+    "numpy": "2.4.6",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "scipy": "1.17.1"
+  },
+  "runtime_source": {
+    "distinct_from_prediction_commit": true,
+    "git_version_at_launch": "7cf40e211ccbd01b5baa60693834ea7907b89405"
+  },
+  "schema": "paper2_transverse_notch_v02",
+  "scientific_boundary": {
+    "interface_action_reaction_is_structural_identity_not_independent_measurement": true,
+    "not_continuous_minimum_certification": true,
+    "not_formal_spatial_convergence": true,
+    "not_nature_physics_novelty_certification": true,
+    "not_original_blind_holdout": true,
+    "prediction_read_after_first_batch": true
+  },
+  "status": "STARTED_FAIL_CLOSED_WITH_FINAL_STATUS_IN_SUMMARY"
+}

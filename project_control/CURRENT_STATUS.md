@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 9842b3bfab7f11e947d0c355fa8b0202a368138f
-current_lifecycle: paper2_transverse_notch_import_failure_one_v02_retry_authorized
+verified_commit: 7cf40e211ccbd01b5baa60693834ea7907b89405
+current_lifecycle: paper2_transverse_notch_accepted_mean_normal_transfer_theory_active
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: transverse_notch_v02_one_startup_retry_original_8_endpoints_v04_section10_1
+execution_authorized: mean_normal_conditional_transfer_theory_only_v04_section11
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: results/paper2_science_pilot/v01_20260905/numerical/field_comparison_v01.json
+latest_completed_execution_log: results/paper2_transverse_notch/v02_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -35,7 +35,8 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 人类于 2026-09-05 明确批准实施 science-first v04：先判断全局收缩与心内膜局部负荷之间
 是否存在可预测、非平凡的关系。计算基础具备，核心科学贡献尚未得到证明；允许最多
-30 个二维理想体 CPU 工况，不必等待完整 Figure 2 认证或 C1 整理后才开展探索。
+30 个首轮二维理想体 CPU 工况，首轮已在 26 个完成处收缩；另行授权的第二批已完成 8 个，累计 34 个。
+原 4 个留出未运行。探索不必等待完整 Figure 2 认证或 C1 整理。
 唯一活跃架构仍为离散心内膜弹性链＋主动心肌 FEM＋黏弹 ECM FEM；器官方向为心室/EFE。
 不恢复心肌 DCM，不加入流体、真实三维几何或生物反馈，不把线性滤波当作相变或疾病机制。
 
@@ -60,15 +61,17 @@ P0 为构造零状态，endpoint 的作用反作用为结构恒等，二者不�
 但整体短缩比变为 0.943960–0.972993，不是双约束。最大倍率来自低 A1 基线，不是最大绝对负荷。
 总管独立直接 DFT/梯形积分复算最大差 1.776e-15；此为后处理一致性，不是新增空间收敛。
 第 18 节理论稿经纠错补回 macro 体应力/drag 功项、内部状态允许集和离散功因子；当前集总容量对照不再开发，
-但不以 Schur 表示等价否定全部线性新规律。第 21 节横向抵消约化已独立复算，预测 H_min^(0)=0.26044558，尚未获 FEM 支持。
-总管已按 v04 第 10 节/简报第 22 节单独授权第二批最多 8 个定向端点：固定 De=0.2，A1 三厚度与 S1 中心各做 S2/S3，
-CPU1/8GiB，计算累计 900 秒封顶；生产物理和 API 不变，不扩充扫描。首轮仍为 26 个完成+4 个锁定，第二批起始0/8，实时完成数以新目录结果和任务快照为准。
-第二批若完成，两批实际计算为26+8，不能写成首轮仍不超过30；原4留出不替换、不重标、不运行。
-两侧与中心分别测网格误差，使用 PASS/FAIL/INCONCLUSIVE；新预测执行前提交并记录SHA256，执行中不改简报。
-第二批 v01 启动已失败，FEM仍为0/8；失败为 PYTHONPATH 覆盖镜像运行库导致无法导入 dolfinx，不形成科学门结果。
-总管已独立核对容器/镜像实际环境与日志，按 v04 第10.1节授权仅一次v02启动修复重试，输出为
-results/paper2_transverse_notch/v02_20260905/；原v01失败包和容器保留。保守预扣启动3秒，剩余计算最多897秒，资源不变。
-修复必须先在实际运行容器验证依赖导入，预测SHA和工况/判据不改；不允许自动v03。后续以v02实际输出和任务快照为准。
+但不以 Schur 表示等价否定全部线性新规律。第 21 节源参数约化预测 H_min^(0)=0.26044558；
+第二批 v01 启动失败（0 个 FEM），一次授权的 v02 修复已成功完成 8/8，原失败证据保留。
+总管独立复算及理论 agent 核查均支持：A1 在 H=0.260 的上界面 y 牵引均值幅值比 0.210/0.310 低约 9 倍，
+两侧 D/(2E) 约 301/296；中心 S1 的 B1/e1 约 53.4，两项冻结探索门 PASS。
+这不是连续最小值认证或全场卸载；A1 中心仍有显著 B1，弱法向应力厚度式尚不能定量解释实际牵引低谷深度。
+接受范围及完整证据见 science_brief.md 第 23 节；冻结预测仍保存在提交 9842b3bf 的原简报，执行后追加验收不改历史预测。
+8 例原始数组独立 DFT/Gauss 投影与结果最大绝对差 9.401e-19，64 个记录的结构子门通过、所有数组有限；
+本次为后处理一致性核查，不覆盖旧空间失败。实际容器退出 0、1 CPU/8 GiB、无网络/无 GPU、只读项目/根文件系统。
+本批求解 38.73 秒，首批加本批及失败预扣 3 秒的计算预算合计 104.45 秒；两批实际完成 26+8=34。
+当前按 v04 第 11 节只推进无拟合的法向均值条件传递推导：解释整体应变与平均激活如何共同决定 c0，
+保留底部运动、界面滑移与法向应力，不增加新 FEM。数值任务已完成，理论 agent 接续；原 4 留出仍锁定。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，

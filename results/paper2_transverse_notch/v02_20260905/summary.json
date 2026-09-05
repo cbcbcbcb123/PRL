@@ -1,0 +1,668 @@
+{
+  "all_arrays_finite": true,
+  "all_structural_gates_pass": true,
+  "batch_case_count": 8,
+  "batch_elapsed_seconds": 38.73185682599433,
+  "budgets": {
+    "failed_startup_budget_debit_seconds": 3.0,
+    "original_batch_wall_seconds": 900.0,
+    "project_cumulative_wall_seconds": 7200.0,
+    "v02_available_wall_seconds": 897.0
+  },
+  "case_count": 8,
+  "cases": [
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1.npz",
+        "sha256": "be720279537b456f12cafe71a015043db829d5e0fd0544ab8330d1656e063999"
+      },
+      "case_id": "A1",
+      "case_json": {
+        "path": "cases/transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1.json",
+        "sha256": "d983354bc5b0e1a0f910e26962d76f391f5762589e40cb536ac926b5ab616d57"
+      },
+      "key": "transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1",
+      "raw_active_work": 0.0001226486589700967,
+      "runtime_seconds": 3.6063804299919866,
+      "spatial_label": "S2",
+      "spatial_modes": {
+        "B1": 0.00020508486805918873,
+        "c0": {
+          "amplitude": 0.0001255367462860772,
+          "imag": -7.405947269118832e-05,
+          "real": -0.00010136404280018652
+        },
+        "c_cos": {
+          "amplitude": 0.00029000962656549847,
+          "imag": 7.0349010093259695e-06,
+          "real": -0.00028992428954547576
+        },
+        "c_sin": {
+          "amplitude": 3.7446913156914714e-06,
+          "imag": 2.6316071474175814e-06,
+          "real": -2.664086498497341e-06
+        },
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "B1": "sqrt((|c_cos|^2+|c_sin|^2)/2)",
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "time-fundamental complex y traction on the endocardium-ECM interface",
+          "integration": "exact analytic integration of the native piecewise-linear interpolant on every interface segment"
+        },
+        "node_count": 33,
+        "periodic_endpoint_check": {
+          "absolute_complex_mismatch": 0.0,
+          "note": "the finite-interval P1 integral remains the reported estimator even if endpoint samples differ",
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "uniform_spacing_relative_error": 5.329070518200751e-15
+      },
+      "structural_pass": true,
+      "thickness_ratio": 0.21
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1.npz",
+        "sha256": "f884c646912469213b958d2251f3fe814301c08ad107032653c83ebc478e910c"
+      },
+      "case_id": "A1",
+      "case_json": {
+        "path": "cases/transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1.json",
+        "sha256": "f046e6838b9e1073bbc73ac98da88722d705b02f96b4275bd94cb43a38e1e5a8"
+      },
+      "key": "transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1",
+      "raw_active_work": 0.00012260840801810158,
+      "runtime_seconds": 6.8233799530135,
+      "spatial_label": "S3",
+      "spatial_modes": {
+        "B1": 0.00020872236697510254,
+        "c0": {
+          "amplitude": 0.0001254572411947101,
+          "imag": -7.39761487029055e-05,
+          "real": -0.00010132644665275341
+        },
+        "c_cos": {
+          "amplitude": 0.0002951763933554359,
+          "imag": 8.170713203667688e-06,
+          "real": -0.00029506328582198503
+        },
+        "c_sin": {
+          "amplitude": 9.745547987271669e-07,
+          "imag": 6.811715374797541e-07,
+          "real": -6.969665646568828e-07
+        },
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "B1": "sqrt((|c_cos|^2+|c_sin|^2)/2)",
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "time-fundamental complex y traction on the endocardium-ECM interface",
+          "integration": "exact analytic integration of the native piecewise-linear interpolant on every interface segment"
+        },
+        "node_count": 65,
+        "periodic_endpoint_check": {
+          "absolute_complex_mismatch": 0.0,
+          "note": "the finite-interval P1 integral remains the reported estimator even if endpoint samples differ",
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "uniform_spacing_relative_error": 1.0658141036401503e-14
+      },
+      "structural_pass": true,
+      "thickness_ratio": 0.21
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1.npz",
+        "sha256": "002859ef5fe79173dd2005a358fbb663ac5693f4bb492c7ed66106b03926c710"
+      },
+      "case_id": "A1",
+      "case_json": {
+        "path": "cases/transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1.json",
+        "sha256": "35a6ca1cd33013ee7602b6651da9912c5489becdfa39efe0f30cd7447dd43fcf"
+      },
+      "key": "transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1",
+      "raw_active_work": 0.00012655507157442484,
+      "runtime_seconds": 1.4754491630010307,
+      "spatial_label": "S2",
+      "spatial_modes": {
+        "B1": 0.00016268893937583954,
+        "c0": {
+          "amplitude": 1.3457378418528756e-05,
+          "imag": 1.3387040070422521e-05,
+          "real": -1.374115006971871e-06
+        },
+        "c_cos": {
+          "amplitude": 0.00023004954292495013,
+          "imag": -5.978221768470999e-06,
+          "real": -0.00022997185276564926
+        },
+        "c_sin": {
+          "amplitude": 3.54820947700629e-06,
+          "imag": 2.730485327412698e-06,
+          "real": -2.2658862216583645e-06
+        },
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "B1": "sqrt((|c_cos|^2+|c_sin|^2)/2)",
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "time-fundamental complex y traction on the endocardium-ECM interface",
+          "integration": "exact analytic integration of the native piecewise-linear interpolant on every interface segment"
+        },
+        "node_count": 33,
+        "periodic_endpoint_check": {
+          "absolute_complex_mismatch": 0.0,
+          "note": "the finite-interval P1 integral remains the reported estimator even if endpoint samples differ",
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "uniform_spacing_relative_error": 5.329070518200751e-15
+      },
+      "structural_pass": true,
+      "thickness_ratio": 0.26
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1.npz",
+        "sha256": "a24a2bad02b19a0fb135d340cd147f0dbc1999a2be9a0c566d27adcf0c7f7657"
+      },
+      "case_id": "A1",
+      "case_json": {
+        "path": "cases/transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1.json",
+        "sha256": "a60002e8f3ecca35d828b0a93aaf4f3d2f0c7657d87e38ee7b1aba2dc5d7d575"
+      },
+      "key": "transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1",
+      "raw_active_work": 0.00012651995610308154,
+      "runtime_seconds": 6.846658613008913,
+      "spatial_label": "S3",
+      "spatial_modes": {
+        "B1": 0.00016499444693746706,
+        "c0": {
+          "amplitude": 1.353830463079047e-05,
+          "imag": 1.3472403611680338e-05,
+          "real": -1.334178848605113e-06
+        },
+        "c_cos": {
+          "amplitude": 0.00023333555673343373,
+          "imag": -4.974238358621449e-06,
+          "real": -0.00023328253039791276
+        },
+        "c_sin": {
+          "amplitude": 9.235823189101421e-07,
+          "imag": 7.099527976992801e-07,
+          "real": -5.907379493839893e-07
+        },
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "B1": "sqrt((|c_cos|^2+|c_sin|^2)/2)",
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "time-fundamental complex y traction on the endocardium-ECM interface",
+          "integration": "exact analytic integration of the native piecewise-linear interpolant on every interface segment"
+        },
+        "node_count": 65,
+        "periodic_endpoint_check": {
+          "absolute_complex_mismatch": 0.0,
+          "note": "the finite-interval P1 integral remains the reported estimator even if endpoint samples differ",
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "uniform_spacing_relative_error": 1.0658141036401503e-14
+      },
+      "structural_pass": true,
+      "thickness_ratio": 0.26
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1.npz",
+        "sha256": "0b482b0e9df03799c4e09ff0e3d729ec546eba7654fb99d8ccee946ddcce8101"
+      },
+      "case_id": "A1",
+      "case_json": {
+        "path": "cases/transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1.json",
+        "sha256": "f37dcb0f0274e33465ea46eaac6a6c4e6c53a32a836af391ab345147c6821170"
+      },
+      "key": "transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1",
+      "raw_active_work": 0.0001293569864455303,
+      "runtime_seconds": 1.5128007559978869,
+      "spatial_label": "S2",
+      "spatial_modes": {
+        "B1": 0.0001292879943891678,
+        "c0": {
+          "amplitude": 0.0001260001586505621,
+          "imag": 9.090146866422568e-05,
+          "real": 8.725229495350602e-05
+        },
+        "c_cos": {
+          "amplitude": 0.00018281234116988363,
+          "imag": -1.7033248672559037e-05,
+          "real": -0.00018201708854850057
+        },
+        "c_sin": {
+          "amplitude": 3.2278324512046274e-06,
+          "imag": 2.7521351918379084e-06,
+          "real": -1.6866102747514e-06
+        },
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "B1": "sqrt((|c_cos|^2+|c_sin|^2)/2)",
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "time-fundamental complex y traction on the endocardium-ECM interface",
+          "integration": "exact analytic integration of the native piecewise-linear interpolant on every interface segment"
+        },
+        "node_count": 33,
+        "periodic_endpoint_check": {
+          "absolute_complex_mismatch": 0.0,
+          "note": "the finite-interval P1 integral remains the reported estimator even if endpoint samples differ",
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "uniform_spacing_relative_error": 5.329070518200751e-15
+      },
+      "structural_pass": true,
+      "thickness_ratio": 0.31
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1.npz",
+        "sha256": "faac01eb24f888f090c34a9ee8f9fe7a78bc773e5172bc0e95ba16ca53a75465"
+      },
+      "case_id": "A1",
+      "case_json": {
+        "path": "cases/transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1.json",
+        "sha256": "620c9e3379ec77d9698b5042d69a87bb8a6c07c3cda75f7517f3ddbef6af2c4a"
+      },
+      "key": "transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1",
+      "raw_active_work": 0.0001293261184074502,
+      "runtime_seconds": 6.600034951989073,
+      "spatial_label": "S3",
+      "spatial_modes": {
+        "B1": 0.0001305080375834193,
+        "c0": {
+          "amplitude": 0.00012609139285162934,
+          "imag": 9.098783307170702e-05,
+          "real": 8.729406385418829e-05
+        },
+        "c_cos": {
+          "amplitude": 0.0001845643252433091,
+          "imag": -1.6020656400047414e-05,
+          "real": -0.00018386769352180825
+        },
+        "c_sin": {
+          "amplitude": 8.399971621275823e-07,
+          "imag": 7.198216224989336e-07,
+          "real": -4.329573468199777e-07
+        },
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "B1": "sqrt((|c_cos|^2+|c_sin|^2)/2)",
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "time-fundamental complex y traction on the endocardium-ECM interface",
+          "integration": "exact analytic integration of the native piecewise-linear interpolant on every interface segment"
+        },
+        "node_count": 65,
+        "periodic_endpoint_check": {
+          "absolute_complex_mismatch": 0.0,
+          "note": "the finite-interval P1 integral remains the reported estimator even if endpoint samples differ",
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "uniform_spacing_relative_error": 1.0658141036401503e-14
+      },
+      "structural_pass": true,
+      "thickness_ratio": 0.31
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1.npz",
+        "sha256": "c2822d2cbea3cf126ef4d6247b650af72c7304440919f79297883c5b5c6417d0"
+      },
+      "case_id": "S1",
+      "case_json": {
+        "path": "cases/transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1.json",
+        "sha256": "7a11eb8fe4b0c5e8e8d9070c8b29494002708445f756019c8c173b929328ede6"
+      },
+      "key": "transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1",
+      "raw_active_work": 0.00013365332889012107,
+      "runtime_seconds": 1.4105634730076417,
+      "spatial_label": "S2",
+      "spatial_modes": {
+        "B1": 0.0015855437396911705,
+        "c0": {
+          "amplitude": 9.366749783547439e-06,
+          "imag": 5.11138246048177e-06,
+          "real": -7.849189184257526e-06
+        },
+        "c_cos": {
+          "amplitude": 0.0022419954809162965,
+          "imag": -3.349616579401585e-05,
+          "real": 0.002241745244965671
+        },
+        "c_sin": {
+          "amplitude": 3.67989741518518e-05,
+          "imag": -3.822053418022662e-06,
+          "real": 3.659995090568344e-05
+        },
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "B1": "sqrt((|c_cos|^2+|c_sin|^2)/2)",
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "time-fundamental complex y traction on the endocardium-ECM interface",
+          "integration": "exact analytic integration of the native piecewise-linear interpolant on every interface segment"
+        },
+        "node_count": 33,
+        "periodic_endpoint_check": {
+          "absolute_complex_mismatch": 0.0,
+          "note": "the finite-interval P1 integral remains the reported estimator even if endpoint samples differ",
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "uniform_spacing_relative_error": 5.329070518200751e-15
+      },
+      "structural_pass": true,
+      "thickness_ratio": 0.26
+    },
+    {
+      "arrays": {
+        "key_count": 50,
+        "path": "cases/transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1.npz",
+        "sha256": "2de887af9dda076ea7140975281baed375f307a0f8dadc008d28d8c2a79eaff4"
+      },
+      "case_id": "S1",
+      "case_json": {
+        "path": "cases/transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1.json",
+        "sha256": "7c8dd6604c66345ebe531cc36ae958b21405dc548845f319393c85cfcc23a6d5"
+      },
+      "key": "transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1",
+      "raw_active_work": 0.00013368062558635405,
+      "runtime_seconds": 7.15221890801331,
+      "spatial_label": "S3",
+      "spatial_modes": {
+        "B1": 0.0016077799779278255,
+        "c0": {
+          "amplitude": 9.39856368983278e-06,
+          "imag": 5.160039855134461e-06,
+          "real": -7.855379565957785e-06
+        },
+        "c_cos": {
+          "amplitude": 0.0022737229700975255,
+          "imag": -2.5099379789590783e-05,
+          "real": 0.0022735844312194104
+        },
+        "c_sin": {
+          "amplitude": 9.837179579777304e-06,
+          "imag": -1.0730972223561208e-06,
+          "real": 9.778474545457443e-06
+        },
+        "coordinate_domain": [
+          -0.49999999999999994,
+          0.5000000000000001
+        ],
+        "definition": {
+          "B1": "sqrt((|c_cos|^2+|c_sin|^2)/2)",
+          "c0": "L^-1 integral f dx",
+          "c_cos": "2 L^-1 integral f cos(2 pi x/L) dx",
+          "c_sin": "2 L^-1 integral f sin(2 pi x/L) dx",
+          "field": "time-fundamental complex y traction on the endocardium-ECM interface",
+          "integration": "exact analytic integration of the native piecewise-linear interpolant on every interface segment"
+        },
+        "node_count": 65,
+        "periodic_endpoint_check": {
+          "absolute_complex_mismatch": 0.0,
+          "note": "the finite-interval P1 integral remains the reported estimator even if endpoint samples differ",
+          "relative_to_peak_field": 0.0,
+          "used_as_assumption": false
+        },
+        "uniform_spacing_relative_error": 1.0658141036401503e-14
+      },
+      "structural_pass": true,
+      "thickness_ratio": 0.26
+    }
+  ],
+  "claim_boundary": {
+    "S2_S3_difference_is_not_error_bound": true,
+    "negative_or_inconclusive_result_not_retuned": true,
+    "not_continuous_minimum_certification": true,
+    "not_equal_power_across_thickness": true,
+    "not_formal_spatial_or_temporal_convergence": true,
+    "not_nature_physics_novelty_certification": true,
+    "not_original_blind_holdout": true
+  },
+  "comparison": {
+    "candidate_retained": true,
+    "candidate_status": "RETAINED_AS_EXPLORATORY_REDUCED_CANDIDATE",
+    "heterogeneous_channel_gate": {
+      "B1_S3": 0.0016077799779278255,
+      "e1_S2_S3_vector": 3.009309016046939e-05,
+      "five_e1": 0.00015046545080234694,
+      "floor": 1e-12,
+      "pass_condition": "B1_S3 > 5*e1 and B1_S3 > floor",
+      "quantity": "S1 S3 B1 at H=0.260",
+      "status": "PASS"
+    },
+    "phase_diagnostics": {
+      "A1__h0p21": {
+        "c0": {
+          "interpretable": true,
+          "relative_to_activation_deg": 36.13233703791248,
+          "relative_to_activation_rad": 0.630628247751868,
+          "threshold": 4.570655676477925e-07
+        },
+        "c_cos": {
+          "interpretable": true,
+          "relative_to_activation_deg": -1.5861945527054937,
+          "relative_to_activation_rad": -0.027684317521909595,
+          "threshold": 2.6315086961091155e-05
+        },
+        "c_sin": {
+          "interpretable": false,
+          "relative_to_activation_deg": null,
+          "relative_to_activation_rad": null,
+          "threshold": 1.3850776063659783e-05
+        }
+      },
+      "A1__h0p26": {
+        "c0": {
+          "interpretable": true,
+          "relative_to_activation_deg": -84.3444104735801,
+          "relative_to_activation_rad": -1.4720876684175623,
+          "threshold": 4.7121733099414516e-07
+        },
+        "c_cos": {
+          "interpretable": true,
+          "relative_to_activation_deg": 1.221521741045226,
+          "relative_to_activation_rad": 0.02131957626593275,
+          "threshold": 1.729780988450777e-05
+        },
+        "c_sin": {
+          "interpretable": false,
+          "relative_to_activation_deg": null,
+          "relative_to_activation_rad": null,
+          "threshold": 1.3123141237651457e-05
+        }
+      },
+      "A1__h0p31": {
+        "c0": {
+          "interpretable": true,
+          "relative_to_activation_deg": -133.81307572279604,
+          "relative_to_activation_rad": -2.3354787535832817,
+          "threshold": 4.796731163982821e-07
+        },
+        "c_cos": {
+          "interpretable": true,
+          "relative_to_activation_deg": 4.979687286882822,
+          "relative_to_activation_rad": 0.08691193887580867,
+          "threshold": 1.0547608588658141e-05
+        },
+        "c_sin": {
+          "interpretable": false,
+          "relative_to_activation_deg": null,
+          "relative_to_activation_rad": null,
+          "threshold": 1.193937195566663e-05
+        }
+      },
+      "S1__h0p26": {
+        "c0": {
+          "interpretable": true,
+          "relative_to_activation_deg": -33.300101624887326,
+          "relative_to_activation_rad": -0.5811964146029975,
+          "threshold": 2.452479806228122e-07
+        },
+        "c_cos": {
+          "interpretable": true,
+          "relative_to_activation_deg": 179.36750529517437,
+          "relative_to_activation_rad": 3.1305535384891563,
+          "threshold": 0.00016463898357500447
+        },
+        "c_sin": {
+          "interpretable": false,
+          "relative_to_activation_deg": null,
+          "relative_to_activation_rad": null,
+          "threshold": 0.00013480989896033743
+        }
+      }
+    },
+    "pointwise_S2_S3_error_proxies": {
+      "A1__h0p21": {
+        "S2_case_key": "transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1",
+        "S3_case_key": "transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1",
+        "absolute_complex_error": {
+          "B1_vector": 4.205538727286768e-06,
+          "c0": 9.14131135295585e-08,
+          "c_cos": 5.263017392218231e-06,
+          "c_sin": 2.7701552127319567e-06
+        },
+        "case_id": "A1",
+        "error_role": "S2-S3 absolute-difference proxy at this physical point; not a rigorous error bound",
+        "thickness_ratio": 0.21
+      },
+      "A1__h0p26": {
+        "S2_case_key": "transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1",
+        "S3_case_key": "transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1",
+        "absolute_complex_error": {
+          "B1_vector": 3.0706060077578266e-06,
+          "c0": 9.424346619882904e-08,
+          "c_cos": 3.459561976901554e-06,
+          "c_sin": 2.6246282475302912e-06
+        },
+        "case_id": "A1",
+        "error_role": "S2-S3 absolute-difference proxy at this physical point; not a rigorous error bound",
+        "thickness_ratio": 0.26
+      },
+      "A1__h0p31": {
+        "S2_case_key": "transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1",
+        "S3_case_key": "transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1",
+        "absolute_complex_error": {
+          "B1_vector": 2.2530008860863494e-06,
+          "c0": 9.593462327965643e-08,
+          "c_cos": 2.1095217177316283e-06,
+          "c_sin": 2.387874391133326e-06
+        },
+        "case_id": "A1",
+        "error_role": "S2-S3 absolute-difference proxy at this physical point; not a rigorous error bound",
+        "thickness_ratio": 0.31
+      },
+      "S1__h0p26": {
+        "S2_case_key": "transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1",
+        "S3_case_key": "transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1",
+        "absolute_complex_error": {
+          "B1_vector": 3.009309016046939e-05,
+          "c0": 4.904959612456244e-08,
+          "c_cos": 3.2927796715000896e-05,
+          "c_sin": 2.6961979792067485e-05
+        },
+        "case_id": "S1",
+        "error_role": "S2-S3 absolute-difference proxy at this physical point; not a rigorous error bound",
+        "thickness_ratio": 0.26
+      }
+    },
+    "position_gate": {
+      "center_thickness_ratio": 0.26,
+      "floor": 1e-12,
+      "interpretation": "three-point exploratory notch test only; not certification of a continuous minimum",
+      "quantity": "A1 S3 amplitude |c0| at H=0.210, 0.260, 0.310",
+      "sides": [
+        {
+          "A_center": 1.353830463079047e-05,
+          "A_side": 0.0001254572411947101,
+          "D_side_minus_center": 0.00011191893656391963,
+          "E_sum": 1.8565657972838752e-07,
+          "e_center": 9.424346619882904e-08,
+          "e_side": 9.14131135295585e-08,
+          "fail_floor": false,
+          "fail_inequality_D_lt_minus_2E": false,
+          "pass_floor": true,
+          "pass_inequality_D_gt_2E": true,
+          "side_thickness_ratio": 0.21,
+          "two_E": 3.7131315945677504e-07
+        },
+        {
+          "A_center": 1.353830463079047e-05,
+          "A_side": 0.00012609139285162934,
+          "D_side_minus_center": 0.00011255308822083887,
+          "E_sum": 1.9017808947848545e-07,
+          "e_center": 9.424346619882904e-08,
+          "e_side": 9.593462327965643e-08,
+          "fail_floor": false,
+          "fail_inequality_D_lt_minus_2E": false,
+          "pass_floor": true,
+          "pass_inequality_D_gt_2E": true,
+          "side_thickness_ratio": 0.31,
+          "two_E": 3.803561789569709e-07
+        }
+      ],
+      "status": "PASS"
+    }
+  },
+  "completed_at_utc": "2026-09-05T02:46:32.382495+00:00",
+  "cumulative_completed_case_count": 34,
+  "evidence_level": "preregistered_bounded_exploratory_test_after_training_pilot",
+  "failed_startup_budget_debit_seconds": 3.0,
+  "holdouts": "LOCKED_NOT_RUN",
+  "prior_batch_elapsed_seconds": 62.71693008200964,
+  "prior_case_count": 26,
+  "project_cumulative_elapsed_seconds": 104.44878690800397,
+  "schema": "paper2_transverse_notch_summary_v02",
+  "status": "COMPLETED"
+}
