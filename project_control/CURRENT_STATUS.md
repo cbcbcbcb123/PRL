@@ -1,14 +1,14 @@
 ---
 document_id: PRL-CURRENT-STATUS
 status: current
-last_verified: 2026-09-05
+last_verified: 2026-09-06
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: ac5f50cee42def48092bcaae39c3be99d361bdee
-current_lifecycle: paper2_identifiability_closed_compression_scope_literature_review
+verified_commit: 6fafae6f80816310854317c36c7cfff38057d179
+current_lifecycle: paper2_compression_claim_narrowed_scientific_milestone_synthesis
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section41_brief67_supervisor_compression_scope_review_only
+execution_authorized: v04_section42_brief68_bounded_scientific_synthesis_only
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_cell_bloch_asymptotic_probe/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划41/简报67，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
+当前裁决（主计划42/简报68，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
 已完成并通过总管独立几何与解析输入重建；theta=0.02时领先系数误差分别约0.008558%和0.016599%。
 本批计算0.0750725000秒，独立复核0.0177348000秒且0新右端；没有新增FEM或解盲原四留出。
 长波连接伸长可写成普通应变—曲率恢复，alpha=-0.778458496485260，z_eff/b=0.49625，
@@ -51,15 +51,17 @@ C_h随厚度非增，所以|c1(h)|非增且有非零下界。这是限定经典�
 约0.264752%（以薄层幅值为分母）。不据此声称真实组织效应微小或实验不可测。
 Y/W关系是依赖独立细胞参数的模型必要检验，不是无参数规律；近零差分不取比，有限k须统一相位。
 本阶段收缩“强厚度效应/DCM独占”的创新主张，保留静态分支为基线，不增加扫描或重建平台。
-总管已在本轮20分钟预算内核对3篇原始研究：一般顶底机械隔离、内部耗散模态及心肌/ECM
-分层材料反演都有先例。这不是穷尽性查新；目前0项新机制获确认，保留1项可辨识性候选。
+前轮三篇原始研究已确认一般顶底机械隔离、内部耗散模态及心肌/ECM分层材料反演存在先例。
+这不是穷尽性查新；目前0项新机制获确认，可辨识性候选的条件结论已验收并收口。
 第40节辨识核查已交接并由总管独立代数验收：未知端口轨迹只能确定两个组合，并存在共同尺度
 及相对参数退化；两个不同且绝对已知的端口、非退化响应原则上可反演四个有效细胞参数。
 这是结构可辨识性，不是实验可操作性、噪声稳健性或Nature Physics创新证明；该辅助分支收口。
 第41节压缩提案也已完成。总管源码核实：常Hessian未定义有限压缩支路，不能判定失稳有无；
 参照重合配对的二次向量/距离能相同，纠正将二者当作现有歧义的过强说法，见简报67。
-理论与数值任务均完成。下一轮由总管最多20分钟、2篇原始研究核对压缩候选与已有屈曲解释，
-再决定是否值得定义最小有限能量；此刻不批准扩模，不沿旧强效应分支救参数。
+本轮已核对2025年PRL的unbuckling与2026年Communications Physics的细胞表面力学/基底
+屈曲理论，收缩一般压缩创新主张，不批准新的有限能量实现；文献模型不等于项目模型或EFE验证。
+有限厚度法切端口已在前面处理，不能重新命名后当新候选。原理论agent下一步最多20分钟，
+只做一页既有科学结果综合与唯一下一预测建议（允许无合格候选），待总管作科学里程碑裁决。
 数值任务保持完成，15例既有输出本轮只读核实仍全部检查通过；无新计算或原留出读取。
 这是独立理想边界研究，不是已实现三层耦合；不启动新FEM、扫描、原留出、流体或非线性。
 Nature Physics目标保持；生产心肌FEM/ECM黏弹FEM不变，现有链不追认为完整细胞DCM。
