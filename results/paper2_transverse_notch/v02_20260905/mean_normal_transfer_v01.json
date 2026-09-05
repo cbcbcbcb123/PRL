@@ -1,0 +1,2124 @@
+{
+  "aggregate": {
+    "all_json_extraction_consistency_pass": true,
+    "all_values_finite": true,
+    "conditional_residual_S2_over_S3_by_physical_point": [
+      3.999962677538551,
+      3.999894914051117,
+      3.999875943826877,
+      4.000006956548304
+    ],
+    "maximum_cancellation_condition_number": 299.0292111810549,
+    "maximum_conditional_absolute_complex_residual_S2": 2.3285133394762316e-09,
+    "maximum_conditional_absolute_complex_residual_S3": 5.821463895823801e-10,
+    "maximum_conditional_absolute_complex_residual_all": 2.3285133394762316e-09,
+    "maximum_conditional_relative_complex_residual_all": 0.0001973986751818116
+  },
+  "claim_boundary": {
+    "S1_negative_diagnostic_retained": true,
+    "S2_S3_difference_is_not_a_rigorous_error_bound": true,
+    "chi0_source_prediction_is_separate_and_can_fail": true,
+    "conditional_mapping_uses_actual_macro_strain": true,
+    "does_not_explain_nonzero_B1_or_local_loading": true,
+    "no_holdout_read": true,
+    "no_new_fem": true,
+    "not_a_new_preregistered_pass_gate": true,
+    "not_continuous_notch_or_novelty_certification": true
+  },
+  "created_at_utc": "2026-09-05T03:32:52.313621+00:00",
+  "direct_input_count": 8,
+  "evidence_level": "post_hoc_existing_array_diagnostic",
+  "formula": {
+    "analysis_code_version": "0fa6805d888e2468b51298d46bb44ff154b499d6",
+    "brief_path": "results/paper2_science_pilot/v01_20260905/science_brief.md",
+    "brief_sha256": "8e2f0ed04e33cc028aef3291743206e848bf66321c0a577026966d545da5a289",
+    "conditional_equation": "c0_cond = p_epsilon*epsilon_bar + p_activation*a_bar",
+    "residual_sign": "prediction minus raw-array actual",
+    "source_equation": "epsilon_src = -chi0*a_bar; c0_src = p_epsilon*epsilon_src + p_activation*a_bar",
+    "source_preregistration_commit": "9842b3bfab7f11e947d0c355fa8b0202a368138f",
+    "source_v02_runtime_version": "7cf40e211ccbd01b5baa60693834ea7907b89405",
+    "space_mean": "exact trapezoidal integral of the native P1 nodal field divided by L",
+    "time_fundamental": "2/N times first rFFT coefficient after temporal mean removal, first cycle samples only",
+    "version": "science_brief_sections_24_25_at_0fa6805d"
+  },
+  "grid_pairs": [
+    {
+      "absolute_complex_S3_minus_S2_actual_c0": 9.141311352954615e-08,
+      "case_id": "A1",
+      "conditional_residual": {
+        "S2": {
+          "absolute": 1.4733594798548124e-09,
+          "over_grid_difference": 0.016117594325004578
+        },
+        "S3": {
+          "absolute": 3.683433068334204e-10,
+          "over_grid_difference": 0.004029436178370252
+        }
+      },
+      "conditional_residual_S2_over_S3": 3.999962677538551,
+      "difference_role": "two-grid absolute difference proxy, not a rigorous error bound",
+      "source_residual": {
+        "S2": {
+          "absolute": 2.7973058471724322e-06,
+          "over_grid_difference": 30.60070638845814
+        },
+        "S3": {
+          "absolute": 2.8856795304207126e-06,
+          "over_grid_difference": 31.567456998256773
+        }
+      },
+      "thickness_ratio": 0.21
+    },
+    {
+      "absolute_complex_S3_minus_S2_actual_c0": 9.424346619883496e-08,
+      "case_id": "A1",
+      "conditional_residual": {
+        "S2": {
+          "absolute": 1.8537248996254733e-09,
+          "over_grid_difference": 0.01966953226990275
+        },
+        "S3": {
+          "absolute": 4.6344340025373564e-10,
+          "over_grid_difference": 0.004917512257836127
+        }
+      },
+      "conditional_residual_S2_over_S3": 3.999894914051117,
+      "difference_role": "two-grid absolute difference proxy, not a rigorous error bound",
+      "source_residual": {
+        "S2": {
+          "absolute": 1.5787220213804726e-06,
+          "over_grid_difference": 16.751527560008068
+        },
+        "S3": {
+          "absolute": 1.6608401413144704e-06,
+          "over_grid_difference": 17.622867752024614
+        }
+      },
+      "thickness_ratio": 0.26
+    },
+    {
+      "absolute_complex_S3_minus_S2_actual_c0": 9.593462327965643e-08,
+      "case_id": "A1",
+      "conditional_residual": {
+        "S2": {
+          "absolute": 2.3285133394762316e-09,
+          "over_grid_difference": 0.024271876616312395
+        },
+        "S3": {
+          "absolute": 5.821463895823801e-10,
+          "over_grid_difference": 0.006068157352172854
+        }
+      },
+      "conditional_residual_S2_over_S3": 3.999875943826877,
+      "difference_role": "two-grid absolute difference proxy, not a rigorous error bound",
+      "source_residual": {
+        "S2": {
+          "absolute": 9.571183878491787e-07,
+          "over_grid_difference": 9.976777467078897
+        },
+        "S3": {
+          "absolute": 9.096199424628378e-07,
+          "over_grid_difference": 9.481664818875968
+        }
+      },
+      "thickness_ratio": 0.31
+    },
+    {
+      "absolute_complex_S3_minus_S2_actual_c0": 4.9049596124576043e-08,
+      "case_id": "S1",
+      "conditional_residual": {
+        "S2": {
+          "absolute": 1.8489839980317885e-09,
+          "over_grid_difference": 0.03769621248941058
+        },
+        "S3": {
+          "absolute": 4.622451956001893e-10,
+          "over_grid_difference": 0.00942403673266096
+        }
+      },
+      "conditional_residual_S2_over_S3": 4.000006956548304,
+      "difference_role": "two-grid absolute difference proxy, not a rigorous error bound",
+      "source_residual": {
+        "S2": {
+          "absolute": 9.418757077494109e-06,
+          "over_grid_difference": 192.02517088157816
+        },
+        "S3": {
+          "absolute": 9.388555784879371e-06,
+          "over_grid_difference": 191.40944119161227
+        }
+      },
+      "thickness_ratio": 0.26
+    }
+  ],
+  "holdouts": "LOCKED_NOT_READ",
+  "records": [
+    {
+      "cancellation": {
+        "condition_number": 21.68900224115871,
+        "denominator_amplitude": 0.0001255367462860772,
+        "denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+        "floor": 1e-12,
+        "interpretable": true,
+        "p_activation_times_actual_activation": {
+          "amplitude": 0.0014241498678629573,
+          "imag": -0.0008470920654737623,
+          "real": -0.0011448309389361705
+        },
+        "p_epsilon_times_actual_strain": {
+          "amplitude": 0.0012986169036835438,
+          "imag": 0.0007730327571209755,
+          "real": 0.0010434683603016326
+        }
+      },
+      "case_key": "transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1",
+      "conditional_mapping": {
+        "c0_conditional": {
+          "amplitude": 0.00012553546710446426,
+          "imag": -7.405930835278679e-05,
+          "real": -0.00010136257863453788
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 1.4733594798548124e-09,
+          "absolute_relative_amplitude_difference": 1.0189698640222541e-05,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 0.0003336727537341231,
+          "prediction_minus_actual": {
+            "amplitude": 1.4733594798548124e-09,
+            "imag": 1.6433840152965153e-10,
+            "real": 1.4641656486411372e-09
+          },
+          "relative_complex_residual": 1.1736479743526833e-05,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": -1.0189698640222541e-05
+        }
+      },
+      "grid_pair": {
+        "absolute_complex_S3_minus_S2_actual_c0": 9.141311352954615e-08,
+        "conditional_residual_over_grid_difference": 0.016117594325004578,
+        "near_zero_grid_difference": false,
+        "source_residual_over_grid_difference": 30.60070638845814
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "d983354bc5b0e1a0f910e26962d76f391f5762589e40cb536ac926b5ab616d57",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1.npz",
+        "npz_sha256": "be720279537b456f12cafe71a015043db829d5e0fd0544ab8330d1656e063999",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            33,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            33
+          ]
+        }
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0,
+        "config_digest": "447046b401dd442cf0ec873a24492c4c6f76092eb920a9ead4c52afddf8ebfad",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.21,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "steps_per_cycle": 128
+      },
+      "raw_array_extraction": {
+        "actual_upper_y_traction_c0": {
+          "amplitude": 0.0001255367462860772,
+          "imag": -7.405947269118832e-05,
+          "real": -0.00010136404280018652
+        },
+        "json_consistency": {
+          "mean_activation": {
+            "absolute_complex_difference": 2.4936649967166602e-18,
+            "pass": true,
+            "relative_difference": 4.9873299934333204e-17,
+            "tolerance": 1e-11
+          },
+          "mean_strain": {
+            "absolute_complex_difference": 8.673617379884035e-19,
+            "pass": true,
+            "relative_difference": 5.590779696658088e-17,
+            "tolerance": 1e-11
+          },
+          "upper_y_traction_c0": {
+            "absolute_complex_difference": 0.0,
+            "pass": true,
+            "relative_difference": 0.0,
+            "tolerance": 1e-11
+          }
+        },
+        "mean_activation": {
+          "amplitude": 0.05,
+          "imag": 5.7462715141731735e-18,
+          "real": -0.05
+        },
+        "mean_macro_strain_equals_negative_shortening": {
+          "amplitude": 0.015514146238079684,
+          "imag": -0.0013767646516157752,
+          "real": 0.015452936697941375
+        }
+      },
+      "source_prediction": {
+        "c0_source": {
+          "amplitude": 0.00012754309158837705,
+          "imag": -7.68205504140118e-05,
+          "real": -0.00010181278527773125
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 2.7973058471724322e-06,
+          "absolute_relative_amplitude_difference": 0.01598213560297109,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 0.8826248749639405,
+          "prediction_minus_actual": {
+            "amplitude": 2.7973058471724322e-06,
+            "imag": -2.7610777228234803e-06,
+            "real": -4.4874247754473056e-07
+          },
+          "relative_complex_residual": 0.02228276524546718,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": 0.01598213560297109
+        },
+        "macro_strain_comparison_to_actual": {
+          "absolute_complex_residual": 3.342323511188633e-05,
+          "absolute_relative_amplitude_difference": 0.0015431643140172298,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.08620023756966905,
+          "prediction_minus_actual": {
+            "amplitude": 3.342323511188633e-05,
+            "imag": -2.1086587736936398e-05,
+            "real": -2.5931996894896364e-05
+          },
+          "relative_complex_residual": 0.0021543715393018883,
+          "relative_denominator_definition": "magnitude of raw-array actual mean macro strain",
+          "signed_relative_amplitude_difference": -0.0015431643140172298
+        },
+        "macro_strain_from_minus_chi0_activation": {
+          "amplitude": 0.015490205361242635,
+          "imag": -0.0013978512393527116,
+          "real": 0.015427004701046479
+        },
+        "scope_warning": "chi0 ignores macro-to-nonzero-mode feedback; S1 is retained as a negative diagnostic, not a validated autonomous prediction"
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p21__a1__s2__t128__a0p1",
+        "spatial_label": "S2",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.21
+      },
+      "transfer": {
+        "chi0": {
+          "amplitude": 0.3098041072248527,
+          "imag": -0.027957024787054193,
+          "real": 0.3085400940209296
+        },
+        "material": {
+          "B_e": {
+            "amplitude": 1.862359376233292,
+            "imag": 0.45288979960966164,
+            "real": 1.8064532309621462
+          },
+          "K0": {
+            "amplitude": 0.8400139053442407,
+            "imag": 0.06493928835214412,
+            "real": 0.8375
+          },
+          "Q_e": {
+            "amplitude": 1.8561654273295183,
+            "imag": 0.4267046026934745,
+            "real": 1.8064532309621462
+          },
+          "Q_m": {
+            "amplitude": 2.747252747252747,
+            "imag": 0.0,
+            "real": 2.747252747252747
+          },
+          "lambda_e": {
+            "amplitude": 3.3565229088010637,
+            "imag": 0.1967577557848613,
+            "real": 3.350751023702725
+          },
+          "lambda_m": {
+            "amplitude": 1.4423076923076923,
+            "imag": 0.0,
+            "real": 1.4423076923076923
+          },
+          "mu_e": {
+            "amplitude": 0.5263042368240298,
+            "imag": 0.13117183718990752,
+            "real": 0.5096960847673335
+          },
+          "mu_m": {
+            "amplitude": 0.9615384615384615,
+            "imag": 0.0,
+            "real": 0.9615384615384615
+          }
+        },
+        "omega_discrete": 6.284447259884914,
+        "p_activation": {
+          "amplitude": 0.028482997357259145,
+          "imag": 0.016941841309475247,
+          "real": 0.02289661877872341
+        },
+        "p_epsilon": {
+          "amplitude": 0.08370534116122169,
+          "imag": 0.055599763314063314,
+          "real": 0.06257196223818343
+        },
+        "passive_denominator_ell_dot_v": {
+          "amplitude": 1.1437465537047233,
+          "imag": 0.9979147013904427,
+          "real": 0.5588581464560174
+        },
+        "phi_discrete": {
+          "amplitude": 0.782539908847316,
+          "imag": 0.48720968099108514,
+          "real": 0.6123687089387656
+        }
+      }
+    },
+    {
+      "cancellation": {
+        "condition_number": 21.70337559338479,
+        "denominator_amplitude": 0.00012545724119471013,
+        "denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+        "floor": 1e-12,
+        "interpretable": true,
+        "p_activation_times_actual_activation": {
+          "amplitude": 0.0014241498678629581,
+          "imag": -0.0008470920654737628,
+          "real": -0.0011448309389361713
+        },
+        "p_epsilon_times_actual_strain": {
+          "amplitude": 0.001298695758695703,
+          "imag": 0.0007731159578620923,
+          "real": 0.0010435048583275438
+        }
+      },
+      "case_key": "transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1",
+      "conditional_mapping": {
+        "c0_conditional": {
+          "amplitude": 0.00012545692132712147,
+          "imag": -7.397610761167056e-05,
+          "real": -0.00010132608060862752
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 3.683433068334204e-10,
+          "absolute_relative_amplitude_difference": 2.549614399413931e-06,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 8.341619020660963e-05,
+          "prediction_minus_actual": {
+            "amplitude": 3.683433068334204e-10,
+            "imag": 4.1091234947543236e-11,
+            "real": 3.66044125891217e-10
+          },
+          "relative_complex_residual": 2.936006748799379e-06,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": -2.549614399413931e-06
+        }
+      },
+      "grid_pair": {
+        "absolute_complex_S3_minus_S2_actual_c0": 9.141311352954615e-08,
+        "conditional_residual_over_grid_difference": 0.004029436178370252,
+        "near_zero_grid_difference": false,
+        "source_residual_over_grid_difference": 31.567456998256773
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1.json",
+        "case_json_sha256": "f046e6838b9e1073bbc73ac98da88722d705b02f96b4275bd94cb43a38e1e5a8",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1.npz",
+        "npz_sha256": "f884c646912469213b958d2251f3fe814301c08ad107032653c83ebc478e910c",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            65,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            65
+          ]
+        }
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0000000000000007,
+        "config_digest": "447046b401dd442cf0ec873a24492c4c6f76092eb920a9ead4c52afddf8ebfad",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.21,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "steps_per_cycle": 128
+      },
+      "raw_array_extraction": {
+        "actual_upper_y_traction_c0": {
+          "amplitude": 0.00012545724119471013,
+          "imag": -7.397614870290551e-05,
+          "real": -0.00010132644665275341
+        },
+        "json_consistency": {
+          "mean_activation": {
+            "absolute_complex_difference": 2.4936649967166625e-18,
+            "pass": true,
+            "relative_difference": 4.987329993433321e-17,
+            "tolerance": 1e-11
+          },
+          "mean_strain": {
+            "absolute_complex_difference": 6.505213034913027e-19,
+            "pass": true,
+            "relative_difference": 4.192830174179446e-17,
+            "tolerance": 1e-11
+          },
+          "upper_y_traction_c0": {
+            "absolute_complex_difference": 1.3552527156068805e-20,
+            "pass": true,
+            "relative_difference": 1.0802506915511742e-16,
+            "tolerance": 1e-11
+          }
+        },
+        "mean_activation": {
+          "amplitude": 0.05000000000000004,
+          "imag": 5.746271514173177e-18,
+          "real": -0.05000000000000004
+        },
+        "mean_macro_strain_equals_negative_shortening": {
+          "amplitude": 0.015515088292804808,
+          "imag": -0.0013763112563569344,
+          "real": 0.01545392286958732
+        }
+      },
+      "source_prediction": {
+        "c0_source": {
+          "amplitude": 0.00012754309158837697,
+          "imag": -7.682055041401169e-05,
+          "real": -0.00010181278527773125
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 2.8856795304207126e-06,
+          "absolute_relative_amplitude_difference": 0.01662598646202965,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 0.9032218438347996,
+          "prediction_minus_actual": {
+            "amplitude": 2.8856795304207126e-06,
+            "imag": -2.844401711106181e-06,
+            "real": -4.863386249778388e-07
+          },
+          "relative_complex_residual": 0.02300129911148075,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": 0.01662598646202965
+        },
+        "macro_strain_comparison_to_actual": {
+          "absolute_complex_residual": 3.447547918522547e-05,
+          "absolute_relative_amplitude_difference": 0.001603789233587584,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.08819116429828203,
+          "prediction_minus_actual": {
+            "amplitude": 3.447547918522547e-05,
+            "imag": -2.1539982995777982e-05,
+            "real": -2.6918168540829637e-05
+          },
+          "relative_complex_residual": 0.002222061423989036,
+          "relative_denominator_definition": "magnitude of raw-array actual mean macro strain",
+          "signed_relative_amplitude_difference": -0.001603789233587584
+        },
+        "macro_strain_from_minus_chi0_activation": {
+          "amplitude": 0.015490205361242647,
+          "imag": -0.0013978512393527124,
+          "real": 0.015427004701046491
+        },
+        "scope_warning": "chi0 ignores macro-to-nonzero-mode feedback; S1 is retained as a negative diagnostic, not a validated autonomous prediction"
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p21__a1__s3__t128__a0p1",
+        "spatial_label": "S3",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.21
+      },
+      "transfer": {
+        "chi0": {
+          "amplitude": 0.3098041072248527,
+          "imag": -0.027957024787054193,
+          "real": 0.3085400940209296
+        },
+        "material": {
+          "B_e": {
+            "amplitude": 1.862359376233292,
+            "imag": 0.45288979960966164,
+            "real": 1.8064532309621462
+          },
+          "K0": {
+            "amplitude": 0.8400139053442407,
+            "imag": 0.06493928835214412,
+            "real": 0.8375
+          },
+          "Q_e": {
+            "amplitude": 1.8561654273295183,
+            "imag": 0.4267046026934745,
+            "real": 1.8064532309621462
+          },
+          "Q_m": {
+            "amplitude": 2.747252747252747,
+            "imag": 0.0,
+            "real": 2.747252747252747
+          },
+          "lambda_e": {
+            "amplitude": 3.3565229088010637,
+            "imag": 0.1967577557848613,
+            "real": 3.350751023702725
+          },
+          "lambda_m": {
+            "amplitude": 1.4423076923076923,
+            "imag": 0.0,
+            "real": 1.4423076923076923
+          },
+          "mu_e": {
+            "amplitude": 0.5263042368240298,
+            "imag": 0.13117183718990752,
+            "real": 0.5096960847673335
+          },
+          "mu_m": {
+            "amplitude": 0.9615384615384615,
+            "imag": 0.0,
+            "real": 0.9615384615384615
+          }
+        },
+        "omega_discrete": 6.284447259884914,
+        "p_activation": {
+          "amplitude": 0.028482997357259145,
+          "imag": 0.016941841309475247,
+          "real": 0.02289661877872341
+        },
+        "p_epsilon": {
+          "amplitude": 0.08370534116122169,
+          "imag": 0.055599763314063314,
+          "real": 0.06257196223818343
+        },
+        "passive_denominator_ell_dot_v": {
+          "amplitude": 1.1437465537047233,
+          "imag": 0.9979147013904427,
+          "real": 0.5588581464560174
+        },
+        "phi_discrete": {
+          "amplitude": 0.782539908847316,
+          "imag": 0.48720968099108514,
+          "real": 0.6123687089387656
+        }
+      }
+    },
+    {
+      "cancellation": {
+        "condition_number": 208.88512843615595,
+        "denominator_amplitude": 1.3457378418528753e-05,
+        "denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+        "floor": 1e-12,
+        "interpretable": true,
+        "p_activation_times_actual_activation": {
+          "amplitude": 0.0014021382720885154,
+          "imag": -0.000820522198787704,
+          "real": -0.0011369850726161532
+        },
+        "p_epsilon_times_actual_strain": {
+          "amplitude": 0.0014089079472798167,
+          "imag": 0.0008339096052268347,
+          "real": 0.0011356127747690458
+        }
+      },
+      "case_key": "transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1",
+      "conditional_mapping": {
+        "c0_conditional": {
+          "amplitude": 1.345755745102549e-05,
+          "imag": 1.3387406439130628e-05,
+          "real": -1.3722978471073562e-06
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 1.8537248996254733e-09,
+          "absolute_relative_amplitude_difference": 1.3303668156544704e-05,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.007855423057449107,
+          "prediction_minus_actual": {
+            "amplitude": 1.8537248996254733e-09,
+            "imag": 3.6636870811022947e-10,
+            "real": 1.8171598645163592e-09
+          },
+          "relative_complex_residual": 0.00013774784671828633,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": 1.3303668156544704e-05
+        }
+      },
+      "grid_pair": {
+        "absolute_complex_S3_minus_S2_actual_c0": 9.424346619883496e-08,
+        "conditional_residual_over_grid_difference": 0.01966953226990275,
+        "near_zero_grid_difference": false,
+        "source_residual_over_grid_difference": 16.751527560008068
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "35a6ca1cd33013ee7602b6651da9912c5489becdfa39efe0f30cd7447dd43fcf",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1.npz",
+        "npz_sha256": "002859ef5fe79173dd2005a358fbb663ac5693f4bb492c7ed66106b03926c710",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            33,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            33
+          ]
+        }
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0,
+        "config_digest": "231345b1974ce2845a6f6430dbf678e1cf54415e5b6e464614aff1f30a54ac63",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.26,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "steps_per_cycle": 128
+      },
+      "raw_array_extraction": {
+        "actual_upper_y_traction_c0": {
+          "amplitude": 1.3457378418528753e-05,
+          "imag": 1.3387040070422518e-05,
+          "real": -1.3741150069718726e-06
+        },
+        "json_consistency": {
+          "mean_activation": {
+            "absolute_complex_difference": 2.4936649967166602e-18,
+            "pass": true,
+            "relative_difference": 4.9873299934333204e-17,
+            "tolerance": 1e-11
+          },
+          "mean_strain": {
+            "absolute_complex_difference": 6.505213034913027e-19,
+            "pass": true,
+            "relative_difference": 4.414974221164834e-17,
+            "tolerance": 1e-11
+          },
+          "upper_y_traction_c0": {
+            "absolute_complex_difference": 3.788046498485219e-21,
+            "pass": true,
+            "relative_difference": 2.814847276100713e-16,
+            "tolerance": 1e-11
+          }
+        },
+        "mean_activation": {
+          "amplitude": 0.05,
+          "imag": 5.7462715141731735e-18,
+          "real": -0.05
+        },
+        "mean_macro_strain_equals_negative_shortening": {
+          "amplitude": 0.014734430393110448,
+          "imag": -0.0014288240263293274,
+          "real": 0.0146649889502584
+        }
+      },
+      "source_prediction": {
+        "c0_source": {
+          "amplitude": 1.187879711282485e-05,
+          "imag": 1.1814671115492354e-05,
+          "real": -1.2326261722057658e-06
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 1.5787220213804726e-06,
+          "absolute_relative_amplitude_difference": 0.11730228998617129,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 0.0955180863648131,
+          "prediction_minus_actual": {
+            "amplitude": 1.5787220213804726e-06,
+            "imag": -1.5723689549301635e-06,
+            "real": 1.4148883476610677e-07
+          },
+          "relative_complex_residual": 0.11731274638207495,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": -0.11730228998617129
+        },
+        "macro_strain_comparison_to_actual": {
+          "absolute_complex_residual": 1.651247869678131e-05,
+          "absolute_relative_amplitude_difference": 0.0005803432698041565,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.054945532317025876,
+          "prediction_minus_actual": {
+            "amplitude": 1.651247869678131e-05,
+            "imag": -1.3225408870111552e-05,
+            "real": -9.886885906595227e-06
+          },
+          "relative_complex_residual": 0.001120673026118624,
+          "relative_denominator_definition": "magnitude of raw-array actual mean macro strain",
+          "signed_relative_amplitude_difference": -0.0005803432698041565
+        },
+        "macro_strain_from_minus_chi0_activation": {
+          "amplitude": 0.014725879365597409,
+          "imag": -0.001442049435199439,
+          "real": 0.014655102064351805
+        },
+        "scope_warning": "chi0 ignores macro-to-nonzero-mode feedback; S1 is retained as a negative diagnostic, not a validated autonomous prediction"
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p26__a1__s2__t128__a0p1",
+        "spatial_label": "S2",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.26
+      },
+      "transfer": {
+        "chi0": {
+          "amplitude": 0.29451758731194816,
+          "imag": -0.028840988703988744,
+          "real": 0.2931020412870361
+        },
+        "material": {
+          "B_e": {
+            "amplitude": 1.862359376233292,
+            "imag": 0.45288979960966164,
+            "real": 1.8064532309621462
+          },
+          "K0": {
+            "amplitude": 0.8400139053442407,
+            "imag": 0.06493928835214412,
+            "real": 0.8375
+          },
+          "Q_e": {
+            "amplitude": 1.8561654273295183,
+            "imag": 0.4267046026934745,
+            "real": 1.8064532309621462
+          },
+          "Q_m": {
+            "amplitude": 2.747252747252747,
+            "imag": 0.0,
+            "real": 2.747252747252747
+          },
+          "lambda_e": {
+            "amplitude": 3.3565229088010637,
+            "imag": 0.1967577557848613,
+            "real": 3.350751023702725
+          },
+          "lambda_m": {
+            "amplitude": 1.4423076923076923,
+            "imag": 0.0,
+            "real": 1.4423076923076923
+          },
+          "mu_e": {
+            "amplitude": 0.5263042368240298,
+            "imag": 0.13117183718990752,
+            "real": 0.5096960847673335
+          },
+          "mu_m": {
+            "amplitude": 0.9615384615384615,
+            "imag": 0.0,
+            "real": 0.9615384615384615
+          }
+        },
+        "omega_discrete": 6.284447259884914,
+        "p_activation": {
+          "amplitude": 0.02804276544177031,
+          "imag": 0.016410443975754082,
+          "real": 0.022739701452323062
+        },
+        "p_epsilon": {
+          "amplitude": 0.09562011626446018,
+          "imag": 0.06380307021650437,
+          "real": 0.071220607027578
+        },
+        "passive_denominator_ell_dot_v": {
+          "amplitude": 1.1617017634794768,
+          "imag": 1.0202661775962132,
+          "real": 0.5555248996440562
+        },
+        "phi_discrete": {
+          "amplitude": 0.782539908847316,
+          "imag": 0.48720968099108514,
+          "real": 0.6123687089387656
+        }
+      }
+    },
+    {
+      "cancellation": {
+        "condition_number": 207.64251879596443,
+        "denominator_amplitude": 1.3538304630790469e-05,
+        "denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+        "floor": 1e-12,
+        "interpretable": true,
+        "p_activation_times_actual_activation": {
+          "amplitude": 0.0014021382720885165,
+          "imag": -0.0008205221987877046,
+          "real": -0.001136985072616154
+        },
+        "p_epsilon_times_actual_strain": {
+          "amplitude": 0.001408989401675886,
+          "imag": 0.0008339946940377046,
+          "real": 0.0011356513480606301
+        }
+      },
+      "case_key": "transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1",
+      "conditional_mapping": {
+        "c0_conditional": {
+          "amplitude": 1.3538351061014804e-05,
+          "imag": 1.3472495250000023e-05,
+          "real": -1.333724555523932e-06
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 4.6344340025373564e-10,
+          "absolute_relative_amplitude_difference": 3.429544954208037e-06,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.001951478485061612,
+          "prediction_minus_actual": {
+            "amplitude": 4.6344340025373564e-10,
+            "imag": 9.163831968437793e-11,
+            "real": 4.5429308117576255e-10
+          },
+          "relative_complex_residual": 3.423201153264907e-05,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": 3.429544954208037e-06
+        }
+      },
+      "grid_pair": {
+        "absolute_complex_S3_minus_S2_actual_c0": 9.424346619883496e-08,
+        "conditional_residual_over_grid_difference": 0.004917512257836127,
+        "near_zero_grid_difference": false,
+        "source_residual_over_grid_difference": 17.622867752024614
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1.json",
+        "case_json_sha256": "a60002e8f3ecca35d828b0a93aaf4f3d2f0c7657d87e38ee7b1aba2dc5d7d575",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1.npz",
+        "npz_sha256": "a24a2bad02b19a0fb135d340cd147f0dbc1999a2be9a0c566d27adcf0c7f7657",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            65,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            65
+          ]
+        }
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0000000000000007,
+        "config_digest": "231345b1974ce2845a6f6430dbf678e1cf54415e5b6e464614aff1f30a54ac63",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.26,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "steps_per_cycle": 128
+      },
+      "raw_array_extraction": {
+        "actual_upper_y_traction_c0": {
+          "amplitude": 1.3538304630790469e-05,
+          "imag": 1.3472403611680338e-05,
+          "real": -1.3341788486051078e-06
+        },
+        "json_consistency": {
+          "mean_activation": {
+            "absolute_complex_difference": 2.4936649967166625e-18,
+            "pass": true,
+            "relative_difference": 4.987329993433321e-17,
+            "tolerance": 1e-11
+          },
+          "mean_strain": {
+            "absolute_complex_difference": 4.336808689942018e-19,
+            "pass": true,
+            "relative_difference": 2.943145992835285e-17,
+            "tolerance": 1e-11
+          },
+          "upper_y_traction_c0": {
+            "absolute_complex_difference": 5.082197683525802e-21,
+            "pass": true,
+            "relative_difference": 3.75393952354067e-16,
+            "tolerance": 1e-11
+          }
+        },
+        "mean_activation": {
+          "amplitude": 0.05000000000000004,
+          "imag": 5.746271514173177e-18,
+          "real": -0.05000000000000004
+        },
+        "mean_macro_strain_equals_negative_shortening": {
+          "amplitude": 0.014735282247293976,
+          "imag": -0.0014284304026835038,
+          "real": 0.014665883181455744
+        }
+      },
+      "source_prediction": {
+        "c0_source": {
+          "amplitude": 1.1878797112824872e-05,
+          "imag": 1.1814671115492354e-05,
+          "real": -1.2326261722059827e-06
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 1.6608401413144704e-06,
+          "absolute_relative_amplitude_difference": 0.12257868050858757,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 0.3005385907222795,
+          "prediction_minus_actual": {
+            "amplitude": 1.6608401413144704e-06,
+            "imag": -1.657732496187984e-06,
+            "real": 1.0155267639912518e-07
+          },
+          "relative_complex_residual": 0.12267711405586078,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": -0.12257868050858757
+        },
+        "macro_strain_comparison_to_actual": {
+          "absolute_complex_residual": 1.7369816714022924e-05,
+          "absolute_relative_amplitude_difference": 0.0006381202299863092,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.05680603954753644,
+          "prediction_minus_actual": {
+            "amplitude": 1.7369816714022924e-05,
+            "imag": -1.3619032515936212e-05,
+            "real": -1.0781117103928622e-05
+          },
+          "relative_complex_residual": 0.0011787909062422445,
+          "relative_denominator_definition": "magnitude of raw-array actual mean macro strain",
+          "signed_relative_amplitude_difference": -0.0006381202299863092
+        },
+        "macro_strain_from_minus_chi0_activation": {
+          "amplitude": 0.01472587936559742,
+          "imag": -0.00144204943519944,
+          "real": 0.014655102064351815
+        },
+        "scope_warning": "chi0 ignores macro-to-nonzero-mode feedback; S1 is retained as a negative diagnostic, not a validated autonomous prediction"
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p26__a1__s3__t128__a0p1",
+        "spatial_label": "S3",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.26
+      },
+      "transfer": {
+        "chi0": {
+          "amplitude": 0.29451758731194816,
+          "imag": -0.028840988703988744,
+          "real": 0.2931020412870361
+        },
+        "material": {
+          "B_e": {
+            "amplitude": 1.862359376233292,
+            "imag": 0.45288979960966164,
+            "real": 1.8064532309621462
+          },
+          "K0": {
+            "amplitude": 0.8400139053442407,
+            "imag": 0.06493928835214412,
+            "real": 0.8375
+          },
+          "Q_e": {
+            "amplitude": 1.8561654273295183,
+            "imag": 0.4267046026934745,
+            "real": 1.8064532309621462
+          },
+          "Q_m": {
+            "amplitude": 2.747252747252747,
+            "imag": 0.0,
+            "real": 2.747252747252747
+          },
+          "lambda_e": {
+            "amplitude": 3.3565229088010637,
+            "imag": 0.1967577557848613,
+            "real": 3.350751023702725
+          },
+          "lambda_m": {
+            "amplitude": 1.4423076923076923,
+            "imag": 0.0,
+            "real": 1.4423076923076923
+          },
+          "mu_e": {
+            "amplitude": 0.5263042368240298,
+            "imag": 0.13117183718990752,
+            "real": 0.5096960847673335
+          },
+          "mu_m": {
+            "amplitude": 0.9615384615384615,
+            "imag": 0.0,
+            "real": 0.9615384615384615
+          }
+        },
+        "omega_discrete": 6.284447259884914,
+        "p_activation": {
+          "amplitude": 0.02804276544177031,
+          "imag": 0.016410443975754082,
+          "real": 0.022739701452323062
+        },
+        "p_epsilon": {
+          "amplitude": 0.09562011626446018,
+          "imag": 0.06380307021650437,
+          "real": 0.071220607027578
+        },
+        "passive_denominator_ell_dot_v": {
+          "amplitude": 1.1617017634794768,
+          "imag": 1.0202661775962132,
+          "real": 0.5555248996440562
+        },
+        "phi_discrete": {
+          "amplitude": 0.782539908847316,
+          "imag": 0.48720968099108514,
+          "real": 0.6123687089387656
+        }
+      }
+    },
+    {
+      "cancellation": {
+        "condition_number": 22.897051468001077,
+        "denominator_amplitude": 0.00012600015865056206,
+        "denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+        "floor": 1e-12,
+        "interpretable": true,
+        "p_activation_times_actual_activation": {
+          "amplitude": 0.0013805817338031826,
+          "imag": -0.0007947364393304042,
+          "real": -0.001128893226001216
+        },
+        "p_epsilon_times_actual_strain": {
+          "amplitude": 0.0015044503837950381,
+          "imag": 0.0008856384990781147,
+          "real": 0.0012161477731968684
+        }
+      },
+      "case_key": "transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1",
+      "conditional_mapping": {
+        "c0_conditional": {
+          "amplitude": 0.00012600214471466216,
+          "imag": 9.090205974771049e-05,
+          "real": 8.725454719565244e-05
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 2.3285133394762316e-09,
+          "absolute_relative_amplitude_difference": 1.5762393645920052e-05,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.0005527329499185269,
+          "prediction_minus_actual": {
+            "amplitude": 2.3285133394762316e-09,
+            "imag": 5.910834848107342e-10,
+            "real": 2.2522421464182645e-09
+          },
+          "relative_complex_residual": 1.8480241329964743e-05,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": 1.5762393645920052e-05
+        }
+      },
+      "grid_pair": {
+        "absolute_complex_S3_minus_S2_actual_c0": 9.593462327965643e-08,
+        "conditional_residual_over_grid_difference": 0.024271876616312395,
+        "near_zero_grid_difference": false,
+        "source_residual_over_grid_difference": 9.976777467078897
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1.json",
+        "case_json_sha256": "f37dcb0f0274e33465ea46eaac6a6c4e6c53a32a836af391ab345147c6821170",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1.npz",
+        "npz_sha256": "0b482b0e9df03799c4e09ff0e3d729ec546eba7654fb99d8ccee946ddcce8101",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            33,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            33
+          ]
+        }
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0,
+        "config_digest": "4959a734621a8154a8c31cb98868078a808bada25a91c4070f430cfca2b48491",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.31,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "steps_per_cycle": 128
+      },
+      "raw_array_extraction": {
+        "actual_upper_y_traction_c0": {
+          "amplitude": 0.00012600015865056206,
+          "imag": 9.090146866422568e-05,
+          "real": 8.725229495350602e-05
+        },
+        "json_consistency": {
+          "mean_activation": {
+            "absolute_complex_difference": 2.4936649967166602e-18,
+            "pass": true,
+            "relative_difference": 4.9873299934333204e-17,
+            "tolerance": 1e-11
+          },
+          "mean_strain": {
+            "absolute_complex_difference": 6.505213034913027e-19,
+            "pass": true,
+            "relative_difference": 4.6383050362767456e-17,
+            "tolerance": 1e-11
+          },
+          "upper_y_traction_c0": {
+            "absolute_complex_difference": 0.0,
+            "pass": true,
+            "relative_difference": 0.0,
+            "tolerance": 1e-11
+          }
+        },
+        "mean_activation": {
+          "amplitude": 0.05,
+          "imag": 5.7462715141731735e-18,
+          "real": -0.05
+        },
+        "mean_macro_strain_equals_negative_shortening": {
+          "amplitude": 0.014024978918020629,
+          "imag": -0.0014666037797224217,
+          "real": 0.013948086141267805
+        }
+      },
+      "source_prediction": {
+        "c0_source": {
+          "amplitude": 0.00012673720160755634,
+          "imag": 9.100806633457765e-05,
+          "real": 8.820345873805343e-05
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 9.571183878491787e-07,
+          "absolute_relative_amplitude_difference": 0.005849539912392696,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.2768526065483167,
+          "prediction_minus_actual": {
+            "amplitude": 9.571183878491787e-07,
+            "imag": 1.0659767035197287e-07,
+            "real": 9.511637845474054e-07
+          },
+          "relative_complex_residual": 0.007596168116768551,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": 0.005849539912392696
+        },
+        "macro_strain_comparison_to_actual": {
+          "absolute_complex_residual": 8.901092238647816e-06,
+          "absolute_relative_amplitude_difference": 0.0005513952235966207,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.01800055406922668,
+          "prediction_minus_actual": {
+            "amplitude": 8.901092238647816e-06,
+            "imag": -5.193077450898901e-06,
+            "real": 7.229203941644044e-06
+          },
+          "relative_complex_residual": 0.0006346599371504826,
+          "relative_denominator_definition": "magnitude of raw-array actual mean macro strain",
+          "signed_relative_amplitude_difference": 0.0005513952235966207
+        },
+        "macro_strain_from_minus_chi0_activation": {
+          "amplitude": 0.014032712224407069,
+          "imag": -0.0014717968571733206,
+          "real": 0.013955315345209449
+        },
+        "scope_warning": "chi0 ignores macro-to-nonzero-mode feedback; S1 is retained as a negative diagnostic, not a validated autonomous prediction"
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p31__a1__s2__t128__a0p1",
+        "spatial_label": "S2",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.31
+      },
+      "transfer": {
+        "chi0": {
+          "amplitude": 0.28065424448814136,
+          "imag": -0.02943593714346638,
+          "real": 0.27910630690418897
+        },
+        "material": {
+          "B_e": {
+            "amplitude": 1.862359376233292,
+            "imag": 0.45288979960966164,
+            "real": 1.8064532309621462
+          },
+          "K0": {
+            "amplitude": 0.8400139053442407,
+            "imag": 0.06493928835214412,
+            "real": 0.8375
+          },
+          "Q_e": {
+            "amplitude": 1.8561654273295183,
+            "imag": 0.4267046026934745,
+            "real": 1.8064532309621462
+          },
+          "Q_m": {
+            "amplitude": 2.747252747252747,
+            "imag": 0.0,
+            "real": 2.747252747252747
+          },
+          "lambda_e": {
+            "amplitude": 3.3565229088010637,
+            "imag": 0.1967577557848613,
+            "real": 3.350751023702725
+          },
+          "lambda_m": {
+            "amplitude": 1.4423076923076923,
+            "imag": 0.0,
+            "real": 1.4423076923076923
+          },
+          "mu_e": {
+            "amplitude": 0.5263042368240298,
+            "imag": 0.13117183718990752,
+            "real": 0.5096960847673335
+          },
+          "mu_m": {
+            "amplitude": 0.9615384615384615,
+            "imag": 0.0,
+            "real": 0.9615384615384615
+          }
+        },
+        "omega_discrete": 6.284447259884914,
+        "p_activation": {
+          "amplitude": 0.027611634676063652,
+          "imag": 0.015894728786608085,
+          "real": 0.02257786452002432
+        },
+        "p_epsilon": {
+          "amplitude": 0.10726935081962774,
+          "imag": 0.07186866587488183,
+          "real": 0.07963421683314885
+        },
+        "passive_denominator_ell_dot_v": {
+          "amplitude": 1.1798406884901662,
+          "imag": 1.0427354763010968,
+          "real": 0.5520206306652626
+        },
+        "phi_discrete": {
+          "amplitude": 0.782539908847316,
+          "imag": 0.48720968099108514,
+          "real": 0.6123687089387656
+        }
+      }
+    },
+    {
+      "cancellation": {
+        "condition_number": 22.881142258471268,
+        "denominator_amplitude": 0.00012609139285162934,
+        "denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+        "floor": 1e-12,
+        "interpretable": true,
+        "p_activation_times_actual_activation": {
+          "amplitude": 0.0013805817338031837,
+          "imag": -0.0007947364393304047,
+          "real": -0.0011288932260012168
+        },
+        "p_epsilon_times_actual_strain": {
+          "amplitude": 0.0015045333636037348,
+          "imag": 0.0008857244202438686,
+          "real": 0.0012161878529160003
+        }
+      },
+      "case_key": "transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1",
+      "conditional_mapping": {
+        "c0_conditional": {
+          "amplitude": 0.00012609188934622286,
+          "imag": 9.09879809134639e-05,
+          "real": 8.729462691478345e-05
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 5.821463895823801e-10,
+          "absolute_relative_amplitude_difference": 3.937577199233737e-06,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.00013811569435528203,
+          "prediction_minus_actual": {
+            "amplitude": 5.821463895823801e-10,
+            "imag": 1.4784175687604546e-10,
+            "real": 5.63060595165036e-10
+          },
+          "relative_complex_residual": 4.616860647002185e-06,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": 3.937577199233737e-06
+        }
+      },
+      "grid_pair": {
+        "absolute_complex_S3_minus_S2_actual_c0": 9.593462327965643e-08,
+        "conditional_residual_over_grid_difference": 0.006068157352172854,
+        "near_zero_grid_difference": false,
+        "source_residual_over_grid_difference": 9.481664818875968
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1.json",
+        "case_json_sha256": "620c9e3379ec77d9698b5042d69a87bb8a6c07c3cda75f7517f3ddbef6af2c4a",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1.npz",
+        "npz_sha256": "faac01eb24f888f090c34a9ee8f9fe7a78bc773e5172bc0e95ba16ca53a75465",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            65,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            65
+          ]
+        }
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0000000000000007,
+        "config_digest": "4959a734621a8154a8c31cb98868078a808bada25a91c4070f430cfca2b48491",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.31,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "steps_per_cycle": 128
+      },
+      "raw_array_extraction": {
+        "actual_upper_y_traction_c0": {
+          "amplitude": 0.00012609139285162934,
+          "imag": 9.098783307170702e-05,
+          "real": 8.729406385418829e-05
+        },
+        "json_consistency": {
+          "mean_activation": {
+            "absolute_complex_difference": 2.4936649967166625e-18,
+            "pass": true,
+            "relative_difference": 4.987329993433321e-17,
+            "tolerance": 1e-11
+          },
+          "mean_strain": {
+            "absolute_complex_difference": 4.336808689942018e-19,
+            "pass": true,
+            "relative_difference": 3.0920328126503885e-17,
+            "tolerance": 1e-11
+          },
+          "upper_y_traction_c0": {
+            "absolute_complex_difference": 0.0,
+            "pass": true,
+            "relative_difference": 0.0,
+            "tolerance": 1e-11
+          }
+        },
+        "mean_activation": {
+          "amplitude": 0.05000000000000004,
+          "imag": 5.746271514173177e-18,
+          "real": -0.05000000000000004
+        },
+        "mean_macro_strain_equals_negative_shortening": {
+          "amplitude": 0.014025752482958448,
+          "imag": -0.0014662594773498616,
+          "real": 0.013948900166618757
+        }
+      },
+      "source_prediction": {
+        "c0_source": {
+          "amplitude": 0.00012673720160755642,
+          "imag": 9.100806633457797e-05,
+          "real": 8.820345873805321e-05
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 9.096199424628378e-07,
+          "absolute_relative_amplitude_difference": 0.005121751305317026,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.2903353899446094,
+          "prediction_minus_actual": {
+            "amplitude": 9.096199424628378e-07,
+            "imag": 2.023326287094976e-08,
+            "real": 9.093948838649201e-07
+          },
+          "relative_complex_residual": 0.007213973308496796,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": 0.005121751305317026
+        },
+        "macro_strain_comparison_to_actual": {
+          "absolute_complex_residual": 8.474496543150198e-06,
+          "absolute_relative_amplitude_difference": 0.0004962116262274484,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.01974706460621601,
+          "prediction_minus_actual": {
+            "amplitude": 8.474496543150198e-06,
+            "imag": -5.537379823459913e-06,
+            "real": 6.415178590702189e-06
+          },
+          "relative_complex_residual": 0.000604209760114252,
+          "relative_denominator_definition": "magnitude of raw-array actual mean macro strain",
+          "signed_relative_amplitude_difference": 0.0004962116262274484
+        },
+        "macro_strain_from_minus_chi0_activation": {
+          "amplitude": 0.01403271222440708,
+          "imag": -0.0014717968571733215,
+          "real": 0.01395531534520946
+        },
+        "scope_warning": "chi0 ignores macro-to-nonzero-mode feedback; S1 is retained as a negative diagnostic, not a validated autonomous prediction"
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "uniform",
+        "case_id": "A1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p31__a1__s3__t128__a0p1",
+        "spatial_label": "S3",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.31
+      },
+      "transfer": {
+        "chi0": {
+          "amplitude": 0.28065424448814136,
+          "imag": -0.02943593714346638,
+          "real": 0.27910630690418897
+        },
+        "material": {
+          "B_e": {
+            "amplitude": 1.862359376233292,
+            "imag": 0.45288979960966164,
+            "real": 1.8064532309621462
+          },
+          "K0": {
+            "amplitude": 0.8400139053442407,
+            "imag": 0.06493928835214412,
+            "real": 0.8375
+          },
+          "Q_e": {
+            "amplitude": 1.8561654273295183,
+            "imag": 0.4267046026934745,
+            "real": 1.8064532309621462
+          },
+          "Q_m": {
+            "amplitude": 2.747252747252747,
+            "imag": 0.0,
+            "real": 2.747252747252747
+          },
+          "lambda_e": {
+            "amplitude": 3.3565229088010637,
+            "imag": 0.1967577557848613,
+            "real": 3.350751023702725
+          },
+          "lambda_m": {
+            "amplitude": 1.4423076923076923,
+            "imag": 0.0,
+            "real": 1.4423076923076923
+          },
+          "mu_e": {
+            "amplitude": 0.5263042368240298,
+            "imag": 0.13117183718990752,
+            "real": 0.5096960847673335
+          },
+          "mu_m": {
+            "amplitude": 0.9615384615384615,
+            "imag": 0.0,
+            "real": 0.9615384615384615
+          }
+        },
+        "omega_discrete": 6.284447259884914,
+        "p_activation": {
+          "amplitude": 0.027611634676063652,
+          "imag": 0.015894728786608085,
+          "real": 0.02257786452002432
+        },
+        "p_epsilon": {
+          "amplitude": 0.10726935081962774,
+          "imag": 0.07186866587488183,
+          "real": 0.07963421683314885
+        },
+        "passive_denominator_ell_dot_v": {
+          "amplitude": 1.1798406884901662,
+          "imag": 1.0427354763010968,
+          "real": 0.5520206306652626
+        },
+        "phi_discrete": {
+          "amplitude": 0.782539908847316,
+          "imag": 0.48720968099108514,
+          "real": 0.6123687089387656
+        }
+      }
+    },
+    {
+      "cancellation": {
+        "condition_number": 299.0292111810549,
+        "denominator_amplitude": 9.366749783547455e-06,
+        "denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+        "floor": 1e-12,
+        "interpretable": true,
+        "p_activation_times_actual_activation": {
+          "amplitude": 0.0014021382720885154,
+          "imag": -0.000820522198787704,
+          "real": -0.0011369850726161532
+        },
+        "p_epsilon_times_actual_strain": {
+          "amplitude": 0.0013987935270159968,
+          "imag": 0.0008256339308526307,
+          "real": 0.0011291376990636196
+        }
+      },
+      "case_key": "transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1",
+      "conditional_mapping": {
+        "c0_conditional": {
+          "amplitude": 9.365419177837346e-06,
+          "imag": 5.111732064926717e-06,
+          "real": -7.847373552533586e-06
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 1.8489839980317885e-09,
+          "absolute_relative_amplitude_difference": 0.0001420562885587777,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.00785368549780362,
+          "prediction_minus_actual": {
+            "amplitude": 1.8489839980317885e-09,
+            "imag": 3.4960444494785574e-10,
+            "real": 1.8156317239600983e-09
+          },
+          "relative_complex_residual": 0.0001973986751818116,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": -0.0001420562885587777
+        }
+      },
+      "grid_pair": {
+        "absolute_complex_S3_minus_S2_actual_c0": 4.9049596124576043e-08,
+        "conditional_residual_over_grid_difference": 0.03769621248941058,
+        "near_zero_grid_difference": false,
+        "source_residual_over_grid_difference": 192.02517088157816
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1.json",
+        "case_json_sha256": "7a11eb8fe4b0c5e8e8d9070c8b29494002708445f756019c8c173b929328ede6",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1.npz",
+        "npz_sha256": "c2822d2cbea3cf126ef4d6247b650af72c7304440919f79297883c5b5c6417d0",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            33,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            33
+          ]
+        }
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0,
+        "config_digest": "231345b1974ce2845a6f6430dbf678e1cf54415e5b6e464614aff1f30a54ac63",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.26,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "steps_per_cycle": 128
+      },
+      "raw_array_extraction": {
+        "actual_upper_y_traction_c0": {
+          "amplitude": 9.366749783547455e-06,
+          "imag": 5.111382460481769e-06,
+          "real": -7.849189184257546e-06
+        },
+        "json_consistency": {
+          "mean_activation": {
+            "absolute_complex_difference": 2.4936649967166602e-18,
+            "pass": true,
+            "relative_difference": 4.9873299934333204e-17,
+            "tolerance": 1e-11
+          },
+          "mean_strain": {
+            "absolute_complex_difference": 4.336808689942018e-19,
+            "pass": true,
+            "relative_difference": 2.964598728402856e-17,
+            "tolerance": 1e-11
+          },
+          "upper_y_traction_c0": {
+            "absolute_complex_difference": 2.0346429601399228e-20,
+            "pass": true,
+            "relative_difference": 2.172197408020596e-15,
+            "tolerance": 1e-11
+          }
+        },
+        "mean_activation": {
+          "amplitude": 0.05,
+          "imag": 5.7462715141731735e-18,
+          "real": -0.05
+        },
+        "mean_macro_strain_equals_negative_shortening": {
+          "amplitude": 0.014628653275711364,
+          "imag": -0.0014481026940495953,
+          "real": 0.014556802370317017
+        }
+      },
+      "source_prediction": {
+        "c0_source": {
+          "amplitude": 1.187879711282485e-05,
+          "imag": 1.1814671115492354e-05,
+          "real": -1.2326261722057658e-06
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 9.418757077494109e-06,
+          "absolute_relative_amplitude_difference": 0.26818772651424566,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -50.97174583522948,
+          "prediction_minus_actual": {
+            "amplitude": 9.418757077494109e-06,
+            "imag": 6.703288655010585e-06,
+            "real": 6.61656301205178e-06
+          },
+          "relative_complex_residual": 1.0055523308669996,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": 0.26818772651424566
+        },
+        "macro_strain_comparison_to_actual": {
+          "absolute_complex_residual": 9.848589640166682e-05,
+          "absolute_relative_amplitude_difference": 0.006646277552252497,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 0.06129718041771331,
+          "prediction_minus_actual": {
+            "amplitude": 9.848589640166682e-05,
+            "imag": 6.053258850156375e-06,
+            "real": 9.829969403478758e-05
+          },
+          "relative_complex_residual": 0.006732396656443253,
+          "relative_denominator_definition": "magnitude of raw-array actual mean macro strain",
+          "signed_relative_amplitude_difference": 0.006646277552252497
+        },
+        "macro_strain_from_minus_chi0_activation": {
+          "amplitude": 0.014725879365597409,
+          "imag": -0.001442049435199439,
+          "real": 0.014655102064351805
+        },
+        "scope_warning": "chi0 ignores macro-to-nonzero-mode feedback; S1 is retained as a negative diagnostic, not a validated autonomous prediction"
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "S1",
+        "case_id": "S1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p26__s1__s2__t128__a0p1",
+        "spatial_label": "S2",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.26
+      },
+      "transfer": {
+        "chi0": {
+          "amplitude": 0.29451758731194816,
+          "imag": -0.028840988703988744,
+          "real": 0.2931020412870361
+        },
+        "material": {
+          "B_e": {
+            "amplitude": 1.862359376233292,
+            "imag": 0.45288979960966164,
+            "real": 1.8064532309621462
+          },
+          "K0": {
+            "amplitude": 0.8400139053442407,
+            "imag": 0.06493928835214412,
+            "real": 0.8375
+          },
+          "Q_e": {
+            "amplitude": 1.8561654273295183,
+            "imag": 0.4267046026934745,
+            "real": 1.8064532309621462
+          },
+          "Q_m": {
+            "amplitude": 2.747252747252747,
+            "imag": 0.0,
+            "real": 2.747252747252747
+          },
+          "lambda_e": {
+            "amplitude": 3.3565229088010637,
+            "imag": 0.1967577557848613,
+            "real": 3.350751023702725
+          },
+          "lambda_m": {
+            "amplitude": 1.4423076923076923,
+            "imag": 0.0,
+            "real": 1.4423076923076923
+          },
+          "mu_e": {
+            "amplitude": 0.5263042368240298,
+            "imag": 0.13117183718990752,
+            "real": 0.5096960847673335
+          },
+          "mu_m": {
+            "amplitude": 0.9615384615384615,
+            "imag": 0.0,
+            "real": 0.9615384615384615
+          }
+        },
+        "omega_discrete": 6.284447259884914,
+        "p_activation": {
+          "amplitude": 0.02804276544177031,
+          "imag": 0.016410443975754082,
+          "real": 0.022739701452323062
+        },
+        "p_epsilon": {
+          "amplitude": 0.09562011626446018,
+          "imag": 0.06380307021650437,
+          "real": 0.071220607027578
+        },
+        "passive_denominator_ell_dot_v": {
+          "amplitude": 1.1617017634794768,
+          "imag": 1.0202661775962132,
+          "real": 0.5555248996440562
+        },
+        "phi_discrete": {
+          "amplitude": 0.782539908847316,
+          "imag": 0.48720968099108514,
+          "real": 0.6123687089387656
+        }
+      }
+    },
+    {
+      "cancellation": {
+        "condition_number": 298.01939542268804,
+        "denominator_amplitude": 9.398563689832862e-06,
+        "denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+        "floor": 1e-12,
+        "interpretable": true,
+        "p_activation_times_actual_activation": {
+          "amplitude": 0.0014021382720885158,
+          "imag": -0.0008205221987877042,
+          "real": -0.0011369850726161534
+        },
+        "p_epsilon_times_actual_strain": {
+          "amplitude": 0.0013988159965971016,
+          "imag": 0.000825682326065951,
+          "real": 0.001129130146953071
+        }
+      },
+      "case_key": "transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1",
+      "conditional_mapping": {
+        "c0_conditional": {
+          "amplitude": 9.39823231784885e-06,
+          "imag": 5.1601272782467915e-06,
+          "real": -7.85492566308249e-06
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 4.622451956001893e-10,
+          "absolute_relative_amplitude_difference": 3.525772606842649e-05,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -0.001964715675351618,
+          "prediction_minus_actual": {
+            "amplitude": 4.622451956001893e-10,
+            "imag": 8.742311232675163e-11,
+            "real": 4.539028753891756e-10
+          },
+          "relative_complex_residual": 4.9182535848561084e-05,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": -3.525772606842649e-05
+        }
+      },
+      "grid_pair": {
+        "absolute_complex_S3_minus_S2_actual_c0": 4.9049596124576043e-08,
+        "conditional_residual_over_grid_difference": 0.00942403673266096,
+        "near_zero_grid_difference": false,
+        "source_residual_over_grid_difference": 191.40944119161227
+      },
+      "input": {
+        "case_json": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1.json",
+        "case_json_sha256": "7c8dd6604c66345ebe531cc36ae958b21405dc548845f319393c85cfcc23a6d5",
+        "npz": "results/paper2_transverse_notch/v02_20260905/cases/transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1.npz",
+        "npz_sha256": "2de887af9dda076ea7140975281baed375f307a0f8dadc008d28d8c2a79eaff4",
+        "raw_array_shapes": {
+          "activation_two_cycles": [
+            257
+          ],
+          "endocardium_ecm_traction_two_cycles": [
+            65,
+            2,
+            257
+          ],
+          "limited_shortening_two_cycles": [
+            257
+          ],
+          "time_two_cycles": [
+            257
+          ],
+          "x_interface_nodes": [
+            65
+          ]
+        }
+      },
+      "parameter_summary": {
+        "active_profile_average": 1.0000000000000002,
+        "config_digest": "231345b1974ce2845a6f6430dbf678e1cf54415e5b6e464614aff1f30a54ac63",
+        "ecm_relaxation_time": 0.2,
+        "ecm_thickness": 0.26,
+        "length": 1.0,
+        "myocardium_thickness": 0.2,
+        "steps_per_cycle": 128
+      },
+      "raw_array_extraction": {
+        "actual_upper_y_traction_c0": {
+          "amplitude": 9.398563689832862e-06,
+          "imag": 5.160039855134465e-06,
+          "real": -7.85537956595788e-06
+        },
+        "json_consistency": {
+          "mean_activation": {
+            "absolute_complex_difference": 2.4936649967166602e-18,
+            "pass": true,
+            "relative_difference": 4.9873299934333185e-17,
+            "tolerance": 1e-11
+          },
+          "mean_strain": {
+            "absolute_complex_difference": 6.505213034913027e-19,
+            "pass": true,
+            "relative_difference": 4.446826660809394e-17,
+            "tolerance": 1e-11
+          },
+          "upper_y_traction_c0": {
+            "absolute_complex_difference": 9.492817316530898e-20,
+            "pass": true,
+            "relative_difference": 1.0100285139100646e-14,
+            "tolerance": 1e-11
+          }
+        },
+        "mean_activation": {
+          "amplitude": 0.05000000000000002,
+          "imag": 5.746271514173175e-18,
+          "real": -0.05000000000000002
+        },
+        "mean_macro_strain_equals_negative_shortening": {
+          "amplitude": 0.014628888263724167,
+          "imag": -0.0014476730215652461,
+          "real": 0.014557081254673233
+        }
+      },
+      "source_prediction": {
+        "c0_source": {
+          "amplitude": 1.1878797112824935e-05,
+          "imag": 1.1814671115492462e-05,
+          "real": -1.232626172205549e-06
+        },
+        "comparison_to_actual": {
+          "absolute_complex_residual": 9.388555784879371e-06,
+          "absolute_relative_amplitude_difference": 0.263894942338384,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": -50.74377025797294,
+          "prediction_minus_actual": {
+            "amplitude": 9.388555784879371e-06,
+            "imag": 6.654631260357998e-06,
+            "real": 6.622753393752331e-06
+          },
+          "relative_complex_residual": 0.9989351665548304,
+          "relative_denominator_definition": "magnitude of raw-array actual upper-interface y-traction c0",
+          "signed_relative_amplitude_difference": 0.263894942338384
+        },
+        "macro_strain_comparison_to_actual": {
+          "absolute_complex_residual": 9.818199353067464e-05,
+          "absolute_relative_amplitude_difference": 0.00663010750541856,
+          "floor": 1e-12,
+          "phase_interpretable": true,
+          "phase_prediction_minus_actual_deg": 0.05951445662644675,
+          "prediction_minus_actual": {
+            "amplitude": 9.818199353067464e-05,
+            "imag": 5.623586365806777e-06,
+            "real": 9.802080967857667e-05
+          },
+          "relative_complex_residual": 0.006711514351650386,
+          "relative_denominator_definition": "magnitude of raw-array actual mean macro strain",
+          "signed_relative_amplitude_difference": 0.00663010750541856
+        },
+        "macro_strain_from_minus_chi0_activation": {
+          "amplitude": 0.014725879365597414,
+          "imag": -0.0014420494351994394,
+          "real": 0.01465510206435181
+        },
+        "scope_warning": "chi0 ignores macro-to-nonzero-mode feedback; S1 is retained as a negative diagnostic, not a validated autonomous prediction"
+      },
+      "spec": {
+        "activation_peak": 0.1,
+        "active_profile": "S1",
+        "case_id": "S1",
+        "de": 0.2,
+        "group": "transverse_notch",
+        "key": "transverse_notch__de0p2__h0p26__s1__s3__t128__a0p1",
+        "spatial_label": "S3",
+        "steps_per_cycle": 128,
+        "thickness_ratio": 0.26
+      },
+      "transfer": {
+        "chi0": {
+          "amplitude": 0.29451758731194816,
+          "imag": -0.028840988703988744,
+          "real": 0.2931020412870361
+        },
+        "material": {
+          "B_e": {
+            "amplitude": 1.862359376233292,
+            "imag": 0.45288979960966164,
+            "real": 1.8064532309621462
+          },
+          "K0": {
+            "amplitude": 0.8400139053442407,
+            "imag": 0.06493928835214412,
+            "real": 0.8375
+          },
+          "Q_e": {
+            "amplitude": 1.8561654273295183,
+            "imag": 0.4267046026934745,
+            "real": 1.8064532309621462
+          },
+          "Q_m": {
+            "amplitude": 2.747252747252747,
+            "imag": 0.0,
+            "real": 2.747252747252747
+          },
+          "lambda_e": {
+            "amplitude": 3.3565229088010637,
+            "imag": 0.1967577557848613,
+            "real": 3.350751023702725
+          },
+          "lambda_m": {
+            "amplitude": 1.4423076923076923,
+            "imag": 0.0,
+            "real": 1.4423076923076923
+          },
+          "mu_e": {
+            "amplitude": 0.5263042368240298,
+            "imag": 0.13117183718990752,
+            "real": 0.5096960847673335
+          },
+          "mu_m": {
+            "amplitude": 0.9615384615384615,
+            "imag": 0.0,
+            "real": 0.9615384615384615
+          }
+        },
+        "omega_discrete": 6.284447259884914,
+        "p_activation": {
+          "amplitude": 0.02804276544177031,
+          "imag": 0.016410443975754082,
+          "real": 0.022739701452323062
+        },
+        "p_epsilon": {
+          "amplitude": 0.09562011626446018,
+          "imag": 0.06380307021650437,
+          "real": 0.071220607027578
+        },
+        "passive_denominator_ell_dot_v": {
+          "amplitude": 1.1617017634794768,
+          "imag": 1.0202661775962132,
+          "real": 0.5555248996440562
+        },
+        "phi_discrete": {
+          "amplitude": 0.782539908847316,
+          "imag": 0.48720968099108514,
+          "real": 0.6123687089387656
+        }
+      }
+    }
+  ],
+  "runtime": {
+    "budget_seconds": 120.0,
+    "cpu_limit": 1,
+    "elapsed_seconds": 0.3201900999993086,
+    "gpu": "not_used",
+    "memory_limit_gib": 8,
+    "numpy": "2.2.6",
+    "python": "3.13.7",
+    "script_path": "scripts/analyze_paper2_mean_normal_transfer_v01.py",
+    "script_sha256": "5b6e9e0ec423403e0d8c34a57be242b87bfcd0d7c5df3162fbe188ad36762bc3",
+    "self_test": {
+      "harmonic_errors": {
+        "constant": 0.0,
+        "cosine": 1.1831877066180474e-16,
+        "sine": 1.1120108961020658e-16
+      },
+      "pass": true,
+      "tolerance": 2e-13,
+      "zero_drag_layer_limit_error": 0.0
+    }
+  },
+  "schema": "paper2_mean_normal_transfer_v01",
+  "status": "COMPLETED_DIAGNOSTIC_NO_NEW_PASS_GATE"
+}

@@ -1651,3 +1651,48 @@ c_0^{\rm src}(H)=\left[p_a(H)-p_\epsilon(H)\chi_0(H)\right]\hat{\bar a}.
 
 下一步仅把上述 8 例诊断写成可复算的小型后处理，保留条件预测/源预测/失败差异，并完成最接近原始文献的反例核查。
 范围、预算与文件见主计划第 12 节。牵引驻点尚未重新冻结，不授权刚度扰动 FEM 或原 4 留出。
+
+## 26. 后处理验收与原始文献边界（总管，2026-09-05）
+
+### 26.1 可复算交付已接受
+
+`scripts/analyze_paper2_mean_normal_transfer_v01.py` 与第二批目录中的 `mean_normal_transfer_v01.json`
+是唯一新增交付；没有新 FEM、图或生产修改。正式后处理为 0.32019 秒，采用单线程环境，8 GiB 为任务预算口径。
+总管读回 8 份输入摘要并与原 case 记录一致，再用独立 3×3 矩阵指数核对传播系数和预测，最大绝对差 2.502e-16。
+输出保留全部 A1/S1、双网格残差和源闭合阴性项；科学接受范围仍为第 25 节，不新增 PASS 门。
+
+- 入口 SHA256：`5b6e9e0ec423403e0d8c34a57be242b87bfcd0d7c5df3162fbe188ad36762bc3`。
+- 结果 SHA256：`40bb234e10c719f470589dab842140c47546fc3a09aae68dc36b0d1089843cc9`。
+- 公式截点为提交 `0fa6805d888e2468b51298d46bb44ff154b499d6` 的完整简报，SHA256
+  `8e2f0ed04e33cc028aef3291743206e848bf66321c0a577026966d545da5a289`；后续追加不改变该历史截点。
+- 结果相消条件数以原始数组实际 abs(c0) 为分母；A1 中心为 207.6425。
+  第 25 节约 207.64 使用条件预测分母，差异可追溯，不应混作数值不一致。
+
+### 26.2 文献已说明什么
+
+理论 agent 使用公开通用检索词，回交五个原始来源；总管另打开前两篇核对关键正文。
+下表区分读取层级：不是完整系统综述，也未对全部补充材料逐式核验。
+
+| 一手来源 | 实际读取边界 | 支持的经典基础，不等于当前模型已被同一篇完全解释 |
+|---|---|---|
+| [Merkel et al., 2007, Cell Force Microscopy on Elastic Layers of Finite Thickness](https://pmc.ncbi.nlm.nih.gov/articles/PMC2025665/) | 理论 agent 与总管均读到正文相关段落，非完整 PDF 核验 | 有限厚度弹性层 Green 张量、场局域化与反演差异已有明确处理 |
+| [del Álamo et al., 2013, Three-Dimensional Quantification of Cellular Traction Forces and Mechanosensing of Thin Substrata by Fourier Traction Force Microscopy](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0069850) | 两方均读到有限厚度/Fourier 与 Poisson 法切向耦合相关正文；未核完整补充材料 | 厚度、法向/切向耦合改变位移—牵引解释，是既有理论问题 |
+| [Matsu'ura et al., 1981, Quasi-static Displacements due to Faulting in a Layered Half-space with an Intervenient Viscoelastic Layer](https://doi.org/10.4294/jpe1952.29.23) | 理论 agent 读原刊完整摘要，未读 PDF 正文 | 摘要确认线性黏弹对应原理及波数/层厚相关响应；不足以证明已含当前牵引低谷 |
+| [Grönquist et al., 2018, Modeling and Design of Thin Bending Wooden Bilayers](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0205607) | 理论 agent 读双层湿胀本征应变、曲率相关正文，未逐式核全部正文 | 主动/被动层失配和厚度比调控已有双层力学基础，不同于当前法向阻抗边界 |
+| [Moore, 1981, Principal Component Analysis in Linear Systems: Controllability, Observability, and Model Reduction](https://doi.org/10.1109/TAC.1981.1102568) | 理论 agent 读原刊题录/完整摘要，未取得 PDF 正文 | 支持一般可控/可观及模型约化背景；不据摘要声称某特定组织零点定理 |
+
+结合本项目已独立建立的无 ECM 反例与条件映射，总管判断：有限厚度传递、两个复贡献相消、
+平均量低而其他空间模态非零，这些要素本身不能作为 Nature Physics 创新证据。
+未检索到完全同构论文不证明新颖；本核查也不证明该模型不可能产生新的可检验规律。
+
+术语纠正：观测量是**均值牵引幅值低谷**，不是耗散低谷，尚无后者的证据。
+条件式的两个输入相消不自动构成 MIMO 传递矩阵的秩亏；若讨论单输入传递零点，必须先给定
+源激活到整体应变的闭合并定义自变量及输入/输出。不能把当前过阻尼模型直接称作惯性反共振。
+第 21 节 chi0 是近似闭合，不是完整宏观平衡；无量纲塌缩也只是适用域/稳健性检查，不是新颖性充分条件。
+
+### 26.3 下一项只检验位置预测是否可被严格约束
+
+保留一个问题：完整法向传递加近似宏观闭合所预报的牵引低谷，在边界轴向刚度扰动下能否给出
+不靠事后回代整体应变的位置预测，以及清楚的近似误差容限？
+先由理论 agent 用现有公式计算三个刚度的驻点并给出误差传播条件，最多一页；
+仅当预测与否证窗口明确后，总管才决定是否另行授权 FEM。范围见主计划第 13 节，原 4 留出仍锁定。
