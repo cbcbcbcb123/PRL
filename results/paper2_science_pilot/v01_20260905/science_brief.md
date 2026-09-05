@@ -1471,3 +1471,183 @@ v02 实际源码基线为 `7cf40e211ccbd01b5baa60693834ea7907b89405`，入口由
 Nature Physics 继续为固定研究目标。本次接受的是可证伪约化候选，不是论文已达到目标期刊水平。
 下一步沿用同一物理架构核查分层法向平均平衡及其边界项；具体有界任务由主计划下一节记录，
 在新的源参数预测和反例清楚前，不释放原留出或自动追加 FEM。
+
+## 24. 无拟合法向均值条件传递：从整体复应变到上界面均值牵引
+
+**结论。** 对当前线性、均匀系数、affine-periodic 三层架构，给定整体复应变
+\(\hat{\bar\epsilon}\) 与平均激活 \(\hat{\bar a}\) 后，x 平均的法向问题闭合成一个两层
+2×2 传递系统；不需要弱法向应力、底面固定或硬界面假设。它无拟合地重建现有 8 例的
+\(c_0\) 到远小于 S2--S3 差的精度；再组合源参数宏观近似后，第 23 节的大部分幅值缺口消失。
+这仍是**条件映射**，不能代替宏观应变的自主预测，也不解释非零 \(B_1\) 或全场局部负荷。
+
+### 24.1 x 平均方程与周期侧边项
+
+取全局 y 向上，并定义
+
+\[
+U_j(y)=L^{-1}\int_{-L/2}^{L/2}\hat u_{j,y}(x,y)\,dx,\qquad
+\sigma_j(y)=L^{-1}\int_{-L/2}^{L/2}\hat\sigma_{j,yy}(x,y)\,dx .
+\]
+生产弱式对应 \(-\nabla\!\cdot\boldsymbol\sigma+i\omega_d\gamma_j\mathbf u=0\)。
+积分 y 分量后，侧边项是
+\([\hat\sigma_{yx}(L/2,y)-\hat\sigma_{yx}(-L/2,y)]/L\)。在材料系数周期、两侧自由度
+affine-periodic 且无非周期侧载时，应力周期，所以该项严格消失；若侧面材料/载荷不匹配则不能删。
+由于 \(\overline{\partial_x\tilde u_x}=0\)，各层有
+
+\[
+\sigma_j'=i\omega_d\gamma_jU_j,\qquad
+U_j'=\frac{\sigma_j-\lambda_j^*E_j}{M_j^*},\qquad
+E_m=\hat{\bar\epsilon}+\hat{\bar a},\quad E_e=\hat{\bar\epsilon}.
+\]
+其中心肌 \(\lambda_m,M_m\) 为实数，ECM 使用第 21 节 midpoint 复模量；
+\(M_j^*=\lambda_j^*+2\mu_j^*\)。这不是 \(\sigma_{yy}\simeq0\)：法向应力可随 y 变化。
+
+### 24.2 源符号、有限支撑与两界面滑移
+
+令 \(k_\ell=k_{m/e}\)、\(k_u=k_{n/e}\)、\(k_s^y\) 为底部 normal support，
+\(Z_n=i\omega_d\gamma_n\)。从界面能
+\(\tfrac12k|u_A-u_B|^2\) 和源码 `_interface_tractions` 独立变分得到：
+
+\[
+\sigma_m(0)=k_s^yU_m(0),\qquad
+U_e(0)-U_m(h_m)=\frac{\sigma_m(h_m)}{k_\ell},\qquad
+\sigma_e(0)=\sigma_m(h_m),
+\]
+\[
+c_0=\sigma_e(h_e)=k_u(U_n-U_e(h_e)),\qquad c_0=-Z_nU_n .
+\]
+所以源码下界面输出 \(\bar t_{m/e,y}=k_\ell(U_m-U_e)=-\sigma_m\)，而上界面输出
+\(\bar t_{n/e,y}=k_u(U_n-U_e)=c_0\)；两者不能套同一个输出符号。
+
+### 24.3 2×2 闭合与双输入传递
+
+记 \(\mathbf s=(U,\sigma)^\mathsf T\)、\(\kappa_j^2=i\omega_d\gamma_j/M_j^*\)。一层厚度
+\(h_j\) 的精确连续传递是
+
+\[
+\mathbf s_j^+=\mathbf P_j\mathbf s_j^-+\mathbf q_jE_j,\qquad
+\mathbf P_j=
+\begin{bmatrix}
+\cosh\kappa_jh_j&\sinh(\kappa_jh_j)/(M_j^*\kappa_j)\\
+M_j^*\kappa_j\sinh(\kappa_jh_j)&\cosh\kappa_jh_j
+\end{bmatrix},
+\]
+
+\[
+\mathbf q_j=
+\begin{bmatrix}
+-\lambda_j^*\sinh(\kappa_jh_j)/(M_j^*\kappa_j)\\
+\lambda_j^*[1-\cosh(\kappa_jh_j)]
+\end{bmatrix},
+\]
+并按 \(\kappa_j\to0\) 的解析极限取值。令
+
+\[
+\mathbf J_\ell=\begin{bmatrix}1&1/k_\ell\\0&1\end{bmatrix},\quad
+\mathbf b_0=\begin{bmatrix}1\\k_s^y\end{bmatrix},\quad
+\boldsymbol\ell^\mathsf T=\begin{bmatrix}Z_n&1+Z_n/k_u\end{bmatrix},
+\]
+\[
+\mathbf v=\mathbf P_e\mathbf J_\ell\mathbf P_m\mathbf b_0,\quad
+\mathbf w_a=\mathbf P_e\mathbf J_\ell\mathbf q_m,\quad
+\mathbf w_\epsilon=\mathbf w_a+\mathbf q_e .
+\]
+ECM 顶面状态为
+\(\mathbf s_t=\mathbf vU_0+\mathbf w_\epsilon\hat{\bar\epsilon}
++\mathbf w_a\hat{\bar a}\)。顶链条件 \(\boldsymbol\ell^\mathsf T\mathbf s_t=0\) 给
+
+\[
+U_0=-\frac{\boldsymbol\ell^\mathsf T
+(\mathbf w_\epsilon\hat{\bar\epsilon}+\mathbf w_a\hat{\bar a})}
+{\boldsymbol\ell^\mathsf T\mathbf v},
+\]
+因此在 \(\boldsymbol\ell^\mathsf T\mathbf v\ne0\) 的被动子空间上
+
+\[
+\boxed{\ c_0=p_\epsilon\hat{\bar\epsilon}+p_a\hat{\bar a}\ },\qquad
+p_\nu=\mathbf e_\sigma^\mathsf T\mathbf w_\nu-
+\frac{\mathbf e_\sigma^\mathsf T\mathbf v}{\boldsymbol\ell^\mathsf T\mathbf v}
+\boldsymbol\ell^\mathsf T\mathbf w_\nu .
+\]
+输入无量纲，\(p_\nu\) 与 \(c_0\) 都是牵引单位。离散 P1 系统对应同一边界闭合的纵向
+小矩阵近似；连续指数传递与其差应随 y 网格细化而减小。
+
+### 24.4 极限与不能越过的宏观边界
+
+- \((\hat{\bar\epsilon},\hat{\bar a})=(0,0)\Rightarrow c_0=0\)。
+- \(\omega_d\to0\) 时 \(Z_n\to0\)，无外加均值法向载荷即 \(c_0\to0\)，即使层厚发生静态变化。
+- \(k_\ell,k_u\to\infty\) 时两界面位移连续；\(k_u\to0\) 时顶面卸载且 \(c_0\to0\)；
+  \(k_s^y\to\infty\) 时 \(U_0\to0\)。这些极限都不允许先把有限项从生产模型删掉。
+
+条件式没有闭合 \(\hat{\bar\epsilon}\)。完整 macro 行仍含心肌/ECM/心内膜材料贡献以及
+support/drag 的 \(\int x\hat u_x\,dx\)；固定参考的 affine 列可与非零 x 模态耦合。因此
+\(c_0=p_\epsilon\hat{\bar\epsilon}+p_a\hat{\bar a}\) 可以是精确平均条件关系，
+但“全系统严格一维”仍不成立。
+
+### 24.5 现有 8 例的无拟合条件检查
+
+只读取每份 case JSON 的整体缩短复系数、激活复系数和 \(c_0\)；取
+\(\hat{\bar\epsilon}=-\widehat{\rm shortening}\)，没有读取 NPZ、回归参数或改变阈值。
+用源码全部法向参数逐例计算上式，S3 结果为：
+
+| 驱动，H | 条件预测 \(c_0\) | JSON \(c_0\) | 复残差幅值 |
+|---|---:|---:|---:|
+| A1, 0.210 | \(-1.013261-0.739761i\)e-4 | \(-1.013264-0.739761i\)e-4 | 3.68e-10 |
+| A1, 0.260 | \(-0.013337+0.134725i\)e-4 | \(-0.013342+0.134724i\)e-4 | 4.63e-10 |
+| A1, 0.310 | \((0.872946+0.909880i)\)e-4 | \((0.872941+0.909878i)\)e-4 | 5.82e-10 |
+| S1, 0.260 | \(-0.078549+0.051601i\)e-4 | \(-0.078554+0.051600i\)e-4 | 4.62e-10 |
+8/8 的复系数符号与分量一致。S3 最大残差为 5.82e-10、最大相对 \(|c_0|\) 为
+4.92e-5；S2 最大残差为 2.33e-9，约为 S3 的四倍。每个 S3 条件残差均小于对应
+S2--S3 \(c_0\) 差的 1%。这是事后条件诊断，不是第 22 节预登记新门或独立 FEM 验证；
+若残差超过该点双网格差或未随细化减小，应先检查连续/离散对应与数据定义，暂停其作为有效条件预测的主张；
+双网格差本身不是严格误差上界，单次非单调误差也不直接否定连续方程。
+
+### 24.6 条件解释与源参数自主预测的分界
+
+若另用第 21 节无拟合宏观近似
+\(\hat{\bar\epsilon}=-\chi_0(H)\hat{\bar a}\)，才得到自主式
+
+\[
+c_0^{\rm src}(H)=\left[p_a(H)-p_\epsilon(H)\chi_0(H)\right]\hat{\bar a}.
+\]
+对三个 A1/S3 厚度，其幅值预测为
+\((1.27543\mathrm e{-4},1.18788\mathrm e{-5},1.26737\mathrm e{-4})\)，实际为
+\((1.25457\mathrm e{-4},1.35383\mathrm e{-5},1.26091\mathrm e{-4})\)：两侧误差约
+1.66%/0.51%，中心误差约 12.3%；预测侧/中比 10.74/10.67，实际为 9.27/9.31。
+故法向传递补上了第 23 节的大部分深度缺口，但中心小量仍敏感于 \(\chi_0\) 的宏观余项。
+
+这闭合的是**均值牵引**，没有消除 A1 中心显著 \(B_1\)，也不证明局部心内膜卸载。
+数学上它仍是经典被动层传递。下一项若检验 \(K_{n,x}=0.6/1.0\) 的低谷左移/右移，
+应先用本节 \(c_0^{\rm src}\) 重新冻结牵引低谷位置，而不能把第 21 节的厚度变化驻点直接当成
+牵引驻点；本节不自动授权该 FEM，也不构成 Nature Physics 创新认证。
+
+## 25. 条件传递独立验收与低谷敏感性（总管，2026-09-05）
+
+总管从层内一阶 ODE、底部力平衡和界面弹簧能独立核对第 24 节符号。
+随后直接从既有 8 份 NPZ 时间序列求复应变、平均激活与平均牵引，以增广 3×3 生成矩阵的
+指数计算各层传播，不复用理论稿中的 cosh/sinh 分量求值。所得 S3 条件复残差最大
+5.8215e-10、相对 abs(c0) 最大 4.9183e-5；S2/S3 残差比在 3.99988–4.00001，复现理论 agent 的 JSON 求值。
+该独立数值求值约 0.051 秒，没有运行 FEM、拟合或解盲。
+
+**接受边界：** 当前均匀系数、周期侧边、线性模型的连续 x 平均条件映射成立，现有离散结果与其一致。
+这不是不依赖整体应变数据的自主预测，不是新增盲验证，也不解释非零空间模态或生物学真实性。
+第 24 节极限按可唯一求解的子空间理解；全部 drag 为零且无底部约束时存在刚体自由度，不能直接除以零分母。
+
+给定当前参数，条件映射还提供一个清楚的误差传播式：
+
+\[
+\delta c_0=p_\epsilon\,\delta\hat{\bar\epsilon}
+\quad\text{（固定平均激活与传递参数）},\qquad
+\mathcal C=\frac{|p_\epsilon\hat{\bar\epsilon}|+|p_a\hat{\bar a}|}{|c_0|}.
+\]
+
+这是相消条件数，不是新增机制。A1/S3 的 H=0.260 有 C≈207.64，两侧约为 21.70、22.88；
+源参数宏观近似的复应变相对差仅 0.117879%，却对应均值牵引幅值差 12.2579%，相位差约 0.301°。
+应同时报告绝对残差和相消条件数，不能把接近零点时的大相对差直接解释成新负荷放大。
+
+还有必须保留的阴性项：若把不分驱动形状的 chi0 直接套到中心 S1，源预测幅值差为 26.3895%，
+相位差约 -50.744°；其宏观复应变差为 0.671151%。因此不能把 A1 的源参数效果外推为 S1 的完整预测。
+这与条件映射的准确性并不矛盾：条件映射使用实际整体应变，chi0 忽略了相关宏观—空间模态反馈。
+
+下一步仅把上述 8 例诊断写成可复算的小型后处理，保留条件预测/源预测/失败差异，并完成最接近原始文献的反例核查。
+范围、预算与文件见主计划第 12 节。牵引驻点尚未重新冻结，不授权刚度扰动 FEM 或原 4 留出。

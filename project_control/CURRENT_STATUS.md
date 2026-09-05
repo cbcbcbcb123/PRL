@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 7cf40e211ccbd01b5baa60693834ea7907b89405
-current_lifecycle: paper2_transverse_notch_accepted_mean_normal_transfer_theory_active
+verified_commit: 36ae9ff96cc33c80f3324168251383737c746a32
+current_lifecycle: paper2_mean_normal_transfer_accepted_existing_data_and_literature_check
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: mean_normal_conditional_transfer_theory_only_v04_section11
+execution_authorized: mean_normal_transfer_existing_eight_postprocess_and_literature_v04_section12
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_transverse_notch/v02_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -70,8 +70,11 @@ P0 为构造零状态，endpoint 的作用反作用为结构恒等，二者不�
 8 例原始数组独立 DFT/Gauss 投影与结果最大绝对差 9.401e-19，64 个记录的结构子门通过、所有数组有限；
 本次为后处理一致性核查，不覆盖旧空间失败。实际容器退出 0、1 CPU/8 GiB、无网络/无 GPU、只读项目/根文件系统。
 本批求解 38.73 秒，首批加本批及失败预扣 3 秒的计算预算合计 104.45 秒；两批实际完成 26+8=34。
-当前按 v04 第 11 节只推进无拟合的法向均值条件传递推导：解释整体应变与平均激活如何共同决定 c0，
-保留底部运动、界面滑移与法向应力，不增加新 FEM。数值任务已完成，理论 agent 接续；原 4 留出仍锁定。
+第 24 节无拟合双输入条件传递已交接，总管从原始数组独立指数矩阵复算，S3 最大复残差 5.8215e-10，
+且 S2 残差约为 S3 的四倍；详见第 25 节。这是给定实际整体应变后的均值预测，不是全场或自主源参数预测。
+A1 中心相消条件数约 207.64，宏观复应变近似差 0.117879% 对应 c0 幅值差 12.2579%；
+chi0 直接套 S1 的相位差约 50.7°，该阴性项保留，不能外推为完整异质驱动规律。
+当前按 v04 第 12 节只推进现有 8 例的可复算后处理与最接近原始文献核查，不增加新 FEM，原 4 留出仍锁定。
 4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，
