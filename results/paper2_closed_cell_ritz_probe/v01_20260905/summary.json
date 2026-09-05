@@ -1,0 +1,6 @@
+{
+  "checks": {
+    "Ritz_reduced_residual": {
+      "absolute_norm": 8.467889666272201e-19,
+      "full_space_residual_is_not_a_Ritz_failure": 0.00022927579829492114,
+      "pass": 

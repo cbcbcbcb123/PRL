@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 4ad5b562d273a4e1956e666be3666437d4a9d432
-current_lifecycle: paper2_closed_cell_ritz_ideal_prototype
+verified_commit: 7d4166f48d8261b69be76dfc2217df39b01ef497
+current_lifecycle: paper2_closed_cell_ritz_v01_serialization_failed_v02_bounded_repair
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section31_brief54_six_small_cell_algebra_rhs_only
+execution_authorized: v04_section32_brief55_v02_serialization_repair_and_six_small_cell_algebra_rhs_only
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_cell_mode_drive_overlap/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,11 +33,12 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-最新进展：第30节比值候选及长波阶数已收缩纠错（简报53）；单向多分量输入也能给非零比值差，
-不能据此声称双向机制。生理参数不足不禁止理想体探索。总管批准第31节/简报54的两个闭合细胞
-16自由度原型，对照同能量/同输入的两坐标限制；最多6个小型代数右端、准备30分钟、执行30秒。
+最新进展：两个闭合细胞16自由度原型v01在结果序列化时失败，留下182字节的不完整summary；
+不能验收任何数值结果或检查。总管已用无求解、无写盘的最小例复现NumPy布尔值问题，
+并验证类型转换、严格有限JSON和解析回读的修复路径。原入口及失败文件保留。
+第32节/简报55只批准新v02入口、新summary及最多6个相同小型代数右端；不改模型、参数或阈值。
 生产三层架构不变，无新FEM/留出/GPU；原型只检验简化误差，不冒称完整生理DCM或Nature Physics创新。
-冻结后交既有数值任务，下列逐阶段记录为历史，不重复执行。
+冻结后交既有数值任务修复；下列逐阶段记录为历史，不重复执行。
 
 人类于 2026-09-05 明确批准实施 science-first v04：先判断全局收缩与心内膜局部负荷之间
 是否存在可预测、非平凡的关系。计算基础具备，核心科学贡献尚未得到证明；允许最多
