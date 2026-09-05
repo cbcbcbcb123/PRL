@@ -3,8 +3,8 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: a490833f378a6cd84db847aadb2310127dbf4722
-current_lifecycle: paper2_science_first_26_cases_reviewed_bounded_theory_followup
+verified_commit: 0344b0169692e1539a2923ef2aa48f359878d83b
+current_lifecycle: paper2_science_first_classical_counterexample_mechanism_attribution
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
@@ -52,8 +52,12 @@ P0 为构造零状态，endpoint 的作用反作用为结构恒等，二者不�
 理论源级复核已撤回“当前模型严格平移不变、A1/S1整体短缩必然相同”的初始假设：
 对总位移的仿射支撑与阻尼存在宏观—空间模态耦合；原预测及修正在 science_brief.md 中保留。
 4 个留出仍未释放/未运行：第 11 节 v2 已登记为读取 26 例后的经验预测，但不能区分经典解释与新机制，未作为验收预测冻结。
-数值任务已完成并停止新模拟；独立科学核查已交接。下一步为理论子 agent `/root/paper2_theory` 的最多 45 分钟纯理论续任务，
-具体见 science_brief.md 第 14 节：审查物理可行的等运动、等功局部差与经典反例。本阶段新增模拟授权为 0。
+26 例数值任务已完成并停止新模拟；纯理论续查第 15–16 节已交接。
+无 ECM 的两个对称 Kelvin–Voigt 支路构成反例：等 DC/复基频整体运动与等主动功，仍可有有限的固定位置牵引差。
+总管复核配对和功公式后接受其为排除“现象本身是 ECM 特异创新”的反例，而非已解释现有模型全部结果。
+第 15.7 节提出的集总对照优化尚未获准：当前阻抗是多端口/多分量，不能预设三个标量 SLS 参数能够完整匹配。
+下一步为简报第 17 节的机制归因：数值执行任务只后处理既有数组（新增 FEM 为 0）；理论 agent 只核查对照可实现性与经典解释。
+4 个留出保持未运行。暂停的是不够独特的科学主张，不是整个项目或 Nature Physics 目标。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，
 不得将其直接解释为细胞形变、EFE 因果或已达到 Nature Physics 的新机制。

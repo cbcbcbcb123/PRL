@@ -582,3 +582,333 @@ DC 与复基频。令 \(\mathbf D\mathbf p\) 观测共同位置/共同分量的�
 5. 最后只给一个决策：现候选可形成有可区分预测的机制、仅是已知数学的应用，或不可行。若只是经典应用，可在研究目标不变的前提下提出至多一个更具体的新理论问题及其否证条件；不得自动改代码、增加流体/非线性或运行新参数扫描。
 
 后续是否构造小输入基及新增有限计算，由总管基于上述结果记录假设、控制变量、判据与预算后另行下发；不需要用户逐步批准，但不占用或重标本轮 4 个未见留出。
+
+## 15. 双约束有限配对：物理可行性、反例与裁决
+
+> 本节是第 14 节授权的纯理论续查。没有运行 FEM、没有读取或释放 4 个留出，也没有修改数值或
+> 生产代码。结论针对当前小应变、线性、互易三层系统及其 midpoint 离散频率响应。
+
+### 15.1 有限维、非负且有界的允许激活集
+
+令 \(\mathbf p\in\mathbb R^m\) 为预先固定的有限空间基系数，\(\mathbf F\mathbf p\) 是心肌单元
+或共同求积点上的无量纲主动轮廓。为了不靠负激活或网格 Nyquist 模式制造效应，允许集应先写成
+
+\[
+\mathcal P=\left\{\mathbf p:
+\langle\mathbf F\mathbf p\rangle_w=1,\quad
+p_{\min}\le(\mathbf F\mathbf p)_i\le p_{\max},\quad
+|k|\le k_{\max},\quad
+\sup_{r,t}|\epsilon_r(\mathbf p,t)|\le\epsilon_{\rm lin}
+\right\}.
+\]
+
+这里 \(k_{\max}\) 必须独立于网格细化预先指定；\(\epsilon_{\rm lin}\) 是小应变模型的有效上限。
+源码只给出主动峰值 \(a_{\rm pk}=0.10\)，未给出 \(\epsilon_{\rm lin}\)，因此仅靠线性方程不能
+自行认证生理小应变。保守的首个筛查可不扩大既有 S1 包络，取
+\(p_{\min}=0.65,\ p_{\max}=1.35\)，使局部规定主动应变不超过 0.135；这只表示“不比现有
+S1 更激进”，不等于 0.135 已被独立证明处于真实组织的线性域。
+
+用对称配对
+
+\[
+\mathbf p_\pm=\mathbf p_0\pm\alpha\mathbf v,\qquad
+\boldsymbol\phi_0=\mathbf F\mathbf p_0,\quad
+\boldsymbol\psi=\mathbf F\mathbf v,
+\]
+
+并令 \(\|\boldsymbol\psi\|_\infty=1\)。两轮廓同时满足点态盒约束的精确上限是
+
+\[
+\alpha_{\rm box}=
+\min_{i:\psi_i\ne0}
+\frac{\min(\phi_{0i}-p_{\min},\,p_{\max}-\phi_{0i})}{|\psi_i|}.
+\]
+
+若 \(\epsilon_r(\mathbf p_\pm,t)=\epsilon_{0r}(t)\pm\alpha\epsilon_{vr}(t)\)，两侧同时留在
+小应变域还要求
+
+\[
+\alpha\le\alpha_{\rm state}=
+\inf_{r,t:\epsilon_{vr}\ne0}
+\frac{\epsilon_{\rm lin}-|\epsilon_{0r}(t)|}{|\epsilon_{vr}(t)|}.
+\]
+
+因此真正的有限可行区间是
+\(0\le\alpha\le\alpha_{\max}=\max[0,\min(\alpha_{\rm box},\alpha_{\rm state})]\)。
+若基准轮廓已碰到幅值边界，或基准状态已越过 \(\epsilon_{\rm lin}\)，则相应方向的
+\(\alpha_{\max}=0\)：无穷小线性方向存在并不意味着存在物理可用的有限配对。
+
+### 15.2 固定外载下周期主动功不是纯二次型
+
+对固定空间基，主动本征应变给出的广义主动向量线性依赖轮廓：
+\(\mathbf h(\mathbf p)=\mathbf B\mathbf p\)；源码中的 active_scalar_c 对一般基是
+\(c(\mathbf p)=\mathbf p^\mathsf T\mathbf C_a\mathbf p\)。令
+
+\[
+\mathbf R_d=(\mathbf A+i\omega_d\mathbf G)^{-1},\qquad
+\hat{\mathbf q}=\mathbf R_d\left(\hat{\mathbf f}-\hat a\,\mathbf B\mathbf p\right),
+\]
+
+其中 \(\hat{\mathbf f}\) 是与激活同频的固定外载。对 \(N\) 步 midpoint 周期，
+\(\theta=2\pi/N\) 且 \(\kappa_d=N\sin\theta/2>0\)。源码定义的 raw signed 主动功可精确写成
+
+\[
+P_a(\mathbf p)=\mathbf p^\mathsf T\mathbf W\mathbf p+\boldsymbol\ell^\mathsf T\mathbf p,
+\]
+
+\[
+\mathbf W=\kappa_d|\hat a|^2
+\left[-\operatorname{Im}\!\left(\mathbf B^\mathsf T\mathbf R_d\mathbf B\right)\right],
+\qquad
+\boldsymbol\ell^\mathsf T\mathbf p
+=\kappa_d\operatorname{Re}\!\left[
+\left(\mathbf p^\mathsf T\mathbf B^\mathsf T\mathbf R_d\hat{\mathbf f}\right)^*
+i\hat a\right].
+\]
+
+active_scalar_c 的周期项逐步等于
+\(c(\mathbf p)a_{n+1/2}(a_{n+1}-a_n)\)，在闭合周期严格望远镜求和为零；固定 DC 外载产生的
+常位移乘 \(\sum_n\Delta a_n=0\)，也不产生 \(\boldsymbol\ell\)。只有同频动态外载一般产生
+上述线性项。当前 A1/S1 源码令 \(\hat{\mathbf f}=0\)，故本轮原始对比确有
+\(\boldsymbol\ell=0\)；这不能外推到带腔面周期载荷的工况。
+
+若公平性定义改为“主动功加固定外载功”的总输入，则一般形式为
+
+\[
+P_{\rm tot}(\mathbf p)=
+\mathbf p^\mathsf T\mathbf W_{\rm tot}\mathbf p+
+\boldsymbol\ell_{\rm tot}^\mathsf T\mathbf p+P_f.
+\]
+
+常数 \(P_f\) 在两轮廓比较中相消，但线性项仍改变等功条件。应比较同一种有符号正生产；
+不能用绝对值相等掩盖一侧由系统向驱动器返功。
+
+### 15.3 等 DC、等复基频运动与等功的精确条件
+
+固定外载对两轮廓相同，所以它在运动差中相消。把整体短缩的 DC、基频实部和虚部堆叠为
+\(\mathbf C_{\rm aug}\)。若还要求相同平均激活，则方向必须满足
+
+\[
+\mathbf C_{\rm aug}\mathbf v=0,\qquad
+\langle\mathbf F\mathbf v\rangle_w=0.
+\]
+
+对第 15.2 节的一般功泛函，
+
+\[
+P(\mathbf p_+)-P(\mathbf p_-)
+=2\alpha\,\mathbf v^\mathsf T
+\left(2\mathbf W\mathbf p_0+\boldsymbol\ell\right).
+\]
+
+所以对称配对在整个 \(0<\alpha\le\alpha_{\max}\) 区间等功，当且仅当
+
+\[
+\mathbf v^\mathsf T(2\mathbf W\mathbf p_0+\boldsymbol\ell)=0.
+\]
+
+若只比较 \(\mathbf p_0\) 与 \(\mathbf p_0+\alpha\mathbf v\)，则
+
+\[
+\Delta P=\alpha g_v+\alpha^2w_v,\qquad
+g_v=\mathbf v^\mathsf T(2\mathbf W\mathbf p_0+\boldsymbol\ell),\quad
+w_v=\mathbf v^\mathsf T\mathbf W\mathbf v.
+\]
+
+除 \(\alpha=0\) 外，只有 \(\alpha_{\rm eq}=-g_v/w_v\) 可能等功，并且必须落入该方向的
+单侧盒约束/小应变可行区间。若 \(w_v=0\)，则 \(g_v=0\) 时整个可行区间等功，
+\(g_v\ne0\) 时只有零扰动等功。
+
+DC、复基频、平均激活和等功最多给出五个独立实约束。一般情况下若想保留非零方向，完整输入
+基至少要有六个实系数；固定均值后，至少要有五个独立零均值方向。较低维基只有在对称性造成
+约束秩亏时才可能成功，不能预设。可行方向找到后，共同位置 \(x_j\)、共同分量 \(c_j\) 的局部
+复响应差为
+
+\[
+\Delta\hat y_j=2\alpha\,\mathbf d_j^\mathsf T\mathbf v.
+\]
+
+\(\mathbf d_j\) 必须在优化前固定，不能在两轮廓各自重新挑最大分量或峰位置。
+
+### 15.4 \(\mathbf W\) 的零空间、原 \(\Gamma\) 的有限性与正确归一化
+
+由 \(\mathbf A,\mathbf G\) 实对称且 \(\mathbf G\succeq0\)，
+
+\[
+-\operatorname{Im}\mathbf R_d
+=\omega_d\mathbf R_d^*\mathbf G\mathbf R_d\succeq0,
+\]
+
+故无同频外载时 \(\mathbf W\succeq0\)，但不必正定，并且
+
+\[
+\ker\mathbf W=
+\{\mathbf v:\mathbf G^{1/2}\mathbf R_d\mathbf B\mathbf v=0\}.
+\]
+
+令 \(\mathcal S\) 同时满足运动、平均激活和对称等功的线性约束。第 12 节的商在且仅在
+
+\[
+\ker\mathbf W\cap\mathcal S\subseteq\ker\mathbf D
+\]
+
+时，才能在商空间上得到有限最大值。若存在
+\(\mathbf v\in\ker\mathbf W\cap\mathcal S\) 而 \(\mathbf D\mathbf v\ne0\)，则
+\(\Gamma=\infty\)；这表示“以耗散归一化”失效，不表示有无限物理牵引。点态激活上限与
+\(\alpha_{\max}\) 仍使有限响应有界。
+
+原 \(\Gamma\) 的单位是 \([\mathrm{local\ output}]^2/[\mathrm{work}]\)，不能与 5% 一类
+相对网格误差直接比较。若牵引参考尺度取
+\(y_{\rm ref}=E_m a_{\rm pk}\)，功尺度取每单位厚度
+\(P_{\rm ref}=E_m Lh_m a_{\rm pk}^2\)，可定义
+
+\[
+\widetilde\Gamma=\Gamma P_{\rm ref}/y_{\rm ref}^2.
+\]
+
+但真正可观测的有限量应直接定义为紧集上的容量
+
+\[
+\mathcal H_j=
+\max_{\mathbf p_\pm\in\mathcal P}
+\frac{|\mathbf d_j^\mathsf T(\mathbf p_+-\mathbf p_-)|}{y_{\rm ref}},
+\quad
+\mathbf C_{\rm aug}(\mathbf p_+-\mathbf p_-)=0,\quad
+P(\mathbf p_+)=P(\mathbf p_-).
+\]
+
+有限维、闭合且有界的 \(\mathcal P\) 保证 \(\mathcal H_j<\infty\)，不需要假定
+\(\mathbf W\succ0\)。数值判据也应使用同位置/同分量的绝对误差：
+
+\[
+\delta_{\rm disc,j}=
+|\hat y_{j,+}^{\,fine}-\hat y_{j,+}^{\,coarse}|
++|\hat y_{j,-}^{\,fine}-\hat y_{j,-}^{\,coarse}|.
+\]
+
+只有 \(|\Delta\hat y_j|\) 超过预先登记倍数的 \(\delta_{\rm disc,j}\)，并同时高于幅值 floor，
+才称有限效应可分辨。现有“各自峰值的百分比变化”不能替代这项误差；相位也只能对同一点、
+同一分量且非近零的复数比较。
+
+### 15.5 当前支撑/阻尼必须保留，但它不是现象存在的必要条件
+
+源码用含仿射 \(x\bar\epsilon\) 的 bottom_transform 构造
+
+\[
+\mathbf A_{\rm sup}=\mathbf T_b^\mathsf T\mathbf K_s\mathbf T_b,
+\qquad
+\mathbf G_{\rm drag}=\sum_\ell
+\mathbf T_\ell^\mathsf T\mathbf M_\ell\mathbf T_\ell.
+\]
+
+因此完整 \(\mathbf R_d,\mathbf C_{\rm aug},\mathbf D,\mathbf W,\boldsymbol\ell\) 都包含
+宏观—非零空间模态的支撑/drag 交叉块；不能用 Fourier 平移不变性预先令这些块为零。
+未来任何 ECM 对照都必须保留相同的 bottom support、三层/替代层 drag 与仿射坐标，否则
+测到的容量差可能只是边界条件差。
+
+但支撑跨模态耦合只会改变可行子空间和容量数值，并不是“同整体运动、同功、不同局部负荷”
+存在的必要条件。下述反例在严格对称、无跨模态混合的经典网络中已经产生该现象。
+
+### 15.6 无 ECM 的两支路被动网络反例
+
+取两个完全相同、互不耦合的 Kelvin--Voigt 被动支路，
+
+\[
+g\dot q_i+kq_i=f(t)-b\,p_i a(t),\qquad i=1,2,
+\]
+
+以 \(s=(q_1+q_2)/2\) 为整体运动，以第一支路的固定位置支撑牵引为局部观测。固定外载在两支路
+完全相同。令
+
+\[
+\mathbf p_+=(1+\alpha,1-\alpha),\qquad
+\mathbf p_-=(1-\alpha,1+\alpha).
+\]
+
+两者在 DC 和复基频上的 \(q_1+q_2\) 严格相同。其主动功必可写成
+
+\[
+P(\mathbf p)=\beta(p_1^2+p_2^2)+\lambda(p_1+p_2),
+\qquad \beta>0
+\]
+
+（\(\lambda\) 来自对称同频固定外载），故两轮廓的平方和与和都相同，主动功也严格相同。
+然而固定的第一支路牵引差正比于 \(2\alpha\)，对任意有限 \(\alpha>0\) 非零。
+在一般非负上限 \(0\le p_i\le p_{\max}\) 下，
+\(0\le\alpha\le\min(1,p_{\max}-1)\)；若沿用当前
+\([0.65,1.35]\) 包络，则 \(0\le\alpha\le0.35\)，效应是有限而非无穷小。
+
+若再取纯弹性极限 \(g=0\)，则 \(\beta=0\)、\(\mathbf W\) 整体有零空间，局部牵引仍可非零：
+原 \(\Gamma\) 发散，但盒约束容量 \(\mathcal H_j\) 仍有限。这同时给出第 15.4 节所需的
+零耗散可见方向反例。
+
+因此，双约束局部负荷分离本身是经典多输入—少观测系统的性质；无 ECM、无非互易、无异常点、
+无非线性或相变也会出现。它不能作为三层心肌—ECM—心内膜的新物理。
+
+### 15.7 单一裁决、一个更具体问题与下一步建议
+
+**裁决：现候选仅是已知线性可观测性/约束优化的应用，不是可区分的新机制。**
+物理盒约束使有限配对可能存在，但是否存在及效应大小取决于输入基、支撑/drag、幅值包络和
+小应变余量；无 ECM 反例已经否定其体系特异性。此裁决收缩当前主张，不改变 Nature Physics
+目标。
+
+仍服务中心问题的一个更具体、可否证理论问题是：
+
+> 在保留当前仿射支撑/drag、相同激活允许集和相同 \(k=0\) DC/基频边界阻抗时，分布式有限厚度
+> SLS ECM 的有限容量 \(\mathcal H_j\)，是否与一个无空间厚度的集总被动 SLS 连接器产生可分辨
+> 的容量差？
+
+集总控制应先用三个实参数匹配 \(k=0\) 的 DC 阻抗和复基频阻抗；这样保留相同时间记忆而只移除
+有限厚度的空间传递。拟合参数还必须满足被动 SLS 的正性条件；若目标阻抗不在该三参数被动类
+的可实现集合内，此最小控制不存在，应先停止并重定义控制，而不是允许非被动参数强行匹配。
+两者在 \(k=0\) 必须一致，差异只能来自有限 \(kH\) 的分布式空间阻抗及其
+与既有边界耦合的组合。否证条件是：在共同位置/共同分量和绝对误差口径下，
+\(|\mathcal H_j^{full}-\mathcal H_j^{lumped}|\) 不超过离散误差，或差异在保留同一支撑/drag 后
+消失。即使差异成立，它首先仍是经典有限厚度空间色散的系统特异结果；只有进一步得到非平凡
+界限、清晰适用域并获独立生物验证，才可能支持更高层主张。
+
+**单一下一步建议：值得做一次非留出、单条件的小型约束优化作为否证门，不值得先增加 FEM
+扫描。** 建议只用 \((De,H)=(0.2,0.3)\)、固定 \(x=0\) 的心内膜—ECM \(y\) 牵引、
+预登记 \(|k|\le3\) 的有限基、均值 1、轮廓包络 \([0.65,1.35]\)，同时计算完整分布式 ECM 与
+上述 \(k=0\) 匹配的集总 SLS 控制的 \(\mathcal H_j\)。运行前必须先给出
+\(\epsilon_{\rm lin}\) 或等价的小应变状态上限，并登记绝对误差倍数。若容量差不过误差，本方向
+停止；若超过误差，再由总管另行设计有限验证。该建议不使用或重标 4 个留出，也不构成当前
+数值执行授权。
+
+## 16. 本轮纯理论交接
+
+第 15 节已完成双约束可行区间、固定外载功项、\(\mathbf W\) 零空间、有限容量/误差口径、
+精确支撑耦合及无 ECM 反例的检查。结论和单一后续建议已经交接；此后停止写入本简报。
+
+## 17. 总管复核与机制归因任务（2026-09-05 监督更新）
+
+### 裁决
+
+总管独立检查了对称配对、周期功差和双 Kelvin–Voigt 支路反例：交换两支路的激活保持和与平方和，
+因而保持全局 DC/复基频响应和主动功，却改变指定支路的响应。这足以否定“双约束局部分离本身是 ECM 特异创新”，
+但不是现有三层模型的完整机制解释。Nature Physics 目标不变。
+第 15.7 节的单条件优化暂不执行：两界面、切向/法向以及仿射整体应变产生多端口阻抗；
+“三个标量参数匹配 k=0 DC 与复基频”至多自动对应一个明确标量端口，不能先宣称整个系统已匹配。
+
+### A. 数值执行任务：仅既有数据后处理
+
+- 只读本轮 18 个基础 NPZ/JSON，必要时读取已有 6 个分辨率 NPZ；不新增 FEM、不重跑、不读取/释放留出。
+- 固定心内膜–ECM 牵引的 y 分量，在 x/L={-0.25,0,0.25} 使用共同位置的复基频量；若需插值，先固定插值规则并披露。
+  同时计算该分量全场加权复幅值 RMS、复场差的 RMS 和各自峰值，区分峰位选择、近零分母与全场改变。
+- 九组 A1/S1 分别报告 raw 对照，以及以 sqrt(P_A1/P_S1) 缩放 S1 的等周期主动功对照。
+  后者是线性模型的代数归一化，不是新模拟；必须报告其整体短缩如何变化，不称同时等运动/等功。
+- 报告同点绝对量、同点复差与可解释相位；分母/幅值近零时禁用倍率/相位。不要用三个 S1 代表点的误差冒充九组 A1/S1 的完整认证。
+- 工作预算最多 30 分钟，后处理计算累计最多 120 秒，最多 1 CPU/8 GiB，无 GPU；只需必要的数组一致性与重算检查。
+  写入仅限 `scripts/analyze_paper2_science_pilot_fields_v01.py` 和 `numerical/field_comparison_v01.json`（均须先确认不存在），
+  后者相对本简报目录；不覆盖任何既有记录，不新增图/报告树，不提交或推送，由总管统一检查同步。
+
+### B. 理论 agent：明确一个可实现、可否证的对照
+
+- 最多 45 分钟，源码与文献只读、无 FEM、无优化计算。只续写本简报第 18 节，总管在交接前不再编辑本简报。
+- 明确当前 ECM 的端口变量、共轭功与阻抗维数，保留仿射支撑/drag 的全部耦合。
+  判断单个被动三参数 SLS 能匹配什么，不能匹配什么；必要时用精确 Schur 消元说明，而不另建替代模型代码。
+- 检查当前问题是否已经由经典有限厚度空间传递解释。单个频率的容量差不等于新物理，不用拟合自由度或匹配不充分制造差异。
+- 最终给一个可区分预测及最小计算条件，或者明确建议停止该对照路线；不能仅以“值得进一步研究”交接。
+  如尚无足以区别经典解释的预测，诚实记录缺口，不自动下发优化或新增参数扫描。
+
+本阶段属于机制归因和路线筛选，不是投稿级证据接受；用户保留最终科学判断，常规推进按已授予的自主权限执行。
