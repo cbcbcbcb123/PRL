@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-06
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 91a59537cd3e4399eb18b5acbe12165598dada75
-current_lifecycle: paper2_pumped_cross_response_counterexample_accepted
+verified_commit: 1739d1bd5a27c5e846349de8e744dfc6fb6da991
+current_lifecycle: paper2_cell_port_symmetry_review_accepted
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section53_brief78_complete_no_physics_implementation
+execution_authorized: v04_section54_brief79_complete_no_physics_implementation
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_cell_bloch_asymptotic_probe/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划53/简报78，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
+当前裁决（主计划54/简报79，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
 已完成并通过总管独立几何与解析输入重建；theta=0.02时领先系数误差分别约0.008558%和0.016599%。
 本批计算0.0750725000秒，独立复核0.0177348000秒且0新右端；没有新增FEM或解盲原四留出。
 长波连接伸长可写成普通应变—曲率恢复，alpha=-0.778458496485260，z_eff/b=0.49625，
@@ -105,6 +105,11 @@ R来自完整张量比较，不能用杨氏模量比替代；精确无动力学�
 2023受驱颗粒与2026被动齿轮作者稿提供相关时间平均机制先例，但并非相同光滑势的等价证明。
 接受的是抽象反例，不是心内膜机制、新颖性或DCM必要性；不采纳有限几何、新本构或Floquet实现。
 若保留该方向，下一步须先定义细胞几何/共轭端口映射和空间对称性否证，不直接增加数值工况。
+主计划54/简报79已独立验收：胞高/客观内部剪切及其共轭力已定义。自镜像/平移均匀胞不能
+承接抽象(1,1)泵浦；有限域全局镜像不等于逐胞剪切为零，局部交叉差可以镜像反号而偶权相消。
+同奇偶空间端口只是不被镜像禁止，未证明受激发或非互易；高阶耦合未由二次能量决定。
+该直接映射收口。后续若保留异质候选，先从客观胞能和真实P1输入推出耦合/模态投影，
+并与保留同等内部自由度的连续对照比较；本轮不实现有限几何、不添加手性或新工况。
 数值任务保持完成，15例既有输出本轮只读核实仍全部检查通过；无新计算或原留出读取。
 这是独立理想边界研究，不是已实现三层耦合；不启动新FEM、扫描、原留出、流体或非线性。
 Nature Physics目标保持；生产心肌FEM/ECM黏弹FEM不变，现有链不追认为完整细胞DCM。
