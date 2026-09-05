@@ -3,8 +3,8 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 740f2da07b6bfd4000ca900e5c27dcc9e3041483
-current_lifecycle: paper2_science_first_26_cases_completed_scientific_review
+verified_commit: a490833f378a6cd84db847aadb2310127dbf4722
+current_lifecycle: paper2_science_first_26_cases_reviewed_bounded_theory_followup
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
@@ -51,8 +51,9 @@ numerical/summary.json 记录总耗时约 62.72 秒；26/26 单工况结构门�
 P0 为构造零状态，endpoint 的作用反作用为结构恒等，二者不冒称独立求解测量。
 理论源级复核已撤回“当前模型严格平移不变、A1/S1整体短缩必然相同”的初始假设：
 对总位移的仿射支撑与阻尼存在宏观—空间模态耦合；原预测及修正在 science_brief.md 中保留。
-4 个留出仍未释放/未运行：修正后尚无足够辨别力的端点独立预测，不用能量恒等过关冒充新机制验证。
-数值任务已完成并停止新模拟，理论子 agent `/root/paper2_theory` 进行独立科学核查与下一假设分析。
+4 个留出仍未释放/未运行：第 11 节 v2 已登记为读取 26 例后的经验预测，但不能区分经典解释与新机制，未作为验收预测冻结。
+数值任务已完成并停止新模拟；独立科学核查已交接。下一步为理论子 agent `/root/paper2_theory` 的最多 45 分钟纯理论续任务，
+具体见 science_brief.md 第 14 节：审查物理可行的等运动、等功局部差与经典反例。本阶段新增模拟授权为 0。
 初步观测为 A1/S1 整体短缩幅值差约 0.701%–0.722%，链轴向应变峰值幅值差约 0.115%–0.608%，
 心内膜侧界面牵引最大分量基频幅值比为 1.28–8.05；峰值位置、非零基线、输入功和经典线性路径仍须区分，
 不得将其直接解释为细胞形变、EFE 因果或已达到 Nature Physics 的新机制。
