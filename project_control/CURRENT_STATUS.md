@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-05
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: ef1d0172ce0e09f139ccbdf4d3428b7b2dce1273
-current_lifecycle: paper2_cell_mechanics_candidate_not_established_next_hypothesis_selection
+verified_commit: 663a638df4ac4d2cfa78764ddf9d94aa75760c5f
+current_lifecycle: paper2_cell_energy_soft_mode_drivability_observability_theory_check
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: supervisor_cell_mechanics_hypothesis_selection_no_new_runs
+execution_authorized: v04_section27_bounded_cell_energy_theory_no_new_runs
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_static_mode_screen/v03_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -49,6 +49,11 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 该补齐现已完成并验收（简报45.5）：共同观测和完整载荷投影明确，但候选仍为NOT_ESTABLISHED。
 两任务本阶段结束；下一步由总管筛选细胞形变/连接几何与ECM耦合的具体可区分假设，不重复第26节，
 不以实验尚未到位停止理论工作，也不自动启动DCM实现或增加参数扫描。
+
+本轮已核实数值任务仍结束、无新输出。总管完成有界原始文献复核后，设定第27节/简报第46节的
+30分钟纸面任务：两细胞周期截面的总周长与逐边弹性，是否允许不同的低刚度形变，且能否同时被
+ECM基底驱动、在线性连接长度上观察。它是待检查的具体材料/观测选择，不是已证明的软模机制。
+不重复第26节，不运行模型或原四留出；已完成46周期工况+30静态右端，累计数值170.24076614秒。
 
 本轮以前的运行基础为 P5 r03：68 项宿主测试通过、182 项 Linux 测试通过及 2 项预期平台
 跳过；不是正式 Figure 2 数值 PASS。证据入口：
