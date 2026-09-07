@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: e9725011bf7b69d0d499c4301f67ed3e8e3dbf69
-current_lifecycle: paper2_linear_mechanics_no_go_accepted_cell_state_ecm_feedback_theory_gate
+verified_commit: 0de1b9dcef8e34b2515095311080101d2e4a9321
+current_lifecycle: paper2_feedback_kernel_preregistered_waiting_execution
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section79_completed_no_new_batch
+execution_authorized: v04_section84_feedback_kernel_gate_only
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_natural_probe/v01_20260907/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -32,6 +32,13 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 及启动 GPU worker 仍须单独询问。
 
 ## 1. 一句话状态
+
+最新执行授权（主计划84/简报110，取代下列即时授权）：理论agent与总管已冻结唯一机械刺激、唯一ECM
+模量支路及与生产T128谐波算子一致的反馈导数。现允许A1、H=0.3、`tau_e/T=0.2`下S2/S3各一个
+基态和8列局部模量灵敏度，第0/3列两档中心差分复核；1 CPU、8GiB、60秒、0 GPU。必须先核查
+基态均匀性及平移协变，不能因周期网格直接使用`k`标签。当前弹性链不是闭合胞DCM，任何阳性仅是
+机械反馈核可行性；真实DCM/连续强对照、分裂、扩散、流体、频率轴及原4留出均未授权。论文2固定
+周期，避免与论文3频率解码—ECM慢记忆主线重叠。
 
 当前最高优先级裁决（主计划82–83/简报108–109）：共享连接的固定拓扑线性机械多端口仍可由普通
 耦合弹簧—阻尼网络精确复现，DCM机械独占主张暂停。新入口改为心内膜胞身份/激活状态—局部ECM
