@@ -1,14 +1,14 @@
 ---
 document_id: PRL-CURRENT-STATUS
 status: current
-last_verified: 2026-09-06
+last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 0a896e5c42575a84dae0bc17ae9b1fa888615947
-current_lifecycle: paper2_neighbor_rearrangement_review_complete_no_case
+verified_commit: 74be18e0d052c08f3d66915d12d251014d5833d5
+current_lifecycle: paper2_pair_junction_probe_authorized_not_run
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section59_brief84_complete_no_new_case
+execution_authorized: v04_section60_bounded_static_pair_probe
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_cell_bloch_asymptotic_probe/v01_20260905/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,7 +33,14 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划59/简报84，取代下列历史阶段的即时授权表述）：15个固定8自由度复Bloch右端
+当前裁决（主计划60/简报85，取代下列历史阶段的即时授权表述）：两预先弱连接的局部相互作用
+判据已由总管与理论子agent独立核对；“ECM厚度使屏蔽转放大”仍是未证实候选。授权一个8胞
+与受载有限厚度ECM耦合的静态力探针，最多30状态/44线性右端、300秒、1 CPU/8 GiB；新结果not_run。
+它不含心肌主动驱动及宏观仿射缩短，不能用盒长固定作为整体/局部分离证据；生产身份不变。
+固定源、等静态加载功、连接开度与连接力分开报告。未增加非线性/T1/损伤/流体；原4留出锁定。
+目标Nature Physics、心室/EFE方向不变；目前0项核心新机制确认，闭合胞DCM必要性尚待证据。
+
+此前已接受证据：15个固定8自由度复Bloch右端
 已完成并通过总管独立几何与解析输入重建；theta=0.02时领先系数误差分别约0.008558%和0.016599%。
 本批计算0.0750725000秒，独立复核0.0177348000秒且0新右端；没有新增FEM或解盲原四留出。
 长波连接伸长可写成普通应变—曲率恢复，alpha=-0.778458496485260，z_eff/b=0.49625，
