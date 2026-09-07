@@ -3,7 +3,7 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: d169b403556a6119a90c7da972ae588c7429eddd
+verified_commit: e9725011bf7b69d0d499c4301f67ed3e8e3dbf69
 current_lifecycle: paper2_linear_mechanics_no_go_accepted_cell_state_ecm_feedback_theory_gate
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
