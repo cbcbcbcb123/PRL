@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: b50be4fea71033f5d1d8c28ebcff8f59abf4add8
-current_lifecycle: paper2_collocated_phase_bound_accepted_as_diagnostic
+verified_commit: 6e32da37aaea98c55373e055a04e1a31f6e9dd30
+current_lifecycle: paper2_hydraulic_scaling_identification_candidate_narrowed
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section71_completed_no_new_numerical_or_model_batch
+execution_authorized: v04_section72_completed_no_new_numerical_or_model_batch
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_shape_coupling_coefficients/v01_20260907/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划60.4–71/简报86–96，取代下列历史阶段即时授权）：8胞与受载有限厚ECM的
+当前裁决（主计划60.4–72/简报86–97，取代下列历史阶段即时授权）：8胞与受载有限厚ECM的
 双弱连接静态探针已完成30状态/14指定柔度列。三厚度、两距离均为屏蔽，不支持本采样转变假设。
 总管用不同三角梯度、界面积分和胞能量重建全部状态平衡及能量，0新解；理论子agent亦完成
 独立源码审查。中心细化变化0.98424%，不认证全区间。求解1.1091311秒、独立重建1.2086616秒。
@@ -70,6 +70,9 @@ pi/2同负。ECM后者粗细差11.41%，不认证所有灵敏度；未识别唯�
 第71节功共轭端口相位锐界已独立验收，作为限定耗散诊断；默认ECM的零drag对照全频上界约16.30644度。
 交叉读出可由普通通路相消达到90度，故整体到局部的大相位差不是细胞额外耗散证据；生产有drag不套此界。
 本步0新工况/代码/模型/实验，仅常数算术；不越界亦不能证明细胞无耗散。判别基线收口，暂无下一数值批次。
+第72节平方时间律识别检查已独立验收：限定固结与弹性/drag杆可同加载端响应/耗散；平方律不唯一识别胞内水力。
+两篇原始研究区分胞内孔弹和基底水力；排水控制只是一项条件性破退化办法，现实能力未知，不等于DCM必要性。
+该识别候选收缩，0新数值/流体/状态实现/实验。无遗漏执行成果，暂无下一数值批次，目标与原留出不变。
 它不含心肌主动驱动及宏观仿射缩短，不能用盒长固定作为整体/局部分离证据；生产身份不变。
 固定源、等静态加载功、连接开度与连接力分开报告。未增加非线性/T1/损伤/流体；原4留出锁定。
 目标Nature Physics、心室/EFE方向不变；目前0项核心新机制确认，闭合胞DCM必要性尚待证据。
