@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 74be18e0d052c08f3d66915d12d251014d5833d5
-current_lifecycle: paper2_pair_junction_probe_implementation_in_progress
+verified_commit: 95aee0038fd63fd852d25054e65489fe1cf9c7b5
+current_lifecycle: paper2_pair_kernel_comparator_complete_attribution_authorized
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section60_bounded_static_pair_probe_with_60_3_local_assembly
+execution_authorized: v04_section62_saved_flexibility_bilinear_attribution_no_new_solve
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: results/paper2_cell_bloch_asymptotic_probe/v01_20260905/summary.json
+latest_completed_execution_log: results/paper2_pair_junction_probe/v01_20260907/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -33,11 +33,15 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划60/简报85，取代下列历史阶段的即时授权表述）：两预先弱连接的局部相互作用
-判据已由总管与理论子agent独立核对；“ECM厚度使屏蔽转放大”仍是未证实候选。授权一个8胞
-与受载有限厚度ECM耦合的静态力探针，最多30状态/44线性右端、300秒、1 CPU/8 GiB；实现已启动、尚未求解。
-本机缺DOLFINx/PETSc，总管已核对并允许单入口复用生产手工P1装配公式；未继承原UFL验证PASS，
-不安装依赖或改生产模块，详见主计划60.3/简报85.5。原物理规格与先验预测不变。
+当前裁决（主计划60.4–62/简报86–87，取代下列历史阶段即时授权）：8胞与受载有限厚ECM的
+双弱连接静态探针已完成30状态/14指定柔度列。三厚度、两距离均为屏蔽，不支持本采样转变假设。
+总管用不同三角梯度、界面积分和胞能量重建全部状态平衡及能量，0新解；理论子agent亦完成
+独立源码审查。中心细化变化0.98424%，不认证全区间。求解1.1091311秒、独立重建1.2086616秒。
+已纠正近零特征值不能单独认证正定的检查表述，用结构证明与四套基准/下界Cholesky补查。
+近零绝对误差门及全局胞坐标标签限制见简报86.3，冻结结果保留；真实UFL交叉仍not_run。
+普通标量链对照已完成：它解释所有负号，但0/pi校准不能在观察精度内恢复中心完整作用核；
+pi/4谱偏差细网格4.50821%，其粗细变化0.0213234%。这不识别ECM非局域性与胞内部形变。
+本批求解结束，当前仅授权计划62从已保存柔度场分解六个能量块的交叉贡献，0新解/文件。
 它不含心肌主动驱动及宏观仿射缩短，不能用盒长固定作为整体/局部分离证据；生产身份不变。
 固定源、等静态加载功、连接开度与连接力分开报告。未增加非线性/T1/损伤/流体；原4留出锁定。
 目标Nature Physics、心室/EFE方向不变；目前0项核心新机制确认，闭合胞DCM必要性尚待证据。
