@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 6cf87cb678e03fce303950c4ec6e8c4ac07924f3
-current_lifecycle: paper2_write_read_original_criteria_accepted_with_frozen_solver_warning
+verified_commit: 6324d886a50653f27138d4e8dc0d4c8d4a8207d2
+current_lifecycle: paper2_natural_probe_preregistered_pending_execution
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section78_completed_no_new_batch
+execution_authorized: v04_section79_prediction_fixed_12_trajectories_authorized_after_commit
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_rest_length_write_read/v01_20260907/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -104,6 +104,10 @@ DeltaA=-0.0028271428245；相对预注册预测最大偏差1.392411%，半幅、
 总管按原合同验收并保留该辅助告警，未改门、重跑或修改冻结结果。205个保存样点及五个末态已独立重建，
 不称全程严格稳定性或十三位精度认证。计算1.4055725秒、峰值工作集约0.072567GiB，无GPU。
 接受本理想点的暂存状态/条件静态几何读出支持；下一步须先定义自然小探针与漂移对照，尚无新批次。
+第79节现已在首次轨迹前固定自然演化探针：nonlinear/E2各取trained/reference，正/负/零共12条；
+正负中心差与零探针对照扣除背景，完整三状态Jacobian预测动态刚度+1.331026%、张力增益-0.404947%。
+理论子agent独立复算一致，并在运行前修正偶次污染量纲/窗口定义。预测提交后授权既有执行任务在
+1 CPU、8GiB、累计求解60秒内实现并运行；当前仍0新轨迹/结果，失败保留且不换参寻找通过。
 上述8胞静态探针不含心肌主动驱动及宏观仿射缩短，不能用盒长固定作为整体/局部分离证据；生产身份不变。
 固定源、等静态加载功、连接开度与连接力分开报告。生产未实现非线性/T1/损伤/流体；原4留出锁定。
 目标Nature Physics、心室/EFE方向不变；目前0项核心新机制确认，闭合胞DCM必要性尚待证据。
