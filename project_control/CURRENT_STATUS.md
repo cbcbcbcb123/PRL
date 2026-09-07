@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 95aee0038fd63fd852d25054e65489fe1cf9c7b5
-current_lifecycle: paper2_pair_kernel_comparator_complete_attribution_authorized
+verified_commit: 9dc0f705e035bff50876b057c1b7df734cef0e41
+current_lifecycle: paper2_spectral_residual_audited_basal_reciprocity_check_authorized
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section62_saved_flexibility_bilinear_attribution_no_new_solve
+execution_authorized: v04_section64_saved_response_basal_reciprocity_no_new_solve
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_pair_junction_probe/v01_20260907/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划60.4–62/简报86–87，取代下列历史阶段即时授权）：8胞与受载有限厚ECM的
+当前裁决（主计划60.4–64/简报86–89，取代下列历史阶段即时授权）：8胞与受载有限厚ECM的
 双弱连接静态探针已完成30状态/14指定柔度列。三厚度、两距离均为屏蔽，不支持本采样转变假设。
 总管用不同三角梯度、界面积分和胞能量重建全部状态平衡及能量，0新解；理论子agent亦完成
 独立源码审查。中心细化变化0.98424%，不认证全区间。求解1.1091311秒、独立重建1.2086616秒。
@@ -41,7 +41,11 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 近零绝对误差门及全局胞坐标标签限制见简报86.3，冻结结果保留；真实UFL交叉仍not_run。
 普通标量链对照已完成：它解释所有负号，但0/pi校准不能在观察精度内恢复中心完整作用核；
 pi/4谱偏差细网格4.50821%，其粗细变化0.0213234%。这不识别ECM非局域性与胞内部形变。
-本批求解结束，当前仅授权计划62从已保存柔度场分解六个能量块的交叉贡献，0新解/文件。
+六块交叉柔度重组已独立验收；总管纠正导数符号与“已定位谱形机制”的过强解释，执行者确认。
+计划63再校准谱导数已独立验收，0.0540143秒、0新解/文件；pi/4角与ECM倍率导数相反，
+pi/2同负。ECM后者粗细差11.41%，不认证所有灵敏度；未识别唯一谱来源或DCM必要性。
+当前仅授权计划64恢复底面运动到连接开度的互易投影，先查心肌侧输入代理可激发性，
+0新解/文件；不将边界位移代理称已加入主动心肌，不重开已收口的泛化仿射/Schur支线。
 它不含心肌主动驱动及宏观仿射缩短，不能用盒长固定作为整体/局部分离证据；生产身份不变。
 固定源、等静态加载功、连接开度与连接力分开报告。未增加非线性/T1/损伤/流体；原4留出锁定。
 目标Nature Physics、心室/EFE方向不变；目前0项核心新机制确认，闭合胞DCM必要性尚待证据。
