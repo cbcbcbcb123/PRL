@@ -3,12 +3,12 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 5605e648b7146488537d380a6e3af80898ebd3e7
-current_lifecycle: paper2_closed_cell_geometry_readout_checked_candidate_retained
+verified_commit: 62c8e40ed185f18c8578c5a225ac9d33ea968d52
+current_lifecycle: paper2_loading_wait_probe_feasibility_checked_candidate_retained
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section76_completed_no_new_numerical_or_model_batch
+execution_authorized: v04_section77_completed_no_new_numerical_or_model_batch
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_shape_coupling_coefficients/v01_20260907/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划60.4–76/简报86–101，取代下列历史阶段即时授权）：8胞与受载有限厚ECM的
+当前裁决（主计划60.4–77/简报86–102，取代下列历史阶段即时授权）：8胞与受载有限厚ECM的
 双弱连接静态探针已完成30状态/14指定柔度列。三厚度、两距离均为屏蔽，不支持本采样转变假设。
 总管用不同三角梯度、界面积分和胞能量重建全部状态平衡及能量，0新解；理论子agent亦完成
 独立源码审查。中心细化变化0.98424%，不认证全区间。求解1.1091311秒、独立重建1.2086616秒。
@@ -88,6 +88,11 @@ pi/2同负。ECM后者粗细差11.41%，不认证所有灵敏度；未识别唯�
 局部正角度刚度区间。没有量化该区间或认证任意自由细胞；受约束胞不是完整DCM生产模型。
 保留并推进候选。下一缺口是加载—等待—测试的状态可达性、快慢时窗及能量对照，随后才评估ECM作用。
 本步0新工况/求解/代码/目录/文献/模型实现/实验；数值任务无故障或遗漏，尚未下发新数值批次。
+第77节加载—等待—测试的局部可达性已独立核查：弱加载可写入暂存自然长度状态，撤载后逐渐恢复。
+接受约化关系及条件性窗口；自然恢复慢不保证探针不改写状态，需更严格的低扰动频率条件。
+短训练快层、小信号残余和局部幅值限制须保留；固定二次矩阵不能自身产生训练后增量刚度变化。
+下一步为同一有限几何候选设计前瞻数值核验，先定参数/工况/误差对照/预算，不自动加入ECM或其他机制。
+本步0新数值/代码/模型实现/实验，原4留出未动；ECM作用、实验可辨识性及核心创新仍未证实。
 上述8胞静态探针不含心肌主动驱动及宏观仿射缩短，不能用盒长固定作为整体/局部分离证据；生产身份不变。
 固定源、等静态加载功、连接开度与连接力分开报告。未实现非线性/T1/损伤/流体；原4留出锁定。
 目标Nature Physics、心室/EFE方向不变；目前0项核心新机制确认，闭合胞DCM必要性尚待证据。
