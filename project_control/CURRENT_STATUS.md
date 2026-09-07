@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 6b283dfe89bd3c11efabaf3922f6bc410ea0a7e9
-current_lifecycle: paper2_write_read_pilot_preregistered
+verified_commit: 6cf87cb678e03fce303950c4ec6e8c4ac07924f3
+current_lifecycle: paper2_write_read_original_criteria_accepted_with_frozen_solver_warning
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section78_five_histories_cpu_60s_after_prediction_release
+execution_authorized: v04_section78_completed_no_new_batch
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: results/paper2_shape_coupling_coefficients/v01_20260907/summary.json
+latest_completed_execution_log: results/paper2_rest_length_write_read/v01_20260907/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划60.4–78/简报86–103，取代下列历史阶段即时授权）：8胞与受载有限厚ECM的
+当前裁决（主计划60.4–78/简报86–104，取代下列历史阶段即时授权）：8胞与受载有限厚ECM的
 双弱连接静态探针已完成30状态/14指定柔度列。三厚度、两距离均为屏蔽，不支持本采样转变假设。
 总管用不同三角梯度、界面积分和胞能量重建全部状态平衡及能量，0新解；理论子agent亦完成
 独立源码审查。中心细化变化0.98424%，不认证全区间。求解1.1091311秒、独立重建1.2086616秒。
@@ -98,6 +98,12 @@ pi/2同负。ECM后者粗细差11.41%，不认证所有灵敏度；未识别唯�
 允许一个独立三状态有限几何辅助ODE及固定二次对照，生产接口不变；1 CPU/8GiB，累计求解最多60秒。
 执行任务已下发实现，预测提交后明确放行；最多五例与五次末态条件平衡，不扩参数/工况。
 条件静态读出与自然动态探针区分；后者本批未授权。数值结果及独立验收待完成，原4留出保持锁定。
+第78节现已完成五例/五次条件诊断并独立验收：m_wait=0.0067799748582，条件DeltaK_eff=+0.0068090076424，
+DeltaA=-0.0028271428245；相对预注册预测最大偏差1.392411%，半幅、零载、严积分、E2与原功账门通过。
+原JSON仍为聚合FAIL：脚本额外要求solver.success，半幅/严格条件解status=5但独立残差<6.7e-16且正定。
+总管按原合同验收并保留该辅助告警，未改门、重跑或修改冻结结果。205个保存样点及五个末态已独立重建，
+不称全程严格稳定性或十三位精度认证。计算1.4055725秒、峰值工作集约0.072567GiB，无GPU。
+接受本理想点的暂存状态/条件静态几何读出支持；下一步须先定义自然小探针与漂移对照，尚无新批次。
 上述8胞静态探针不含心肌主动驱动及宏观仿射缩短，不能用盒长固定作为整体/局部分离证据；生产身份不变。
 固定源、等静态加载功、连接开度与连接力分开报告。生产未实现非线性/T1/损伤/流体；原4留出锁定。
 目标Nature Physics、心室/EFE方向不变；目前0项核心新机制确认，闭合胞DCM必要性尚待证据。
