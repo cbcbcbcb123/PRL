@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: e3c3272237fcfe99147a4b5b1390628c0fc0b2a0
-current_lifecycle: paper2_cell_shape_coupling_coefficient_check_authorized
+verified_commit: ae01bcdaf8d5acb230a5782bc3032bedd7095e0f
+current_lifecycle: paper2_shape_coupling_coefficients_accepted_mechanism_unconfirmed
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section68_four_gauged_coefficient_rhs_no_shape_scan
+execution_authorized: v04_section68_completed_no_new_numerical_batch
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: results/paper2_pair_junction_probe/v01_20260907/summary.json
+latest_completed_execution_log: results/paper2_shape_coupling_coefficients/v01_20260907/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -33,7 +33,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 1. 一句话状态
 
-当前裁决（主计划60.4–66/简报86–91，取代下列历史阶段即时授权）：8胞与受载有限厚ECM的
+当前裁决（主计划60.4–68/简报86–93，取代下列历史阶段即时授权）：8胞与受载有限厚ECM的
 双弱连接静态探针已完成30状态/14指定柔度列。三厚度、两距离均为屏蔽，不支持本采样转变假设。
 总管用不同三角梯度、界面积分和胞能量重建全部状态平衡及能量，0新解；理论子agent亦完成
 独立源码审查。中心细化变化0.98424%，不认证全区间。求解1.1091311秒、独立重建1.2086616秒。
@@ -52,10 +52,14 @@ pi/2同负。ECM后者粗细差11.41%，不认证所有灵敏度；未识别唯�
 计划66纸面否证已由两方独立验收：普通被动两模态可有静态两端负、中频交叉实部正，
 可行性门lambda_1*lambda_2>1；实际幅值导数仍须载荷比j2/j1。不能套到完整多模态/含drag模型。
 本步0新解/扫描/模型接入/查新，泛化频率变号候选收口；下一合格细胞预测仍待筛选。
-第67节纸面检查完成：唯一零模与正几何刚度已核查，固定底面输入的驱动投影非零尚未证明。
+第67节纸面检查完成：唯一零模与正几何刚度已核查，彼时固定底面驱动投影非零尚未证明。
 三篇原始文献限定一般非仿射机制的新颖性，不能据此宣布DCM必要性或否定所有细胞物理。
-现按68授权仅两个网格共4个有Q=0规范的线性右端，核算缺失的F_h和C_g；尚未运行/验收。
-此为系数判零，不是阳性预测批次；30秒计算预算，无形状/频率扫描或生产改动，详见简报92。
+第68节两个网格共4个Q=0系数右端已独立验收：细网格F_h=2.649438561、C_g=335.7499367，
+粗细变化分别0.3084075%/0.0519880%，通过限定5%探索门；不是所有场/能量分项的收敛认证。
+执行0.6017392秒，总管独立完整单元重建0.2959302秒、0新解；峰值内存不可用，未虚报8GiB实测。
+冻结JSON的u0能量标签只指消元代数恒等式，已在简报93勘误并由执行者确认；独立真实边界功闭合
+误差最大8.705e-13，不影响F_h/C_g。尚未计算有限形状下Q放大，不能据非零系数声称局部负荷增长。
+本系数判零完成，无新的数值批次；下一步须先给出区别普通非仿射响应的具体负荷预测，不自动扩扫。
 它不含心肌主动驱动及宏观仿射缩短，不能用盒长固定作为整体/局部分离证据；生产身份不变。
 固定源、等静态加载功、连接开度与连接力分开报告。未增加非线性/T1/损伤/流体；原4留出锁定。
 目标Nature Physics、心室/EFE方向不变；目前0项核心新机制确认，闭合胞DCM必要性尚待证据。
