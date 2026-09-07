@@ -4,11 +4,11 @@ status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
 verified_commit: e3c3272237fcfe99147a4b5b1390628c0fc0b2a0
-current_lifecycle: paper2_passive_dynamic_counterexample_accepted_candidate_selection
+current_lifecycle: paper2_cell_shape_coupling_coefficient_check_authorized
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section65_candidate_selection_section66_closed_no_new_numerical_batch
+execution_authorized: v04_section68_four_gauged_coefficient_rhs_no_shape_scan
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
 latest_completed_execution_log: results/paper2_pair_junction_probe/v01_20260907/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
@@ -52,6 +52,10 @@ pi/2同负。ECM后者粗细差11.41%，不认证所有灵敏度；未识别唯�
 计划66纸面否证已由两方独立验收：普通被动两模态可有静态两端负、中频交叉实部正，
 可行性门lambda_1*lambda_2>1；实际幅值导数仍须载荷比j2/j1。不能套到完整多模态/含drag模型。
 本步0新解/扫描/模型接入/查新，泛化频率变号候选收口；下一合格细胞预测仍待筛选。
+第67节纸面检查完成：唯一零模与正几何刚度已核查，固定底面输入的驱动投影非零尚未证明。
+三篇原始文献限定一般非仿射机制的新颖性，不能据此宣布DCM必要性或否定所有细胞物理。
+现按68授权仅两个网格共4个有Q=0规范的线性右端，核算缺失的F_h和C_g；尚未运行/验收。
+此为系数判零，不是阳性预测批次；30秒计算预算，无形状/频率扫描或生产改动，详见简报92。
 它不含心肌主动驱动及宏观仿射缩短，不能用盒长固定作为整体/局部分离证据；生产身份不变。
 固定源、等静态加载功、连接开度与连接力分开报告。未增加非线性/T1/损伤/流体；原4留出锁定。
 目标Nature Physics、心室/EFE方向不变；目前0项核心新机制确认，闭合胞DCM必要性尚待证据。
