@@ -3,8 +3,8 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: f2c5590ea99e1bc15be422c6a3e876b8c4a65df2
-current_lifecycle: paper2_natural_probe_original_criteria_accepted
+verified_commit: 71370c9272fa0e2658fce62ac06f05a931aaa454
+current_lifecycle: paper2_natural_probe_accepted_pair_symmetry_candidate_rejected
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
@@ -112,6 +112,10 @@ DeltaA=-0.0028271428245；相对预注册预测最大偏差1.392411%，半幅、
 复增益差约2e-9。自然漂移和探针扰动、拟合/偶次污染、功账、域及保存点稳定门均通过；求解
 5.58921秒、峰值约0.075974GiB、0 GPU。接受限定“自然恢复中动态可读”，不等于DCM必要性。
 下一步仅授权解析筛选反对称双胞状态能否形成宏观暗/局部亮的一阶模态，尚无新数值批次。
+该解析筛选现已完成并否证专属性：宏观偶阶/有符号局部差奇阶只是交换对称性；当前复端口可由
+四组正参数的普通双支路Kelvin–Voigt连续模型精确匹配。邻近研究亦已覆盖连接重塑、全局弹性学习、
+长程记忆及离散软模。因此不启动双胞扫描。下一门收缩为真实共享连接的跨胞复两端口及严格连续对照；
+在得到连续模型不能复现的留出预测前，DCM必要性仍未建立，0新数值授权。
 上述8胞静态探针不含心肌主动驱动及宏观仿射缩短，不能用盒长固定作为整体/局部分离证据；生产身份不变。
 固定源、等静态加载功、连接开度与连接力分开报告。生产未实现非线性/T1/损伤/流体；原4留出锁定。
 目标Nature Physics、心室/EFE方向不变；目前0项核心新机制确认，闭合胞DCM必要性尚待证据。
