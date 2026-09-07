@@ -3,8 +3,8 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 71370c9272fa0e2658fce62ac06f05a931aaa454
-current_lifecycle: paper2_natural_probe_accepted_pair_symmetry_candidate_rejected
+verified_commit: d169b403556a6119a90c7da972ae588c7429eddd
+current_lifecycle: paper2_linear_mechanics_no_go_accepted_cell_state_ecm_feedback_theory_gate
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
@@ -32,6 +32,14 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 及启动 GPU worker 仍须单独询问。
 
 ## 1. 一句话状态
+
+当前最高优先级裁决（主计划82–83/简报108–109）：共享连接的固定拓扑线性机械多端口仍可由普通
+耦合弹簧—阻尼网络精确复现，DCM机械独占主张暂停。新入口改为心内膜胞身份/激活状态—局部ECM
+沉积—机械读出的闭环，候选核心是“平均心室运动稳定而非均匀胞状态先失稳”的隐藏反馈失稳。
+现仅授权推导实际有限厚ECM核`G_h(k)`、反馈符号、稳定性边界及均匀连续/空间连续/DCM三层强对照；
+0新数值授权。固定拓扑门通过后才讨论分裂、换邻和状态继承，不自动加入流体或三维。EFE胞来源存在
+心内膜EndMT与心外膜衍生间充质两类证据，模型必须保留外源成纤维细胞对照，不把`a_i`直接解释为
+已确认的ECM分泌命运。Nature Physics目标及心室/EFE边界不变。
 
 当前裁决（主计划60.4–78/简报86–104，取代下列历史阶段即时授权）：8胞与受载有限厚ECM的
 双弱连接静态探针已完成30状态/14指定柔度列。三厚度、两距离均为屏蔽，不支持本采样转变假设。
