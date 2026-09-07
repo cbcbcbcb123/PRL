@@ -3,14 +3,14 @@ document_id: PRL-CURRENT-STATUS
 status: current
 last_verified: 2026-09-07
 branch: codex/simucell3d-hybrid-feasibility
-verified_commit: 6324d886a50653f27138d4e8dc0d4c8d4a8207d2
-current_lifecycle: paper2_natural_probe_preregistered_pending_execution
+verified_commit: f2c5590ea99e1bc15be422c6a3e876b8c4a65df2
+current_lifecycle: paper2_natural_probe_original_criteria_accepted
 current_contract: project_control/prl_independent_theory_mainline_plan_v04.md
 current_authorization: project_control/prl_independent_theory_mainline_plan_v04.md
 current_clarification: results/paper2_science_pilot/v01_20260905/science_brief.md
-execution_authorized: v04_section79_prediction_fixed_12_trajectories_authorized_after_commit
+execution_authorized: v04_section79_completed_no_new_batch
 current_execution_log: results/paper2_science_pilot/v01_20260905/science_brief.md
-latest_completed_execution_log: results/paper2_rest_length_write_read/v01_20260907/summary.json
+latest_completed_execution_log: results/paper2_natural_probe/v01_20260907/summary.json
 latest_supervisor_decision: project_control/prl_independent_theory_mainline_plan_v04.md
 current_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
@@ -107,7 +107,11 @@ DeltaA=-0.0028271428245；相对预注册预测最大偏差1.392411%，半幅、
 第79节现已在首次轨迹前固定自然演化探针：nonlinear/E2各取trained/reference，正/负/零共12条；
 正负中心差与零探针对照扣除背景，完整三状态Jacobian预测动态刚度+1.331026%、张力增益-0.404947%。
 理论子agent独立复算一致，并在运行前修正偶次污染量纲/窗口定义。预测提交后授权既有执行任务在
-1 CPU、8GiB、累计求解60秒内实现并运行；当前仍0新轨迹/结果，失败保留且不换参寻找通过。
+1 CPU、8GiB、累计求解60秒内实现并运行。现已完成12/12条并由总管与理论agent独立验收：
+动态刚度幅值+1.329437%、单侧张力增益-0.404470%，相对前瞻偏差均约0.12%；固定E2两状态
+复增益差约2e-9。自然漂移和探针扰动、拟合/偶次污染、功账、域及保存点稳定门均通过；求解
+5.58921秒、峰值约0.075974GiB、0 GPU。接受限定“自然恢复中动态可读”，不等于DCM必要性。
+下一步仅授权解析筛选反对称双胞状态能否形成宏观暗/局部亮的一阶模态，尚无新数值批次。
 上述8胞静态探针不含心肌主动驱动及宏观仿射缩短，不能用盒长固定作为整体/局部分离证据；生产身份不变。
 固定源、等静态加载功、连接开度与连接力分开报告。生产未实现非线性/T1/损伤/流体；原4留出锁定。
 目标Nature Physics、心室/EFE方向不变；目前0项核心新机制确认，闭合胞DCM必要性尚待证据。
