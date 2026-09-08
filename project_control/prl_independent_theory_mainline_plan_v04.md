@@ -2499,3 +2499,98 @@ ECM、总分泌、主动输入功及无脉冲分裂背景。EFE 只表述为“�
 EFE 来源的竞争证据见
 [Circulation Research 2015](https://pubmed.ncbi.nlm.nih.gov/25587097/) 与
 [Cell Research 2017](https://pubmed.ncbi.nlm.nih.gov/28809397/)。
+
+## 93. 未知纵深核下的稳健性定理与镜像网格合同入口
+
+### 93.1 任意共享感受核下的代数结构
+
+定义深度分辨足迹平均与核加权平均
+
+    S_i(z)=(1/A_i)*int_{I_i} s_epsilon(x,z) dx,
+    S_i[w]=int_0^h w(z)*S_i(z) dz,
+    w(z)>=0,  int_0^h w(z) dz=1.
+
+若 `I_M=I_+ disjoint-union I_-`、`A_+>0`、`A_->0`、`eta=A_+/A_M` 且母女使用同一个 `w`，
+则对任意允许核
+
+    P_M,w=eta*P_+,w+(1-eta)*P_-,w,
+    A_+*S_+[w]+A_-*S_-[w]=A_M*S_M[w].
+
+不同母女纵深核、水平重叠/间隙或面积改变会破坏该恒等式。令 `Q_w=P_+,w-P_-,w`；对完整场空间，
+第91节的 z-independent witness 对任意归一化 `w` 都满足 `P_M,w*s_a=0`、`Q_w*s_a=1`。
+但实际 rank-opening 还要求机械可达子空间 `V_mech` 同时满足
+
+    P_M,w restricted to V_mech != 0,
+    Q_w restricted to [ker(P_M,w) intersect V_mech] != 0.
+
+第一项保证母平均通道本身贡献一维秩，第二项保证存在母平均不可见但女儿差可见的机械可达方向；
+两者共同保证 `[P_M,w;Q_w]` 在 `V_mech` 上的秩为 2。仅有第二项时若 `P_M,w=0`，总秩仍可只有 1。
+因此全场代数通道存在不代表当前心肌—ECM 力学一定能激发它。
+
+### 93.2 Scalar parity 与镜像离散分解
+
+在镜像几何、均匀 A1 和非零基准应变幅值下，基准复应变是 physical-even 张量，
+`s_epsilon,0` 为 scalar even，所以连续基准女儿差 `B(z)=S_+,0(z)-S_-,0(z)=0`。奇 ECM 扰动
+产生 physical-odd 的 `delta e_hat`，进而使 `delta s_epsilon` 为 spatial odd；输入 `M_minus` 和
+输出 `D_S` 都在镜像下反号，因此深度分辨导数
+
+    g_minus(z)=partial [S_+(z)-S_-(z)]/partial M_minus
+
+是 reflection-even，并在 parity 上允许非零。张量正交、机械解耦或足迹平均仍可使其为零。
+
+对严格互为镜像、实验室坐标标签不交换的 `/` 与 `\` 网格，预期
+
+    B_backslash(z)=-B_slash(z),
+    g_backslash(z)=g_slash(z).
+
+所以 `B_phys=(B_slash+B_backslash)/2` 应为零，`B_chir=(B_slash-B_backslash)/2` 量化网格伪手性；
+`g_even=(g_slash+g_backslash)/2` 是候选物理量，`g_odd_mesh=(g_slash-g_backslash)/2` 检查镜像配对、
+区域标签、装配和求导一致性。双奇导数的 reflection-even 离散误差也可能留在平均中，因此仍须
+S2/S3 收敛，不能只靠镜像平均认证。
+
+### 93.3 对未知 `w` 的三类可证伪结论
+
+令 `g_min=ess inf_z g_minus(z)`、`g_max=ess sup_z g_minus(z)`。因 `w` 是概率核，
+
+    g_min <= g_minus[w] <= g_max.
+
+以下是连续深度剖面已被可靠控制时的定理。判定必须使用包含解析—FD、镜像差、S2/S3 差异及
+纵深离散误差的误差包络：
+
+- 若全深度下界严格大于零，或全深度上界严格小于零，则所有允许 `w` 具有同一反馈符号和非零下界；
+- 若误差包络后仍有 `g_min<0<g_max`，允许核可给正、负或零，反馈符号和阈值必须等待实验确定 `w`；
+- 若 `||g_minus||_infinity` 连同误差不超过预注册分辨门，则任意非负归一化 `w` 都近零，构成该
+  scalar 反馈路线的稳健阴性；
+- 任意计算所得 `g_minus[w]` 超出数值误差扩张后的 `[g_min,g_max]`，才判为核归一化、深度映射或
+  实现错误；不能与未经误差扩张的凸包比较。
+
+首轮 8 个带平均并不能认证任意连续 `w(z)`：它只直接覆盖在每带内为常数的非负概率权重。若要把
+三分类扩展到任意连续核，必须预先增加每带内的可靠上下界，或继续纵深细化直至带内误差进入总误差
+包络；否则不得写“对所有允许核”或连续核 `NO-GO`。
+
+零频机械因子只有在其他环路项不依赖 `w` 时才能直接给 `L_minus(0;w)=C_minus(0)g_minus[w]` 的
+上下界。非零频率下 `g_minus(i*omega;w)` 只保证位于深度分辨复值的凸包；不同深度相位可相消。
+令 `C_minus(i*omega)` 为除机械深度增益 `g_minus` 外的奇模态开环因子。若该子系统稳定、因果，
+互联适定，且 `w` 不随时间变化，则对所有允许 `w` 排除动态失稳的一个充分、非必要条件是
+
+    sup_omega { |C_minus(i*omega)| * ess_sup_z |g_minus(z,i*omega)| } < 1.
+
+当前首门只处理由心动周期快力学定义、供慢 ECM 状态使用的准静态实 `g_minus(z)`，不借此声称已
+完成完整动态稳定性分析。
+
+### 93.4 下一最小合同骨架，尚非执行授权
+
+固定已有 A1、`H=0.3`、`De=0.2`、T128，合同只计划四个严格配对离散：S2 `/`、S2 `\`、
+S3 `/`、S3 `\`。模型 ECM 坐标 `y=0` 在心肌侧、`y=h` 在心内膜侧；理论坐标反向，必须冻结
+`z/h=1-y/h`，使 `z=0` 位于心内膜侧。按该坐标预先分成 8 个物理带；S2 每带一层、S3 每带
+两层，不得按结果改带。首轮结论域冻结为带内常数概率权重；每个离散只计算基准 `B(z)`、一个
+ECM 偶极解析导数 `g_minus(z)` 及两档中心差分。
+
+合同须在运行前冻结：实验室坐标中的 `I_+/-` 与 `p_M`；peak-phasor 与 `W_epsilon`；近零绝对门；
+带积分；镜像 baseline 反号和 derivative 同号门；S2/S3 paired-average 收敛门；误差扩张后的凸包；
+以及仅对带内常数核成立的“稳健同号 / `w`-依赖 / 稳健近零”三分类。若最终改用严格界面值，必须
+定义 ECM 侧单边 trace；
+当前分片常应变不能把界面点值当天然唯一量，故有限近表面物理带更容易形成网格独立合同。
+
+本节只形成理论和合同入口，尚未授权 runner、JSON、Docker 或求解；先由数值任务只读确认
+runner-only 镜像 connectivity 可行性，再完成定量门槛与独立审查。
