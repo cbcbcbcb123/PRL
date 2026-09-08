@@ -780,3 +780,32 @@ Nature Physics 为固定目标，不预设达到，也不自动降档；研究�
 - 根目录 `README.md` 仍写有“X1-K 仍未通过”，与已接受的 v11 结果冲突；当前只登记为待修正项，尚未获得修改授权。
 - 仓库存在较多未纳入版本控制的结果、图件和过程文件；投稿前必须建立 evidence inventory，逐项确认来源、版本、hash 和是否应纳入仓库。当前不清理、不移动、不提交这些文件。
 - 本页的建立不改变任何计算结果、合同状态或执行权限，也不构成提交/推送授权。
+
+## 8. 2026-09-08 Paper 2 反馈核门终局状态
+
+§84 冻结批次已完成并由总管独立裁决。v01 因 FEniCS JIT 缓存未显式允许执行而在装配期
+fail-closed，0 次分解、0 个右端；失败 JSON 与容器保留。仅修正缓存 tmpfs 为 `rw,exec` 后，
+v02 在 1 CPU、8 GiB、0 GPU、禁网条件下完成，累计求解 28.35689074 s、峰值约 0.459 GiB。
+
+当前分层结论：
+
+- execution completion：`PASS`；
+- algebraic/numerical derivative validation：`PASS`；
+- preregistered symmetry/Fourier gate：`FAIL`；
+- Fourier `k` 标签、跨网格谱比较和 gain window：`NOT_EVALUABLE`；
+- scientific interpretation：当前有限链、支撑与共同仿射耦合不支持预设的平移不变标量反馈路线。
+
+S2 的 `U_S=1.0701754314e-3`、`R_c=6.6097842785e-3`；S3 的
+`U_S=1.0560189535e-3`、`R_c=7.1009072726e-3`，均超过 `1e-8` 门。完整 `G` 的候选特征值
+实部均负，只提示当前基线下局部 ECM 刚化未呈现自放大，不能称为正式稳定性证明。
+
+证据入口：
+
+- `scripts/run_paper2_feedback_kernel_gate_v01.py`；
+- `results/paper2_feedback_kernel/v01_20260907/summary.json`；
+- `results/paper2_feedback_kernel/v02_20260908/summary.json`，SHA256
+  `9b4534b4f455d93a41148e9adf8b5f758164bcf3c3743f5060ce9f1b529b9c2e`。
+
+下一步仅为理论研究：把完整非循环机械算子纳入反馈稳定性分析，并识别胞身份、邻接、状态继承、
+分裂事件与 ECM 局部分泌中真正需要 DCM 的条件。尚未授权任何新计算；不得追加 S4、放宽对称性门、
+恢复心肌 DCM，或以流体、非线性、三维和反应轨迹补救本次阴性结果。

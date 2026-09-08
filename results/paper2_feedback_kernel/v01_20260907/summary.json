@@ -1,0 +1,151 @@
+{
+  "actual_config": {
+    "action_reaction_relative_tolerance": 1e-10,
+    "activation_peak": 0.1,
+    "cases": [
+      "P0",
+      "P1",
+      "A1",
+      "A2",
+      "LN",
+      "LS",
+      "C0",
+      "CQ",
+      "S1"
+    ],
+    "config_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69",
+    "cycle_state_relative_tolerance": 0.001,
+    "direct_backward_error_tolerance": 1e-12,
+    "direct_relative_residual_tolerance": 1e-07,
+    "direct_solver": "scipy_superlu",
+    "discrete_ledger_closure_tolerance": 1e-10,
+    "dissipation_lower_tolerance": -1e-12,
+    "ecm_drag": 0.05,
+    "ecm_equilibrium_poisson_ratio": 0.45,
+    "ecm_equilibrium_young_modulus": 1.0,
+    "ecm_maxwell_poisson_ratio": 0.3,
+    "ecm_maxwell_young_modulus": 0.7,
+    "ecm_myocardium_interface_stiffness": 8.0,
+    "ecm_relaxation_time": 0.2,
+    "ecm_thickness": 0.3,
+    "endocardial_axial_stiffness": 0.8,
+    "endocardial_bending_stiffness": 0.02,
+    "endocardial_drag": 0.1,
+    "endocardial_transverse_stiffness": 0.25,
+    "endocardium_ecm_interface_stiffness": 7.0,
+    "length": 1.0,
+    "manufactured_solution_relative_tolerance": 1e-06,
+    "mesh_diagonal": "lower_left_to_upper_right",
+    "myocardium_drag": 0.12,
+    "myocardium_poisson_ratio": 0.3,
+    "myocardium_thickness": 0.2,
+    "myocardium_young_modulus": 2.5,
+    "normal_traction_peak": 0.08,
+    "passive_perturbation_strain": 0.0001,
+    "period": 1.0,
+    "power_ledger_relative_tolerance": 1e-08,
+    "schema": "paper2_hybrid_active_config_v08",
+    "spatial_activation_contrast": 0.35,
+    "spatial_levels": [
+      {
+        "label": "S2",
+        "nx": 32,
+        "ny_per_layer": 8
+      },
+      {
+        "label": "S3",
+        "nx": 64,
+        "ny_per_layer": 16
+      },
+      {
+        "label": "S4",
+        "nx": 128,
+        "ny_per_layer": 32
+      }
+    ],
+    "support_normal_stiffness": 0.6,
+    "support_tangential_stiffness": 0.45,
+    "tangential_traction_peak": 0.05,
+    "time_steps_per_cycle": [
+      64,
+      128,
+      256
+    ],
+    "x_boundary_condition": "affine_periodic_common_macro_strain",
+    "zero_state_absolute_tolerance": 1e-10
+  },
+  "base_commit": "b7449ccf7ffd40af88b0181d530355b575e4a52a",
+  "claim_boundary": {
+    "endocardium_is_elastic_chain_with_common_macro_affine_mode": true,
+    "evidence": "mechanical-kernel feasibility for a continuum-plus-elastic-chain baseline",
+    "fixed_frequency_not_paper3_frequency_decoding": true,
+    "not_dcm_evidence": true,
+    "not_experimental_reachability_or_biological_calibration": true,
+    "not_full_slow_system_stability_proof": true,
+    "not_scientific_gate_pass_until_independent_supervisor_review": true
+  },
+  "created_at_utc": "2026-09-08T01:45:27.478467+00:00",
+  "error_message": "/root/.cache/fenics/libffcx_forms_d7dcc89f8aee740f09b55bfad631dfe72e935084.cpython-312-x86_64-linux-gnu.so: failed to map segment from shared object",
+  "error_type": "ImportError",
+  "failed_at_utc": "2026-09-08T01:45:29.326888+00:00",
+  "frozen_scope": {
+    "activation_peak": 0.1,
+    "active_profile": "uniform",
+    "case": "A1",
+    "ecm_relaxation_time_over_period": 0.2,
+    "ecm_thickness_over_length": 0.3,
+    "fd_amplitudes": [
+      0.0001,
+      5e-05
+    ],
+    "fd_columns": [
+      0,
+      3
+    ],
+    "footprint_count": 8,
+    "holdouts_read": false,
+    "pressure_wss_fluid": false,
+    "spatial_levels": [
+      "S2",
+      "S3"
+    ],
+    "steps_per_cycle": 128
+  },
+  "memory_budget_hard_enforced_by_container": true,
+  "numerical_gate_pass": false,
+  "peak_rss_gib": 0.1800537109375,
+  "runtime": {
+    "container_image": "dolfinx/dolfinx:v0.11.0",
+    "container_image_id": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+    "container_name": "prl-paper2-feedback-kernel-v01-20260908",
+    "cpu_limit": 1,
+    "dolfinx": "0.11.0.post0",
+    "dolfinx_path": "/usr/local/dolfinx-real/lib/python3.12/dist-packages/dolfinx/__init__.py",
+    "gpu_count": 0,
+    "memory_limit_gib": 8,
+    "network": "none",
+    "numpy": "2.4.6",
+    "python": "3.12.3",
+    "scipy": "1.17.1"
+  },
+  "schema": "paper2_feedback_kernel_gate_v01",
+  "scientific_gate_status": "NOT_EVALUABLE",
+  "solve_ledger": {
+    "budget_seconds": 60.0,
+    "elapsed_seconds": 0.0,
+    "factorization_count": 0,
+    "records": [],
+    "rhs_count": 0
+  },
+  "source_hashes": {
+    "project_control/CURRENT_STATUS.md": "6c9e816a0aa093b7bc040cb78e43365b36999fab010a08d17f2bdd5ee7adca9d",
+    "project_control/prl_independent_theory_mainline_plan_v04.md": "a5c5db0e339ac587f7dbb6dc1b3b58542959cb45989acbd26501f018f72c6e0c",
+    "results/paper2_science_pilot/v01_20260905/science_brief.md": "67b751998325317d4e1e8e86adbb476daebc1f81924c71353ac417dca1ebae54",
+    "scripts/run_paper2_feedback_kernel_gate_v01.py": "a09fa4319bd0246fe8b3c9f524af88438d1e00a501c016dc0c71caea75c60260",
+    "src/paper2_hybrid/config.py": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe",
+    "src/paper2_hybrid/model.py": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800",
+    "src/paper2_hybrid/numerics.py": "620381c4f0165801f2af03defe587e8381c9b6859f8bbd9d2f84198a555331e4"
+  },
+  "status": "FAILED_CLOSED",
+  "total_wall_seconds": 1.9527148639999723
+}
