@@ -1,0 +1,94 @@
+{
+  "FEM_derivative": {
+    "status": "NOT_EVALUABLE"
+  },
+  "algebraic_identity": {
+    "status": "NOT_EVALUABLE"
+  },
+  "all_reported_values_finite": true,
+  "created_at_utc": "2026-09-08T07:32:05.509843+00:00",
+  "cross_grid_resolution": {
+    "pass": false,
+    "status": "NOT_EVALUABLE"
+  },
+  "execution": {
+    "error_message": "PYTHONPATH drift",
+    "error_type": "RuntimeError",
+    "failed_at_utc": "2026-09-08T07:32:05.564510+00:00",
+    "memory_budget_hard_enforced_by_container": true,
+    "peak_rss_gib": 0.0750732421875,
+    "solve_ledger": {
+      "budget_seconds": 30.0,
+      "elapsed_seconds": 0.0,
+      "factorization_count": 0,
+      "records": [],
+      "rhs_count": 0
+    },
+    "status": "FAIL",
+    "total_wall_seconds": 0.05470513899999929
+  },
+  "frozen_gates": {
+    "FD_fixed_absolute_tolerance": 1e-08,
+    "FD_near_zero_magnitude": 1e-10,
+    "FD_relative_tolerance": 0.01,
+    "algebraic_absolute_tolerance": 1e-12,
+    "cross_grid_relative_tolerance": 0.05,
+    "linear_solve_budget_seconds": 30.0,
+    "noise_multiplier": 100.0
+  },
+  "frozen_scope": {
+    "De": 0.2,
+    "FD_amplitudes": [
+      0.0001,
+      5e-05
+    ],
+    "H": 0.3,
+    "S4_run": false,
+    "T": 128,
+    "T1_or_Floquet_run": false,
+    "activation_peak": 0.1,
+    "case": "A1 uniform prescribed active strain",
+    "daughter_left": "I3",
+    "daughter_right": "I4",
+    "division_DCM_implemented": false,
+    "fluid_nonlinear_3D_reaction_trajectory": false,
+    "holdouts_read": false,
+    "mother_region": "I3 union I4",
+    "p_M": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      -1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "spatial_levels": [
+      "S2",
+      "S3"
+    ]
+  },
+  "parameter_identifiability": {
+    "status": "NOT_EVALUABLE_DUE_TO_EXECUTION_FAILURE"
+  },
+  "schema": "paper2_division_dipole_gate_v01",
+  "scientific_interpretation": {
+    "not_a_scientific_negative_result": true,
+    "status": "NOT_EVALUABLE"
+  },
+  "source_version": {
+    "base_commit": "962bdd54196fa94d2e0597aefbff825dc6c03fc7",
+    "source_hashes": {
+      "project_control/CURRENT_STATUS.md": "0dc20d878fcf3bffc325f9247aa52b89a8d4b168dac2846438d71c0c5ecabb2a",
+      "project_control/prl_independent_theory_mainline_plan_v04.md": "72a456add578ea1c55e1e2078364833ae4cf3c881aa0dfad76e3bf18e8101eeb",
+      "results/paper2_science_pilot/v01_20260905/science_brief.md": "b74b042908ec27877675f1e26c4dec2ec2dbe626bf568bccf1431d84b06d5d18",
+      "scripts/run_paper2_division_dipole_gate_v01.py": "aa59b306377e50352c4b3a3e1b1b0c36b76aae2d42698031e63ca3a67fb291b2",
+      "scripts/run_paper2_feedback_kernel_gate_v01.py": "a09fa4319bd0246fe8b3c9f524af88438d1e00a501c016dc0c71caea75c60260",
+      "src/paper2_hybrid/config.py": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe",
+      "src/paper2_hybrid/model.py": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800",
+      "src/paper2_hybrid/numerics.py": "620381c4f0165801f2af03defe587e8381c9b6859f8bbd9d2f84198a555331e4"
+    }
+  },
+  "status": "FAILED_CLOSED"
+}

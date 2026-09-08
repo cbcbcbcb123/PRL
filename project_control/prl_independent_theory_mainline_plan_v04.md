@@ -2306,3 +2306,196 @@ ECM 偶极 `M` 满足 `tau_m*M_dot=-M+rho*D`。若脉冲结束时 `M=0`，随后
 当前裁决为 `PAPER_ONLY_GO_PENDING_MINIMAL_CHECK`。下一步只检查面积加权恒等式、`Phi_q` 与相等
 时标极限、参数独立可辨识性以及当前 FEM 的 `G_D` 符号/量级。通过前不建立完整分裂 DCM、不做
 参数扫描、不恢复 T1/Floquet，也不加入流体、三维或 GPU。
+
+## 90. 最小机械门结果与 parity no-go
+
+最小门的代数恒等式、解析导数及有限差分均通过，但预注册增益从 S2 的
+`4.4418265569e-4` 降至 S3 的 `1.9854442043e-4`，跨网格变化 `55.30117669%`，故原门为
+`ACCEPT_NOT_RESOLVED`。该失败不是求解误差：两层信号都高于各自定义的 100 倍数值噪声地板，
+解析—差分最大相对偏差仅为 S2 `4.85e-8`、S3 `3.18e-6`。
+
+连续问题存在更强的镜像约束。记轴向镜像为 `rho:x->-x`。均匀 A1 下基准位移和牵引满足
+`u_0x,t_0x` 为 spatial odd；奇的 ECM 模量扰动 `p_M=I3-I4` 产生 `u_1x,t_1x` spatial even。
+读出权重 `w=I3/A-I4/A` 为 odd，因此
+
+    G_D = int_Gamma w(x)*t_1x(x) dx = 0.
+
+等价地，镜像把扰动幅度 `m` 变为 `-m`，而完整预注册读出不变，故 `Y(m)=Y(-m)`、`Y'(0)=0`。
+当前统一 lower-left-to-upper-right 对角线在镜像后变成另一套网格，离散矩阵不保持该对称性；
+S3/S2=`0.446988` 的衰减与网格伪手性随细化趋零相容，但两个层级不用于估计收敛率或证明单调性；
+连续零极限来自上述 symmetry 定理。解析导数与有限差分一致只证明正确求导了同一非对称离散系统。
+
+该结果触发第89节预注册停止门。禁止 S4、`abs(G_D)`、两层平均、非零外推以及结果后改用另一
+方向/区域/分量/时相。原 signed global-axial traction-difference 不再承担 ECM 机械回读；FEM
+只保留为输入机械梯度、主动功、峰值牵引和整体运动的独立约束。traction magnitude、strain/traction
+energy 或其他标量只有在结果之外的生物学证据先确定后，才能作为全新候选重新预注册。
+
+## 91. 下一理论主线：分裂开启隐藏的谱系可观测模态
+
+令 `P_+`、`P_-` 为未来两个女儿足迹上的归一化面积平均算子。只有在
+`Omega_M=Omega_+ disjoint-union Omega_-`、无重叠/间隙且
+`eta=|Omega_+|/|Omega_M|` 时，母细胞平均才严格满足
+
+    P_M = eta*P_+ + (1-eta)*P_-.
+
+定义 `Q=P_+-P_-`。存在一类母胞平均不可见而女儿差可见的空间分量
+
+    P_M*s_a = 0,
+    Q*s_a != 0,
+
+即新可见空间为 `ker(P_M)/[ker(P_M) intersect ker(Q)]`，而不是整个 `ker(P_M)`。一个明确见证为
+`s_a=(1-eta)*1_{Omega_+}-eta*1_{Omega_-}`，它满足 `P_M*s_a=0`、`Q*s_a=1`。
+
+因此母细胞的单一充分混合状态看不到该类 `s_a`，而分裂把感受/可观测通道从单极扩展为单极 `A`
+与谱系偶极 `D`。连续相位门可写成
+
+    P_q = [P_M; q(t)*Q].
+
+若 `P_M,Q` 线性独立，则 exact rank 在 `q=0` 时为 1、任意 `q!=0` 时为 2；它不是随 `q` 连续
+增加。连续开启的是第二奇异值、通道增益或噪声下的有效可观测性，其量级为 `O(|q|)`。这不是
+“分裂制造了额外总输入”，而是事件改变粗粒化边界并开启母胞平均核中的一个商空间；面积加权单极
+仍守恒。该 algebraic rank opening 加 noise-limited gradual observability 是当前最值得检验的
+理论候选。
+
+DCM 的候选表示优势在于以有限对象直接保存胞身份、分裂事件、女儿标签、状态继承及胞域局部 ECM 源。
+没有材料标签和动态分区的普通 Eulerian 连续模型不能定义谱系条件的 `D` 与 `M_lineage`；但若连续体
+获得相同动态材料域、谱系标签、混合和继承信息，它仍可精确复现。因此不得声称数学独占，必须用
+不重拟合的分裂相位、方向和谱系留出，公平比较可拟合参数、每胞状态自由度、外给身份/事件信息和
+训练数据量。若同信息连续体通过留出，DCM 只能称自然实现，不能称已证明的最小可辨识闭合。
+
+下一步保持两层门：
+
+1. 先完成 rank-opening 的维数、极限、噪声与连续强反例推导；主读出仅为谱系状态偶极和 ECM
+   偶极，机械输入由 FEM/实验独立冻结。
+2. 只有独立文献或实验预先支持一个客观标量机械感受量后，才允许定义条件反馈
+   `tau_a*D_dot=-D+(chi*q_s/t_*)*(delta_s_ext+g_M*M)-b*D^3`、
+   `tau_m*M_dot=-M+rho*q_e*D`。这里 `q_s` 表示感受域分离，`q_e` 表示两个局部 ECM 源足迹形成；
+   若后者在分裂前后不门控则固定 `q_e=1`，不得把二者静默合并。对固定门、零外部偏置的线性化，
+   只有正反馈 `chi*g_M*rho>0` 时零特征值条件才是
+   `q_s*q_e*chi*g_M*rho/t_*=1`；若 `q_s=q_e=q` 则含 `q^2`。随时间变化的门只允许称 frozen-q
+   阈值候选，不等于非自治系统已发生分岔。`b>0` 的 cubic 仅在镜像等价女儿、无外部偏置且单位
+   已固定时作为现象学超临界 pitchfork normal form；`delta_s_ext!=0` 会展开该对称性。当前 parity
+   no-go 的 signed traction 不能充当 `g_M`。在 `g_M` 的物理定义、符号、单位、独立测量和同信息
+   连续反例闭合前，不运行扫描，也不实现完整 DCM。
+
+Nature Physics 目标不变。可投稿级命题必须同时包含事件开启的隐藏模态、相位/角度/零单极定律、
+ECM 谱系存储及未拟合留出；若只能得到一般标量机械—ECM 正反馈，则收缩为已有机制的具体应用。
+
+## 92. 生物学先验后的新 scalar cue 与奇偶模态门
+
+### 92.1 Primary cue 的冻结候选
+
+独立文献门排除裸的有符号切向牵引作为 primary mechanosensory cue，并选择与当前小变形固体模型
+一致的 ECM 周期应变幅值作为唯一可起草新合同的候选。令 `epsilon'(x,t)=epsilon(x,t)-epsilon_bar(x)`，
+
+    s_epsilon(x)
+      = sqrt[(1/T)*int_{t0}^{t0+T} ||epsilon'(x,t)||_F^2 dt],
+    S_i = (1/|Omega_i^ECM|)*int_{Omega_i^ECM} s_epsilon(x) dA.
+
+这里必须使用真实对称小应变张量的 Frobenius 范数，不能把工程剪切分量直接按普通欧氏范数代入。
+当前 `ecm_strain_operator_full` 的第三分量是工程剪切 `gamma_xy=2*epsilon_xy`，故代码向量内积必须
+固定为 `W_epsilon=diag(1,1,1/2)`，即
+`||epsilon||_F^2=epsilon_xx^2+epsilon_yy^2+gamma_xy^2/2=e^T*W_epsilon*e`。
+`T` 固定为一个心动周期。水平域 `I_i` 冻结为未来女儿物理足迹；令 `z=0` 位于
+endocardium-ECM 界面、`z=h` 指向 myocardium，纵深感受核写成
+
+    S_i=(1/A_i)*int_{I_i} int_0^h w(z)*s_epsilon(x,z) dz dx,
+    int_0^h w(z) dz=1.
+
+其中 `A_i` 是水平足迹测度。`w(z)` 尚未冻结：界面 trace 或固定近表面带最接近细胞接触与实验
+成像 ROI，作为 primary 候选；`w=1/h` 的完整厚度均匀平均只可称理想模型的纵深粗粒化敏感性
+对照，不能称生物感受域。必须在求解前选定且不得按结果更换，母女儿使用同一 `w(z)`。计算顺序
+固定为逐点周期 RMS 后再作加权空间平均，不与先空间平均再取 RMS 混同。primary 为完整张量幅值；
+沿分裂法向或细胞长轴的投影只能在结果前另列为 secondary anisotropy test。
+
+若水平 `I_M=I_+ disjoint-union I_-` 且母女使用同一纵深核，则对这个已形成的点态标量仍有
+
+    A_+*S_+ + A_-*S_- = A_M*S_M,
+
+故 `D_S=S_+-S_-` 可非零而面积加权机械单极不变。这只是同一已形成点态场重新分区的 bookkeeping
+恒等式，不证明早/晚分裂协议的应变场、主动功或机械剂量相同；这些仍须逐例测量。
+
+对单频约定 `epsilon'(t)=Re[e_hat*exp(i*omega*t)]`，`e_hat` 必须是 peak phasor；若从 `rfft`
+取得系数，先按 `2/N` 归一化，不能直接使用原始 DFT 系数。此时
+`s_epsilon=sqrt[(e_hat^* W_epsilon e_hat)/2]`；非零基态处的一阶变分为
+
+    delta s_epsilon
+      = Re[e_hat^* W_epsilon delta e_hat]/(2*s_epsilon).
+
+近零点不得使用该除法，必须在新合同中冻结绝对门或改用可微的 `s_epsilon^2`。这一标量是
+exploratory prior，不声称为心内膜唯一或普适传感器。
+
+在镜像均匀基态下，`e_hat_0` 是 physical-even 张量场，奇 ECM 扰动产生 physical-odd 的
+`delta e_hat`，故 `delta s_epsilon` 为 spatial odd，I3-I4 区域差在 parity 上允许非零。该结论
+没有非零下界，也不定符号；张量正交、机械解耦或足迹平均仍可使导数为零。新导数必须允许正、负、
+零三种结果，并通过镜像配对和跨网格门。
+
+生物物理依据分层如下：心内膜垫实验直接关联心肌收缩传入的局部胶体变形/应变幅值与 EndMT；
+瓣膜内皮实验支持周期应变幅值与方向依赖；斑马鱼 AVC 支持机械响应基因 `klf2a` 调控局部
+fibronectin 合成。前两者支持输入量，后者支持“机械激活到 ECM”环节，但均不能替代心室/EFE 的
+独立实验。流动/WSS 证据不倒灌到当前无流体模型。
+
+### 92.2 只有奇模态选择性才保留目标期刊潜力
+
+文献中已有分裂后姐妹信号偶极与机械对称破缺，也已有 ECM—细胞激活正反馈和阈值。因此
+“division opens a dipole”或“ECM feedback crosses a threshold”单独及简单相加均为 Nature Physics
+`NO-GO`。仍为 `CONDITIONAL` 的窄命题是：
+
+> 在最终几何、总机械剂量和面积加权单极相同的条件下，刺激—分裂顺序选择性开启原先被母细胞
+> 粗粒化隐藏的谱系奇模态；ECM 随后只放大并保存该模态，并对未拟合的相位、角度和松弛时间组合
+> 给出定量预测。
+
+闭环必须分开比较单极和偶极通道。一般偶极线性化写成
+
+    tau_a*D_a_dot=-k_a_minus*D_a+c_a_minus*q_s*D_S,
+    tau_m*M_minus_dot=-k_m_minus*M_minus+c_m_minus*q_e*D_a,
+    D_S=g_minus(sigma)*M_minus+D_S_ext.
+
+特征方程为
+
+    (tau_a*sigma+k_a_minus)*(tau_m*sigma+k_m_minus)
+      -q_s*q_e*c_a_minus*c_m_minus*g_minus(sigma)=0.
+
+定义归一化零频稳态环路增益
+
+    L_minus(0)
+      =q_s*q_e*c_a_minus*c_m_minus*g_minus(0)
+       /(k_a_minus*k_m_minus),
+
+以及动态环路
+
+    L_minus(sigma)
+      =q_s*q_e*c_a_minus*c_m_minus*g_minus(sigma)
+       /[(tau_a*sigma+k_a_minus)*(tau_m*sigma+k_m_minus)],
+
+单极 `L_plus(0)` 同理。三个偏导的直接乘积只有在每项已包含门和自身恢复斜率时才等于该无量纲量；
+含 SLS 相位或其他动态记忆时必须检查 `1-L_plus/minus(sigma)=0`，不能由零频值排除动态失稳。
+
+两类主张严格分开：`0<L_minus(0)<1` 且 `L_minus(0)>L_plus(0)` 表示受迫谱系偶极的稳定选择性
+放大与存储，闭环静态放大为 `1/[1-L_minus(0)]`；`L_minus(0)>1` 且 `L_plus(0)<1` 才是偶极
+选择性静态失稳，另需镜像对称、零外部偏置及独立饱和律。当前主线优先检验前者，不预设分岔。
+其中 `g_minus=partial D_S/partial M_minus` 必须用新应变标量重新预注册；v02 parity no-go 的 signed
+traction `G_D` 不能替代它。若没有偶极相对单极的选择性、同信息连续体同样通过留出，或需要结果后
+换机械标量，则该 Nature Physics 主张停止或收缩。
+
+### 92.3 下一最小工作与实验边界
+
+下一步仍是纸面/独立检查：冻结应变张量内积、机械感受域、谐波变分、镜像 parity、近零处理、
+单极/偶极归一化及动态环路单位；先写出 S2/S3 和镜像配对网格的判定，不执行。之后如获放行，
+只做一个既有 A1/H=0.3/De=0.2/T128 的 S2/S3 导数门，不扫描参数、不读取留出、不实现完整 DCM。
+
+实验最小读出为：分裂时间/轴、两个未来女儿足迹、局部 ECM 周期应变、谱系状态偶极、局部新生
+ECM、总分泌、主动输入功及无脉冲分裂背景。EFE 只表述为“心内膜状态可能空间指导 EFE-like ECM
+沉积或重塑”；现有心内膜与心外膜来源竞争证据禁止把心内膜女儿预设为全部 EFE 成纤维细胞来源。
+
+本门关键原始来源：心内膜垫应变与 EndMT 见
+[Sewell-Loftin et al., Biomaterials 2014](https://pmc.ncbi.nlm.nih.gov/articles/PMC3950274/)；
+瓣膜内皮周期应变见
+[Balachandran et al., PNAS 2011](https://pmc.ncbi.nlm.nih.gov/articles/PMC3250145/)；
+`klf2a-fn1b` 局部 ECM 见
+[Steed et al., Nature Communications 2016](https://pmc.ncbi.nlm.nih.gov/articles/PMC4894956/)；
+分裂后姐妹信号偶极与机械对称破缺先例见
+[Erzberger et al., Nature Physics 2020](https://pubmed.ncbi.nlm.nih.gov/33790985/)；
+EFE 来源的竞争证据见
+[Circulation Research 2015](https://pubmed.ncbi.nlm.nih.gov/25587097/) 与
+[Cell Research 2017](https://pubmed.ncbi.nlm.nih.gov/28809397/)。
