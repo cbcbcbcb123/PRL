@@ -41,7 +41,7 @@
           // Explicit opt-in: no type-ID dispatch, permanent links, or position projection.
           surface_quadrature_audit run_surface_quadrature(
                const std::vector<cell_ptr>& cells, double maximum_edge = 0.20,
-               double adhesion_scale = 1.0, double positive_barrier_range = 0.0) const;
+               double adhesion_scale = 1.0, double positive_barrier_range = 0.0);
 
           contact_node_face_via_spring() = default;                                          //default constructor
           contact_node_face_via_spring(const contact_node_face_via_spring& v) = delete;           //copy constructor

@@ -1,7 +1,5 @@
-#include "cell.hpp"
-#include "custom_structures.hpp"
+#include "bioform_model.hpp"
 #include "local_mesh_refiner.hpp"
-#include "prl_cell_engine/cell_surface_force.hpp"
 
 #include <algorithm>
 #include <array>
@@ -23,18 +21,8 @@
 
 #include <omp.h>
 
-namespace {
+namespace prl::ventricle::bioform {
 
-using Vector3 = std::array<double, 3>;
-using Matrix3 = std::array<std::array<double, 3>, 3>;
-using Vector6 = std::array<double, 6>;
-using Matrix6 = std::array<std::array<double, 6>, 6>;
-using prl::cell_engine::SurfaceDampingLaw;
-using prl::cell_engine::SurfaceDampingMeasure;
-using prl::cell_engine::SurfaceVertexForce;
-
-constexpr double kPi = 3.1415926535897932384626433832795;
-constexpr double kTargetVolume = 167.875410364543;
 constexpr double kEquivalentRadius = 3.42215355382543;
 constexpr double kSurfaceTension = 0.160;
 #ifdef PRL_MYO_BENDING_MODULUS
@@ -50,55 +38,11 @@ constexpr double kHoldCoordinate = 400.0;
 constexpr double kPerturbationAmplitude = 0.02;
 constexpr double kRotationDegrees = 37.0;
 constexpr double kMaximumEdgeFractionPerSubstep = 0.10;
-constexpr double kTiny = 1.0e-30;
 #ifdef PRL_MYO_SKIP_ACTIVE_EQUILIBRATION
 constexpr const char* kActiveEquilibrationPolicy = "raw_normal_drive_total_velocity_rigid_gauge";
 #else
 constexpr const char* kActiveEquilibrationPolicy = "minimum_area_weighted_normal_traction_correction";
 #endif
-
-struct RunConfig {
-    std::string condition;
-    unsigned face_count{};
-    unsigned subdivision_level{};
-    double time_step{};
-    double stress_amplitude{};
-    bool cytoskeleton_enabled{true};
-    bool perturbed{false};
-    double rotation_radians{};
-};
-
-struct MeshMeasure {
-    double area{};
-    double signed_volume{};
-};
-
-struct CytoskeletonLoad {
-    std::vector<Vector3> nodal_forces;
-    Matrix3 stress{};
-    Vector3 long_axis{};
-    Vector3 transverse_axis{};
-    Vector3 thickness_axis{};
-    double absolute_force_residual{};
-    double relative_force_residual{};
-    double absolute_moment_residual{};
-    double relative_moment_residual{};
-    double normal_correction_l2{};
-};
-
-struct ShapeVelocityProjection {
-    std::vector<Vector3> effective_total_forces;
-    std::vector<Vector3> integrator_additional_forces;
-    Vector3 removed_translation_velocity{};
-    Vector3 removed_angular_velocity{};
-    double maximum_shape_speed{};
-    double weighted_translation_residual{};
-    double weighted_rotation_residual{};
-    double relative_translation_residual{};
-    double relative_rotation_residual{};
-    double physical_net_force{};
-    double physical_net_moment{};
-};
 
 Vector3 add(const Vector3& a, const Vector3& b) {
     return {a[0] + b[0], a[1] + b[1], a[2] + b[2]};
@@ -913,9 +857,7 @@ void write_metrics(
            << "}\n";
 }
 
-} // namespace
-
-int main(int argc, char** argv) {
+int run_bioform_v03(int argc, char** argv) {
     try {
         if(argc != 6) {
             throw std::invalid_argument(
@@ -1269,3 +1211,5 @@ int main(int argc, char** argv) {
         return 1;
     }
 }
+
+} // namespace prl::ventricle::bioform

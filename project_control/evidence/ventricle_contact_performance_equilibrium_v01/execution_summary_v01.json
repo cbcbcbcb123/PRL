@@ -1,0 +1,61 @@
+{
+  "schema_version": "prl.ventricle_contact_performance_equilibrium.execution_summary.v1",
+  "recorded_at": "2026-09-15",
+  "status": "failed",
+  "failure_class": "failed_equilibrium",
+  "result_path": "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915",
+  "execution": {
+    "single_thread_cpu": true,
+    "gpu": false,
+    "automatic_retries": 0,
+    "q_calls": 39,
+    "equilibrium_cases": 4,
+    "equilibrium_elapsed_seconds": 1247.5796165000065
+  },
+  "q": {
+    "status": "passed",
+    "sixteen_cell_speedup": 2.5203108612845777,
+    "two_cell_slowdown_ratio": 0.9431980682099039,
+    "numerical_equivalence": true,
+    "retained_regressions": "21/21 passed"
+  },
+  "equilibrium": {
+    "status": "failed",
+    "failure_class": "failed_equilibrium",
+    "all_trajectories_safe": true,
+    "coarse_fine_agreement": true,
+    "static_residual_gate": false,
+    "final_max_free_force_range": [0.017748841900740255, 0.02132684387699171],
+    "minimum_gap": 0.04939648707632201,
+    "maximum_volume_error": 0.003387463257553014,
+    "minimum_angle_degrees": 22.048764241635304,
+    "maximum_work_residual": 5.543887227147088e-16,
+    "event_states_checked": 20,
+    "penetration_containment_and_self_crossing_witnesses": 0,
+    "end_displacement_relative_error": 0.000180630323143804,
+    "side_displacement_relative_error": 0.00018504730405700338
+  },
+  "result_package": {
+    "file_count": 128,
+    "logical_bytes": 13393641,
+    "q_verdict_sha256": "1ef2b0a59358faa4702ecd19c0216cf19b1a5a745ba983b46088116d47f66c1d",
+    "e_verdict_sha256": "3f7e1aa74cb490a16f9e4c42437919d786caefa18ba6c4e8d26150681d1c14b7",
+    "root_verdict_sha256": "8a791eedd11ac9ebbb3565ddff90dd1aaed2b8f93fc4c388be38549cf1362428",
+    "figure_manifest_sha256": "10a268485758b46349209d93a9cb61b06db0530513f90068f6ec1b42d9e95b4d"
+  },
+  "visual_qa": {
+    "status": "passed",
+    "pngs_inspected": 5,
+    "gifs": 2,
+    "gif_frames_each": 5,
+    "actual_solver_states": true,
+    "physiological_time": false
+  },
+  "storage_checkpoint_before_final_control_records": {
+    "status": "passed",
+    "workspace_logical_bytes": 1346360270,
+    "hard_limit_bytes": 3221225472,
+    "scan_errors": []
+  },
+  "interpretation_boundary": "Q passed; E was numerically safe and step-size consistent but failed the frozen static residual gate. This is not a biological validation or physiological-time result."
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "prl.repository_cleanup.contact_performance_engineering_preflight.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "scope": "Pre-deletion engineering qualification only; the formal three-repeat Q contract remains to be executed after Batch 6.",
+  "candidate": "grouped native USPG candidates for more than four cells; frozen linear quadrature path for two and four cells",
+  "mechanics_changed": false,
+  "gpu": false,
+  "automatic_retries": 0,
+  "two_cell": {
+    "baseline_seconds": [0.2066972, 0.2260407, 0.2282341],
+    "candidate_seconds": [0.1948543, 0.1945913, 0.215053],
+    "baseline_median_seconds": 0.2260407,
+    "candidate_median_seconds": 0.1948543,
+    "candidate_over_baseline": 0.8620319261088821,
+    "maximum_allowed_ratio": 1.2,
+    "status": "passed"
+  },
+  "sixteen_cell": {
+    "frozen_reference_seconds": 12.1500332,
+    "candidate_seconds": 4.5597117,
+    "speedup": 2.664649433866619,
+    "minimum_speedup": 2.0,
+    "status": "passed"
+  },
+  "equivalence": {
+    "two_cell_max_force_absolute_difference": 0.0,
+    "sixteen_cell_max_force_absolute_difference": 0.0,
+    "active_samples_equal": true,
+    "contact_energy_equal": true,
+    "quadrature_support_area_equal": true,
+    "status": "passed"
+  },
+  "evidence_root": "project_control/evidence/repository_cleanup_v01/batch04_equivalence_v01",
+  "claim_boundary": "This establishes readiness for formal Q; it is not equilibrium, tissue dynamics, or biological validation."
+}

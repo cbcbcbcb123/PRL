@@ -1,6 +1,5 @@
-#include "cell.hpp"
+#include "m0_model.hpp"
 #include "contact_face_face_via_coupling.hpp"
-#include "custom_structures.hpp"
 #include "prl_cell_engine/cell_surface_force.hpp"
 
 #include <algorithm>
@@ -25,9 +24,7 @@
 
 #include <omp.h>
 
-namespace {
-
-using Vector3 = std::array<double, 3>;
+namespace prl::ventricle::m0 {
 using prl::cell_engine::SurfaceDampingLaw;
 using prl::cell_engine::SurfaceDampingMeasure;
 using prl::cell_engine::SurfaceVertexForce;
@@ -38,18 +35,6 @@ constexpr double kSurfaceDampingDensity = 1.0;
 constexpr double kLumenPressure = 0.50;
 constexpr double kActiveAmplitude = 0.035;
 constexpr double kTiny = 1.0e-30;
-
-struct Body {
-    cell_ptr surface;
-    std::string role;
-    std::string kinematic_mode{"deformable"};
-    int grid_i{-1};
-    int grid_j{-1};
-    std::set<std::uint64_t> fixed_vertices;
-    std::map<std::uint64_t, Vector3> initial_positions;
-    std::vector<std::uint64_t> initial_vertex_ids;
-    std::size_t initial_face_count{};
-};
 
 struct LoadFields {
     std::vector<Vector3> active;
@@ -321,8 +306,8 @@ Body make_body(
     const unsigned id,
     const std::string& role,
     const cell_type_param_ptr& type,
-    const int grid_i = -1,
-    const int grid_j = -1
+    const int grid_i,
+    const int grid_j
 ) {
     Body result;
     result.surface = std::make_shared<cell>(geometry, id, type);
@@ -1016,9 +1001,7 @@ void write_metrics(
            << "}\n";
 }
 
-} // namespace
-
-int main(int argc, char** argv) {
+int run_m0(int argc, char** argv) {
     try {
         if(argc != 2) {
             throw std::invalid_argument("usage: prl_ventricle_simucell3d_m0 OUTPUT_DIRECTORY");
@@ -1131,3 +1114,5 @@ int main(int argc, char** argv) {
         return 1;
     }
 }
+
+} // namespace prl::ventricle::m0

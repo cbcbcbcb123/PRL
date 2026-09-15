@@ -5,12 +5,13 @@ from prl.verification import verify_long_doublet
 
 
 ROOT = Path(__file__).resolve().parents[2]
+FIXTURE = ROOT / "tests/prl/fixtures/long_doublet_compact_v01"
 
 
 class LongDoubletVerificationPublicInterfaceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.report = verify_long_doublet(ROOT)
+        cls.report = verify_long_doublet(ROOT, FIXTURE)
 
     def test_retained_evidence_and_source_identity_pass(self):
         self.assertEqual(self.report["status"], "passed")

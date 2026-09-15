@@ -1,0 +1,7 @@
+{
+  "long_doublet_numerical":"passed",
+  "static_equilibrium":"failed",
+  "parent_Z1":"blocked",
+  "biological_validation":"blocked",
+  "sixteen_cell_dynamics":"not_run"
+}

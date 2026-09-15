@@ -1,0 +1,25 @@
+cmake_minimum_required(VERSION 3.20)
+
+project(prl_cardioecm_model LANGUAGES C CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_POLICY_VERSION_MINIMUM 3.5 CACHE STRING "" FORCE)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+set(ENABLE_PYTHON_BINDINGS OFF CACHE BOOL "" FORCE)
+set(PRL_CELL_ENGINE_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(PRL_CELL_ENGINE_BUILD_EXECUTABLE OFF CACHE BOOL "" FORCE)
+
+if(MSVC)
+    add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/EHsc>)
+    add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/FS>)
+    add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/openmp:llvm>)
+    add_compile_definitions(_USE_MATH_DEFINES)
+endif()
+
+include(CTest)
+add_subdirectory(external/simucell3d EXCLUDE_FROM_ALL)
+set(PRL_VENTRICLE_SUPPORT_BUILD_TESTS ON CACHE BOOL "" FORCE)
+add_subdirectory(src/prl_ventricle_support)
+add_subdirectory(src/ventricle_bioform_myo)
+add_subdirectory(src/ventricle_simucell3d_m0)

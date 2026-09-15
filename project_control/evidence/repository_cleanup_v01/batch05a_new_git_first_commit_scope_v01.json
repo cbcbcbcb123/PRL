@@ -1,11 +1,14 @@
 {
   "schema_version": "prl.repository_cleanup.new_git_first_commit_scope.v1",
   "recorded_at": "2026-09-15",
-  "status": "frozen_before_first_commit",
+  "status": "passed",
   "repository": "E:\\Temp-Projects\\PRL",
   "branch": "codex/clean-baseline",
   "remote_count": 0,
   "commit_message": "baseline: preserve selected pre-refactor evidence",
+  "commit": "d53ca553fd8bba9965d850106fd9305da76be668",
+  "commit_count_after_creation": 1,
+  "parent_count": 0,
   "root_files": [
     ".gitattributes",
     ".gitignore",

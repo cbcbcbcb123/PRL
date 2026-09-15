@@ -1,0 +1,6 @@
+[
+  {"case":"END_DT0.02","returncode":0,"first_failure":null},
+  {"case":"END_DT0.01","returncode":0,"first_failure":null},
+  {"case":"SIDE_DT0.02","returncode":0,"first_failure":null},
+  {"case":"SIDE_DT0.01","returncode":0,"first_failure":null}
+]

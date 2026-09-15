@@ -1,0 +1,397 @@
+{
+  "schema_version": "prl.long_doublet_verification.v1",
+  "status": "passed",
+  "workspace": "E:\\Temp-Projects\\PRL",
+  "result_path": "E:\\Temp-Projects\\PRL\\results\\ventricle_z1\\z1_myo_long_doublet_v01_20260914",
+  "checks": {
+    "source_identity": true,
+    "matrix_complete": true,
+    "case_scalar_ledgers": true,
+    "frozen_status_agreement": true
+  },
+  "source_identity": {
+    "status": "passed",
+    "files_checked": 13,
+    "first_clean_baseline_commit": "d53ca553fd8bba9965d850106fd9305da76be668",
+    "checks": [
+      {
+        "path": "scripts/run_myo_contact_barrier_v01.py",
+        "working_tree_exists": true,
+        "expected_sha256": "7244dffc1c54599d19ce81058522fd5c2e7ce0cde044a0ef20b862aaa6a62fd0",
+        "actual_sha256": "7244dffc1c54599d19ce81058522fd5c2e7ce0cde044a0ef20b862aaa6a62fd0",
+        "working_tree_sha256": "7244dffc1c54599d19ce81058522fd5c2e7ce0cde044a0ef20b862aaa6a62fd0",
+        "root_commit_sha256": "7244dffc1c54599d19ce81058522fd5c2e7ce0cde044a0ef20b862aaa6a62fd0",
+        "filter_mapping_applied": false,
+        "matched_from": "working_tree",
+        "matches": true
+      },
+      {
+        "path": "b/z1m0a/Release/prl_myo_contact_barrier_probe_v01.exe",
+        "working_tree_exists": true,
+        "expected_sha256": "7f2dbc7fe85ab908ed4c50c7a5828b44680ac85c37550d49c67771626f43a205",
+        "actual_sha256": "7f2dbc7fe85ab908ed4c50c7a5828b44680ac85c37550d49c67771626f43a205",
+        "working_tree_sha256": "7f2dbc7fe85ab908ed4c50c7a5828b44680ac85c37550d49c67771626f43a205",
+        "root_commit_sha256": null,
+        "filter_mapping_applied": false,
+        "matched_from": "working_tree",
+        "matches": true
+      },
+      {
+        "path": "b/z1m0a/Release/prl_myo_contact_barrier_relaxation_v01.exe",
+        "working_tree_exists": true,
+        "expected_sha256": "a900c4265847599969e77d5a078f35a4b26062ebeabf0508db15755960e779d9",
+        "actual_sha256": "a900c4265847599969e77d5a078f35a4b26062ebeabf0508db15755960e779d9",
+        "working_tree_sha256": "a900c4265847599969e77d5a078f35a4b26062ebeabf0508db15755960e779d9",
+        "root_commit_sha256": null,
+        "filter_mapping_applied": false,
+        "matched_from": "working_tree",
+        "matches": true
+      },
+      {
+        "path": "project_control/ventricle_myocardial_contact_barrier_contract_v01.md",
+        "working_tree_exists": true,
+        "expected_sha256": "ad80e7585a26a59185f23267e21b052ec2747ecdd3304567a49a499c1a79b4f6",
+        "actual_sha256": "ad80e7585a26a59185f23267e21b052ec2747ecdd3304567a49a499c1a79b4f6",
+        "working_tree_sha256": "ad80e7585a26a59185f23267e21b052ec2747ecdd3304567a49a499c1a79b4f6",
+        "root_commit_sha256": "ad80e7585a26a59185f23267e21b052ec2747ecdd3304567a49a499c1a79b4f6",
+        "filter_mapping_applied": false,
+        "matched_from": "working_tree",
+        "matches": true
+      },
+      {
+        "path": "src/ventricle_simucell3d_m0/myo_contact_barrier_probe_v01.cpp",
+        "working_tree_exists": true,
+        "expected_sha256": "e2bd686f5d0272bd2446441fb0eacbeba0ade5f0b59521c0c46f6540b35184bf",
+        "actual_sha256": "e2bd686f5d0272bd2446441fb0eacbeba0ade5f0b59521c0c46f6540b35184bf",
+        "working_tree_sha256": "f99070f31b702c7690c1b5ac4e8c678dcd2d9062d4e052483f3efe43234f8784",
+        "root_commit_sha256": "e2bd686f5d0272bd2446441fb0eacbeba0ade5f0b59521c0c46f6540b35184bf",
+        "filter_mapping_applied": false,
+        "matched_from": "first_clean_baseline_commit",
+        "matches": true
+      },
+      {
+        "path": "src/ventricle_simucell3d_m0/myo_contact_barrier_relaxation_v01.cpp",
+        "working_tree_exists": true,
+        "expected_sha256": "ace79ec85e9ef3c1698b3a6df66afb4186a1ed615da62447a0cf316f1b80df91",
+        "actual_sha256": "ace79ec85e9ef3c1698b3a6df66afb4186a1ed615da62447a0cf316f1b80df91",
+        "working_tree_sha256": "826e45a4aa75f5c1a1e56e3c22f184d89cc34ea013a10dd862228dd8f96bb703",
+        "root_commit_sha256": "ace79ec85e9ef3c1698b3a6df66afb4186a1ed615da62447a0cf316f1b80df91",
+        "filter_mapping_applied": false,
+        "matched_from": "first_clean_baseline_commit",
+        "matches": true
+      },
+      {
+        "path": "external/simucell3d/src/contact_models/contact_node_face_via_spring.cpp",
+        "working_tree_exists": true,
+        "expected_sha256": "c5af738f2bb65e9c0877e5a6127e609467935d1bb09849397387f7d8ffd0c580",
+        "actual_sha256": "c5af738f2bb65e9c0877e5a6127e609467935d1bb09849397387f7d8ffd0c580",
+        "working_tree_sha256": "527e3de03c5026953f2b8e253bb72e441c27af420b21745fce8f998997d2f30d",
+        "root_commit_sha256": "4fdb9bec148f183199fca8c069bfb48e9190493223f7eb5cb7b8717088ca4647",
+        "filter_mapping_applied": true,
+        "matched_from": "first_commit_clean_filter_mapping",
+        "matches": true
+      },
+      {
+        "path": "external/simucell3d/include/contact_models/contact_node_face_via_spring.hpp",
+        "working_tree_exists": true,
+        "expected_sha256": "57e18cd1e686c47117f50aafdd149043505f14ef3482d9a9f191e71484361ff1",
+        "actual_sha256": "57e18cd1e686c47117f50aafdd149043505f14ef3482d9a9f191e71484361ff1",
+        "working_tree_sha256": "487c4a44af0210ebb7996ea4c629a7d917e85ea86728025d56918592eefa3c99",
+        "root_commit_sha256": "9331b7126c9604de0c3ae1aaa1256b11e57b4561c20db84fe7eacf235b29aa49",
+        "filter_mapping_applied": true,
+        "matched_from": "first_commit_clean_filter_mapping",
+        "matches": true
+      },
+      {
+        "path": "external/simucell3d/include/contact_models/surface_separation_guard.hpp",
+        "working_tree_exists": true,
+        "expected_sha256": "b1ba13f8028534402b5e8221b84ccaa516bd615bc4831a524cce6406ceb93f3b",
+        "actual_sha256": "b1ba13f8028534402b5e8221b84ccaa516bd615bc4831a524cce6406ceb93f3b",
+        "working_tree_sha256": "b1ba13f8028534402b5e8221b84ccaa516bd615bc4831a524cce6406ceb93f3b",
+        "root_commit_sha256": "b1ba13f8028534402b5e8221b84ccaa516bd615bc4831a524cce6406ceb93f3b",
+        "filter_mapping_applied": false,
+        "matched_from": "working_tree",
+        "matches": true
+      },
+      {
+        "path": "src/ventricle_bioform_myo/ventricle_bioform_myo_v03.cpp",
+        "working_tree_exists": true,
+        "expected_sha256": "85a25905e8c1697302d2d695b7c2fad19a20b780dc183a86d70ab6b66074703c",
+        "actual_sha256": "85a25905e8c1697302d2d695b7c2fad19a20b780dc183a86d70ab6b66074703c",
+        "working_tree_sha256": "4d1d851d8da19bbd60895e74fd05b586141f8996d900b50d78596447a7eaa875",
+        "root_commit_sha256": "85a25905e8c1697302d2d695b7c2fad19a20b780dc183a86d70ab6b66074703c",
+        "filter_mapping_applied": false,
+        "matched_from": "first_clean_baseline_commit",
+        "matches": true
+      },
+      {
+        "path": "scripts/run_myo_long_doublet_v01.py",
+        "working_tree_exists": true,
+        "expected_sha256": "f859e5326d140fa87da392bd4b815a66fbb29b40a311cd12140e04d26ccdb172",
+        "actual_sha256": "f859e5326d140fa87da392bd4b815a66fbb29b40a311cd12140e04d26ccdb172",
+        "working_tree_sha256": "f859e5326d140fa87da392bd4b815a66fbb29b40a311cd12140e04d26ccdb172",
+        "root_commit_sha256": "f859e5326d140fa87da392bd4b815a66fbb29b40a311cd12140e04d26ccdb172",
+        "filter_mapping_applied": false,
+        "matched_from": "working_tree",
+        "matches": true
+      },
+      {
+        "path": "scripts/myo_fold_monitor_v01.py",
+        "working_tree_exists": true,
+        "expected_sha256": "e0a76f0a5df875752d089e912e49d716f74024254ce2b9943509ffa54247df0f",
+        "actual_sha256": "e0a76f0a5df875752d089e912e49d716f74024254ce2b9943509ffa54247df0f",
+        "working_tree_sha256": "e0a76f0a5df875752d089e912e49d716f74024254ce2b9943509ffa54247df0f",
+        "root_commit_sha256": "e0a76f0a5df875752d089e912e49d716f74024254ce2b9943509ffa54247df0f",
+        "filter_mapping_applied": false,
+        "matched_from": "working_tree",
+        "matches": true
+      },
+      {
+        "path": "project_control/ventricle_myocardial_long_doublet_contract_v01.md",
+        "working_tree_exists": true,
+        "expected_sha256": "ee0021769d19b2316c1ed6f16111bbb0d3cd8dad5266f25f06b2211a8a7b60a2",
+        "actual_sha256": "ee0021769d19b2316c1ed6f16111bbb0d3cd8dad5266f25f06b2211a8a7b60a2",
+        "working_tree_sha256": "ee0021769d19b2316c1ed6f16111bbb0d3cd8dad5266f25f06b2211a8a7b60a2",
+        "root_commit_sha256": "ee0021769d19b2316c1ed6f16111bbb0d3cd8dad5266f25f06b2211a8a7b60a2",
+        "filter_mapping_applied": false,
+        "matched_from": "working_tree",
+        "matches": true
+      }
+    ]
+  },
+  "matrix_complete": true,
+  "status_agreement": {
+    "long_doublet_numerical": true,
+    "static_equilibrium": true,
+    "parent_z1_remains_blocked": true,
+    "biological_validation_remains_blocked": true,
+    "sixteen_cell_dynamics_not_run": true
+  },
+  "frozen_status": {
+    "long_doublet_numerical": "passed",
+    "static_equilibrium": "failed",
+    "parent_Z1": "blocked",
+    "biological_validation": "blocked",
+    "sixteen_cell_dynamics": "not_run"
+  },
+  "cases": [
+    {
+      "case": "END_DT0.02",
+      "status": "passed",
+      "checks": {
+        "state_count": true,
+        "monitor_state_count": true,
+        "monitor_has_no_failure": true,
+        "final_coordinate": true,
+        "minimum_gap": true,
+        "final_gap": true,
+        "minimum_angle": true,
+        "minimum_adjacent_cosine": true,
+        "maximum_volume_error": true,
+        "maximum_work_residual": true,
+        "final_force": true,
+        "static_equilibrium": true,
+        "cell_ids": true,
+        "cell_0_length_strain": true,
+        "cell_0_width_strain": true,
+        "cell_0_thickness_strain": true,
+        "cell_1_length_strain": true,
+        "cell_1_width_strain": true,
+        "cell_1_thickness_strain": true
+      },
+      "metrics": {
+        "states": 253,
+        "final_coordinate": 5.0,
+        "minimum_gap": 0.057792185067401296,
+        "final_gap": 0.06243949957085325,
+        "minimum_angle": 22.51617947210229,
+        "minimum_adjacent_cosine": 0.0,
+        "maximum_volume_error": 0.0033143346003037255,
+        "maximum_work_residual": 6.415194227414769e-16,
+        "final_force": 0.10365979770019539,
+        "static_equilibrium": "failed",
+        "monitor_first_failure": null,
+        "monitor_states": 253,
+        "per_cell": [
+          {
+            "cell": 0,
+            "length_strain": 0.06364246459091594,
+            "width_strain": 0.02947309483709737,
+            "thickness_strain": 0.07576146434059372
+          },
+          {
+            "cell": 1,
+            "length_strain": 0.06364237593215694,
+            "width_strain": 0.02947310732838826,
+            "thickness_strain": 0.07576148064598276
+          }
+        ]
+      }
+    },
+    {
+      "case": "END_DT0.01",
+      "status": "passed",
+      "checks": {
+        "state_count": true,
+        "monitor_state_count": true,
+        "monitor_has_no_failure": true,
+        "final_coordinate": true,
+        "minimum_gap": true,
+        "final_gap": true,
+        "minimum_angle": true,
+        "minimum_adjacent_cosine": true,
+        "maximum_volume_error": true,
+        "maximum_work_residual": true,
+        "final_force": true,
+        "static_equilibrium": true,
+        "cell_ids": true,
+        "cell_0_length_strain": true,
+        "cell_0_width_strain": true,
+        "cell_0_thickness_strain": true,
+        "cell_1_length_strain": true,
+        "cell_1_width_strain": true,
+        "cell_1_thickness_strain": true
+      },
+      "metrics": {
+        "states": 501,
+        "final_coordinate": 4.999999999999937,
+        "minimum_gap": 0.05781071956444081,
+        "final_gap": 0.06244313826161604,
+        "minimum_angle": 22.521448100999717,
+        "minimum_adjacent_cosine": 0.0,
+        "maximum_volume_error": 0.003314376698859922,
+        "maximum_work_residual": 5.048903863970297e-16,
+        "final_force": 0.10369049730165279,
+        "static_equilibrium": "failed",
+        "monitor_first_failure": null,
+        "monitor_states": 501,
+        "per_cell": [
+          {
+            "cell": 0,
+            "length_strain": 0.06361266144087763,
+            "width_strain": 0.02947745471886809,
+            "thickness_strain": 0.0757357822863387
+          },
+          {
+            "cell": 1,
+            "length_strain": 0.06361257942655119,
+            "width_strain": 0.029477466658911933,
+            "thickness_strain": 0.0757357979241946
+          }
+        ]
+      }
+    },
+    {
+      "case": "SIDE_DT0.02",
+      "status": "passed",
+      "checks": {
+        "state_count": true,
+        "monitor_state_count": true,
+        "monitor_has_no_failure": true,
+        "final_coordinate": true,
+        "minimum_gap": true,
+        "final_gap": true,
+        "minimum_angle": true,
+        "minimum_adjacent_cosine": true,
+        "maximum_volume_error": true,
+        "maximum_work_residual": true,
+        "final_force": true,
+        "static_equilibrium": true,
+        "cell_ids": true,
+        "cell_0_length_strain": true,
+        "cell_0_width_strain": true,
+        "cell_0_thickness_strain": true,
+        "cell_1_length_strain": true,
+        "cell_1_width_strain": true,
+        "cell_1_thickness_strain": true
+      },
+      "metrics": {
+        "states": 253,
+        "final_coordinate": 5.0,
+        "minimum_gap": 0.06829849026849075,
+        "final_gap": 0.06829849026849075,
+        "minimum_angle": 23.036110452387117,
+        "minimum_adjacent_cosine": 0.0,
+        "maximum_volume_error": 0.003337844343308527,
+        "maximum_work_residual": 4.3641750566570266e-16,
+        "final_force": 0.10477922467176629,
+        "static_equilibrium": "failed",
+        "monitor_first_failure": null,
+        "monitor_states": 253,
+        "per_cell": [
+          {
+            "cell": 0,
+            "length_strain": 0.12220255879739295,
+            "width_strain": 0.019872259064119602,
+            "thickness_strain": 0.07586807749270186
+          },
+          {
+            "cell": 1,
+            "length_strain": 0.12220250120821108,
+            "width_strain": 0.019872222787631344,
+            "thickness_strain": 0.07586802858026265
+          }
+        ]
+      }
+    },
+    {
+      "case": "SIDE_DT0.01",
+      "status": "passed",
+      "checks": {
+        "state_count": true,
+        "monitor_state_count": true,
+        "monitor_has_no_failure": true,
+        "final_coordinate": true,
+        "minimum_gap": true,
+        "final_gap": true,
+        "minimum_angle": true,
+        "minimum_adjacent_cosine": true,
+        "maximum_volume_error": true,
+        "maximum_work_residual": true,
+        "final_force": true,
+        "static_equilibrium": true,
+        "cell_ids": true,
+        "cell_0_length_strain": true,
+        "cell_0_width_strain": true,
+        "cell_0_thickness_strain": true,
+        "cell_1_length_strain": true,
+        "cell_1_width_strain": true,
+        "cell_1_thickness_strain": true
+      },
+      "metrics": {
+        "states": 501,
+        "final_coordinate": 4.999999999999937,
+        "minimum_gap": 0.06832875770405664,
+        "final_gap": 0.06832875770405664,
+        "minimum_angle": 23.040882982369016,
+        "minimum_adjacent_cosine": 0.0,
+        "maximum_volume_error": 0.003337860188051489,
+        "maximum_work_residual": 4.50417314200788e-16,
+        "final_force": 0.10480889375921554,
+        "static_equilibrium": "failed",
+        "monitor_first_failure": null,
+        "monitor_states": 501,
+        "per_cell": [
+          {
+            "cell": 0,
+            "length_strain": 0.12213483714519602,
+            "width_strain": 0.01988284715678912,
+            "thickness_strain": 0.07583988177390943
+          },
+          {
+            "cell": 1,
+            "length_strain": 0.12213476772706655,
+            "width_strain": 0.019882809809574686,
+            "thickness_strain": 0.0758398317075395
+          }
+        ]
+      }
+    }
+  ],
+  "not_recomputed": [
+    "node-level END/SIDE displacement-refinement norms",
+    "node/triangle containment and crossing predicates",
+    "all possible incident-vertex fold configurations"
+  ],
+  "scope": "independent source-hash, execution-ledger, retained geometry-monitor, scalar-state, separation, work-residual and per-cell deformation checks; no solver execution and no biological validation"
+}

@@ -18,13 +18,25 @@
 
 ## 当前软件入口
 
-稳定Python入口位于`src/prl/`，当前只提供有界的存储检查、保留长程结果独立核验和快速工程回归：
+稳定Python入口位于`src/prl/`，提供有界存储检查、独立核验、工程回归、驾驶舱维护，以及当前冻结科学合同的运行/验证/绘图入口：
 
 ```powershell
 $env:PYTHONPATH = "$PWD\src"
 python -B -X utf8 -m prl storage status --workspace .
 python -B -X utf8 -m prl verify long-doublet --workspace .
 python -B -X utf8 -m prl test quick --workspace .
+python -B -X utf8 -m prl render cockpit --workspace .
+python -B -X utf8 -m prl validate cockpit --workspace .
+```
+
+当前唯一科学任务使用分阶段、create-only命令；运行器会先检查清理裁决和存储准入，Q未通过时拒绝平衡阶段：
+
+```powershell
+python -B -X utf8 -m prl run contact-performance-equilibrium --phase q --workspace .
+python -B -X utf8 -m prl verify contact-performance-equilibrium --phase q --workspace .
+python -B -X utf8 -m prl run contact-performance-equilibrium --phase equilibrium --workspace .
+python -B -X utf8 -m prl verify contact-performance-equilibrium --phase equilibrium --workspace .
+python -B -X utf8 -m prl render contact-performance-equilibrium --workspace .
 ```
 
 默认pytest仅收集当前`tests/prl/`：
@@ -36,7 +48,7 @@ $env:PYTHONPATH = "$PWD\src"
 python -B -X utf8 -m pytest -q
 ```
 
-当前命令不会启动科研求解器或GPU。科研运行必须另有阶段合同和明确授权。
+只有上述`run`子命令会启动科研求解器；本合同强制单线程CPU且不自动重跑，所有其他命令均不启动求解器或GPU。
 
 ## 代码与证据边界
 

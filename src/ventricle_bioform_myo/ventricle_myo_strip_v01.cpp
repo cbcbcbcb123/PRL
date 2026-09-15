@@ -1,8 +1,8 @@
-#define main prl_embedded_bioform_myo_v03_main
-#include "ventricle_bioform_myo_v03.cpp"
-#undef main
+#include "bioform_model.hpp"
 
 #include <sstream>
+
+using namespace prl::ventricle::bioform;
 
 namespace {
 

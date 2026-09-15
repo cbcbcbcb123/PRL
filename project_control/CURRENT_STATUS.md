@@ -1,24 +1,24 @@
 ---
 document_id: PRL-CURRENT-STATUS
 status: current
-last_verified: 2026-09-14
-branch: codex/simucell3d-hybrid-feasibility
-verified_commit: b45650a9e370be138a70acf305b6c3a21e6a7ed2
-current_lifecycle: simucell3d_long_doublet_numerical_passed_equilibrium_failed_parent_z1_blocked
+last_verified: 2026-09-15
+branch: codex/clean-baseline
+verified_commit: d97c2a4c3d20b156532d1b4cd96c83216f689989
+current_lifecycle: cleanup_passed_contact_q_passed_extended_doublet_safe_equilibrium_failed_parent_z1_blocked
 documentation_updated_at: 2026-09-15
-current_repository_cleanup: closure_v01_active_old_git_replaced_first_commit_pending
+current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
 current_contract: project_control/repository_cleanup_closure_and_science_restart_proposal_v01.md
-last_completed_contract: project_control/ventricle_myocardial_long_doublet_contract_v01.md
-current_render_contract: results/ventricle_z1/z1_myo_long_doublet_v01_20260914/visual_qa.json
-next_stage_contract: project_control/ventricle_contact_performance_and_extended_equilibrium_contract_v01.md
-current_authorization: none_closure_and_science_restart_v01_awaiting_exact_confirmation
+last_completed_contract: project_control/ventricle_contact_performance_and_extended_equilibrium_contract_v01.md
+current_render_contract: results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/visual_qa.json
+next_stage_contract: not_yet_frozen_residual_force_decomposition
+current_authorization: closure_and_conditional_cpu_science_restart_v01_consumed
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_bioform_intrinsic_mechanics_decision_v01.md
-execution_authorized: none_pending_user_confirmation
-current_execution_log: project_control/ventricle_myocardial_long_doublet_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_myocardial_long_doublet_execution_v01.md
-latest_result_package: results/ventricle_z1/z1_myo_long_doublet_v01_20260914/verdict.json
+execution_authorized: no_further_scientific_run_authorized
+current_execution_log: project_control/ventricle_contact_performance_and_extended_equilibrium_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_contact_performance_and_extended_equilibrium_execution_v01.md
+latest_result_package: results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/verdict.json
 latest_supervisor_decision: project_control/ventricle_stage_contracts_v03_adoption_v01.md
 current_theory_contract: plan/active/PRL_Codex_Stage_Contracts_v03/01_GLOBAL_EXECUTION_CONTRACT.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -38,7 +38,13 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前仓库任务：2026-09-15 旧Git已替换，首提交保全进行中
+## 当前仓库与科学裁决：清理passed，Q passed，扩展平衡failed
+
+旧Git已永久删除并替换为无远端`codex/clean-baseline`两提交基线；第一根提交`d53ca553`保全迁移前证据。当前Python统一入口、根级CMake和8个C++应用的正常库边界已通过构建与回归。Batch 5B同一冻结清单的其余30目标已全部永久删除：241文件、8子目录、133,839,393逻辑字节，保护路径无缺失、未处理未授权路径。
+
+正式Q 39/39调用并独立裁决`passed`：16胞静态接触组装中位加速2.5203×，2胞candidate/baseline比0.9432；9组逐节点力/能量/支撑等价且21/21旧回归通过。扩展E四条双胞轨迹均安全到算法坐标20，20个事件网格无穿透、包含或自交见证，粗细步长位移误差小于0.019%；但末态自由力0.01775–0.02133高于0.001门，严格裁决`failed_equilibrium`。
+
+绘图后的验收扫描约1.346 GB，仍低于2 GiB目标和3 GiB硬限。全过程单线程CPU、0 GPU、0自动重跑。结构、残力、安全质量、曲率/体积约束压力/接触牵引及两份五状态动图已生成并视觉验收；算法坐标不是生理时间。
 
 依用户批准的[清理总合同](repository_cleanup_master_contract_v01.md)，科研阶段暂停；唯一活动主线仍为SimuCell3D心肌→心内膜→ECM。只读盘点登记34,406个普通文件、8,127,368,982 bytes，每文件含路径、字节、SHA-256和分类；目录reparse point不跟随。Batch 1为`passed`，只代表仓库盘点。
 
@@ -52,9 +58,15 @@ Batch 2裁决`passed`。[Batch 3A执行](repository_cleanup_batch03a_execution_v
 
 用户已确认并完成[候选3退出前安全切片](repository_cleanup_batch04_candidate03_exit_safe_slice_execution_v01.md)及[永久删除](repository_cleanup_batch04_candidate03_deletion_execution_v01.md)：两个宿主包装已保全，退役路线精选源码现共16文件、369,160 bytes；冻结的8目录＋30文件共38路径、61文件、1,541,224 bytes已永久删除，剩余0。删除前35个tracked-clean、26个untracked、0修改、0 reparse；删除后32/32保护身份、范围外Git变化0，默认pytest与显式quick均19/19通过，默认包发现仅`prl`和`prl.verification`。本批删除授权已消费，科学状态和3 GiB存储`blocked`不变。
 
-[清理收口与科学重启一次性审批包](repository_cleanup_closure_and_science_restart_proposal_v01.md)已获精确授权。旧`.git`首次因ReadOnly对象部分失败并如实停止；补充授权后对同一目标9,994/9,994文件清除ReadOnly并完成删除。本地`codex/clean-baseline`已显式建立在项目内，远端0；父级Git未修改。首提交正在捕获48项迁移前来源和当前唯一内核。其余30目标、候选1/2、性能门、Batch 6和CPU科学任务仍按门顺序执行；GPU未启动。
+[清理收口与科学重启一次性审批包](repository_cleanup_closure_and_science_restart_proposal_v01.md)已按精确授权完成清理收口。旧`.git`首次因ReadOnly对象部分失败并如实停止；补充授权后仅在同一目标内清除9,994/9,994普通文件的ReadOnly属性并完成永久替换。冻结清单其余30目标也已永久删除，未处理未授权路径。本地`codex/clean-baseline`为两提交、远端0；Batch 6全构建、测试、证据、链接和存储验收均`passed`。现在仅执行已授权的单线程CPU正式Q；Q通过才进入扩展平衡E，GPU未启动。
 
-## 当前决定：2026-09-14 长程双胞数值资格passed，未达到静态平衡
+## 当前唯一下一步：末态残力来源诊断（尚未冻结或授权）
+
+先使用现有逐步账本判断残力尾部是继续衰减还是形成平台，并分解末态骨架、皮质/面积体积与接触力，定位非零残力来源。只有诊断支持“仅需更长松弛”时才另行冻结延长合同；若持续预应力不相容，则先修订物理机制。不得直接进入4×4动力学、心内膜、ECM或自动延长。
+
+[本轮执行报告](ventricle_contact_performance_and_extended_equilibrium_execution_v01.md)、[Q裁决](../results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/Q/verdict.json)、[E裁决](../results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/E/verdict.json)、[图像导航](../results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/README.md)。
+
+## 上一阶段：2026-09-14 长程双胞数值资格passed，未达到静态平衡
 
 依用户“然后你继续任务”和[长程合同](ventricle_myocardial_long_doublet_contract_v01.md)，4条END/SIDE步长对照完成至算法坐标5，另完成2条实际安全裁切轨迹和2/4/16胞各一次静态计时。未改唯一接触核心或原动力学可执行文件，增加外部折叠监测和应用层计时探针。全部CPU；16胞动力学及随机形态not_run。
 

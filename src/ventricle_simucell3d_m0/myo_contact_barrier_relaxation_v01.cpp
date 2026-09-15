@@ -1,9 +1,8 @@
-// Application assembly only: existing myocardium loads and unique core integration/contact.
-#define main preserved_bioform_entrypoint
-#include "../ventricle_bioform_myo/ventricle_bioform_myo_v03.cpp"
-#undef main
+#include "../ventricle_bioform_myo/bioform_model.hpp"
 #include "contact_node_face_via_spring.hpp"
 #include "surface_separation_guard.hpp"
+
+using namespace prl::ventricle::bioform;
 
 struct SheetCell {
     cell_ptr surface;
@@ -47,7 +46,7 @@ int main(int argc,char** argv){
         contact_node_face_via_spring contact(parameters);RunConfig shape_config=parse_config("FULL",320,dt,.060);
         std::ofstream nodes(output/"nodes.csv"),faces(output/"faces.csv"),states(output/"states.csv"),cell_states(output/"cells.csv"),audits(output/"step_audits.csv");
         nodes<<"snapshot,step,coordinate,cell,node,x,y,z,fx,fy,fz,cfx,cfy,cfz,sfx,sfy,sfz,rfx,rfy,rfz,area,curvature,pressure,fixed,x0,y0,z0\n";
-        faces<<"cell,face,a,b,c\n";states<<"snapshot,step,coordinate,max_free_force,max_volume_error,min_angle,max_fixed_displacement,contact_energy,contact_support_area,passive_energy\n";
+        faces<<"cell,face,a,b,c\n";states<<"step,coordinate,max_free_force,max_volume_error,min_angle,max_fixed_displacement,contact_energy,contact_support_area,passive_energy\n";
         cell_states<<"snapshot,cell,volume,target_volume,length,width,thickness,pressure\n";
         audits<<"step,coordinate,max_free_force,max_volume_error,min_angle,max_fixed_displacement,work_residual,shape_work,dissipation,contact_energy\n";
         for(unsigned cid=0;cid<count;++cid)for(const auto& f:cells[cid]->get_face_lst()){const auto ids=f.get_node_ids();faces<<cid<<','<<f.get_local_id()<<','<<ids[0]<<','<<ids[1]<<','<<ids[2]<<'\n';}
@@ -82,9 +81,12 @@ int main(int argc,char** argv){
                 for(const auto& f:cells[cid]->get_face_lst()){const auto ids=f.get_node_ids();for(unsigned i=0;i<3;++i)values[3]=std::min(values[3],norm(subtract(node_position(cells[cid]->get_node_lst()[ids[i]]),node_position(cells[cid]->get_node_lst()[ids[(i+1)%3]]))));}
             }return values;
         };
-        unsigned snapshot=0;double coordinate=0.0;const double end_coordinate=dt*steps;double next_snapshot=end_coordinate/4.0;
-        const auto save=[&](unsigned step,const SheetAssembly& assembly){
-            const auto gm=geometry_metrics();states<<std::setprecision(17)<<snapshot<<','<<step<<','<<coordinate<<','<<assembly.max_free_force<<','<<gm[0]<<','<<gm[1]<<','<<gm[2]<<','<<assembly.contact_energy<<','<<assembly.support<<','<<assembly.passive_energy<<'\n';
+        unsigned snapshot=0;long long last_mesh_step=-1;double coordinate=0.0;const double end_coordinate=dt*steps;double next_snapshot=end_coordinate/4.0;
+        const auto write_state=[&](unsigned step,const SheetAssembly& assembly){
+            const auto gm=geometry_metrics();states<<std::setprecision(17)<<step<<','<<coordinate<<','<<assembly.max_free_force<<','<<gm[0]<<','<<gm[1]<<','<<gm[2]<<','<<assembly.contact_energy<<','<<assembly.support<<','<<assembly.passive_energy<<'\n';states.flush();
+        };
+        const auto save_mesh=[&](unsigned step,const SheetAssembly& assembly){
+            if(last_mesh_step==static_cast<long long>(step))return;
             for(unsigned cid=0;cid<count;++cid){
                 const auto areas=nodal_areas(*cells[cid]);Vector3 low{1e30,1e30,1e30},high{-1e30,-1e30,-1e30};
                 for(unsigned i=0;i<areas.size();++i){const auto& n=cells[cid]->get_node_lst()[i];const auto p=node_position(n);nodes<<std::setprecision(17)<<snapshot<<','<<step<<','<<coordinate<<','<<cid<<','<<i;
@@ -93,11 +95,11 @@ int main(int argc,char** argv){
                     for(unsigned axis=0;axis<3;++axis){low[axis]=std::min(low[axis],p[axis]);high[axis]=std::max(high[axis],p[axis]);}
                 }
                 cell_states<<std::setprecision(17)<<snapshot<<','<<cid<<','<<cells[cid]->get_volume()<<','<<bodies[cid].volume0<<','<<high[0]-low[0]<<','<<high[1]-low[1]<<','<<high[2]-low[2]<<','<<cells[cid]->get_pressure()<<'\n';
-            }++snapshot;nodes.flush();states.flush();cell_states.flush();
+            }last_mesh_step=step;++snapshot;nodes.flush();cell_states.flush();
         };
         auto separation=prl::contact_safety::measure(cells);
         prl::contact_safety::safe_increment(separation,0.,dt);
-        auto assembly=assemble();save(0,assembly);
+        auto assembly=assemble();write_state(0,assembly);save_mesh(0,assembly);
         safety<<std::setprecision(17)<<0<<','<<0<<','<<separation.intercell<<','<<separation.nonincident<<','<<separation.min_height<<",0\n";safety.flush();double cumulative_shape_work=0,cumulative_dissipation=0;unsigned completed=0;
         for(unsigned step=1;coordinate<end_coordinate-1e-12;++step){
             const double requested=std::min({dt,end_coordinate-coordinate,next_snapshot-coordinate});
@@ -105,8 +107,8 @@ int main(int argc,char** argv){
             if(increment<1e-7 || step>2000)throw std::runtime_error("frozen step budget or increment floor");
             if(std::filesystem::exists(output/"STOP"))throw std::runtime_error("cooperative stop requested; previous step fully saved");
             const auto gm=geometry_metrics();
-            if(increment*assembly.max_speed>.08*gm[3]){save(step-1,assembly);throw std::runtime_error("step motion exceeded frozen edge fraction");}
-            if(std::chrono::duration<double>(std::chrono::steady_clock::now()-began).count()>wall_limit){save(step-1,assembly);throw std::runtime_error("frozen wall budget exhausted");}
+            if(increment*assembly.max_speed>.08*gm[3]){save_mesh(step-1,assembly);throw std::runtime_error("step motion exceeded frozen edge fraction");}
+            if(std::chrono::duration<double>(std::chrono::steady_clock::now()-began).count()>wall_limit){save_mesh(step-1,assembly);throw std::runtime_error("frozen wall budget exhausted");}
             double work_residual=0,shape_work=0,dissipation=0;
             for(unsigned cid=0;cid<count;++cid){
                 const auto area=nodal_areas(*cells[cid]);std::vector<Vector3> additional(area.size());
@@ -117,11 +119,14 @@ int main(int argc,char** argv){
             completed=step;coordinate+=increment;cumulative_shape_work+=shape_work;cumulative_dissipation+=dissipation;assembly=assemble();const auto after=geometry_metrics();
             separation=prl::contact_safety::measure(cells);
             safety<<std::setprecision(17)<<step<<','<<coordinate<<','<<separation.intercell<<','<<separation.nonincident<<','<<separation.min_height<<','<<increment<<'\n';safety.flush();
-            save(step,assembly);
+            write_state(step,assembly);
             prl::contact_safety::safe_increment(separation,0.,dt);
             audits<<std::setprecision(17)<<step<<','<<coordinate<<','<<assembly.max_free_force<<','<<after[0]<<','<<after[1]<<','<<after[2]<<','<<work_residual<<','<<shape_work<<','<<dissipation<<','<<assembly.contact_energy<<'\n';audits.flush();
-            if(coordinate>=next_snapshot-1e-12){next_snapshot+=end_coordinate/4.0;}
-            if(after[0]>.05 || after[1]<8 || after[2]>1e-10 || work_residual>1e-10){save(step,assembly);throw std::runtime_error("geometry, clamp or step-work safety gate failed");}
+            const bool unsafe=after[0]>.02 || after[1]<15 || after[2]>1e-10 || work_residual>1e-10;
+            const bool event_state=coordinate>=next_snapshot-1e-12 || coordinate>=end_coordinate-1e-12;
+            if(event_state || unsafe)save_mesh(step,assembly);
+            if(coordinate>=next_snapshot-1e-12)next_snapshot+=end_coordinate/4.0;
+            if(unsafe)throw std::runtime_error("geometry, clamp or step-work safety gate failed");
             if(step%25==0)std::cout<<"step "<<step<<" / "<<steps<<" max_force "<<assembly.max_free_force<<std::endl;
         }
         std::ofstream report(output/"run.json");report<<std::setprecision(17)<<"{\"execution_status\":\"passed\",\"completed_steps\":"<<completed<<",\"snapshots\":"<<snapshot<<",\"shape_work\":"<<cumulative_shape_work<<",\"dissipation\":"<<cumulative_dissipation<<",\"elapsed_seconds\":"<<std::chrono::duration<double>(std::chrono::steady_clock::now()-began).count()<<",\"static_equilibrium\":\"not_adjudicated\"}\n";

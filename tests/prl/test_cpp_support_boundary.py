@@ -1,11 +1,13 @@
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 import unittest
 
 
 ROOT = Path(__file__).resolve().parents[2]
 SUPPORT = ROOT / "src/prl_ventricle_support"
+FIRST_BASELINE_COMMIT = "d53ca553fd8bba9965d850106fd9305da76be668"
 BASELINE = (
     ROOT
     / "project_control/evidence/repository_cleanup_v01"
@@ -25,31 +27,46 @@ class CppSupportBoundaryTests(unittest.TestCase):
         self.assertNotIn('#include "ventricle_simucell3d_m0.cpp"', source)
         self.assertNotIn('#include "ventricle_bioform_myo_v03.cpp"', source)
 
-    def test_ten_frozen_implementation_sources_match_prechange_baseline(self):
+    def test_ten_prechange_sources_are_preserved_in_first_root_commit(self):
         baseline = json.loads(BASELINE.read_text(encoding="utf-8"))
         self.assertEqual(baseline["status"], "passed")
         self.assertEqual(len(baseline["files"]), 10)
         for item in baseline["files"]:
-            path = ROOT / item["path"]
-            self.assertEqual(path.stat().st_size, item["bytes"], item["path"])
+            completed = subprocess.run(
+                ["git", "show", f"{FIRST_BASELINE_COMMIT}:{item['path']}"],
+                cwd=ROOT,
+                capture_output=True,
+                check=True,
+            )
+            payload = completed.stdout
+            self.assertEqual(len(payload), item["bytes"], item["path"])
             self.assertEqual(
-                hashlib.sha256(path.read_bytes()).hexdigest(),
+                hashlib.sha256(payload).hexdigest(),
                 item["sha256"],
                 item["path"],
             )
 
-    def test_safe_slice_builds_seam_without_switching_old_applications(self):
-        cmake = (ROOT / "src/ventricle_simucell3d_m0/CMakeLists.txt").read_text(
+    def test_current_applications_use_headers_and_shared_model_libraries(self):
+        applications = [
+            ROOT / "src/ventricle_bioform_myo/ventricle_myo_strip_v01.cpp",
+            *sorted((ROOT / "src/ventricle_simucell3d_m0").glob("myo_*probe_v0*.cpp")),
+            ROOT / "src/ventricle_simucell3d_m0/myo_sheet_relaxation_v01.cpp",
+            ROOT / "src/ventricle_simucell3d_m0/myo_contact_barrier_relaxation_v01.cpp",
+        ]
+        self.assertEqual(len(applications), 8)
+        for path in applications:
+            source = path.read_text(encoding="utf-8")
+            self.assertNotIn('#include "ventricle_simucell3d_m0.cpp"', source)
+            self.assertNotIn('#include "ventricle_bioform_myo_v03.cpp"', source)
+        m0_cmake = (ROOT / "src/ventricle_simucell3d_m0/CMakeLists.txt").read_text(
             encoding="utf-8"
         )
-        self.assertIn("../prl_ventricle_support", cmake)
-        old_application_links = [
-            line
-            for line in cmake.splitlines()
-            if "target_link_libraries" in line
-            and "prl_ventricle_support" in line
-        ]
-        self.assertEqual(old_application_links, [])
+        bioform_cmake = (ROOT / "src/ventricle_bioform_myo/CMakeLists.txt").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("add_library(prl_m0_model", m0_cmake)
+        self.assertIn("add_library(prl_bioform_model", bioform_cmake)
+        self.assertTrue((ROOT / "CMakeLists.txt").is_file())
 
 
 if __name__ == "__main__":

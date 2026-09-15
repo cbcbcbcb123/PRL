@@ -1,0 +1,35 @@
+{
+  "schema_version": "prl.repository_cleanup.batch05b_predelete_revalidation.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "workspace": "E:\\Temp-Projects\\PRL",
+  "frozen_manifest": "project_control/evidence/repository_cleanup_v01/final_closure_deletion_targets_v01.txt",
+  "frozen_manifest_sha256": "c44b1eb1ab59ac692453b4829a9b0a427cc4e66a23f81fbb2b1d52caf696446b",
+  "manifest_targets": 31,
+  "already_completed_target": "E:\\Temp-Projects\\PRL\\.git",
+  "remaining_targets": 30,
+  "remaining_directories": 14,
+  "remaining_files": 16,
+  "descendant_files": 241,
+  "descendant_directories": 8,
+  "logical_bytes": 133839393,
+  "reparse_points": 0,
+  "new_clean_baseline_tracked_files_inside_targets": 38,
+  "tracking_change_reason": "The authorized first root commit intentionally captured 34 scripts and four historical tests before retirement; their content remains recoverable from commit d53ca553.",
+  "content_drift": false,
+  "type_drift": false,
+  "scope_drift": false,
+  "interfaces": {
+    "directories": "System.IO.Directory.Delete recursive",
+    "files": "System.IO.File.Delete nonrecursive"
+  },
+  "predelete_gates": {
+    "quick_suite": "27 passed",
+    "retained_long_doublet": "passed",
+    "cmake_build": "passed",
+    "ctest": "1 passed",
+    "cockpit_strict_links": "passed, 213 evidence paths, 0 missing",
+    "contact_performance_engineering_preflight": "passed"
+  },
+  "irreversibility": "The remaining 30 paths will be permanently removed; selected source content is retained by the first root commit and formal evidence packages. Development/smoke raw arrays will no longer be recoverable as complete packages."
+}

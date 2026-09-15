@@ -1,0 +1,19 @@
+{
+  "schema_version": "prl.repository_cleanup.source_filter_map.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "first_clean_baseline_commit": "d53ca553fd8bba9965d850106fd9305da76be668",
+  "scope": "Raw working-tree SHA-256 to first-commit Git-blob SHA-256 mappings caused only by the Git clean text filter at the pre-refactor capture boundary.",
+  "mappings": [
+    {
+      "path": "external/simucell3d/src/contact_models/contact_node_face_via_spring.cpp",
+      "raw_worktree_sha256": "c5af738f2bb65e9c0877e5a6127e609467935d1bb09849397387f7d8ffd0c580",
+      "first_commit_blob_sha256": "4fdb9bec148f183199fca8c069bfb48e9190493223f7eb5cb7b8717088ca4647"
+    },
+    {
+      "path": "external/simucell3d/include/contact_models/contact_node_face_via_spring.hpp",
+      "raw_worktree_sha256": "57e18cd1e686c47117f50aafdd149043505f14ef3482d9a9f191e71484361ff1",
+      "first_commit_blob_sha256": "9331b7126c9604de0c3ae1aaa1256b11e57b4561c20db84fe7eacf235b29aa49"
+    }
+  ]
+}

@@ -1,9 +1,8 @@
-// Reuse the existing adapter helpers and the unique linked core; do not copy a kernel.
-#define main preserved_migration_entrypoint
-#include "ventricle_simucell3d_m0.cpp"
-#undef main
+#include "m0_model.hpp"
 #include "contact_node_face_via_spring.hpp"
 #include "surface_separation_guard.hpp"
+
+using namespace prl::ventricle::m0;
 
 int main(int argc, char** argv) {
     try {

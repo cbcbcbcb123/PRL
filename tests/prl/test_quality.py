@@ -23,7 +23,9 @@ class CurrentQuickSuiteContractTests(unittest.TestCase):
             entries,
             [
                 "tests/prl/test_cli.py",
+                "tests/prl/test_contact_task_contract.py",
                 "tests/prl/test_cpp_support_boundary.py",
+                "tests/prl/test_current_mechanics_contracts.py",
                 "tests/prl/test_long_doublet_verification.py",
                 "tests/prl/test_quality.py",
                 "tests/prl/test_storage.py",

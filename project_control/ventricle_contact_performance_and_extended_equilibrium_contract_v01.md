@@ -1,8 +1,8 @@
 ---
 document_id: PRL-VENTRICLE-CONTACT-PERFORMANCE-AND-EXTENDED-EQUILIBRIUM-CONTRACT-V01
-status: frozen_pending_user_confirmation
+status: frozen_authorized
 frozen_at: 2026-09-15
-execution_status: not_run
+execution_status: authorized_q_pending_execution
 gpu: forbidden
 result_path: results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915
 ---

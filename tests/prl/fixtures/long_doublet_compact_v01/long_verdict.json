@@ -1,0 +1,10 @@
+{
+  "status":"passed",
+  "static_equilibrium":"failed",
+  "details":[
+    {"case":"END_DT0.02","states":2,"final_coordinate":5.0,"minimum_gap":0.07,"final_gap":0.08,"minimum_angle":30.0,"minimum_adjacent_cosine":0.9,"maximum_volume_error":0.001,"maximum_work_residual":0.0,"final_force":0.104,"static_equilibrium":"failed","per_cell":[{"cell":0,"length_strain":0.06361266144087763,"width_strain":0.0,"thickness_strain":0.0},{"cell":1,"length_strain":0.06361266144087763,"width_strain":0.0,"thickness_strain":0.0}]},
+    {"case":"END_DT0.01","states":2,"final_coordinate":5.0,"minimum_gap":0.07,"final_gap":0.08,"minimum_angle":30.0,"minimum_adjacent_cosine":0.9,"maximum_volume_error":0.001,"maximum_work_residual":0.0,"final_force":0.104,"static_equilibrium":"failed","per_cell":[{"cell":0,"length_strain":0.06361266144087763,"width_strain":0.0,"thickness_strain":0.0},{"cell":1,"length_strain":0.06361266144087763,"width_strain":0.0,"thickness_strain":0.0}]},
+    {"case":"SIDE_DT0.02","states":2,"final_coordinate":5.0,"minimum_gap":0.07,"final_gap":0.08,"minimum_angle":30.0,"minimum_adjacent_cosine":0.9,"maximum_volume_error":0.001,"maximum_work_residual":0.0,"final_force":0.104,"static_equilibrium":"failed","per_cell":[{"cell":0,"length_strain":0.12213476772706655,"width_strain":0.0,"thickness_strain":0.0},{"cell":1,"length_strain":0.12213476772706655,"width_strain":0.0,"thickness_strain":0.0}]},
+    {"case":"SIDE_DT0.01","states":2,"final_coordinate":5.0,"minimum_gap":0.07,"final_gap":0.08,"minimum_angle":30.0,"minimum_adjacent_cosine":0.9,"maximum_volume_error":0.001,"maximum_work_residual":0.0,"final_force":0.104,"static_equilibrium":"failed","per_cell":[{"cell":0,"length_strain":0.12213476772706655,"width_strain":0.0,"thickness_strain":0.0},{"cell":1,"length_strain":0.12213476772706655,"width_strain":0.0,"thickness_strain":0.0}]}
+  ]
+}

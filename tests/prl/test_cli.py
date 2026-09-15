@@ -9,6 +9,7 @@ from prl.cli import main
 
 
 ROOT = Path(__file__).resolve().parents[2]
+FIXTURE = ROOT / "tests/prl/fixtures/long_doublet_compact_v01"
 
 
 class CommandLinePublicInterfaceTests(unittest.TestCase):
@@ -16,7 +17,14 @@ class CommandLinePublicInterfaceTests(unittest.TestCase):
         output = StringIO()
         with redirect_stdout(output):
             exit_code = main(
-                ["verify", "long-doublet", "--workspace", str(ROOT)]
+                [
+                    "verify",
+                    "long-doublet",
+                    "--workspace",
+                    str(ROOT),
+                    "--result",
+                    str(FIXTURE),
+                ]
             )
         report = json.loads(output.getvalue())
         self.assertEqual(exit_code, 0)
@@ -45,6 +53,25 @@ class CommandLinePublicInterfaceTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(report["status"], "passed")
         quick.assert_called_once_with(ROOT)
+
+    @patch("prl.cli.run_contact_performance_equilibrium")
+    def test_contact_run_exposes_frozen_phase_without_hidden_retry(self, run):
+        run.return_value = {"status": "passed", "phase": "q", "calls": 39}
+        output = StringIO()
+        with redirect_stdout(output):
+            exit_code = main(
+                [
+                    "run",
+                    "contact-performance-equilibrium",
+                    "--workspace",
+                    str(ROOT),
+                    "--phase",
+                    "q",
+                ]
+            )
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(json.loads(output.getvalue())["calls"], 39)
+        run.assert_called_once_with(ROOT, None, phase="q")
 
 
 if __name__ == "__main__":

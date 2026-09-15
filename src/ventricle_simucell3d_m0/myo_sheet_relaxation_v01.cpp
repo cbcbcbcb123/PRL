@@ -1,8 +1,7 @@
-// Application assembly only: existing myocardium loads and unique core integration/contact.
-#define main preserved_bioform_entrypoint
-#include "../ventricle_bioform_myo/ventricle_bioform_myo_v03.cpp"
-#undef main
+#include "../ventricle_bioform_myo/bioform_model.hpp"
 #include "contact_node_face_via_spring.hpp"
+
+using namespace prl::ventricle::bioform;
 
 struct SheetCell {
     cell_ptr surface;

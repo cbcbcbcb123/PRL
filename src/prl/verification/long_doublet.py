@@ -7,6 +7,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
+import subprocess
 from typing import Any
 
 
@@ -20,6 +21,9 @@ EXPECTED_CASES = (
     "SIDE_DT0.01",
 )
 EQUILIBRIUM_FORCE_LIMIT = 0.001
+SOURCE_FILTER_MAP = Path(
+    "project_control/evidence/repository_cleanup_v01/batch05a_source_filter_map_v01.json"
+)
 
 
 def _read_json(path: Path) -> Any:
@@ -44,31 +48,90 @@ def _close(left: float, right: float, *, absolute: float = 1e-10) -> bool:
     return math.isclose(left, right, rel_tol=1e-10, abs_tol=absolute)
 
 
+def _root_commit(workspace: Path) -> str | None:
+    completed = subprocess.run(
+        ["git", "rev-list", "--max-parents=0", "HEAD"],
+        cwd=workspace,
+        capture_output=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        return None
+    commits = completed.stdout.decode("ascii", errors="replace").splitlines()
+    return commits[0].strip() if len(commits) == 1 else None
+
+
+def _git_blob_sha256(workspace: Path, revision: str | None, relative: str) -> str | None:
+    if revision is None:
+        return None
+    completed = subprocess.run(
+        ["git", "show", f"{revision}:{relative}"],
+        cwd=workspace,
+        capture_output=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        return None
+    return hashlib.sha256(completed.stdout).hexdigest()
+
+
 def _source_identity(workspace: Path, result: Path) -> dict:
     recorded = _read_json(result / "source_hashes_before.json")
     checks: list[dict] = []
     root = workspace.resolve(strict=True)
+    root_commit = _root_commit(root)
+    filter_map_path = root / SOURCE_FILTER_MAP
+    filter_mappings: dict[str, dict] = {}
+    if filter_map_path.is_file():
+        payload = _read_json(filter_map_path)
+        if payload.get("first_clean_baseline_commit") == root_commit:
+            filter_mappings = {item["path"]: item for item in payload.get("mappings", [])}
     for relative, expected in recorded.items():
-        candidate = (root / Path(relative.replace("\\", "/"))).resolve(strict=False)
+        normalized = relative.replace("\\", "/")
+        candidate = (root / Path(normalized)).resolve(strict=False)
         try:
             candidate.relative_to(root)
             inside_workspace = True
         except ValueError:
             inside_workspace = False
-        exists = inside_workspace and candidate.is_file()
-        actual = _sha256(candidate) if exists else None
+        working_tree_exists = inside_workspace and candidate.is_file()
+        working_tree_sha256 = _sha256(candidate) if working_tree_exists else None
+        root_commit_sha256 = _git_blob_sha256(root, root_commit, normalized)
+        mapped = filter_mappings.get(normalized)
+        mapped_match = bool(
+            mapped
+            and mapped.get("raw_worktree_sha256") == expected
+            and mapped.get("first_commit_blob_sha256") == root_commit_sha256
+        )
+        if working_tree_sha256 == expected:
+            matched_from = "working_tree"
+            actual = working_tree_sha256
+        elif root_commit_sha256 == expected:
+            matched_from = "first_clean_baseline_commit"
+            actual = root_commit_sha256
+        elif mapped_match:
+            matched_from = "first_commit_clean_filter_mapping"
+            actual = expected
+        else:
+            matched_from = None
+            actual = working_tree_sha256 or root_commit_sha256
         checks.append(
             {
-                "path": relative.replace("\\", "/"),
-                "exists": exists,
+                "path": normalized,
+                "working_tree_exists": working_tree_exists,
                 "expected_sha256": expected,
                 "actual_sha256": actual,
-                "matches": exists and actual == expected,
+                "working_tree_sha256": working_tree_sha256,
+                "root_commit_sha256": root_commit_sha256,
+                "filter_mapping_applied": mapped_match,
+                "matched_from": matched_from,
+                "matches": matched_from is not None,
             }
         )
     return {
         "status": "passed" if checks and all(item["matches"] for item in checks) else "failed",
         "files_checked": len(checks),
+        "first_clean_baseline_commit": root_commit,
         "checks": checks,
     }
 

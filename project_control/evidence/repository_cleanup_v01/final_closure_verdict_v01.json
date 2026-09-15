@@ -1,0 +1,73 @@
+{
+  "schema_version": "prl.repository_cleanup.final_closure_verdict.v1",
+  "checked_at": "2026-09-15",
+  "status": "passed",
+  "workspace": "E:\\Temp-Projects\\PRL",
+  "authorization": {
+    "frozen_manifest": "project_control/evidence/repository_cleanup_v01/final_closure_deletion_targets_v01.txt",
+    "frozen_manifest_sha256": "c44b1eb1ab59ac692453b4829a9b0a427cc4e66a23f81fbb2b1d52caf696446b",
+    "directory_targets": 15,
+    "file_targets": 16,
+    "gpu_authorized": false,
+    "remote_git_operations_authorized": false
+  },
+  "deletion": {
+    "old_git_replacement": "passed",
+    "remaining_targets_deleted": 30,
+    "remaining_targets_absent": 30,
+    "remaining_directories_deleted": 14,
+    "remaining_files_deleted": 16,
+    "remaining_descendant_files": 241,
+    "remaining_descendant_directories": 8,
+    "remaining_logical_bytes_released": 133839393,
+    "reparse_points_in_targets": 0,
+    "unauthorized_paths_processed": 0,
+    "permanence": "permanent",
+    "recovery_boundary": "Selected pre-refactor source remains readable from the first root commit; nonselected development and smoke raw packages are no longer complete or recoverable."
+  },
+  "git_baseline": {
+    "status": "passed",
+    "branch": "codex/clean-baseline",
+    "commit_count": 2,
+    "root_commit": "d53ca553fd8bba9965d850106fd9305da76be668",
+    "pre_acceptance_second_commit": "8812f59cff0785d884962bfb789afc4ff8e4f43e",
+    "final_second_commit_resolution": "Resolve current HEAD after this acceptance record is committed as part of the second commit.",
+    "remote_count": 0,
+    "tracked_files_before_acceptance_record": 1608,
+    "git_fsck": "passed"
+  },
+  "architecture_and_quality": {
+    "current_python_entry": "passed",
+    "cpp_main_boundary": "passed",
+    "configure_and_release_build": "passed",
+    "ctest": "1/1 passed",
+    "quick_suite": "27/27 passed",
+    "retained_long_doublet_verification": "passed",
+    "compact_fixture_verification": "passed",
+    "cockpit_links": "passed, 24 html links and 214 evidence paths, 0 missing",
+    "contact_performance_engineering_preflight": "passed"
+  },
+  "storage": {
+    "status": "passed",
+    "file_count": 7306,
+    "directory_count": 1975,
+    "logical_bytes": 1332845967,
+    "target_bytes": 2147483648,
+    "warning_bytes": 2576980377,
+    "hard_limit_bytes": 3221225472,
+    "planned_new_bytes": 268435456,
+    "stop_reserve_bytes": 67108864,
+    "projected_logical_bytes": 1668390287,
+    "can_start_scientific_task": true,
+    "reparse_points_followed": false,
+    "scan_errors": []
+  },
+  "scientific_state_at_cleanup_acceptance": {
+    "formal_q": "not_run",
+    "extended_equilibrium": "not_run",
+    "static_equilibrium_from_retained_long_doublet": "failed",
+    "parent_Z1": "blocked",
+    "biological_validation": "blocked"
+  },
+  "scope": "Repository cleanup and engineering acceptance only. This verdict authorizes entry into the already approved single-thread CPU Q gate; it is not a scientific result."
+}
