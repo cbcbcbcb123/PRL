@@ -1,0 +1,29 @@
+{
+  "schema_version": "efe_node1_n1_2b_st1_cycle_summary_v01",
+  "cycle": 2,
+  "compared_with_cycle": 1,
+  "waveform_normalized_l2": {
+    "axial_shortening": 1.6361831777152713e-05,
+    "maximum_discrete_interface_traction": 0.0025315164319015906,
+    "total_stored_energy": 2.8352039870006292e-05,
+    "ecm_internal_z_norm": 0.029995152686445863
+  },
+  "maximum_waveform_normalized_l2": 0.029995152686445863,
+  "cycle_end_internal_z_relative_difference": 0.06865344881818877,
+  "cycle_dissipation": 3.234638952074366e-06,
+  "maximum_kkt": 1.1706795693494222e-07,
+  "minimum_ecm_jacobian": 0.9872957718499488,
+  "minimum_gap": 0.017286454341830498,
+  "maximum_coupling_residual": 1.1753073174001063e-05,
+  "peak_axial_shortening": 0.11690990812808477,
+  "peak_interface_traction": 0.0936014294184112,
+  "solve_seconds": 3624.387670235981,
+  "accepted_transaction_count": 64,
+  "cycle_end_commit": {
+    "path": "/workspace/results/hybrid/prl_figure2_spatial_tolerance_st1_v01_20260901/A1/transaction_engine/cycle_02/cycle_end_checkpoint.npz",
+    "array_digest": "d5ca68253ba2234d1db522b0499c09836748c4656ecf268e9f025e7e11d0cd32",
+    "payload_bytes": 221429,
+    "create_only": true
+  },
+  "cycle_stable": false
+}

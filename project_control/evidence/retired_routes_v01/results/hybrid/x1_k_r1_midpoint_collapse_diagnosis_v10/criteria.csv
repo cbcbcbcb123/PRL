@@ -1,0 +1,7 @@
+order,role,criterion,threshold,observed,passed,adjudicated,provenance
+1,acceptance,split_geometry_neutrality,all normalized jumps <=1e-12; orientation>0; q>=0.05,passed,True,True,split_gate.csv
+2,supporting,frozen_edge_quarter_point_analytic_machine_closure,residual<=1e-12 and edge fraction=0.25+-1e-12,residual=0; fraction=0.25,True,True,frozen_merge.csv
+3,acceptance,all_publicly_eligible_candidate_merges_complete,4/4 eligible candidates complete production merge audit,"candidate 3 edge (2,8) can_be_merged=true but production sink rebind failed at distance=0.047434164902525666",False,True,candidate_matrix.csv:candidate_id=3
+4,not_adjudicated,runner_vs_case_api_vs_general_algorithm_classification,unique falsifiable class after complete candidate audit,not_adjudicated_due_to_first_failure,False,False,first_failure.json
+5,supporting,controlled_fork_git_object_provenance,all commit:path objects are blobs and current hash-object matches,5/5 verified,True,True,source_provenance.json
+6,not_adjudicated,repair_option_selection,classification must complete first,not_adjudicated_due_to_first_failure,False,False,repair_options.csv

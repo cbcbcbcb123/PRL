@@ -1,0 +1,40 @@
+{
+  "case_id": "A1_ACTIVE",
+  "dt": 0.02,
+  "duration_requested": 5.0,
+  "files": [
+    {
+      "bytes": 62354,
+      "path": "time_series.csv",
+      "sha256": "733A6645E0BAC618D963B717AECB35618C345D5B7BAFA87EC485D2B8AD10B42D"
+    },
+    {
+      "bytes": 56952,
+      "path": "step_acceptance_audit.csv",
+      "sha256": "FD3327E590C3A786E441F6818342EB31797A601ABE53A05D7D4B6CC8FB0AB132"
+    },
+    {
+      "bytes": 754400,
+      "path": "vertices.npy",
+      "sha256": "D13D9A0B999A2E0D4B014485774A4DF6AF2319BB4CAADFB528DD8DEEAA7EC17E"
+    },
+    {
+      "bytes": 1832,
+      "path": "summary.json",
+      "sha256": "95E1711AAC4AC150AED91333BF26B5928E94B216BF8D2952EDE413CE06DE26FC"
+    },
+    {
+      "bytes": 994,
+      "path": "failure_snapshot.json",
+      "sha256": "D9ABA50560DA8B63365F9F539610B48EDBCA4D772A315CBB4174D692C798E07C"
+    },
+    {
+      "bytes": 4016,
+      "path": "rejected_candidate_vertices.npy",
+      "sha256": "F7D4B6720EFBF4CBCA62ABF3591D1A460A4AC367F1DFB1278AE7D446F3BE2569"
+    }
+  ],
+  "last_accepted_time": 3.86,
+  "run_id": "A1_ACTIVE_dt0.02",
+  "status": "failed_invalid_numerics"
+}

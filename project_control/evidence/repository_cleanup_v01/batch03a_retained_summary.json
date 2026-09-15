@@ -1,0 +1,20 @@
+{
+  "schema_version": "prl_repository_cleanup_batch03a_retained_summary_v01",
+  "status": "passed",
+  "recorded_at": "2026-09-14",
+  "source_manifest": "project_control/evidence/repository_cleanup_v01/inventory_manifest.jsonl",
+  "source_manifest_sha256": "1e6504248cadf558709fdbedd591fd64d75b8dad06d892b47ff855a2ded2fb30",
+  "proposal": "project_control/evidence/repository_cleanup_v01/batch03a_legacy_results_proposal.json",
+  "proposal_sha256_at_execution": "de7aac395993c251034f77d2ab1e7db6d382e740191a156723b107e1cd4200e2",
+  "proposal_later_updated_to_completed": true,
+  "retained_root": "project_control/evidence/retired_routes_v01",
+  "retained_files": 169,
+  "retained_bytes": 55720718,
+  "hash_failures": 0,
+  "deleted_targets": 19,
+  "deleted_source_files": 14089,
+  "deleted_source_bytes": 1640809991,
+  "expected_net_release_bytes": 1585089273,
+  "source_results_fully_reproducible": false,
+  "evidence_boundary": "Selected evidence preserves frozen conclusions and key failure states; omitted legacy trajectories and per-step worker staging are permanently retired."
+}

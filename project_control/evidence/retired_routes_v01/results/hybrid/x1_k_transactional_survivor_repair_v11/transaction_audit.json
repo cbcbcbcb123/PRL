@@ -1,0 +1,25 @@
+{
+  "record": "transaction_state_hashes",
+  "algorithm": "fnv1a64_canonical_hexfloat",
+  "cell_before": "8135641961492115153",
+  "cell_after": "8135641961492115153",
+  "material_before": "17314506449340943532",
+  "material_after": "17314506449340943532",
+  "transfer_before": "17584227448191346989",
+  "transfer_after": "17584227448191346989",
+  "defect_before": "8032676260190446260",
+  "defect_after": "8032676260190446260",
+  "ledger_before": "11654674352659368421",
+  "ledger_after": "11654674352659368421",
+  "workset_before": "1172034548726886793",
+  "workset_after": "1172034548726886793",
+  "all_before_after_hashes_equal": true,
+  "hashed_state_inventory": {
+    "cell": "snapshot, node use/identity/position/force/momentum, face identity/normal/area/type, edges, centroid, scalar energies/properties",
+    "material": "cell/revision, material ids/regions/fibers/active state, host ids, barycentric weights, reference weights",
+    "transfer": "last committed transfer audit",
+    "defect": "last committed remesh energy defect audit",
+    "ledger": "complete active remesh energy ledger",
+    "workset": "external edge workset node and face identities"
+  }
+}

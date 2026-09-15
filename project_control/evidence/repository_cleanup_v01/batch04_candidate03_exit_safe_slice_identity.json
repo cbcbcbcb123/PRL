@@ -1,0 +1,173 @@
+{
+  "schema_version": "prl.repository_cleanup.batch04_candidate03_exit_safe_slice_identity.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "scope": "current default entry, current prl package and tests, and selected retired-route source copies after the authorized exit safe slice",
+  "prior_baseline": {
+    "path": "project_control/evidence/repository_cleanup_v01/batch04_candidate04_source_baseline.json",
+    "sha256": "e0ede041a52b627cf7d4a2e5b3c3c6cb1038da9a0ae8413147a0471d2dd87614",
+    "preserved_unchanged": true
+  },
+  "protected_unchanged": [
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/scripts/run_ncs_m1_all_fem_v01.py",
+      "bytes": 23111,
+      "sha256": "df2319d8276062ddf74113ee216f280f98b977a1a02637a903164fbf90e03dfc"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/scripts/run_paper2_division_dipole_gate_v01.py",
+      "bytes": 35888,
+      "sha256": "aa59b306377e50352c4b3a3e1b1b0c36b76aae2d42698031e63ca3a67fb291b2"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/scripts/run_paper2_feedback_kernel_gate_v01.py",
+      "bytes": 34811,
+      "sha256": "a09fa4319bd0246fe8b3c9f524af88438d1e00a501c016dc0c71caea75c60260"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/scripts/run_paper2_lineage_odd_mode_gate_v01.py",
+      "bytes": 59762,
+      "sha256": "a4c5e641eee1109334ee7d448f60decce21205c07c659ca621581aa76446887a"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/scripts/run_paper2_lineage_odd_mode_gate_v02_host.ps1",
+      "bytes": 4500,
+      "sha256": "4a4483ad7cc35d940726c269175e36e903cb2654d026085e3ff92e8bc9d30dae"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/scripts/run_paper2_lineage_odd_mode_gate_v02.py",
+      "bytes": 68185,
+      "sha256": "54f07dfdb1b51286c129ec41404e31945492532e1346fc5728893b06b17f752a"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/scripts/run_paper2_lineage_odd_mode_gate_v03_host.ps1",
+      "bytes": 4571,
+      "sha256": "35a45ad3f51a652d68c162a327bc351e1b4a43cd08635c17b1b5fbfd82b366ba"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/scripts/run_paper2_lineage_odd_mode_gate_v03.py",
+      "bytes": 6604,
+      "sha256": "d6e52b17e00d9e0ddafbaee86689917f8f2bb4755fdd3d1cbc02ba8d1cf24ed7"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/src/ncs_m1/__init__.py",
+      "bytes": 57,
+      "sha256": "50337149e83ed7fc2ef1a67d7b2807c98517b06e8482eba57e92616ca6961af8"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/src/ncs_m1/baseline.py",
+      "bytes": 63083,
+      "sha256": "550b3b17428415c7193b9166d188577ec8eacc99682987f33569cdf5f471c94c"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/src/paper2_hybrid/__init__.py",
+      "bytes": 448,
+      "sha256": "4626ee6f49cac099734728fe0dc2f3412ded11cf5066b32aff556cc39324783f"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/src/paper2_hybrid/config.py",
+      "bytes": 4555,
+      "sha256": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/src/paper2_hybrid/model.py",
+      "bytes": 42954,
+      "sha256": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/src/paper2_hybrid/numerics.py",
+      "bytes": 17413,
+      "sha256": "620381c4f0165801f2af03defe587e8381c9b6859f8bbd9d2f84198a555331e4"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/src/paper2_hybrid/protocol.py",
+      "bytes": 2342,
+      "sha256": "f96d779cfcd6c76e9535f90a9941a6156b545d53a0270f04a564c68a304fe3ca"
+    },
+    {
+      "path": "project_control/evidence/retired_routes_v01/source/src/paper2_hybrid/roles.py",
+      "bytes": 876,
+      "sha256": "beb447ab12b8c433973ca807bba07331b8640b9fb9d4c944e3595510a3a501ec"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 614,
+      "sha256": "388f63be3367d04619ab102212dd03c2fa470da3637322aac12791797c478791"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2816,
+      "sha256": "4edbf062e379691658adfe804e202bab45eb767b647bf75692883b2b476fc084"
+    },
+    {
+      "path": "src/prl/__init__.py",
+      "bytes": 211,
+      "sha256": "341d6da255c2350432bb83990b89fec62546779dd975a0952695a6d000595066"
+    },
+    {
+      "path": "src/prl/__main__.py",
+      "bytes": 129,
+      "sha256": "570fa726ba96508f1fb4481b0eab34c06e50b328309c06265c1edb0c5faf38d3"
+    },
+    {
+      "path": "src/prl/cli.py",
+      "bytes": 2755,
+      "sha256": "c5db31182d8f7368059b7917608095363b8d4db42902380c7039f8cc2815e92e"
+    },
+    {
+      "path": "src/prl/quality.py",
+      "bytes": 10427,
+      "sha256": "8f17fb44b28d3e1eb3b485047f1d2e232b4245384a5f0081cf3162ddb66b41cb"
+    },
+    {
+      "path": "src/prl/storage.py",
+      "bytes": 5090,
+      "sha256": "c1c5635dc1891a088e154e1478740f95a9d766723d4160413d0ccb2be2e671df"
+    },
+    {
+      "path": "src/prl/verification/__init__.py",
+      "bytes": 142,
+      "sha256": "a2849497ec3c857db161e61d4380140eddd722827b2b98489d05f72763415aeb"
+    },
+    {
+      "path": "src/prl/verification/long_doublet.py",
+      "bytes": 10119,
+      "sha256": "4713cc847600a75cc92abc0470c90186f01058300abe92005c772afc18017d7c"
+    },
+    {
+      "path": "src/prl/workspace.py",
+      "bytes": 937,
+      "sha256": "1aecd48c23de713904913ca2c110108f07da7580ada21b19dd8a857ec4fc6d19"
+    },
+    {
+      "path": "tests/prl/quick_suite_v01.txt",
+      "bytes": 236,
+      "sha256": "9c1778fd6fad2c87f0f6f3d2d7a4619d44b392e3758367adc57601e8844cd28e"
+    },
+    {
+      "path": "tests/prl/test_cli.py",
+      "bytes": 1776,
+      "sha256": "307d6f80ef57ff6c0195d52c273ec042e2d9ede924db7827ec9f566a5a8fd1a4"
+    },
+    {
+      "path": "tests/prl/test_cpp_support_boundary.py",
+      "bytes": 2024,
+      "sha256": "382fad9ad1432f692a63e788c41d1451ae71882f9a030f71b3db790289b6a947"
+    },
+    {
+      "path": "tests/prl/test_long_doublet_verification.py",
+      "bytes": 1680,
+      "sha256": "9077073d199eaa035871e28f2f12704159b78042d6834e6c15b96dca1b26ff2e"
+    },
+    {
+      "path": "tests/prl/test_quality.py",
+      "bytes": 2874,
+      "sha256": "272ce594b15ee1fa4bb71bea50769ba1bc71e278b6517d86b31cae3b531fa286"
+    },
+    {
+      "path": "tests/prl/test_storage.py",
+      "bytes": 1371,
+      "sha256": "5846ac3bd9e13f676610ee1be029bb048bec7dfc2b8350e17a9f931f33c04268"
+    }
+  ]
+}

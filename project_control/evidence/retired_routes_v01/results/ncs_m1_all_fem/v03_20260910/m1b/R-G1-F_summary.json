@@ -1,0 +1,17 @@
+{
+  "kind": "frequency_domain",
+  "level": "G1",
+  "angle_offset_degrees": 0.0,
+  "tau": 0.2,
+  "factorizations": 1,
+  "rhs_count": 1,
+  "factor_seconds": 0.05439279999700375,
+  "solve_seconds": 0.0026959000097122043,
+  "wall_seconds": 0.06391339999390766,
+  "maximum_backward_residual": 2.471127817566281e-16,
+  "maximum_constraint_residual": 1.0796763044929952e-18,
+  "inner_radial_harmonic": {
+    "real": 0.00312332207629843,
+    "imag": -0.0004196646296248271
+  }
+}

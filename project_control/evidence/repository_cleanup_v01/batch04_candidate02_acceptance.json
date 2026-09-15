@@ -1,0 +1,69 @@
+{
+  "schema_version": "prl.repository_cleanup.batch04_candidate02_acceptance.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "implementation_status": "safe_slice_passed",
+  "application_migration": "not_run",
+  "scientific_execution": "not_run",
+  "deletion_executed": false,
+  "scope": "project-owned non-physics Vector3, triangle surface mesh text I/O and versioned result schemas",
+  "source": {
+    "directory": "src/prl_ventricle_support",
+    "files": 8,
+    "bytes": 16044,
+    "simucell3d_dependency": false,
+    "old_cpp_implementation_include": false
+  },
+  "build": {
+    "existing_build_tree": "b/z1m0a",
+    "new_build_directory_created": false,
+    "build_tree_bytes_before": 51295019,
+    "build_tree_bytes_after_acceptance": 52594779,
+    "incremental_bytes": 1299760,
+    "target": "prl_ventricle_support_contract_test",
+    "configuration": "Release",
+    "status": "passed",
+    "artifacts": [
+      {
+        "path": "b/z1m0a/prl_ventricle_support/Release/prl_ventricle_support.lib",
+        "bytes": 270322,
+        "sha256": "af5ffc221bec7ed1fb9d7bec21a643fd713953342c4563bd61bfe0db16eb2526"
+      },
+      {
+        "path": "b/z1m0a/prl_ventricle_support/Release/prl_ventricle_support_contract_test.exe",
+        "bytes": 75264,
+        "sha256": "8a03cad21342b777a2213ddde8f143a19dbef5bd5ce9afb572e16748146a5b8a"
+      }
+    ]
+  },
+  "tests": {
+    "cpp_contract": "passed",
+    "ctest": "1/1 passed",
+    "retained_two_cell_mesh_read": "passed",
+    "retained_six_table_schema_match": "passed",
+    "existing_geometry_self_test": "passed",
+    "python_selected_regressions": "18 passed",
+    "old_implementation_source_identity": "10/10 passed",
+    "long_doublet_source_identity": "13/13 passed",
+    "long_doublet_matrix": "4/4 passed"
+  },
+  "observed_repair": {
+    "first_retained_schema_check": "failed",
+    "cause": "new faces schema omitted the existing face column",
+    "change": "new schema corrected from cell,a,b,c to cell,face,a,b,c",
+    "old_source_or_result_changed": false,
+    "final_retained_schema_check": "passed"
+  },
+  "scientific_status_preserved": {
+    "long_doublet_numerical": "passed",
+    "static_equilibrium": "failed",
+    "parent_Z1": "blocked",
+    "biological_validation": "blocked"
+  },
+  "not_done": [
+    "no existing application links against prl_ventricle_support",
+    "eight legacy applications still include old implementation cpp files",
+    "no contact, material, active-load or integrator implementation moved",
+    "no performance claim or scientific result was generated"
+  ]
+}

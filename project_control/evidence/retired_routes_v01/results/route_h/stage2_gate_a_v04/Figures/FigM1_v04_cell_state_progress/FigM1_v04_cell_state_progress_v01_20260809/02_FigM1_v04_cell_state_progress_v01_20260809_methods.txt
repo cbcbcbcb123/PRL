@@ -1,0 +1,33 @@
+# 图件方法与验证记录
+
+## 人工填写内容
+- 风格来源: cb-plot-unified-style / unified-style-v01；用户此前授权自行排版，长时间序列采用 10.0 × 5.0 in 主坐标框
+- 用户提供的期刊规格: 未指定；本图为阶段性科研审阅图，按上述风格来源执行，600 dpi PNG 与可编辑文字 SVG 同源导出
+- 03_材料方法来源: `src/route_h/stage2_gate_a_v04.py` 的版本包快照 `03a_FigM1_v04_cell_state_progress_v01_20260809_solver.py`；统一风格快照为 `03c_FigM1_v04_cell_state_progress_v01_20260809_style.py`
+- 数据来源: `results/route_h/stage2_gate_a_v04/A1_ACTIVE_dt0.02/` 的正式接受轨迹、time series、首个失败快照和 rejected candidate；表面 faces 来自同套件 `reference_faces.npy`
+- 数据/模型变换: A 面板选择 t=0、2.00、3.00 和最后接受节点 t=3.86；顶点位移为相对 t=0 的欧氏位移除以初始纤维长度并转为百分比，四幅状态图共享色标、相机和坐标范围。B 面板直接将 activation、axial shortening 与两个 transverse scale change 转为百分比；t=3.88 之后的灰色区明确表示未接受、未模拟区间，不含补点或外推
+- 统计方法与不确定性: 单条确定性数值轨迹的描述性图；不进行推断统计、不绘制置信区间。最大体积误差和失败 residual 由保留 time series/failure JSON 直接计算或读取
+- 生物学分组颜色: 不适用；本图无生物学分组颜色
+- 人工/代理视觉验收: 通过
+
+## 自动记录
+<!-- 自动记录开始 -->
+- 前缀: FigM1_v04_cell_state_progress_v01_20260809
+- 包状态: 工作版本
+- 创建日期: 20260809
+- 执行时间: 2026-08-09T17:46:55+08:00
+- 自动校验: 通过
+- 颜色配置 SHA-256: 不适用
+- Notebook SHA-256: 7f59912572644e65b0272925a8390222116345c803dd3e43629450f1cce02350
+- 文件 SHA-256: 已记录如下
+- 01_FigM1_v04_cell_state_progress_v01_20260809_data.npy: d13d9a0b999a2e0d4b014485774a4df6af2319bb4caadfb528dd8deeaa7ec17e
+- 01a_FigM1_v04_cell_state_progress_v01_20260809_data_faces.npy: f015a1db8b58c6d7f0584bce6c43afbad9f613aca83c6061c52892c97511487f
+- 01b_FigM1_v04_cell_state_progress_v01_20260809_data_failure.json: d9aba50560da8b63365f9f539610b48edbca4d772a315cbb4174d692c798e07c
+- 01c_FigM1_v04_cell_state_progress_v01_20260809_data_rejected.npy: f7d4b6720efbf4cbca62abf3591d1a460a4ac367f1dfb1278ae7d446f3be2569
+- 01d_FigM1_v04_cell_state_progress_v01_20260809_data_time_series.csv: 733a6645e0bac618d963b717aecb35618c345d5b7bafa87ec485d2b8ad10b42d
+- 03_FigM1_v04_cell_state_progress_v01_20260809_plot.ipynb: 7f59912572644e65b0272925a8390222116345c803dd3e43629450f1cce02350
+- 03a_FigM1_v04_cell_state_progress_v01_20260809_solver.py: ec99dc02b318e6a4b878b3519ba71961dad47573800ab51740045076a9a31035
+- 03c_FigM1_v04_cell_state_progress_v01_20260809_style.py: e6216aa78d3f9fe01606b8ebf2a0602815c5b826c9b89c496f78f3829c02795c
+- 03d_FigM1_v04_cell_state_progress_v01_20260809_render.py: f20f1bc995cdb31089f9a7597ad8effd113e9721d253779bfd401e1180a21df3
+- Python 与主要库版本: Python 3.13.7; Windows 11; ipython=9.6.0, numpy=2.2.6
+<!-- 自动记录结束 -->

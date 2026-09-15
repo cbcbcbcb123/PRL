@@ -1,0 +1,21 @@
+{
+  "schema_version": "prl.repository_cleanup.final_closure_identity_overrides.v1",
+  "recorded_at": "2026-09-15",
+  "status": "frozen_pending_user_confirmation",
+  "base_identity": "project_control/evidence/repository_cleanup_v01/batch04_candidate03_exit_safe_slice_identity.json",
+  "scope": "Intentional current-mainline changes made while freezing the cleanup closure approval package; all other protected identities remain bound to the immutable Batch 4 baseline.",
+  "protected_identity_overrides": [
+    {
+      "path": "README.md",
+      "bytes": 3002,
+      "sha256": "66af71617e8c4477c89a0b90d8586469cedd0b7fabf14112b6110ed37e5466fa",
+      "reason": "Adds the frozen one-approval cleanup and conditional CPU science-restart entry point."
+    },
+    {
+      "path": "src/prl/quality.py",
+      "bytes": 11312,
+      "sha256": "49ca2883a9836c61b52cde8f90ba765967fb55fa20e44db2a906d64506904c2a",
+      "reason": "Loads this bounded override set while preserving all unchanged Batch 4 identities."
+    }
+  ]
+}

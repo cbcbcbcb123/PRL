@@ -1,0 +1,34 @@
+# PRL cleanup closure v01 exact destructive target set
+# Frozen path set: 15 recursive directories and 16 non-recursive files.
+# Format: kind|scope|approved_interface|normalized_absolute_path
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\.git
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\scripts
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\tmp\z1_bioform_myo_repair_v03_dev_fine_dt020_20260913
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\tmp\z1_bioform_myo_repair_v03_dev_main_dt020_20260913
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\tmp\z1_bioform_myo_repair_v03_dev_perturbed_dt020_20260913
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\tmp\z1_bioform_myo_repair_v03_dev_rawactive_main_20260913
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\tmp\z1_bioform_myo_repair_v03_dev_rawactive_perturbed_20260913
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\tmp\z1_bioform_myo_repair_v03_production_smoke_m080_20260913
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\tmp\z1_bioform_myo_repair_v03_smoke_dt040_20260913
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\tmp\z1_bioform_myo_repair_v03_smoke_nobend_dt040_20260913
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\tmp\z1tf2b_smoke_v01
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\tmp\z1tf2b_smoke_v02
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\tmp\z1tf2b_smoke_v03
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\tmp\z1tf2m0_smoke_v01
+D|recursive|System.IO.Directory.Delete|E:\Temp-Projects\PRL\imach project_control
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_myo_adjacent_fold_monitor_v01.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_myo_contact_positive_gap_v01.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_myo_sheet_2d_m0_v01.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_myo_sheet_contact_repair_v02.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_repository_cleanup_audit_v01.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_ventricle_myo_strip_load_boundary_v01.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_ventricle_myo_strip_v01.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_ventricle_z0_v01.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_ventricle_z1_bioform_myo_repair_v03.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_ventricle_z1_bioform_myo_v02.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_ventricle_z1_v01.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_ventricle_z1a_v02.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_ventricle_z1b_v04.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_ventricle_z1c_v06.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_ventricle_z1tf2b_simucell3d_v01.py
+F|nonrecursive|System.IO.File.Delete|E:\Temp-Projects\PRL\tests\test_ventricle_z1tf2m0_simucell3d_v01.py

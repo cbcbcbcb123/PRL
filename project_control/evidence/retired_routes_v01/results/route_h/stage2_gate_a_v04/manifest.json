@@ -1,0 +1,132 @@
+{
+  "completed_at": "2026-08-09T17:35:52.845255+08:00",
+  "contract": "project_control/route_h_stage2_gate_a_v04_curvature_memory_contract.md",
+  "environment": {
+    "numpy": "2.2.6",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.7",
+    "scipy": "1.16.2"
+  },
+  "equation_parameter_time_step_or_threshold_change": false,
+  "files": [
+    {
+      "bytes": 110966,
+      "path": "A0_ZERO_dt0.01/step_acceptance_audit.csv",
+      "sha256": "BB2F765B9A044658893DB3F6CB70BBE3934E7793F6C944F5073C3212A4B9AC8F"
+    },
+    {
+      "bytes": 1022,
+      "path": "A0_ZERO_dt0.01/summary.json",
+      "sha256": "398E35D24CD1CDD4A88C893A8F4AEF7DEBC58FA495DC27202A0B00921C7FD77A"
+    },
+    {
+      "bytes": 68890,
+      "path": "A0_ZERO_dt0.01/time_series.csv",
+      "sha256": "85D2753B918C900985D0EF240CCE24CDD6F6A26EF622668BE09D9A12128C9B4A"
+    },
+    {
+      "bytes": 1948016,
+      "path": "A0_ZERO_dt0.01/vertices.npy",
+      "sha256": "11768F3D708E0175F93F5BD2A5E5C7C3330A3310DFB6AC2F5D67811C059FE829"
+    },
+    {
+      "bytes": 994,
+      "path": "A1_ACTIVE_dt0.02/failure_snapshot.json",
+      "sha256": "D9ABA50560DA8B63365F9F539610B48EDBCA4D772A315CBB4174D692C798E07C"
+    },
+    {
+      "bytes": 4016,
+      "path": "A1_ACTIVE_dt0.02/rejected_candidate_vertices.npy",
+      "sha256": "F7D4B6720EFBF4CBCA62ABF3591D1A460A4AC367F1DFB1278AE7D446F3BE2569"
+    },
+    {
+      "bytes": 56952,
+      "path": "A1_ACTIVE_dt0.02/step_acceptance_audit.csv",
+      "sha256": "FD3327E590C3A786E441F6818342EB31797A601ABE53A05D7D4B6CC8FB0AB132"
+    },
+    {
+      "bytes": 1832,
+      "path": "A1_ACTIVE_dt0.02/summary.json",
+      "sha256": "95E1711AAC4AC150AED91333BF26B5928E94B216BF8D2952EDE413CE06DE26FC"
+    },
+    {
+      "bytes": 62354,
+      "path": "A1_ACTIVE_dt0.02/time_series.csv",
+      "sha256": "733A6645E0BAC618D963B717AECB35618C345D5B7BAFA87EC485D2B8AD10B42D"
+    },
+    {
+      "bytes": 754400,
+      "path": "A1_ACTIVE_dt0.02/vertices.npy",
+      "sha256": "D13D9A0B999A2E0D4B014485774A4DF6AF2319BB4CAADFB528DD8DEEAA7EC17E"
+    },
+    {
+      "bytes": 667,
+      "path": "formal_run_progress.json",
+      "sha256": "401469B872E9F23147422B9146888CBE9F749A0D8B1D2843F9FE65CA79AE85D2"
+    },
+    {
+      "bytes": 1036,
+      "path": "gate_a_acceptance.json",
+      "sha256": "09C930E8C072234266D3F8C2698FF67C3B1F5165D4A6679DE00BCC467668438D"
+    },
+    {
+      "bytes": 7808,
+      "path": "reference_faces.npy",
+      "sha256": "F015A1DB8B58C6D7F0584BCE6C43AFBAD9F613ACA83C6061C52892C97511487F"
+    }
+  ],
+  "lbfgs_maxcor_previous": 20,
+  "lbfgs_maxcor_v04": 40,
+  "preserves_frozen_failure": "FREEZE-PRL-ROUTE-H-STAGE2-GATE-A-V03-FAILURE-V01",
+  "run_manifests": [
+    {
+      "manifest_path": "results/route_h/stage2_gate_a_v04/A0_ZERO_dt0.01/manifest.json",
+      "manifest_sha256": "B826E17DD1D5D2BD926CB6E99F8FB047E498F619A638420B8BB89098871A8568",
+      "run_id": "A0_ZERO_dt0.01",
+      "status": "completed"
+    },
+    {
+      "manifest_path": "results/route_h/stage2_gate_a_v04/A1_ACTIVE_dt0.02/manifest.json",
+      "manifest_sha256": "9B8CF4A2D2998AC7DF5E902701F6536ECAB41B5B6CA6DFAD375E0DBB8796832C",
+      "run_id": "A1_ACTIVE_dt0.02",
+      "status": "failed_invalid_numerics"
+    }
+  ],
+  "solver_acceptance_timing_change": false,
+  "solver_curvature_memory_change": true,
+  "source_inputs": [
+    {
+      "bytes": 4436,
+      "path": "project_control/route_h_stage2_gate_a_v04_curvature_memory_contract.md",
+      "sha256": "78F9E5C089A4DA36EC3E041E85BF77A4C4CB811993A2154EB53FCA761E82F3B7"
+    },
+    {
+      "bytes": 22987,
+      "path": "src/route_h/stage2_gate_a.py",
+      "sha256": "ACE96B4703F01226219C17C2D5F6857A2F22B6B2ECBC219E4108F88D99D270BE"
+    },
+    {
+      "bytes": 20149,
+      "path": "src/route_h/stage2_gate_a_v02_observability.py",
+      "sha256": "7F30191636566554403EE2283468F137B361C0C2D64422277857E55C2128FB8C"
+    },
+    {
+      "bytes": 24085,
+      "path": "src/route_h/stage2_gate_a_v03.py",
+      "sha256": "D7AD2FA2E2221C413967D7D90B56DD400A1855B5F9749D7CE32B5397FD77022F"
+    },
+    {
+      "bytes": 24000,
+      "path": "src/route_h/stage2_gate_a_v04.py",
+      "sha256": "EC99DC02B318E6A4B878B3519BA71961DAD47573800AB51740045076A9A31035"
+    },
+    {
+      "bytes": 13064,
+      "path": "project_control/route_h_stage2_gate_a_v03_failure_manifest_v01.json",
+      "sha256": "5A42F79E42684F5A28C94036713E73F3F235D6C8EA49B39B7838F409B32FE51A"
+    }
+  ],
+  "started_at": "2026-08-09T17:34:31.878591+08:00",
+  "status": "failed_invalid_numerics",
+  "suite_id": "PRL-ROUTE-H-STAGE2-GATE-A-V04"
+}

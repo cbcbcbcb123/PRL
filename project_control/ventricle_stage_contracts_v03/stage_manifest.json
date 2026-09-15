@@ -1,0 +1,181 @@
+{
+  "package_version": "v03",
+  "created_date": "2026-09-10",
+  "artifact_kind": "execution_contracts_not_results",
+  "default_start": "Z0",
+  "auto_advance": false,
+  "source_document": "sources/v02_original.md",
+  "stages": [
+    {
+      "id": "Z0",
+      "file": "stages/Z0_ENTRY_DATA_AND_KERNEL_AUDIT.md",
+      "title": "资料、内核审计与可旋转模型入口",
+      "prerequisites": "用户授权 Z0；可访问实际 PRL 工作区；历史记录仅作待核验输入",
+      "next": "Z1",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z1",
+      "file": "stages/Z1_PASSIVE_SINGLE_AND_DOUBLE_CELL.md",
+      "title": "被动单细胞与双细胞力学",
+      "prerequisites": "Z0 合成入口/内核路径可用；被动物理项和尺度已冻结",
+      "next": "Z2",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z2",
+      "file": "stages/Z2_ACTIVE_SINGLE_CELL.md",
+      "title": "主动单细胞：自由缩短、固定端与有限负载",
+      "prerequisites": "Z1 被动力学、夹持/接触、积分和体积检查 PASS",
+      "next": "Z3",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z3",
+      "file": "stages/Z3_ECM_VISCOELASTIC_NETWORK.md",
+      "title": "ECM 黏弹网络：内变量、剪切与离散标定",
+      "prerequisites": "Z0 几何/单位入口；Z1 的连接力、几何与积分基础通过；Z2 无需参与独立网络计算但默认已完成",
+      "next": "Z4",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z4",
+      "file": "stages/Z4_FINITE_BILAYER_TISSUE.md",
+      "title": "有限双层组织：层间传递、局部扰动与边缘效应",
+      "prerequisites": "Z1 被动力学、Z2 主动机制、Z3 ECM 网络均在使用路径上 PASS",
+      "next": "Z4b",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z4b",
+      "file": "stages/Z4b_WATERTIGHT_CAVITY_AND_PRESSURE.md",
+      "title": "无 CFD 共同腔面与被动受压",
+      "prerequisites": "Z4 双层组织力学/连接与 Z1 压力作用路径 PASS",
+      "next": "Z5",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z5",
+      "file": "stages/Z5_FIXED_GRID_CFD.md",
+      "title": "独立 CFD：固定规则边界与解析/制造解",
+      "prerequisites": "Z0 数值/单位合同；默认 Z4b 已完成；本阶段不调用 DCM 力学",
+      "next": "Z6a（先阅读 Z6 控制入口）",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z6",
+      "file": "stages/Z6_MOVING_BOUNDARY_CONTROLLER.md",
+      "title": "移动边界 CFD 总控制入口",
+      "prerequisites": "Z5 PASS；Z4b 共同腔面语义可供后续映射；每个子门需单独授权",
+      "next": "Z6a；不得一次执行 Z6a–Z6c",
+      "kind": "controller",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z6a",
+      "file": "stages/Z6a_CUT_GEOMETRY_AND_SWEEP.md",
+      "title": "切割几何与壁面扫掠：先不求流体",
+      "prerequisites": "Z6 设计审计与算法选择冻结；Z5 网格/单位定义可用",
+      "next": "Z6b",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z6b",
+      "file": "stages/Z6b_FIXED_CURVED_WALL_CFD.md",
+      "title": "固定曲壁 CFD：切割算子、牵引与壁面剪切",
+      "prerequisites": "Z5 和 Z6a 在兼容代码版本上 PASS；极小单元/压力边界策略已冻结",
+      "next": "Z6c",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z6c",
+      "file": "stages/Z6c_MOVING_WALL_CFD.md",
+      "title": "移动边界 CFD：规定运动、单元生灭与活塞排液",
+      "prerequisites": "Z6a 几何/扫掠、Z6b 固定曲壁及 Z5 独立 CFD 均 PASS；状态转移策略冻结",
+      "next": "Z7（先汇总 Z6）",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z7",
+      "file": "stages/Z7_PASSIVE_TWO_WAY_FSI.md",
+      "title": "被动双向流固耦合：牵引、虚功与时间状态",
+      "prerequisites": "Z4b 共同腔面、Z6 全部子门及所用 Z1/Z3 力学路径 PASS",
+      "next": "Z8",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z8",
+      "file": "stages/Z8_ACTIVE_IDEAL_VENTRICLE_PUMP.md",
+      "title": "主动理想心室泵血：短管、椭球、负载与强对照",
+      "prerequisites": "Z2 主动、Z4/Z4b 组织/共同腔面、Z7 被动 FSI 均 PASS；所有依赖版本兼容",
+      "next": "Z9a（先阅读 Z9 控制入口）",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z9",
+      "file": "stages/Z9_DATA_VALIDATION_CONTROLLER.md",
+      "title": "斑马鱼数据比较总控制入口",
+      "prerequisites": "Z0 数据清单；Z8 主动理想泵血的相关路径 PASS；生物数据能力待复核",
+      "next": "Z9a；不得自动进入 Z9b",
+      "kind": "controller",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z9a",
+      "file": "stages/Z9a_PRESCRIBED_WALL_DATA_COMPARISON.md",
+      "title": "实测壁运动驱动的条件性 CFD 比较",
+      "prerequisites": "Z9 数据分级审计；相关 Z6/Z8 流体路径 PASS；动态验证所需壁运动/配准实际可用",
+      "next": "Z9b",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z9b",
+      "file": "stages/Z9b_ACTIVE_PREDICTION_AND_IDENTIFIABILITY.md",
+      "title": "主动预测：参数可辨识性与保留数据检验",
+      "prerequisites": "Z8 主动 FSI PASS；Z9a 相关数据/观测算子可信；独立保留条件和参数约束实际具备",
+      "next": "Z10",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z10",
+      "file": "stages/Z10_SINGLE_MYOCARDIAL_DIVISION.md",
+      "title": "心肌单次受控分裂与材料状态继承",
+      "prerequisites": "Z1–Z4b 与 Z7/Z8 相关路径 PASS；分裂基础能力已审计；Z9 数据不足不构成本合成阶段逻辑阻断",
+      "next": "Z11；Z10b 仅另行授权",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z10b",
+      "file": "stages/Z10b_ENDOCARDIAL_TOPOLOGY_EVENT_OPTIONAL.md",
+      "title": "可选扩展：直接涉及腔面拓扑的心内膜分裂",
+      "prerequisites": "Z10 事件转移、Z4b 腔面、Z6/Z7 移动/耦合均 PASS；用户单独授权本扩展",
+      "next": "停止；由用户选择后续阶段",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "Z11",
+      "file": "stages/Z11_ECM_SECRETION_DEGRADATION_AND_MEMORY.md",
+      "title": "ECM 分泌、降解与沉积参考态",
+      "prerequisites": "Z3 网络内变量、Z4 组织、Z8 主动 FSI 均 PASS；仅使用分裂状态时依赖 Z10；Z9 数据不足不阻断合成工作",
+      "next": "停止；生长、死亡及体积占据另立合同",
+      "kind": "execution",
+      "status": "NOT_RUN"
+    }
+  ]
+}

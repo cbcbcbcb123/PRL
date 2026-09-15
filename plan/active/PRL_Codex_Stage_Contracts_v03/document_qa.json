@@ -1,0 +1,31 @@
+{
+  "package_version": "v03",
+  "document_integrity": "PASS",
+  "stage_document_count": 19,
+  "markdown_count": 26,
+  "all_stage_calculation_status": "NOT_RUN",
+  "source_copy_byte_identical": true,
+  "broken_local_markdown_links": 0,
+  "balanced_code_fences": true,
+  "balanced_display_math_delimiters": true,
+  "algebra_checks": {
+    "sls_power_identity": true,
+    "ecm_five_moment_energy_identity": true,
+    "oscillatory_channel_momentum": true,
+    "three_dimensional_mms_divergence_and_boundary": true,
+    "moving_piston_energy_flux": true
+  },
+  "algebra_check_scope": "Editorial symbolic identity checks only; no numerical solver, material transfer, convergence, or biological validation executed.",
+  "scientific_simulations_executed": false,
+  "document_navigation_checks": {
+    "chromium_file_protocol": "NOT_TESTED_ENVIRONMENT_ADMIN_POLICY_BLOCKS_FILE_URL",
+    "chromium_embedded_document_render": "PASS",
+    "stage_navigation": "PASS",
+    "internal_markdown_link_routing": "PASS",
+    "filter": "PASS",
+    "mobile_layout_loaded": "PASS",
+    "javascript_errors": [],
+    "external_network_requests": [],
+    "scope": "Document preview only, not a scientific visualization or solver test."
+  }
+}

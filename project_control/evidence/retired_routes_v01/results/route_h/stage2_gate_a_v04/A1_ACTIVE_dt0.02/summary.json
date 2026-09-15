@@ -1,0 +1,51 @@
+{
+  "acceptance_source_counts": {
+    "initial_state_physical_gate": 50,
+    "objective_evaluation_physical_gate": 143
+  },
+  "accepted_steps": 193,
+  "case_id": "A1_ACTIVE",
+  "dt": 0.02,
+  "duration_requested": 5.0,
+  "failure": {
+    "acceptance_source": "rejected_optimizer_candidate",
+    "accepted_objective": 0.00023045447519050806,
+    "alpha": 0.003511175705587444,
+    "callback_count": 68,
+    "candidate_is_accepted_state": false,
+    "gauge_increment_residual": 2.6398555254744684e-20,
+    "geometry": {
+      "degenerate_face_count": 0,
+      "finite": true,
+      "flipped_face_count": 0,
+      "minimum_face_area_ratio": 0.521022904413206,
+      "minimum_orientation_cosine": 0.9983278991363653,
+      "relative_volume": 0.9999022257742239,
+      "signed_volume": 0.29996504195119883
+    },
+    "initial_objective": 0.0002573742171032339,
+    "optimizer_evaluations": 81,
+    "optimizer_iterations": 68,
+    "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+    "optimizer_reported_success": true,
+    "projected_residual": 1.1991047754392014e-08,
+    "qualifying_evaluation_index": 81,
+    "reason": "physical_gate_or_descent_or_geometry_check_failed",
+    "step_index": 194,
+    "strict_potential_descent": true,
+    "time": 3.88
+  },
+  "last_accepted_axial_shortening": 0.0074690160349139,
+  "last_accepted_time": 3.86,
+  "last_accepted_transverse_scale_changes": [
+    0.024211703359445336,
+    -0.0022713213880282135
+  ],
+  "last_accepted_volume_error": -8.389597888114331e-05,
+  "maximum_geometry_degenerate_face_count": 0,
+  "maximum_geometry_flipped_face_count": 0,
+  "minimum_geometry_face_area_ratio": 0.379927665113476,
+  "minimum_geometry_orientation_cosine": 0.9931620432957415,
+  "minimum_geometry_signed_volume": 0.29995889158696526,
+  "status": "failed_invalid_numerics"
+}

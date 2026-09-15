@@ -1,0 +1,214 @@
+{
+  "schema_version": "paper2_expert_guidance_delivery_checks.v1",
+  "record_id": "EXP-20260909-001-paper2-lineage-ecm",
+  "checked_at_utc": "2026-09-09T02:48:31.383631+00:00",
+  "delivery_structural_status": "PASS",
+  "status_scope": "Document structure, local links, JSON parsing, evidence hashes, registration preservation and write boundaries only. No scientific gate evaluated.",
+  "html_checks": [
+    {
+      "path": "records/EXP-20260909-001-paper2-lineage-ecm/source/review-and-execution-plan.html",
+      "status": "PASS",
+      "local_links_checked": 20,
+      "external_links_not_requeried": 9,
+      "errors": []
+    },
+    {
+      "path": "records/EXP-20260909-001-paper2-lineage-ecm/assessment.html",
+      "status": "PASS",
+      "local_links_checked": 8,
+      "external_links_not_requeried": 0,
+      "errors": []
+    },
+    {
+      "path": "index.html",
+      "status": "PASS",
+      "local_links_checked": 11,
+      "external_links_not_requeried": 0,
+      "errors": []
+    }
+  ],
+  "json_checks": [
+    {
+      "path": "records/EXP-20260909-001-paper2-lineage-ecm/provenance.json",
+      "status": "PASS"
+    },
+    {
+      "path": "records/EXP-20260909-001-paper2-lineage-ecm/decision.json",
+      "status": "PASS"
+    },
+    {
+      "path": "registry.json",
+      "status": "PASS"
+    },
+    {
+      "path": "records/EXP-20260909-001-paper2-lineage-ecm/delivery_checks.json",
+      "status": "PASS"
+    }
+  ],
+  "registry": {
+    "status": "PASS",
+    "record_count": 2,
+    "path_references_checked": 11,
+    "previous_records_preserved": true,
+    "decision_status": "reviewed"
+  },
+  "source_and_assessment_checks": [
+    {
+      "path": "source/review-and-execution-plan.html",
+      "sha256": "5e83c8bcf043355e833391d05bbebfe076913e07f2d07b974e945897ed2aa826",
+      "status": "PASS"
+    },
+    {
+      "path": "assessment.html",
+      "sha256": "03e8744bb35a9ee80e3fb27d31c833125df4c0ea32e98cd4da515871889c3619",
+      "status": "PASS"
+    }
+  ],
+  "protected_PRL_evidence_checks": [
+    {
+      "path": "E:\\Temp-Projects\\PRL\\project_control\\CURRENT_STATUS.md",
+      "sha256": "5e648339c743cb227563c63ff61bb689b15d79631cd0f2be3da9d3c4963a9583",
+      "status": "PASS"
+    },
+    {
+      "path": "E:\\Temp-Projects\\PRL\\project_control\\prl_independent_theory_mainline_plan_v04.md",
+      "sha256": "b41fb16926375f31ae7b457575a21f61f806e3e2a680fc0f43d1457411615d20",
+      "status": "PASS"
+    },
+    {
+      "path": "E:\\Temp-Projects\\PRL\\results\\paper2_science_pilot\\v01_20260905\\science_brief.md",
+      "sha256": "5ac3a1c017e1fe288e3229f7ff0e96cfd45717985f1f52d3c3c9f74efd8d9f86",
+      "status": "PASS"
+    },
+    {
+      "path": "E:\\Temp-Projects\\PRL\\results\\paper2_division_dipole_gate\\v02_20260908\\summary.json",
+      "sha256": "65518f1fb24f441450cbdfbe25e5e447c56088d55ac14988440f59ce46bb7df5",
+      "status": "PASS"
+    },
+    {
+      "path": "E:\\Temp-Projects\\PRL\\scripts\\run_paper2_lineage_odd_mode_gate_v01.py",
+      "sha256": "a4c5e641eee1109334ee7d448f60decce21205c07c659ca621581aa76446887a",
+      "status": "PASS"
+    },
+    {
+      "path": "E:\\Temp-Projects\\PRL\\src\\paper2_hybrid\\config.py",
+      "sha256": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe",
+      "status": "PASS"
+    },
+    {
+      "path": "E:\\Temp-Projects\\PRL\\src\\paper2_hybrid\\model.py",
+      "sha256": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800",
+      "status": "PASS"
+    },
+    {
+      "path": "E:\\Temp-Projects\\PRL\\src\\paper2_hybrid\\numerics.py",
+      "sha256": "620381c4f0165801f2af03defe587e8381c9b6859f8bbd9d2f84198a555331e4",
+      "status": "PASS"
+    },
+    {
+      "path": "E:\\Temp-Projects\\PRL\\project_control\\prl_figure2_spatial_tolerance_validation_contract_v02.md",
+      "sha256": "633be2cd534c05ac3d3416e4ca046d52b2b17bef4f4b373fbb1a242a72e33274",
+      "status": "PASS"
+    },
+    {
+      "path": "E:\\Temp-Projects\\PRL\\README.md",
+      "sha256": "f7c900acc707859705ff164c755cfe899cc6648573b28704b744388ff4677f53",
+      "status": "PASS"
+    }
+  ],
+  "other_guidance_preservation_checks": [
+    {
+      "path": "records/EXP-20260909-001-independent-scientific-architecture-review/assessment.html",
+      "sha256": "7d2b83ad8d501f5704ad0e2be826dd15d0c28a16ce84dd4dbe7701d45dd20bb8",
+      "status": "PASS"
+    },
+    {
+      "path": "records/EXP-20260909-001-independent-scientific-architecture-review/decision.json",
+      "sha256": "9406f147c53fb590d6ba6f46300b479630dfa9b111bb8b7b66ad108b7838f67f",
+      "status": "PASS"
+    },
+    {
+      "path": "records/EXP-20260909-001-independent-scientific-architecture-review/execution-proposal.html",
+      "sha256": "ff1deafec4c5719991823241e311473a774af62fdfd14b4c807f92c703b60232",
+      "status": "PASS"
+    },
+    {
+      "path": "records/EXP-20260909-001-independent-scientific-architecture-review/provenance.json",
+      "sha256": "3a6ff67a22ea4175c826d9d6ca13003621cef7e140c2cd3f61fa50d92e528664",
+      "status": "PASS"
+    },
+    {
+      "path": "records/EXP-20260909-001-independent-scientific-architecture-review/source/registration-request.json",
+      "sha256": "71be5f54a19babcb1b2b61cfb53255f669246509f713416c961e00d5f9c2cdfd",
+      "status": "PASS"
+    },
+    {
+      "path": "records/EXP-20260909-001-independent-scientific-architecture-review/source/review-v1.html",
+      "sha256": "c153b2fb88aada39ea6e3c033d4dbce262fccf916baacbfaa653c6a87c737e9d",
+      "status": "PASS"
+    }
+  ],
+  "expected_absence_checks": [
+    {
+      "path": "E:\\Temp-Projects\\PRL\\results\\paper2_lineage_odd_mode_gate\\v01_20260908",
+      "exists": false
+    },
+    {
+      "path": "E:\\Temp-Projects\\PRL\\results\\paper2_lineage_odd_mode_gate\\v01_20260908\\summary.json",
+      "exists": false
+    },
+    {
+      "path": "E:\\Temp-Projects\\PRL\\scripts\\run_paper2_lineage_odd_mode_gate_v02.py",
+      "exists": false
+    },
+    {
+      "path": "E:\\Temp-Projects\\PRL\\results\\paper2_lineage_odd_mode_gate\\v02_20260909",
+      "exists": false
+    }
+  ],
+  "PRL_tracked_status": {
+    "exit_code": 0,
+    "output": "M README.md\n M project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md",
+    "stderr": ""
+  },
+  "MeshCell3D_tracked_document_diff_check": {
+    "exit_code": 0,
+    "output": "",
+    "stderr": "warning: in the working copy of 'plan/expert_guidance/registry.json', CRLF will be replaced by LF the next time Git touches it"
+  },
+  "rendered_visual_QA": {
+    "status": "BLOCKED",
+    "reason": "The in-app browser URL policy rejected file:///E:/MeshCell3D/.../review-and-execution-plan.html. No alternate browser, local server, CDP or rendering workaround was used."
+  },
+  "external_link_live_check_this_delivery": "NOT_RUN; prior-review sources retained without a new novelty search",
+  "scientific_execution": {
+    "status": "NOT_RUN",
+    "simulations": 0,
+    "FEM_solves": 0,
+    "Docker_commands": 0,
+    "scientific_tests": 0
+  },
+  "actions_not_taken": {
+    "production_code_edits": 0,
+    "active_plan_creation": 0,
+    "tasks_sent": 0,
+    "automations_created": 0,
+    "commits": 0,
+    "pushes": 0,
+    "deletions": 0
+  },
+  "write_scope": [
+    "E:\\MeshCell3D\\plan\\expert_guidance\\records\\EXP-20260909-001-paper2-lineage-ecm",
+    "E:\\MeshCell3D\\plan\\expert_guidance\\registry.json",
+    "E:\\MeshCell3D\\plan\\expert_guidance\\index.html"
+  ],
+  "temporary_artifacts_created": [],
+  "final_file_sha256": {
+    "records/EXP-20260909-001-paper2-lineage-ecm/source/review-and-execution-plan.html": "5e83c8bcf043355e833391d05bbebfe076913e07f2d07b974e945897ed2aa826",
+    "records/EXP-20260909-001-paper2-lineage-ecm/assessment.html": "03e8744bb35a9ee80e3fb27d31c833125df4c0ea32e98cd4da515871889c3619",
+    "records/EXP-20260909-001-paper2-lineage-ecm/decision.json": "262a9c9b3f463a039f83ee63dade636145c6405fdc5579b7d8c79ed825272ad1",
+    "records/EXP-20260909-001-paper2-lineage-ecm/provenance.json": "1343802aa25a62c37456cdb85de52d87a0a4cdb7bca5ae73baa22dc1ae57319a",
+    "registry.json": "69637d41f907e4e94bb387122064b53e8c9d0cd5289aa4fdc0065730d2da9e36",
+    "index.html": "d81597e3f05ea186b93559cc18fa79fca2f85da6dae5301fda88c621ddafb898"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "prl.repository_cleanup.batch04_candidate03_source_copy_acceptance.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "implementation_status": "selected_source_copy_passed",
+  "source_matrix": "passed",
+  "source_copy": "passed",
+  "deletion_authorized": false,
+  "deletion_executed": false,
+  "scientific_execution": "not_run",
+  "copy": {
+    "files": 14,
+    "bytes": 360089,
+    "destination_root": "project_control/evidence/retired_routes_v01/source",
+    "method": "System.IO.File.Copy",
+    "overwrite": false
+  },
+  "validation": {
+    "matrix_hash": "passed",
+    "source_paths": "14/14 inside workspace",
+    "target_paths": "14/14 inside selected evidence root",
+    "source_hashes": "14/14 passed",
+    "target_hashes": "14/14 passed",
+    "source_bytes": "14/14 passed",
+    "target_bytes": "14/14 passed",
+    "reparse_points": 0,
+    "overwritten_files": 0,
+    "quick_suite": "17/17 passed",
+    "cockpit_links": "24 local links and 192 evidence paths passed"
+  },
+  "manifest": {
+    "path": "project_control/evidence/repository_cleanup_v01/batch04_candidate03_source_copy_manifest.json",
+    "sha256": "1ab80a9a51f26c677f02b862b8e6dce3b2044eb74911ae8cc72d618f2b7dd085"
+  },
+  "limitations": [
+    "active source files remain in place",
+    "the remaining 45 candidate files are not a deletion list and have no deletion authorization",
+    "external Dolfinx/Basix/MPI/PETSc/UFL and container environments are not archived",
+    "source preservation supports evidence interpretation but does not promise complete rerun capability"
+  ]
+}

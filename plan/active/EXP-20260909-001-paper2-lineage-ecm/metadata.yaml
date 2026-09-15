@@ -1,0 +1,19 @@
+plan_id: EXP-20260909-001-paper2-lineage-ecm
+title: Paper 2 分裂可见性、有限心内膜细胞层与 ECM 选择性记忆
+status: active
+expert_identity: Codex AI-assisted independent scientific reviewer
+human_expert_certification: false
+source_channel: E:/MeshCell3D/plan/expert_guidance record delivered at user request
+source_received_at: 2026-09-09
+catalogued_at: 2026-09-09
+scope: PRL Paper 2 lineage odd-mode gate, mother-to-daughters event model, finite endocardial layer, and fair continuum control
+original_source: plan/active/EXP-20260909-001-paper2-lineage-ecm/source/review-and-execution-plan.html
+assessment: plan/active/EXP-20260909-001-paper2-lineage-ecm/assessment.html
+source_decision_snapshot: plan/active/EXP-20260909-001-paper2-lineage-ecm/decision.json
+adoption_record: project_control/external_guidance_adoption_EXP-20260909-001-paper2-lineage-ecm_v01.md
+active_execution_plan: project_control/paper2_lineage_ecm_active_execution_plan_v01.md
+supersedes: []
+notes:
+  - The copied source package is preserved without rewriting its historical reviewed decision.
+  - The user's 2026-09-09 execution instruction is recorded separately in project_control.
+  - P0-P3 are stage-gated; P4 is design-only and P5 is deferred.

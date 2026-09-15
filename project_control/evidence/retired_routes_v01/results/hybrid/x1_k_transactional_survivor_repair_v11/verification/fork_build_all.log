@@ -1,0 +1,579 @@
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+-- Python bindings disabled
+CMake Deprecation Warning at lib/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at lib/tinyxml2/CMakeLists.txt:8 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at lib/tinyxml2/CMakeLists.txt:9 (cmake_policy):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at lib/delaunator/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+-- Configuring release build
+CMake Deprecation Warning at src/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at src/uspg/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at src/math_modules/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at src/mesh/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at src/io/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at src/triangulation_modules/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at src/time_integration/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at src/contact_models/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at src/automatic_polarization/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_utils/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_uspg/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_uspg/test_uspg_3d/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_uspg/test_uspg_4d/CMakeLists.txt:3 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_math_modules/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_math_modules/test_vec3/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_math_modules/test_mat33/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_mesh/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_mesh/test_node/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_mesh/test_edge/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_mesh/test_face/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_mesh/test_cell/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_mesh/test_surface_tension_cache_precision/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_io/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_io/test_mesh_reader/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_io/test_mesh_writer/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_io/test_parameter_reader/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_io/test_simulation_initializer/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_triangulation_modules/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_triangulation_modules/test_local_mesh_refiner/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_triangulation_modules/test_initial_triangulation/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_triangulation_modules/test_poisson_sampling/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_triangulation_modules/test_bpa/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_triangulation_modules/test_cell_divider/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_triangulation_modules/test_cell_surface_force/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_contact_models/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_contact_models/test_contact_model_abstract/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_contact_models/test_contact_node_node_via_coupling/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_contact_models/test_contact_node_node_via_coupling/test_cell_separation/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_contact_models/test_contact_node_node_via_coupling/test_nucleus_in_cell_contact_via_coupling/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_contact_models/test_contact_node_node_via_coupling/test_cell_in_ecm_contact_via_coupling/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_contact_models/test_contact_node_face_via_springs/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_contact_models/test_contact_node_face_via_springs/test_cell_in_ecm_contact_via_springs/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_contact_models/test_contact_node_face_via_springs/test_nucleus_in_cell_contact_via_springs/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at test/test_automatic_polarization/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+-- Building in release mode
+-- Configuring done (3.3s)
+-- Generating done (41.1s)
+-- Build files have been written to: /workspace/external/simucell3d/build-linux-x1h
+[  2%] Built target tinyxml2
+[  3%] Building CXX object bin/automatic_polarization/CMakeFiles/automatic_polarization.dir/automatic_polarization_writer.cpp.o
+[  7%] Built target uspg
+[ 10%] Built target math_modules
+[ 11%] Building CXX object bin/triangulation_modules/CMakeFiles/triangulation_modules.dir/ball_pivoting_algorithm.cpp.o
+[ 12%] Building CXX object bin/automatic_polarization/CMakeFiles/automatic_polarization.dir/automatic_polarizer.cpp.o
+/workspace/external/simucell3d/src/triangulation_modules/ball_pivoting_algorithm.cpp: In member function ‘void ball_pivoting_algorithm::find_seed_triangle()’:
+/workspace/external/simucell3d/src/triangulation_modules/ball_pivoting_algorithm.cpp:67:24: warning: ‘void std::random_shuffle(_RAIter, _RAIter) [with _RAIter = __gnu_cxx::__normal_iterator<unsigned int*, vector<unsigned int> >]’ is deprecated: use 'std::shuffle' instead [-Wdeprecated-declarations]
+   67 |     std::random_shuffle(index_lst.begin(), index_lst.end());
+      |     ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/c++/14/algorithm:61,
+                 from /workspace/external/simucell3d/include/utils.hpp:8,
+                 from /workspace/external/simucell3d/include/math_modules/vec3.hpp:12,
+                 from /workspace/external/simucell3d/include/custom_structures.hpp:12,
+                 from /workspace/external/simucell3d/include/triangulation_modules/ball_pivoting_algorithm.hpp:12,
+                 from /workspace/external/simucell3d/src/triangulation_modules/ball_pivoting_algorithm.cpp:1:
+/usr/include/c++/14/bits/stl_algo.h:4492:5: note: declared here
+ 4492 |     random_shuffle(_RandomAccessIterator __first, _RandomAccessIterator __last)
+      |     ^~~~~~~~~~~~~~
+[ 13%] Building CXX object bin/triangulation_modules/CMakeFiles/triangulation_modules.dir/cell_divider.cpp.o
+[ 14%] Linking CXX shared library libautomatic_polarization.so
+[ 14%] Built target automatic_polarization
+[ 15%] Building CXX object bin/time_integration/CMakeFiles/time_integration.dir/time_integration.cpp.o
+[ 17%] Linking CXX shared library libtime_integration.so
+[ 17%] Built target time_integration
+[ 18%] Building CXX object bin/triangulation_modules/CMakeFiles/triangulation_modules.dir/cell_surface_force.cpp.o
+[ 19%] Building CXX object bin/contact_models/CMakeFiles/contact_models.dir/contact_face_face_via_coupling.cpp.o
+[ 20%] Building CXX object bin/contact_models/CMakeFiles/contact_models.dir/contact_model_abstract.cpp.o
+[ 21%] Building CXX object bin/triangulation_modules/CMakeFiles/triangulation_modules.dir/cell_surface_snapshot.cpp.o
+[ 22%] Building CXX object bin/contact_models/CMakeFiles/contact_models.dir/contact_node_node_via_coupling.cpp.o
+[ 23%] Building CXX object bin/triangulation_modules/CMakeFiles/triangulation_modules.dir/initial_triangulation.cpp.o
+[ 24%] Linking CXX shared library libcontact_models.so
+[ 25%] Built target contact_models
+[ 27%] Built target test_uspg_3d
+[ 29%] Built target test_uspg_4d
+[ 30%] Building CXX object bin/mesh/CMakeFiles/mesh.dir/cell.cpp.o
+[ 31%] Building CXX object bin/triangulation_modules/CMakeFiles/triangulation_modules.dir/local_mesh_refiner.cpp.o
+[ 32%] Building CXX object bin/mesh/CMakeFiles/mesh.dir/edge.cpp.o
+[ 34%] Building CXX object bin/mesh/CMakeFiles/mesh.dir/face.cpp.o
+[ 35%] Building CXX object bin/triangulation_modules/CMakeFiles/triangulation_modules.dir/poisson_sampling.cpp.o
+[ 36%] Building CXX object bin/mesh/CMakeFiles/mesh.dir/node.cpp.o
+[ 37%] Linking CXX shared library libmesh.so
+[ 38%] Linking CXX shared library libtriangulation_modules.so
+[ 38%] Built target mesh
+[ 39%] Building CXX object bin/io/CMakeFiles/io.dir/mesh_writer.cpp.o
+[ 40%] Building CXX object bin/io/CMakeFiles/io.dir/simulation_initializer.cpp.o
+[ 40%] Built target triangulation_modules
+[ 41%] Building CXX object bin/io/CMakeFiles/io.dir/statistics_writer.cpp.o
+[ 42%] Building CXX object test/test_triangulation_modules/test_cell_surface_force/CMakeFiles/test_cell_surface_force.dir/test_cell_surface_force.cpp.o
+[ 43%] Linking CXX shared library libio.so
+[ 44%] Linking CXX executable test_cell_surface_force
+[ 44%] Built target test_cell_surface_force
+[ 46%] Built target io
+[ 47%] Building CXX object bin/CMakeFiles/src.dir/solver.cpp.o
+[ 48%] Linking CXX shared library libsrc.so
+[ 48%] Built target src
+[ 50%] Linking CXX executable test_utils
+[ 51%] Linking CXX executable vec3_test
+[ 52%] Built target vec3_test
+[ 53%] Built target test_utils
+[ 54%] Linking CXX executable mat33_test
+[ 55%] Building CXX object test/test_mesh/test_node/CMakeFiles/test_node.dir/test_node.cpp.o
+[ 56%] Built target mat33_test
+[ 57%] Building CXX object test/test_mesh/test_edge/CMakeFiles/test_edge.dir/test_edge.cpp.o
+[ 58%] Linking CXX executable test_edge
+[ 59%] Linking CXX executable test_node
+[ 59%] Built target test_edge
+[ 59%] Built target test_node
+[ 60%] Building CXX object test/test_mesh/test_face/CMakeFiles/test_face.dir/test_face.cpp.o
+[ 61%] Building CXX object test/test_mesh/test_cell/CMakeFiles/test_cell.dir/test_cell.cpp.o
+[ 62%] Linking CXX executable test_face
+[ 62%] Built target test_face
+[ 63%] Building CXX object test/test_mesh/test_surface_tension_cache_precision/CMakeFiles/test_surface_tension_cache_precision.dir/test_surface_tension_cache_precision.cpp.o
+[ 64%] Linking CXX executable test_cell
+[ 64%] Built target test_cell
+[ 65%] Linking CXX executable test_mesh_reader
+[ 67%] Built target test_mesh_reader
+[ 68%] Building CXX object test/test_io/test_mesh_writer/CMakeFiles/test_mesh_writer.dir/test_mesh_writer.cpp.o
+[ 69%] Linking CXX executable test_surface_tension_cache_precision
+[ 69%] Built target test_surface_tension_cache_precision
+[ 70%] Linking CXX executable test_parameter_reader
+[ 71%] Built target test_parameter_reader
+[ 72%] Building CXX object test/test_io/test_simulation_initializer/CMakeFiles/test_simulation_initializer.dir/test_simulation_initializer.cpp.o
+[ 73%] Linking CXX executable test_mesh_writer
+[ 73%] Built target test_mesh_writer
+[ 74%] Building CXX object test/test_triangulation_modules/test_local_mesh_refiner/CMakeFiles/test_local_mesh_refiner.dir/test_local_mesh_refiner.cpp.o
+[ 75%] Linking CXX executable test_simulation_initializer
+[ 75%] Built target test_simulation_initializer
+[ 76%] Building CXX object test/test_triangulation_modules/test_initial_triangulation/CMakeFiles/test_initial_triangulation.dir/test_initial_triangulation.cpp.o
+[ 77%] Linking CXX executable test_local_mesh_refiner
+[ 77%] Built target test_local_mesh_refiner
+[ 78%] Linking CXX executable test_initial_triangulation
+[ 79%] Building CXX object test/test_triangulation_modules/test_poisson_sampling/CMakeFiles/test_poisson_sampling.dir/test_poisson_sampling.cpp.o
+[ 79%] Built target test_initial_triangulation
+[ 80%] Building CXX object test/test_triangulation_modules/test_bpa/CMakeFiles/test_bpa.dir/test_bpa.cpp.o
+[ 81%] Linking CXX executable test_poisson_sampling
+[ 81%] Built target test_poisson_sampling
+[ 82%] Building CXX object test/test_triangulation_modules/test_cell_divider/CMakeFiles/test_cell_divider.dir/test_cell_divider.cpp.o
+[ 84%] Linking CXX executable test_bpa
+[ 84%] Built target test_bpa
+[ 85%] Building CXX object test/test_contact_models/test_contact_model_abstract/CMakeFiles/test_contact_model_abstract.dir/test_contact_model_abstract.cpp.o
+[ 86%] Linking CXX executable test_cell_divider
+[ 87%] Linking CXX executable test_contact_model_abstract
+[ 87%] Built target test_contact_model_abstract
+[ 88%] Building CXX object test/test_contact_models/test_contact_node_node_via_coupling/test_cell_separation/CMakeFiles/test_cell_separation.dir/test_cell_separation.cpp.o
+[ 88%] Built target test_cell_divider
+[ 89%] Building CXX object test/test_contact_models/test_contact_node_node_via_coupling/test_nucleus_in_cell_contact_via_coupling/CMakeFiles/test_nucleus_in_cell_contact_via_coupling.dir/test_nucleus_in_cell_contact_via_coupling.cpp.o
+[ 90%] Linking CXX executable test_cell_separation
+[ 91%] Linking CXX executable test_nucleus_in_cell_contact_via_coupling
+[ 91%] Built target test_cell_separation
+[ 92%] Building CXX object test/test_contact_models/test_contact_node_node_via_coupling/test_cell_in_ecm_contact_via_coupling/CMakeFiles/test_cell_in_ecm_contact_via_coupling.dir/test_cell_in_ecm_contact_via_coupling.cpp.o
+[ 92%] Built target test_nucleus_in_cell_contact_via_coupling
+[ 93%] Building CXX object test/test_contact_models/test_contact_node_face_via_springs/test_cell_in_ecm_contact_via_springs/CMakeFiles/test_cell_in_ecm_contact_via_springs.dir/test_cell_in_ecm_contact_via_springs.cpp.o
+[ 94%] Linking CXX executable test_cell_in_ecm_contact_via_coupling
+[ 95%] Linking CXX executable test_cell_in_ecm_contact_via_springs
+[ 95%] Built target test_cell_in_ecm_contact_via_coupling
+[ 95%] Built target test_cell_in_ecm_contact_via_springs
+[ 96%] Building CXX object test/test_contact_models/test_contact_node_face_via_springs/test_nucleus_in_cell_contact_via_springs/CMakeFiles/test_nucleus_in_cell_contact_via_springs.dir/test_nucleus_in_cell_contact_via_springs.cpp.o
+[ 97%] Building CXX object test/test_automatic_polarization/CMakeFiles/test_automatic_polarization.dir/test_automatic_polarization.cpp.o
+[ 98%] Linking CXX executable test_nucleus_in_cell_contact_via_springs
+[100%] Linking CXX executable test_automatic_polarization
+[100%] Built target test_nucleus_in_cell_contact_via_springs
+[100%] Built target test_automatic_polarization

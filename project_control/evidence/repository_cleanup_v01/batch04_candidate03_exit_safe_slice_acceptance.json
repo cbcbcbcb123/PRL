@@ -1,0 +1,65 @@
+{
+  "schema_version": "prl.repository_cleanup.batch04_candidate03_exit_safe_slice_acceptance.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "deletion_authorized": false,
+  "deletion_executed": false,
+  "scientific_execution": "not_run",
+  "wrapper_copy": {
+    "files": 2,
+    "bytes": 9071,
+    "overwrite": false,
+    "source_hashes": "2/2 passed",
+    "target_hashes": "2/2 passed"
+  },
+  "default_entry": {
+    "setuptools_include": [
+      "prl*"
+    ],
+    "discovered_packages": [
+      "prl",
+      "prl.verification"
+    ],
+    "pytest_testpaths": [
+      "tests/prl"
+    ],
+    "pytest_cacheprovider": "disabled",
+    "readme_current_mainline": true,
+    "retired_hybrid_commands_removed_from_readme": true
+  },
+  "validation": {
+    "default_pytest": "19/19 passed",
+    "explicit_quick": "19/19 passed",
+    "protected_identity": "32/32 passed",
+    "python_import_boundary": "passed",
+    "package_discovery": "passed",
+    "cockpit_links": "25 local links and 199 evidence paths passed"
+  },
+  "current_identity": {
+    "path": "project_control/evidence/repository_cleanup_v01/batch04_candidate03_exit_safe_slice_identity.json",
+    "sha256": "6fa8d05f2013f0b7ee297a82f7e51902250447dc427a60178c367f563ed38e7a"
+  },
+  "prior_identity_preserved": {
+    "path": "project_control/evidence/repository_cleanup_v01/batch04_candidate04_source_baseline.json",
+    "sha256": "e0ede041a52b627cf7d4a2e5b3c3c6cb1038da9a0ae8413147a0471d2dd87614"
+  },
+  "deletion_proposal": {
+    "status": "frozen_not_authorized",
+    "target_list": "project_control/evidence/repository_cleanup_v01/batch04_candidate03_deletion_targets_v01.txt",
+    "target_list_sha256": "2d612a361cbf1f37c1f2c05d07e1a9bac4a3a0b3c506b9b4c57bf06d73a7e6de",
+    "top_paths": 38,
+    "directories": 8,
+    "single_files": 30,
+    "files": 61,
+    "bytes": 1541224,
+    "git_tracked_clean": 35,
+    "git_untracked": 26,
+    "git_modified": 0,
+    "reparse_points": 0
+  },
+  "observed_execution_issue": {
+    "scope": "receipt_only",
+    "description": "the first wrapper-copy command completed both copies, then its final JSON receipt failed because PowerShell false was missing the dollar prefix",
+    "impact": "no file mismatch and no overwrite; a read-only source/target verification passed 2/2 before subsequent work"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": "prl.repository_cleanup.batch04_candidate04_source_baseline.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "scope": "pre-change identity for the default configuration and current tests protected during the candidate 4 first safe slice",
+  "baseline_test_result": "tests/prl: 11 passed",
+  "planned_change": {
+    "path": "src/prl/cli.py",
+    "bytes": 2219,
+    "sha256": "6fdb4fed5be00591dec7f344a3bdf24e4fedc8f58ea22d985ae1b93c1e730078"
+  },
+  "protected_unchanged": [
+    {
+      "path": "README.md",
+      "bytes": 9992,
+      "sha256": "56a14a15be8aab5927cd34644fc3f722afe50500e8cf4b5292333f88591e48e7"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 647,
+      "sha256": "d1994b77bc87c31c80408a5eda2c58f0b70affa4cd5e4c57dabe5faf0210945e"
+    },
+    {
+      "path": "tests/test_myo_adjacent_fold_monitor_v01.py",
+      "bytes": 1071,
+      "sha256": "77e48eaecd3f8b0a1e8f46666c6225fb91b714d10a8aa74c76b766045c0b5b5b"
+    },
+    {
+      "path": "tests/test_myo_contact_positive_gap_v01.py",
+      "bytes": 971,
+      "sha256": "30d214632c8c35e71cf7178bc5ae66e74afdd9ab71ae8b565af3b6a73a2bb100"
+    },
+    {
+      "path": "tests/test_myo_sheet_contact_repair_v02.py",
+      "bytes": 1719,
+      "sha256": "b01ee0f6686bd9fe687ff9d0f9a9ec389eda1bf66b05f58c18608f82ee1e4f48"
+    },
+    {
+      "path": "src/prl/storage.py",
+      "bytes": 5090,
+      "sha256": "c1c5635dc1891a088e154e1478740f95a9d766723d4160413d0ccb2be2e671df"
+    },
+    {
+      "path": "src/prl/workspace.py",
+      "bytes": 937,
+      "sha256": "1aecd48c23de713904913ca2c110108f07da7580ada21b19dd8a857ec4fc6d19"
+    },
+    {
+      "path": "src/prl/verification/long_doublet.py",
+      "bytes": 10119,
+      "sha256": "4713cc847600a75cc92abc0470c90186f01058300abe92005c772afc18017d7c"
+    },
+    {
+      "path": "tests/prl/test_cpp_support_boundary.py",
+      "bytes": 2024,
+      "sha256": "382fad9ad1432f692a63e788c41d1451ae71882f9a030f71b3db790289b6a947"
+    },
+    {
+      "path": "tests/prl/test_long_doublet_verification.py",
+      "bytes": 1680,
+      "sha256": "9077073d199eaa035871e28f2f12704159b78042d6834e6c15b96dca1b26ff2e"
+    },
+    {
+      "path": "tests/prl/test_storage.py",
+      "bytes": 1371,
+      "sha256": "5846ac3bd9e13f676610ee1be029bb048bec7dfc2b8350e17a9f931f33c04268"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "figure_role": "diagnostic_display_not_publication_figure",
+  "axis_box_size_in": [
+    10.0,
+    5.0
+  ],
+  "deformation_multiplier": 20.0,
+  "inputs": {
+    "results/ncs_m1_all_fem/v02_20260910/m1a/U-G2-T256_data.npz": "2299a2d14c578726aa634ae9b201f0b08785a6da82e55bea7559612fb399a64a",
+    "results/ncs_m1_all_fem/v02_20260910/m1a/H-G2-T256_data.npz": "6205665afa0d694aa70fcd223f4505c0c7d3459bcc944f156261683561c44c66",
+    "results/ncs_m1_all_fem/v02_20260910/m1a/summary.json": "94e08dad43667ae73e0bdcf52ed08d37f395dcb14f93eb8d0ab80ccc4f520c5d",
+    "results/ncs_m1_all_fem/v03_20260910/m1b/R-G2-T256_data.npz": "69df10e65902c04fef9cd4ce6b387de6ce8b13219dd5fbcaefc3d5534fe17494",
+    "results/ncs_m1_all_fem/v03_20260910/m1b/R-G2-F_data.npz": "56d7bf8277ac3e3569647861a6f5e61f7149d2509da5d3d2e0bbe5be53cc3f7f",
+    "results/ncs_m1_all_fem/v03_20260910/m1b/summary.json": "a55e34e4c5f60b54efaea75454f1a5795032e0a836454784147a68f8cc87fd55"
+  },
+  "outputs": {
+    "response": {
+      "png": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\01_flat_U_H_response.png",
+      "svg": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\01_flat_U_H_response.svg",
+      "manifest": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\01_flat_U_H_response_style_manifest.json"
+    },
+    "convergence": {
+      "png": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\02_spatial_convergence.png",
+      "svg": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\02_spatial_convergence.svg",
+      "manifest": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\02_spatial_convergence_style_manifest.json"
+    },
+    "ledger": {
+      "png": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\03_annulus_energy_ledger.png",
+      "svg": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\03_annulus_energy_ledger.svg",
+      "manifest": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\03_annulus_energy_ledger_style_manifest.json"
+    },
+    "geometry": {
+      "png": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\04_model_and_deformation_x20.png",
+      "svg": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\04_model_and_deformation_x20.svg",
+      "manifest": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\04_model_and_deformation_x20_style_manifest.json"
+    }
+  }
+}

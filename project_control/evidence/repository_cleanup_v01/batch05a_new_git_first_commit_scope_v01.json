@@ -1,0 +1,43 @@
+{
+  "schema_version": "prl.repository_cleanup.new_git_first_commit_scope.v1",
+  "recorded_at": "2026-09-15",
+  "status": "frozen_before_first_commit",
+  "repository": "E:\\Temp-Projects\\PRL",
+  "branch": "codex/clean-baseline",
+  "remote_count": 0,
+  "commit_message": "baseline: preserve selected pre-refactor evidence",
+  "root_files": [
+    ".gitattributes",
+    ".gitignore",
+    "AGENTS.md",
+    "START_HERE.md",
+    "README.md",
+    "pyproject.toml"
+  ],
+  "bounded_trees": [
+    "data",
+    "docs",
+    "external",
+    "memory",
+    "plan",
+    "project_control",
+    "references",
+    "src",
+    "tests/prl",
+    "tools"
+  ],
+  "selected_pre_refactor_sources": "project_control/evidence/repository_cleanup_v01/final_closure_selected_source_set_v01.txt",
+  "selected_source_count": 48,
+  "selected_source_record_set_sha256": "5736c10d921976315ca579d63dc53b9a758f3eed6d3b27f3f9f9c6a91366abc3",
+  "explicitly_untracked_and_ignored": [
+    "02_图表",
+    "artifacts",
+    "b",
+    "figures",
+    "planning",
+    "results",
+    "tmp",
+    "memory/project_cockpit/index.html"
+  ],
+  "staging_rule": "No unbounded git add dot. Add only the listed root files, bounded trees, tests/prl, and the 48 manifest paths."
+}

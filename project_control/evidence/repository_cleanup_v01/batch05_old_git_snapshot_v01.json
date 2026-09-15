@@ -1,0 +1,65 @@
+{
+  "schema_version": "prl.repository_cleanup.old_git_snapshot.v1",
+  "captured_at": "2026-09-15T17:32:47+08:00",
+  "workspace": "E:\\Temp-Projects\\PRL",
+  "head": "b45650a9e370be138a70acf305b6c3a21e6a7ed2",
+  "branch": "codex/simucell3d-hybrid-feasibility",
+  "remote": {
+    "name": "origin",
+    "fetch_url": "https://github.com/cbcbcbcb123/PRL.git",
+    "push_url": "https://github.com/cbcbcbcb123/PRL.git"
+  },
+  "counts": {
+    "local_branches": 8,
+    "remote_tracking_branches": 7,
+    "tags": 3,
+    "codex_snapshot_refs": 5,
+    "codex_checkpoint_refs": 7,
+    "stashes": 0,
+    "reflog_entries": 569,
+    "tracked_paths": 1640,
+    "status_entries": 4568,
+    "status_deleted": 605,
+    "status_modified": 18,
+    "status_untracked": 3945
+  },
+  "object_store": {
+    "loose_objects": 9791,
+    "loose_size": "2.88 GiB",
+    "packed_objects": 19256,
+    "packs": 13,
+    "pack_size": "1.23 GiB",
+    "prune_packable": 5390,
+    "garbage_objects": 10,
+    "garbage_size": "4.84 MiB",
+    "unreachable_blobs": 2434,
+    "unreachable_trees": 431,
+    "unreachable_commits": 2
+  },
+  "local_branches": {
+    "codex/simucell3d-hybrid-feasibility": "b45650a9e370be138a70acf305b6c3a21e6a7ed2",
+    "codex/stage0-closure": "8b3000bd8f1cbad01340385587eb933675ddc133",
+    "codex/stage0-v06-discretization": "16bf8843c2f351027763b51c134cac0514632c59",
+    "codex/stage1-passive-kernel": "2c8004f21c622c7075e45fbcf02d17512a03e6af",
+    "codex/stage2-gates-a-e": "a6150d51f23de5847a21209e02dd645271f2c278",
+    "codex/x1-k-v10r1-executor": "27b7fbfda1d8533a99dd7c80e91fce15ddfcdd6c",
+    "codex/x1-k-v10r2-executor": "dbd2f6e06d5609ec6c76a40d0d32ae7e352605e3",
+    "main": "16bf8843c2f351027763b51c134cac0514632c59"
+  },
+  "tags": {
+    "prl-cell-engine-import-20260829": "874c1a273281ccd92f89d7f71b5e5dec5e33b66a",
+    "prl-monorepo-integration-20260829": "2c2050d38dfb7d971d5c15d386bf8bb457be87d5",
+    "upstream-simucell3d-38af451": "e66098a88a0d84135e6d5c59b8a3c280ce08c33c"
+  },
+  "codex_snapshots": {
+    "42d6b83523e2b69dbc0b37a6a7549c9d12b5fd5e": "ddd663d461da7b25aefd5cf3fbecff488800053e",
+    "6f005c5298ebe4a76e7264530323911113b7d702": "a0c874e7a97350429c5b8dcec9f21daa91b6887e",
+    "b071dee3b82d2aed020e099db3a41745cb21dce0": "16bf8843c2f351027763b51c134cac0514632c59",
+    "cbe961c4c3f9d344b9f67ee10fb1166329015039": "83908206f15f35ac3481ed48dfb8a9667f97aca9",
+    "cf0756ef329802940f6aa365ebfa3eccdadd0183": "27b7fbfda1d8533a99dd7c80e91fce15ddfcdd6c"
+  },
+  "worktrees": 1,
+  "submodules": 0,
+  "destructive_effect": "Deleting the old .git directory permanently removes all local refs, reflogs, Codex refs, unreachable objects and unpushed local-only history. The remote repository is not changed. The new repository will have no remote configured.",
+  "scientific_limit": "This metadata records identities, not the contents of all old commits; it cannot restore the deleted object database."
+}

@@ -1,0 +1,96 @@
+{
+  "schema_version": "prl.repository_cleanup.final_closure_inventory.v1",
+  "captured_at": "2026-09-15T17:31:41+08:00",
+  "workspace": "E:\\Temp-Projects\\PRL",
+  "target_manifest": "project_control/evidence/repository_cleanup_v01/final_closure_deletion_targets_v01.txt",
+  "manifest_integrity": {
+    "target_manifest_sha256": "c44b1eb1ab59ac692453b4829a9b0a427cc4e66a23f81fbb2b1d52caf696446b",
+    "selected_source_manifest_sha256": "c6335f6614d35857367acac6e5219008c14a4280224040f9acd9601e2147528b",
+    "selected_source_record_set_sha256": "5736c10d921976315ca579d63dc53b9a758f3eed6d3b27f3f9f9c6a91366abc3",
+    "selected_source_record_format": "relative_path|logical_bytes|sha256, UTF-8 no BOM, LF, sorted in manifest order"
+  },
+  "targets": [
+    {"path":"E:\\Temp-Projects\\PRL\\.git","kind":"directory","recursive":true,"files":10095,"directories":438,"bytes":4464182252,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\scripts","kind":"directory","recursive":true,"files":119,"directories":0,"bytes":1953400,"tracked_files":22,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_repair_v03_dev_fine_dt020_20260913","kind":"directory","recursive":true,"files":4,"directories":0,"bytes":13236965,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_repair_v03_dev_main_dt020_20260913","kind":"directory","recursive":true,"files":4,"directories":0,"bytes":11222513,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_repair_v03_dev_perturbed_dt020_20260913","kind":"directory","recursive":true,"files":4,"directories":0,"bytes":11190237,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_repair_v03_dev_rawactive_main_20260913","kind":"directory","recursive":true,"files":4,"directories":0,"bytes":10818019,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_repair_v03_dev_rawactive_perturbed_20260913","kind":"directory","recursive":true,"files":4,"directories":0,"bytes":10808516,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_repair_v03_production_smoke_m080_20260913","kind":"directory","recursive":true,"files":4,"directories":0,"bytes":6018590,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_repair_v03_smoke_dt040_20260913","kind":"directory","recursive":true,"files":4,"directories":0,"bytes":6152374,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_repair_v03_smoke_nobend_dt040_20260913","kind":"directory","recursive":true,"files":4,"directories":0,"bytes":6247424,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tmp\\z1tf2b_smoke_v01","kind":"directory","recursive":true,"files":6,"directories":1,"bytes":2908396,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tmp\\z1tf2b_smoke_v02","kind":"directory","recursive":true,"files":13,"directories":2,"bytes":7838567,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tmp\\z1tf2b_smoke_v03","kind":"directory","recursive":true,"files":6,"directories":1,"bytes":3004911,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tmp\\z1tf2m0_smoke_v01","kind":"directory","recursive":true,"files":48,"directories":4,"bytes":42398472,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\imach project_control","kind":"directory","recursive":true,"files":1,"directories":0,"bytes":0,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_myo_adjacent_fold_monitor_v01.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":1071,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_myo_contact_positive_gap_v01.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":971,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_myo_sheet_2d_m0_v01.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":1125,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_myo_sheet_contact_repair_v02.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":1719,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_repository_cleanup_audit_v01.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":1418,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_ventricle_myo_strip_load_boundary_v01.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":1992,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_ventricle_myo_strip_v01.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":2990,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_ventricle_z0_v01.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":1909,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_ventricle_z1_bioform_myo_repair_v03.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":3602,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_ventricle_z1_bioform_myo_v02.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":4621,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_ventricle_z1_v01.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":2543,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_ventricle_z1a_v02.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":1778,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_ventricle_z1b_v04.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":2701,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_ventricle_z1c_v06.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":4753,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_ventricle_z1tf2b_simucell3d_v01.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":4838,"tracked_files":0,"reparse_points":0},
+    {"path":"E:\\Temp-Projects\\PRL\\tests\\test_ventricle_z1tf2m0_simucell3d_v01.py","kind":"file","recursive":false,"files":1,"directories":0,"bytes":2978,"tracked_files":0,"reparse_points":0}
+  ],
+  "totals": {
+    "targets": 31,
+    "directory_targets": 15,
+    "file_targets": 16,
+    "files": 10336,
+    "directories": 446,
+    "logical_bytes": 4598021645,
+    "tracked_files": 22,
+    "reparse_points": 0
+  },
+  "subsets": {
+    "old_git_bytes": 4464182252,
+    "temporary_run_files": 105,
+    "temporary_run_bytes": 131844984,
+    "legacy_script_files": 119,
+    "legacy_script_bytes": 1953400,
+    "legacy_test_files": 16,
+    "legacy_test_bytes": 41009,
+    "accidental_zero_byte_files": 1
+  },
+  "workspace_before": {
+    "captured_at": "2026-09-15T17:39:16+08:00",
+    "ordinary_file_count": 15002,
+    "directory_count": 1666,
+    "logical_bytes": 5773809821,
+    "reparse_points": 78,
+    "reparse_points_followed": false,
+    "counting_note": "Ordinary files and logical bytes follow the prl storage scanner; 78 retained reparse entries are reported separately and not followed."
+  },
+  "selected_source_preservation": {
+    "manifest": "project_control/evidence/repository_cleanup_v01/final_closure_selected_source_set_v01.txt",
+    "file_count": 48,
+    "logical_bytes": 528865,
+    "reparse_points": 0,
+    "outside_workspace": 0,
+    "capture_rule": "All 48 paths must be captured in the first new-Git root commit before scripts or legacy tests are deleted."
+  },
+  "boundary_check": {
+    "targets_outside_workspace": 0,
+    "workspace_root_targets": 0,
+    "target_reparse_points": 0,
+    "retained_workspace_reparse_points": 78,
+    "retained_reparse_note": "The retained forensic reparse points are outside the destructive manifest and are not followed."
+  },
+  "current_identity_override": {
+    "path": "project_control/evidence/repository_cleanup_v01/final_closure_identity_overrides_v01.json",
+    "paths": 2,
+    "reason": "Records the intentional README navigation change and the bounded quality-check update without rewriting the immutable Batch 4 identity evidence."
+  },
+  "irreversibility": "All listed old contents are permanently removed. The .git path is then recreated as a new local repository, but none of the deleted old object database is restored.",
+  "authorization_status": "granted_then_partially_consumed_batch05a_blocked_readonly"
+}

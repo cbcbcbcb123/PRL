@@ -1,0 +1,405 @@
+{
+  "registry_id": "CASES-PRL-ROUTE-H-STAGE0-V01",
+  "contract_id": "CONTRACT-PRL-ROUTE-H-STAGE0-V01",
+  "specialization_id": "SPECIALIZATION-PRL-ROUTE-H-STAGE0-V01",
+  "created_at": "2026-07-28T16:04:19+08:00",
+  "status": "frozen_stage0_not_authorized_to_run",
+  "execution_order": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "global_rules": {
+    "strict_gate_order": true,
+    "next_gate_requires_all_required_cases_passed": true,
+    "failed_case_is_terminal_for_downstream_gates": true,
+    "failed_and_not_run_records_must_be_retained": true,
+    "response_dependent_parameter_changes_forbidden": true,
+    "formal_parameter_sweep_forbidden": true,
+    "paper_figure_generation_forbidden": true,
+    "mechanism_claim_from_these_cases_forbidden": true,
+    "run_blocked_while_active_sign_or_axis_unresolved": false,
+    "run_blocked_without_separate_stage1_and_stage2_authorization": true
+  },
+  "case_status_enum": [
+    "not_run_unauthorized",
+    "not_run_upstream_failed",
+    "running",
+    "passed",
+    "failed",
+    "invalid_numerics"
+  ],
+  "gates": [
+    {
+      "gate_id": "A",
+      "name": "single_myocardial_cell",
+      "depends_on": [],
+      "required_case_ids": [
+        "A0_ZERO",
+        "A1_ACTIVE"
+      ],
+      "scientific_question": "Can the sole active preferred-length mechanism shorten one myocardial DCM cell along its material axis, produce compatible transverse thickening, control volume, and close the power ledger without rigid drift?",
+      "falsifier": "The required shortening occurs only after changing passive isotropic tension, the active mechanism produces non-central torque, or the energy/power residual fails."
+    },
+    {
+      "gate_id": "B",
+      "name": "myocardial_cell_chain",
+      "depends_on": [
+        "A"
+      ],
+      "required_case_ids": [
+        "B0_ZERO_CHAIN",
+        "B1_TRAVELING_ACTIVE_CHAIN"
+      ],
+      "scientific_question": "Can three independently meshed myocardial cells transmit a prescribed mechanical activation sequence while cell-cell pair forces remain balanced?",
+      "falsifier": "Persistent penetration, detachment, topology jump, net internal force/moment drift, or an electrophysiological interpretation is required."
+    },
+    {
+      "gate_id": "C",
+      "name": "myocardium_ECM_sandwich",
+      "depends_on": [
+        "B"
+      ],
+      "required_case_ids": [
+        "C0_ZERO_SANDWICH",
+        "C1_ACTIVE_SANDWICH"
+      ],
+      "scientific_question": "Does myocardial basal adhesion transmit contraction primarily as tangential ECM traction without an artificial normal source?",
+      "falsifier": "A manually imposed normal q is needed, cell-ECM forces fail to cancel internally, or j_myo becomes nonzero."
+    },
+    {
+      "gate_id": "D",
+      "name": "endocardium_ECM_sandwich",
+      "depends_on": [
+        "C"
+      ],
+      "required_case_ids": [
+        "D0_ZERO",
+        "D1_PRESSURE_ONLY",
+        "D2_WSS_ONLY"
+      ],
+      "scientific_question": "Are pressure and WSS applied only to the correct endocardial apical port and transmitted mechanically to ECM while chi_E remains outside the mechanical ledger?",
+      "falsifier": "ECM receives direct blood loading, pressure has a tangential resultant, WSS has a normal resultant, or chi_E contributes mechanical power."
+    },
+    {
+      "gate_id": "E",
+      "name": "minimal_complete_patch_verification",
+      "depends_on": [
+        "D"
+      ],
+      "required_case_ids": [
+        "E0_ZERO",
+        "E1_ACTIVE_ONLY",
+        "E2_PRESSURE_ONLY",
+        "E3_WSS_ONLY",
+        "E4_COMBINED"
+      ],
+      "sensitivity_case_ids": [
+        "E5_COMBINED_PERIODIC_SENSITIVITY"
+      ],
+      "scientific_question": "Can the minimum layered patch close topology, resultant, orientation, contact and power checks under registered ablations with compliant support?",
+      "falsifier": "A fully fixed boundary is needed, a registered ablation is omitted, or the combined response is used as a developmental or physiological claim."
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "A0_ZERO",
+      "gate_id": "A",
+      "geometry": "single myocardial DCM cell",
+      "activation": "zero",
+      "pressure": 0.0,
+      "WSS": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support": "minimal solver gauge only",
+      "required_outputs": [
+        "rigid-motion invariance",
+        "volume error",
+        "passive energy",
+        "dissipation",
+        "power residual"
+      ],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "A1_ACTIVE",
+      "gate_id": "A",
+      "geometry": "single myocardial DCM cell",
+      "activation": "alpha_peak=0.10 cosine ramp-hold-release",
+      "pressure": 0.0,
+      "WSS": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support": "minimal solver gauge only",
+      "required_outputs": [
+        "axial length",
+        "two transverse scales",
+        "volume error",
+        "centroid drift",
+        "net force",
+        "net moment",
+        "active-control power",
+        "stored energy",
+        "dissipation",
+        "power residual"
+      ],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "B0_ZERO_CHAIN",
+      "gate_id": "B",
+      "geometry": "three myocardial DCM cells in a chain",
+      "activation": "zero",
+      "pressure": 0.0,
+      "WSS": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support": "minimal global solver gauge only",
+      "required_outputs": [
+        "pairwise force residual",
+        "pairwise moment residual",
+        "penetration",
+        "detachment",
+        "chain centroid drift"
+      ],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "B1_TRAVELING_ACTIVE_CHAIN",
+      "gate_id": "B",
+      "geometry": "three myocardial DCM cells in a chain",
+      "activation": "same mechanical protocol with 0.50*T0 phase lag per cell",
+      "pressure": 0.0,
+      "WSS": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support": "minimal global solver gauge only",
+      "required_outputs": [
+        "prescribed activation phase",
+        "mechanical response phase",
+        "junction pair forces",
+        "net internal force",
+        "net internal moment",
+        "penetration",
+        "topology status",
+        "power residual"
+      ],
+      "interpretation_guard": "mechanical phase protocol only; not conduction velocity",
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "C0_ZERO_SANDWICH",
+      "gate_id": "C",
+      "geometry": "myocardial DCM monolayer on independent tetrahedral ECM",
+      "activation": "zero",
+      "pressure": 0.0,
+      "WSS": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support": "ECM outer compliant support",
+      "j_myo": 0.0,
+      "required_outputs": [
+        "cell-ECM pair force residual",
+        "ECM J",
+        "zero source audit",
+        "power residual"
+      ],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "C1_ACTIVE_SANDWICH",
+      "gate_id": "C",
+      "geometry": "myocardial DCM monolayer on independent tetrahedral ECM",
+      "activation": "alpha_peak=0.10",
+      "pressure": 0.0,
+      "WSS": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support": "ECM outer compliant support",
+      "j_myo": 0.0,
+      "required_outputs": [
+        "ECM tangential traction along active axis",
+        "ECM normal reaction partition",
+        "cell-ECM action-reaction",
+        "ECM J",
+        "zero source audit",
+        "power residual"
+      ],
+      "forbidden_input": "artificial normal q",
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "D0_ZERO",
+      "gate_id": "D",
+      "geometry": "endocardial DCM monolayer on independent tetrahedral ECM",
+      "activation": "none",
+      "pressure": 0.0,
+      "WSS": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support": "ECM outer compliant support",
+      "required_outputs": [
+        "zero-load resultant",
+        "chi_E baseline",
+        "power residual"
+      ],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "D1_PRESSURE_ONLY",
+      "gate_id": "D",
+      "geometry": "endocardial DCM monolayer on independent tetrahedral ECM",
+      "activation": "none",
+      "pressure": 0.05,
+      "WSS": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support": "ECM outer compliant support",
+      "required_outputs": [
+        "apical pressure resultant",
+        "tangential resultant leakage",
+        "endocardium-to-ECM transfer",
+        "direct ECM load audit",
+        "P_pressure",
+        "power residual"
+      ],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "D2_WSS_ONLY",
+      "gate_id": "D",
+      "geometry": "endocardial DCM monolayer on independent tetrahedral ECM",
+      "activation": "none",
+      "pressure": 0.0,
+      "WSS": [
+        0.02,
+        0.0,
+        0.0
+      ],
+      "support": "ECM outer compliant support",
+      "required_outputs": [
+        "apical WSS resultant",
+        "normal resultant leakage",
+        "endocardium-to-ECM transfer",
+        "direct ECM load audit",
+        "chi_E",
+        "P_WSS",
+        "chi_E mechanical-power exclusion",
+        "power residual"
+      ],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "E0_ZERO",
+      "gate_id": "E",
+      "geometry": "one endocardial layer + independent ECM + one myocardial layer",
+      "activation": "zero",
+      "pressure": 0.0,
+      "WSS": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support": "compliant",
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "E1_ACTIVE_ONLY",
+      "gate_id": "E",
+      "geometry": "one endocardial layer + independent ECM + one myocardial layer",
+      "activation": "alpha_peak=0.10",
+      "pressure": 0.0,
+      "WSS": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support": "compliant",
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "E2_PRESSURE_ONLY",
+      "gate_id": "E",
+      "geometry": "one endocardial layer + independent ECM + one myocardial layer",
+      "activation": "zero",
+      "pressure": 0.05,
+      "WSS": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support": "compliant",
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "E3_WSS_ONLY",
+      "gate_id": "E",
+      "geometry": "one endocardial layer + independent ECM + one myocardial layer",
+      "activation": "zero",
+      "pressure": 0.0,
+      "WSS": [
+        0.02,
+        0.0,
+        0.0
+      ],
+      "support": "compliant",
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "E4_COMBINED",
+      "gate_id": "E",
+      "geometry": "one endocardial layer + independent ECM + one myocardial layer",
+      "activation": "alpha_peak=0.10",
+      "pressure": 0.05,
+      "WSS": [
+        0.02,
+        0.0,
+        0.0
+      ],
+      "support": "compliant",
+      "required_outputs": [
+        "all state observables",
+        "all port powers",
+        "all dissipations",
+        "resultant",
+        "orientation audit",
+        "ECM J",
+        "integrated power residual"
+      ],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "E5_COMBINED_PERIODIC_SENSITIVITY",
+      "gate_id": "E",
+      "geometry": "same registered complete patch as E4",
+      "activation": "alpha_peak=0.10",
+      "pressure": 0.05,
+      "WSS": [
+        0.02,
+        0.0,
+        0.0
+      ],
+      "support": "periodic in-plane sensitivity with outer compliance retained",
+      "interpretation_guard": "sensitivity only; cannot replace the compliant primary case",
+      "initial_status": "not_run_unauthorized"
+    }
+  ]
+}

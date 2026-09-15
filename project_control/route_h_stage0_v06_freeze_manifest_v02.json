@@ -1,0 +1,589 @@
+{
+  "freeze_id": "FREEZE-PRL-ROUTE-H-STAGE0-V06-V02",
+  "frozen_at": "2026-07-31T10:26:00+08:00",
+  "status": "frozen_pending_readonly_inspection",
+  "contract_id": "CONTRACT-PRL-ROUTE-H-STAGE0-V06",
+  "geometry_family_id": "DISCRETIZATION-FAMILY-PRL-ROUTE-H-STAGE0-V06",
+  "supersedes": "FREEZE-PRL-ROUTE-H-STAGE0-V06",
+  "resolved_finding": "V06-EOL-SEAL-001",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 249,
+      "sha256": "939FEA85AF90D59EEA64BCC0A9A7246CD8385831C5C65A21E2065EE660A92EED"
+    },
+    {
+      "path": "data/route_h/route_h_cases_v06.json",
+      "bytes": 18736,
+      "sha256": "0A813D6089CE1A7BC75660484168577355AC7340E4357769F749214E16B60B94"
+    },
+    {
+      "path": "data/route_h/route_h_spatial_discretization_family_v06.json",
+      "bytes": 7457,
+      "sha256": "DF4F5BEEB85A0FF254006A5F310F82291F867D232BDBDDD0A5A642EB77620F2E"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/cell_anchor_counts.bin",
+      "bytes": 240,
+      "sha256": "284CCE5B73FBB8B2A67DB3A4103A35C962E6D20C073EFDAC117957BD34689472"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/cell_anchor_minus_face_ids.bin",
+      "bytes": 5280,
+      "sha256": "952684BB97B75398049653FD0DCA12424D766BB378B2B80DECF4EAC80F958634"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/cell_anchor_plus_face_ids.bin",
+      "bytes": 5280,
+      "sha256": "BA045245515B2D7A6C1E6FB68C89BB92406955195BFBDC04BA2A588A6F494539"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/cell_boundary_owner.bin",
+      "bytes": 38400,
+      "sha256": "6F16B5083A825288FB5DF4FC7DE568C13006DFBCF44E0B863CDAD1B05C0CD657"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/cell_directional_identity.bin",
+      "bytes": 38400,
+      "sha256": "8B403D274701A11AA0F90769922AD9C3EED004537CC9A5667145E3AA110C95C3"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/cell_faces.bin",
+      "bytes": 115200,
+      "sha256": "F98A7A9D1272F075AED1F77E929DAC727D21596ABACF9B9AD1975951290B2D70"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/cell_gauge_dual_area_weights.bin",
+      "bytes": 19440,
+      "sha256": "0D4116940553CF3C67B4D46B4CADD61D8310A8F2F8096ACB132E71A9ACEB06A7"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/cell_primary_identity.bin",
+      "bytes": 38400,
+      "sha256": "EE9AA110DBFFB44DFE9E9828403988CA00EF317A7140A2052D31382742509CD3"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/cell_vertices.bin",
+      "bytes": 58320,
+      "sha256": "2716FDF622505AAC309306EDF1FC8A5AAC072A4854328913AE24B07FCDE90BE0"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/ecm_boundary_faces.bin",
+      "bytes": 13056,
+      "sha256": "26A0AC534966375613F919C16F454A757CEECAB543C80A1317459A5DF9435416"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/ecm_boundary_identity.bin",
+      "bytes": 4352,
+      "sha256": "BD4B26412D906A897AA5048672333CCADE5DCD1CDF3360F2ABDA4D7B8133B587"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/ecm_boundary_owner.bin",
+      "bytes": 4352,
+      "sha256": "4FBFFC596F49A2DD3AD4D12B8F889725AC3B7FB9682F97CD5037C437FDE3C620"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/ecm_boundary_tetra.bin",
+      "bytes": 4352,
+      "sha256": "6CEDED782D3D06A4C36F2F71F0869F69039A944EA2900A59194022AFDBC13E04"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/ecm_exterior_vertex_dual_area_weights.bin",
+      "bytes": 2808,
+      "sha256": "0D9E1F7DC9B309903C295FA6A804C11A5D5944125345FBC153DD43B327395013"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/ecm_exterior_vertex_ids.bin",
+      "bytes": 2192,
+      "sha256": "BD0D69F376557F334793017F8B3ECBCFC3C1D63657259A940CD1EDDCD75ED4BF"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/ecm_gauge_lumped_volume_weights.bin",
+      "bytes": 2808,
+      "sha256": "159EC547A0B90C8FCF72ADB34F061131D4EE3802DC5DE81E186BF55752C7B01D"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/ecm_tetrahedra.bin",
+      "bytes": 36864,
+      "sha256": "BCE3511405F593C283913DDC299E6F5DCD0CCF578D6421E9215E0C67535D8DD7"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/ecm_vertices.bin",
+      "bytes": 8424,
+      "sha256": "8338DA350B22515814D4923DFF98FEC67DF382CEF5FFC265F345EBA6BD8C845E"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/manifest.json",
+      "bytes": 4689,
+      "sha256": "D147C4616FB3FE11361075117E35FEE09D441F1597ECB7DCEBF4FC76CF59A56B"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/material_tether_float.bin",
+      "bytes": 219360,
+      "sha256": "3559DD790B6FFDDB69DE3F18410E35C0FD14635AFD015E1CFC247D670F5DFC14"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/material_tether_integer.bin",
+      "bytes": 87744,
+      "sha256": "07659B94DD3CC36340C382818DE28A81DE9CAB45184463AFC135A32AFA99055D"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/metadata.json",
+      "bytes": 2272,
+      "sha256": "808639DE5F3B49BF14283B5EB723060EBA2E3C588AF6A649AA3E819798BFD552"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/myocardial_source_map_float.bin",
+      "bytes": 28224,
+      "sha256": "C0887CE94729EA48CC1A0A06E7A57695BABCADF71F426FDBDEB265548B717F35"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/base/myocardial_source_map_integer.bin",
+      "bytes": 20160,
+      "sha256": "9113785F85D0A8CD778143F90D1645DB866ECCBBA5D1F3505EB79CBD4FCF230E"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/cell_anchor_counts.bin",
+      "bytes": 240,
+      "sha256": "1CF068AF4C373E87ECEF1494B4B118A8AEDCF3B720D6EEA849C39BA8967FE5E8"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/cell_anchor_minus_face_ids.bin",
+      "bytes": 1440,
+      "sha256": "5D1D2E8BF7B1238B555C24DE7824F488088F1F886FAC23438933F0C751F38F3C"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/cell_anchor_plus_face_ids.bin",
+      "bytes": 1440,
+      "sha256": "7FEAAB5339D54804BCAC9FDDEB16954AC816A027F0F5977D42A50E31820C9119"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/cell_boundary_owner.bin",
+      "bytes": 9600,
+      "sha256": "BBB16A7A4F90ED732CCF4EE02B72F4A4FFC5BA64A427234CED72236834DC2338"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/cell_directional_identity.bin",
+      "bytes": 9600,
+      "sha256": "C58D28F569B5204E5E6493763B55F2B9C4FDE4D86968C50852A7416C0C6DEB3F"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/cell_faces.bin",
+      "bytes": 28800,
+      "sha256": "8D9782BCE99FCF2017D0D5C43A6F219F6BFA336A961C2EA21EFA47F8DF6DDCD0"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/cell_gauge_dual_area_weights.bin",
+      "bytes": 5040,
+      "sha256": "31056551F186B5729FE2B36E572CA2930CA50B4D8349BE7CB069F7AE5E7E984E"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/cell_primary_identity.bin",
+      "bytes": 9600,
+      "sha256": "2E5464330CDAA86545619430F9813A448BF4C87A3CFABA9E98DD60162FE50ACA"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/cell_vertices.bin",
+      "bytes": 15120,
+      "sha256": "DD992F5A531CEF07A1F03C1947F51058E568889C754CBF25FF40967ED71A25AD"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/ecm_boundary_faces.bin",
+      "bytes": 4224,
+      "sha256": "AF3B4B8FF928F4EDC6FE7E34601FEF98EBDAE3C18C79ED302FCE41D29CD12390"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/ecm_boundary_identity.bin",
+      "bytes": 1408,
+      "sha256": "0665D67B40E962C5BB7BB433E9813F47078D50412B9BEF1E97FFD79CDDE403AE"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/ecm_boundary_owner.bin",
+      "bytes": 1408,
+      "sha256": "5A5FB8B3D87FF13DC8D7D91CE1F9EE2BECDD7AED5B8BC0B833874DF90069A33A"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/ecm_boundary_tetra.bin",
+      "bytes": 1408,
+      "sha256": "949C264402242B210574722D06D7A9EBFBFED7E9AB52012D0E6EFA1DCDF338F8"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/ecm_exterior_vertex_dual_area_weights.bin",
+      "bytes": 840,
+      "sha256": "54B9486DC004D7495DB3CEE7C4C0D5ED2B635E1789186339BEE44E4B8539356C"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/ecm_exterior_vertex_ids.bin",
+      "bytes": 720,
+      "sha256": "A0E74ED2BC998C4E235A0F21CAF273BAD632099A4F0B6071B7699DC157D4467B"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/ecm_gauge_lumped_volume_weights.bin",
+      "bytes": 840,
+      "sha256": "91925EF61FFCDFCDDA7DFA24017862136E97FB3DC00B609817FBD8B6186B3006"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/ecm_tetrahedra.bin",
+      "bytes": 9216,
+      "sha256": "D4898DEDE674F4DAB05AE9DF01B1BE31A853F0910105A7D26C18D5C76B475C30"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/ecm_vertices.bin",
+      "bytes": 2520,
+      "sha256": "C020BC4DBEB42EF4763237AAF6CBDC4F285FEF08FC57C946BB556569BBE88321"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/manifest.json",
+      "bytes": 4683,
+      "sha256": "7A36877E2E790C6D1C44890B9252FF17487417F680B496129134A11D39F3A90D"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/material_tether_float.bin",
+      "bytes": 56160,
+      "sha256": "4B707B39D5FC635E8BA97B15778FE6BEB0536BBE92BFBF88CB1E8B5873E1D1A9"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/material_tether_integer.bin",
+      "bytes": 22464,
+      "sha256": "7877CBAE2C8A53DC1250041E41B74FBD7B3ED57AFADAE98BF2DDA02B9F253F89"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/metadata.json",
+      "bytes": 2293,
+      "sha256": "507D07D9C7D9D28F82398A078B30E5D1C45C0BE3D38115216C5B550E34578397"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/myocardial_source_map_float.bin",
+      "bytes": 8064,
+      "sha256": "7B1E2FD914C1B566B3DD500C5C171204D476E4C969F268575D9F16EF2B221391"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/coarse/myocardial_source_map_integer.bin",
+      "bytes": 5760,
+      "sha256": "A40B7515F1B6E00C569398FF87242D3AC93E2725AE6DD071A36763CEB1CEE933"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/cell_anchor_counts.bin",
+      "bytes": 240,
+      "sha256": "140B436004E35F92BED21A4C2F5EE677030AC9997F6753B11EDA26CB9756ADBE"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/cell_anchor_minus_face_ids.bin",
+      "bytes": 19200,
+      "sha256": "5F0C279087BD286C7C5ADCB545010C56F025DFB337CD2EABBBCBF5404563F5E5"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/cell_anchor_plus_face_ids.bin",
+      "bytes": 19200,
+      "sha256": "BFA18FAF0E51C9E1834C0DF1A56BBE7340CF93C8B450D8552D35B84EF0D233B2"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/cell_boundary_owner.bin",
+      "bytes": 153600,
+      "sha256": "4CD215FF4CEE5695169C94320F7C71D341976C930A5F68B4DA5B6EE5345DD335"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/cell_directional_identity.bin",
+      "bytes": 153600,
+      "sha256": "34BBA1502465241F629E8BCAE8444FE17CE45D768BCFD44C2058A19D34FE5A8B"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/cell_faces.bin",
+      "bytes": 460800,
+      "sha256": "26AD36A78824A13D50D68D7899E4BDEE4082AD75C0123FF9458F5CA0284EF55E"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/cell_gauge_dual_area_weights.bin",
+      "bytes": 77040,
+      "sha256": "D22B3911447EDFB9DC6282929C85E1BD1AE3123C0AE0B8F0F2EB1223F70F6D03"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/cell_primary_identity.bin",
+      "bytes": 153600,
+      "sha256": "A274130345117BA44824CB98B1C0671F9425EBA5851E660E10702DF0D3A6072A"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/cell_vertices.bin",
+      "bytes": 231120,
+      "sha256": "9C1EB02E9D74176F39330B27463B0D77C22F1BB6F44E6E0CDA4073AE14BF1C89"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/ecm_boundary_faces.bin",
+      "bytes": 52224,
+      "sha256": "0F564AAAE3A1FD7661FE7BA674ED0B93AA6C52E2F3CFB3C1E920505EE3B2E50C"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/ecm_boundary_identity.bin",
+      "bytes": 17408,
+      "sha256": "97483D7D28F398755BAEA55C1202D59CDCDD4C006299DCF0F074AF93ED70EFF7"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/ecm_boundary_owner.bin",
+      "bytes": 17408,
+      "sha256": "0287018C8C365880BB8CD13CE30BA777223CF14CC558F1FB849AAC10D68B74CE"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/ecm_boundary_tetra.bin",
+      "bytes": 17408,
+      "sha256": "55D8AF1068FFD3AB28B6091126CB0C46E70AF124B4BA19F2C1C39DC0D5182A6C"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/ecm_exterior_vertex_dual_area_weights.bin",
+      "bytes": 17000,
+      "sha256": "C0F53A037E2090EDC41B82DFEA4CD1723D00B8D8EFC5D6F6F2A82D9A1C812E98"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/ecm_exterior_vertex_ids.bin",
+      "bytes": 8720,
+      "sha256": "92DAE4476A0EACF69C6BD126CD7F96101591B83EC3F6162755EB01DEEAACC290"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/ecm_gauge_lumped_volume_weights.bin",
+      "bytes": 17000,
+      "sha256": "48D4C3EA01A53CED8C47A3544EF181039FAC091B6504D040E76517EEC6DFBBFB"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/ecm_tetrahedra.bin",
+      "bytes": 294912,
+      "sha256": "1696AFE184D10951C2235B5EA4BF676D40952124F48DCA2BE0DFA2C904F25F5D"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/ecm_vertices.bin",
+      "bytes": 51000,
+      "sha256": "69EDD6A8C462D5D4B8A699F05D78F19F1B46160C7E478384997D0554912DCE8B"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/manifest.json",
+      "bytes": 4705,
+      "sha256": "D77D7680F415EFEA527A881AE5E2B2F1A76202DC7A58E7A62362158164B6F179"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/material_tether_float.bin",
+      "bytes": 872160,
+      "sha256": "A434C5B23CE1A7B2AE392296B1CB6A7A0BC1716DC7153567B0C7706CC04EA215"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/material_tether_integer.bin",
+      "bytes": 348864,
+      "sha256": "25391C012F47DF77D3CD31A80E35E2B7F3024374A5A438E4706AC7701466CB50"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/metadata.json",
+      "bytes": 2291,
+      "sha256": "CEA064E00458CEF2D7EE3A781C4FC0D3F5ABA934282ECD6532A5EA37C0904826"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/myocardial_source_map_float.bin",
+      "bytes": 108864,
+      "sha256": "733C9BD0A73BAF7D98D35A0CB2BC4A116A45E03ADC6AAE7463FE8E05D58BB149"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/fine/myocardial_source_map_integer.bin",
+      "bytes": 77760,
+      "sha256": "B3219C0AB24C722703A61172F895EC87DF62FC2B1E5C87F0F1BEA2B27C9C6506"
+    },
+    {
+      "path": "data/route_h/stage0_v06_discretization_family/manifest.json",
+      "bytes": 1769,
+      "sha256": "8E3F35BA8B69DD518D9EF4551D8791910F1AC260C3AE50A4B7211D5AEBDCBF0B"
+    },
+    {
+      "path": "docs/route_h/route_h_spatial_discretization_protocol_v06.md",
+      "bytes": 3407,
+      "sha256": "FE8FAC6D345BAF14F93FC77BDAD84D319B3274B94E7F9CCC246B64F8B534702D"
+    },
+    {
+      "path": "project_control/route_h_stage0_v06_discretization_authorization_decision_v01.md",
+      "bytes": 2045,
+      "sha256": "1FBD85591EBE03CDF2940A8F6EE093354EB393BE4C3FE4B2F590B8C35FC69856"
+    },
+    {
+      "path": "project_control/route_h_stage0_v06_freeze_manifest_v01.json",
+      "bytes": 22035,
+      "sha256": "A339B8D38CCE579A8EA0369B5ABAA86F0DE31E77C02CA49CD962753EAE823721"
+    },
+    {
+      "path": "project_control/route_h_stage0_v06_freeze_record_v01.md",
+      "bytes": 2142,
+      "sha256": "0F503F4C03E15952AA3127C090493CDB143C2FFA98A3264DD1E0BA8BAA4B4B56"
+    },
+    {
+      "path": "project_control/route_h_stage0_v06_readonly_scientific_code_review_v01.md",
+      "bytes": 5455,
+      "sha256": "079F17FA02E821B97D4294F9E07F9130860A919C2EFBF34FA755B05CA0D84F03"
+    },
+    {
+      "path": "project_control/route_h_stage0_v06_revision_execution_log_v01.md",
+      "bytes": 4514,
+      "sha256": "ECAA2C5DD81AEA71FFFD76F687C4B34EBB023C23900314BE99B9950F40BF0395"
+    },
+    {
+      "path": "project_control/route_h_stage0_v06_v02_revision_execution_log.md",
+      "bytes": 2936,
+      "sha256": "BF381F88308884B6506C1E47C5F04F96BF43888E4E167A776C02AB6AB71E9631"
+    },
+    {
+      "path": "project_control/route_h_stage2_preflight_discretization_block_v01.md",
+      "bytes": 3081,
+      "sha256": "B3BD9A4274BCEE0F33F1C145399C6FB9194DBFEA6497E7E85AE46E0C9F07BCE5"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 523,
+      "sha256": "BBF6AD58DA6FD1ECA53AC51C547D745FB8C89BE41751FB5C3334A4F40C581FA9"
+    },
+    {
+      "path": "scripts/route_h_stage0_v06_artifacts.py",
+      "bytes": 30094,
+      "sha256": "A243E81CB2E43132F900F2DD99D5FFD025F1FB261AEE00594A702ABC348980AA"
+    },
+    {
+      "path": "scripts/route_h_stage0_v06_freeze.py",
+      "bytes": 11774,
+      "sha256": "7E058F06A7C4F94FE1AE14E73A57503BA63D2C6F87B2F60019137ABDD55BFCCB"
+    },
+    {
+      "path": "scripts/route_h_stage0_v06_freeze_v02.py",
+      "bytes": 9962,
+      "sha256": "1727F05642E4DBC6A0770210C3CD11AECF1218D93D2714702A53DF00FB0FBF05"
+    },
+    {
+      "path": "scripts/route_h_stage0_v06_materialize.py",
+      "bytes": 2502,
+      "sha256": "C4B2255600423EC0A43983B3ED680E0CEE559424F38CF137665B3D9EA46897C2"
+    },
+    {
+      "path": "scripts/route_h_stage0_v06_verification_evidence.py",
+      "bytes": 10527,
+      "sha256": "6537F42196F1E7333C99B995A4A97F8C0922F7813240453C96BF18F044CA9631"
+    },
+    {
+      "path": "src/route_h/discretization.py",
+      "bytes": 11091,
+      "sha256": "30658912F483B0208AC1F11090ECEB8BD89F581AEB4ED8ADAD57A7B2EDA16E54"
+    },
+    {
+      "path": "src/route_h/geometry.py",
+      "bytes": 35286,
+      "sha256": "8CB1B1221BBDCFA39981CCDF9734267CD88DCFDCEBF50EF16AA24F4960B56C26"
+    },
+    {
+      "path": "src/route_h/route_h_contract_v06.json",
+      "bytes": 21779,
+      "sha256": "D4A49005583CCD6536E620DC55CEA203BD0BF123C48369A676182410D65FA281"
+    },
+    {
+      "path": "src/route_h/route_h_model_specialization_v06.json",
+      "bytes": 9429,
+      "sha256": "A00B3B06293041AC67C7BB50E6494E6596E169E3BE3DD75F48B2F89968C0BBA1"
+    },
+    {
+      "path": "src/route_h/solver.py",
+      "bytes": 8176,
+      "sha256": "40CEB3C026783856F9809C8A84080D00F570681483CE94A8A5930BDC802236AC"
+    },
+    {
+      "path": "tests/route_h/route_h_verification_registry_v06.csv",
+      "bytes": 21068,
+      "sha256": "651A8C9B8023C9FB2D4FA5EE7BF66EB9A207D38206C8C8E4BAA4EEC9830BC1CD"
+    },
+    {
+      "path": "tests/route_h/stage0_v06_metrics_v01.json",
+      "bytes": 4986,
+      "sha256": "C1656B2BCBF2979D72240B33DB6456DD76D419487D4C517DB3213585ECBBDBE1"
+    },
+    {
+      "path": "tests/route_h/stage0_v06_pytest_junit_v01.xml",
+      "bytes": 1832,
+      "sha256": "666D563CF2FBAACA50787BBDDDE5FA23769F6DBA8F534EDB8B7E5D19338A8C08"
+    },
+    {
+      "path": "tests/route_h/stage0_v06_pytest_junit_v02.xml",
+      "bytes": 1832,
+      "sha256": "FB85F8964E1BB56C220FAF142F6632FE5CA4F14B910DE7DC4504758B8686DF5A"
+    },
+    {
+      "path": "tests/route_h/stage0_v06_replay_results_v01.json",
+      "bytes": 614,
+      "sha256": "94A3F5CC41E9B0ECFCEB72618A99231A241C39FF2C17FDD000C0489C7FD8EB47"
+    },
+    {
+      "path": "tests/route_h/stage0_v06_verification_results_v01.csv",
+      "bytes": 18641,
+      "sha256": "4E7B7D792992617BBDBE3ABD7144298FA97D02F4714B87B36EEE192D939D3565"
+    },
+    {
+      "path": "tests/stage0_v06/conftest.py",
+      "bytes": 278,
+      "sha256": "3247F229B126DC72CF853179C81462688D132861AF45F37B215545D1A4148C8D"
+    },
+    {
+      "path": "tests/stage0_v06/test_discretization_family.py",
+      "bytes": 14322,
+      "sha256": "863E9B7AA5365107AFD554B9742ACE639CB1952A64BF015F1F65CECB78D01F04"
+    }
+  ],
+  "file_count": 103,
+  "package_sha256": "4066D1BBEBCEA8996D4F9547B7AFDD21037F8B78BACE94E9549A41F89FE3E9F9",
+  "family_sha256": "EB29A59A17CC60CBE67E512B8E210F0052794B841504359A52CFE816AEBB6131",
+  "base_array_reuse": {
+    "all_22_arrays_byte_exact": true,
+    "source_array_payload_sha256": "4F3F6C1331ED1CDE0BD7F926E031FF0D0FEC5BBA48AC4C1CEC5E780961343905",
+    "source_bundle": "REFERENCE-BUNDLE-PRL-ROUTE-H-STAGE1-V01",
+    "source_bundle_sha256": "4A73D370162D8EBFB7B120C42881F7470D68E82D10ABD159CB65C2B73ADECC59",
+    "v06_base_array_payload_sha256": "4F3F6C1331ED1CDE0BD7F926E031FF0D0FEC5BBA48AC4C1CEC5E780961343905"
+  },
+  "scientific_metrics_source": {
+    "path": "tests/route_h/stage0_v06_metrics_v01.json",
+    "sha256": "C1656B2BCBF2979D72240B33DB6456DD76D419487D4C517DB3213585ECBBDBE1",
+    "unchanged_from_v01_scientific_freeze": true
+  },
+  "v02_pytest": {
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "v02_junit_sha256": "FB85F8964E1BB56C220FAF142F6632FE5CA4F14B910DE7DC4504758B8686DF5A",
+  "deterministic_replay_sha256": "94A3F5CC41E9B0ECFCEB72618A99231A241C39FF2C17FDD000C0489C7FD8EB47",
+  "line_ending_audit": {
+    "LF_text_files": 37,
+    "binary_minus_text_files": 66,
+    "carriage_return_violations": 0,
+    "attribute_violations": 0
+  },
+  "registry_terminal_status_counts": {
+    "not_run_stage2_preexecution": 4,
+    "passed": 86
+  },
+  "stage2_scientific_runs_before_freeze": 0,
+  "direct_inputs": [
+    {
+      "path": ".gitattributes",
+      "sha256": "939FEA85AF90D59EEA64BCC0A9A7246CD8385831C5C65A21E2065EE660A92EED"
+    },
+    {
+      "path": "project_control/route_h_stage0_v06_freeze_manifest_v01.json",
+      "sha256": "A339B8D38CCE579A8EA0369B5ABAA86F0DE31E77C02CA49CD962753EAE823721"
+    },
+    {
+      "path": "project_control/route_h_stage0_v06_freeze_record_v01.md",
+      "sha256": "0F503F4C03E15952AA3127C090493CDB143C2FFA98A3264DD1E0BA8BAA4B4B56"
+    },
+    {
+      "path": "project_control/route_h_stage0_v06_readonly_scientific_code_review_v01.md",
+      "sha256": "079F17FA02E821B97D4294F9E07F9130860A919C2EFBF34FA755B05CA0D84F03"
+    },
+    {
+      "path": "project_control/route_h_stage0_v06_v02_revision_execution_log.md",
+      "sha256": "BF381F88308884B6506C1E47C5F04F96BF43888E4E167A776C02AB6AB71E9631"
+    }
+  ],
+  "authorization_boundary": {
+    "v06_spatial_family_materialized": true,
+    "Stage2_response_run": false,
+    "active_enabled": false,
+    "periodic_registered": false,
+    "parameter_sweep_run": false
+  }
+}

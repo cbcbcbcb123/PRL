@@ -1,0 +1,62 @@
+In file included from /workspace/external/simucell3d/include/mesh/cell.hpp:30,
+                 from /workspace/external/simucell3d/include/io/mesh_writer.hpp:14,
+                 from /workspace/external/simucell3d/include/triangulation_modules/local_mesh_refiner.hpp:20,
+                 from /workspace/external/simucell3d/src/triangulation_modules/local_mesh_refiner.cpp:1:
+/workspace/external/simucell3d/include/mesh/node.hpp:165:16: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+  165 |         inline const bool  is_used()   const noexcept {return is_used_;}
+      |                ^~~~~
+In file included from /workspace/external/simucell3d/include/mesh/edge.hpp:16,
+                 from /workspace/external/simucell3d/include/mesh/cell.hpp:31:
+/workspace/external/simucell3d/include/mesh/face.hpp:136:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+  136 |         const unsigned get_local_id() const noexcept {return local_face_id_;};
+      |         ^~~~~
+/workspace/external/simucell3d/include/mesh/cell.hpp: In member function ‘virtual cell_ptr cell::get_cell_same_type(const mesh&)’:
+/workspace/external/simucell3d/include/mesh/cell.hpp:426:57: warning: unused parameter ‘m’ [-Wunused-parameter]
+  426 |         virtual cell_ptr get_cell_same_type(const mesh& m) noexcept(false){
+      |                                             ~~~~~~~~~~~~^
+/workspace/external/simucell3d/include/mesh/cell.hpp: In member function ‘virtual void cell::face_is_in_contact(unsigned int, cell_ptr, const face&)’:
+/workspace/external/simucell3d/include/mesh/cell.hpp:454:56: warning: unused parameter ‘face_local_id’ [-Wunused-parameter]
+  454 |         virtual void face_is_in_contact(const unsigned face_local_id, const cell_ptr other_cell, const face& other_face) noexcept {}
+      |                                         ~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+/workspace/external/simucell3d/include/mesh/cell.hpp:454:86: warning: unused parameter ‘other_cell’ [-Wunused-parameter]
+  454 |         virtual void face_is_in_contact(const unsigned face_local_id, const cell_ptr other_cell, const face& other_face) noexcept {}
+      |                                                                       ~~~~~~~~~~~~~~~^~~~~~~~~~
+/workspace/external/simucell3d/include/mesh/cell.hpp:454:110: warning: unused parameter ‘other_face’ [-Wunused-parameter]
+  454 |         virtual void face_is_in_contact(const unsigned face_local_id, const cell_ptr other_cell, const face& other_face) noexcept {}
+      |                                                                                                  ~~~~~~~~~~~~^~~~~~~~~~
+/workspace/external/simucell3d/include/mesh/cell.hpp: In member function ‘virtual void cell::face_is_in_contact(unsigned int, cell_ptr)’:
+/workspace/external/simucell3d/include/mesh/cell.hpp:455:56: warning: unused parameter ‘face_local_id’ [-Wunused-parameter]
+  455 |         virtual void face_is_in_contact(const unsigned face_local_id, const cell_ptr other_cell) noexcept {}
+      |                                         ~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+/workspace/external/simucell3d/include/mesh/cell.hpp:455:86: warning: unused parameter ‘other_cell’ [-Wunused-parameter]
+  455 |         virtual void face_is_in_contact(const unsigned face_local_id, const cell_ptr other_cell) noexcept {}
+      |                                                                       ~~~~~~~~~~~~~~~^~~~~~~~~~
+/workspace/external/simucell3d/include/mesh/cell.hpp: In member function ‘virtual void cell::special_polarization_update(const std::vector<std::shared_ptr<cell> >&)’:
+/workspace/external/simucell3d/include/mesh/cell.hpp:481:79: warning: unused parameter ‘cell_lst’ [-Wunused-parameter]
+  481 |         virtual void special_polarization_update(const std::vector<cell_ptr>& cell_lst) noexcept{};
+      |                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+/workspace/external/simucell3d/include/io/mesh_writer.hpp: In static member function ‘static void mesh_writer::add_cell_data_arrays_to_mesh(std::ofstream&, const std::vector<mesh>&)’:
+/workspace/external/simucell3d/include/io/mesh_writer.hpp:120:65: warning: unused parameter ‘data_file’ [-Wunused-parameter]
+  120 |         static void add_cell_data_arrays_to_mesh(std::ofstream& data_file, const std::vector<mesh>& mesh_lst) noexcept{}
+      |                                                  ~~~~~~~~~~~~~~~^~~~~~~~~
+/workspace/external/simucell3d/include/io/mesh_writer.hpp:120:101: warning: unused parameter ‘mesh_lst’ [-Wunused-parameter]
+  120 |         static void add_cell_data_arrays_to_mesh(std::ofstream& data_file, const std::vector<mesh>& mesh_lst) noexcept{}
+      |                                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+/workspace/external/simucell3d/include/io/mesh_writer.hpp: In static member function ‘static void mesh_writer::add_face_data_arrays_to_mesh(std::ofstream&, const std::vector<mesh>&)’:
+/workspace/external/simucell3d/include/io/mesh_writer.hpp:121:65: warning: unused parameter ‘data_file’ [-Wunused-parameter]
+  121 |         static void add_face_data_arrays_to_mesh(std::ofstream& data_file, const std::vector<mesh>& mesh_lst) noexcept{}
+      |                                                  ~~~~~~~~~~~~~~~^~~~~~~~~
+/workspace/external/simucell3d/include/io/mesh_writer.hpp:121:101: warning: unused parameter ‘mesh_lst’ [-Wunused-parameter]
+  121 |         static void add_face_data_arrays_to_mesh(std::ofstream& data_file, const std::vector<mesh>& mesh_lst) noexcept{}
+      |                                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+/workspace/external/simucell3d/src/triangulation_modules/local_mesh_refiner.cpp: In member function ‘void local_mesh_refiner::split_edge(edge&, cell_ptr, edge_set&) const’:
+/workspace/external/simucell3d/src/triangulation_modules/local_mesh_refiner.cpp:711:16: warning: variable ‘ref_normal’ set but not used [-Wunused-but-set-variable]
+  711 |     const vec3 ref_normal = n_e.pos() - c->get_centroid();
+      |                ^~~~~~~~~~
+/workspace/external/simucell3d/src/triangulation_modules/local_mesh_refiner.cpp: In member function ‘bool local_mesh_refiner::can_be_merged(edge&, cell_ptr) const’:
+/workspace/external/simucell3d/src/triangulation_modules/local_mesh_refiner.cpp:837:17: warning: unused variable ‘f_a’ [-Wunused-variable]
+  837 |     const face& f_a = c->get_face(e_ab.f1());
+      |                 ^~~
+/workspace/external/simucell3d/src/triangulation_modules/local_mesh_refiner.cpp:838:17: warning: unused variable ‘f_b’ [-Wunused-variable]
+  838 |     const face& f_b = c->get_face(e_ab.f2());
+      |                 ^~~

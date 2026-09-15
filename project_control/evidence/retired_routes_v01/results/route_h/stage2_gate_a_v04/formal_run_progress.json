@@ -1,0 +1,18 @@
+{
+  "completed_run_records": [
+    {
+      "manifest_path": "results/route_h/stage2_gate_a_v04/A0_ZERO_dt0.01/manifest.json",
+      "manifest_sha256": "B826E17DD1D5D2BD926CB6E99F8FB047E498F619A638420B8BB89098871A8568",
+      "run_id": "A0_ZERO_dt0.01",
+      "status": "completed"
+    },
+    {
+      "manifest_path": "results/route_h/stage2_gate_a_v04/A1_ACTIVE_dt0.02/manifest.json",
+      "manifest_sha256": "9B8CF4A2D2998AC7DF5E902701F6536ECAB41B5B6CA6DFAD375E0DBB8796832C",
+      "run_id": "A1_ACTIVE_dt0.02",
+      "status": "failed_invalid_numerics"
+    }
+  ],
+  "started_at": "2026-08-09T17:34:31.878591+08:00",
+  "suite_id": "PRL-ROUTE-H-STAGE2-GATE-A-V04"
+}

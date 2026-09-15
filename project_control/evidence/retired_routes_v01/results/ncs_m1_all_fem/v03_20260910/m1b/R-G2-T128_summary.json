@@ -1,0 +1,25 @@
+{
+  "kind": "time_domain",
+  "level": "G2",
+  "nt": 128,
+  "tau": 0.2,
+  "cycles": 8,
+  "cycle_difference": 5.4344541119349827e-11,
+  "factorizations": 1,
+  "rhs_count": 1024,
+  "factor_seconds": 0.20420950002153404,
+  "solve_seconds": 6.053220999310724,
+  "wall_seconds": 15.3711336000124,
+  "maximum_backward_residual": 6.165865571997878e-16,
+  "maximum_constraint_residual": 9.299257090549743e-18,
+  "energy_relative_residual": 1.3762271869882376e-17,
+  "minimum_dissipation": 4.984087544033844e-10,
+  "interface_max_mismatch": 1.9018132575582552e-13,
+  "cycle_active_work": 1.628653580357137e-05,
+  "cycle_dissipation": 1.6286535803440786e-05,
+  "max_abs_strain": 0.011588220445095332,
+  "inner_radial_harmonic": {
+    "real": 0.0031279244082852617,
+    "imag": -0.0004203704857105567
+  }
+}

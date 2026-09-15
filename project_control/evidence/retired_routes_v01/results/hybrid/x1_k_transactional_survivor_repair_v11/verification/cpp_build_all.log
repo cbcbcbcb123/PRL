@@ -1,0 +1,20 @@
+[  7%] Built target uspg
+[ 18%] Built target prl_core
+[ 23%] Built target math_modules
+[ 32%] Built target contact_models
+[ 36%] Built target prl_remesh_contract_test
+[ 40%] Built target prl_myocardial_material_transfer_test
+[ 43%] Built target prl_active_myocardial_mechanics_test
+[ 52%] Built target mesh
+[ 67%] Built target triangulation_modules
+[ 72%] Built target prl_r1_remesh_robustness
+[ 74%] Built target prl_cell_engine_material_transfer_integration_test
+[ 78%] Built target prl_cell_engine_active_force_assembly_integration_test
+[ 81%] Built target prl_cell_engine_owned_step_integration_test
+[ 85%] Built target prl_short_trajectory_integration_test
+[ 89%] Built target prl_x1k_r1_remesh_robustness_integration_test
+[ 92%] Building CXX object CMakeFiles/prl_x1k_v11_transactional_rejection_test.dir/tests/r1_transactional_rejection_test.cpp.o
+[ 94%] Built target prl_x1k_v10_midpoint_collapse_diagnostic_test
+[ 98%] Built target prl_multicell_remesh_benchmark
+[100%] Linking CXX executable prl_x1k_v11_transactional_rejection_test
+[100%] Built target prl_x1k_v11_transactional_rejection_test

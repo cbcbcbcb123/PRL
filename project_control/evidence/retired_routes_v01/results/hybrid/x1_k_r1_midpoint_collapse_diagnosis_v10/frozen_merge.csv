@@ -1,0 +1,2 @@
+local_0,local_1,persistent_0,split_persistent,deleted_persistent_0,deleted_persistent_1,created_persistent,analytic_x,analytic_y,analytic_z,machine_x,machine_y,machine_z,analytic_residual,distance_from_x0_over_original_edge,centroid_jump,area_jump,volume_jump,axis_jump,active_energy_jump,minimum_fiber_alignment,maximum_rebind_error,passed_analytic
+0,8,0,8,0,8,9,0,-0.75,0,0,-0.75,0,0,0.25,0.08373635837457412,0.08508095792315566,0.125,1.1950150693478818e-16,4.823561294533619e-15,1,5.551115123125783e-17,True

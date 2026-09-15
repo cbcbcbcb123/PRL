@@ -1,0 +1,29 @@
+{
+  "failed_run_id": "A1_ACTIVE_dt0.02",
+  "gate_id": "A",
+  "m1_v04_audit_checks": {
+    "all_gauge_residuals_pass": true,
+    "all_geometry_checks_pass": true,
+    "all_optimized_candidates_descend": true,
+    "all_physical_residuals_pass": true,
+    "all_runs_complete": false,
+    "audit_rows_match_trajectory_nodes": true,
+    "failure_candidate_separate_from_accepted_trajectory": true,
+    "v03_failure_manifest_matches": true
+  },
+  "run_manifests": [
+    {
+      "manifest_path": "results/route_h/stage2_gate_a_v04/A0_ZERO_dt0.01/manifest.json",
+      "manifest_sha256": "B826E17DD1D5D2BD926CB6E99F8FB047E498F619A638420B8BB89098871A8568",
+      "run_id": "A0_ZERO_dt0.01",
+      "status": "completed"
+    },
+    {
+      "manifest_path": "results/route_h/stage2_gate_a_v04/A1_ACTIVE_dt0.02/manifest.json",
+      "manifest_sha256": "9B8CF4A2D2998AC7DF5E902701F6536ECAB41B5B6CA6DFAD375E0DBB8796832C",
+      "run_id": "A1_ACTIVE_dt0.02",
+      "status": "failed_invalid_numerics"
+    }
+  ],
+  "status": "failed_invalid_numerics"
+}

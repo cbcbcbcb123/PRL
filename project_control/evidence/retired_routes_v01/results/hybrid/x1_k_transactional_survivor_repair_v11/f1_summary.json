@@ -1,0 +1,29 @@
+{
+  "f1_raw_records": [
+    "f1,status,failed_non_finite_state,first_failure_step,1,time_before_failure,0,configuration_hash,5563990112392874779,state_hash_before,7680911624141591325,state_hash_after,7680911624141591325,atomic_state_preserved,1,reason,overdamped step audit became non-finite"
+  ],
+  "f1": {
+    "record": "f1",
+    "status": "failed_non_finite_state",
+    "first_failure_step": "1",
+    "time_before_failure": "0",
+    "configuration_hash": "5563990112392874779",
+    "state_hash_before": "7680911624141591325",
+    "state_hash_after": "7680911624141591325",
+    "atomic_state_preserved": "1",
+    "reason": "overdamped step audit became non-finite"
+  },
+  "f1r_raw_records": [
+    "f1r,topology_eligible,1,transfer_acceptable,0,operation_committed,0,rebind_distance,0.047434164902525666,atomic_rejection,1,following_survivor_cycle,passed,final_revision,2"
+  ],
+  "f1r": {
+    "record": "f1r",
+    "topology_eligible": "1",
+    "transfer_acceptable": "0",
+    "operation_committed": "0",
+    "rebind_distance": "0.047434164902525666",
+    "atomic_rejection": "1",
+    "following_survivor_cycle": "passed",
+    "final_revision": "2"
+  }
+}

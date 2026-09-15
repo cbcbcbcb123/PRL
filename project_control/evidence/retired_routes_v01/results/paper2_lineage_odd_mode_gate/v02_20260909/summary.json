@@ -1,0 +1,258 @@
+{
+  "created_at_utc": "2026-09-09T13:59:41.618084+00:00",
+  "discretizations": {
+    "S2": {}
+  },
+  "execution": {
+    "completed_at_utc": "2026-09-09T13:59:44.098276+00:00",
+    "error_message": "[Errno 30] Read-only file system: '/root/.cache'",
+    "error_type": "OSError",
+    "failed_at_utc": "2026-09-09T13:59:44.098058+00:00",
+    "peak_rss_gib": 0.16357421875,
+    "runtime": {
+      "complete_process_wall_alarm_enabled": true,
+      "container_image": "dolfinx/dolfinx:v0.11.0",
+      "container_image_id": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+      "container_name": "prl-paper2-lineage-odd-mode-gate-v02-20260909",
+      "dolfinx": "0.11.0.post0",
+      "dolfinx_path": "/usr/local/dolfinx-real/lib/python3.12/dist-packages/dolfinx/__init__.py",
+      "external_process_watchdog": "host-60s-v01",
+      "numpy": "2.4.6",
+      "python": "3.12.3",
+      "resource_gate": {
+        "cpu": {
+          "cgroup_path": "/sys/fs/cgroup/cpu.max",
+          "effective_cpu_limit": 1.0,
+          "expected": 1.0,
+          "pass": true,
+          "period_path": null,
+          "period_raw": null,
+          "raw": "100000 100000"
+        },
+        "gpu": {
+          "CUDA_VISIBLE_DEVICES": "",
+          "NVIDIA_VISIBLE_DEVICES": "",
+          "device_paths": [],
+          "pass": true
+        },
+        "memory": {
+          "cgroup_path": "/sys/fs/cgroup/memory.max",
+          "expected_bytes": 8589934592,
+          "limit_bytes": 8589934592,
+          "pass": true,
+          "raw": "8589934592"
+        },
+        "network": {
+          "expected": [
+            "lo"
+          ],
+          "interfaces": [
+            "lo"
+          ],
+          "pass": true
+        },
+        "pass": true,
+        "root_filesystem": {
+          "pass": true,
+          "read_only": true,
+          "statvfs_flags": 4097
+        }
+      },
+      "scipy": "1.17.1"
+    },
+    "solve_ledger": {
+      "budget_seconds": 30.0,
+      "elapsed_seconds": 0.0,
+      "factorization_count": 0,
+      "records": [],
+      "rhs_count": 0
+    },
+    "status": "FAIL",
+    "total_wall_seconds": 3.937876581000012,
+    "wall_budget_seconds": 60.0
+  },
+  "frozen_gates": {
+    "FD_absolute": 1e-08,
+    "FD_near_zero": 1e-10,
+    "FD_relative": 0.01,
+    "backward_error": 1e-12,
+    "cross_grid_relative": 0.05,
+    "linear_solve_seconds": 30.0,
+    "mirror_absolute": 1e-10,
+    "mirror_relative": 1e-08,
+    "noise_multiplier": 100.0,
+    "relative_residual": 1e-07,
+    "robust_no_go_absolute": 1e-08,
+    "runner_wall_seconds": 60.0,
+    "single_linear_algebra_call_seconds": 30.0,
+    "strain_near_zero": 1e-10
+  },
+  "frozen_scope": {
+    "De": 0.2,
+    "FD_amplitudes": [
+      0.0001,
+      5e-05
+    ],
+    "H": 0.3,
+    "S4_run": false,
+    "T": 128,
+    "alpha_0": 0.1,
+    "case": "A1 uniform prescribed active strain",
+    "daughter_left": "I3",
+    "daughter_right": "I4",
+    "depth_bands": 8,
+    "depth_coordinate": "z/h=1-y/h",
+    "division_DCM_implemented": false,
+    "feedback_fluid_3D_nonlinear_parameter_scan": false,
+    "orientations": [
+      "slash",
+      "backslash"
+    ],
+    "spatial_levels": [
+      "S2",
+      "S3"
+    ]
+  },
+  "logical_output": "results/paper2_lineage_odd_mode_gate/v02_20260909/summary.json",
+  "mesh_pair_prechecks": {
+    "S2": {
+      "all_triangles_positive_area": true,
+      "backslash_is_strict_x_reflection_of_slash": true,
+      "cell_count": 512,
+      "coordinates_identical": true,
+      "hashes": {
+        "backslash_connectivity": "216f78e5851521786410471fdd077b708988cd76afb037be77e1d38c99ea0777",
+        "coordinates": "6394c1b5b8ef7a11e1ebd81980fa6abf53f277237ab4c5acfa761ea491844707",
+        "reflection_cell_permutation": "2ca22dcc32305d6fea7063d4626c6b96abf4926ea8e7040951cdaa2d46f9695e",
+        "reflection_node_permutation": "3a069c1d1c809b99ba1bd91875d6e29bc74c68285c1c3ced1460c6f7192b692c",
+        "slash_connectivity": "9adcb759d8d14262da8dc5a0506d3454942f8354928ee67c1edc732827bc50a0"
+      },
+      "maximum_reflected_centroid_error": 0.0,
+      "node_count": 297,
+      "pass": true,
+      "periodic_endpoint_y_coordinates_match": true,
+      "physical_p_M_reflection_error": 0.0,
+      "top_bottom_and_endpoint_coordinate_sets_identical": true
+    },
+    "S3": {
+      "all_triangles_positive_area": true,
+      "backslash_is_strict_x_reflection_of_slash": true,
+      "cell_count": 2048,
+      "coordinates_identical": true,
+      "hashes": {
+        "backslash_connectivity": "983d1fbd22d5a2e6029224e21988249be7f13c2e01dc957407d465fd8eea535c",
+        "coordinates": "4b5537f8294ffe8e8871432c18682f416b4446c2d152f64f60936ff0baed9eeb",
+        "reflection_cell_permutation": "6e088bd25417db373e705be3cc4645494b92891725445dbc8a268bd2de64267b",
+        "reflection_node_permutation": "f43d4ea47229f32e55e3967eb78a6ceb1cf4376ca32accd7ce56fcce46b840ec",
+        "slash_connectivity": "b72ccd57b5a356453f23c4fe326ae6e8760443723834e80307a7e5e6c1b5c0b1"
+      },
+      "maximum_reflected_centroid_error": 0.0,
+      "node_count": 1105,
+      "pass": true,
+      "periodic_endpoint_y_coordinates_match": true,
+      "physical_p_M_reflection_error": 0.0,
+      "top_bottom_and_endpoint_coordinate_sets_identical": true
+    }
+  },
+  "parameters": {
+    "action_reaction_relative_tolerance": 1e-10,
+    "activation_peak": 0.1,
+    "cases": [
+      "P0",
+      "P1",
+      "A1",
+      "A2",
+      "LN",
+      "LS",
+      "C0",
+      "CQ",
+      "S1"
+    ],
+    "config_digest": "e32007757c2807c5c56e684f4c175a8896cd27371b97170333b9f8c25bb61e69",
+    "cycle_state_relative_tolerance": 0.001,
+    "direct_backward_error_tolerance": 1e-12,
+    "direct_relative_residual_tolerance": 1e-07,
+    "direct_solver": "scipy_superlu",
+    "discrete_ledger_closure_tolerance": 1e-10,
+    "dissipation_lower_tolerance": -1e-12,
+    "ecm_drag": 0.05,
+    "ecm_equilibrium_poisson_ratio": 0.45,
+    "ecm_equilibrium_young_modulus": 1.0,
+    "ecm_maxwell_poisson_ratio": 0.3,
+    "ecm_maxwell_young_modulus": 0.7,
+    "ecm_myocardium_interface_stiffness": 8.0,
+    "ecm_relaxation_time": 0.2,
+    "ecm_thickness": 0.3,
+    "endocardial_axial_stiffness": 0.8,
+    "endocardial_bending_stiffness": 0.02,
+    "endocardial_drag": 0.1,
+    "endocardial_transverse_stiffness": 0.25,
+    "endocardium_ecm_interface_stiffness": 7.0,
+    "length": 1.0,
+    "manufactured_solution_relative_tolerance": 1e-06,
+    "mesh_diagonal": "lower_left_to_upper_right",
+    "myocardium_drag": 0.12,
+    "myocardium_poisson_ratio": 0.3,
+    "myocardium_thickness": 0.2,
+    "myocardium_young_modulus": 2.5,
+    "normal_traction_peak": 0.08,
+    "passive_perturbation_strain": 0.0001,
+    "period": 1.0,
+    "power_ledger_relative_tolerance": 1e-08,
+    "schema": "paper2_hybrid_active_config_v08",
+    "spatial_activation_contrast": 0.35,
+    "spatial_levels": [
+      {
+        "label": "S2",
+        "nx": 32,
+        "ny_per_layer": 8
+      },
+      {
+        "label": "S3",
+        "nx": 64,
+        "ny_per_layer": 16
+      },
+      {
+        "label": "S4",
+        "nx": 128,
+        "ny_per_layer": 32
+      }
+    ],
+    "support_normal_stiffness": 0.6,
+    "support_tangential_stiffness": 0.45,
+    "tangential_traction_peak": 0.05,
+    "time_steps_per_cycle": [
+      64,
+      128,
+      256
+    ],
+    "x_boundary_condition": "affine_periodic_common_macro_strain",
+    "zero_state_absolute_tolerance": 1e-10
+  },
+  "schema": "paper2_lineage_odd_mode_gate_v02",
+  "scientific_interpretation": {
+    "not_a_scientific_negative_result": true,
+    "status": "NOT_EVALUABLE_DUE_TO_EXECUTION_FAILURE"
+  },
+  "source_version": {
+    "accepted_contract_commit": "b45650a9e370be138a70acf305b6c3a21e6a7ed2",
+    "actual_HEAD": "b45650a9e370be138a70acf305b6c3a21e6a7ed2",
+    "approved_runner_sha256": "54f07dfdb1b51286c129ec41404e31945492532e1346fc5728893b06b17f752a",
+    "runner_sha256": "54f07dfdb1b51286c129ec41404e31945492532e1346fc5728893b06b17f752a",
+    "tracked_source_hash_gate_pass": true,
+    "tracked_source_hashes": {
+      "plan/active/EXP-20260909-001-paper2-lineage-ecm/source/review-and-execution-plan.html": "5e83c8bcf043355e833391d05bbebfe076913e07f2d07b974e945897ed2aa826",
+      "project_control/CURRENT_STATUS.md": "de7f79c28b2f4d3f50e10db96bfb153f890e10201927f5ecaee029d97f16e06e",
+      "project_control/external_guidance_adoption_EXP-20260909-001-paper2-lineage-ecm_v01.md": "af902621622576236097d2abc168f97bf7b6ae07ba27acc331333b7bcee6d9b6",
+      "project_control/paper2_lineage_odd_mode_gate_execution_contract_v02.md": "eb6c88e762a60b75d0abe9a259ac6ca32286d6013a96d477f08349f0748ef5d0",
+      "project_control/prl_independent_theory_mainline_plan_v04.md": "b41fb16926375f31ae7b457575a21f61f806e3e2a680fc0f43d1457411615d20",
+      "results/paper2_science_pilot/v01_20260905/science_brief.md": "5ac3a1c017e1fe288e3229f7ff0e96cfd45717985f1f52d3c3c9f74efd8d9f86",
+      "scripts/run_paper2_division_dipole_gate_v01.py": "aa59b306377e50352c4b3a3e1b1b0c36b76aae2d42698031e63ca3a67fb291b2",
+      "scripts/run_paper2_lineage_odd_mode_gate_v01.py": "a4c5e641eee1109334ee7d448f60decce21205c07c659ca621581aa76446887a",
+      "src/paper2_hybrid/config.py": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe",
+      "src/paper2_hybrid/model.py": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800",
+      "src/paper2_hybrid/numerics.py": "620381c4f0165801f2af03defe587e8381c9b6859f8bbd9d2f84198a555331e4"
+    }
+  },
+  "status": "FAILED_CLOSED"
+}

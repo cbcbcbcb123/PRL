@@ -1,0 +1,166 @@
+{
+  "schema_version": "meshcell3d_expert_guidance_provenance.v1",
+  "record_id": "EXP-20260909-001-paper2-lineage-ecm",
+  "title": "Paper 2 分裂可见性、有限心内膜细胞层与 ECM 选择性记忆：专家意见及分阶段执行建议",
+  "received_at": "2026-09-09",
+  "created_at_utc": "2026-09-09T02:40:43.484014+00:00",
+  "expert": {
+    "name": "Codex",
+    "role": "AI-assisted independent scientific reviewer and plan author",
+    "organization": "Not a human institutional expert certification"
+  },
+  "source_channel": "Current Codex conversation: previous independent review plus user request to archive and extend the guidance",
+  "confidentiality": "internal",
+  "applicable_scope": [
+    "PRL/Paper2/lineage-odd-mode-gate",
+    "PRL/Paper2/endocardial-division-state-inheritance",
+    "PRL/Paper2/multicellular-layer-and-ECM-feedback",
+    "PRL/Paper2/fair-dynamic-material-domain-continuum-control",
+    "MeshCell3D/expert-guidance/cross-repository-capability-assessment"
+  ],
+  "scientific_workspace": "E:\\Temp-Projects\\PRL",
+  "guidance_storage_workspace": "E:\\MeshCell3D",
+  "source_files": [
+    {
+      "path": "source/review-and-execution-plan.html",
+      "sha256": "5e83c8bcf043355e833391d05bbebfe076913e07f2d07b974e945897ed2aa826",
+      "media_type": "text/html",
+      "source_kind": "newly authored synthesis and extension, not a verbatim chat transcript"
+    }
+  ],
+  "assessment_files": [
+    {
+      "path": "assessment.html",
+      "sha256": "03e8744bb35a9ee80e3fb27d31c833125df4c0ea32e98cd4da515871889c3619",
+      "media_type": "text/html"
+    }
+  ],
+  "repository_snapshots": {
+    "PRL": {
+      "root": "E:\\Temp-Projects\\PRL",
+      "head": "b45650a9e370be138a70acf305b6c3a21e6a7ed2",
+      "branch": "codex/simucell3d-hybrid-feasibility",
+      "tracked_status": "M README.md\n M project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md",
+      "lineage_gate_v01_result_directory_exists": false,
+      "lineage_gate_v01_summary_exists": false,
+      "evidence_files": [
+        {
+          "path": "E:\\Temp-Projects\\PRL\\project_control\\CURRENT_STATUS.md",
+          "sha256": "5e648339c743cb227563c63ff61bb689b15d79631cd0f2be3da9d3c4963a9583"
+        },
+        {
+          "path": "E:\\Temp-Projects\\PRL\\project_control\\prl_independent_theory_mainline_plan_v04.md",
+          "sha256": "b41fb16926375f31ae7b457575a21f61f806e3e2a680fc0f43d1457411615d20"
+        },
+        {
+          "path": "E:\\Temp-Projects\\PRL\\results\\paper2_science_pilot\\v01_20260905\\science_brief.md",
+          "sha256": "5ac3a1c017e1fe288e3229f7ff0e96cfd45717985f1f52d3c3c9f74efd8d9f86"
+        },
+        {
+          "path": "E:\\Temp-Projects\\PRL\\results\\paper2_division_dipole_gate\\v02_20260908\\summary.json",
+          "sha256": "65518f1fb24f441450cbdfbe25e5e447c56088d55ac14988440f59ce46bb7df5"
+        },
+        {
+          "path": "E:\\Temp-Projects\\PRL\\scripts\\run_paper2_lineage_odd_mode_gate_v01.py",
+          "sha256": "a4c5e641eee1109334ee7d448f60decce21205c07c659ca621581aa76446887a"
+        },
+        {
+          "path": "E:\\Temp-Projects\\PRL\\src\\paper2_hybrid\\config.py",
+          "sha256": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe"
+        },
+        {
+          "path": "E:\\Temp-Projects\\PRL\\src\\paper2_hybrid\\model.py",
+          "sha256": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800"
+        },
+        {
+          "path": "E:\\Temp-Projects\\PRL\\src\\paper2_hybrid\\numerics.py",
+          "sha256": "620381c4f0165801f2af03defe587e8381c9b6859f8bbd9d2f84198a555331e4"
+        },
+        {
+          "path": "E:\\Temp-Projects\\PRL\\project_control\\prl_figure2_spatial_tolerance_validation_contract_v02.md",
+          "sha256": "633be2cd534c05ac3d3416e4ca046d52b2b17bef4f4b373fbb1a242a72e33274"
+        },
+        {
+          "path": "E:\\Temp-Projects\\PRL\\README.md",
+          "sha256": "f7c900acc707859705ff164c755cfe899cc6648573b28704b744388ff4677f53"
+        }
+      ]
+    },
+    "MeshCell3D": {
+      "root": "E:\\MeshCell3D",
+      "head": "abca591e73041363200ecbb61253c3fc91532edb",
+      "branch": "main",
+      "rules_sha256": "6dad747c29eadf457b232f245f4dc0989e543682597a4875db30b37348ae0b2c",
+      "architecture_scope": "Application-agnostic 3D closed-triangulated-cell DCM-only; no continuum tier",
+      "coupling_note": "Current active plan documents LB2-B-R1 spatial FAIL and bounded offline evaluator correction. This turn did not re-evaluate raw simulation evidence."
+    }
+  },
+  "review_scope": {
+    "new_scientific_simulations": 0,
+    "docker_commands": 0,
+    "scientific_tests_run": 0,
+    "new_automations": 0,
+    "tasks_dispatched": 0,
+    "commits": 0,
+    "pushes": 0,
+    "current_turn_work": "Read-only repository verification plus expert-guidance HTML/JSON delivery and document checks"
+  },
+  "literature_note": "Primary-source URLs were checked in the preceding review turn of this conversation. This delivery does not claim a new systematic novelty search.",
+  "notes": "Source remains immutable after registration. Future adoption is stored in decision.json; do not infer execution authorization or a scientific PASS from delivery verification.",
+  "related_guidance_review": {
+    "record_id": "EXP-20260909-001-independent-scientific-architecture-review",
+    "reviewed_files": [
+      "assessment.html",
+      "decision.json"
+    ],
+    "relationship": "Compatible but separate scope; no supersession or cross-authorization. The related record governs framework engineering, this record governs PRL Paper 2 science.",
+    "detected_during_delivery": true,
+    "preservation_baseline_sha256": {
+      "records/EXP-20260909-001-independent-scientific-architecture-review/assessment.html": "7d2b83ad8d501f5704ad0e2be826dd15d0c28a16ce84dd4dbe7701d45dd20bb8",
+      "records/EXP-20260909-001-independent-scientific-architecture-review/decision.json": "9406f147c53fb590d6ba6f46300b479630dfa9b111bb8b7b66ad108b7838f67f",
+      "records/EXP-20260909-001-independent-scientific-architecture-review/execution-proposal.html": "ff1deafec4c5719991823241e311473a774af62fdfd14b4c807f92c703b60232",
+      "records/EXP-20260909-001-independent-scientific-architecture-review/provenance.json": "3a6ff67a22ea4175c826d9d6ca13003621cef7e140c2cd3f61fa50d92e528664",
+      "records/EXP-20260909-001-independent-scientific-architecture-review/source/registration-request.json": "71be5f54a19babcb1b2b61cfb53255f669246509f713416c961e00d5f9c2cdfd",
+      "records/EXP-20260909-001-independent-scientific-architecture-review/source/review-v1.html": "c153b2fb88aada39ea6e3c033d4dbce262fccf916baacbfaa653c6a87c737e9d"
+    }
+  },
+  "registration_context": {
+    "checked_at_utc": "2026-09-09T02:46:59.362328+00:00",
+    "registry_sha256_before_append": "51a5203e400a7cbdaa89687b16abdfbfa75ebd15733b3e1de15dba9d4fa6df7f",
+    "index_sha256_before_append": "ae0b4c86811d39d552d4ea49b8ef09760359cd11447892cbac4f8e96050ad5cc",
+    "previous_records_preserved": [
+      {
+        "record_id": "EXP-20260909-001-independent-scientific-architecture-review",
+        "title": "MeshCell3D 科学可信度、数值收敛与架构评审",
+        "received_at": "2026-09-09",
+        "decision_status": "partially_adopted",
+        "record_dir": "records/EXP-20260909-001-independent-scientific-architecture-review",
+        "assessment_path": "records/EXP-20260909-001-independent-scientific-architecture-review/assessment.html",
+        "execution_proposal_path": "records/EXP-20260909-001-independent-scientific-architecture-review/execution-proposal.html",
+        "provenance_path": "records/EXP-20260909-001-independent-scientific-architecture-review/provenance.json",
+        "decision_path": "records/EXP-20260909-001-independent-scientific-architecture-review/decision.json",
+        "source_paths": [
+          "records/EXP-20260909-001-independent-scientific-architecture-review/source/review-v1.html",
+          "records/EXP-20260909-001-independent-scientific-architecture-review/source/registration-request.json"
+        ],
+        "applicable_scope": [
+          "certification-status-propagation",
+          "C19",
+          "installed-wheel-and-resource-contracts",
+          "catalog-prerequisites",
+          "C6",
+          "LB2-B",
+          "DCM-architecture-and-state-ownership",
+          "backend-parity",
+          "release-readiness",
+          "plan-lifecycle"
+        ],
+        "adopted_summary": "Stage 1 engineering direction with C19 failure propagation first; bounded implementation discretion after user dispatch. Stages 2 and 3, formal computing and publication remain separately gated.",
+        "active_plan_refs": [],
+        "supersedes": [],
+        "superseded_by": null
+      }
+    ],
+    "record_id_note": "Use the complete topic-qualified record IDs; two independent concurrent records share the date-sequence prefix."
+  }
+}

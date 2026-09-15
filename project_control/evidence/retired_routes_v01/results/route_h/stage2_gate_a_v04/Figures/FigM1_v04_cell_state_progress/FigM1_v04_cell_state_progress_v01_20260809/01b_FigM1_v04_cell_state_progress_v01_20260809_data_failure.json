@@ -1,0 +1,28 @@
+{
+  "acceptance_source": "rejected_optimizer_candidate",
+  "accepted_objective": 0.00023045447519050806,
+  "alpha": 0.003511175705587444,
+  "callback_count": 68,
+  "candidate_is_accepted_state": false,
+  "gauge_increment_residual": 2.6398555254744684e-20,
+  "geometry": {
+    "degenerate_face_count": 0,
+    "finite": true,
+    "flipped_face_count": 0,
+    "minimum_face_area_ratio": 0.521022904413206,
+    "minimum_orientation_cosine": 0.9983278991363653,
+    "relative_volume": 0.9999022257742239,
+    "signed_volume": 0.29996504195119883
+  },
+  "initial_objective": 0.0002573742171032339,
+  "optimizer_evaluations": 81,
+  "optimizer_iterations": 68,
+  "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+  "optimizer_reported_success": true,
+  "projected_residual": 1.1991047754392014e-08,
+  "qualifying_evaluation_index": 81,
+  "reason": "physical_gate_or_descent_or_geometry_check_failed",
+  "step_index": 194,
+  "strict_potential_descent": true,
+  "time": 3.88
+}

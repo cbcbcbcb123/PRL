@@ -1,0 +1,39 @@
+{
+  "schema_version": "meshcell3d_expert_guidance_decision.v1",
+  "record_id": "EXP-20260909-001-paper2-lineage-ecm",
+  "decision_status": "reviewed",
+  "decided_at": null,
+  "decided_by": null,
+  "adopted_scope": [],
+  "excluded_scope": [
+    "Reviving the closed signed global traction-dipole route",
+    "Treating static implementation review as numerical or scientific PASS",
+    "Claiming DCM is the unique numerical representation",
+    "Adding a continuum tier or cardiac-specific core semantics to MeshCell3D",
+    "Treating this guidance delivery as a simulation, Docker, GPU, commit, push or automation instruction"
+  ],
+  "deferred_scope": [
+    "Execution budgets and formal adoption of proposed P0-P3 stages",
+    "P4 new FEM sensitivity solves and closed-loop computation",
+    "P5 repeated growth, division, death and turnover",
+    "Cross-repository production-code edits or changes of dimensionality"
+  ],
+  "active_plan_refs": [],
+  "supersedes": [],
+  "superseded_by": null,
+  "delivery_authorization": {
+    "status": "explicit",
+    "date": "2026-09-09",
+    "scope": "Create the expert-guidance record and update registry/index within E:\\MeshCell3D\\plan\\expert_guidance",
+    "user_request": "把你的意见及执行方案（此外，目前仅仅模拟一个心内膜细胞能否满足要求，是不是得建立一层细胞分裂，生长，死亡的过程？），落到（/E:/MeshCell3D/plan/expert_guidance）中，我让codex执行，此外，这个方案可以给codex一些执行空间"
+  },
+  "recommended_execution_package": {
+    "priority": ["P0", "P1", "P2"],
+    "conditional": ["P3"],
+    "design_only_until_budget_adoption": ["P4"],
+    "deferred": ["P5"],
+    "principle": "After user adoption and repository checks, proceed autonomously inside the adopted scope when stage prerequisites pass; do not request repeated approval for routine implementation details.",
+    "budgets_are_proposals_not_consumed_authorization": true
+  },
+  "decision_notes": "The user explicitly requested this delivery and intends to hand it to an execution Codex. This records the authorization already given for documentation. It does not fabricate adoption of new simulation budgets or all newly proposed scientific choices. No active plan was created and no execution task was sent."
+}

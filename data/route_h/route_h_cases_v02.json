@@ -1,0 +1,257 @@
+{
+  "registry_id": "CASES-PRL-ROUTE-H-STAGE0-V02",
+  "schema_version": "2.0.0",
+  "contract_id": "CONTRACT-PRL-ROUTE-H-STAGE0-V02",
+  "specialization_id": "SPECIALIZATION-PRL-ROUTE-H-STAGE0-V02",
+  "geometry_spec_id": "GEOMETRY-PRL-ROUTE-H-STAGE0-V02",
+  "created_at": "2026-07-29T15:20:00+08:00",
+  "status": "frozen_stage0_not_authorized_to_run",
+  "execution_order": ["A", "B", "C", "D", "E"],
+  "global_rules": {
+    "strict_gate_order": true,
+    "next_gate_requires_all_required_cases_passed": true,
+    "failed_case_is_terminal_for_downstream_gates": true,
+    "failed_and_not_run_records_must_be_retained": true,
+    "response_dependent_parameter_changes_forbidden": true,
+    "parameter_sweep_forbidden": true,
+    "claim_bearing_output_forbidden": true,
+    "reference_bundle_hash_match_required": true,
+    "geometry_materialization_authorized": false,
+    "stage1_authorized": false,
+    "stage2_authorized": false
+  },
+  "case_status_enum": [
+    "not_run_unauthorized",
+    "not_run_upstream_failed",
+    "running",
+    "passed",
+    "failed",
+    "invalid_numerics"
+  ],
+  "common_operators": {
+    "steric": "dynamic deterministic search at each accepted state; no adhesion on dynamic pairs",
+    "adhesion": "frozen SHA-256-sealed reference material-tether set; no birth or death",
+    "force": "complete negative gradient of each discrete pair potential",
+    "owner_count": "exactly one owner per quadrature contribution"
+  },
+  "gates": [
+    {
+      "gate_id": "A",
+      "name": "single_myocardial_cell",
+      "depends_on": [],
+      "required_case_ids": ["A0_ZERO", "A1_ACTIVE"],
+      "question": "Does the preferred-length controller shorten one myocardial DCM cell with central forces, controlled volume, transverse response and a closed power ledger?",
+      "falsifier": "Required shortening depends on passive gamma, produces non-central torque, or violates the registered residuals."
+    },
+    {
+      "gate_id": "B",
+      "name": "myocardial_cell_chain",
+      "depends_on": ["A"],
+      "required_case_ids": ["B0_ZERO_CHAIN", "B1_TRAVELING_ACTIVE_CHAIN"],
+      "question": "Can three independent cells transmit a prescribed mechanical activation sequence while steric and frozen material tethers remain objective and balanced?",
+      "falsifier": "Persistent penetration, unintended tether birth/death, topology jump, or force/moment drift."
+    },
+    {
+      "gate_id": "C",
+      "name": "myocardium_ECM_sandwich",
+      "depends_on": ["B"],
+      "required_case_ids": ["C0_ZERO_SANDWICH", "C1_ACTIVE_SANDWICH"],
+      "question": "Does myocardial basal adhesion transmit contraction to ECM without an artificial normal source or support-owner conflict?",
+      "support_owner": "myocardium.opposite_outer only",
+      "ECM_lumen_boundary": "traction_free",
+      "falsifier": "ECM owns the support, a manual normal q is needed, pair forces do not cancel, or j_myo is nonzero."
+    },
+    {
+      "gate_id": "D",
+      "name": "endocardium_ECM_sandwich",
+      "depends_on": ["C"],
+      "required_case_ids": ["D0_ZERO", "D1_PRESSURE_ONLY", "D2_WSS_ONLY"],
+      "question": "Are pressure and WSS applied only to endocardial apical faces and transferred to ECM while chi_E stays outside mechanical power?",
+      "fixture_owner": "P_FIXTURE_D on ECM.outer_facing_boundary",
+      "fixture_interpretation": "test fixture only",
+      "falsifier": "Direct blood load reaches ECM, pressure leaks tangentially, WSS leaks normally, or chi_E enters the mechanical ledger."
+    },
+    {
+      "gate_id": "E",
+      "name": "minimal_complete_patch_verification",
+      "depends_on": ["D"],
+      "required_case_ids": ["E0_ZERO", "E1_ACTIVE_ONLY", "E2_PRESSURE_ONLY", "E3_WSS_ONLY", "E4_COMBINED"],
+      "sensitivity_case_ids": ["E5_COMBINED_PERIODIC_SENSITIVITY"],
+      "question": "Can the complete 6-endocardial-cell, ECM and 9-myocardial-cell patch close topology, ownership, resultant, orientation, contact and power checks?",
+      "primary_support": "outer and perimeter-lateral myocardial compliant ports",
+      "falsifier": "A fully fixed boundary is needed, ownership is duplicated, a registered ablation is omitted, or a mechanistic result is treated as physiological."
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "A0_ZERO",
+      "gate_id": "A",
+      "geometry": "one myocardial cell from the frozen surface template",
+      "activation": "zero",
+      "pressure": 0.0,
+      "WSS": [0.0,0.0,0.0],
+      "support": "minimal zero-power numerical gauge",
+      "required_outputs": ["reference-force residual","rigid-motion invariance","volume error","stored energies","dissipation","power residual"],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "A1_ACTIVE",
+      "gate_id": "A",
+      "geometry": "one myocardial cell from the frozen surface template",
+      "activation": "alpha_peak=0.10 cosine ramp-hold-release",
+      "pressure": 0.0,
+      "WSS": [0.0,0.0,0.0],
+      "support": "minimal zero-power numerical gauge",
+      "required_outputs": ["axial length","two transverse scales","volume error","centroid drift","net force","net moment","P_active","stored energies","dissipation","power residual"],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "B0_ZERO_CHAIN",
+      "gate_id": "B",
+      "geometry": "three adjacent myocardial template cells along e_x",
+      "activation": "zero",
+      "pressure": 0.0,
+      "WSS": [0.0,0.0,0.0],
+      "support": "minimal global zero-power numerical gauge",
+      "required_outputs": ["dynamic steric-pair history","frozen tether hash","pair force residual","pair moment residual","penetration","detachment","rigid-objectivity residual"],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "B1_TRAVELING_ACTIVE_CHAIN",
+      "gate_id": "B",
+      "geometry": "three adjacent myocardial template cells along e_x",
+      "activation": "alpha_peak=0.10 with 0.50*T0 prescribed phase lag per cell",
+      "pressure": 0.0,
+      "WSS": [0.0,0.0,0.0],
+      "support": "minimal global zero-power numerical gauge",
+      "required_outputs": ["prescribed activation phase","mechanical response phase","junction pair forces","net internal force","net internal moment","penetration","tether-identity audit","power residual"],
+      "interpretation_guard": "mechanical phase protocol only; not conduction velocity",
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "C0_ZERO_SANDWICH",
+      "gate_id": "C",
+      "geometry": "3x3 myocardial monolayer on the independent frozen ECM volume",
+      "activation": "zero",
+      "pressure": 0.0,
+      "WSS": [0.0,0.0,0.0],
+      "support": "myocardium.opposite_outer compliant support only; ECM lumen face traction free",
+      "j_myo": 0.0,
+      "required_outputs": ["reference-force residual","support-owner audit","cell-ECM pair residual","ECM J","zero-source audit","power residual"],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "C1_ACTIVE_SANDWICH",
+      "gate_id": "C",
+      "geometry": "3x3 myocardial monolayer on the independent frozen ECM volume",
+      "activation": "alpha_peak=0.10",
+      "pressure": 0.0,
+      "WSS": [0.0,0.0,0.0],
+      "support": "myocardium.opposite_outer compliant support only; ECM lumen face traction free",
+      "j_myo": 0.0,
+      "required_outputs": ["ECM tangential traction along active axis","ECM normal-reaction partition","cell-ECM action-reaction","support-owner audit","ECM J","zero-source audit","power residual"],
+      "forbidden_input": "artificial normal q",
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "D0_ZERO",
+      "gate_id": "D",
+      "geometry": "3x2 endocardial monolayer on the independent frozen ECM volume",
+      "activation": "none",
+      "pressure": 0.0,
+      "WSS": [0.0,0.0,0.0],
+      "support": "fixed-reference P_FIXTURE_D on ECM.outer_facing_boundary only",
+      "required_outputs": ["reference-force residual","zero-load resultant","fixture-owner audit","chi_E baseline","P_FIXTURE_D","power residual"],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "D1_PRESSURE_ONLY",
+      "gate_id": "D",
+      "geometry": "3x2 endocardial monolayer on the independent frozen ECM volume",
+      "activation": "none",
+      "pressure": 0.05,
+      "WSS": [0.0,0.0,0.0],
+      "support": "fixed-reference P_FIXTURE_D on ECM.outer_facing_boundary only",
+      "required_outputs": ["current-normal apical pressure resultant","tangential leakage","endocardium-to-ECM transfer","direct ECM load audit","P_pressure","P_FIXTURE_D","power residual"],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "D2_WSS_ONLY",
+      "gate_id": "D",
+      "geometry": "3x2 endocardial monolayer on the independent frozen ECM volume",
+      "activation": "none",
+      "pressure": 0.0,
+      "WSS": [0.02,0.0,0.0],
+      "support": "fixed-reference P_FIXTURE_D on ECM.outer_facing_boundary only",
+      "required_outputs": ["current-tangent apical WSS resultant","normal leakage","endocardium-to-ECM transfer","direct ECM load audit","chi_E","P_WSS","P_FIXTURE_D","chi_E power exclusion","power residual"],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "E0_ZERO",
+      "gate_id": "E",
+      "geometry": "frozen complete flat patch: 6 endocardial cells + ECM + 9 myocardial cells",
+      "activation": "zero",
+      "pressure": 0.0,
+      "WSS": [0.0,0.0,0.0],
+      "support": "myocardial outer and perimeter-lateral compliant ports",
+      "required_outputs": ["reference-force residual","owner audit","topology audit","ECM J","power residual"],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "E1_ACTIVE_ONLY",
+      "gate_id": "E",
+      "geometry": "same frozen complete patch as E0",
+      "activation": "alpha_peak=0.10",
+      "pressure": 0.0,
+      "WSS": [0.0,0.0,0.0],
+      "support": "myocardial outer and perimeter-lateral compliant ports",
+      "required_outputs": ["all state observables","all energies","all dissipations","P_active","support powers","power residual"],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "E2_PRESSURE_ONLY",
+      "gate_id": "E",
+      "geometry": "same frozen complete patch as E0",
+      "activation": "zero",
+      "pressure": 0.05,
+      "WSS": [0.0,0.0,0.0],
+      "support": "myocardial outer and perimeter-lateral compliant ports",
+      "required_outputs": ["blood-port audit","pressure resultant","direct ECM load audit","P_pressure","support powers","power residual"],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "E3_WSS_ONLY",
+      "gate_id": "E",
+      "geometry": "same frozen complete patch as E0",
+      "activation": "zero",
+      "pressure": 0.0,
+      "WSS": [0.02,0.0,0.0],
+      "support": "myocardial outer and perimeter-lateral compliant ports",
+      "required_outputs": ["blood-port audit","WSS resultant","chi_E","direct ECM load audit","P_WSS","support powers","power residual"],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "E4_COMBINED",
+      "gate_id": "E",
+      "geometry": "same frozen complete patch as E0",
+      "activation": "alpha_peak=0.10",
+      "pressure": 0.05,
+      "WSS": [0.02,0.0,0.0],
+      "support": "myocardial outer and perimeter-lateral compliant ports",
+      "required_outputs": ["all registered states","all energy terms","all dissipations","all port powers","owner audit","resultant","orientation audit","contact audit","ECM J","integrated power residual"],
+      "initial_status": "not_run_unauthorized"
+    },
+    {
+      "case_id": "E5_COMBINED_PERIODIC_SENSITIVITY",
+      "gate_id": "E",
+      "geometry": "same frozen complete patch as E0",
+      "activation": "alpha_peak=0.10",
+      "pressure": 0.05,
+      "WSS": [0.02,0.0,0.0],
+      "support": "exact in-plane material-node periodic pairing; lateral support off; outer support retained; zero-mean numerical gauge",
+      "required_outputs": ["periodic-pair residual","all port powers","owner audit","ECM J","integrated power residual","difference from E4"],
+      "interpretation_guard": "sensitivity only; cannot replace the primary compliant-boundary case",
+      "initial_status": "not_run_unauthorized"
+    }
+  ]
+}

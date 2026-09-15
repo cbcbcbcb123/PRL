@@ -1,0 +1,28 @@
+Internal ctest changing into directory: /workspace/cpp/build-linux-x1k-v11
+Test project /workspace/cpp/build-linux-x1k-v11
+      Start  1: prl_remesh_contract_test
+ 1/11 Test  #1: prl_remesh_contract_test .................................   Passed    0.01 sec
+      Start  2: prl_myocardial_material_transfer_swap
+ 2/11 Test  #2: prl_myocardial_material_transfer_swap ....................   Passed    0.02 sec
+      Start  3: prl_myocardial_material_transfer_split
+ 3/11 Test  #3: prl_myocardial_material_transfer_split ...................   Passed    0.01 sec
+      Start  4: prl_myocardial_material_transfer_merge
+ 4/11 Test  #4: prl_myocardial_material_transfer_merge ...................   Passed    0.02 sec
+      Start  5: prl_myocardial_material_transfer_failure_atomicity
+ 5/11 Test  #5: prl_myocardial_material_transfer_failure_atomicity .......   Passed    0.02 sec
+      Start  6: prl_myocardial_material_transfer_stable_host_ids
+ 6/11 Test  #6: prl_myocardial_material_transfer_stable_host_ids .........   Passed    0.01 sec
+      Start  7: prl_myocardial_material_transfer_fiber_projection
+ 7/11 Test  #7: prl_myocardial_material_transfer_fiber_projection ........   Passed    0.02 sec
+      Start  8: prl_myocardial_material_transfer_multicell_concurrency
+ 8/11 Test  #8: prl_myocardial_material_transfer_multicell_concurrency ...   Passed    0.01 sec
+      Start  9: prl_x1k_v11_material_prepared_transaction
+ 9/11 Test  #9: prl_x1k_v11_material_prepared_transaction ................   Passed    0.01 sec
+      Start 10: prl_myocardial_material_active_state_update
+10/11 Test #10: prl_myocardial_material_active_state_update ..............   Passed    0.01 sec
+      Start 11: prl_myocardial_remesh_cycle_gate_failures
+11/11 Test #11: prl_myocardial_remesh_cycle_gate_failures ................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 11
+
+Total Test time (real) =   0.46 sec

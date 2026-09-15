@@ -1,0 +1,4 @@
+/workspace/results/hybrid/x1_k_transactional_survivor_repair_v11/red_transaction_capability_probe.cpp: In function ‘void probe(prl::core::RemeshEventSink&, const prl::core::RemeshEvent&, const prl::core::SurfaceMeshSnapshot&, const prl::core::SurfaceMeshSnapshot&)’:
+/workspace/results/hybrid/x1_k_transactional_survivor_repair_v11/red_transaction_capability_probe.cpp:6:16: error: ‘class prl::core::RemeshEventSink’ has no member named ‘prepare_remesh’
+    6 |     (void)sink.prepare_remesh(event, before, after);
+      |                ^~~~~~~~~~~~~~

@@ -1,0 +1,130 @@
+{
+  "schema_version": "prl.repository_cleanup.batch04_candidate03_source_copy_manifest.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "workspace": "E:\\Temp-Projects\\PRL",
+  "source_matrix": {
+    "path": "project_control/evidence/repository_cleanup_v01/batch04_candidate03_source_matrix.json",
+    "sha256": "84d3cdaa9bc1533ebcc047ed79c91cac497cb98143b031ad5ed3e2d3d68337eb"
+  },
+  "copy_policy": {
+    "method": "System.IO.File.Copy",
+    "overwrite": false,
+    "destination_root": "project_control/evidence/retired_routes_v01/source",
+    "outside_workspace_write": false,
+    "deletion_authorized": false,
+    "deletion_executed": false
+  },
+  "summary": {
+    "files": 14,
+    "bytes": 360089,
+    "direct_evidence_files": 8,
+    "direct_evidence_bytes": 258472,
+    "minimal_dependency_files": 6,
+    "minimal_dependency_bytes": 101617,
+    "source_hash_matches": "14/14",
+    "target_hash_matches": "14/14",
+    "overwritten_files": 0,
+    "reparse_points": 0
+  },
+  "files": [
+    {
+      "source": "scripts/run_ncs_m1_all_fem_v01.py",
+      "target": "project_control/evidence/retired_routes_v01/source/scripts/run_ncs_m1_all_fem_v01.py",
+      "bytes": 23111,
+      "sha256": "df2319d8276062ddf74113ee216f280f98b977a1a02637a903164fbf90e03dfc",
+      "relation": "selected_evidence_direct_hash"
+    },
+    {
+      "source": "scripts/run_paper2_division_dipole_gate_v01.py",
+      "target": "project_control/evidence/retired_routes_v01/source/scripts/run_paper2_division_dipole_gate_v01.py",
+      "bytes": 35888,
+      "sha256": "aa59b306377e50352c4b3a3e1b1b0c36b76aae2d42698031e63ca3a67fb291b2",
+      "relation": "selected_evidence_direct_hash"
+    },
+    {
+      "source": "scripts/run_paper2_feedback_kernel_gate_v01.py",
+      "target": "project_control/evidence/retired_routes_v01/source/scripts/run_paper2_feedback_kernel_gate_v01.py",
+      "bytes": 34811,
+      "sha256": "a09fa4319bd0246fe8b3c9f524af88438d1e00a501c016dc0c71caea75c60260",
+      "relation": "minimal_dependency_of_selected_source"
+    },
+    {
+      "source": "scripts/run_paper2_lineage_odd_mode_gate_v01.py",
+      "target": "project_control/evidence/retired_routes_v01/source/scripts/run_paper2_lineage_odd_mode_gate_v01.py",
+      "bytes": 59762,
+      "sha256": "a4c5e641eee1109334ee7d448f60decce21205c07c659ca621581aa76446887a",
+      "relation": "selected_evidence_direct_hash"
+    },
+    {
+      "source": "scripts/run_paper2_lineage_odd_mode_gate_v02.py",
+      "target": "project_control/evidence/retired_routes_v01/source/scripts/run_paper2_lineage_odd_mode_gate_v02.py",
+      "bytes": 68185,
+      "sha256": "54f07dfdb1b51286c129ec41404e31945492532e1346fc5728893b06b17f752a",
+      "relation": "selected_evidence_direct_hash"
+    },
+    {
+      "source": "scripts/run_paper2_lineage_odd_mode_gate_v03.py",
+      "target": "project_control/evidence/retired_routes_v01/source/scripts/run_paper2_lineage_odd_mode_gate_v03.py",
+      "bytes": 6604,
+      "sha256": "d6e52b17e00d9e0ddafbaee86689917f8f2bb4755fdd3d1cbc02ba8d1cf24ed7",
+      "relation": "selected_evidence_direct_hash"
+    },
+    {
+      "source": "src/ncs_m1/__init__.py",
+      "target": "project_control/evidence/retired_routes_v01/source/src/ncs_m1/__init__.py",
+      "bytes": 57,
+      "sha256": "50337149e83ed7fc2ef1a67d7b2807c98517b06e8482eba57e92616ca6961af8",
+      "relation": "minimal_dependency_of_selected_source"
+    },
+    {
+      "source": "src/ncs_m1/baseline.py",
+      "target": "project_control/evidence/retired_routes_v01/source/src/ncs_m1/baseline.py",
+      "bytes": 63083,
+      "sha256": "550b3b17428415c7193b9166d188577ec8eacc99682987f33569cdf5f471c94c",
+      "relation": "minimal_dependency_of_selected_source"
+    },
+    {
+      "source": "src/paper2_hybrid/__init__.py",
+      "target": "project_control/evidence/retired_routes_v01/source/src/paper2_hybrid/__init__.py",
+      "bytes": 448,
+      "sha256": "4626ee6f49cac099734728fe0dc2f3412ded11cf5066b32aff556cc39324783f",
+      "relation": "minimal_dependency_of_selected_source"
+    },
+    {
+      "source": "src/paper2_hybrid/config.py",
+      "target": "project_control/evidence/retired_routes_v01/source/src/paper2_hybrid/config.py",
+      "bytes": 4555,
+      "sha256": "0a83aedbabeb944b89f9584511dac5a597401327a68ac5c6411cb30e81ced6fe",
+      "relation": "selected_evidence_direct_hash"
+    },
+    {
+      "source": "src/paper2_hybrid/model.py",
+      "target": "project_control/evidence/retired_routes_v01/source/src/paper2_hybrid/model.py",
+      "bytes": 42954,
+      "sha256": "d43129c746c133294fcc92149d519a6c94bd633f2be54c898beea5d23190e800",
+      "relation": "selected_evidence_direct_hash"
+    },
+    {
+      "source": "src/paper2_hybrid/numerics.py",
+      "target": "project_control/evidence/retired_routes_v01/source/src/paper2_hybrid/numerics.py",
+      "bytes": 17413,
+      "sha256": "620381c4f0165801f2af03defe587e8381c9b6859f8bbd9d2f84198a555331e4",
+      "relation": "selected_evidence_direct_hash"
+    },
+    {
+      "source": "src/paper2_hybrid/protocol.py",
+      "target": "project_control/evidence/retired_routes_v01/source/src/paper2_hybrid/protocol.py",
+      "bytes": 2342,
+      "sha256": "f96d779cfcd6c76e9535f90a9941a6156b545d53a0270f04a564c68a304fe3ca",
+      "relation": "minimal_dependency_of_selected_source"
+    },
+    {
+      "source": "src/paper2_hybrid/roles.py",
+      "target": "project_control/evidence/retired_routes_v01/source/src/paper2_hybrid/roles.py",
+      "bytes": 876,
+      "sha256": "beb447ab12b8c433973ca807bba07331b8640b9fb9d4c944e3595510a3a501ec",
+      "relation": "minimal_dependency_of_selected_source"
+    }
+  ]
+}

@@ -1,0 +1,907 @@
+{
+  "geometry_spec_id": "GEOMETRY-PRL-ROUTE-H-STAGE0-V05",
+  "schema_version": "5.0.0",
+  "created_at": "2026-07-30T20:08:00+08:00",
+  "status": "frozen_stage0_specification_not_materialized",
+  "evidence_level": "deterministic_dimensionless_reference_geometry_and_pairing_spec_no_mesh_file_no_solver",
+  "supersedes": "GEOMETRY-PRL-ROUTE-H-STAGE0-V04",
+  "reference_frame": {
+    "type": "flat_canonical_patch",
+    "basis": {
+      "e_x": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "e_y": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "e_z": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "layer_direction": "e_z points from lumen toward outer myocardium",
+    "endocardial_apical_normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "curvature_enabled": false,
+    "curved_patch_requires_new_geometry_version": true
+  },
+  "patch_bounds": {
+    "x": [
+      0.0,
+      3.0
+    ],
+    "y": [
+      0.0,
+      1.8
+    ],
+    "z_lumen_to_outer": [
+      -0.24,
+      0.76
+    ],
+    "L_x": 3.0,
+    "L_y": 1.8
+  },
+  "surface_mesh_generator": {
+    "arithmetic": "IEEE-754 binary64; every listed operation is rounded to binary64; sqrt is correctly rounded; no fused algebraic reassociation is allowed.",
+    "fixed_vector_norm_order": "For vector v, compute s_xy=round(v_x*v_x+v_y*v_y), s_xyz=round(s_xy+v_z*v_z), then norm=sqrt(s_xyz).",
+    "seed_constant": "phi=(1+sqrt(5))/2",
+    "seed_normalization": "Each raw vertex is divided by sqrt(1+phi^2).",
+    "raw_vertices_by_id": [
+      {
+        "id": 0,
+        "xyz": [
+          "-1",
+          "phi",
+          "0"
+        ]
+      },
+      {
+        "id": 1,
+        "xyz": [
+          "1",
+          "phi",
+          "0"
+        ]
+      },
+      {
+        "id": 2,
+        "xyz": [
+          "-1",
+          "-phi",
+          "0"
+        ]
+      },
+      {
+        "id": 3,
+        "xyz": [
+          "1",
+          "-phi",
+          "0"
+        ]
+      },
+      {
+        "id": 4,
+        "xyz": [
+          "0",
+          "-1",
+          "phi"
+        ]
+      },
+      {
+        "id": 5,
+        "xyz": [
+          "0",
+          "1",
+          "phi"
+        ]
+      },
+      {
+        "id": 6,
+        "xyz": [
+          "0",
+          "-1",
+          "-phi"
+        ]
+      },
+      {
+        "id": 7,
+        "xyz": [
+          "0",
+          "1",
+          "-phi"
+        ]
+      },
+      {
+        "id": 8,
+        "xyz": [
+          "phi",
+          "0",
+          "-1"
+        ]
+      },
+      {
+        "id": 9,
+        "xyz": [
+          "phi",
+          "0",
+          "1"
+        ]
+      },
+      {
+        "id": 10,
+        "xyz": [
+          "-phi",
+          "0",
+          "-1"
+        ]
+      },
+      {
+        "id": 11,
+        "xyz": [
+          "-phi",
+          "0",
+          "1"
+        ]
+      }
+    ],
+    "oriented_seed_faces_by_id": [
+      {
+        "id": 0,
+        "vertices": [
+          0,
+          11,
+          5
+        ]
+      },
+      {
+        "id": 1,
+        "vertices": [
+          0,
+          5,
+          1
+        ]
+      },
+      {
+        "id": 2,
+        "vertices": [
+          0,
+          1,
+          7
+        ]
+      },
+      {
+        "id": 3,
+        "vertices": [
+          0,
+          7,
+          10
+        ]
+      },
+      {
+        "id": 4,
+        "vertices": [
+          0,
+          10,
+          11
+        ]
+      },
+      {
+        "id": 5,
+        "vertices": [
+          1,
+          5,
+          9
+        ]
+      },
+      {
+        "id": 6,
+        "vertices": [
+          5,
+          11,
+          4
+        ]
+      },
+      {
+        "id": 7,
+        "vertices": [
+          11,
+          10,
+          2
+        ]
+      },
+      {
+        "id": 8,
+        "vertices": [
+          10,
+          7,
+          6
+        ]
+      },
+      {
+        "id": 9,
+        "vertices": [
+          7,
+          1,
+          8
+        ]
+      },
+      {
+        "id": 10,
+        "vertices": [
+          3,
+          9,
+          4
+        ]
+      },
+      {
+        "id": 11,
+        "vertices": [
+          3,
+          4,
+          2
+        ]
+      },
+      {
+        "id": 12,
+        "vertices": [
+          3,
+          2,
+          6
+        ]
+      },
+      {
+        "id": 13,
+        "vertices": [
+          3,
+          6,
+          8
+        ]
+      },
+      {
+        "id": 14,
+        "vertices": [
+          3,
+          8,
+          9
+        ]
+      },
+      {
+        "id": 15,
+        "vertices": [
+          4,
+          9,
+          5
+        ]
+      },
+      {
+        "id": 16,
+        "vertices": [
+          2,
+          4,
+          11
+        ]
+      },
+      {
+        "id": 17,
+        "vertices": [
+          6,
+          2,
+          10
+        ]
+      },
+      {
+        "id": 18,
+        "vertices": [
+          8,
+          6,
+          7
+        ]
+      },
+      {
+        "id": 19,
+        "vertices": [
+          9,
+          8,
+          1
+        ]
+      }
+    ],
+    "subdivision_level": 2,
+    "subdivision_id_rule": {
+      "face_traversal": "Process input face IDs in ascending order.",
+      "edge_traversal_per_face": [
+        "(v0,v1)",
+        "(v1,v2)",
+        "(v2,v0)"
+      ],
+      "edge_key": "sorted endpoint vertex IDs",
+      "new_vertex_id": "When an edge key is first encountered, assign the next integer after the current maximum vertex ID.",
+      "midpoint_coordinate": "Normalize the arithmetic midpoint of its two unit-sphere endpoints to Euclidean unit length.",
+      "child_faces_in_output_order": [
+        [
+          "v0",
+          "m01",
+          "m20"
+        ],
+        [
+          "v1",
+          "m12",
+          "m01"
+        ],
+        [
+          "v2",
+          "m20",
+          "m12"
+        ],
+        [
+          "m01",
+          "m12",
+          "m20"
+        ]
+      ],
+      "new_face_ids": "Sequential integers in the listed child output order."
+    },
+    "superellipsoid_mapping": "For each component q=|u_k| compute q2=round(q*q), q4=round(q2*q2), q8=round(q4*q4); compute S_xy=round(x8+y8), S=round(S_xy+z8), denominator=sqrt(sqrt(sqrt(S))); then x=c+diag(a_x,a_y,a_z)*u/denominator with component operations in x,y,z order.",
+    "superellipsoid_exponent_p": 8,
+    "expected_vertices_per_cell": 162,
+    "expected_faces_per_cell": 320,
+    "fixed_topology_in_stage1": true,
+    "remeshing_enabled": false,
+    "failure_if_triangle_quality_below": 0.3,
+    "failure_if_nonmanifold_or_open": true
+  },
+  "canonical_array_serialization": {
+    "integer_arrays": "signed little-endian int64 in C row-major order",
+    "floating_arrays": "little-endian IEEE-754 binary64 in C row-major order",
+    "strings_and_metadata": "UTF-8 canonical JSON with keys sorted by Unicode code point and no insignificant whitespace",
+    "negative_zero": "canonicalize to positive zero before hashing",
+    "NaN_or_infinity": "forbidden",
+    "hash_algorithm": "SHA-256"
+  },
+  "cell_templates": {
+    "endocardial": {
+      "half_axes": {
+        "a_x": 0.5,
+        "a_y": 0.45,
+        "a_z": 0.12
+      },
+      "nominal_full_lengths": [
+        1.0,
+        0.9,
+        0.24
+      ],
+      "reference_volume_rule": "V0 is the exact signed volume of the finalized oriented triangulated surface.",
+      "reference_area_rule": "A0 is the exact reference triangle-area sum for each persistent primary face identity and lateral directional subtype.",
+      "reference_hinge_rule": "theta0 is the exact oriented dihedral angle of each finalized reference hinge."
+    },
+    "myocardial": {
+      "half_axes": {
+        "a_x": 0.5,
+        "a_y": 0.3,
+        "a_z": 0.28
+      },
+      "nominal_full_lengths": [
+        1.0,
+        0.6,
+        0.56
+      ],
+      "reference_volume_rule": "V0 is the exact signed volume of the finalized oriented triangulated surface.",
+      "reference_area_rule": "A0 is the exact reference triangle-area sum for each persistent primary face identity and lateral directional subtype.",
+      "reference_hinge_rule": "theta0 is the exact oriented dihedral angle of each finalized reference hinge."
+    }
+  },
+  "material_face_identity": {
+    "parametric_face_direction": "u_bar is the Euclidean-normalized sum of the three unit-sphere preimage directions of an oriented triangle.",
+    "dominant_z_rule": "|u_bar_z| >= max(|u_bar_x|,|u_bar_y|)",
+    "endocardial_primary": {
+      "dominant_z_negative": "apical_lumen",
+      "dominant_z_positive": "basal_ecm",
+      "otherwise": "lateral"
+    },
+    "myocardial_primary": {
+      "dominant_z_negative": "basal_ecm",
+      "dominant_z_positive": "opposite_outer",
+      "otherwise": "lateral"
+    },
+    "lateral_directional_subtype": {
+      "precondition": "primary identity is lateral",
+      "if_abs_x_greater_or_equal_abs_y_and_x_negative": "lateral_x_minus",
+      "if_abs_x_greater_or_equal_abs_y_and_x_positive": "lateral_x_plus",
+      "if_abs_y_greater_abs_x_and_y_negative": "lateral_y_minus",
+      "if_abs_y_greater_abs_x_and_y_positive": "lateral_y_plus",
+      "zero_sign_tie": "forbidden by the seed/subdivision geometry; if encountered stop materialization"
+    },
+    "persistence": "Primary and directional identities are assigned once in the reference mesh and never recomputed from current geometry.",
+    "floating_tie_rule": {
+      "comparison_tolerance": "8*eps_binary64 where eps_binary64=2^-52",
+      "dominance_priority": [
+        "abs(u_bar_z)",
+        "abs(u_bar_x)",
+        "abs(u_bar_y)"
+      ],
+      "rule": "Components whose absolute values differ by no more than 8*eps_binary64 are a tie. Resolve a three- or two-way tie by z before x before y. Otherwise apply the listed dominant-z and lateral x/y rules.",
+      "reason": "The eight mathematically symmetric corner directions must retain mirror-consistent material identity despite binary64 roundoff.",
+      "materialization_falsifier_closed": "Faces 63 and 159 and their six symmetric partners receive the same z-dominant priority; no x-neighbor master ray is forced onto an apical/basal slave face."
+    }
+  },
+  "myocardial_anchor_patches": {
+    "eligible_primary_identity": "lateral",
+    "Gamma_minus_rule": "Select faces with u_bar_x <= -0.75.",
+    "Gamma_plus_rule": "Select faces with u_bar_x >= 0.75.",
+    "centroid_and_force_weights": "Fixed reference triangle area multiplied by one-third barycentric nodal weights, normalized separately within each patch.",
+    "reference_length": "Lf0=||c_plus_0-c_minus_0||",
+    "minimum_reference_length": 0.8,
+    "failure_if_either_patch_empty": true,
+    "identity_hash": "Hash cell ID and the ascending face-ID arrays for Gamma_minus and Gamma_plus using the canonical serialization."
+  },
+  "entity_id_and_grid_registry": {
+    "endocardial_cell_id": "ENDO-i-j with i ascending fastest, i=0..2 and j=0..1",
+    "myocardial_cell_id": "MYO-i-j with i ascending fastest, i=0..2 and j=0..2",
+    "endocardial_grid": {
+      "n_x": 3,
+      "n_y": 2,
+      "cell_count": 6,
+      "center_rule": "c(i,j)=(0.5+i,0.45+0.9*j,-0.12)"
+    },
+    "myocardial_grid": {
+      "n_x": 3,
+      "n_y": 3,
+      "cell_count": 9,
+      "center_rule": "c(i,j)=(0.5+i,0.3+0.6*j,0.48)"
+    },
+    "endocardial_z_extent": [
+      -0.24,
+      0.0
+    ],
+    "myocardial_z_extent": [
+      0.2,
+      0.76
+    ]
+  },
+  "ECM_mesh": {
+    "bounds": {
+      "x": [
+        0.0,
+        3.0
+      ],
+      "y": [
+        0.0,
+        1.8
+      ],
+      "z": [
+        0.0,
+        0.2
+      ]
+    },
+    "structured_intervals": {
+      "n_x": 12,
+      "n_y": 8,
+      "n_z": 2
+    },
+    "spacings": {
+      "delta_x": 0.25,
+      "delta_y": 0.225,
+      "delta_z": 0.1
+    },
+    "vertex_id_rule": "ID=((k*(n_y+1))+j)*(n_x+1)+i with i ascending fastest.",
+    "brick_id_rule": "ID=((k*n_y)+j)*n_x+i with i ascending fastest.",
+    "brick_local_vertices": "b_abc is the grid vertex (i+a,j+b,k+c), a,b,c in {0,1}.",
+    "tetrahedralization_before_orientation_fix": [
+      [
+        "b_000",
+        "b_100",
+        "b_110",
+        "b_111"
+      ],
+      [
+        "b_000",
+        "b_100",
+        "b_101",
+        "b_111"
+      ],
+      [
+        "b_000",
+        "b_010",
+        "b_110",
+        "b_111"
+      ],
+      [
+        "b_000",
+        "b_010",
+        "b_011",
+        "b_111"
+      ],
+      [
+        "b_000",
+        "b_001",
+        "b_101",
+        "b_111"
+      ],
+      [
+        "b_000",
+        "b_001",
+        "b_011",
+        "b_111"
+      ]
+    ],
+    "orientation": "Swap the final two tetra vertices if necessary so det(Dm)>0.",
+    "expected_vertex_count": 351,
+    "expected_tetra_count": 1152,
+    "minimum_elements_through_thickness": 2,
+    "boundary_identities": {
+      "z_0": "lumen_facing",
+      "z_0_2": "outer_facing",
+      "x_0": "lateral_x_minus",
+      "x_3": "lateral_x_plus",
+      "y_0": "lateral_y_minus",
+      "y_1_8": "lateral_y_plus"
+    },
+    "boundary_triangle_order": "Ascending sorted global vertex tuple after outward orientation."
+  },
+  "material_tether_operator": {
+    "status": "fully_specified_but_not_materialized",
+    "reference_quadrature": {
+      "cell_master_face_points": "One point at barycentric coordinates (1/3,1/3,1/3) on every eligible master face.",
+      "reference_weight": "Exact reference area of the master triangle.",
+      "slave_point": "Fixed reference barycentric point found by the registered ray intersection; current closest-point updates are forbidden.",
+      "coverage": "Every eligible master face must produce exactly one tether."
+    },
+    "cell_ECM_pairing": {
+      "IF_ENDO_ECM": "For every endocardial basal_ecm face, use the cell as master and cast a ray from its reference barycenter along +e_z to the ECM z=0 boundary.",
+      "IF_MYO_ECM": "For every myocardial basal_ecm face, use the cell as master and cast a ray from its reference barycenter along -e_z to the ECM z=0.2 boundary.",
+      "hit_rule": "Choose the nearest nonnegative ray-triangle hit; on equal distance choose the smallest ECM boundary face ID.",
+      "failure_if_no_hit": true,
+      "maximum_reference_natural_gap": 0.05
+    },
+    "cell_cell_neighbor_registry": {
+      "neighbors": "Only grid-adjacent same-layer pairs; enumerate +x first then +y from each lower-index cell so every unordered neighbor appears once.",
+      "plus_x_pair": "Master is the lower-i cell lateral_x_plus face; cast +e_x to the higher-i cell lateral_x_minus surface.",
+      "plus_y_pair": "Master is the lower-j cell lateral_y_plus face; cast +e_y to the higher-j cell lateral_y_minus surface.",
+      "hit_rule": "Choose the nearest strictly positive ray-triangle hit on the required slave directional subtype; tie by smallest slave face ID.",
+      "failure_if_no_hit": true,
+      "maximum_reference_natural_gap": 0.15
+    },
+    "pair_record_fields_in_hash_order": [
+      "interface_id",
+      "pair_id",
+      "master_entity_id",
+      "master_face_id",
+      "master_barycentric",
+      "slave_entity_id",
+      "slave_face_id",
+      "slave_barycentric",
+      "reference_weight",
+      "g0_pair",
+      "normal_orientation_sign",
+      "reference_t1",
+      "reference_t2"
+    ],
+    "pair_id_rule": "Sort records by (interface_id,master_entity_id,master_face_id,slave_entity_id,slave_face_id); assign zero-based sequential pair IDs.",
+    "normal_and_tangent_rule": {
+      "master_normal": "Use the current oriented master-face normal; the registered sign makes it point from master toward slave at reference.",
+      "t1": "Normalize the current oriented edge from master face vertex 0 to vertex 1.",
+      "t2": "n_pair cross t1.",
+      "degeneracy": "Any zero-area master face stops before solver use; no fallback basis is permitted."
+    },
+    "physical_gap": "g_pair=(x_slave-x_master) dot n_pair using fixed material barycentric points.",
+    "natural_gap": "g0_pair is the same expression in the reference state and is stored per pair.",
+    "adhesive_opening": "delta_g=g_pair-g0_pair; reference delta_g=0.",
+    "normal_potential": "phi_adh_n=-w for delta_g<0; -w*(1-3*s^2+2*s^3) for 0<=delta_g<=g_c with s=delta_g/g_c; 0 for delta_g>g_c.",
+    "material_slip": "delta_t=[r dot t1-r0 dot t10, r dot t2-r0 dot t20] with r=x_slave-x_master.",
+    "tangential_potential": "phi_adh_t=0.5*k_t*a(delta_g)*||delta_t||^2; a=1 for delta_g<0, the same cubic for 0<=delta_g<=g_c, and 0 above g_c.",
+    "pair_birth_or_death": false,
+    "pair_hash_required": true,
+    "failure_checks": [
+      "coverage is exactly 100 percent of eligible master faces",
+      "pair IDs are unique",
+      "each master quadrature has exactly one owner",
+      "all barycentric coordinates lie within tolerance of the closed triangle",
+      "all g0_pair are nonnegative and below the interface maximum",
+      "assembled reference adhesive force and moment residuals pass the frozen thresholds"
+    ]
+  },
+  "dynamic_steric_operator": {
+    "eligible_entity_pairs": "All distinct cell-cell and cell-ECM entity pairs whose current axis-aligned bounding-box distance is at most the interface search buffer; no material-neighbor restriction and no cell self-contact in v04.",
+    "closed_boundary_surfaces": {
+      "cell": "All consistently outward-oriented triangles of the watertight cell surface.",
+      "ECM": "Only exterior ECM boundary triangles with a frozen boundary identity; interior tetrahedral faces are forbidden.",
+      "ECM_source_vertices": "Only ECM vertices incident on at least one exterior boundary triangle."
+    },
+    "target_surface_validity": "Before winding-number use, every current target boundary must remain an embedded consistently oriented closed 2-manifold with no proper self-intersection; ECM additionally requires J>0 in every tetrahedron. An invalid target surface fails the current state rather than receiving a winding classification.",
+    "ordered_sampling": "For each unordered eligible entity pair (A,B), evaluate every boundary vertex of A against the complete closed boundary surface of B and every boundary vertex of B against the complete closed boundary surface of A.",
+    "global_surface_owner": "For one ordered source vertex and one target entity, compute the Euclidean closest point over every target boundary triangle and retain exactly one globally closest target feature. Compare squared distances first; exact distance ties use target_face_id ascending then feature order face interior, edge 01, edge 12, edge 20, vertex 0, vertex 1, vertex 2.",
+    "closest_point": "Use the exact piecewise closest point on the selected current target triangle and store its barycentric coordinates and selected feature region.",
+    "inside_outside_classifier": {
+      "method": "Oriented generalized winding number of the complete watertight target boundary.",
+      "solid_angle": "For target triangle (a,b,c) and source x, Omega_f=2*atan2(det(a-x,b-x,c-x), ||a-x||||b-x||||c-x||+(a-x) dot (b-x)||c-x||+(b-x) dot (c-x)||a-x||+(c-x) dot (a-x)||b-x||).",
+      "sum_order": "Ascending target face ID in binary64 arithmetic.",
+      "winding_number": "w=abs(sum_f Omega_f)/(4*pi).",
+      "classification": "If closest distance <=1e-12*L0 set boundary with g=0; otherwise outside if w<0.5-1e-8 and inside if w>0.5+1e-8.",
+      "ambiguous_action": "Any non-boundary point with |w-0.5|<=1e-8 is an invalid geometry/classification event and the state is not accepted."
+    },
+    "signed_distance": "Let d be the global closest Euclidean distance. The physical gap is g=+d outside the target, g=0 on its boundary and g=-d inside the target.",
+    "reference_weight": "For a cell source vertex use one third of the fixed reference areas of all incident cell surface faces; for an ECM source vertex use one third of the fixed reference areas of incident exterior ECM boundary triangles only.",
+    "potential": "For every ordered source-vertex/target-surface owner, phi_rep=0.5*k_rep*reference_weight*max(-g,0)^2. The two ordered sampling directions are both retained by definition and no additional factor of two is applied.",
+    "active_record_fields_in_hash_order": [
+      "source_entity_id",
+      "source_vertex_id",
+      "target_entity_id",
+      "target_face_id",
+      "target_feature_region",
+      "target_barycentric",
+      "inside_outside_state",
+      "reference_weight"
+    ],
+    "active_record_order": "Sort by (source_entity_id,source_vertex_id,target_entity_id,target_face_id,target_feature_region). Recompute records at every accepted state.",
+    "complete_gradient": "Away from closest-feature and inside/outside events, hold the discrete owner and sign branch fixed and differentiate the selected squared-distance potential with respect to every participating source and target coordinate. A feature event is reported and cannot silently pass a directional-derivative test.",
+    "proper_intersection_definition": "A proper triangle-triangle intersection is a transverse interior-interior, interior-edge or edge-edge crossing that changes oriented side signs. Isolated zero-measure tangency without side-sign crossing is allowed and has g=0.",
+    "edge_edge_safety": {
+      "method": "Deterministic continuous triangle-triangle collision detection on the linear interpolation from the last accepted state to every trial state.",
+      "primitive_order": "Entity pair ID then ascending face-ID pair then feature order.",
+      "acceptance": "A trial state containing or crossing a proper intersection without a negative signed vertex-surface distance is rejected before state acceptance; reduce the step and repeat.",
+      "terminal_falsifier": "If the registered minimum step cannot avoid the proper intersection, the current case fails; the guard is not relabeled as a contact force, energy or dissipation."
+    },
+    "failure_checks": [
+      "each ordered source vertex has exactly one global target-surface owner while its entity pair is eligible",
+      "all active target triangles belong to closed exterior boundary surfaces",
+      "every target boundary remains embedded oriented and free of proper self-intersection",
+      "two disjoint watertight entities have no negative signed distances and zero steric energy",
+      "a manufactured point inside a watertight target has negative signed distance",
+      "reference patch steric energy force and moment are zero",
+      "no accepted state contains an unpenalized proper triangle-triangle intersection"
+    ]
+  },
+  "myocardial_source_map_operator": {
+    "status": "fully_specified_but_not_materialized",
+    "current_flux": "j_myo=0 in every v04 case",
+    "source_owner": "Every myocardial basal_ecm master-face barycenter quadrature owns exactly one source-map record.",
+    "geometry_reuse": "Reuse the already selected IF_MYO_ECM material-tether ray hit only as geometry: the same myocardial master face, ECM slave boundary face and fixed slave barycentric point. Source ownership remains separate from mechanical tether ownership.",
+    "target_tetrahedron": "The target ECM outer-facing boundary triangle must be incident on exactly one tetrahedron; that unique tetrahedron is target_tetra_id.",
+    "reference_weight": "Exact reference area of the myocardial basal master triangle.",
+    "record_fields_in_hash_order": [
+      "source_map_id",
+      "source_cell_id",
+      "source_face_id",
+      "source_barycentric",
+      "target_ECM_face_id",
+      "target_ECM_barycentric",
+      "target_tetra_id",
+      "reference_weight"
+    ],
+    "record_order": "Sort by (source_cell_id,source_face_id,target_ECM_face_id,target_tetra_id) and assign zero-based source_map_id.",
+    "future_nonzero_semantics": "If a later contract authorizes nonzero reference-area flux, record amount rate is j_myo*reference_weight and belongs only to target_tetra_id; no such assembly is enabled in v04.",
+    "v04_zero_action": "Every mapped amount rate, ECM source residual and source power is exactly zero because j_myo=0.",
+    "hash_required": true,
+    "failure_checks": [
+      "coverage is exactly 100 percent of myocardial basal_ecm master faces",
+      "each source face has exactly one source-map owner",
+      "each target boundary face has exactly one incident target tetrahedron",
+      "all record IDs and barycentric coordinates are valid",
+      "j_myo source assembly and source power are identically zero"
+    ]
+  },
+  "boundary_owner_registry": {
+    "full_patch_primary": {
+      "blood_pressure": "endocardium.apical_lumen only",
+      "blood_WSS": "endocardium.apical_lumen only",
+      "outer_compliant_support": "myocardium.opposite_outer only",
+      "lateral_support_x_minus": "MYO-0-j lateral_x_minus",
+      "lateral_support_x_plus": "MYO-2-j lateral_x_plus",
+      "lateral_support_y_minus": "MYO-i-0 lateral_y_minus",
+      "lateral_support_y_plus": "MYO-i-2 lateral_y_plus",
+      "endocardial_perimeter_lateral": "traction_free",
+      "ECM_lateral_boundaries": "traction_free",
+      "direct_environment_support_on_ECM": false,
+      "direct_environment_support_on_endocardium": false,
+      "fully_fixed_boundary": false
+    },
+    "gate_C_sandwich": {
+      "support": "myocardium.opposite_outer only",
+      "ECM_lumen_facing": "traction_free",
+      "ECM_lateral": "traction_free",
+      "myocardial_perimeter_lateral": "traction_free"
+    },
+    "gate_D_sandwich": {
+      "fixture_support": "ECM.outer_facing only",
+      "port_id": "P_FIXTURE_D",
+      "ECM_lateral": "traction_free",
+      "endocardial_perimeter_lateral": "traction_free",
+      "interpretation": "fixed test fixture only; not surrounding myocardium and not reused in the full patch"
+    },
+    "periodic_sensitivity": {
+      "registered_in_v04": false,
+      "reason": "Discrete-cell periodic image interactions and ECM continuum periodic constraints require a separate geometry/case version; v02 same-template-ID pairing is superseded and forbidden."
+    },
+    "owner_exclusivity": [
+      "each cell face has one primary identity and lateral faces have exactly one directional subtype",
+      "each external face has exactly one of blood port, support port, fixture port or traction-free",
+      "an interface face cannot own an external environment port",
+      "each material tether quadrature has exactly one pair owner",
+      "each myocardial basal source quadrature has exactly one source-map owner distinct from the mechanical pair owner",
+      "internal pair transfer is never external power"
+    ]
+  },
+  "support_energy_spec": {
+    "nodal_weight": "One third of the fixed reference areas of all owned support faces incident on the node.",
+    "energy": "Psi_support=0.5*sum_i w_i*(x_i-y_i)^T*K_port*(x_i-y_i).",
+    "dissipation": "D_support=sum_i w_i*v_i^T*C_port*v_i because every registered support reference is fixed.",
+    "full_patch_outer_K": [
+      [
+        0.25,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.25,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "full_patch_outer_C": [
+      [
+        0.25,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.25,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "full_patch_lateral_K": [
+      [
+        0.5,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.5,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.25
+      ]
+    ],
+    "full_patch_lateral_C": [
+      [
+        0.5,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.5,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.25
+      ]
+    ],
+    "gate_D_fixture_K": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "gate_D_fixture_C": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "reference_motion": "fixed in every registered v04 case",
+    "base_input_power": 0,
+    "moving_reference_requires_new_contract": true
+  },
+  "numerical_gauge_registry": {
+    "single_entity_or_free_chain": {
+      "translation_constraints": "Reference-area/volume weighted mean displacement is zero in each Cartesian component.",
+      "rotation_constraints": "The three axial components of the antisymmetric part of sum_a w_a*(X_a-X_c) tensor (x_a-x_c) are zero.",
+      "scope": "one global six-constraint gauge per otherwise unsupported case, not per cell",
+      "implementation": "exact holonomic Lagrange multipliers",
+      "constraint_rate": 0,
+      "physical_power": 0,
+      "claim_as_environment_reaction": false
+    },
+    "supported_cases": "No additional gauge unless a rank test proves a remaining null mode; such a finding requires a new Stage 0 version."
+  },
+  "spatial_refinement_policy": {
+    "registered_in_v04": false,
+    "reason": "The v04 reference geometry has one fixed identity-bearing topology. Coarse/fine families would change IDs, tethers and hashes.",
+    "required_before_stage2_scientific_execution": true,
+    "future_requirement": "A separately approved discretization-verification version must seal coarse/base/fine geometry families and cross-mesh observables.",
+    "stage1_effect": "Does not authorize Stage 1; if later authorized, Stage 1 may target only the frozen base topology."
+  },
+  "reference_state_registry": {
+    "cell_V0": "exact finalized reference mesh volume",
+    "cell_A0": "exact finalized reference area per primary identity and directional subtype",
+    "cell_theta0": "exact finalized oriented reference hinge angles",
+    "cell_Lf0": "exact fixed-reference-weight anchor-centroid distance",
+    "ECM_F0": "identity",
+    "ECM_J0": 1.0,
+    "ECM_Z0": "zero symmetric traceless tensor",
+    "ECM_A_hat0": 1.0,
+    "ECM_H_ECM_hat0": 0.2,
+    "material_tether_delta_g0": 0.0,
+    "material_tether_delta_t0": [
+      0.0,
+      0.0
+    ],
+    "dynamic_steric_reference": "all ordered source vertices are outside or on the target boundary, all physical signed distances are nonnegative, no proper intersection exists and steric energy is zero",
+    "myocardial_source_map_reference": "complete unique map with j_myo=0 and zero source assembly",
+    "default_prestress": false,
+    "reference_bundle_seal": {
+      "materialization_authorized": false,
+      "required_before_any_solver_or_response": true,
+      "required_arrays": [
+        "all cell vertex arrays",
+        "all cell oriented face arrays",
+        "all primary and directional material face identity arrays",
+        "all anchor face-ID arrays",
+        "ECM vertex and oriented tetra arrays",
+        "ECM boundary face identity arrays",
+        "complete material tether records including g0_pair",
+        "complete myocardial source-map records including target_tetra_id",
+        "support and traction-free owner arrays",
+        "gauge weight arrays"
+      ],
+      "required_assembled_checks": [
+        "reference conservative force residual",
+        "reference net force",
+        "reference net moment",
+        "material tether coverage",
+        "myocardial source-map coverage and zero assembly",
+        "zero reference steric energy force moment and proper intersections",
+        "all tetra det(Dm)>0"
+      ],
+      "hash_algorithm": "SHA-256",
+      "mismatch_action": "stop before Stage 1 implementation or any response"
+    }
+  }
+}

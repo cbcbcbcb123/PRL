@@ -1,0 +1,66 @@
+{
+  "schema_version": "prl.repository_cleanup.batch04_candidate01_acceptance.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "implementation_status": "passed",
+  "scientific_execution": "not_run",
+  "deletion_executed": false,
+  "scope": "create-only stable Python storage status and retained long-doublet verification slice",
+  "tests": {
+    "command": "python -B -X utf8 -m pytest -p no:cacheprovider tests/prl -q",
+    "status": "passed",
+    "passed": 8,
+    "failed": 0,
+    "cache_paths_present_after": 0
+  },
+  "storage_status": {
+    "command": "python -B -X utf8 -m prl storage status",
+    "status": "blocked",
+    "level": "hard_limit_exceeded",
+    "can_start": false,
+    "logical_bytes_observed_before_this_acceptance_record": 5773467044,
+    "file_count_observed_before_this_acceptance_record": 14917,
+    "directory_count_observed_before_this_acceptance_record": 1567,
+    "reparse_points_skipped": 78,
+    "scan_errors": 0,
+    "warning_bytes": 2576980377,
+    "hard_limit_bytes": 3221225472,
+    "default_stage_bytes": 268435456,
+    "minimum_stop_reserve_bytes": 67108864
+  },
+  "long_doublet_verification": {
+    "command": "python -B -X utf8 -m prl verify long-doublet",
+    "status": "passed",
+    "source_files_checked": 13,
+    "source_identity": "passed",
+    "matrix_cases": 4,
+    "matrix_complete": true,
+    "case_scalar_ledgers": "passed",
+    "frozen_status_agreement": "passed",
+    "long_doublet_numerical": "passed",
+    "static_equilibrium": "failed",
+    "parent_Z1": "blocked",
+    "biological_validation": "blocked",
+    "sixteen_cell_dynamics": "not_run",
+    "consecutive_reports_equal": true,
+    "not_recomputed": [
+      "node-level END/SIDE displacement-refinement norms",
+      "node/triangle containment and crossing predicates",
+      "all possible incident-vertex fold configurations"
+    ]
+  },
+  "package_discovery": {
+    "status": "passed",
+    "packages": [
+      "prl",
+      "prl.verification"
+    ]
+  },
+  "boundaries": [
+    "no historical run script is imported by src/prl",
+    "no Codex skill path is imported by src/prl",
+    "no solver, GPU worker, Docker, installation or external service was started",
+    "no historical script, result, mechanics equation, material parameter or threshold was changed",
+    "no file or directory was deleted"
+  ]
+}

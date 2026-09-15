@@ -1,0 +1,8 @@
+order,criterion,observed,threshold,passed,provenance
+1,baseline_drift,only frozen parent v02/v04/v06 failures,no new failure,true,verification/cpp_full_ctest.log
+2,transaction_atomicity,six full-state before/after hashes equal,all bitwise-state hashes equal,true,transaction_audit.json
+3,survivor_collapse,split to endpoint-survivor cycle recovered,geometry/topology/material/identity/energy pass,true,survivor_cycle.json
+4,r1r,focused executable passed,all preregistered QoI/J1/safety gates,true,r1r_summary.json
+5,c1,contact-only 10-step path passed,penetration/action-reaction/work/zero active-passive,true,c1_summary.json
+6,f1_and_f1r,nonfinite persistence and remesh rejection passed,failure state persists and rejected remesh is atomic,true,f1_summary.json;transaction_audit.json
+7,evidence_and_verification,passed,v08r1 reverified; no new regressions; strict/ruff pass,true,verification_summary.json;v08r1_evidence_reverification.json

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paper 2 专家指导：仓库适用性与交付评估</title>
+<link rel="stylesheet" href="../../../../muse_theory/styles.css">
+<style>main{max-width:1100px}td,th{vertical-align:top}code{overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere}.notice{padding:16px;border-left:4px solid #126b59;background:#f0f8f5}</style>
+</head><body><main>
+<nav class="crumb"><a href="../../index.html">Expert Guidance</a> · EXP-20260909-001-paper2-lineage-ecm</nav>
+<header class="page-header"><p class="eyebrow">REPOSITORY ASSESSMENT · 2026-09-09</p><h1>Paper 2 专家意见与执行建议：适用性评估</h1>
+<p><strong>指导源：</strong><a href="source/review-and-execution-plan.html">完整评审、单细胞/细胞层判断及分阶段执行方案</a>。</p></header>
+<section><h2>1. 交付及授权事实</h2>
+<p>用户要求把本任务的专家意见和执行方案写入 <code>E:\MeshCell3D\plan\expert_guidance</code>，补充“是否需要一层细胞分裂、生长、死亡”的判断，并给后续执行 Codex 留出空间。该指令明确授权本目录的交付及登记，无需重复申请项目外写入许可。</p>
+<p>本次仅创建指导记录及更新本目录的 registry/index；没有转写 active、修改生产代码、运行科学计算、创建自动化、发送任务、提交或推送。执行阶段的预算为建议值；用户以后明确交给执行者采纳的范围才可执行。</p>
+<p>决定状态为 <code>reviewed</code>：科学建议已做静态证据评估，但未将新增阶段预算、模型物理和全部技术选择伪记为用户已接受。它不是要求重新批准这次文件交付。执行者应沿用用户明确采纳的阶段自主完成一般实现步骤。</p></section>
+<section><h2>2. 两个仓库的职责</h2>
+<table><thead><tr><th>项目</th><th>本次确认</th><th>适用边界</th></tr></thead><tbody>
+<tr><td>PRL / Paper 2</td><td><code>E:\Temp-Projects\PRL</code>；分支 <code>codex/simucell3d-hybrid-feasibility</code>；HEAD <code>b45650a9e370be138a70acf305b6c3a21e6a7ed2</code>。</td><td>当前科学合同、心肌/ECM FEM、二维候选及公平连续强对照归此项目。</td></tr>
+<tr><td>MeshCell3D</td><td><code>E:\MeshCell3D</code>；main；HEAD <code>abca591e73041363200ecbb61253c3fc91532edb</code>；首次只读快照的已跟踪工作树无修改，登记期间发现另一指导记录并发更新索引。</td><td>应用无关、三维闭合三角表面 DCM-only；不新增连续模型层，不写心脏专属核心语义。</td></tr>
+</tbody></table>
+<p>二者不能仅靠目录名“DCM”而互换。MeshCell3D 的薄三维细胞不自动满足 Paper 2 的二维假设；如后续确需跨仓库生产代码修改、改变维度或引入新接口，应另有明确设计和授权。本指导只支持当前范围内的能力映射。</p></section>
+<section><h2>3. 仓库证据及复核范围</h2>
+<table><thead><tr><th>项目</th><th>证据</th><th>状态</th><th>判断</th></tr></thead><tbody>
+<tr><td>runner 身份</td><td>v01 SHA256 与用户提供值及上一轮读取一致；三份科学记录与生产关键源哈希见 provenance。</td><td>passed</td><td>本轮刷新身份；没有重新执行实现或数值验证。</td></tr>
+<tr><td>新机械结果</td><td>v01_20260908 结果目录及 summary 均不存在。</td><td>not_run</td><td>保留未运行，不能转为科学 NO-GO。</td></tr>
+<tr><td>用户/并发修改</td><td>PRL 的指定 Figure 2 合同保持原哈希；README.md 本轮已有额外未提交修改。</td><td>passed</td><td>均只读保留；README 修改来源 unknown，不夹带处理。</td></tr>
+<tr><td>当前数学实现</td><td>上一轮已独立审阅 A/B/a/g、RMS、镜像、八带和 FD；本轮哈希未变。</td><td>passed</td><td>仅指静态实现主体；分类及执行边界仍存在明确待修项。</td></tr>
+<tr><td>完整可执行合同</td><td>主指导第 4 节所列重叠分类、全核区间及硬限制问题。</td><td>failed</td><td>P0 优先修订，不能称原 runner 完全通过。</td></tr>
+<tr><td>MeshCell3D 声明式表型</td><td><a href="../../../../code/muse_dcm/engine/biochemistry/phenotype.py">phenotype.py</a>；拓扑目录含 cell_divider.py、cell_cycle.py。</td><td>passed</td><td>只确认代码入口存在并声明接线；未验收全部实际行为。</td></tr>
+<tr><td>可复用双向耦合成熟度</td><td><a href="../../../active/meshcell3d-scientific-closure-and-head-recertification.html#lb2br1-review-20260908">现行计划的 LB2-B-R1 审阅</a>明确保留空间 FAIL；后续 R2 仅允许离线 evaluator 修正。</td><td>blocked</td><td>这是当前计划记录，本次未重算原运行结果；不能据此宣布耦合能力已成熟或启动 LB2-C。</td></tr>
+<tr><td>有限细胞层/生长/死亡</td><td>本指导提出科学入场条件；无本任务实际仿真或生物结果。</td><td>not_run</td><td>死亡不自动成为必要工作，细胞层也不等于完整生命周期平台。</td></tr>
+</tbody></table>
+<p>此表沿用仓库 assessment 模板的小写机器状态；主指导用用户要求的 PASS/FAIL/BLOCKED/NOT_RUN/UNKNOWN。两者含义一致，不代表新增验收。</p></section>
+<section><h2>4. 建议采用与暂缓</h2>
+<ul>
+<li><strong>优先采用：</strong>P0 数值合同与失败分类修订；P1 唯一机械门；P2 母胞—女儿最小事件模型和虚拟分区/有限混合/同信息连续强对照；允许执行者自行组织普通实现与必要校核。</li>
+<li><strong>有条件采用：</strong>P3 有限心内膜细胞层，先一次局部分裂，再检验一个邻近事件；必须满足前置门、二维边界和阶段预算。</li>
+<li><strong>先设计后决定执行：</strong>P4 的 ECM 偶通道、闭环及存储定位实验；新增求解不能占用或继承 P1 未用预算。</li>
+<li><strong>暂缓：</strong>重复生长/分裂、死亡/挤出/替换、大组织、三维、流体、非线性、GPU与全面平台迁移。</li>
+<li><strong>不采用：</strong>旧牵引路线复活、只用 g 判秩、将母胞平均核直接称生物盲区、剥夺连续模型身份信息、同信息连续模型通过即自动否定物理机制。</li>
+</ul></section>
+<section><h2>5. 相关指导记录与并发保留</h2>
+<p>登记前重新读取清单，发现已新增 <a href="../EXP-20260909-001-independent-scientific-architecture-review/assessment.html">EXP-20260909-001-independent-scientific-architecture-review</a>，并核对其评估与 <a href="../EXP-20260909-001-independent-scientific-architecture-review/decision.json">采纳决定</a>。该记录针对 MeshCell3D 的 C19 失败传播、C6/LB2 证据与框架架构；本记录针对 PRL 的 Paper 2 科学设计。两者在状态真实性、DCM-only 边界和可复用能力审查上相容，无替代关系。</p>
+<p>本次保留另一记录的全部文件与登记内容，只追加本记录。执行 Paper 2 不自动触发 C19/C6/LB2 任务，框架的阶段采纳也不授权 Paper 2 正式求解；若后续能力复用依赖框架修复，应明确依赖与相应证据。两份记录需使用完整 record_id 或明确项目名称区分，不能只写相同的日期编号简称。</p></section>
+<section><h2>6. 交付核验与后续更新</h2>
+<p>本记录内的 <a href="delivery_checks.json">delivery_checks.json</a> 将保存实际文件/JSON/链接/来源哈希及写入范围核验；它只验收文档交付，不验收任何科学命题。登记索引与决定文件可随实际用户决定更新，已登记 source 不覆盖；后续实质修订另建版本并注明 supersedes。</p>
+<p class="notice">建议的下一步是让执行 Codex 读取完整指导及本评估，刷新当前事实，把用户明确采纳的范围转成一份简明活动计划，再推进 P0。无需为这次已授权的文件保存再次确认。</p></section>
+<footer class="page-footer">MeshCell3D Expert Guidance · PRL Paper 2 cross-repository scope assessment · 科学执行未启动</footer>
+</main></body></html>

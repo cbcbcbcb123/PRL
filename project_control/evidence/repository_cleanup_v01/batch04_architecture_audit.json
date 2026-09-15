@@ -1,0 +1,77 @@
+{
+  "schema_version": "prl_repository_cleanup_batch04_architecture_audit_v01",
+  "status": "passed",
+  "recorded_at": "2026-09-15",
+  "workspace": "E:\\Temp-Projects\\PRL",
+  "scientific_execution": "not_run",
+  "deletion_executed": false,
+  "inventory": {
+    "code_files": 210,
+    "code_bytes": 3868810,
+    "script_python_files": 145,
+    "versioned_script_files": 136,
+    "test_python_files": 30,
+    "source_files": 34,
+    "active_python_roots": 8,
+    "active_python_closure_files": 15,
+    "active_python_closure_bytes": 100135,
+    "active_python_closure_lines": 1263,
+    "active_python_internal_edges": 28,
+    "all_local_script_import_edges": 82,
+    "scripts_with_local_imports": 54,
+    "retained_z1_normalized_source_references": 54,
+    "retired_result_path_hits": 75,
+    "code_files_with_retired_result_path_hits": 32,
+    "cpp_application_targets": 14,
+    "cpp_sources_including_implementation_cpp": 8
+  },
+  "git_visibility": {
+    "scripts_tracked": 22,
+    "scripts_untracked": 123,
+    "tests_tracked": 4,
+    "tests_untracked": 26,
+    "src_tracked": 10,
+    "src_untracked": 24
+  },
+  "default_test_collection": {
+    "tests_collected": 266,
+    "collection_errors": 2,
+    "error_dependency": "basix",
+    "error_scope": "retired Paper2/FEniCSx tests"
+  },
+  "active_python_closure": [
+    "scripts/diagnose_myo_sheet_saved_geometry_v01.py",
+    "scripts/myo_fold_monitor_v01.py",
+    "scripts/package_myo_long_doublet_v01.py",
+    "scripts/render_myo_long_doublet_extensions_v01.py",
+    "scripts/render_myo_long_doublet_v01.py",
+    "scripts/render_myo_sheet_relaxation_v01.py",
+    "scripts/render_project_cockpit_v01.py",
+    "scripts/run_myo_contact_barrier_v01.py",
+    "scripts/run_myo_long_doublet_extensions_v01.py",
+    "scripts/run_myo_long_doublet_v01.py",
+    "scripts/run_myo_sheet_2d_m0_v01.py",
+    "scripts/run_myo_sheet_short_dynamics_v01.py",
+    "scripts/verify_myo_long_doublet_v01.py",
+    "scripts/verify_myo_sheet_relaxation_delivery_v01.py",
+    "scripts/verify_myo_sheet_relaxation_v01.py"
+  ],
+  "cpp_implementation_include_sources": [
+    "src/ventricle_bioform_myo/ventricle_myo_strip_v01.cpp",
+    "src/ventricle_simucell3d_m0/myo_contact_barrier_probe_v01.cpp",
+    "src/ventricle_simucell3d_m0/myo_contact_barrier_relaxation_v01.cpp",
+    "src/ventricle_simucell3d_m0/myo_contact_scaling_probe_v01.cpp",
+    "src/ventricle_simucell3d_m0/myo_sheet_contact_probe_v01.cpp",
+    "src/ventricle_simucell3d_m0/myo_sheet_contact_probe_v02.cpp",
+    "src/ventricle_simucell3d_m0/myo_sheet_contact_probe_v03.cpp",
+    "src/ventricle_simucell3d_m0/myo_sheet_relaxation_v01.cpp"
+  ],
+  "recommended_order": [
+    "stable_python_application_and_evidence_module",
+    "cpp_application_support_library",
+    "unified_build_test_navigation",
+    "retired_code_evidence_migration_and_exact_deletion_proposal"
+  ],
+  "recommended_first_slice": "python_storage_and_independent_long_doublet_verification",
+  "implementation_status": "not_run"
+}

@@ -1,0 +1,343 @@
+你现在接管“心脏发育—cECM 细胞—基质—血流耦合模型”项目。
+
+====================
+一、唯一工作目录
+====================
+
+唯一正式项目根目录：
+
+E:\Temp-Projects\PRL
+
+源项目目录：
+
+D:\我的坚果云\33 My Projects\Projects\00 PRL
+
+重要参考文献：
+
+D:\我的坚果云\11 wiki from refs\05 原始资料\文献 MD\2024 - Nature Computational Science - Iber - SimuCell3D三维组织力学模拟.md
+
+硬性规则：
+
+1. 后续所有代码、notebook、数据、模型、治理记录、图片、GIF、视频和稿件产物，只能写入：
+   E:\Temp-Projects\PRL
+
+2. 如果当前 workspace 没有包含该目录，立即请求目录权限；不得退回 C: 或 D: 创建正式产物。
+
+3. 源项目目录只能读取和复制：
+   - 不修改；
+   - 不移动；
+   - 不覆盖；
+   - 不重命名；
+   - 不执行任何删除操作。
+
+4. 用户将在迁移验收完成后自行删除旧项目。你无权删除旧目录。
+
+5. 不得在迁移尚未完成时报告旧项目“可以删除”。
+
+====================
+二、迁移授权与模式
+====================
+
+用户授权你自行判断哪些旧项目内容有继续使用价值，并将其复制到新项目中。
+
+迁移采用 Direct + Check，由当前单一执行者完成，不建立总管或多角色任务。
+
+科学模型、求解器、参数、边界条件和论文证据仍采用 cb-governed-project-supervisor 的受治理工作流。
+
+迁移时优先保留：
+
+1. 理论推导、模型定义和边界条件；
+2. 当前及历史版本的源代码；
+3. Jupyter notebooks；
+4. 原始数据、source data、中间数据及其说明；
+5. Fig.1–Fig.9 已生成或已接受的图片；
+6. 补充材料、GIF 或动画的生成代码；
+7. plans、execution_logs、inspection_reports、decision_records、memory；
+8. foundation v03、v06 及相关模型版本；
+9. Stage 4 的 case registry、参数记录、门禁记录和 blocked/caveat 结论；
+10. exact hash、批准记录、输入清单和证据链；
+11. 环境文件、requirements、lock files、配置文件；
+12. Git 历史、当前分支、HEAD、未提交修改和未跟踪但有用的文件；
+13. 被 notebook、脚本或 Markdown 通过绝对路径引用的外部输入；
+14. 不能可靠重新生成的中间结果。
+
+原则上不迁移：
+
+- Python cache；
+- notebook checkpoint；
+- pytest/cache；
+- 可重新安装的虚拟环境；
+- 临时渲染文件；
+- 明确重复且已有权威版本的输出；
+- 无法确认来源的临时图片；
+- 与该论文项目无关的文件。
+
+任何被排除的文件必须记录理由，不得静默遗漏。
+
+====================
+三、迁移执行要求
+====================
+
+迁移前：
+
+1. 只读盘点源项目，包括隐藏文件。
+2. 检查源项目是否为 Git repository。
+3. 记录：
+   - 当前 branch；
+   - HEAD commit；
+   - git status；
+   - remotes；
+   - submodules；
+   - 未提交修改；
+   - 未跟踪文件。
+4. 搜索项目中的绝对路径依赖。
+5. 识别指向源目录、用户临时目录和 generated_images 的链接。
+6. 生成迁移候选清单。
+
+迁移过程中：
+
+1. 只复制，不移动。
+2. 保留文件时间、扩展名和目录语义。
+3. 不覆盖目标目录中已存在且内容不同的文件。
+4. 内容冲突时创建新版本，并记录冲突。
+5. 每个迁移文件计算源文件和目标文件的 SHA-256。
+6. Git 元数据若有效，应一并保存，并在目标目录执行只读完整性检查。
+7. 外部但必需的输入复制到新项目的 references 或 external_inputs 目录，并保留原始路径与来源说明。
+8. 文献资料只作为只读参考输入，不修改原文。
+
+至少建立：
+
+E:\Temp-Projects\PRL\migration\
+E:\Temp-Projects\PRL\project_control\
+E:\Temp-Projects\PRL\references\
+E:\Temp-Projects\PRL\external_inputs\
+
+优先保留旧项目已经采用的有效目录结构，不做无必要的大规模重排。
+
+====================
+四、迁移验收
+====================
+
+迁移完成后必须检查：
+
+1. 所有源—目标 SHA-256 是否一致；
+2. notebook 是否能够被解析；
+3. Python 文件是否能够完成语法检查；
+4. Markdown 中的重要本地链接是否仍然有效；
+5. 关键图片能否打开；
+6. 关键 CSV/JSON/YAML 是否能够解析；
+7. Git HEAD、branch 和 status 是否与迁移前一致；
+8. 是否仍有指向即将删除的旧项目目录的关键依赖；
+9. 是否仍有只存在于 Temp 或 generated_images 中的权威图片；
+10. accepted、blocked、accepted_with_caveats 等状态是否被原样保留；
+11. 是否错误地把历史计算结果重新解释为当前模型证据。
+
+生成以下文件：
+
+migration/migration_manifest_v01.csv
+migration/migration_report_v01.md
+migration/excluded_files_v01.csv
+migration/external_dependencies_v01.csv
+migration/sha256_manifest_v01.csv
+
+迁移报告最后必须明确写出：
+
+SAFE_TO_DELETE_SOURCE = YES
+
+或者：
+
+SAFE_TO_DELETE_SOURCE = NO
+
+只有同时满足以下条件才能写 YES：
+
+- 权威文件已复制；
+- SHA-256 验证通过；
+- 无关键绝对路径依赖指向旧项目；
+- Git 和治理记录完整；
+- 关键 notebook、代码、数据和图片均可读取；
+- 被排除的内容全部有明确理由；
+- 没有尚未解决的迁移冲突。
+
+迁移验收不等于科学结果验收。不得通过迁移报告改变任何科学结论。
+
+====================
+五、当前科学路线
+====================
+
+已原则同意的新候选路线：
+
+Route H — 3D deformable-cell-model–ECM hybrid
+
+当前生物学对象暂定为：
+
+早期胚胎心室壁局部 patch，而不是成年心肌纤维化。
+
+从血液侧到外侧依次为：
+
+blood lumen
+→ explicit endocardial DCM cells
+→ deformable cardiac-jelly ECM mesh
+→ explicit active myocardial DCM cells
+→ compliant surrounding myocardium
+
+SimuCell3D-style DCM 指每个细胞具有独立闭合三角曲面，不是传统 shared-vertex model。
+
+====================
+六、心内膜模型
+====================
+
+1. 心内膜建立为显式单层 DCM 细胞。
+2. 血压 p 施加于心内膜顶面的法向。
+3. 壁面剪切 τ_w 施加于心内膜顶面的切向。
+4. 血流载荷不得直接施加到 ECM。
+5. 心内膜通过细胞骨架、细胞连接和基底黏附向 ECM 传递力。
+6. 心内膜同时产生流动感知变量 χ_E。
+7. χ_E 可调节 KLF2、Notch、WNT9B、NRG1、fibronectin 和 ADAMTS 类过程。
+8. 力学传递和生化机械转导必须分别记账，不能重复计算同一血流输入。
+
+====================
+七、ECM 模型
+====================
+
+1. ECM 是独立的有限变形网格，不与细胞共享顶点。
+2. 保留：
+   - ECM areal amount A；
+   - remodeling/natural thickness H_ECM；
+   - 黏弹内部变量；
+   - turnover；
+   - KKT 条件；
+   - 完整功率 ledger。
+3. A 与 H_ECM 不自动等同。
+4. 只有明确假设有效密度恒定时，才允许：
+   H_ECM = A / rho_ECM
+5. 早期 cardiac jelly 的主要基质来源暂设为心肌基底面分泌。
+6. 心内膜主要承担流动感知、特定 ECM 调节和降解控制。
+7. 进入 cushion 或更晚发育阶段后，才引入 EndoMT 间充质细胞或心脏成纤维细胞。
+8. 不得把成熟成纤维细胞设为早期 cardiac jelly 的唯一来源。
+
+====================
+八、心肌 DCM 模型
+====================
+
+心肌层也必须显式细胞化。
+
+1. 早期胚胎心肌暂设为 1–2 层 DCM 心肌细胞。
+2. 每个心肌细胞具有：
+   - 独立闭合三角曲面；
+   - 体积约束；
+   - basal/lateral/opposite-surface identity；
+   - 细胞—细胞接触与黏附；
+   - 心肌—ECM 基底黏附；
+   - 局部肌纤维方向 f_i；
+   - 周期性主动激活 T_a,i(t)。
+
+3. 禁止使用各向同性表面张力直接代表心肌收缩，因为它可能只造成细胞变圆或错误的法向挤压。
+
+4. Stage 2 至少采用以下一种心肌主动机制：
+   - 沿 f_i 的 anisotropic active preferred metric；
+   - 沿 f_i 的 active preferred length；
+   - anisotropic active tension T_a(t)。
+
+5. 心肌来源 ECM 必须以细胞基底面通量 j_myo 映射到相邻 ECM 单元，不允许使用没有细胞归属的任意均匀源。
+
+6. 初期只允许把该模型解释为细胞—ECM力路的无量纲机制模型，不得声称已经得到定量生理心肌本构。
+
+7. 若表面 DCM 无法产生合理的纵向缩短、横向增厚和功率平衡，再另行审批心肌细胞内部有限应变模型或内部纤维网络。
+
+====================
+九、最低验证门禁
+====================
+
+正式 patch 计算前必须依次通过：
+
+A. 单个心肌细胞
+- 沿 f_i 缩短；
+- 横向合理增厚；
+- 体积误差受控；
+- 无非物理刚体漂移。
+
+B. 心肌细胞链
+- 细胞连接处作用力与反作用力平衡；
+- 激活波能够传递；
+- 无重叠或非物理脱离。
+
+C. Myocardium–ECM sandwich
+- 心肌收缩首先产生切向 ECM 牵引；
+- 法向响应来自接触、曲率和不可压缩效应；
+- 不得人为加入虚假的法向 q。
+
+D. Endocardium–ECM sandwich
+- p 是法向载荷；
+- τ_w 是切向载荷；
+- 载荷通过心内膜传递；
+- χ_E 与机械功分开记录。
+
+E. 完整 patch
+- 周边采用 compliant、periodic 或有限位移边界；
+- 不采用无生物学依据的全固定边界；
+- 坐标、法向和牵引符号一致；
+- KKT、resultant 和 power ledger 闭合。
+
+====================
+十、当前授权边界
+====================
+
+当前直接授权：
+
+1. 执行项目迁移；
+2. 完成迁移 Direct + Check；
+3. 建立迁移清单和校验记录；
+4. 盘点新项目；
+5. 起草 Route H Stage 0–2 的受治理执行计划。
+
+当前未授权：
+
+- 运行新的正式科学求解；
+- Stage 3 及以后；
+- 完整 ECM turnover 计算；
+- Stage 4 response registry 重跑；
+- Stage 5；
+- 正式论文图片；
+- GIF、视频或动画；
+- 稿件修改；
+- Memory 稳定化；
+- 删除旧项目。
+
+原 continuum foundation、v03、v06 和 Stage 4 结果只能作为历史证据和 regression reference，不得覆盖，也不得自动升级为 Route H 的验证结果。
+
+====================
+十一、论文图和 notebook 规则
+====================
+
+1. 示意图可以使用 cb-scientific-figure-prompt → Image Gen。
+2. 模型计算图必须来自真实求解输出。
+3. 定量图优先由 Jupyter notebook 生成。
+4. 原则上一个定量小图对应一个 notebook。
+5. 核心求解器必须位于独立模块，不能复制进 notebook。
+6. notebook 必须记录准确的输入版本、模型版本和输出路径。
+7. 所有新版本均另存，不覆盖已有结果。
+8. 后续所有图片必须落入 E:\Temp-Projects\PRL。
+
+====================
+十二、开始执行
+====================
+
+现在直接执行迁移，不需要先建立迁移 plan，也不启动多角色总管模式。
+
+按以下顺序：
+
+1. 确认 E:\Temp-Projects\PRL 可写；
+2. 只读盘点旧项目；
+3. 生成迁移候选分类；
+4. 复制有用文件；
+5. 执行 SHA-256、Git、链接、notebook、代码和数据检查；
+6. 修复新项目内部的失效路径，但不得修改旧项目；
+7. 生成迁移报告；
+8. 明确给出 SAFE_TO_DELETE_SOURCE；
+9. 随后只起草 Route H Stage 0–2 governed plan，不运行科学求解；
+10. 向用户报告：
+   - 实际迁移了什么；
+   - 排除了什么；
+   - 关键文件现在位于哪里；
+   - 是否可以安全删除旧项目；
+   - 下一项需要用户批准的科学工作是什么。

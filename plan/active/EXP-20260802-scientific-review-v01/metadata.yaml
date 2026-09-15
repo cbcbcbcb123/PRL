@@ -1,0 +1,18 @@
+plan_id: EXP-20260802-scientific-review-v01
+title: Hybrid X1-H 以后外部科学评审约束
+status: active_constraint_only
+expert_identity: unknown
+source_channel: unknown
+source_received_at: unknown
+constraint_accepted_at: 2026-08-02
+catalogued_at: 2026-09-09
+scope: hybrid X1-H and later scientific/software claims
+original_source_status: missing_from_current_workspace
+normalized_guidance: plan/active/EXP-20260802-scientific-review-v01/guidance.md
+derived_constraint: project_control/external_scientific_review_constraints_v01.md
+adoption_record: project_control/external_guidance_adoption_EXP-20260802_v01.md
+supersedes: []
+notes:
+  - Existing project records establish an accepted frozen constraint.
+  - The expert name, original file, original wording, and source channel were not recovered.
+  - This package must not be cited as an original expert document.

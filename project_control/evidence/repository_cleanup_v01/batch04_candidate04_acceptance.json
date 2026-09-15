@@ -1,0 +1,84 @@
+{
+  "schema_version": "prl.repository_cleanup.batch04_candidate04_acceptance.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "implementation_status": "first_safe_slice_passed",
+  "default_test_switch": "not_run",
+  "legacy_test_migration": "not_run",
+  "scientific_execution": "not_run",
+  "deletion_executed": false,
+  "scope": "explicit current Python quick suite and fail-closed import/path checks",
+  "command": "python -m prl test quick --workspace E:\\Temp-Projects\\PRL",
+  "manifest": {
+    "path": "tests/prl/quick_suite_v01.txt",
+    "entries": 5,
+    "explicit_files_only": true,
+    "default_pytest_changed": false
+  },
+  "implementation_files": [
+    {
+      "path": "src/prl/quality.py",
+      "bytes": 10418,
+      "sha256": "9beb8eba09c47cd2fc041c88baf6d1cd983d56eae61777c96fae7113c630e27e"
+    },
+    {
+      "path": "src/prl/cli.py",
+      "bytes": 2755,
+      "sha256": "c5db31182d8f7368059b7917608095363b8d4db42902380c7039f8cc2815e92e"
+    },
+    {
+      "path": "tests/prl/quick_suite_v01.txt",
+      "bytes": 236,
+      "sha256": "9c1778fd6fad2c87f0f6f3d2d7a4619d44b392e3758367adc57601e8844cd28e"
+    },
+    {
+      "path": "tests/prl/test_quality.py",
+      "bytes": 1835,
+      "sha256": "61c9ff0ef35c236b7936c3caf9c861372b548bf1539f3b20d1851d8b3adb0433"
+    },
+    {
+      "path": "tests/prl/test_cli.py",
+      "bytes": 1776,
+      "sha256": "307d6f80ef57ff6c0195d52c273ec042e2d9ede924db7827ec9f566a5a8fd1a4"
+    }
+  ],
+  "checks": {
+    "quick_suite": "17 passed",
+    "scanned_python_files": 13,
+    "manifest_and_workspace_path_boundary": "passed",
+    "import_boundary": "passed",
+    "machine_absolute_path_boundary": "passed",
+    "protected_unchanged_identity": "11/11 passed",
+    "legacy_location_qualification_regressions": "7 passed",
+    "long_doublet_source_identity": "13/13 passed",
+    "long_doublet_matrix": "4/4 passed",
+    "cache_absence": "passed"
+  },
+  "storage_check": {
+    "status": "blocked",
+    "level": "hard_limit_exceeded",
+    "file_count": 15023,
+    "logical_bytes": 5774819244,
+    "scope": "before governance records and cockpit refresh; reparse points not followed"
+  },
+  "observed_repair": {
+    "first_strict_boundary_test": "failed",
+    "cause": "UNC detector matched its own backslash string literal",
+    "change": "construct the UNC prefix at runtime without changing the detection rule",
+    "old_source_test_or_result_changed": false,
+    "final_strict_boundary_test": "passed"
+  },
+  "scientific_status_preserved": {
+    "long_doublet_numerical": "passed",
+    "static_equilibrium": "failed",
+    "parent_Z1": "blocked",
+    "biological_validation": "blocked"
+  },
+  "not_done": [
+    "default pytest collection was not changed",
+    "root README and pyproject.toml were not changed",
+    "legacy tests were not moved or deleted",
+    "C++ targets were not reorganized",
+    "no solver, performance or scientific result was generated"
+  ]
+}

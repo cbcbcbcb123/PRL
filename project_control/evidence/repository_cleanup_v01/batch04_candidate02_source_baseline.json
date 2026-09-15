@@ -1,0 +1,58 @@
+{
+  "schema_version": "prl.repository_cleanup.batch04_candidate02_source_baseline.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "scope": "pre-change identity of the two embedded implementations and eight applications that include them",
+  "files": [
+    {
+      "path": "src/ventricle_simucell3d_m0/ventricle_simucell3d_m0.cpp",
+      "bytes": 47642,
+      "sha256": "b53c9e463320ecd1f910d59b420cea56cb9ad4d7ce54d0f559fa9423b0cb18d2"
+    },
+    {
+      "path": "src/ventricle_bioform_myo/ventricle_bioform_myo_v03.cpp",
+      "bytes": 59652,
+      "sha256": "85a25905e8c1697302d2d695b7c2fad19a20b780dc183a86d70ab6b66074703c"
+    },
+    {
+      "path": "src/ventricle_simucell3d_m0/myo_contact_barrier_probe_v01.cpp",
+      "bytes": 5392,
+      "sha256": "e2bd686f5d0272bd2446441fb0eacbeba0ade5f0b59521c0c46f6540b35184bf"
+    },
+    {
+      "path": "src/ventricle_simucell3d_m0/myo_contact_barrier_relaxation_v01.cpp",
+      "bytes": 12788,
+      "sha256": "ace79ec85e9ef3c1698b3a6df66afb4186a1ed615da62447a0cf316f1b80df91"
+    },
+    {
+      "path": "src/ventricle_simucell3d_m0/myo_contact_scaling_probe_v01.cpp",
+      "bytes": 5898,
+      "sha256": "75426d861a7bd296e51a2eaa4ddaf5399f922f81f35b82aed59374c32ee07147"
+    },
+    {
+      "path": "src/ventricle_simucell3d_m0/myo_sheet_contact_probe_v01.cpp",
+      "bytes": 2652,
+      "sha256": "567b777bb97f660b9c54f9ffef6c657ee28e0f7741fad023f7e09257203d3019"
+    },
+    {
+      "path": "src/ventricle_simucell3d_m0/myo_sheet_contact_probe_v02.cpp",
+      "bytes": 3543,
+      "sha256": "452787d31759b08197a2fa6c98e728964f1b93ed401920a4d3b52e911499a520"
+    },
+    {
+      "path": "src/ventricle_simucell3d_m0/myo_sheet_contact_probe_v03.cpp",
+      "bytes": 3588,
+      "sha256": "150c02951d9d287f437e6594cfdb7620612c579bf7f7a9cea50586170d3f3c8f"
+    },
+    {
+      "path": "src/ventricle_simucell3d_m0/myo_sheet_relaxation_v01.cpp",
+      "bytes": 11628,
+      "sha256": "2e97f2d196f262f539649276896154aefc2054467f8afa5ae44598eca1d5256b"
+    },
+    {
+      "path": "src/ventricle_bioform_myo/ventricle_myo_strip_v01.cpp",
+      "bytes": 43472,
+      "sha256": "3fcfa95409a75d8309baa88b01760900731fbb650e3edd0e1333716882c09151"
+    }
+  ]
+}

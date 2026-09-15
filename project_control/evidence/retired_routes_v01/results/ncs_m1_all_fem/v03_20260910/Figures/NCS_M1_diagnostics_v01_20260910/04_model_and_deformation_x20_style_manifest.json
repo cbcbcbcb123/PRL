@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "style": {
+    "axis_box_size_in": [
+      10.0,
+      5.0
+    ],
+    "tick_label_size": 34.0,
+    "axis_label_size": 38.0,
+    "annotation_font_size": 32.0,
+    "sample_size_and_stat_font_size": 30.0,
+    "in_axes_title_size": 32.0,
+    "legend_font_size": 30.0,
+    "axes_line_width": 4.0,
+    "major_tick_length_pt": 10.5,
+    "major_tick_width_pt": 2.0,
+    "minor_tick_length_pt": 7.0,
+    "minor_tick_width_pt": 2.0,
+    "data_line_width": 3.0,
+    "significance_bracket_line_width": 3.0,
+    "tick_label_pad_pt": 6.0,
+    "axis_label_pad_pt": 18.0,
+    "export_dpi": 600,
+    "axis_box_tolerance_in": 0.02,
+    "font_candidates": [
+      "Calibri",
+      "Arial",
+      "Helvetica",
+      "DejaVu Sans"
+    ],
+    "show_minor_ticks": true,
+    "use_in_axes_title": false
+  },
+  "overrides": [],
+  "validation": {
+    "passed": true,
+    "issues": [],
+    "warnings": [
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width.",
+      "Axes 1 contains a data line not using the default 3 pt width."
+    ],
+    "measured_axes_in": [
+      {
+        "axis_index": 1.0,
+        "width_in": 10.0,
+        "height_in": 5.0,
+        "expected_width_in": 10.0,
+        "expected_height_in": 5.0
+      }
+    ],
+    "selected_font": "Calibri",
+    "required_canvas_clearance_pt": 12.0,
+    "measured_minimum_canvas_clearance_pt": 23.1
+  },
+  "exports": {
+    "png": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\04_model_and_deformation_x20.png",
+    "svg": "E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910\\Figures\\NCS_M1_diagnostics_v01_20260910\\04_model_and_deformation_x20.svg",
+    "png_dpi": 600,
+    "svg_fonttype": "none",
+    "bbox_inches": null
+  }
+}

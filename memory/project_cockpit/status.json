@@ -1,0 +1,215 @@
+{
+  "schema_version": "scientific_project_cockpit.v1",
+  "updated_at": "2026-09-15",
+  "overall_status": "blocked",
+  "summary": "Batch 5A恢复：旧Git已完全删除，本地codex/clean-baseline已创建且无远端；首提交保全进行中，科学任务仍not_run。",
+  "project": {
+    "name": "PRL｜三维细胞分辨心室模型",
+    "goal": "先用不含目标形状能的生物学启发机制分别得到可信的自由心肌和心内膜形态，再加入可变形 ECM、空间拥挤、接触、腔压和端部夹持形成三层组织，之后才进入周期主动力学、CFD/FSI 与真实数据验证。",
+    "scope": "当前完成长程双胞数值资格与扩展前静态计时；尚无组织平衡、周期收缩或三层。",
+    "current_stage": "清理收口Batch 5A首提交保全",
+    "current_location": "补充授权后旧Git完全删除；新本地仓库远端0，正在捕获48项迁移前来源",
+    "evidence_basis_commit": "b45650a9e370be138a70acf305b6c3a21e6a7ed2",
+    "evidence_checked_at": "2026-09-14",
+    "freshness_note": "长程双胞4轨迹、实际裁切2轨迹及2/4/16胞静态计时passed；末态残力约.104未平衡。16胞接触一次12.150秒，优先优化计算；形态异质性未运行，父Z1 blocked。",
+    "model_overview": {
+      "model_type": "三维闭合曲面DCM；唯一SimuCell3D核心，显式心肌表面接触修订",
+      "simulated_object": "END端对端和SIDE侧邻双胞，全自由，每胞194节点384面；2/4/16胞另做静态性能调用，无16胞动力学。",
+      "theory": "原皮质/体积/面积能、恒定方向骨架；独立黏附与正间隙屏障、非相邻面距离约束步进。无参考形状膜能。",
+      "current_question": "接触计算如何在保留精度和安全门的前提下加速，使长期收敛与组织计算可负担？",
+      "pipeline": [
+        "旧整片穿透失败保留",
+        "正间隙接触资格passed",
+        "双胞至算法坐标5数值资格passed",
+        "接触计算性能优化",
+        "静态平衡与形态异质性",
+        "周期心肌/心内膜/ECM"
+      ],
+      "diagram": "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/figures/structure.png",
+      "diagram_caption": "本轮实际初态，同模板和同材料的确定性对照，非随机组织。",
+      "assumptions": [
+        "骨架.060、周期驱动关闭",
+        "皮质.160、bulk30、area.050、bending0",
+        "独立黏附.04与rho.14正间隙屏障；rho尚未生物标定",
+        "双胞全自由；无ECM、腔压或目标形状能"
+      ],
+      "methods": [
+        "4条长程步长对照与事件几何复核",
+        "完整状态共享边面法向/角度/体积监测",
+        "两例实际安全裁切",
+        "2/4/16胞单次静态力调用计时"
+      ],
+      "scope_boundary": "数值资格passed不等于静态平衡；有限时域未收敛不证明渐近不稳定。形态异质性/噪声未运行，时间未标定。",
+      "evidence_refs": [
+        "project_control/ventricle_myocardial_long_doublet_execution_v01.md",
+        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/verdict.json",
+        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/long_verdict.json"
+      ]
+    }
+  },
+  "roadmap": [
+    {
+      "label": "长程双胞与实际裁切",
+      "status": "passed",
+      "summary": "4条至坐标5、2条实际裁切，冻结数值门通过。",
+      "evidence_refs": [
+        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/long_verdict.json",
+        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/A/verdict.json"
+      ]
+    },
+    {
+      "label": "扩展前性能测量",
+      "status": "passed",
+      "summary": "16胞静态一次13.735秒，接触12.150秒；尚未优化。",
+      "evidence_refs": [
+        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/P/verdict.json"
+      ]
+    },
+    {
+      "label": "接触性能优化",
+      "status": "not_run",
+      "summary": "下一切片待冻结，保持原科学门。",
+      "evidence_refs": [
+        "project_control/ventricle_myocardial_long_doublet_execution_v01.md"
+      ]
+    },
+    {
+      "label": "组织平衡与三层",
+      "status": "blocked",
+      "summary": "双胞残力约.104，未达到.001；16胞动力学未重跑。",
+      "evidence_refs": [
+        "project_control/ventricle_myocardial_long_doublet_execution_v01.md",
+        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/verdict.json",
+        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/long_verdict.json"
+      ]
+    }
+  ],
+  "active_work": [
+    {
+      "title": "全面清理Batch 2完成",
+      "status": "passed",
+      "summary": "用户单独授权同一30路径的.NET删除；30/30已移除，保护路径及结果哈希通过。",
+      "evidence_refs": [
+        "project_control/repository_cleanup_master_contract_v01.md",
+        "project_control/repository_cleanup_batch01_inventory_v01.md",
+        "project_control/repository_cleanup_batch02_deletion_proposal_v01.md",
+        "project_control/repository_cleanup_batch02_execution_v01.md",
+        "project_control/repository_cleanup_batch02_execution_v02.md"
+      ]
+    },
+    {
+      "title": "Batch 3A旧路线精选与删除",
+      "status": "passed",
+      "summary": "169文件/53.139 MiB精选证据哈希通过；19目录/1.528 GiB原结果删除，净释放1.476 GiB。",
+      "evidence_refs": [
+        "project_control/repository_cleanup_batch03a_legacy_results_proposal_v01.md",
+        "project_control/repository_cleanup_batch03a_execution_v01.md",
+        "project_control/repository_cleanup_retired_path_map_v01.md",
+        "project_control/evidence/repository_cleanup_v01/batch03a_retained_summary.json"
+      ]
+    },
+    {
+      "title": "Batch 3B被取代Z1与缓存删除",
+      "status": "passed",
+      "summary": "45目录/1,275文件/467.866 MiB已删除；13个保留Z1包及当前114+14项哈希通过。",
+      "evidence_refs": [
+        "project_control/repository_cleanup_batch03b_z1_proposal_v01.md",
+        "project_control/repository_cleanup_batch03b_execution_v01.md",
+        "project_control/repository_cleanup_retired_path_map_v01.md"
+      ]
+    },
+    {
+      "title": "Batch 4架构审计、安全切片与候选3源码退役",
+      "status": "passed",
+      "summary": "16个退役源码及包装已保全；38路径、61文件永久删除，32/32保护身份及19项默认与quick测试通过。",
+      "evidence_refs": [
+        "project_control/repository_cleanup_batch04_architecture_audit_v01.md",
+        "project_control/repository_cleanup_batch04_candidate01_execution_v01.md",
+        "project_control/repository_cleanup_batch04_candidate02_execution_v01.md",
+        "project_control/repository_cleanup_batch04_candidate04_execution_v01.md",
+        "project_control/evidence/repository_cleanup_v01/batch04_candidate04_acceptance.json",
+        "project_control/repository_cleanup_batch04_candidate03_execution_v01.md",
+        "project_control/evidence/repository_cleanup_v01/batch04_candidate03_acceptance.json",
+        "project_control/repository_cleanup_batch04_candidate03_source_copy_execution_v01.md",
+        "project_control/evidence/repository_cleanup_v01/batch04_candidate03_source_copy_acceptance.json",
+        "project_control/repository_cleanup_batch04_candidate03_deletion_readiness_audit_v01.md",
+        "project_control/repository_cleanup_batch04_candidate03_exit_safe_slice_execution_v01.md",
+        "project_control/evidence/repository_cleanup_v01/batch04_candidate03_exit_safe_slice_acceptance.json",
+        "project_control/repository_cleanup_batch04_candidate03_deletion_execution_v01.md",
+        "project_control/evidence/repository_cleanup_v01/batch04_candidate03_deletion_acceptance.json",
+        "project_control/repository_cleanup_retired_path_map_v01.md"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "title": "未达到平衡及固定拓扑质量",
+      "status": "blocked",
+      "summary": "至坐标5残力约.104，有限时域不收敛；共享节点面普遍折叠排除未证明。",
+      "evidence_refs": [
+        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/long_verdict.json"
+      ]
+    },
+    {
+      "title": "接触开销与生物形态",
+      "status": "blocked",
+      "summary": "16胞接触单次12.150秒；材料、尺度、异质性和时间尚未标定。",
+      "evidence_refs": [
+        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/P/verdict.json",
+        "docs/myocardial_shape_variability_literature_v01.md"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "title": "真实逐胞形变",
+      "status": "passed",
+      "summary": "END每胞长轴+6.36%，SIDE+12.21%；为恒定预应力松弛。",
+      "image": "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/figures/cell_length.png",
+      "image_caption": "逐胞曲线对称重合，无位移放大。",
+      "evidence_refs": [
+        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/long_verdict.json",
+        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/index.html"
+      ],
+      "result_group": "current",
+      "interpretation_boundary": "非周期收缩；算法坐标不是生理时间，末态不是合格平衡。"
+    },
+    {
+      "title": "静态计算瓶颈",
+      "status": "passed",
+      "summary": "2/4/16胞静态探针显示接触组装占主要耗时。",
+      "image": "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/figures/static_cost.png",
+      "image_caption": "每规模一次真实计时，非统计缩放律。",
+      "evidence_refs": [
+        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/P/verdict.json"
+      ],
+      "result_group": "current",
+      "interpretation_boundary": "无16胞动态状态推进，不等于性能优化完成。"
+    }
+  ],
+  "next_actions": [
+    {
+      "title": "执行清理收口与条件式科学重启v01",
+      "status": "active",
+      "summary": "旧Git已按补充授权完全删除并建立无远端新仓库；首提交后继续候选1/2、其余30目标和Batch 6。",
+      "evidence_refs": [
+        "project_control/repository_cleanup_closure_and_science_restart_proposal_v01.md",
+        "project_control/evidence/repository_cleanup_v01/final_closure_deletion_targets_v01.txt",
+        "project_control/ventricle_contact_performance_and_extended_equilibrium_contract_v01.md"
+      ]
+    }
+  ],
+  "evidence_boundaries": [
+    "当前数值资格passed，静态平衡failed；父Z1及生物验证blocked。",
+    "原核心及动力学二进制哈希不变，旧失败包保留。",
+    "5帧GIF为实际算法状态，不是生理时间。",
+    "形态异质性和噪声只有文献候选方案，未计算。",
+    "无GPU；16胞仅静态计时。",
+    "全面清理Batch 1–2 passed；Batch 2永久删除273.845 MiB，首次阻断记录仍保留。",
+    "Batch 3A已永久删除19个旧结果目录；仅169文件、55,720,718 bytes精选证据保留，原路线不再完整可复算。",
+    "Batch 3B已永久删除45个精确目录；13个保留Z1包完整，已退役开发/探索包不再完整可复算。",
+    "Batch 4候选3永久删除passed；38路径、61文件不再存在，仅16个精选源码及包装保留，旧路线不再完整可重跑。",
+    "旧Git已永久删除并替换为无远端本地仓库；旧历史不可恢复，科学执行仍未开始。",
+    "审批前复核：31/31目标边界与类型一致、目标内0 reparse；默认与quick各19/19、长程证据复核和严格链接检查passed；存储门仍blocked。"
+  ]
+}

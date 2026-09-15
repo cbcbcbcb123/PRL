@@ -1,0 +1,28 @@
+{
+  "protocol_ids": [
+    "R-G0-F",
+    "R-G1-F",
+    "R-G2-F",
+    "R-G2-T64",
+    "R-G2-T128",
+    "R-G2-T256",
+    "R-G1-ROT17"
+  ],
+  "files": [
+    "R-G0-F_data.npz",
+    "R-G0-F_summary.json",
+    "R-G1-F_data.npz",
+    "R-G1-F_summary.json",
+    "R-G1-ROT17_data.npz",
+    "R-G1-ROT17_summary.json",
+    "R-G2-F_data.npz",
+    "R-G2-F_summary.json",
+    "R-G2-T128_data.npz",
+    "R-G2-T128_summary.json",
+    "R-G2-T256_data.npz",
+    "R-G2-T256_summary.json",
+    "R-G2-T64_data.npz",
+    "R-G2-T64_summary.json",
+    "summary.json"
+  ]
+}

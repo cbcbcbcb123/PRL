@@ -1,0 +1,80 @@
+{
+  "schema_version": "prl.repository_cleanup.batch04_candidate03_deletion_readiness_audit.v1",
+  "recorded_at": "2026-09-15",
+  "status": "blocked",
+  "workspace": "E:\\Temp-Projects\\PRL",
+  "deletion_authorized": false,
+  "deletion_executed": false,
+  "protected_source_copy": {
+    "status": "passed",
+    "files": 14,
+    "bytes": 360089,
+    "source_target_hashes": "14/14 passed"
+  },
+  "candidate_scope": {
+    "top_paths": 36,
+    "files": 59,
+    "bytes": 1532153,
+    "status": "not_ready_for_deletion"
+  },
+  "dependency_scan": {
+    "python_roots": [
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "noncandidate_python_files_parsed": 148,
+    "parse_errors": 0,
+    "outside_python_import_dependents": 0,
+    "powershell_wrapper_dependents": 2,
+    "pyproject_retired_packages_discovered": [
+      "paper2_figure2",
+      "paper2_hybrid",
+      "paper2_m1"
+    ]
+  },
+  "unresolved_wrappers": [
+    {
+      "path": "scripts/run_paper2_lineage_odd_mode_gate_v02_host.ps1",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\scripts\\run_paper2_lineage_odd_mode_gate_v02_host.ps1",
+      "bytes": 4500,
+      "sha256": "4a4483ad7cc35d940726c269175e36e903cb2654d026085e3ff92e8bc9d30dae",
+      "git_status": "untracked",
+      "reparse_point": false,
+      "invokes": "scripts/run_paper2_lineage_odd_mode_gate_v02.py",
+      "selected_evidence_copy": "not_run"
+    },
+    {
+      "path": "scripts/run_paper2_lineage_odd_mode_gate_v03_host.ps1",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\scripts\\run_paper2_lineage_odd_mode_gate_v03_host.ps1",
+      "bytes": 4571,
+      "sha256": "35a45ad3f51a652d68c162a327bc351e1b4a43cd08635c17b1b5fbfd82b366ba",
+      "git_status": "untracked",
+      "reparse_point": false,
+      "invokes": "scripts/run_paper2_lineage_odd_mode_gate_v03.py",
+      "selected_evidence_copy": "not_run"
+    }
+  ],
+  "blocking_reasons": [
+    "deleting the frozen runner paths would leave two host wrappers pointing to missing files",
+    "pyproject.toml still exposes three retired Paper2 packages as default package discovery",
+    "README.md still presents retired Hybrid and historical commands as active project usage"
+  ],
+  "next_safe_slice": {
+    "status": "requires_user_confirmation",
+    "actions": [
+      "copy and hash-verify the two host wrappers, 9071 bytes, into selected evidence",
+      "switch pyproject default package discovery and default pytest to the current prl package and tests/prl",
+      "replace root README active usage with the current START_HERE and stable prl commands",
+      "verify default package discovery, default pytest, explicit quick suite, source hashes, and cockpit links"
+    ],
+    "deletion": "not_included"
+  },
+  "future_deletion_scope_if_prerequisites_pass": {
+    "top_paths": 38,
+    "files": 61,
+    "bytes": 1541224,
+    "composition": "the original 36 candidate paths plus the two host wrappers",
+    "status": "not_a_deletion_list_not_authorized"
+  }
+}

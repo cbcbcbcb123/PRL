@@ -1,0 +1,18 @@
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+
+=================================== ERRORS ====================================
+________ ERROR collecting tests/test_r1_midpoint_diagnosis_evidence.py ________
+ImportError while importing test module 'E:\Temp-Projects\PRL\tests\test_r1_midpoint_diagnosis_evidence.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+F:\python\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_r1_midpoint_diagnosis_evidence.py:7: in <module>
+    from hybrid.r1_midpoint_diagnosis_evidence import (
+E   ModuleNotFoundError: No module named 'hybrid.r1_midpoint_diagnosis_evidence'
+=========================== short test summary info ===========================
+ERROR tests/test_r1_midpoint_diagnosis_evidence.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.07s

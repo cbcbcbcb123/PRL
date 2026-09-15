@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paper 2 专家意见与分阶段执行方案｜EXP-20260909-001</title>
+<style>
+:root{--ink:#172b36;--muted:#536874;--green:#126b59;--blue:#175c85;--line:#d4e0e3;--paper:#fff;--bg:#f3f6f7;--warn:#8a510b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 "Microsoft YaHei","Segoe UI",sans-serif}main{max-width:1180px;margin:32px auto;padding:36px 48px 50px;background:var(--paper);border:1px solid var(--line);border-radius:12px}a{color:var(--blue);text-underline-offset:3px}h1{font-size:31px;line-height:1.45;margin:8px 0 14px}h2{font-size:23px;margin:0 0 16px;border-bottom:2px solid var(--line);padding-bottom:10px}h3{font-size:18px;margin:23px 0 8px}p{margin:10px 0}section{margin-top:38px;scroll-margin-top:20px}.eyebrow,.meta{font-size:13px;color:var(--muted)}.lead{font-size:19px;font-weight:600}.callout{border-left:4px solid var(--green);padding:12px 20px;background:#eff8f5;margin:18px 0}.scope{border-left-color:var(--blue);background:#edf5fa}.warning{border-left-color:var(--warn);background:#fff7e9}.toc{display:flex;flex-wrap:wrap;gap:9px 18px;padding:15px 0;border-block:1px solid var(--line)}.toc a{font-size:14px}table{border-collapse:collapse;width:100%;font-size:14px;margin:14px 0}th,td{border:1px solid var(--line);padding:11px 13px;vertical-align:top;text-align:left}th{background:#edf3f5;font-weight:650}td:first-child{min-width:104px}code{font-family:Consolas,monospace;font-size:.9em;overflow-wrap:anywhere;background:#f2f5f7;padding:1px 4px;border-radius:3px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f6f8;border:1px solid var(--line);padding:16px;font:14px/1.8 Consolas,"Microsoft YaHei",monospace}pre code{padding:0;background:none}.equation{font-size:16px;background:#f6f9fb}.tag{font:700 12px/1.5 Consolas,monospace;white-space:nowrap}.pass{color:var(--green)}.fail{color:#aa3634}.pending{color:var(--warn)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{padding:16px;border:1px solid var(--line);border-top:3px solid var(--green);border-radius:7px}.card strong{display:block;margin-bottom:7px}.small{font-size:13px;color:var(--muted)}li{margin:6px 0}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:15px;font-size:13px;color:var(--muted)}@media(max-width:760px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:25px}.cards{grid-template-columns:1fr}.table-wrap{overflow-x:auto}table{min-width:680px}}@media print{body{background:white}main{max-width:none;margin:0;padding:0;border:0}.toc{display:none}h2,h3{break-after:avoid}tr,.card,.callout{break-inside:avoid}a{color:inherit}section{margin-top:26px}}
+</style>
+</head>
+<body><main>
+<header>
+<p class="eyebrow">独立科学评审 · 机制优先 · 交给 Codex 的实施建议</p>
+<h1>Paper 2：从分裂后的局部可见性<br>走向细胞层的谱系—ECM 记忆</h1>
+<p class="meta">记录 <code>EXP-20260909-001-paper2-lineage-ecm</code> · 2026-09-09 · 来源：本任务中的 Codex AI 辅助独立评审及用户追加要求</p>
+<p class="lead">值得开展有停止条件的最小验证；单个不分裂细胞不够，一个母细胞分裂成两个女儿可以检验局部机制，有限细胞层才适合检验组织空间反馈。生长按问题加入，死亡不作为当前默认必选项。</p>
+<div class="callout scope"><strong>存放位置与执行位置必须区分。</strong><br>
+本指导保存于 <code>E:\MeshCell3D\plan\expert_guidance</code>；科学对象及当前主执行工作区是 <code>E:\Temp-Projects\PRL</code> 的 Paper 2。MeshCell3D 是独立的通用三维 DCM 框架，只作为候选能力来源，不因保存本文件就改造成心脏 FEM 项目。本次交付没有运行模拟、Docker 或测试，也没有修改两个仓库的生产代码。</div>
+<p class="small">本文件是上一轮评审的结构化汇编与扩展，不是聊天逐字稿。原始建议登记为咨询输入；执行者须先核对仓库事实并按用户实际采纳范围转成活动计划。参见 <a href="../assessment.html">仓库适用性评估</a>、<a href="../decision.json">采纳状态</a>、<a href="../provenance.json">来源与哈希</a>。</p>
+</header>
+<nav class="toc" aria-label="目录">
+<a href="#judgment">评审结论</a><a href="#hypotheses">科学命题</a><a href="#scale">单细胞与细胞层</a><a href="#audit">合同修正</a><a href="#phases">执行阶段</a><a href="#autonomy">自主空间</a><a href="#controls">公平强对照</a><a href="#stop">停止条件</a><a href="#handoff">执行提示词</a><a href="#sources">证据来源</a>
+</nav>
+<section id="judgment">
+<h2>1. 当前结论与证据层级</h2>
+<p>当前门最多检验受限机械切向空间的读出秩；真实分裂的因果作用、ECM 选择性放大及谱系存储仍未获得数值或实验支持。Nature Physics 是研究设计目标，不能预设期刊成熟度。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>检查项</th><th>截至本次交付的证据</th><th>状态</th><th>执行含义</th></tr></thead><tbody>
+<tr><td>PRL 版本</td><td>HEAD 为 <code>b45650a9e370be138a70acf305b6c3a21e6a7ed2</code>；runner SHA256 仍为 <code>A4C5E641EEE1109334EE7D448F60DECCE21205C07C659CA621581AA76446887A</code>。</td><td><span class="tag pass">PASS</span></td><td>当前是静态证据快照；执行前重新核验。</td></tr>
+<tr><td>核心数学实现</td><td>工程剪切权重、逐单元 RMS、面积加权、A/B/a/g、逐带完整行列式、镜像与两档 FD 符合相应公式。</td><td><span class="tag pass">PASS</span>（静态）</td><td>不等于数值运行通过。</td></tr>
+<tr><td>判定及执行边界</td><td>GO/近零条件重叠；全核行列式联合传播缺项；硬时限保障与失败留痕有缺口。</td><td><span class="tag fail">FAIL</span>（待修正）</td><td>P0 先处理，不能先求解后决定判据。</td></tr>
+<tr><td>新机械门</td><td><code>results/paper2_lineage_odd_mode_gate/v01_20260908</code> 及其 summary 均不存在。</td><td><span class="tag pending">NOT_RUN</span></td><td>用户报告的容器名预检失败不是科学 NO-GO；本次没有调用 Docker 复核容器。</td></tr>
+<tr><td>真实分裂及细胞层</td><td>当前 runner 不含真实分裂、状态继承或多谱系细胞层。</td><td><span class="tag pending">NOT_RUN</span></td><td>不能将静态足迹重命名为真实 DCM。</td></tr>
+<tr><td>ECM 选择性反馈与存储</td><td>缺局部源回写、ECM 偶通道、写入—等待—读取及切断对照。</td><td><span class="tag pending">NOT_RUN</span></td><td>与机械秩门分开判定。</td></tr>
+<tr><td>生物命题与投稿水平</td><td>缺分裂因果、存储位置的独立验证及不重拟合留出。</td><td><span class="tag pending">UNKNOWN / BLOCKED</span></td><td>科学潜力未被认证；代码量与图像美观不计科学进展。</td></tr>
+</tbody></table></div>
+<p><strong>四层状态始终分开：</strong>实现正确 → 数值门通过 → 科学命题获得支持 → 达到投稿水平。每阶段报告 <code>PASS / FAIL / BLOCKED / NOT_RUN / UNKNOWN</code>，并写清证据与适用范围。</p>
+<h3>固定科学边界</h3>
+<ul>
+<li>心肌只用规定主动应变 FEM，不称完整主动张力模型；ECM 用黏弹 FEM；当前心内膜为被动离散弹性链。</li>
+<li>研究心室/EFE，优先二维理想体。当前不增加流体、三维、材料或几何非线性、参数海或 GPU；必要的分裂事件是已明确研究对象，不据此扩大其他物理。</li>
+<li>EFE 来源保持开放，只能提出心内膜状态可能引导局部 EFE-like ECM 沉积。不能假定心内膜女儿是全部 EFE 成纤维细胞来源。</li>
+<li>DCM 的候选价值是显式携带单细胞身份、分裂、继承、分化、局部状态和局部 ECM 源；不能声称数值方法独占。</li>
+<li>旧全局有符号牵引偶极路线永久保持关闭：连续对称目标为零，旧非零来自网格伪手性；不以 S4、绝对值、换 ROI 或换读出挽救。</li>
+<li>保留用户修改的 <code>project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md</code>；本次另发现 <code>README.md</code> 也有未提交修改，来源未核实，执行端同样保留，不覆盖、不还原、不夹带提交。</li>
+</ul>
+</section>
+<section id="hypotheses">
+<h2>2. 将主线拆成两个可以独立失败的命题</h2>
+<p><strong>H0 是前置机械门：</strong>在给定二维切向子空间内，是否存在母平均不可见、女儿差可见的方向。若 A≠0：</p>
+<pre class="equation">v_hidden = v− − (a/A) v+
+P_M v_hidden = 0
+Q v_hidden = (A g − a B)/A</pre>
+<p>行列式离零支持这个局部观测结论，但分裂前后观测算子的改变仍是外加设定；当前没有模拟分裂，也没有证明真实母细胞只能保存一个充分混合状态。</p>
+<div class="cards">
+<div class="card"><strong>H1：事件改变有效可见性</strong>匹配最终几何、细胞年龄与实际输入历史后，真实分裂改变状态交流、感受或保存能力；所得女儿状态差超出虚拟分区、母胞预极化及普通时间滤波的解释。</div>
+<div class="card"><strong>H2a：ECM 选择性放大</strong>独立比较奇、偶环路；优先受迫且稳定的选择性放大，不要求系统跨越失稳阈值。被动 ECM 不凭空供能，放大来源须包含持续主动驱动或细胞分泌过程。</div>
+<div class="card"><strong>H2b：ECM 保存可读取信息</strong>去除写入刺激后，局部 ECM 状态仍影响后续测试；改变 ECM 可以改变读出，且效应不能全部归于持续刺激或细胞内部记忆。</div>
+</div>
+<h3>最强的三个方面</h3>
+<ol><li>使用真正机械可达方向，而非只给一个任意空间函数的代数见证。</li><li>客观 RMS、镜像 parity 与完整行列式针对旧路线的实际失败原因。</li><li>固定工况、明确深度核类和阴性出口，使研究能被有限成本否证。</li></ol>
+<h3>最危险的三个逻辑跳跃</h3>
+<ol><li>从“平均读出丢失空间信息”跳到“分裂创造生物可见性”。</li><li>从 I3/I4 左右空间差跳到依赖历史与身份的谱系机制。</li><li>从静态模量导数 g 跳到 ECM 的正反馈、奇模态选择性和存储。</li></ol>
+<p>建议用“分裂改变有效感受与状态保存，使原本低于可测水平的空间对比进入谱系状态”作为待检验表述；严格 rank 从 1 到 2 是理想极限，噪声下的有效可见性可以连续开启。不要把预设 q(t) 的输出当作 q(t) 存在的证明。</p>
+</section>
+<section id="scale">
+<h2>3. 一个细胞够不够：按科学问题逐级增加规模</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>模型层级</th><th>能够回答</th><th>不能回答</th><th>当前建议</th></tr></thead><tbody>
+<tr><td>静态单细胞/被动链</td><td>机械传递、RMS 定义、数值误差、虚拟女儿读出。</td><td>真实分裂、谱系继承或组织图样。</td><td>仅作为 H0 和负对照。</td></tr>
+<tr><td>一个母细胞 → 两个女儿</td><td>事件映射、继承守恒、状态交流变化、分裂相位与一次局部 ECM 源写入。</td><td>多谱系作用、邻居屏蔽、覆盖率和组织尺度稳定性。</td><td><strong>局部机制的最小充分模型</strong>；不是最终组织模型。</td></tr>
+<tr><td>有限心内膜细胞层</td><td>邻居约束、相邻谱系相互作用、局部沉积的空间选择性与单细胞结论的稳健性。</td><td>未经长期跟踪的组织更新、慢性疾病进展。</td><td><strong>组织空间主张所必需</strong>；先少数指定分裂，不立即让所有细胞随机分裂。</td></tr>
+<tr><td>生长 + 重复分裂</td><td>多代谱系、组织扩展、状态稀释、谱系边界长期保存。</td><td>仅凭更长视频证明 ECM 记忆。</td><td>只有需要跨代结论或持续扩展时进入。</td></tr>
+<tr><td>死亡/挤出/替换</td><td>组织周转、空缺修补、谱系竞争、细胞消失后 ECM 记忆。</td><td>不能替代 H1/H2 的因果对照。</td><td><strong>暂缓</strong>；有明确替代解释或周转问题时另立门。</td></tr>
+</tbody></table></div>
+<h3>推荐的最小细胞层</h3>
+<p>在二维组织截面中，先建立沿 ECM 界面的有限<strong>单列心内膜细胞</strong>，每个细胞具有闭合边界、可变形自由度和独立状态。它是细胞层的二维截面代理，不是完整腔面二维镶嵌，也不是三维组织。</p>
+<p>优先利用现有八个物理足迹：中央母域取 I3∪I4，其余六个足迹作为邻胞，构成 <strong>7 个细胞 → 8 个细胞</strong> 的一次分裂候选；中央母胞可以代表已完成生长的待分裂细胞。这是预注册起点建议，不是已验证几何。执行者可根据端点接触和边界一致性调整最小邻域，但必须先声明原因、保持目标母女物理足迹，并在看结果前冻结。</p>
+<p>首次只分裂中央母胞；随后如局部机制及数值门通过，只增加一个预先选定的邻近母胞分裂，用两事件不同顺序检验 ECM 耦合是否超出两个独立谱系的线性叠加。顺序效应本身不新，必须匹配最终几何、分裂后年龄、实际输入及普通松弛基线。</p>
+<p>有限尺寸对照要保持实际胞尺度、ECM 厚度与局部源归一化，并明确组织长度变化带来的边界变化；固定组织长度从 8 胞增到 16 胞会改变生物胞尺度，不能称为网格收敛。胞内离散加密、细胞数量变化和组织域扩大分别记账，不混作同一种收敛。</p>
+<h3>生长与死亡何时必要</h3>
+<ul>
+<li><strong>一次分裂不要求完整生长模型。</strong>可以从已生长母胞开始，明确该初始化是受控理想化，不解释生长速率或细胞周期。</li>
+<li><strong>重复分裂必须处理增长与稀释。</strong>固定组织长度下反复分裂且无生长会不断缩小胞尺度；加入生长但不处理边界扩展会制造拥挤应力。必须预先选定固定域/扩展域、总面积和营养或物质来源的含义。</li>
+<li><strong>浓度与总量分别记账。</strong>等浓度继承不代表每个女儿各复制一份母胞总量；增长时浓度稀释不能被当成状态分化。面积改变后的“零单极”要按当时面积加权，不能沿用固定 1/2 权重。</li>
+<li><strong>死亡不是一层细胞的必备功能。</strong>若需判断 ECM 是否在原细胞消失后仍可读取，先做一个受控“来源关闭/替换”实验设计；实际死亡还带来炎症、碎片、空缺和力学卸载，不能把它当成单一 ECM 擦除操作。</li>
+<li><strong>所有细胞自主生长、分裂、死亡的完整系统后置。</strong>否则可调参数和替代解释同时增多，很难知道阳性来自分裂门、密度、年龄结构、边界应力还是损伤。</li>
+</ul>
+<div class="callout">规模不是贡献。增加细胞层的目的，是检验邻居与谱系之间的空间作用；增加增长/周转的目的，是检验跨代或长期主张。每次增量都应有一个现有模型回答不了的可证伪问题。</div>
+</section>
+<section id="audit">
+<h2>4. 先修正裁决与合同，不改变冻结物理</h2>
+<ol>
+<li><strong>消除 GO/NO-GO 重叠。</strong>保留 1e−8 的参考数值近零尺度，同时分别记录“秩可分辨”和“增益量级”。建议将全带低于该尺度、但完整秩区间仍离零的情形单列为 <code>RESOLVED_SMALL_GAIN</code>：数值可分辨成立，但不得自动释放反馈模型；先给出独立增益/测量噪声约束下的可测效应估计。它不是普通 GO，也不能被报告为精确零。具体互斥条件与优先级必须在首次新求解前写成真值表并冻结。</li>
+<li><strong>传播任意混合纵深核的完整行列式。</strong>R[w]=Σw_bR_b；不能由各 det(R_b) 离零直接推出 det(R[w]) 离零。在 g 同号、A 为正时，可先采用保守充分界 A_min |g|_min &gt; |a|_max |B|_max；不通过这个充分界不等于 NO-GO，可对同一输出的联合区间作更紧的纸面/后处理论证。禁止为此增加 FEM 工况或按结果挑核。</li>
+<li><strong>条件性通过只对应物理深度歧义。</strong>先要求完整数值门；若某带行列式因误差不确定，不要直接解释为感受深度效应。深度符号歧义与数值未解析分别报告。</li>
+<li><strong>B/a 零区间不是第二个独立对称性检验。</strong>当前半和中心的绝对值又进入误差半径，区间包含零具有构造性。保留完整区间传播，但对称性证据主要来自原始镜像失配门，不重复计为独立支持。</li>
+<li><strong>预算同时满足两种既有表述。</strong>建议沿用更严格的累计分解+RHS 耗时≤30 s，并另要求任何单次调用≤30 s；总 runner 墙钟≤60 s，不新增额度。独立进程监督承担强制终止，不能只靠底层调用返回后的检查或 Python 信号。超时及失败也计入尝试，不自动重试。</li>
+<li><strong>保存部分完成证据。</strong>每个离散完成后纳入内存中的 summary；最终失败记录应保留已完成结果、有限值问题的字段位置、账本及执行失败类别。不得把非有限值悄悄改成零，也不得在超时后保留可误读的最终 GO。</li>
+<li><strong>区分经验误差与严格误差。</strong>A/B 的基准残差代理、a/g 的 FD+残差代理、100 倍因子和两网格差可用于探索筛选；不能宣称严格连续极限界或生物噪声界。两档 FD 与同一解析导数一致不构成独立连续模型验证。</li>
+<li><strong>统一主线目标。</strong>以稳定选择性放大为先：0&lt;L−(0)&lt;1，并且奇通道相对偶通道更强；不强制 L−&gt;1。若以后研究动态失稳，须另有稳定性、因果性、时标与饱和律依据，不追加为当前任务。</li>
+</ol>
+<p><strong>保留的冻结量：</strong>A1、H=0.3、De=0.2、T128、activation_peak=0.1；S2/S3×两种严格镜像网格；八个 z/h 带；E_eq=E_eq,0(1+m p_M)，I3 为正、I4 为负；m∈{1e−4,5e−5}；20 次分解/24 RHS；1 CPU/8 GiB/禁网/无 GPU。</p>
+<p><strong>版本方式：</strong>不覆盖已冻结的 v01 runner 或结果。建议新修订 runner 路径为 <code>scripts/run_paper2_lineage_odd_mode_gate_v02.py</code>，新结果为 <code>results/paper2_lineage_odd_mode_gate/v02_20260909/summary.json</code>；这是本指导预先提出的合同修订版本，不是失败后自动换名重试。采用这两个路径须包含在用户对执行包的采纳中；路径冲突即停止，不生成 v03。原合同提交保留为基线，新修订合同和 runner 另记精确哈希，不能仅修改锁值来绕过漂移检查。</p>
+</section>
+<section id="phases">
+<h2>5. 可直接转为活动计划的阶段表</h2>
+<p>以下预算是<strong>建议采纳的上限，不是本次已使用或新增的运行授权</strong>。用户明确让执行 Codex 按本文件执行后，先形成一份简明活动计划，记录采用/排除范围，再在通过阶段门的前提下自主推进。无需为每个函数、测试或普通修复重复请示。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>阶段</th><th>工作与交付</th><th>通过条件</th><th>自主推进及预算建议</th></tr></thead><tbody>
+<tr><td>P0 事实与修订</td><td>刷新 Git、源哈希和结果存在性；修订互斥分类、核区间传播、时限及异常记录；列出正/负合成反例；映射 PRL 与 MeshCell3D 可复用能力。</td><td>所有静态问题有对应修复或缩窄后的声明；聚焦行为测试证明错误路径会失败；生产物理与用户修改未变。</td><td>可自主组织模块和测试。1 CPU/8 GiB；相关轻量测试总墙钟建议≤600 s；不启动 FEM 或 MeshCell3D Simulation，不安装依赖。</td></tr>
+<tr><td>P1 冻结机械门</td><td>运行经修订且接受的唯一机械门，输出四量、FD、镜像、每带与全核行列式、账本、完整阴性和失败证据。</td><td>原数值门、完整区间与互斥分类通过；结果仅认证 H0。</td><td>一次正式尝试；20 次分解/24 RHS；累计求解≤30 s，总 runner≤60 s。失败即停，不自动 S4、换名或重试。</td></tr>
+<tr><td>P2 局部事件与强反例</td><td>建立一个母胞到两个女儿的最小状态/事件模型；先用固定力学输入。实现无分裂虚拟分区、母胞有限混合、无分裂时间滤波、均匀刺激及无刺激分裂对照；给出继承和角度/相位条件律。</td><td>守恒和映射正确；能够区分候选解释；没有把预置 q(t) 当成独立证据。模型验证与生物验证分栏。</td><td>H0 通过且模型闭合后可自主做纸面与微型 CPU 验证。建议≤12 个预列协议、总墙钟≤180 s；不求新 FEM、不运行完整 MeshCell3D。缺实验时可完成假设模型，但 H1 生物状态保持 UNKNOWN。</td></tr>
+<tr><td>P3 有限细胞层</td><td>实现二维闭合心内膜胞边界及一次真实分裂；优先中央母胞+邻胞的 7→8 候选；保留同信息连续模型。第一批只检验邻居约束和局部源，第二批最多再加一个邻近分裂及顺序反例。</td><td>P2 通过；局部响应超过预注册数值不确定度；事件功/几何变化/年龄/剂量与继承正确；无分裂材料区反例不能解释所声称的事件增量。新增真实 DCM 不得只是固定链改名。</td><td>先提交简短可复核规格与成本上界；若 P3 已被用户整体采纳且不触及架构变化，可按门推进。建议一个基准与一个有限尺寸对照、≤8 个预列协议，总墙钟≤300 s；总时限到即停。需要三维框架迁移或新模型层则不在此包内。</td></tr>
+<tr><td>P4 ECM 奇/偶反馈与存储</td><td>补 ECM 偶扰动，区分主动幅值响应 A 与 ECM 单极反馈；固定源到模量映射。做反馈开启/切断、源开启/关闭、写入—等待—读取与 ECM/细胞状态交叉对照。</td><td>有独立符号、单位和时标依据；只有稳定的奇模态选择性及可定位存储才支持 H2。等待时长覆盖普通松弛解释。</td><td>默认只准备规格、解析反例和实验设计。新增 FEM RHS 或闭环仿真预算须在本阶段合同一次性采纳，不能从 P1/P3 余额挪用。</td></tr>
+<tr><td>P5 生长、跨代与周转</td><td>仅在跨代问题成立后加入最小生长/稀释与两代谱系；仅在周转问题成立后加入死亡/挤出/替换。保留年龄、密度、总面积和总源量对照。</td><td>新增过程解决明确替代解释；新参数可独立约束；较简单模型不足以解释目标读出。</td><td>默认暂缓。不能因为框架已有功能而自动开启；另行接受科学范围和预算。</td></tr>
+</tbody></table></div>
+<h3>P1 的分支处理</h3>
+<ul>
+<li><strong>稳健 GO：</strong>进入 P2；不是直接证明真实分裂，也不是自动允许 P4 全反馈。</li>
+<li><strong>条件性 GO：</strong>只准备并开展经实际实验能力确认的纵深感受标定，冻结有效 w 或允许核集后重判。可继续与 w 无关的代数、继承和强反例工作，不能按 g 的正带挑 ROI。</li>
+<li><strong>RESOLVED_SMALL_GAIN：</strong>先用独立细胞响应/源增益与实验噪声约束估计是否可测；不要通过扫描增益把小信号人为推大。</li>
+<li><strong>数值 NO-GO：</strong>关闭当前 scalar/参数点/首轮核类的候选，不扩大为普遍生物否证。</li>
+<li><strong>未解析或对称失败：</strong>停止物理解释；在已采用的 P0 修复范围内可诊断，但新正式计算尝试仍需独立授权。</li>
+</ul>
+<h3>条件性通过时，唯一优先的纵深实验</h3>
+<p>做一个“纵深机械感受标定”实验：在预先设计的可区分纵深应变剖面下，同步测 ECM 应变与心内膜早期状态响应。目标是约束有效感受权重并排除正负增益抵消，不是拍一组纵深图就宣称已恢复 w(z)。若使用单参数穿透长度核，核族要有独立理由并预先固定；有限数据不能识别任意八个权重。若现有实验平台做不到，保持 BLOCKED，并提交一个具体的能力缺口，不用模拟“生成实验依据”。</p>
+<h3>最小机械—状态—源定义</h3>
+<pre class="equation">每胞身份：cell_id, parent_id, lineage_id, birth_time
+每胞状态：a_i（预先定义的状态浓度或无量纲状态）
+感受量：S_i = ∫ w(z) [胞域内逐点周期 RMS 的平均] dz
+局部源：J(x,z,t) = Σ_i ψ_i(x,z,t) j(a_i,t)
+ECM 结构状态：M(x,z,t)，独立于 SLS 内部黏弹松弛变量
+状态到材料：E_eq = E_eq,0 × [1 + β M]（仅局部小扰动适用）
+反馈系数：g− = ∂(S_+ − S_−)/∂M−；另测 g+ = ∂S_M/∂M+
+L±(0) = q_s q_e c_a,± c_m,± g±(0)/(k_a,± k_m,±)</pre>
+<p>ψ_i 的空间支撑与归一化、j 是单位面积速率还是总源强、β 的单位必须明确。奇模态是正基准附近的左右对比，不是允许负 ECM 密度或负绝对分泌。当前 A=∂αS_M 不等于 g+。当前扰动贯穿 ECM 厚度，不能未经论证直接代替女儿近表面分泌足迹。</p>
+</section>
+<section id="autonomy">
+<h2>6. 给执行 Codex 的自主空间</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>可自主决定</th><th>必须守住</th><th>触发负责人决定</th></tr></thead><tbody>
+<tr><td>模块组织、函数接口、聚焦行为测试、报表实现、相同物理下的代数简化与求解复用。</td><td>每个阶段必须有独立失败例；先冻结输入/读出/阈值，后看结果；所有尝试如实入账。</td><td>改变科学主命题、测量量、感受核、判定阈值或解除阴性停止门。</td></tr>
+<tr><td>比较两个纸面候选，选择参数更少且能被否证的一个；拒绝无增量功能。</td><td>不通过重新拟合、事后筛选或隐藏失败制造阳性。</td><td>扩充新物理、三维、流体、非线性或大范围参数扫描。</td></tr>
+<tr><td>在已采纳阶段内修复一般实现问题并重跑相关轻量测试；完成无实验依赖的理论与负对照。</td><td>正式数值尝试次数独立于轻量测试；失败或超时不自动重启正式计算。</td><td>新增正式尝试、超出本阶段 CPU/内存/墙钟预算，或需要安装新依赖。</td></tr>
+<tr><td>阶段通过后，进入用户已整体采纳且先修条件满足的下一阶段，不逐步追问“是否继续”。</td><td>未知实验事实保留 UNKNOWN；缺数据时可交付假设模型，不报告生物 PASS。</td><td>任何 GPU worker、项目外写入、目录删除、盘符映射、外部发送、提交推送或自动化均按用户实际授权处理。</td></tr>
+</tbody></table></div>
+<p><strong>最少记录：</strong>一份活动计划、一份阶段报告及必要机器可读结果即可。不要围绕小任务建立多层审批链、自动监督、任务海或大量没有独立用途的文档。用户接手的执行 Codex 默认单代理推进；本指导没有额外授权创建侧栏任务、委派或自动化。</p>
+<p><strong>并发修改：</strong>执行前检查工作树；保留用户原始修改及本次读取后出现的其他修改。遇到目标文件并发变化时重新读取并做最小合并；不能为了“干净状态”还原或删除它们。</p>
+<p><strong>跨仓库边界：</strong>Paper 2 的连续强对照留在 PRL 的应用研究中，不向 MeshCell3D core 新增 continuum tier。若拟复用 MeshCell3D，先做只读能力映射；其三维闭合三角表面要求与 Paper 2 当前二维边界不等价，不能未经决定运行薄三维模型来冒充二维模型。</p>
+</section>
+<section id="controls">
+<h2>7. 最强反例与同信息连续模型</h2>
+<p><strong>即时反例：</strong>完全没有细胞分裂，只对同一 FEM 场做 I3/I4 虚拟分区，仍会得到相同四量和行列式。因此 H0 阳性必须继续面对 H1 对照。</p>
+<p><strong>母胞已有局部状态：</strong>有限混合模型可写成 dD/dt=kΔs−(r+2κ)D；有限 κ 时母胞已保存空间对比。分裂改变 κ、局部状态寿命或噪声下增益，比严格从零创造通道更一般。κ 或 q_s 必须独立约束，不能为得到秩开启而强制设母胞完全混合。</p>
+<p><strong>普通材料异质性：</strong>非姐妹胞或固定材料区若在匹配输入历史下预测同样沉积，谱系标签没有额外解释价值。比较不同分裂时序时也要包含无事件普通松弛模型，避免把不同等待时长当作事件记忆。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>公平性项目</th><th>连续模型必须获得</th><th>验收方式</th></tr></thead><tbody>
+<tr><td>材料域与谱系</td><td>完全相同的 Ω_i(t)、身份、分裂时刻、分裂轴、材料运动与母女映射。</td><td>标签不因左右位置交换而重新生成。</td></tr>
+<tr><td>状态自由度</td><td>相同每胞状态、胞内混合、邻域交流、继承与分化规则；不剥夺局部隐藏状态。</td><td>逐项列出可拟合参数和状态维数，保持数据量相同。</td></tr>
+<tr><td>力学与源</td><td>相同心肌/ECM FEM、可比胞本构和界面耦合，以及相同 ψ_i、j、β、恢复律。</td><td>先验证等价输入和极限，不能用不同本构的失配宣称表示优势。</td></tr>
+<tr><td>读出与留出</td><td>相同 P_M、Q、纵深核、测量噪声、训练集、相位/角度/松弛留出。</td><td>不重拟合，报告所有阴性与不确定区间。</td></tr>
+</tbody></table></div>
+<p>连续模型可以使用随材料域运动的分片状态场和完全相同的每胞动力学。若它与 DCM 等价并复现结果，<strong>不自动否定物理机制</strong>；只否定独占性或未经证明的表示优越性。DCM 的优势只能是经证据比较的自然性、可维护性、闭合参数或计算效率，不能预先作为科学结果。</p>
+<h3>存储位置的最小分离</h3>
+<p>按“写入—等待—弱测试”流程，比较来源关闭与机械回馈切断；理论对照分别保留 ECM 状态、重置细胞状态，或保留细胞状态、重置 ECM 状态。实际实验中的干预具有其他效应，不能直接把理想重置当作可实现操作。通过明确可行的 ECM 干预及匹配对照，才可将记忆定位到 ECM。黏弹 SLS 的衰减记忆、细胞状态记忆和新生结构 ECM 的存储分别报告。</p>
+</section>
+<section id="stop">
+<h2>8. 停止条件与投稿必要性</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>出现的事实</th><th>结论</th><th>动作</th></tr></thead><tbody>
+<tr><td>版本、路径、资源或宿主预检失败，未求解</td><td>BLOCKED / NOT_RUN</td><td>只修启动边界；不作科学解释。</td></tr>
+<tr><td>镜像或装配不一致</td><td>FAIL：对称性/实现</td><td>停物理解释。</td></tr>
+<tr><td>FD、残差或空间门未通过</td><td>UNKNOWN：未解析</td><td>不自动 S4、改扰动、换 ROI 或追加正式运行。</td></tr>
+<tr><td>达到预注册数值近零裁决</td><td>FAIL：限定当前模型与核类</td><td>停止当前机械候选，保留负结果。</td></tr>
+<tr><td>无分裂模型已解释全部效应</td><td>H1 不获支持</td><td>不进入组织分裂主张或借增大规模维持阳性。</td></tr>
+<tr><td>奇通道不比偶通道更有选择性，或记忆由胞内状态/持续输入解释</td><td>H2 不获支持</td><td>停止 ECM 选择性存储主张。</td></tr>
+<tr><td>留出失败，仅能靠新增自由参数和重拟合维持拟合</td><td>预测主张 FAIL</td><td>停止目标期刊主线扩张。</td></tr>
+<tr><td>同信息连续模型通过</td><td>DCM 独占主张 FAIL；物理机制另判</td><td>如实报告表示等价，不删除强对照。</td></tr>
+</tbody></table></div>
+<p><strong>主线必需：</strong>一个非平凡、可证伪的事件物理问题；独立机械输入与局部状态证据；强反例；奇/偶选择性；可定位存储；目标读出充分误差控制；不重拟合预测。若声称组织空间规律，有限细胞层及邻居/边界检验是必要证据。</p>
+<p><strong>可推迟：</strong>完整生命周期平台、随机增殖/死亡的大组织、三维真实心室、流体、GPU、性能重构、漂亮动画和庞大测试框架。若没有新增可检验预测，它们不增加 Nature Physics 成熟度。</p>
+</section>
+<section id="handoff">
+<h2>9. 给执行 Codex 的可复制提示词</h2>
+<pre><code>请读取：
+E:\MeshCell3D\plan\expert_guidance\records\EXP-20260909-001-paper2-lineage-ecm
+中的 source/review-and-execution-plan.html、assessment.html、provenance.json、decision.json，
+并先查看 expert_guidance/registry.json。
+
+科学对象为 E:\Temp-Projects\PRL 的 Paper 2；MeshCell3D 不是新的 FEM 研究仓库。
+先核对两边 AGENTS、当前 Git、源哈希与实际结果；不要沿用过期的 NOT_RUN 或 PASS。
+向我报告你的采用范围和阶段预算，将已被我明确采纳的部分转成一份简明活动计划；
+执行授权来自我的本次/后续明确指令，不从专家文件自行推导。
+
+在我已整体采纳的阶段内，你可自行做常规修复、聚焦测试、代数推导和负对照，
+并在前置门通过后推进已授权下一阶段，不必为实现细节逐项请示。
+优先完成 P0，再执行唯一冻结机械门；H0 通过后先做 P2 的分裂因果与连续强反例。
+有限心内膜细胞层是组织主张的后续验证目标，不直接上全体细胞随机增长、分裂与死亡。
+
+严格区分实现、数值、科学、生物和投稿层级；每阶段给出实际 PASS/FAIL/BLOCKED/NOT_RUN/UNKNOWN。
+不得复活旧牵引偶极路线，不得结果后改阈值/ROI，不得隐藏失败或自动换名重试。
+不触碰用户原始修改；GPU、新物理、超预算、项目外写入、删除、盘符映射、
+跨仓库生产代码修改、提交推送和自动化按我的实际专项授权处理。
+完成或失败时交付证据、预算、科学解释与下一真实决策；没有必要不增加治理文件。</code></pre>
+<p>需要负责人确定的实质问题保持少量：采用哪些阶段及对应预算；可用的心内膜状态/ECM 读出和纵深标定能力；是否存在必须研究跨代增长或周转的科学问题。普通代码组织和修复不作为额外决策门。</p>
+</section>
+<section id="sources">
+<h2>10. 证据与文献边界</h2>
+<p>主要代码与合同在上一轮已逐段静态审阅，本轮刷新 Git、哈希、结果存在性及交付仓库规则。没有执行科学计算，也没有把 MeshCell3D 的历史诊断 PASS 当成 Paper 2 的验证。</p>
+<ul>
+<li><a href="../../../../../../Temp-Projects/PRL/project_control/CURRENT_STATUS.md">PRL CURRENT_STATUS §12–15</a>；<a href="../../../../../../Temp-Projects/PRL/project_control/prl_independent_theory_mainline_plan_v04.md">主线计划 §90–94</a>；<a href="../../../../../../Temp-Projects/PRL/results/paper2_science_pilot/v01_20260905/science_brief.md">science brief §114–119</a>。</li>
+<li><a href="../../../../../../Temp-Projects/PRL/scripts/run_paper2_lineage_odd_mode_gate_v01.py">冻结 runner v01</a>；<a href="../../../../../../Temp-Projects/PRL/results/paper2_division_dipole_gate/v02_20260908/summary.json">旧牵引门原始结果</a>。</li>
+<li><a href="../../../../../AGENTS.md">MeshCell3D AGENTS</a>；<a href="../../../../active/meshcell3d-scientific-closure-and-head-recertification.html">现行再认证计划</a>。其中 LB2-B-R1 空间失败是该计划记载的当前阻塞，本轮未重算或宣称框架双向耦合成熟。</li>
+</ul>
+<p>下列原始研究已在本任务前一轮公开检索中核查。本轮直接沿用来源，不声称完成了系统性新颖性检索：</p>
+<ol>
+<li><a href="https://pubmed.ncbi.nlm.nih.gov/33790985/">Erzberger 等，Nature Physics 2020</a>：姐妹信号偶极及机械对称破缺有先例，不能仅靠“分裂+偶极”宣称新颖。</li>
+<li><a href="https://www.nature.com/articles/s41421-022-00427-w">Niu 等，Cell Discovery 2022</a>：心脏成纤维细胞机械正反馈及双稳态有直接先例。</li>
+<li><a href="https://pubmed.ncbi.nlm.nih.gov/40310923/">Lovegrove 等，Science 2025</a>：分裂前形态可影响内皮等细胞的女儿状态，支持把母胞预先编码列为强反例；不是当前心室体系的直接证据。</li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3950274/">Sewell-Loftin 等，Biomaterials 2014</a>；<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3250145/">Balachandran 等，PNAS 2011</a>：支持应变幅值作为探索先验，不证明本项目的 RMS 核或分裂门。</li>
+<li><a href="https://pubmed.ncbi.nlm.nih.gov/27221222/">Steed 等，Nature Communications 2016</a>：支持机械响应—局部 ECM 入口，但涉及瓣膜发育和血流，不能替代无流体心室/EFE 验证。</li>
+<li><a href="https://pubmed.ncbi.nlm.nih.gov/25587097/">Xu 等，Circulation Research 2015</a>与<a href="https://pubmed.ncbi.nlm.nih.gov/28809397/">Zhang 等，Cell Research 2017</a>：EFE 来源证据存在不同模型和结论，保持来源开放。</li>
+<li><a href="https://docs.python.org/3.12/library/signal.html#execution-of-python-signal-handlers">Python 3.12 信号处理文档</a>：底层长计算可延迟 Python 信号处理，因此单靠信号不提供完整硬时限保证。</li>
+</ol>
+</section>
+<footer>本记录创建后作为不可覆盖的专家源保存。后续修订使用新记录/版本和 supersedes 链；活动实施与实际验收在相应项目中记录。当前为专家建议及静态评估，不是运行或投稿认证。</footer>
+</main></body></html>

@@ -1,0 +1,47 @@
+{
+  "schema_version": "prl.repository_cleanup.final_closure_preflight.v1",
+  "checked_at": "2026-09-15",
+  "status": "passed",
+  "authorization": {
+    "target_manifest_sha256": "c44b1eb1ab59ac692453b4829a9b0a427cc4e66a23f81fbb2b1d52caf696446b",
+    "directory_targets": 15,
+    "directory_interface": "System.IO.Directory.Delete(recursive=true)",
+    "file_targets": 16,
+    "file_interface": "System.IO.File.Delete",
+    "old_git_replacement": true,
+    "new_branch": "codex/clean-baseline",
+    "remote_operations": false,
+    "gpu": false
+  },
+  "target_recheck": {
+    "targets": 31,
+    "files": 10336,
+    "directories": 446,
+    "logical_bytes": 4598021645,
+    "tracked_files": 22,
+    "reparse_points": 0,
+    "outside_workspace": 0,
+    "workspace_root_targets": 0,
+    "matches_frozen_inventory": true
+  },
+  "selected_source_recheck": {
+    "files": 48,
+    "logical_bytes": 528865,
+    "missing": 0,
+    "reparse_points": 0,
+    "record_set_sha256": "5736c10d921976315ca579d63dc53b9a758f3eed6d3b27f3f9f9c6a91366abc3"
+  },
+  "protected_paths_checked": 20,
+  "engineering_checks": {
+    "default_pytest": "19/19 passed",
+    "quick_suite": "19/19 passed",
+    "long_doublet_retained_evidence": "passed",
+    "strict_links": "28 local links and 207 evidence paths passed"
+  },
+  "scientific_state": {
+    "static_equilibrium": "failed",
+    "parent_Z1": "blocked",
+    "biological_validation": "blocked",
+    "new_scientific_run": "not_run"
+  }
+}

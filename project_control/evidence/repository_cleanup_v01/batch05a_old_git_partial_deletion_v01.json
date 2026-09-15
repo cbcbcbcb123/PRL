@@ -1,0 +1,51 @@
+{
+  "schema_version": "prl.repository_cleanup.batch05a_old_git_partial_deletion.v1",
+  "recorded_at": "2026-09-15",
+  "status": "resolved_after_explicit_readonly_clearance_authorization",
+  "authorized_target": "E:\\Temp-Projects\\PRL\\.git",
+  "authorized_interface": "System.IO.Directory.Delete(recursive=true)",
+  "manifest_sha256": "c44b1eb1ab59ac692453b4829a9b0a427cc4e66a23f81fbb2b1d52caf696446b",
+  "before": {
+    "files": 10095,
+    "directories": 438,
+    "logical_bytes": 4464182252,
+    "reparse_points": 0
+  },
+  "removed_before_failure": {
+    "files": 101,
+    "directories": 57,
+    "logical_bytes": 486738
+  },
+  "remaining": {
+    "files": 9994,
+    "directories": 381,
+    "logical_bytes": 4463695514,
+    "reparse_points": 0,
+    "readonly_files": 9994
+  },
+  "first_reported_blocker": {
+    "path": "E:\\Temp-Projects\\PRL\\.git\\modules\\external\\simucell3d\\objects\\02\\e960f45958242b52c35ddab9785404c2443775",
+    "bytes": 403,
+    "attributes": ["ReadOnly", "Archive"],
+    "error": "Access denied during System.IO.Directory.Delete"
+  },
+  "postcondition": {
+    "new_repository_initialized": true,
+    "other_authorized_targets_processed": 0,
+    "unapproved_paths_processed": 0,
+    "gpu_started": false,
+    "solver_started": false
+  },
+  "important_environment_note": "During the blocked interval an unconstrained git command discovered E:/Temp-Projects/.git, but no parent-repository mutation was performed. The explicit local repository has now been recreated and verified.",
+  "resolution": {
+    "additional_authority": "Clear ReadOnly only on the 9994 remaining ordinary files with System.IO.File.SetAttributes, retry System.IO.Directory.Delete on the same .git target, then resume the original frozen authorization.",
+    "readonly_files_cleared": 9994,
+    "old_git_target_fully_removed": true,
+    "new_repository_path": "E:\\Temp-Projects\\PRL\\.git",
+    "new_branch": "codex/clean-baseline",
+    "new_remote_count": 0,
+    "new_git_initial_files": 18,
+    "new_git_initial_directories": 8,
+    "new_git_initial_logical_bytes": 26359
+  }
+}

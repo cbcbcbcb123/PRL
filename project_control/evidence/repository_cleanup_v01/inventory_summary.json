@@ -1,0 +1,557 @@
+{
+  "schema": "prl.repository_cleanup_inventory.v1",
+  "workspace": "E:\\Temp-Projects\\PRL",
+  "file_count": 34406,
+  "total_bytes": 8127368982,
+  "classification_totals": {
+    "batch02_candidate_pending_user_confirmation": {
+      "files": 4338,
+      "bytes": 287147295
+    },
+    "batch03_evidence_selection_pending": {
+      "files": 17176,
+      "bytes": 3051130692
+    },
+    "batch04_refactor_before_selection": {
+      "files": 210,
+      "bytes": 3874330
+    },
+    "batch05_new_baseline_pending": {
+      "files": 10095,
+      "bytes": 4464182252
+    },
+    "pending_manual_decision": {
+      "files": 790,
+      "bytes": 135409598
+    },
+    "retain_active_source_governance_or_original": {
+      "files": 1290,
+      "bytes": 134329796
+    },
+    "retain_current_rebuild_tree": {
+      "files": 507,
+      "bytes": 51295019
+    }
+  },
+  "top_level_totals": {
+    ".git": {
+      "files": 10095,
+      "bytes": 4464182252
+    },
+    ".gitattributes": {
+      "files": 1,
+      "bytes": 273
+    },
+    ".gitignore": {
+      "files": 1,
+      "bytes": 72
+    },
+    ".pytest_cache": {
+      "files": 5,
+      "bytes": 4772
+    },
+    ".ruff_cache": {
+      "files": 3,
+      "bytes": 227
+    },
+    "02_图表": {
+      "files": 105,
+      "bytes": 46409113
+    },
+    "AGENTS.md": {
+      "files": 1,
+      "bytes": 4967
+    },
+    "artifacts": {
+      "files": 80,
+      "bytes": 28595494
+    },
+    "b": {
+      "files": 3481,
+      "bytes": 228584715
+    },
+    "data": {
+      "files": 108,
+      "bytes": 5088082
+    },
+    "docs": {
+      "files": 39,
+      "bytes": 218418
+    },
+    "external": {
+      "files": 1825,
+      "bytes": 176312034
+    },
+    "figures": {
+      "files": 22,
+      "bytes": 18031410
+    },
+    "imach project_control": {
+      "files": 1,
+      "bytes": 0
+    },
+    "memory": {
+      "files": 6,
+      "bytes": 113116
+    },
+    "plan": {
+      "files": 50,
+      "bytes": 643458
+    },
+    "planning": {
+      "files": 312,
+      "bytes": 148975251
+    },
+    "project_control": {
+      "files": 470,
+      "bytes": 3331248
+    },
+    "pyproject.toml": {
+      "files": 1,
+      "bytes": 597
+    },
+    "README.md": {
+      "files": 1,
+      "bytes": 9992
+    },
+    "references": {
+      "files": 1,
+      "bytes": 98221
+    },
+    "results": {
+      "files": 16657,
+      "bytes": 2809119424
+    },
+    "scripts": {
+      "files": 200,
+      "bytes": 4346288
+    },
+    "src": {
+      "files": 34,
+      "bytes": 689564
+    },
+    "START_HERE.md": {
+      "files": 1,
+      "bytes": 3302
+    },
+    "tests": {
+      "files": 41,
+      "bytes": 295359
+    },
+    "tmp": {
+      "files": 864,
+      "bytes": 192310908
+    },
+    "tools": {
+      "files": 1,
+      "bytes": 425
+    }
+  },
+  "skipped_reparse_points": [
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_216_formal_commitments_bicurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_any_exception_after_popencurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_assignment_failure_never_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_bounded_readback_timeout_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_canonical_provisional_outcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_cidfile_requires_exactly_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_committed_package_readbaccurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_completion_after_worker_tcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_every_late_host_gate_faulcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_failure_classification_ancurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_failure_recovery_preservecurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_final_event_or_stage_faulcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_final_handoff_never_movescurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_final_handoff_timeout_precurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_final_handoff_uses_only_hcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_handoff_payload_without_rcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_host_final_timeout_never_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_host_final_worker_normal_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_host_final_worker_timeoutcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_host_finalization_is_windcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_host_seals_a_malformed_oucurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_malformed_container_outcocurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_plan_sample_includes_ledgcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_pre_holdout_environment_bcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_pre_holdout_environment_rcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_precheck_timeout_maps_to_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_prior_failure_still_runs_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_readback_drift_returns_pacurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_ready_with_partial_or_miscurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_root_completion_is_the_lacurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_root_finalization_has_no_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_s1_first_failed_gate_raiscurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_success_seal_is_only_prepcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_success_transaction_faultcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_timeout_failure_artifactscurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_unreaped_worker_revokes_jcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_verified_cidfile_binds_excurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_watchdog_first_failure_sucurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r02_20260904/p5/pytest_tmp/test_watchdog_remains_the_rootcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_216_formal_commitments_bicurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_any_exception_after_popencurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_assignment_failure_never_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_bounded_readback_timeout_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_canonical_provisional_outcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_cidfile_requires_exactly_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_committed_package_readbaccurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_completion_after_worker_tcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_every_late_host_gate_faulcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_failure_classification_ancurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_failure_recovery_preservecurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_final_event_or_stage_faulcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_final_handoff_never_movescurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_final_handoff_timeout_precurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_final_handoff_uses_only_hcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_handoff_payload_without_rcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_host_final_timeout_never_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_host_final_worker_normal_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_host_final_worker_timeoutcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_host_finalization_is_windcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_host_seals_a_malformed_oucurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_malformed_container_outcocurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_plan_sample_includes_ledgcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_pre_holdout_environment_bcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_pre_holdout_environment_rcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_precheck_timeout_maps_to_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_prior_failure_still_runs_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_readback_drift_returns_pacurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_ready_with_partial_or_miscurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_root_completion_is_the_lacurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_root_finalization_has_no_current",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_s1_first_failed_gate_raiscurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_success_seal_is_only_prepcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_success_transaction_faultcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_timeout_failure_artifactscurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_unreaped_worker_revokes_jcurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_verified_cidfile_binds_excurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_watchdog_first_failure_sucurrent",
+    "tmp/paper2_figure2_fem_only_precheck_v02_r03_20260904/p5/pytest_tmp/test_watchdog_remains_the_rootcurrent"
+  ],
+  "batch02_candidates": [
+    {
+      "path": ".pytest_cache",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\.pytest_cache",
+      "exists": true,
+      "file_count": 5,
+      "bytes": 4772,
+      "git_tracked_files": []
+    },
+    {
+      "path": ".ruff_cache",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\.ruff_cache",
+      "exists": true,
+      "file_count": 3,
+      "bytes": 227,
+      "git_tracked_files": []
+    },
+    {
+      "path": "scripts/__pycache__",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\scripts\\__pycache__",
+      "exists": true,
+      "file_count": 53,
+      "bytes": 1348663,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tests/__pycache__",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tests\\__pycache__",
+      "exists": true,
+      "file_count": 12,
+      "bytes": 108218,
+      "git_tracked_files": []
+    },
+    {
+      "path": "external/simucell3d/build-prl-ventricle-m0-v01",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\external\\simucell3d\\build-prl-ventricle-m0-v01",
+      "exists": true,
+      "file_count": 1215,
+      "bytes": 51493984,
+      "git_tracked_files": []
+    },
+    {
+      "path": "b/z1m0",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\b\\z1m0",
+      "exists": true,
+      "file_count": 1249,
+      "bytes": 57785123,
+      "git_tracked_files": []
+    },
+    {
+      "path": "b/z1_bioform_myo",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\b\\z1_bioform_myo",
+      "exists": true,
+      "file_count": 462,
+      "bytes": 46408908,
+      "git_tracked_files": []
+    },
+    {
+      "path": "b/simucell3d_regression_v02",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\b\\simucell3d_regression_v02",
+      "exists": true,
+      "file_count": 883,
+      "bytes": 37655073,
+      "git_tracked_files": []
+    },
+    {
+      "path": "b/z1tf2b",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\b\\z1tf2b",
+      "exists": true,
+      "file_count": 380,
+      "bytes": 35440592,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/contact_barrier_v01_build",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\contact_barrier_v01_build",
+      "exists": true,
+      "file_count": 1,
+      "bytes": 255,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/myo_long_doublet_v01_build",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\myo_long_doublet_v01_build",
+      "exists": true,
+      "file_count": 1,
+      "bytes": 316,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v01",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v01",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 535022,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v02",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v02",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 533545,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v03",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v03",
+      "exists": true,
+      "file_count": 3,
+      "bytes": 399641,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v04",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v04",
+      "exists": true,
+      "file_count": 3,
+      "bytes": 2324620,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v05_s020",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v05_s020",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 1797463,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v05_s040",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v05_s040",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 1777445,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v05_s060",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v05_s060",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 1762351,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v06_s020",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v06_s020",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 1805425,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v06_s040",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v06_s040",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 1801034,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v06_s060",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v06_s060",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 1799286,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v06_m320_s060",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v06_m320_s060",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 3874264,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v07_m320_s060",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v07_m320_s060",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 3863805,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v08_m320_s060",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v08_m320_s060",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 3868865,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v09_m320_s060",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v09_m320_s060",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 3885826,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v10_m320_s060",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v10_m320_s060",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 3899434,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v11_m320_s060",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v11_m320_s060",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 4696764,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v12_m320_s060",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v12_m320_s060",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 5517671,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v13_m320_s060",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v13_m320_s060",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 5588099,
+      "git_tracked_files": []
+    },
+    {
+      "path": "tmp/z1_bioform_myo_compile_smoke_v14_m320_s060",
+      "absolute_path": "E:\\Temp-Projects\\PRL\\tmp\\z1_bioform_myo_compile_smoke_v14_m320_s060",
+      "exists": true,
+      "file_count": 4,
+      "bytes": 7170604,
+      "git_tracked_files": []
+    }
+  ],
+  "batch02_existing_bytes": 287147295,
+  "extensions": {
+    "<none>": 10057,
+    ".pid": 1,
+    ".sample": 28,
+    ".idx": 14,
+    ".pack": 14,
+    ".rev": 14,
+    ".lock": 1,
+    ".tag": 2,
+    ".md": 645,
+    ".csv": 1114,
+    ".json": 7904,
+    ".txt": 271,
+    ".ipynb": 16,
+    ".npz": 7052,
+    ".py": 350,
+    ".png": 710,
+    ".svg": 302,
+    ".pdf": 18,
+    ".vcxproj": 569,
+    ".filters": 551,
+    ".lastbuildstate": 157,
+    ".tlog": 1525,
+    ".recipe": 157,
+    ".obj": 264,
+    ".cmake": 431,
+    ".stamp": 189,
+    ".depend": 189,
+    ".lib": 64,
+    ".dll": 6,
+    ".rule": 372,
+    ".bin": 121,
+    ".c": 6,
+    ".exe": 78,
+    ".cpp": 136,
+    ".check_cache": 6,
+    ".yaml": 10,
+    ".list": 6,
+    ".sln": 22,
+    ".tcl": 6,
+    ".exp": 6,
+    ".pc": 6,
+    ".vtk": 69,
+    ".log": 171,
+    ".yml": 17,
+    ".jpg": 9,
+    ".hpp": 65,
+    ".js": 1,
+    ".sh": 3,
+    ".geojson": 3,
+    ".css": 1,
+    ".rst": 32,
+    ".h": 35,
+    ".in": 9,
+    ".typed": 1,
+    ".toml": 3,
+    ".cfg": 1,
+    ".ini": 3,
+    ".inl": 1,
+    ".supp": 2,
+    ".conf": 1,
+    ".lua": 2,
+    ".xml": 19,
+    ".cbp": 1,
+    ".pbxproj": 1,
+    ".html": 48,
+    ".jsonl": 18,
+    ".sha256": 2,
+    ".docx": 6,
+    ".npy": 103,
+    ".exitcode": 82,
+    ".cid": 36,
+    ".zip": 2,
+    ".gif": 15,
+    ".mesh": 161,
+    ".pyc": 69,
+    ".ps1": 2,
+    ".ready": 22
+  },
+  "notes": [
+    "Classification is a cleanup decision aid, not deletion authorization.",
+    "Reparse-point contents are deliberately not followed.",
+    "Files generated by this audit are excluded from their own manifest."
+  ]
+}

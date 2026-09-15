@@ -1,0 +1,6 @@
+# Explicit current engineering gate. This is not the default pytest selection.
+tests/prl/test_cli.py
+tests/prl/test_cpp_support_boundary.py
+tests/prl/test_long_doublet_verification.py
+tests/prl/test_quality.py
+tests/prl/test_storage.py

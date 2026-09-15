@@ -1,0 +1,68 @@
+{
+  "schema_version": "prl.repository_cleanup.batch04_candidate03_acceptance.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "implementation_status": "source_retention_matrix_passed",
+  "source_copy": "not_run",
+  "deletion_authorized": false,
+  "deletion_executed": false,
+  "scientific_execution": "not_run",
+  "matrix": {
+    "path": "project_control/evidence/repository_cleanup_v01/batch04_candidate03_source_matrix.json",
+    "sha256": "84d3cdaa9bc1533ebcc047ed79c91cac497cb98143b031ad5ed3e2d3d68337eb",
+    "full_file_records": 59
+  },
+  "inventory": {
+    "top_paths": 36,
+    "directories": 8,
+    "root_test_files": 2,
+    "script_files": 26,
+    "files": 59,
+    "bytes": 1532153,
+    "matches_architecture_audit": true,
+    "reparse_points": 0,
+    "git_tracked_clean": 35,
+    "git_tracked_modified": 0,
+    "git_untracked": 24
+  },
+  "retention": {
+    "direct_evidence_files": 8,
+    "direct_evidence_bytes": 258472,
+    "direct_evidence_hash_matches": "8/8",
+    "minimal_dependency_files": 6,
+    "minimal_dependency_bytes": 101617,
+    "required_copy_files": 14,
+    "required_copy_bytes": 360089,
+    "later_candidate_files": 45,
+    "later_candidate_bytes": 1172064,
+    "later_candidate_authorized_for_deletion": false
+  },
+  "validation": {
+    "all_current_file_hashes_recomputed": "59/59 passed",
+    "all_expected_evidence_hashes": "8/8 passed",
+    "unique_paths": "59/59 passed",
+    "workspace_boundary": "59/59 passed",
+    "inventory_sum": "passed",
+    "candidate_path_sum": "passed",
+    "quick_suite": "17/17 passed",
+    "cockpit_links": "24 local links and 190 evidence paths passed"
+  },
+  "observed_repairs": [
+    {
+      "failure": "initial aggregate byte fields were zero",
+      "cause": "PowerShell Measure-Object did not aggregate ordered-dictionary properties as assumed",
+      "repair": "derive summary values from parsed JSON file records"
+    },
+    {
+      "failure": "first intermediate direct/dependency byte totals omitted directory files",
+      "cause": "candidate directory paths used backslashes while relation maps used forward slashes",
+      "repair": "normalize paths and independently sum the final 59 classified rows"
+    }
+  ],
+  "limitations": [
+    "source files were not copied in this slice",
+    "no candidate path was deleted or authorized for deletion",
+    "external Dolfinx/Basix/MPI/PETSc/UFL and container environments are not archived",
+    "retaining source supports evidence interpretation but does not promise complete rerun capability"
+  ]
+}

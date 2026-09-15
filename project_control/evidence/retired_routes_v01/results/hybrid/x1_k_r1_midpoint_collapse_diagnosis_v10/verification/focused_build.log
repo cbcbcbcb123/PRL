@@ -1,0 +1,8 @@
+[ 14%] Built target uspg
+[ 35%] Built target prl_core
+[ 46%] Built target math_modules
+[ 75%] Built target triangulation_modules
+[ 92%] Built target mesh
+[ 96%] Building CXX object CMakeFiles/prl_x1k_v10_midpoint_collapse_diagnostic_test.dir/tests/r1_midpoint_collapse_diagnostic_test.cpp.o
+[100%] Linking CXX executable prl_x1k_v10_midpoint_collapse_diagnostic_test
+[100%] Built target prl_x1k_v10_midpoint_collapse_diagnostic_test

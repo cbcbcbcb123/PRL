@@ -1,0 +1,31 @@
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+........................................................................ [ 59%]
+............................................F....                        [100%]
+================================== FAILURES ===================================
+________ test_v10_source_provenance_closes_against_the_controlled_fork ________
+
+    def test_v10_source_provenance_closes_against_the_controlled_fork() -> None:
+>       provenance = audit_fork_source_provenance(ROOT)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_r1_midpoint_diagnosis_evidence.py:76: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo_root = WindowsPath('E:/Temp-Projects/PRL')
+
+    def audit_fork_source_provenance(repo_root: Path) -> dict[str, Any]:
+        """Verify the audited fork files against immutable commit:path blobs."""
+        fork = repo_root.resolve() / "external/simucell3d"
+        head = str(_git(fork, "rev-parse", "HEAD"))
+        upstream = str(_git(fork, "rev-parse", "@{upstream}"))
+        if head != FORK_COMMIT or upstream != FORK_COMMIT:
+            raise V10EvidenceError("controlled-fork HEAD/upstream does not match v10 contract")
+        if str(_git(fork, "status", "--short")):
+>           raise V10EvidenceError("controlled fork is dirty")
+E           hybrid.r1_midpoint_diagnosis_evidence.V10EvidenceError: controlled fork is dirty
+
+src\hybrid\r1_midpoint_diagnosis_evidence.py:254: V10EvidenceError
+=========================== short test summary info ===========================
+FAILED tests/test_r1_midpoint_diagnosis_evidence.py::test_v10_source_provenance_closes_against_the_controlled_fork
+1 failed, 120 passed in 557.24s (0:09:17)

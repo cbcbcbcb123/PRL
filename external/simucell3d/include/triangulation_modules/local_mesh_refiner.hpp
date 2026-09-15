@@ -1,0 +1,152 @@
+#ifndef DEF_local_mesh_refiner
+#define DEF_local_mesh_refiner
+
+#define _USE_MATH_DEFINES
+
+
+#include <cassert>
+#include <cmath>  
+#include <set>  
+#include <memory>
+#include <optional>
+
+
+#include "utils.hpp"
+
+
+#include "custom_exception.hpp"
+#include "custom_structures.hpp"
+
+#include "mesh_writer.hpp"
+#include "cell.hpp"
+#include "face.hpp"
+#include "edge.hpp"
+#include "prl_cell_engine/cell_surface_snapshot.hpp"
+
+
+
+/*
+    This class makes sure that all the edges of the cell meshes have lengths comprised in the range [l_min, l_max]. 
+    When an edge is too long, it is subdivided into two edges. When an edge is too short, it is merged with into one node.
+    Triangles with very high isoperimetric ratio are also subdivided into two triangles.
+*/
+
+class local_mesh_refiner
+{
+
+    private:
+
+        //The minimum and maximum authorized edge lengths
+        const double l_min_, l_max_, l_min_squared_, l_max_squared_;
+
+        //If set to true, the local mesh refiner will remove the triangles with high aspect ratio
+        //by swapping their longest edge
+        const bool enable_edge_swap_operation_;
+
+        //Optional observer. When absent, no remesh snapshots are constructed.
+        const std::shared_ptr<prl::core::RemeshEventSink> remesh_event_sink_;
+
+        //The isoperimetric ratio of an equliateral triangle, which
+        //is the smmallest possible isoperimetric ratio
+        // 36 / sqrt(3); literal is portable to C++17 compilers where
+        // std::sqrt is not a constant expression.
+        static constexpr double q_min_ = 20.784609690826527522;
+
+        //The minimum allowed triangle score, below that, the edge swap operation is triggered.
+        //The default preserves upstream behavior; controlled qualification
+        //runs may request a stricter quality floor.
+        double triangle_score_min_ = 0.2;
+
+        //Wrap the call to the local_mesh_refiner::refine_mesh() method into a lambda function
+        const std::function<void(cell_ptr)> refine_mesh_func_ = [=](cell_ptr c) -> void {refine_mesh(c);};
+
+        friend class local_mesh_refiner_tester;
+
+        struct CellRemeshState;
+
+        [[nodiscard]] CellRemeshState capture_remesh_state(
+            const cell& source
+        ) const;
+
+        void restore_remesh_state(
+            cell& destination,
+            CellRemeshState& state
+        ) const noexcept;
+
+        void emit_remesh_event(
+            prl::core::RemeshOperation operation,
+            cell_ptr c,
+            const std::optional<prl::core::SurfaceMeshSnapshot>& before,
+            prl::core::RemeshCollapseMode collapse_mode =
+                prl::core::RemeshCollapseMode::none,
+            std::optional<prl::core::VertexId> survivor_persistent_id =
+                std::nullopt,
+            std::vector<prl::core::VertexId> deleted_persistent_ids = {},
+            std::optional<prl::core::VertexId> created_persistent_id =
+                std::nullopt,
+            const CellRemeshState* rollback_state = nullptr,
+            edge_set* edge_workset = nullptr,
+            const edge_set* rollback_edge_workset = nullptr
+        ) const;
+
+
+    public:
+        //Make sure the local_mesh_refiner cannot be default instantiated
+        local_mesh_refiner() = default;                                     //default constructor
+        local_mesh_refiner(const local_mesh_refiner& c) = delete;           //copy constructor
+        local_mesh_refiner(local_mesh_refiner&& c) = delete;                //move constructor
+        local_mesh_refiner& operator=(const local_mesh_refiner& c) = default;//copy assignment operator
+        local_mesh_refiner& operator=(local_mesh_refiner&& c) = default;     //move assignment operator 
+
+        double get_l_min() const noexcept {return l_min_;};
+        double get_l_max() const noexcept {return l_max_;};
+
+        double get_l_min_squared() const noexcept {return l_min_squared_;};
+        double get_l_max_squared() const noexcept {return l_max_squared_;};
+
+        //Trivial constructor
+        local_mesh_refiner(
+            const double l_min,
+            const double l_max,
+            const bool enable_edge_swap_operation = true,
+            std::shared_ptr<prl::core::RemeshEventSink> remesh_event_sink = nullptr,
+            const double triangle_score_min = 0.2
+        ) noexcept;
+
+        //Refine the meshes of all the cells in the vector
+        void refine_meshes(const std::vector<cell_ptr> cell_lst) const noexcept(false);
+
+        //Refine the mesh of a given cell
+        void refine_mesh(cell_ptr c) const noexcept(false);
+
+        //Remove all the elongated triangles
+        void remove_elongated_triangles(cell_ptr c) const noexcept(false);
+
+        //Return the triangle score and also the longest edge of the triangle
+        std::pair<double, edge> get_triangle_score(cell_ptr c, const face& f) const noexcept;
+
+        //Check if an edge can be merged into a node
+        bool can_be_merged(edge& e_ab, cell_ptr c) const noexcept(false);
+ 
+        void swap_edge(edge& e_ab, cell_ptr c) const noexcept(false);
+
+        void split_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_check_set) const noexcept(false);
+
+        void merge_edge(edge& e_ab, cell_ptr c, edge_set& edge_to_check_set) const noexcept(false);
+
+        void collapse_edge_to_survivor(
+            edge& e_ab,
+            prl::core::VertexId survivor_persistent_id,
+            cell_ptr c,
+            edge_set& edge_to_check_set
+        ) const noexcept(false);
+
+
+        
+
+
+
+
+};
+
+#endif

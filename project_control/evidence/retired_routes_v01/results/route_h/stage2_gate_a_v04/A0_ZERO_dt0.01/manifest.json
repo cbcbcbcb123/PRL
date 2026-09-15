@@ -1,0 +1,30 @@
+{
+  "case_id": "A0_ZERO",
+  "dt": 0.01,
+  "duration_requested": 5.0,
+  "files": [
+    {
+      "bytes": 68890,
+      "path": "time_series.csv",
+      "sha256": "85D2753B918C900985D0EF240CCE24CDD6F6A26EF622668BE09D9A12128C9B4A"
+    },
+    {
+      "bytes": 110966,
+      "path": "step_acceptance_audit.csv",
+      "sha256": "BB2F765B9A044658893DB3F6CB70BBE3934E7793F6C944F5073C3212A4B9AC8F"
+    },
+    {
+      "bytes": 1948016,
+      "path": "vertices.npy",
+      "sha256": "11768F3D708E0175F93F5BD2A5E5C7C3330A3310DFB6AC2F5D67811C059FE829"
+    },
+    {
+      "bytes": 1022,
+      "path": "summary.json",
+      "sha256": "398E35D24CD1CDD4A88C893A8F4AEF7DEBC58FA495DC27202A0B00921C7FD77A"
+    }
+  ],
+  "last_accepted_time": 5.0,
+  "run_id": "A0_ZERO_dt0.01",
+  "status": "completed"
+}

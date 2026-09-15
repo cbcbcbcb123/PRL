@@ -1,0 +1,139 @@
+=src : The term '=src' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the
+ spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ ='src'; python -m pytest -q
++ ~~~~~~
+    + CategoryInfo          : ObjectNotFound: (=src:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+F:\python\Lib\site-packages\cupy\_environment.py:275: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+
+=================================== ERRORS ====================================
+________ ERROR collecting tests/hybrid/test_cell_ecm_vertical_slice.py ________
+ImportError while importing test module 'E:\Temp-Projects\PRL\tests\hybrid\test_cell_ecm_vertical_slice.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+F:\python\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\hybrid\test_cell_ecm_vertical_slice.py:6: in <module>
+    from hybrid.cell_ecm_coupling import CellECMVerticalSlice, build_cell_ecm_tether
+E   ModuleNotFoundError: No module named 'hybrid'
+___________ ERROR collecting tests/hybrid/test_myocardial_remesh.py ___________
+ImportError while importing test module 'E:\Temp-Projects\PRL\tests\hybrid\test_myocardial_remesh.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+F:\python\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\hybrid\test_myocardial_remesh.py:6: in <module>
+    from hybrid.remesh_registry import SurfaceMaterialRegistry, rebind_registry
+E   ModuleNotFoundError: No module named 'hybrid'
+____________ ERROR collecting tests/hybrid/test_remesh_registry.py ____________
+ImportError while importing test module 'E:\Temp-Projects\PRL\tests\hybrid\test_remesh_registry.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+F:\python\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\hybrid\test_remesh_registry.py:6: in <module>
+    from hybrid.remesh_registry import (
+E   ModuleNotFoundError: No module named 'hybrid'
+_________ ERROR collecting tests/hybrid/test_x1k_v08_adjudication.py __________
+ImportError while importing test module 'E:\Temp-Projects\PRL\tests\hybrid\test_x1k_v08_adjudication.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+F:\python\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\hybrid\test_x1k_v08_adjudication.py:6: in <module>
+    from hybrid.fixed_topology_adjudication import (
+E   ModuleNotFoundError: No module named 'hybrid'
+_____ ERROR collecting tests/hybrid/test_x1k_v08r1_adjudicator_repair.py ______
+ImportError while importing test module 'E:\Temp-Projects\PRL\tests\hybrid\test_x1k_v08r1_adjudicator_repair.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+F:\python\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\hybrid\test_x1k_v08r1_adjudicator_repair.py:10: in <module>
+    from hybrid.fixed_topology_adjudication import (
+E   ModuleNotFoundError: No module named 'hybrid'
+______________________ ERROR collecting tests/stage0_v06 ______________________
+F:\python\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+F:\python\Lib\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\stage0_v06\conftest.py:5: in <module>
+    from route_h.discretization import LEVELS, load_discretization_level
+E   ModuleNotFoundError: No module named 'route_h'
+________________________ ERROR collecting tests/stage1 ________________________
+F:\python\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+F:\python\Lib\site-packages\_pytest\assertion\rewrite.py:197: in exec_module
+    exec(co, module.__dict__)
+tests\stage1\conftest.py:5: in <module>
+    from route_h.geometry import load_reference_bundle
+E   ModuleNotFoundError: No module named 'route_h'
+___________ ERROR collecting tests/stage2/test_gate_a_activation.py ___________
+ImportError while importing test module 'E:\Temp-Projects\PRL\tests\stage2\test_gate_a_activation.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+F:\python\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\stage2\test_gate_a_activation.py:8: in <module>
+    from route_h.activation import (
+E   ModuleNotFoundError: No module named 'route_h'
+________ ERROR collecting tests/test_r1_midpoint_diagnosis_evidence.py ________
+ImportError while importing test module 'E:\Temp-Projects\PRL\tests\test_r1_midpoint_diagnosis_evidence.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+F:\python\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_r1_midpoint_diagnosis_evidence.py:7: in <module>
+    from hybrid.r1_midpoint_diagnosis_evidence import (
+E   ModuleNotFoundError: No module named 'hybrid.r1_midpoint_diagnosis_evidence'
+________ ERROR collecting tests/test_r1_remesh_robustness_evidence.py _________
+ImportError while importing test module 'E:\Temp-Projects\PRL\tests\test_r1_remesh_robustness_evidence.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+F:\python\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_r1_remesh_robustness_evidence.py:7: in <module>
+    from hybrid.r1_remesh_robustness_evidence import (
+E   ModuleNotFoundError: No module named 'hybrid.r1_remesh_robustness_evidence'
+=========================== short test summary info ===========================
+ERROR tests/hybrid/test_cell_ecm_vertical_slice.py
+ERROR tests/hybrid/test_myocardial_remesh.py
+ERROR tests/hybrid/test_remesh_registry.py
+ERROR tests/hybrid/test_x1k_v08_adjudication.py
+ERROR tests/hybrid/test_x1k_v08r1_adjudicator_repair.py
+ERROR tests/stage0_v06 - ModuleNotFoundError: No module named 'route_h'
+ERROR tests/stage1 - ModuleNotFoundError: No module named 'route_h'
+ERROR tests/stage2/test_gate_a_activation.py
+ERROR tests/test_r1_midpoint_diagnosis_evidence.py
+ERROR tests/test_r1_remesh_robustness_evidence.py
+!!!!!!!!!!!!!!!!!! Interrupted: 10 errors during collection !!!!!!!!!!!!!!!!!!!
+10 errors in 1.07s

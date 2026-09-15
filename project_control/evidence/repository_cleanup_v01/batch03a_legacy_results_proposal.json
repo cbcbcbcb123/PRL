@@ -1,0 +1,62 @@
+{
+  "schema_version": "prl_repository_cleanup_batch03a_proposal_v01",
+  "status": "passed",
+  "workspace": "E:\\Temp-Projects\\PRL",
+  "copy_root": "E:\\Temp-Projects\\PRL\\project_control\\evidence\\retired_routes_v01",
+  "copy_executed": true,
+  "deletion_executed": true,
+  "execution_record": "project_control/repository_cleanup_batch03a_execution_v01.md",
+  "retained_manifest": "project_control/evidence/repository_cleanup_v01/batch03a_retained_manifest.jsonl",
+  "retired_path_map": "project_control/repository_cleanup_retired_path_map_v01.md",
+  "selected_files": [
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_figure2_spatial_tolerance_st1_v01_20260901\\A1\\summary.json","bytes":4817,"sha256":"6a69a0fba15d6e3bc3ba5d49a9a56eb1c826f1b418d65bcb96b9207f5d7d93b0"},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_figure2_spatial_tolerance_st1_v01_20260901\\A1\\transaction_engine\\summary.json","bytes":9076,"sha256":"89dd180ac17348cd350fe589ceb6c0280b695becbdf0a5ea81909288ce305487"},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_figure2_spatial_tolerance_st1_v01_20260901\\A1\\transaction_engine\\cycle_timeseries.csv","bytes":60322,"sha256":"4baf90f672420b8746e1fc83061d2ffb2efb77e14c7384c2708a111fa6de34d3"},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_figure2_spatial_tolerance_st1_v01_20260901\\A1\\transaction_engine\\cycle_01\\cycle_states.npz","bytes":16089576,"sha256":"c108f7331669ac0095fc897074a597bf7c49945306d77358554d2e1c04d05e94"},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_figure2_spatial_tolerance_st1_v01_20260901\\A1\\transaction_engine\\cycle_01\\cycle_end_checkpoint.npz","bytes":221521,"sha256":"fafa79996a65fbd00f734859179e3aa6a2bde0d4316d786f41fc01541eaedc01"},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_figure2_spatial_tolerance_st1_v01_20260901\\A1\\transaction_engine\\cycle_01\\cycle_summary.json","bytes":1209,"sha256":"a8dc864c23340b77c354153863033bb0ae009442a14bb80e89e84afeebd2a5b2"},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_figure2_spatial_tolerance_st1_v01_20260901\\A1\\transaction_engine\\cycle_01\\cycle_timeseries.csv","bytes":30432,"sha256":"f223e0c4986204512d35db71a7b698c097151a6e83a2688d3ef3ad14d6072e80"},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_figure2_spatial_tolerance_st1_v01_20260901\\A1\\transaction_engine\\cycle_02\\cycle_states.npz","bytes":16091292,"sha256":"b2f5cfdf2ced3a1cf2ec03cb77d13e748f0136c14940e625f7c86b65e1a459e9"},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_figure2_spatial_tolerance_st1_v01_20260901\\A1\\transaction_engine\\cycle_02\\cycle_end_checkpoint.npz","bytes":221429,"sha256":"d0943d1f09bb876661701f38add8633c785919196bcea5e7ef4a9cc217592828"},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_figure2_spatial_tolerance_st1_v01_20260901\\A1\\transaction_engine\\cycle_02\\cycle_summary.json","bytes":1215,"sha256":"fa9e37cdccae0a169b8c01d9d85e4f662293a1ca413e23d1b73790ecf0c5ab22"},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_figure2_spatial_tolerance_st1_v01_20260901\\A1\\transaction_engine\\cycle_02\\cycle_timeseries.csv","bytes":30446,"sha256":"d5b0e206cd4a4c552f958d3f760781178381f0eab97b118c7cfe14ec897082da"}
+  ],
+  "selected_directories": [
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\prl_figure2_spatial_tolerance_st1_warm_e1_v04_20260901","files":3,"bytes":1967852},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\x1_k_r1_midpoint_collapse_diagnosis_v10","files":49,"bytes":1469877},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid\\x1_k_transactional_survivor_repair_v11","files":43,"bytes":1365635},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\route_h\\stage2_gate_a_v04","files":30,"bytes":11105701},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem\\v03_20260910","files":31,"bytes":6882624},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_lineage_odd_mode_gate","files":2,"bytes":167694}
+  ],
+  "deletion_targets": [
+    {"path":"E:\\Temp-Projects\\PRL\\results\\hybrid","files":13528,"bytes":1225646833},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\ncs_m1_all_fem","files":113,"bytes":16727542},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_cell_bloch_asymptotic_probe","files":1,"bytes":416331},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_cell_mode_drive_overlap","files":1,"bytes":21232},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_closed_cell_ritz_probe","files":2,"bytes":83887},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_division_dipole_gate","files":2,"bytes":36124},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_feedback_kernel","files":2,"bytes":92026},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_impedance_shift","files":27,"bytes":105767559},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_lineage_odd_mode_gate","files":2,"bytes":167694},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_m1","files":57,"bytes":10674898},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_natural_probe","files":1,"bytes":1955892},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_pair_junction_probe","files":1,"bytes":2160831},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_rest_length_write_read","files":1,"bytes":88896},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_science_pilot","files":61,"bytes":133764364},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_shape_coupling_coefficients","files":1,"bytes":553537},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_static_mode_screen","files":18,"bytes":3322199},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_transverse_notch","files":23,"bytes":70459438},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\paper2_v08","files":9,"bytes":186234},
+    {"path":"E:\\Temp-Projects\\PRL\\results\\route_h","files":239,"bytes":68684474}
+  ],
+  "totals": {
+    "deletion_targets": 19,
+    "deletion_files": 14089,
+    "deletion_bytes": 1640809991,
+    "selected_bytes": 55720718,
+    "expected_net_release_bytes": 1585089273,
+    "tracked_files_in_targets": 570,
+    "reparse_points_in_targets": 0
+  }
+}

@@ -1,0 +1,11 @@
+branch,action_id,parent_action_id,operation,input_local_0,input_local_1,before_revision,after_revision,new_local_id,new_persistent_id,minimum_fiber_alignment,maximum_rebind_error,created_persistent_id
+frozen_main,split_original_0_1,root,edge_split,0,1,0,1,8,8,1,1.1102230246251565e-16,
+frozen_main,merge_frozen_0_m,split_original_0_1,edge_merge,0,8,1,2,,,,,9
+candidate_discovery,split_original_0_1,root,edge_split,0,1,0,1,8,8,1,1.1102230246251565e-16,
+candidate_1,split_original_0_1,root,edge_split,0,1,0,1,8,8,1,1.1102230246251565e-16,
+candidate_1,merge_candidate_1,split_original_0_1,edge_merge,0,8,1,2,,,,,9
+candidate_2,split_original_0_1,root,edge_split,0,1,0,1,8,8,1,1.1102230246251565e-16,
+candidate_2,merge_candidate_2,split_original_0_1,edge_merge,1,8,1,2,,,,,9
+candidate_3,split_original_0_1,root,edge_split,0,1,0,1,8,8,1,1.1102230246251565e-16,
+candidate_4,split_original_0_1,root,edge_split,0,1,0,1,8,8,1,1.1102230246251565e-16,
+candidate_4,merge_candidate_4,split_original_0_1,edge_merge,3,8,1,2,,,,,9

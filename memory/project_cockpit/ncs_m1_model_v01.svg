@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="310" viewBox="0 0 1160 310" role="img" aria-labelledby="title desc">
+<title id="title">M1 三层全 FEM 计划模型</title><desc id="desc">给定心肌周期主动应变，经黏弹 ECM 传递到被动心内膜 FEM。后续才替换 DCM、加入分裂、ECM 更新和流体。所有内容为计划示意，不是结果。</desc>
+<rect width="1160" height="310" fill="#f8fafc" rx="14"/>
+<g font-family="Microsoft YaHei, sans-serif" fill="#172b4d">
+<text x="25" y="33" font-size="21" font-weight="bold">下一基线：三层全部 FEM</text><text x="700" y="33" font-size="18" fill="#93620b">计划示意 · M1 NOT_RUN · 未显示计算结果</text>
+<rect x="25" y="57" width="510" height="36" fill="#bddbe8" stroke="#417c95"/><text x="43" y="82" font-size="17">心内膜：有限厚度、被动 FEM</text>
+<rect x="25" y="93" width="510" height="66" fill="#eee0be" stroke="#b69c5b"/><text x="43" y="121" font-size="17">ECM：SLS 黏弹 FEM</text><text x="43" y="146" font-size="15">储能 + 松弛耗散；尚无分泌/降解</text>
+<rect x="25" y="159" width="510" height="60" fill="#eac6cc" stroke="#aa6974"/><text x="43" y="185" font-size="17">心肌：规定周期主动应变的 FEM</text><text x="43" y="208" font-size="15">α 峰值 0.01；合成小应变基准</text>
+<text x="25" y="247" font-size="16">输入：周期主动缩短 → 输出：形变、相位、功与耗散</text>
+<text x="25" y="277" font-size="15" fill="#53687d">平面通过后再做圆环；此图不按实际厚度比例绘制。</text>
+<path d="M560 123H605M594 116l12 7-12 7" stroke="#4b6882" stroke-width="2" fill="none"/>
+<rect x="625" y="57" width="510" height="92" rx="8" fill="white" stroke="#8196a9"/>
+<text x="644" y="84" font-size="18" font-weight="bold">先确认模型做对</text><text x="644" y="112" font-size="16">独立参考 · 空间/时间误差 · 镜像 · 能量收支</text><text x="644" y="137" font-size="15">通过仅证明基线，不证明 DCM 优势或投稿水平。</text>
+<rect x="625" y="166" width="510" height="121" rx="8" fill="white" stroke="#8196a9" stroke-dasharray="5 5"/>
+<text x="644" y="191" font-size="18" font-weight="bold">后续逐级增加，尚未执行</text><text x="644" y="218" font-size="16">DCM 细胞层 → 一次分裂 → ECM 更新 → FSI</text><text x="644" y="244" font-size="15">每一步都保留相同信息的连续模型强对照。</text><text x="644" y="269" font-size="15" fill="#53687d">历史实现：心内膜是被动弹性链；不是真实 DCM。</text>
+</g></svg>

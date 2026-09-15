@@ -1,0 +1,257 @@
+{
+  "geometry_spec_id": "GEOMETRY-PRL-ROUTE-H-STAGE0-V02",
+  "schema_version": "2.0.0",
+  "created_at": "2026-07-29T14:25:34+08:00",
+  "status": "frozen_stage0_specification_not_materialized",
+  "evidence_level": "deterministic_dimensionless_reference_geometry_spec_no_mesh_file_no_solver",
+  "reference_frame": {
+    "type": "flat_canonical_patch",
+    "basis": {
+      "e_x": [1.0, 0.0, 0.0],
+      "e_y": [0.0, 1.0, 0.0],
+      "e_z": [0.0, 0.0, 1.0]
+    },
+    "layer_direction": "e_z points from lumen toward outer myocardium",
+    "endocardial_apical_normal": [0.0, 0.0, -1.0],
+    "curvature_enabled": false,
+    "curved_patch_requires_new_geometry_version": true
+  },
+  "patch_bounds": {
+    "x": [0.0, 3.0],
+    "y": [0.0, 1.8],
+    "z_lumen_to_outer": [-0.24, 0.76],
+    "L_x": 3.0,
+    "L_y": 1.8
+  },
+  "surface_mesh_generator": {
+    "seed_polyhedron": "unit_icosahedron_with_canonical_12_vertex_20_face_order",
+    "subdivision_level": 2,
+    "subdivision_rule": "Each oriented triangle is split into four by edge midpoints; shared midpoint IDs are keyed by the sorted endpoint IDs; new faces inherit orientation.",
+    "vertex_projection": "Normalize each new vertex to the Euclidean unit sphere before superellipsoid mapping.",
+    "superellipsoid_mapping": "x=c+diag(a_x,a_y,a_z)*u/(|u_x|^p+|u_y|^p+|u_z|^p)^(1/p)",
+    "superellipsoid_exponent_p": 8,
+    "expected_vertices_per_cell": 162,
+    "expected_faces_per_cell": 320,
+    "fixed_topology_in_stage1_and_stage2": true,
+    "remeshing_enabled": false,
+    "failure_if_triangle_quality_below": 0.30,
+    "failure_if_nonmanifold_or_open": true
+  },
+  "cell_templates": {
+    "endocardial": {
+      "half_axes": {
+        "a_x": 0.50,
+        "a_y": 0.45,
+        "a_z": 0.12
+      },
+      "nominal_full_lengths": [1.00, 0.90, 0.24],
+      "reference_volume_rule": "V0 is the exact signed volume of the finalized oriented triangulated surface, not an analytic rounded-box estimate.",
+      "reference_area_rule": "A0_face_type is the exact sum of reference triangle areas for that material face identity.",
+      "reference_hinge_rule": "theta0_edge is the oriented dihedral angle of the finalized reference mesh."
+    },
+    "myocardial": {
+      "half_axes": {
+        "a_x": 0.50,
+        "a_y": 0.30,
+        "a_z": 0.28
+      },
+      "nominal_full_lengths": [1.00, 0.60, 0.56],
+      "reference_volume_rule": "V0 is the exact signed volume of the finalized oriented triangulated surface.",
+      "reference_area_rule": "A0_face_type is the exact sum of reference triangle areas for that material face identity.",
+      "reference_hinge_rule": "theta0_edge is the oriented dihedral angle of the finalized reference mesh."
+    }
+  },
+  "material_face_identity": {
+    "parametric_face_direction": "u_bar is the normalized sum of the three preimage unit-sphere vertex directions of a triangle.",
+    "dominant_z_rule": "|u_bar_z| >= max(|u_bar_x|,|u_bar_y|)",
+    "endocardial": {
+      "if_dominant_z_and_negative": "apical_lumen",
+      "if_dominant_z_and_positive": "basal_ecm",
+      "otherwise": "lateral"
+    },
+    "myocardial": {
+      "if_dominant_z_and_negative": "basal_ecm",
+      "if_dominant_z_and_positive": "opposite_outer",
+      "otherwise": "lateral"
+    },
+    "persistence": "Face identity is assigned in the reference mesh and never recomputed from current geometry."
+  },
+  "myocardial_anchor_patches": {
+    "eligible_face_identity": "lateral",
+    "Gamma_minus_rule": "Select faces with u_bar_x <= -0.75.",
+    "Gamma_plus_rule": "Select faces with u_bar_x >= 0.75.",
+    "centroid_weight": "reference triangle area",
+    "reference_length": "Lf0=||c_plus_0-c_minus_0||",
+    "minimum_reference_length": 0.80,
+    "failure_if_either_patch_empty": true,
+    "force_distribution": "Fixed reference triangle-area weights, including each triangle's one-third barycentric nodal weights, normalized separately within Gamma_minus and Gamma_plus.",
+    "identity_hash": "Hash sorted face IDs in each anchor patch together with cell ID."
+  },
+  "endocardial_layer": {
+    "grid": {
+      "n_x": 3,
+      "n_y": 2,
+      "cell_count": 6,
+      "center_rule": "c(i,j)=(0.5+i,0.45+0.9*j,-0.12), i=0..2, j=0..1"
+    },
+    "nominal_intercellular_gaps": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "apical_min_z": -0.24,
+    "basal_max_z": 0.0,
+    "gap_to_ECM_lumen_face": 0.0
+  },
+  "ECM_layer": {
+    "bounds": {
+      "x": [0.0, 3.0],
+      "y": [0.0, 1.8],
+      "z": [0.0, 0.2]
+    },
+    "structured_grid": {
+      "n_x_intervals": 12,
+      "n_y_intervals": 8,
+      "n_z_intervals": 2,
+      "delta_x": 0.25,
+      "delta_y": 0.225,
+      "delta_z": 0.10
+    },
+    "tetrahedralization": "Each structured brick uses a conforming six-tetra Freudenthal split determined by global lexicographic vertex order.",
+    "reference_orientation": "Every tetrahedron is reordered once so det(Dm)>0.",
+    "minimum_elements_through_thickness": 2,
+    "lumen_facing_boundary": "z=0",
+    "outer_facing_boundary": "z=0.2",
+    "lateral_boundaries": "x=0, x=3, y=0, y=1.8"
+  },
+  "myocardial_layer_primary": {
+    "grid": {
+      "n_x": 3,
+      "n_y": 3,
+      "n_z": 1,
+      "cell_count": 9,
+      "center_rule": "c(i,j)=(0.5+i,0.3+0.6*j,0.48), i=0..2, j=0..2"
+    },
+    "nominal_intercellular_gaps": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "basal_min_z": 0.20,
+    "opposite_outer_max_z": 0.76,
+    "gap_to_ECM_outer_face": 0.0
+  },
+  "myocardial_two_layer_sensitivity": {
+    "authorized_to_materialize": false,
+    "reason": "Stage 0 records only the option. Two-layer geometry requires a new case/spec version after primary one-layer inspection."
+  },
+  "interface_registry": [
+    {
+      "interface_id": "IF-ENDO-ECM",
+      "side_A": "endocardium.basal_ecm",
+      "side_B": "ECM.lumen_facing_boundary",
+      "nominal_gap": 0.0,
+      "adhesion_tether_allowed": true,
+      "steric_contact_allowed": true
+    },
+    {
+      "interface_id": "IF-MYO-ECM",
+      "side_A": "myocardium.basal_ecm",
+      "side_B": "ECM.outer_facing_boundary",
+      "nominal_gap": 0.0,
+      "adhesion_tether_allowed": true,
+      "steric_contact_allowed": true
+    },
+    {
+      "interface_id": "IF-ENDO-LATERAL",
+      "side_A": "endocardium.lateral",
+      "side_B": "neighboring_endocardium.lateral",
+      "nominal_gap": 0.0,
+      "adhesion_tether_allowed": true,
+      "steric_contact_allowed": true
+    },
+    {
+      "interface_id": "IF-MYO-LATERAL",
+      "side_A": "myocardium.lateral",
+      "side_B": "neighboring_myocardium.lateral",
+      "nominal_gap": 0.0,
+      "adhesion_tether_allowed": true,
+      "steric_contact_allowed": true
+    }
+  ],
+  "boundary_port_registry": {
+    "full_patch_primary": {
+      "blood_pressure": "endocardium.apical_lumen only",
+      "blood_WSS": "endocardium.apical_lumen only",
+      "outer_compliant_support": "myocardium.opposite_outer only",
+      "lateral_compliant_support": "outward-facing lateral faces of perimeter myocardial cells only",
+      "direct_support_on_ECM": false,
+      "direct_support_on_endocardium": false,
+      "fully_fixed_boundary": false
+    },
+    "gate_C_sandwich": {
+      "compliant_support": "myocardium.opposite_outer only",
+      "ECM_lumen_facing_boundary": "traction_free",
+      "direct_support_on_ECM_outer_facing": false
+    },
+    "gate_D_sandwich": {
+      "test_fixture_support": "ECM.outer_facing_boundary",
+      "port_id": "P_FIXTURE_D",
+      "interpretation": "test fixture only; not surrounding myocardium and not reused in the full patch"
+    },
+    "periodic_sensitivity": {
+      "primary": false,
+      "x_pairing": "Pair corresponding boundary-cell material nodes by cell row and template vertex ID across x=0 and x=3.",
+      "y_pairing": "Pair corresponding boundary-cell material nodes by cell column and template vertex ID across y=0 and y=1.8.",
+      "constraint": "paired displacement differences equal zero after removing the imposed lattice translation",
+      "lateral_compliant_support_disabled": true,
+      "outer_compliant_support_retained": true,
+      "mean_translation_gauge": "zero mean displacement; numerical only; zero physical power"
+    }
+  },
+  "support_energy_spec": {
+    "nodal_weight": "one third of the reference areas of all owned support faces incident on the node",
+    "energy": "Psi_support=0.5*sum_i w_i*(x_i-y_i)^T*K_port*(x_i-y_i)",
+    "dissipation": "D_support=sum_i w_i*(v_i-y_dot_i)^T*C_port*(v_i-y_dot_i)",
+    "full_patch_outer_K": [[0.25,0.0,0.0],[0.0,0.25,0.0],[0.0,0.0,1.0]],
+    "full_patch_outer_C": [[0.25,0.0,0.0],[0.0,0.25,0.0],[0.0,0.0,1.0]],
+    "full_patch_lateral_K": [[0.50,0.0,0.0],[0.0,0.50,0.0],[0.0,0.0,0.25]],
+    "full_patch_lateral_C": [[0.50,0.0,0.0],[0.0,0.50,0.0],[0.0,0.0,0.25]],
+    "gate_D_fixture_K": [[1.0,0.0,0.0],[0.0,1.0,0.0],[0.0,0.0,1.0]],
+    "gate_D_fixture_C": [[1.0,0.0,0.0],[0.0,1.0,0.0],[0.0,0.0,1.0]],
+    "reference_motion": "fixed for all registered Stage 2 verification cases"
+  },
+  "reference_state_registry": {
+    "cell_V0": "exact finalized reference mesh volume",
+    "cell_A0": "exact finalized reference area per material face identity",
+    "cell_theta0": "exact finalized reference hinge angles",
+    "ECM_F0": "identity",
+    "ECM_J0": 1.0,
+    "ECM_Z0": "dev(C_bar0)=zero tensor",
+    "ECM_A_hat0": 1.0,
+    "ECM_H_ECM_hat0": 0.20,
+    "default_prestress": false,
+    "reference_bundle_seal": {
+      "materialization_authorized": false,
+      "required_before_any_solver_or_response": true,
+      "required_hashes": [
+        "all cell vertex arrays",
+        "all cell oriented face arrays",
+        "all material face identity arrays",
+        "all anchor face-ID arrays",
+        "ECM vertex array",
+        "ECM tetra array",
+        "ECM boundary-face identity array",
+        "interface pair registry",
+        "support owner registry"
+      ],
+      "hash_algorithm": "SHA-256",
+      "mismatch_action": "stop before Stage 1 implementation or any response"
+    }
+  },
+  "owner_exclusivity_rules": [
+    "Each material face has exactly one material face identity.",
+    "Each external support face has at most one environment port owner.",
+    "A cell-ECM interface face cannot simultaneously own an environment support port.",
+    "Blood ports can target only endocardial apical_lumen faces.",
+    "The Gate D fixture port exists only in Gate D and is excluded from full-patch interpretation."
+  ]
+}

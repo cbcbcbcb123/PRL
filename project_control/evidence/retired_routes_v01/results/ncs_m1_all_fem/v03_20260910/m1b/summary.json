@@ -1,0 +1,245 @@
+{
+  "schema_version": "ncs_m1_all_fem.v01",
+  "stage": "M1b",
+  "execution_status": "passed",
+  "scientific_classification": "PASS",
+  "scope": "two_dimensional_plane_strain_three_layer_annulus_synthetic_benchmark",
+  "m1_overall_status": "passed",
+  "method_novelty": "unknown",
+  "gates": {
+    "linear_algebra": {
+      "maximum_backward_residual": 6.926635897966464e-16,
+      "maximum_constraint_residual": 9.591259456392827e-18,
+      "pass": true
+    },
+    "independent_reference_frequency": {
+      "errors": {
+        "inner_radial": 0.00015864250742713082,
+        "layer_0_0": 8.359594284749378e-05,
+        "layer_0_1": 9.247613860607973e-05,
+        "layer_1_0": 6.919146406581972e-05,
+        "layer_1_1": 5.215787118917195e-05,
+        "layer_2_0": 3.769134968741491e-05,
+        "layer_2_1": 7.098754454728658e-05
+      },
+      "phase_errors_degrees": {
+        "inner_radial": 0.0007474408403832813
+      },
+      "maximum_error": 0.00015864250742713082,
+      "maximum_phase_error_degrees": 0.0007474408403832813,
+      "reference_self_check": {
+        "linear_residual": 2.1690818654827684e-18,
+        "quadrature_self_error": 1.3021714944895506e-16,
+        "pass": true
+      },
+      "pass": true
+    },
+    "independent_reference_time": {
+      "errors": {
+        "inner_radial": 0.00016061139378188336,
+        "layer_0_0": 8.437001899511591e-05,
+        "layer_0_1": 9.439081006154936e-05,
+        "layer_1_0": 7.058560693452991e-05,
+        "layer_1_1": 5.3582342285161494e-05,
+        "layer_2_0": 3.8178422724455706e-05,
+        "layer_2_1": 7.196992917121875e-05
+      },
+      "phase_errors_degrees": {
+        "inner_radial": 0.0008926193273941789
+      },
+      "maximum_error": 0.00016061139378188336,
+      "maximum_phase_error_degrees": 0.0008926193273941789,
+      "reference_self_check": {
+        "linear_residual": 2.1690818654827684e-18,
+        "quadrature_self_error": 1.3021714944895506e-16,
+        "pass": true
+      },
+      "pass": true
+    },
+    "time_convergence": {
+      "absolute_errors": {
+        "64": 3.3689333129888686e-07,
+        "128": 8.420040725302344e-08,
+        "256": 2.104866655008307e-08
+      },
+      "orders": {
+        "64_to_128": 2.000392754712461,
+        "128_to_256": 2.000098370909319
+      },
+      "error_floor_rule_applied": true,
+      "pass": true
+    },
+    "spatial": {
+      "readouts": {
+        "inner_radial": {
+          "g0_g1": 0.0018593759648054774,
+          "g1_g2": 0.00047347097206075505,
+          "ratio": 0.2546397183908356,
+          "error_floor_rule_applied": false,
+          "pass": true
+        },
+        "layer_0_0": {
+          "g0_g1": 0.000984778581399619,
+          "g1_g2": 0.0002497699478887648,
+          "ratio": 0.2536305648867573,
+          "error_floor_rule_applied": false,
+          "pass": true
+        },
+        "layer_0_1": {
+          "g0_g1": 0.0010721974009871087,
+          "g1_g2": 0.00027533981734998933,
+          "ratio": 0.25679955677611255,
+          "error_floor_rule_applied": false,
+          "pass": true
+        },
+        "layer_1_0": {
+          "g0_g1": 0.000802595643408476,
+          "g1_g2": 0.00020603446596056217,
+          "ratio": 0.2567101723672106,
+          "error_floor_rule_applied": false,
+          "pass": true
+        },
+        "layer_1_1": {
+          "g0_g1": 0.0006029468321183025,
+          "g1_g2": 0.0001551992887815231,
+          "ratio": 0.25740128401748014,
+          "error_floor_rule_applied": false,
+          "pass": true
+        },
+        "layer_2_0": {
+          "g0_g1": 0.0004424999076892813,
+          "g1_g2": 0.00011252901713394741,
+          "ratio": 0.25430291663012977,
+          "error_floor_rule_applied": false,
+          "pass": true
+        },
+        "layer_2_1": {
+          "g0_g1": 0.0008337922276639053,
+          "g1_g2": 0.00021195614128098739,
+          "ratio": 0.25420738434422674,
+          "error_floor_rule_applied": false,
+          "pass": true
+        }
+      },
+      "pass": true
+    },
+    "rotation": {
+      "displacement_error": 1.0260938435599421e-13,
+      "polar_strain_error": 4.70672213317963e-14,
+      "maximum_error": 1.0260938435599421e-13,
+      "pass": true
+    },
+    "physical_ledger": {
+      "maximum_relative_residual": 4.269059565011932e-17,
+      "minimum_dissipation": 2.1960711668031195e-10,
+      "pass": true
+    },
+    "interface": {
+      "maximum_normalized_mismatch": 2.192368434061193e-13,
+      "pass": true
+    },
+    "steady_state_and_assumption": {
+      "maximum_cycle_difference": 5.466684117694933e-11,
+      "maximum_absolute_strain": 0.011588328760472999,
+      "pass": true
+    },
+    "budget": {
+      "protocol_count": 7,
+      "protocol_wall_seconds": 52.8868996000092,
+      "maximum_protocol_wall_seconds": 29.290981199999806,
+      "factorizations": 7,
+      "rhs_count": 3588,
+      "pass": true
+    }
+  },
+  "failed_or_unresolved_gates": [],
+  "reference": {
+    "inner_radial_harmonic": {
+      "real": 0.0031295636070215694,
+      "imag": -0.00042066464598946196
+    },
+    "layer_polar_strain_harmonic": {
+      "real": [
+        [
+          -0.0012339493828755405,
+          0.0030222714440307245
+        ],
+        [
+          -0.0015923775153104018,
+          0.002334149650413686
+        ],
+        [
+          0.0015049956173557133,
+          0.001889986030604525
+        ]
+      ],
+      "imag": [
+        [
+          0.0001658630229312597,
+          -0.00040624282063952375
+        ],
+        [
+          0.00030310581310254126,
+          -0.0003021547825268582
+        ],
+        [
+          0.00010285918817853222,
+          -0.00021338557862777746
+        ]
+      ]
+    },
+    "coefficients": {
+      "real": [
+        0.0008941610305775912,
+        0.002235402576443978,
+        0.0003708860675516419,
+        0.0028123132231800876,
+        0.0029437145969391327,
+        -0.0010953230291418422
+      ],
+      "imag": [
+        -0.00012018989885413198,
+        -0.00030047474713532996,
+        4.755152878415533e-07,
+        -0.00043350836622685585,
+        -5.526319522462264e-05,
+        -0.00033192456631788976
+      ]
+    },
+    "linear_residual": 2.1690818654827684e-18,
+    "quadrature_self_error": 1.3021714944895506e-16,
+    "pass": true
+  },
+  "ledger": {
+    "protocol_count": 7,
+    "factorizations": 7,
+    "rhs_count": 3588,
+    "protocol_wall_seconds": 52.8868996000092,
+    "end_to_end_wall_seconds": 56.1129092000192
+  },
+  "environment": {
+    "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.2.6",
+    "scipy": "1.16.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpu_threads_requested": 1,
+    "gpu": false,
+    "network_during_formal_run": false
+  },
+  "git": {
+    "branch": "codex/simucell3d-hybrid-feasibility",
+    "head": "b45650a9e370be138a70acf305b6c3a21e6a7ed2",
+    "dirty": true
+  },
+  "input_hashes": {
+    "scripts/run_ncs_m1_all_fem_v01.py": "df2319d8276062ddf74113ee216f280f98b977a1a02637a903164fbf90e03dfc",
+    "project_control/ncs_m1_frozen_spec_v01.md": "66238b849cc1042fcf8198a494c1e7ed422c78940930b0bed1714687c5309144",
+    "project_control/ncs_m1_all_fem_baseline_plan_v01.md": "9f83e39ec9afe29c43a4cdbb43334c1a5e722851cdff78060c0791e1df18caee",
+    "project_control/ncs_m0_report_v01.md": "b465575e1d6eb3290a4b5602c5b533d8e8f3098834e4aab43923cfed3aada995"
+  },
+  "m1a_summary": {
+    "path": "results/ncs_m1_all_fem/v02_20260910/m1a/summary.json",
+    "sha256": "94e08dad43667ae73e0bdcf52ed08d37f395dcb14f93eb8d0ab80ccc4f520c5d"
+  },
+  "interpretation_boundary": "M1 PASS validates only the frozen planar and annular all-FEM synthetic baselines. M2, event consistency, DCM advantage, biological validity, novelty, and publication readiness remain untested or unknown."
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": "prl.repository_cleanup.batch04_candidate03_deletion_acceptance.v1",
+  "recorded_at": "2026-09-15",
+  "status": "passed",
+  "permanent": true,
+  "scientific_execution": "not_run",
+  "authorization": {
+    "consumed": true,
+    "target_list": "project_control/evidence/repository_cleanup_v01/batch04_candidate03_deletion_targets_v01.txt",
+    "target_list_sha256": "2d612a361cbf1f37c1f2c05d07e1a9bac4a3a0b3c506b9b4c57bf06d73a7e6de",
+    "top_paths": 38,
+    "recursive_directories": 8,
+    "single_files": 30,
+    "directory_interface": "System.IO.Directory.Delete(path, true)",
+    "file_interface": "System.IO.File.Delete(path)",
+    "other_paths_authorized": false
+  },
+  "preflight": {
+    "files": 61,
+    "logical_bytes": 1541224,
+    "git_tracked_clean": 35,
+    "git_untracked": 26,
+    "git_modified": 0,
+    "reparse_points": 0,
+    "file_hashes": "61/61 passed",
+    "protected_identity": "32/32 passed"
+  },
+  "deletion": {
+    "deleted_targets": 38,
+    "remaining_targets": 0,
+    "deleted_files": 61,
+    "logical_bytes_released": 1541224,
+    "recoverability": "not sent to recycle bin; old Git history is not a supported recovery path after Batch 5"
+  },
+  "postflight": {
+    "protected_identity": "32/32 passed",
+    "protected_mismatches": 0,
+    "tracked_deletions_visible": 35,
+    "unauthorized_git_status_changes": 0,
+    "workspace_before": {
+      "file_count": 15054,
+      "directory_count": 1674,
+      "logical_bytes": 5775305474
+    },
+    "workspace_after_immediate": {
+      "file_count": 14993,
+      "directory_count": 1666,
+      "logical_bytes": 5773764250
+    }
+  },
+  "validation": {
+    "default_pytest": "19/19 passed",
+    "explicit_quick": "19/19 passed",
+    "discovered_packages": [
+      "prl",
+      "prl.verification"
+    ],
+    "cockpit_links": "25 local links and 201 evidence paths passed"
+  },
+  "preserved_retired_source": {
+    "root": "project_control/evidence/retired_routes_v01/source",
+    "files": 16,
+    "logical_bytes": 369160
+  },
+  "execution_issues": [
+    {
+      "stage": "PowerShell parse",
+      "impact": "stopped before preflight and deletion; zero targets deleted"
+    },
+    {
+      "stage": "read-only Git preflight",
+      "impact": "stopped before deletion loop; zero targets deleted"
+    }
+  ],
+  "next_gate": "freeze and separately authorize the Candidate 2 application-migration safe slice"
+}
