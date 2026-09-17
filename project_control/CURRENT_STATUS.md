@@ -9,22 +9,25 @@ git_integration_execution: project_control/remote_history_integration_execution_
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
 verified_commit: bbc4b5be549a95766c6419c2aeb784e2c2cc7681
-current_lifecycle: fem_only_f6s1m_geometry_passed_storage_blocked_mechanics_not_run
+current_lifecycle: fem_only_f6s1p_local_volume_failed
 documentation_updated_at: 2026-09-17
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_fenicsx_thin_mesh_contract_v01.md
-last_completed_contract: project_control/ventricle_fem_fenicsx_thin_mesh_contract_v01.md
-current_render_contract: results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/rendering.json
-next_stage_contract: pending_384MiB_passive_continuation_approval
-current_authorization: f6s1m_single_invocation_ended_no_automatic_retry
+current_contract: project_control/ventricle_fem_fenicsx_retained_passive_contract_v01.md
+last_completed_contract: project_control/ventricle_fem_fenicsx_retained_passive_contract_v01.md
+current_render_contract: results/ventricle_fem/f6s1p_retained_passive_v01_20260917/rendering.json
+next_stage_contract: pending_two_state_fine_mesh_diagnostic_approval
+current_authorization: f6s1p_first_failure_stop_no_automatic_retry
+default_new_stage_budget_mib: 800
+project_hard_limit_gib: 3
+external_results_root: pending_exact_path_approval
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: F6S1M_storage_blocked_no_new_scientific_attempt
-current_execution_log: project_control/ventricle_fem_fenicsx_thin_mesh_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_fenicsx_thin_mesh_execution_v01.md
+execution_authorized: F6S1P_local_volume_failed_no_new_scientific_attempt
+current_execution_log: project_control/ventricle_fem_fenicsx_retained_passive_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_fenicsx_retained_passive_execution_v01.md
 latest_completed_scientific_gate: F6-S0_G0_G1_G2_ideal_ring_qualification
-latest_result_package: results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/summary.json
+latest_result_package: results/ventricle_fem/f6s1p_retained_passive_v01_20260917/summary.json
 latest_supervisor_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -44,7 +47,25 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-17 F6-S1-M网格通过，完整输出预算阻断
+## 当前：2026-09-17 F6-S1-P局部体积门失败
+
+用户将新阶段默认输出预算提高到800 MiB，原3 GiB项目硬限与64 MiB停止空间保持。
+复用合格candidate_0，无Gmsh重生成；3541/14164单元两级几何与存储准入通过。
+一次25.932秒容器保存2态：零载passed；p/mu=0.02求解收敛但max|J−1|=6.71167%>1%，
+按合同停止。1态接受、1态失败，细网格力学及其余8态not_run，无自动重跑。
+
+弱压力残量3.22e-17、独立自由力1.69e-14，平均J−1=0.002858%；69个单元含超限积分点。
+腔面积+20.10718%及明显变形只能作为失败态诊断。优先验证空间离散影响，不能放宽1%门。
+308父文件不变；54测试+21子测试passed；结构/应力/局部J图及真实两帧GIF已验收。
+下一科学切片待确认：只补尚未运行的细网格0和0.02两态，不重跑粗网格，不恢复主动。
+
+用户另建议外置PRL-results结果库。当前已请求精确项目外路径确认；尚未外部新建、搬移或删除。
+既有results本来已被Git忽略；本次停止不是空间问题。外置后的磁盘余量规则与路径适配另验收。
+
+[执行记录](ventricle_fem_fenicsx_retained_passive_execution_v01.md) ·
+[图件与动图](../results/ventricle_fem/f6s1p_retained_passive_v01_20260917/index.html)。
+
+## 历史：2026-09-17 F6-S1-M网格通过，完整输出预算阻断
 
 按用户确认的有界修复，将局部边长适配相邻层间距；三个预声明候选均通过原20度及全部几何门。
 最小合格候选1958顶点/3541单元、最小角23.0435度；旧网格45个坏角单元降为0，

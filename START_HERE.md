@@ -6,53 +6,52 @@ updated_at: 2026-09-17
 
 # PRL｜斑马鱼心室 FEM
 
-## 项目目标
+## 项目目标与当前模型
 
-只用FEM建立解释斑马鱼心室跳动及发育的力学模型，逐步研究组织结构、生长、ECM及心内膜反馈。不恢复DCM；精细逐细胞分割不是组织尺度FEM的前置条件。
+只用FEM解释斑马鱼心室跳动及发育，逐步研究组织结构、生长、ECM及心内膜反馈。
+不恢复DCM；精细逐细胞分割不是组织尺度FEM的前置条件。
 
-## 当前模型与边界
+外轮廓来自72 hpf Fish 4、z=39；内腔和三层界面按20/27、21/27、22/27、1构造，
+不是实测解剖。FEniCSx二维P2位移/P1压力三角形、三维平面应变有限变形NH，
+各层mu=1、kappa=1000（未标定）。内壁随动压力，外壁自由；A固定ux/uy、B固定uy，
+只去除刚体运动。主动为0，加载级不是生理时间。
 
-外轮廓来自72 hpf Fish 4、z=39；内腔及三层界面按20/27、21/27、22/27、1构造，
-不是实测内腔或壁厚。计划采用FEniCSx二维P2位移/P1压力三角形、三维平面应变有限变形
-Neo-Hookean材料，各层mu=1、kappa=1000（未标定）。内壁随动压力p/mu=0→0.08，
-外壁自由；A固定ux/uy，B固定uy，只消除刚体运动。加载级不是生理时间。
+## 当前进展：已计算变形，局部体积门失败
 
-## 已完成：薄层网格修复通过
+800 MiB阶段预算已生效。复用合格粗网格3541单元，细网格四分为14164单元；
+两档几何通过，最小角23.0435度、源mask IoU99.5882%、轮廓误差1.66974微米保持。
 
-按局部层间距调整边界目标边长，保持源轮廓及20度质量门不变。
-最小候选为1958顶点、3541三角形；最小角从12.8687°提高至23.0435°，
-不合格单元由45降为0。三个预声明候选均通过几何检查，不再继续盲目加密。
-mask IoU保持99.5882%，原始轮廓采样Hausdorff保持1.66974微米，共享层界完整。
+一次25.932秒容器保存两个平衡态：零载passed；p/mu=0.02收敛，但最大局部
+|J−1|=6.71167%超过1%门，因此停止。后续8态及细网格力学未运行。
+腔面积增加20.10718%及明显变形仅为失败态诊断，不能作为已验证响应。
 
-![合格网格、质量对比与存储预算](results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/figures/FigS1M_mesh_repair/FigS1M_mesh_repair_v01_20260917/04_FigS1M_mesh_repair_v01_20260917.png)
+![结构、形变应力、局部J及两态面积](results/ventricle_fem/f6s1p_retained_passive_v01_20260917/figures/FigS1P_passive_failure/FigS1P_passive_failure_v01_20260917/04_FigS1P_passive_failure_v01_20260917.png)
 
-[本次执行与裁决](project_control/ventricle_fem_fenicsx_thin_mesh_execution_v01.md) ·
-[图件与可复算Notebook](results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/index.html)
+[图件、两帧动图及Notebook](results/ventricle_fem/f6s1p_retained_passive_v01_20260917/index.html) ·
+[执行与原因分析](project_control/ventricle_fem_fenicsx_retained_passive_execution_v01.md)
 
-## 当前阻断：完整输出预算，而非网格或材料失败
+## 核心难点
 
-最小候选的两档网格×五个压力状态，加上图件/控制余量，保守预测307.35 MiB，
-超过本轮256 MiB准入上限。因此本次**0平衡求解，压力响应、形变与应力均not_run**。
-预测不是实际文件体积或RAM占用；没有磁盘写满证据。原调用failed退出保持，
-交付裁决为“网格passed、存储blocked”。260个父证据文件哈希保持。
+求解器残量6.81e-15、独立自由力1.69e-14、弱压力残量3.22e-17均通过；
+平均J−1仅0.002858%，但69个单元含超1%的积分点，局部约束仍未满足。
+这支持优先检验空间离散影响，而不是直接调软材料、提高体积模量或放宽门限。
 
-## 最近通过的力学结果
+只有外轮廓实测；内腔/壁厚/纤维、无应力参考态、材料、生理时间与自由三维仍未标定。
+圆环基准通过不能替代实测轮廓资格或实验验证。
 
-F6-S0理想三层圆环的26个唯一被动/主动平衡态通过。细网格四终态的腔面积变化：
-零载0%、仅压力+9.8974%、仅主动−4.3150%、组合+4.5566%。原1%局部J门及独立82项汇总门通过。
-圆环不是实测心室，不能替代真实轮廓力学资格或斑马鱼实验验证。
+## 唯一下一科学步骤（待确认）
 
-[F6-S0结构与结果](results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html) ·
-[原F6-S1网格失败](results/ventricle_fem/f6s1_contour_passive_v01_20260917/index.html) ·
-[原F5局部J失败](results/ventricle_fem/f5_contour_pressure_v01_20260917/index.html)
+只计算尚未运行的细网格p/mu=0及0.02两个状态，与本次保全粗网格对照，
+检验局部J误差是否随加密降低。保持材料、载荷和1%门，不重跑粗网格，不继续加压或加入主动。
 
-## 唯一下一步（待确认）
+## 存储与历史证据
 
-复用已合格的candidate_0，不重做三候选。建议仅下一被动阶段特批384 MiB，
-另留64 MiB停止保全空间，项目3 GiB硬上限不变。通过准入后执行原两档网格×五压力的十态矩阵，
-材料、加载、时间上限和原质量/力学门不变；首个失败即停，不自动重跑，暂不加入主动收缩。
+新阶段默认800 MiB，另64 MiB停止空间，项目3 GiB硬限保持。用户建议外置PRL-results：
+精确项目外路径待确认，尚未搬移或外部新建。现有results已被Git忽略，不随普通提交同步。
 
-真实内腔/壁厚/纤维、参考应力、材料、生理时间、自由三维、血流、生长及ECM反馈仍未标定或not_run。
-[权威状态与历史](project_control/CURRENT_STATUS.md) · [驾驶舱](memory/project_cockpit/index.html)
+- [F6-S0理想圆环26态通过](results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html)：仅压力+9.8974%、仅主动−4.3150%、组合+4.5566%，不代表斑马鱼实验拟合。
+- [F6-S1-M薄层网格修复](results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/index.html) · [原F6-S1网格失败](results/ventricle_fem/f6s1_contour_passive_v01_20260917/index.html) · [原F5局部J失败](results/ventricle_fem/f5_contour_pressure_v01_20260917/index.html)
+- [权威状态与历史](project_control/CURRENT_STATUS.md) · [驾驶舱](memory/project_cockpit/index.html)
 
-单CPU、固定已有镜像、禁网、0 GPU/DCM；无安装、删除或项目外新建。阶段本地提交main，不自动推送。
+308个父文件保持。单CPU、0 GPU/DCM/自动重跑，固定已有镜像、禁网；无安装或删除。
+阶段本地提交main，不自动推送。真实心动、血流、生长与ECM反馈未运行。

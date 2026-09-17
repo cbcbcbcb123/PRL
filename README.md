@@ -6,11 +6,11 @@
 
 ## 当前进展
 
-F6-S1-M薄层网格修复通过：最小候选3541单元、最小角23.0435度，原45个坏角单元降至0，
-图像外轮廓与共享层界保持。十态完整输出预测307.35 MiB超过本轮256 MiB准入上限，
-故0个新平衡态，位移/应力/压力响应not_run；不是材料失稳或RAM不足。
-见[结构、质量及预算图](results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/index.html)和
-[本次执行记录](project_control/ventricle_fem_fenicsx_thin_mesh_execution_v01.md)。
+F6-S1-P已执行：800 MiB阶段预算生效，复用3541单元合格网格；粗/细几何均通过。
+零载passed；p/mu=0.02求解收敛但局部体积偏差6.71167%超过1%门，按合同停止。
+保存2态、接受1态；其余8态及细网格力学未运行。计算腔面积+20.10718%仅为失败态诊断。
+见[结构、形变应力、局部J及两帧动图](results/ventricle_fem/f6s1p_retained_passive_v01_20260917/index.html)和
+[本次执行记录](project_control/ventricle_fem_fenicsx_retained_passive_execution_v01.md)。
 
 最近通过的力学阶段保持如下：
 
@@ -20,8 +20,8 @@ F6-S0的FEniCSx运行时、被动与主动圆环资格均通过。两档896/3584
 见[结构、结果与动图](results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html)和[完成记录](project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md)。
 
 上述力学结果仍是理想圆环、平面应变、未标定同质材料，不能代表斑马鱼实验拟合。
-F5局部体积及F6-S1网格失败保留。下一步待确认：复用candidate_0，下一被动阶段特批384 MiB、
-另64 MiB停止空间，项目3 GiB硬限保持；执行原十态，不改物理与20度/1%J门，之后再考虑主动收缩。
+F5局部体积、F6-S1网格及F6-S1-M预算阻断原记录保留。下一步待确认：只计算尚未运行的
+细网格0及0.02两态，检验局部离散精度，不改材料与1%J门，不重跑粗网格。
 
 ## 软件入口
 
@@ -32,12 +32,14 @@ python -B -X utf8 -m prl storage status --workspace .
 python -B -X utf8 -m prl verify fem-fenicsx-ring --workspace . --result results/ventricle_fem/f6s0_active_completion_v01_20260917
 python -B -X utf8 -m prl verify fem-fenicsx-contour --workspace .
 python -B -X utf8 -m prl verify fem-fenicsx-contour --repair-thin-mesh --workspace .
+python -B -X utf8 -m prl verify fem-fenicsx-contour --retained-passive --workspace .
 python -B -X utf8 -m prl validate cockpit --workspace .
 ```
 
 圆环verify完整G1/G2应返回passed；不带修复参数的轮廓verify重读原F6-S1并返回failed。
 --repair-thin-mesh返回的是保存网格/预算核验passed，同时明确storage blocked、mechanics not_run，
-不能误读为力学资格通过。结果不得覆盖重跑；冻结图包不静默重绘。大型原始结果留在Git外。
+不能误读为力学资格通过。--retained-passive重读本次保存态，应为failed，不自动重跑。
+冻结图包不静默重绘。大型原始结果留在Git外。外置结果库的精确路径尚待确认，未迁移旧结果。
 
 ## 目录与安全
 
@@ -47,4 +49,4 @@ python -B -X utf8 -m prl validate cockpit --workspace .
 - `results/ventricle_fem/`：FEM证据；`memory/project_cockpit/`只是状态投影。
 - 原SimuCell3D及C++应用仅历史保留，不参与当前FEM。
 
-只使用本地固定FEniCSx镜像，单CPU、0 GPU。项目2.4 GiB预警、3 GiB硬限；F6-S1-M阶段256 MiB加64 MiB保全余量，尚未批准增加。公开大型数据按既有授权存E:\Data，不整包展开到项目。不自动删除或安装。阶段交付验收后直接本地提交`main`，不另开分支；远端推送按明确授权执行。
+只使用本地固定FEniCSx镜像，单CPU、0 GPU。项目2.4 GiB预警、3 GiB硬限；新阶段默认800 MiB加64 MiB保全余量，旧合同保持历史限额。公开大型数据按既有授权存E:\Data，不整包展开到项目。不自动删除或安装。阶段交付验收后直接本地提交`main`，不另开分支；远端推送按明确授权执行。

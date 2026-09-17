@@ -174,7 +174,9 @@ def render_contour(root):
     from nbclient import NotebookClient
 
     root=Path(root)
-    pattern='FigS1M_mesh_repair/FigS1M_mesh_repair_v*/03_*_plot.ipynb' if (root/'mesh_candidates.json').exists() else 'FigS1_mesh_gate/FigS1_mesh_gate_v*/03_*_plot.ipynb'
+    pattern=('FigS1P_passive_failure/FigS1P_passive_failure_v*/03_*_plot.ipynb' if (root/'retained_mesh.npz').exists()
+             else 'FigS1M_mesh_repair/FigS1M_mesh_repair_v*/03_*_plot.ipynb' if (root/'mesh_candidates.json').exists()
+             else 'FigS1_mesh_gate/FigS1_mesh_gate_v*/03_*_plot.ipynb')
     candidates=list((root/'figures').glob(pattern))
     if len(candidates)!=1:
         raise RuntimeError('Initialize the frozen figure package first; no silent version creation')

@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import json
+import hashlib
 import time
 import traceback
 
@@ -127,6 +128,15 @@ def generate(source,size_factor=None):
         gmsh.finalize()
 
 
+def retained_geometry(root,config):
+    """Byte-verified geometry reuse; no mesher import or invocation."""
+    path=Path(root)/'retained_mesh.npz'
+    if hashlib.sha256(path.read_bytes()).hexdigest()!=config['retained_mesh']['sha256']:
+        raise ValueError('Retained geometry hash mismatch')
+    with np.load(path,allow_pickle=False) as archive:
+        return {key:archive[key] for key in archive.files}
+
+
 def main():
     from prl.fem.fenicsx_ring import Ring,write_json
     from prl.verification.fenicsx_ring import load_arrays,state_audit
@@ -134,6 +144,7 @@ def main():
 
     root=Path('/out')
     config=json.loads((root/'configuration.json').read_text())
+    stage_cap=config['resources']['stage_bytes']
     started=time.monotonic()
     completed=0
     attempted=0
@@ -143,17 +154,21 @@ def main():
         source=load_arrays(root/'geometry_source.npz')
         candidates=[]
         for candidate,factor in enumerate(config.get('mesh_size_candidates',[None])):
-            coarse,metadata=generate(source,factor)
+            if 'retained_mesh' in config:
+                coarse=retained_geometry(root,config)
+                metadata={'mode':'retained','source':config['retained_mesh'],'gmsh_calls':0}
+            else:
+                coarse,metadata=generate(source,factor)
             candidate_report=geometry_audit(coarse,source)
             # 12 points for the frozen degree-six triangle quadrature; 32 scalars
             # conservatively cover all saved fields/maps, plus 48 MiB for figures/control.
             predicted=len(coarse['triangles'])*5*5*12*32*8+48*1024**2
             candidates.append({'candidate':candidate,'factor':factor,'geometry':candidate_report,
-                               'predicted_bytes':predicted,'storage_passed':predicted<=256*1024**2})
+                               'predicted_bytes':predicted,'storage_passed':predicted<=stage_cap})
             if factor is not None:
                 np.savez_compressed(root/'raw'/f'candidate_{candidate}_mesh.npz',**coarse)
                 write_json(root/'mesh_candidates.json',candidates)
-            if candidate_report['status']=='passed' and predicted<=256*1024**2:
+            if candidate_report['status']=='passed' and predicted<=stage_cap:
                 break
             if factor is None or candidate+1==len(config.get('mesh_size_candidates',[])):
                 np.savez_compressed(root/'raw'/'M0_input_mesh.npz',**coarse)
@@ -171,15 +186,15 @@ def main():
                 raise ValueError('Independent geometry gate: '+str(report['failed_checks']))
         # Conservative uncompressed storage bound: all quadrature fields, maps and states.
         predicted=sum(len(data['triangles'])*5*12*32*8 for data in geometries)+48*1024**2
-        write_json(root/'raw_storage_bound.json',{'maximum_planned_bytes':predicted,'limit_bytes':256*1024**2})
-        if predicted>256*1024**2:
+        write_json(root/'raw_storage_bound.json',{'maximum_planned_bytes':predicted,'limit_bytes':stage_cap})
+        if predicted>stage_cap:
             raise ValueError('Predicted complete-state output cannot fit phase budget')
         for name,data in zip(['M0','M1'],geometries):
             current=Ring({'name':name},config,root,geometry_input=data)
             current.tangent_checks()
             initial=np.zeros_like(current.w.x.array)
             for i,pressure in enumerate(config['passive_loads']):
-                if time.monotonic()-started>1140 or sum(p.stat().st_size for p in root.rglob('*') if p.is_file())>224*1024**2:
+                if time.monotonic()-started>1140 or sum(p.stat().st_size for p in root.rglob('*') if p.is_file())>stage_cap-32*1024**2:
                     raise RuntimeError('Stop with reserved time/storage headroom')
                 attempted+=1
                 initial=current.solve(f'passive_{i}',pressure,0.,initial)

@@ -9,6 +9,15 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class StoragePublicInterfaceTests(unittest.TestCase):
+    def test_approved_800_mib_stage_keeps_total_limit_and_stop_reserve(self):
+        policy=StoragePolicy()
+        self.assertEqual(policy.default_stage_bytes,800*MIB)
+        self.assertEqual(policy.hard_limit_bytes,3*GIB)
+        snapshot=StorageSnapshot(str(ROOT),1,0,3*GIB-864*MIB)
+        self.assertTrue(evaluate_storage(snapshot)['can_start'])
+        snapshot=StorageSnapshot(str(ROOT),1,0,3*GIB-864*MIB+1)
+        self.assertFalse(evaluate_storage(snapshot)['can_start'])
+
     def test_workspace_is_discovered_from_a_nested_existing_path(self):
         self.assertEqual(find_workspace(ROOT / "results"), ROOT)
 

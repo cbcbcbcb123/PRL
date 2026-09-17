@@ -364,7 +364,9 @@ def _parser() -> argparse.ArgumentParser:
     for group in [run_commands,verify_commands,render_commands]:
         contour=group.add_parser('fem-fenicsx-contour',help='F6-S1 image-derived passive contour')
         contour.add_argument('--workspace',type=Path)
-        contour.add_argument('--repair-thin-mesh',action='store_true',help='F6-S1-M bounded thin-layer mesh repair')
+        contour_mode=contour.add_mutually_exclusive_group()
+        contour_mode.add_argument('--repair-thin-mesh',action='store_true',help='F6-S1-M bounded thin-layer mesh repair')
+        contour_mode.add_argument('--retained-passive',action='store_true',help='F6-S1-P reuse qualified mesh, 800 MiB stage')
     return parser
 
 
@@ -449,10 +451,10 @@ def main(arguments: Sequence[str] | None = None) -> int:
     elif ((parsed.command=='run' and parsed.run_command=='fem-fenicsx-contour') or
           (parsed.command=='verify' and parsed.verify_command=='fem-fenicsx-contour') or
           (parsed.command=='render' and parsed.render_command=='fem-fenicsx-contour')):
-        from .runs.fenicsx_contour import RESULT,REPAIR_RESULT,run_contour
-        contour_result=workspace/(REPAIR_RESULT if parsed.repair_thin_mesh else RESULT)
+        from .runs.fenicsx_contour import RESULT,REPAIR_RESULT,PASSIVE_RESULT,run_contour
+        contour_result=workspace/(PASSIVE_RESULT if parsed.retained_passive else REPAIR_RESULT if parsed.repair_thin_mesh else RESULT)
         if parsed.command=='run':
-            report=run_contour(workspace,repair=parsed.repair_thin_mesh)
+            report=run_contour(workspace,repair=parsed.repair_thin_mesh,retained=parsed.retained_passive)
         elif parsed.command=='verify':
             from .verification.fenicsx_contour import verify_contour,verify_mesh_repair
             report=verify_mesh_repair(contour_result) if parsed.repair_thin_mesh else verify_contour(contour_result)

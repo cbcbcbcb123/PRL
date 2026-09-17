@@ -105,6 +105,11 @@ def verify_contour(root,save=False):
     source=load_arrays(root/'geometry_source.npz')
     checks={'source_hash':hashlib.sha256((root/'geometry_source.npz').read_bytes()).hexdigest()==SOURCE_SHA,
             'frozen_physics':cfg['mu']==1. and cfg['kappa']==1000. and cfg['passive_loads']==[0.,.02,.04,.06,.08] and cfg['geometry_kind']=='image_polygon'}
+    if 'retained_mesh' in cfg:
+        checks['retained_mesh_identity']=hashlib.sha256((root/'retained_mesh.npz').read_bytes()).hexdigest()=='157265c350367a95f36c40c5951117272ceeccac9f273ec65e5000eb81627f65'
+        original=load_arrays(root/'retained_mesh.npz')
+        actual=load_arrays(root/'raw/M0_input_mesh.npz')
+        checks['retained_mesh_arrays']=set(original)==set(actual) and all(np.array_equal(original[k],actual[k]) for k in original)
     cases={}
     geometry={}
     for name in ['M0','M1']:
@@ -157,6 +162,34 @@ def verify_contour(root,save=False):
             'cases':cases,'geometry':geometry,'mesh_comparison':comparison,'active_contraction':'not_run','biological_validation':'not_run'}
     if save:
         (root/'verification.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n',encoding='utf-8')
+    return report
+
+
+def diagnose_local_volume(root,save=False):
+    """Saved-state localization only; weak constraint is not a pointwise bound."""
+    from .fenicsx_ring import fields
+    root=Path(root)
+    mesh=load_arrays(root/'raw/M0_mesh.npz')
+    state=load_arrays(root/'raw/M0_state_passive_1.npz')
+    values=fields(mesh,state)
+    deviation=np.abs(values['J']-1)
+    worst=np.unravel_index(np.argmax(deviation),deviation.shape)
+    bary=np.column_stack((1-mesh['qpoints'].sum(axis=1),mesh['qpoints']))
+    pressure=np.einsum('qa,ca->cq',bary,state['pressure'][mesh['pressure_cells']])
+    position=np.einsum('qa,cai->cqi',bary,mesh['coordinates'][mesh['cells'][:,:3]])
+    report={'status':'passed','scientific_gate':'failed','scientific_solves':0,
+            'max_abs_J_minus_one':float(deviation.max()),'worst_cell':int(worst[0]),'worst_quadrature_point':int(worst[1]),
+            'worst_reference_xy':position[worst].tolist(),'worst_layer':int(mesh['layers'][worst[0]]),
+            'reference_volume_fraction_above_one_percent':float(np.sum(values['weights']*(deviation>.01))/values['weights'].sum()),
+            'pointwise_mixed_constraint_max':float(np.max(np.abs(values['J']-1-pressure/1000))),
+            'max_abs_pressure_over_kappa':float(np.max(np.abs(pressure/1000))),
+            'max_displacement_over_L':float(np.linalg.norm(state['u'],axis=1).max()),
+            'layers':{str(i):{'cells':int(np.sum(mesh['layers']==i)),
+               'failed_cells':int(np.sum(np.max(deviation[mesh['layers']==i],axis=1)>.01)),
+               'max_abs_J_minus_one':float(deviation[mesh['layers']==i].max())} for i in [1,2,3]},
+            'interpretation':'Weak P1 pressure residual can vanish while pointwise volume constraint is unresolved. Spatial discretization sensitivity is a hypothesis; fine-mesh mechanics is not_run.'}
+    if save:
+        (root/'local_volume_diagnosis.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     return report
 
 

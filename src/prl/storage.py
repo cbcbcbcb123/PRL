@@ -16,7 +16,7 @@ MIB = 1024**2
 class StoragePolicy:
     warning_bytes: int = int(2.4 * GIB)
     hard_limit_bytes: int = 3 * GIB
-    default_stage_bytes: int = 256 * MIB
+    default_stage_bytes: int = 800 * MIB
     minimum_stop_reserve_bytes: int = 64 * MIB
 
 
