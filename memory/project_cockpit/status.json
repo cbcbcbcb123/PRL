@@ -1,15 +1,15 @@
 {
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-17",
-  "overall_status": "failed",
-  "summary": "F6-S1接回真实外轮廓；源几何与连通性通过，但45/1828单元低于20度，最小12.8687度。求解前停止，0新平衡态；下一步仅修薄构造层网格。",
+  "overall_status": "blocked",
+  "summary": "F6-S1-M三个网格均通过原20度门；最小3541单元/23.0435度，轮廓保持。十态预计307.35 MiB超过阶段256 MiB；力学0求解，等待预算裁决。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM解释斑马鱼心室跳动及发育，逐步研究组织结构、生长、ECM和心内膜反馈。",
-    "scope": "图像来源二维外轮廓；内腔/层界/材料仍为构造。被动力学尚未运行。",
-    "current_stage": "F6-S1 geometry failed; passive/active mechanics not_run",
-    "current_location": "results/ventricle_fem/f6s1_contour_passive_v01_20260917",
-    "evidence_basis_commit": "e1db43efb12847ac53542b9cb0081cef39a985ee",
+    "scope": "图像来源二维外轮廓；构造内腔/层界。网格passed，预算blocked，被动/主动力学not_run。",
+    "current_stage": "F6-S1-M geometry passed; storage blocked; mechanics not_run",
+    "current_location": "results/ventricle_fem/f6s1m_thin_mesh_v01_20260917",
+    "evidence_basis_commit": "e8ca1d04479df60e645c2c59205d14e9b8b138d2",
     "evidence_checked_at": "2026-09-17",
     "git_workflow": {
       "branch": "main",
@@ -27,21 +27,21 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "F6-S1实际执行以configuration/source_hashes/原始网格和failure为准；上述Git为进入阶段时父提交。218个父文件哈希保持。",
+    "freshness_note": "以本次网格/配置/调用快照及独立审计为准；260父文件保持。原调用failed不改写，存储阻断不是力学失败。",
     "model_overview": {
-      "model_type": "FEniCSx二维P2/P1三角形、有限变形平面应变（力学not_run）",
+      "model_type": "FEniCSx二维P2/P1有限变形平面应变；本次只完成网格资格",
       "simulated_object": "72 hpf Fish 4、z=39实测外轮廓；构造内腔与三层界面",
-      "theory": "计划沿用NH mu=1、kappa=1000，内壁随动压力0→0.08，外壁自由。A固定ux/uy，B固定uy；未求解。",
-      "current_question": "保持实际外多边形不变，薄构造层的共形网格能否通过20度门，再进入原被动压力资格？",
+      "theory": "计划NH mu=1、kappa=1000；内壁随动压力0→0.08、外壁自由。A固定ux/uy，B固定uy；尚未求解。",
+      "current_question": "复用合格网格，能否在完整输出预算允许后通过原十态被动压力及局部J门？",
       "pipeline": [
-        "源哈希与图像外轮廓通过",
-        "已有Gmsh生成1042顶点/1828单元",
-        "连通/层界/源轮廓误差通过",
-        "最小角12.8687度，45个单元未通过",
-        "0平衡求解；新质量网格尝试待确认"
+        "同一源外轮廓及128段多边形保持",
+        "按薄层间距自适应局部边长",
+        "三个网格全部通过20度及其他几何门",
+        "最小候选十态预测307.35 MiB > 256 MiB",
+        "0平衡求解；待裁决阶段预算"
       ],
-      "diagram": "results/ventricle_fem/f6s1_contour_passive_v01_20260917/figures/FigS1_mesh_gate/FigS1_mesh_gate_v01_20260917/04_FigS1_mesh_gate_v01_20260917.png",
-      "diagram_caption": "保存的实际网格：左为构造区域，中为未过20度单元，右为角度CDF；红色不是应力。",
+      "diagram": "results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/figures/FigS1M_mesh_repair/FigS1M_mesh_repair_v01_20260917/04_FigS1M_mesh_repair_v01_20260917.png",
+      "diagram_caption": "实际最小合格网格、旧/新网格角度CDF、十态输出预算；没有虚构力学场。",
       "assumptions": [
         "只有外轮廓来自图像",
         "内腔/层界为同心缩放",
@@ -50,17 +50,17 @@
         "加载级不是生理时间"
       ],
       "methods": [
-        "固定镜像已有Gmsh，未安装",
-        "共形非结构三角形与共享层界",
-        "独立NumPy几何审计，失败即停止",
-        "真实网格Notebook图件，0新增力学场"
+        "仅修改边界目标尺寸，Gmsh算法不变",
+        "一次容器最多三个预声明几何候选",
+        "独立几何与预算重读；存储失败不求解",
+        "Notebook保全真实数据，0新增力学场"
       ],
-      "scope_boundary": "网格门failed；压力响应和主动收缩not_run。F6-S0圆环passed及F5 failed保持。",
+      "scope_boundary": "几何passed；完整输出准入blocked；压力、主动收缩及生物验证not_run。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md",
-        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/raw/M0_geometry_preflight.json",
-        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/failure.json",
-        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/delivery_audit.json"
+        "project_control/ventricle_fem_fenicsx_thin_mesh_execution_v01.md",
+        "results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/verification.json",
+        "results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/mesh_candidates.json",
+        "results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/delivery_audit.json"
       ]
     }
   },
@@ -68,48 +68,49 @@
     {
       "label": "FEniCSx理想圆环",
       "status": "passed",
-      "summary": "F6-S0被动/主动26个唯一平衡态通过，原证据保持"
+      "summary": "F6-S0被动/主动26个唯一态通过；原证据保持"
     },
     {
-      "label": "图像来源与共享层界",
+      "label": "真实外轮廓薄层网格",
       "status": "passed",
-      "summary": "mask IoU99.5882%，轮廓误差1.66974微米，连接与层面积通过"
+      "summary": "最小3541单元，最小角23.0435度；源轮廓/共享界面保持"
     },
     {
-      "label": "真实外轮廓网格质量",
-      "status": "failed",
-      "summary": "45单元未过20度，均在构造心内膜/ECM薄层"
+      "label": "完整输出存储准入",
+      "status": "blocked",
+      "summary": "最小候选预测307.35 MiB；本轮256 MiB门未通过"
     },
     {
-      "label": "真实外轮廓被动/主动",
+      "label": "真实轮廓被动/主动力学",
       "status": "not_run",
-      "summary": "几何门失败，未进入力学"
+      "summary": "0求解；先完成被动十态再考虑主动"
     },
     {
       "label": "生理标定与反馈",
       "status": "not_run",
-      "summary": "实测解剖、材料、时间、自由3D与反馈后续"
+      "summary": "实测解剖、材料、时间与自由3D仍缺"
     }
   ],
   "active_work": [
     {
-      "title": "F6-S1几何失败保全与定位完成",
-      "status": "failed",
-      "summary": "一次正式容器9.131秒，0平衡求解、0自动重试。结构和质量图已保存，不冒充力学结果。",
+      "title": "F6-S1-M网格修复交付",
+      "status": "passed",
+      "summary": "三个候选几何通过；一次容器13.698秒，0平衡求解。存储阻断已保全，不改原failed退出记录。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md",
-        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/summary.json",
-        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/index.html"
+        "project_control/ventricle_fem_fenicsx_thin_mesh_execution_v01.md",
+        "results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/summary.json",
+        "results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/index.html"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "薄构造层45个尖瘦单元",
-      "status": "failed",
-      "summary": "心内膜20、ECM25、心肌0；最差12.8687度。均匀四分不改角度，需局部边长与质量剖分适配。",
+      "title": "阶段输出预算不足",
+      "status": "blocked",
+      "summary": "307.35 MiB保守预测超过256 MiB，不是磁盘已写满或RAM不足。建议下一阶段特批384 MiB，项目3 GiB硬限不变。",
       "evidence_refs": [
-        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/geometry_diagnosis.json"
+        "results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/mesh_candidates.json",
+        "project_control/ventricle_fem_fenicsx_thin_mesh_execution_v01.md"
       ]
     },
     {
@@ -123,14 +124,14 @@
   ],
   "results": [
     {
-      "title": "真实外轮廓结构与网格失败定位",
-      "status": "failed",
-      "summary": "源几何合格；45/1828坏角单元局限于两个薄构造层。无位移/应力/压力响应。",
-      "image": "results/ventricle_fem/f6s1_contour_passive_v01_20260917/figures/FigS1_mesh_gate/FigS1_mesh_gate_v01_20260917/04_FigS1_mesh_gate_v01_20260917.png",
+      "title": "薄层质量网格与预算裁决",
+      "status": "passed",
+      "summary": "几何passed：坏角45→0，最小角12.8687→23.0435度。力学尚未运行。",
+      "image": "results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/figures/FigS1M_mesh_repair/FigS1M_mesh_repair_v01_20260917/04_FigS1M_mesh_repair_v01_20260917.png",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md",
-        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/raw/M0_geometry_preflight.json",
-        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/rendering.json"
+        "project_control/ventricle_fem_fenicsx_thin_mesh_execution_v01.md",
+        "results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/verification.json",
+        "results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/rendering.json"
       ],
       "result_group": "current"
     },
@@ -148,21 +149,21 @@
   ],
   "next_actions": [
     {
-      "title": "F6-S1-M薄层质量网格",
-      "status": "not_run",
-      "summary": "待确认新的有界尝试：保持多边形、层界、材料及20度/1%J门；先改善局部剖分，再做两网格十态被动资格。",
+      "title": "复用candidate_0运行十态被动资格（待预算确认）",
+      "status": "blocked",
+      "summary": "建议下一阶段384 MiB，另64 MiB停止空间，项目≤3 GiB；不重剖分、不改物理/阈值、首个失败即停、无自动重跑。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md"
+        "project_control/ventricle_fem_fenicsx_thin_mesh_execution_v01.md"
       ]
     }
   ],
   "evidence_boundaries": [
     "仅FEM，无DCM前向运行。",
-    "外轮廓来自图像；内腔、层界和材料为构造假设。",
-    "网格门failed；0平衡求解，不提供虚构力学场。",
-    "F6-S0 passed和F5 failed都保持原记录。",
-    "153开发测试+27子测试通过不代表真实轮廓力学通过。",
-    "单CPU、禁网、固定已有镜像，0GPU/拉取/安装/删除/自动重跑。",
-    "本阶段本地main提交；不自动推送。"
+    "只有外轮廓来自图像；内腔、层界、材料及参考无应力态均未标定。",
+    "几何passed不等于力学passed；0平衡求解。",
+    "预算值是保守输出预测，不是实际占用或RAM。",
+    "47开发测试及21子测试通过不能替代物理与生物验证。",
+    "260父包文件不变；单CPU禁网，0GPU/拉取/安装/删除/重跑。",
+    "本阶段本地main提交，不自动推送。"
   ]
 }

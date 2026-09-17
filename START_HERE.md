@@ -10,69 +10,49 @@ updated_at: 2026-09-17
 
 只用FEM建立解释斑马鱼心室跳动及发育的力学模型，逐步研究组织结构、生长、ECM及心内膜反馈。不恢复DCM；精细逐细胞分割不是组织尺度FEM的前置条件。
 
-## 当前进展：F6-S1真实外轮廓网格门未通过
+## 当前模型与边界
 
-已把72 hpf Fish 4保留外轮廓接入FEniCSx几何接口，生成1042顶点、1828单元的共形三角网格。
-内腔和层界仍为构造，不是实测解剖。计划沿用二维P2/P1、有限变形平面应变NH材料，
-内腔随动压力0→0.08、外壁自由，仅固定三个刚体规范自由度。
+外轮廓来自72 hpf Fish 4、z=39；内腔及三层界面按20/27、21/27、22/27、1构造，
+不是实测内腔或壁厚。计划采用FEniCSx二维P2位移/P1压力三角形、三维平面应变有限变形
+Neo-Hookean材料，各层mu=1、kappa=1000（未标定）。内壁随动压力p/mu=0→0.08，
+外壁自由；A固定ux/uy，B固定uy，只消除刚体运动。加载级不是生理时间。
 
-源mask重合度99.5882%、原始轮廓误差1.66974微米及共享层界检查通过。
-但45个单元最小角低于20度，最差12.8687度：心内膜区20个、ECM区25个、心肌区0个。
-因此在求解前停止，**0个新平衡态；压力响应、形变和应力均not_run**。没有放宽门限或自动重跑。
+## 已完成：薄层网格修复通过
 
-![实际结构与未通过网格定位](results/ventricle_fem/f6s1_contour_passive_v01_20260917/figures/FigS1_mesh_gate/FigS1_mesh_gate_v01_20260917/04_FigS1_mesh_gate_v01_20260917.png)
+按局部层间距调整边界目标边长，保持源轮廓及20度质量门不变。
+最小候选为1958顶点、3541三角形；最小角从12.8687°提高至23.0435°，
+不合格单元由45降为0。三个预声明候选均通过几何检查，不再继续盲目加密。
+mask IoU保持99.5882%，原始轮廓采样Hausdorff保持1.66974微米，共享层界完整。
 
-[本次执行与原因](project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md) ·
-[图件与可复算Notebook](results/ventricle_fem/f6s1_contour_passive_v01_20260917/index.html)
+![合格网格、质量对比与存储预算](results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/figures/FigS1M_mesh_repair/FigS1M_mesh_repair_v01_20260917/04_FigS1M_mesh_repair_v01_20260917.png)
 
-## 最近通过的力学模型：F6-S0理想圆环
+[本次执行与裁决](project_control/ventricle_fem_fenicsx_thin_mesh_execution_v01.md) ·
+[图件与可复算Notebook](results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/index.html)
 
-F6-S0采用开源FEniCSx，先验证理想三层圆环。二维P2位移/P1混合压力三角形，
-本构为三维平面应变有限变形。896/3584单元两档网格；内外半径20/27与1，
-层界21/27与22/27。三层目前只作区域标签，均采用未标定Neo-Hookean材料mu=1、kappa=1000。
+## 当前阻断：完整输出预算，而非网格或材料失败
 
-内壁随动压力p/mu=0→0.08，外壁自由；(1,0)固定ux/uy、(-1,0)固定uy只去除刚体运动。
-主动应力仅施于心肌层、沿参考环向纤维，Ta/mu=0→0.10；四终态比较采用p/mu=0或0.04。
-理想圆环不是实测心室，加载级不是生理时间。
+最小候选的两档网格×五个压力状态，加上图件/控制余量，保守预测307.35 MiB，
+超过本轮256 MiB准入上限。因此本次**0平衡求解，压力响应、形变与应力均not_run**。
+预测不是实际文件体积或RAM占用；没有磁盘写满证据。原调用failed退出保持，
+交付裁决为“网格passed、存储blocked”。260个父证据文件哈希保持。
 
-[当前合同与公式](project_control/ventricle_fem_fenicsx_ring_active_contract_v01.md) ·
-[完成裁决](project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md)
+## 最近通过的力学结果
 
-![三层区域、主动纤维、压力及两档网格](results/ventricle_fem/f6s0_active_completion_v01_20260917/figures/model_structure.png)
+F6-S0理想三层圆环的26个唯一被动/主动平衡态通过。细网格四终态的腔面积变化：
+零载0%、仅压力+9.8974%、仅主动−4.3150%、组合+4.5566%。原1%局部J门及独立82项汇总门通过。
+圆环不是实测心室，不能替代真实轮廓力学资格或斑马鱼实验验证。
 
-## 已完成与核心结果
+[F6-S0结构与结果](results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html) ·
+[原F6-S1网格失败](results/ventricle_fem/f6s1_contour_passive_v01_20260917/index.html) ·
+[原F5局部J失败](results/ventricle_fem/f5_contour_pressure_v01_20260917/index.html)
 
-G0运行时、G1被动与G2主动资格均 **passed**。保留10个被动态、16个主动/组合态，共26个唯一平衡态。
+## 唯一下一步（待确认）
 
-- 细网格同一四组对照：零载0%；仅压力+9.8974%；仅主动−4.3150%；压力＋主动+4.5566%。
-- 主动张力使同一压力下的腔面积响应降低5.3408个百分点；组合工况相对零载仍为扩张。
-- 细网格纯主动与组合末态最大局部体积偏差分别0.007705%和0.005376%，原1%门通过。
-- 两网格主动末态腔响应差1.62e-7，组合1.51e-7；独立82项汇总门与主动虚功复核通过。
-- 首次调用保存10个被动态后遇到字段读取错误；修复后只补尚未运行的16态，0重复平衡求解。原失败保留，两次科学容器累计69秒。
+复用已合格的candidate_0，不重做三候选。建议仅下一被动阶段特批384 MiB，
+另留64 MiB停止保全空间，项目3 GiB硬上限不变。通过准入后执行原两档网格×五压力的十态矩阵，
+材料、加载、时间上限和原质量/力学门不变；首个失败即停，不自动重跑，暂不加入主动收缩。
 
-![四组真实终态与统一应力色标](results/ventricle_fem/f6s0_active_completion_v01_20260917/figures/four_conditions.png)
+真实内腔/壁厚/纤维、参考应力、材料、生理时间、自由三维、血流、生长及ECM反馈仍未标定或not_run。
+[权威状态与历史](project_control/CURRENT_STATUS.md) · [驾驶舱](memory/project_cockpit/index.html)
 
-## 当前主要难点
-
-当前直接阻断是两个薄构造层的网格质量；这不是材料失稳证据。
-开源后端的理想被动与主动基准已通过；真实外轮廓仍待新后端力学资格。原F5图像外轮廓
-max|J−1|=54.09%的失败保持，不用圆环结果替代。真实内腔/壁厚/纤维、残余应力、材料、
-生理时间和自由三维运动仍未标定。
-
-## 唯一下一步
-
-F6-S1-M：保持外轮廓、层界、材料、载荷及原门限，改善薄构造层的局部边长与剖分质量。
-均匀四分不改变单元角度，不能直接修复本次失败。新有界尝试待确认；几何通过后才做
-原两网格十态被动压力及1%局部J资格，再考虑主动收缩。不重复圆环资格矩阵。
-
-主动心跳、生理周期、实测材料、真实自由三维心室、血流、生长与ECM反馈均not_run。
-
-## 证据入口
-
-- [F6-S0结构、定量图与动图](results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html) · [完整独立复核](results/ventricle_fem/f6s0_active_completion_v01_20260917/post_verification.json)
-- [被动父证据及原读取失败](results/ventricle_fem/f6s0_fenicsx_ring_active_v01_20260917/index.html)
-- [保留的F5真实外轮廓失败](results/ventricle_fem/f5_contour_pressure_v01_20260917/index.html) · [F4圆柱父资格](results/ventricle_fem/f4_curved_pressure_v01_20260917/index.html)
-- [权威状态与历史](project_control/CURRENT_STATUS.md) · [驾驶舱](memory/project_cockpit/index.html)
-
-单CPU、0 GPU/DCM/科学重跑；固定本地镜像、禁网、不拉取。原失败包与Docker隔离目录保留；
-无删除或安装。阶段进展按既有决定直接本地提交main，不自动推送。
+单CPU、固定已有镜像、禁网、0 GPU/DCM；无安装、删除或项目外新建。阶段本地提交main，不自动推送。

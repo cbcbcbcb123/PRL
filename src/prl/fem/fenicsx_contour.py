@@ -40,21 +40,47 @@ def refine(data):
     return output
 
 
-def generate(source):
+def adaptive_boundary_sizes(polygon,factor):
+    """Resolve distance to adjacent fixed polygonal layer interfaces."""
+    if not np.isfinite(factor) or factor<=0:
+        raise ValueError('Positive finite mesh-size factor required')
+    curves=[np.asarray(polygon)*radius for radius in [20/27,21/27,22/27,1.]]
+    gaps=[]
+    for i,curve in enumerate(curves):
+        neighboring=[]
+        for j in [i-1,i+1]:
+            if 0<=j<len(curves):
+                start=curves[j]
+                direction=np.roll(start,-1,axis=0)-start
+                squared=np.sum(direction*direction,axis=1)
+                if np.any(squared<=0):
+                    raise ValueError('Zero-length polygon edge')
+                offset=curve[:,None,:]-start[None]
+                fraction=np.clip(np.sum(offset*direction,axis=2)/squared,0.,1.)
+                neighboring.append(np.min(np.linalg.norm(offset-fraction[:,:,None]*direction,axis=2),axis=1))
+        gaps.append(np.min(neighboring,axis=0))
+    gaps=np.asarray(gaps)
+    if np.any(gaps<=0):
+        raise ValueError('Intersecting adjacent layers')
+    return np.minimum(.09,factor*gaps),gaps
+
+
+def generate(source,size_factor=None):
     import gmsh
     from scipy.spatial import cKDTree
 
     boundary,rotation=outline(source)
+    sizes,gaps=adaptive_boundary_sizes(boundary,size_factor) if size_factor is not None else (np.full((4,len(boundary)),.09),None)
     gmsh.initialize()
     try:
         for key,value in [('General.NumThreads',1),('General.Terminal',1),('Mesh.Algorithm',6),
-                          ('Mesh.MeshSizeMin',.015),('Mesh.MeshSizeMax',.09),('Mesh.RandomSeed',7301)]:
+                          ('Mesh.MeshSizeMin',.015 if size_factor is None else 0.),('Mesh.MeshSizeMax',.09),('Mesh.RandomSeed',7301)]:
             gmsh.option.setNumber(key,value)
         gmsh.model.add('f6s1_retained_outline')
         loops=[]
         curve_tags=[]
-        for radius in [20/27,21/27,22/27,1.]:
-            points=[gmsh.model.geo.addPoint(float(x),float(y),0.,.09) for x,y in boundary*radius]
+        for layer,radius in enumerate([20/27,21/27,22/27,1.]):
+            points=[gmsh.model.geo.addPoint(float(x),float(y),0.,float(h)) for (x,y),h in zip(boundary*radius,sizes[layer])]
             curves=[gmsh.model.geo.addLine(points[i],points[(i+1)%len(points)]) for i in range(len(points))]
             curve_tags.append(curves)
             loops.append(gmsh.model.geo.addCurveLoop(curves))
@@ -94,7 +120,9 @@ def generate(source):
             result[key]=np.asarray(ordered,dtype=np.int64)
         if cKDTree(xy).query(result['anchors'])[0].max()>1e-12:
             raise ValueError('Gauge point absent from mesh')
-        return result,{'gmsh_version':gmsh.__version__,'algorithm':6,'target_size':.09}
+        return result,{'gmsh_version':gmsh.__version__,'algorithm':6,'target_size':.09,
+                       'size_factor':size_factor,'minimum_prescribed_size':float(sizes.min()),
+                       'minimum_adjacent_gap':None if gaps is None else float(gaps.min())}
     finally:
         gmsh.finalize()
 
@@ -113,7 +141,24 @@ def main():
     (root/'raw').mkdir(exist_ok=False)
     try:
         source=load_arrays(root/'geometry_source.npz')
-        coarse,metadata=generate(source)
+        candidates=[]
+        for candidate,factor in enumerate(config.get('mesh_size_candidates',[None])):
+            coarse,metadata=generate(source,factor)
+            candidate_report=geometry_audit(coarse,source)
+            # 12 points for the frozen degree-six triangle quadrature; 32 scalars
+            # conservatively cover all saved fields/maps, plus 48 MiB for figures/control.
+            predicted=len(coarse['triangles'])*5*5*12*32*8+48*1024**2
+            candidates.append({'candidate':candidate,'factor':factor,'geometry':candidate_report,
+                               'predicted_bytes':predicted,'storage_passed':predicted<=256*1024**2})
+            if factor is not None:
+                np.savez_compressed(root/'raw'/f'candidate_{candidate}_mesh.npz',**coarse)
+                write_json(root/'mesh_candidates.json',candidates)
+            if candidate_report['status']=='passed' and predicted<=256*1024**2:
+                break
+            if factor is None or candidate+1==len(config.get('mesh_size_candidates',[])):
+                np.savez_compressed(root/'raw'/'M0_input_mesh.npz',**coarse)
+                write_json(root/'raw'/'M0_geometry_preflight.json',candidate_report)
+                raise ValueError('Bounded geometry candidates exhausted; no equilibrium solves')
         write_json(root/'mesher.json',metadata)
         fine=refine(coarse)
         geometries=[coarse,fine]
@@ -125,7 +170,7 @@ def main():
             if report['status']!='passed':
                 raise ValueError('Independent geometry gate: '+str(report['failed_checks']))
         # Conservative uncompressed storage bound: all quadrature fields, maps and states.
-        predicted=sum(len(data['triangles'])*5*16*32*8 for data in geometries)+48*1024**2
+        predicted=sum(len(data['triangles'])*5*12*32*8 for data in geometries)+48*1024**2
         write_json(root/'raw_storage_bound.json',{'maximum_planned_bytes':predicted,'limit_bytes':256*1024**2})
         if predicted>256*1024**2:
             raise ValueError('Predicted complete-state output cannot fit phase budget')

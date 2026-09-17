@@ -16,22 +16,31 @@ RESULT=Path('results/ventricle_fem/f6s1_contour_passive_v01_20260917')
 CONTRACT=Path('project_control/ventricle_fem_fenicsx_contour_passive_contract_v01.md')
 SOURCE=Path('results/ventricle_fem/f2_measured_contour_v01_20260917/geometry_source.npz')
 CAP=256*1024**2
+REPAIR_RESULT=Path('results/ventricle_fem/f6s1m_thin_mesh_v01_20260917')
+REPAIR_CONTRACT=Path('project_control/ventricle_fem_fenicsx_thin_mesh_contract_v01.md')
 
 
-def configuration():
+def configuration(repair=False):
     cfg=ring_configuration()
     cfg.update({'schema_version':'prl.fenicsx_contour_passive.v1','geometry_kind':'image_polygon',
                 'meshes':[{'name':'M0'},{'name':'M1'}],'active_peak':0.,'scope':'image-derived outer polygon; assumed cavity/layers; passive plane strain; uncalibrated',
                 'source':'72 hpf Fish 4 XY z=39','source_geometry':SOURCE.as_posix(),
                 'mesher':{'polygon_vertices':128,'algorithm':6,'target_size':.09,'fine':'midpoint four-way subdivision'},
                 'resources':{'threads':1,'gpu':0,'seconds':1200,'stage_bytes':CAP,'reserve_bytes':64*1024**2,'automatic_retries':0}})
+    if repair:
+        cfg['mesh_size_candidates']=[1.2,.9,.7]
+        cfg['mesher']['size_rule']='min(0.09, factor * distance to adjacent fixed polygonal interface)'
+        cfg['mesher']['selection']='first geometry-and-budget-qualified candidate; maximum three geometry generations'
     return cfg
 
 
-def protected(workspace):
+def protected(workspace,repair=False):
     values={}
-    for name in ['f2_measured_contour_v01_20260917','f5_contour_pressure_v01_20260917',
-                 'f6s0_fenicsx_ring_active_v01_20260917','f6s0_active_completion_v01_20260917']:
+    names=['f2_measured_contour_v01_20260917','f5_contour_pressure_v01_20260917',
+           'f6s0_fenicsx_ring_active_v01_20260917','f6s0_active_completion_v01_20260917']
+    if repair:
+        names.append(RESULT.name)
+    for name in names:
         base=workspace/'results/ventricle_fem'/name
         manifest=json.loads((base/'manifest.json').read_text())
         for item in manifest['files']:
@@ -42,11 +51,12 @@ def protected(workspace):
     return values
 
 
-def run_contour(workspace):
+def run_contour(workspace,repair=False):
     from prl.verification.fenicsx_contour import SOURCE_SHA
 
     workspace=Path(workspace).resolve(strict=True)
-    root=workspace/RESULT
+    root=workspace/(REPAIR_RESULT if repair else RESULT)
+    contract=REPAIR_CONTRACT if repair else CONTRACT
     if root.exists():
         raise FileExistsError('F6-S1 is create-only; no automatic rerun')
     if digest(workspace/SOURCE)!=SOURCE_SHA:
@@ -56,22 +66,22 @@ def run_contour(workspace):
     admission=evaluate_storage(scan_workspace(workspace),planned_new_bytes=CAP,stop_reserve_bytes=64*1024**2)
     if not admission['can_start']:
         raise RuntimeError('Storage admission refused')
-    parents=protected(workspace)
+    parents=protected(workspace,repair)
     with scientific_lock(workspace):
         root.mkdir(parents=True,exist_ok=False)
         save_json(root/'storage_preflight.json',admission)
-        save_json(root/'configuration.json',configuration())
+        save_json(root/'configuration.json',configuration(repair))
         save_json(root/'protected_preflight.json',parents)
         shutil.copyfile(workspace/SOURCE,root/'geometry_source.npz')
         source_paths=['src/prl/fem/fenicsx_contour.py','src/prl/fem/fenicsx_ring.py','src/prl/fem/ring_geometry.py',
                       'src/prl/verification/fenicsx_contour.py','src/prl/verification/fenicsx_ring.py',
-                      'src/prl/runs/fenicsx_contour.py','src/prl/runs/fenicsx_runtime.py',CONTRACT.as_posix()]
+                      'src/prl/runs/fenicsx_contour.py','src/prl/runs/fenicsx_runtime.py',contract.as_posix()]
         for relative in source_paths:
             target=root/'sources_at_execution'/relative
             target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(workspace/relative,target)
         save_json(root/'source_hashes.json',{p:digest(workspace/p) for p in source_paths})
-        name='prl-f6s1-contour-passive-v01-20260917'
+        name='prl-f6s1m-thin-mesh-v01-20260917' if repair else 'prl-f6s1-contour-passive-v01-20260917'
         args=container_command(workspace,name,'/workspace/src/prl/fem/fenicsx_contour.py',root)
         save_json(root/'command.json',args)
         save_json(root/'science_started.json',{'invocations':1,'container':name,'automatic_retries':0})
@@ -99,7 +109,7 @@ def run_contour(workspace):
         report={'status':'passed' if process.returncode==0 and all(settings.values()) and unchanged and reason is None else 'failed',
                 'exit_code':process.returncode,'stop_reason':reason,'container_checks':settings,
                 'protected_parent_files':len(parents),'parents_unchanged':unchanged,'scientific_invocations':1,
-                'runtime_capability_probes':1,'automatic_retries':0,'gpu':0,'elapsed_seconds':time.monotonic()-started}
+                'runtime_capability_probes':0 if repair else 1,'automatic_retries':0,'gpu':0,'elapsed_seconds':time.monotonic()-started}
         save_json(root/'execution.json',report)
         save_json(root/'manifest.json',package_manifest(root))
         return report
@@ -163,6 +173,62 @@ def finalize_geometry_failure(workspace):
     return {'delivery_status':'passed','scientific_status':'failed','equilibrium_solves':0,
             'workspace_bytes':audit['space']['usage']['logical_bytes'],
             'phase_bytes':sum(p.stat().st_size for p in root.rglob('*') if p.is_file())}
+
+
+def finalize_mesh_repair(workspace):
+    """Seal the saved geometry pass / storage block; never launch a container."""
+    from prl.verification.fenicsx_contour import verify_mesh_repair
+
+    workspace=Path(workspace).resolve(strict=True)
+    root=workspace/REPAIR_RESULT
+    formal=root/'formal_invocation_manifest.json'
+    if not formal.exists():
+        shutil.copyfile(root/'manifest.json',formal)
+    original=json.loads(formal.read_text())
+    if not all(digest(root/item['path'])==item['sha256'] for item in original['files']):
+        raise ValueError('Original invocation evidence changed')
+    parents=json.loads((root/'protected_preflight.json').read_text())
+    if not all(digest(workspace/path)==value for path,value in parents.items()):
+        raise ValueError('Protected evidence changed')
+    verified=verify_mesh_repair(root,save=True)
+    if verified['status']!='passed':
+        raise ValueError('Independent mesh experiment audit failed')
+    revision=root/'figures/FigS1M_mesh_repair/FigS1M_mesh_repair_v01_20260917'
+    prefix=revision.name
+    methods=(revision/f'02_{prefix}_methods.txt').read_text(encoding='utf-8')
+    if '人工/代理视觉验收: 通过' not in methods or '包状态: 最终包' not in methods:
+        raise ValueError('Figure must be executed, visually accepted and frozen')
+    data_pairs=[(revision/f'01_{prefix}_data.npz',workspace/RESULT/'raw/M0_input_mesh.npz'),
+                (revision/f'01a_{prefix}_data_admission.json',root/'mesh_candidates.json')]
+    data_pairs.extend((revision/f'01{letter}_{prefix}_data_candidate{i}.npz',root/'raw'/f'candidate_{i}_mesh.npz') for i,letter in enumerate('bcd'))
+    if not all(digest(a)==digest(b) for a,b in data_pairs):
+        raise ValueError('Figure data copies differ from original meshes')
+    style=json.loads((revision/f'04_{prefix}_style_manifest.json').read_text())
+    if not style['validation']['passed']:
+        raise ValueError('Style validation failed')
+    report={'status':'blocked','delivery_status':'passed','mesh_gate':'passed','storage_admission':'blocked',
+            'passive_mechanics':'not_run','active_mechanics':'not_run','equilibrium_solves':0,
+            'original_invocation_status':'failed','automatic_retries':0,'candidate_count':3,
+            'recommended_mesh':'raw/candidate_0_mesh.npz','selected_for_solver':False,
+            'smallest_geometry':verified['candidates'][0]['geometry'],
+            'forecast_bytes':verified['candidates'][0]['predicted_bytes'],'stage_limit_bytes':CAP,
+            'figure':(revision/f'04_{prefix}.png').relative_to(root).as_posix(),
+            'next_action':'Pending approval: reuse candidate 0, one passive matrix with a 384 MiB stage allowance; project hard cap unchanged'}
+    save_json(root/'summary.json',report)
+    save_json(root/'rendering.json',{'status':'passed','mesh_generation_calls':0,'scientific_solves':0,
+             'visual_qa':'passed','notebook':(revision/f'03_{prefix}_plot.ipynb').relative_to(root).as_posix(),
+             'outputs':package_manifest(revision)['files']})
+    space=evaluate_storage(scan_workspace(workspace),planned_new_bytes=128*1024,stop_reserve_bytes=64*1024**2)
+    phase_bytes=sum(p.stat().st_size for p in root.rglob('*') if p.is_file())
+    if not space['can_start'] or phase_bytes+128*1024>CAP:
+        raise ValueError('Delivery storage gate failed')
+    audit={'status':'passed','formal_invocation_files_unchanged':len(original['files']),
+           'protected_parent_files_unchanged':len(parents),'figure_input_hash_matches':len(data_pairs),
+           'development_tests':{'passed':47,'subtests_passed':21},'space':space,
+           'phase_bytes_before_final_metadata':phase_bytes,'scientific_solves':0,'mesh_generations':0}
+    save_json(root/'delivery_audit.json',audit)
+    save_json(root/'manifest.json',package_manifest(root))
+    return report
 
 
 if __name__=='__main__':

@@ -9,22 +9,22 @@ git_integration_execution: project_control/remote_history_integration_execution_
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
 verified_commit: bbc4b5be549a95766c6419c2aeb784e2c2cc7681
-current_lifecycle: fem_only_f6s1_geometry_failed_mechanics_not_run
+current_lifecycle: fem_only_f6s1m_geometry_passed_storage_blocked_mechanics_not_run
 documentation_updated_at: 2026-09-17
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_fenicsx_contour_passive_contract_v01.md
-last_completed_contract: project_control/ventricle_fem_fenicsx_contour_passive_contract_v01.md
-current_render_contract: results/ventricle_fem/f6s1_contour_passive_v01_20260917/rendering.json
-next_stage_contract: not_created_F6S1M_thin_layer_quality_meshing
-current_authorization: f6s1_single_invocation_ended_no_automatic_retry
+current_contract: project_control/ventricle_fem_fenicsx_thin_mesh_contract_v01.md
+last_completed_contract: project_control/ventricle_fem_fenicsx_thin_mesh_contract_v01.md
+current_render_contract: results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/rendering.json
+next_stage_contract: pending_384MiB_passive_continuation_approval
+current_authorization: f6s1m_single_invocation_ended_no_automatic_retry
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: F6S1_failed_geometry_no_new_scientific_attempt
-current_execution_log: project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md
+execution_authorized: F6S1M_storage_blocked_no_new_scientific_attempt
+current_execution_log: project_control/ventricle_fem_fenicsx_thin_mesh_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_fenicsx_thin_mesh_execution_v01.md
 latest_completed_scientific_gate: F6-S0_G0_G1_G2_ideal_ring_qualification
-latest_result_package: results/ventricle_fem/f6s1_contour_passive_v01_20260917/summary.json
+latest_result_package: results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/summary.json
 latest_supervisor_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -44,7 +44,25 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-17 F6-S1真实外轮廓在网格门停止
+## 当前：2026-09-17 F6-S1-M网格通过，完整输出预算阻断
+
+按用户确认的有界修复，将局部边长适配相邻层间距；三个预声明候选均通过原20度及全部几何门。
+最小合格候选1958顶点/3541单元、最小角23.0435度；旧网格45个坏角单元降为0，
+外轮廓IoU99.5882%及Hausdorff1.66974微米保持，内腔与层界仍为构造。
+
+该候选两网格十态输出预测307.35 MiB，超过本轮256 MiB；更细两候选也超限。
+一次正式容器13.698秒后停止，0平衡求解。原failed退出不改写，独立交付裁决为
+geometry passed / storage blocked / mechanics not_run；不是材料失稳或RAM不足。
+260个父证据文件保持，47测试及21子测试passed；Notebook结构/质量/预算图已验收。
+
+唯一下一步待确认：复用raw/candidate_0_mesh.npz（不是停止时最后候选M0_input_mesh），
+建议下一被动阶段预算384 MiB、另64 MiB停止空间、项目3 GiB硬限保持，执行原十态。
+不重剖分、不改材料/载荷/门限，首个力学失败即停；主动收缩仍not_run。
+
+[本次执行](ventricle_fem_fenicsx_thin_mesh_execution_v01.md) ·
+[图件与Notebook](../results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/index.html)。
+
+## 历史：2026-09-17 F6-S1真实外轮廓在网格门停止
 
 用户在普通推送main后要求继续项目。本轮完成源轮廓适配、显式几何输入接口、共形Gmsh网格与独立审计。
 1042顶点/1828三角形；mask IoU=99.5882%、原始轮廓采样Hausdorff=1.66974微米，

@@ -158,3 +158,34 @@ def verify_contour(root,save=False):
     if save:
         (root/'verification.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     return report
+
+
+def verify_mesh_repair(root,save=False):
+    """Independently re-read the bounded pre-solve mesh experiment."""
+    root=Path(root)
+    source=load_arrays(root/'geometry_source.npz')
+    cfg=json.loads((root/'configuration.json').read_text())
+    records=json.loads((root/'mesh_candidates.json').read_text())
+    failure=json.loads((root/'failure.json').read_text())
+    checks={'source_hash':hashlib.sha256((root/'geometry_source.npz').read_bytes()).hexdigest()==SOURCE_SHA,
+            'declared_candidates':cfg['mesh_size_candidates']==[1.2,.9,.7],
+            'all_candidates_retained':len(records)==3,
+            'no_equilibrium_attempt':failure['attempted_states']==0 and failure['completed_states']==0,
+            'no_state_files':not any((root/'raw').glob('*state*.npz')),
+            'frozen_physics':cfg['mu']==1. and cfg['kappa']==1000. and cfg['passive_loads']==[0.,.02,.04,.06,.08]}
+    results=[]
+    for i,record in enumerate(records):
+        mesh=load_arrays(root/'raw'/f'candidate_{i}_mesh.npz')
+        audit=geometry_audit(mesh,source)
+        prediction=76800*len(mesh['triangles'])+50331648
+        checks[f'candidate_{i}_geometry']=audit['status']=='passed'
+        checks[f'candidate_{i}_record']=audit==record['geometry'] and record['factor']==[1.2,.9,.7][i]
+        checks[f'candidate_{i}_budget']=prediction==record['predicted_bytes'] and prediction>256*1024**2 and not record['storage_passed']
+        results.append({'factor':record['factor'],'geometry':audit,'predicted_bytes':prediction})
+    report={'status':'passed' if all(checks.values()) else 'failed','checks':checks,
+            'geometry_status':'passed' if all(r['geometry']['status']=='passed' for r in results) else 'failed',
+            'storage_admission':'blocked','passive_mechanics':'not_run','active_mechanics':'not_run',
+            'biological_validation':'not_run','equilibrium_solves':0,'candidates':results}
+    if save:
+        (root/'verification.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n',encoding='utf-8')
+    return report
