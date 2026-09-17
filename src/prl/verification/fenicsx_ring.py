@@ -164,7 +164,7 @@ def state_audit(mesh,state,metadata,config):
             'pressure_virtual_work':work,'pressure_area_difference_work':float(p*(plus-minus)/(2*h)),
             'active_virtual_work':active_work,'active_energy_difference_work':active_difference,
             'active_virtual_work_error':active_work_error,'active_energy_error':active_energy_error}
-    if float(state['activation'])==0. and p>0:
+    if float(state['activation'])==0. and p>0 and config.get('geometry_kind','ring')=='ring':
         c=analytic_c(p)
         expected=c/config['radii'][0]**2
         result['analytic_area_change']=expected

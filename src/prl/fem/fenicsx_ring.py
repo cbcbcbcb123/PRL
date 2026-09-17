@@ -34,14 +34,25 @@ def budget(root,started):
 
 
 class Ring:
-    def __init__(self,case,config,root):
+    def __init__(self,case,config,root,geometry_input=None):
         self.name=case['name']
         self.config=config
         self.root=root
-        xy,cells,labels=annulus(case['segments'],case['radial'],config['radii'])
-        gm=geometry_metrics(xy,cells,labels,case['segments'],config['radii'])
+        if geometry_input is None:
+            xy,cells,labels=annulus(case['segments'],case['radial'],config['radii'])
+            gm=geometry_metrics(xy,cells,labels,case['segments'],config['radii'])
+            geometry_ok=(gm['minimum_signed_area']>0 and gm['minimum_angle_degrees']>=20 and gm['edge_manifold'] and gm['boundary_count_correct'] and gm['circle_area_relative_error']<=(.002 if self.name=='M0' else .0005))
+            angles=np.arange(case['segments'])*2*np.pi/case['segments']
+            inner_vertices=config['radii'][0]*np.column_stack((np.cos(angles),np.sin(angles)))
+            anchors=np.array([[1.,0.],[-1.,0.]])
+        else:
+            xy,cells,labels=[geometry_input[k] for k in ['xy','triangles','labels']]
+            gm=geometry_input['metrics']
+            geometry_ok=gm['status']=='passed'
+            inner_vertices=xy[geometry_input['inner_nodes']]
+            anchors=geometry_input['anchors']
         write_json(root/'raw'/f'{self.name}_geometry.json',gm)
-        if not(gm['minimum_signed_area']>0 and gm['minimum_angle_degrees']>=20 and gm['edge_manifold'] and gm['boundary_count_correct'] and gm['circle_area_relative_error']<=(.002 if self.name=='M0' else .0005)):
+        if not geometry_ok:
             raise ValueError('Frozen reference geometry gate failed')
         coordinate_element=basix.ufl.element('Lagrange','triangle',1,shape=(2,))
         self.domain=domain=mesh.create_mesh(MPI.COMM_WORLD,cells,coordinate_element,xy)
@@ -53,9 +64,11 @@ class Ring:
         domain.topology.create_connectivity(1,2)
         exterior=mesh.exterior_facet_indices(domain.topology)
         midpoints=mesh.compute_midpoints(domain,1,exterior)
-        midpoint_radius=np.linalg.norm(midpoints[:,:2],axis=1)
-        inner=exterior[np.isclose(midpoint_radius,config['radii'][0]*np.cos(np.pi/case['segments']),rtol=1e-9)]
-        assert len(inner)==case['segments']
+        from scipy.spatial import cKDTree
+        inner_midpoints=(inner_vertices+np.roll(inner_vertices,-1,axis=0))/2
+        distance,_=cKDTree(inner_midpoints).query(midpoints[:,:2])
+        inner=exterior[distance<1e-12]
+        assert len(inner)==len(inner_vertices)
         facet_tags=mesh.meshtags(domain,1,np.sort(inner),np.ones(len(inner),dtype=np.int32))
         displacement_element=basix.ufl.element('Lagrange','triangle',2,shape=(2,))
         pressure_element=basix.ufl.element('Lagrange','triangle',1)
@@ -69,10 +82,10 @@ class Ring:
         self.vmap=np.asarray(self.vmap,dtype=np.int32).reshape(-1)
         self.pmap=np.asarray(self.pmap,dtype=np.int32).reshape(-1)
         self.fixed=np.zeros(self.coords.shape,dtype=bool)
-        node_a=int(np.argmin(np.linalg.norm(self.coords-[1.,0.],axis=1)))
-        node_b=int(np.argmin(np.linalg.norm(self.coords-[-1.,0.],axis=1)))
-        assert np.linalg.norm(self.coords[node_a]-[1,0])<1e-12
-        assert np.linalg.norm(self.coords[node_b]-[-1,0])<1e-12
+        node_a=int(np.argmin(np.linalg.norm(self.coords-anchors[0],axis=1)))
+        node_b=int(np.argmin(np.linalg.norm(self.coords-anchors[1],axis=1)))
+        assert np.linalg.norm(self.coords[node_a]-anchors[0])<1e-12
+        assert np.linalg.norm(self.coords[node_b]-anchors[1])<1e-12
         self.fixed[node_a,:]=True
         self.fixed[node_b,1]=True
         map2=self.vmap.reshape(-1,2)
@@ -120,9 +133,8 @@ class Ring:
         self.expressions={k:fem.Expression(value,self.qpoints) for k,value in
                           {'F':f,'J':j,'stress':sigma,'active_stress':active_sigma}.items()}
         self.inner_edges=[]
-        for n in range(case['segments']):
-            angles=np.array([n,n+1])*2*np.pi/case['segments']
-            endpoints=config['radii'][0]*np.column_stack((np.cos(angles),np.sin(angles)))
+        for n in range(len(inner_vertices)):
+            endpoints=inner_vertices[[n,(n+1)%len(inner_vertices)]]
             targets=[endpoints[0],endpoints.mean(axis=0),endpoints[1]]
             indices=[]
             for target in targets:

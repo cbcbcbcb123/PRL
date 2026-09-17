@@ -6,13 +6,21 @@
 
 ## 当前进展
 
+F6-S1已接回真实外轮廓，但在网格门停止：1828单元中45个低于20度，最差12.8687度，
+全部位于薄构造心内膜/ECM层；图像重合与层界连通通过。0个新平衡态，位移/应力/压力响应not_run。
+见[当前结构及质量诊断图](results/ventricle_fem/f6s1_contour_passive_v01_20260917/index.html)和
+[本次执行记录](project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md)。
+
+最近通过的力学阶段保持如下：
+
 F6-S0的FEniCSx运行时、被动与主动圆环资格均通过。两档896/3584个P2/P1三角形，26个唯一平衡态。
 细网格四对照：零载0%、仅压力+9.8974%、仅主动−4.3150%、压力＋主动+4.5566%；均通过原1%局部体积门。
 首次调用在十个被动态保存后发生读取错误，修复后仅补16个未运行主动态，原失败保留，0重复平衡求解。
 见[结构、结果与动图](results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html)和[完成记录](project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md)。
 
 模型仍是无量纲理想圆环、平面应变、未标定同质材料，不能代表斑马鱼实验拟合。
-F5图像外轮廓局部体积失败保留。下一步F6-S1接回图像外轮廓，先复核被动压力及局部J，再加入主动收缩。
+F5图像外轮廓局部体积失败保留。下一步F6-S1-M先修薄层局部网格，保持原物理及20度/1%J门；
+新的有界尝试待确认。几何通过后才运行被动压力，之后再考虑主动收缩。
 
 ## 软件入口
 
@@ -21,10 +29,12 @@ $env:PYTHONPATH = "$PWD\src"
 $env:PYTHONDONTWRITEBYTECODE = "1"
 python -B -X utf8 -m prl storage status --workspace .
 python -B -X utf8 -m prl verify fem-fenicsx-ring --workspace . --result results/ventricle_fem/f6s0_active_completion_v01_20260917
+python -B -X utf8 -m prl verify fem-fenicsx-contour --workspace .
 python -B -X utf8 -m prl validate cockpit --workspace .
 ```
 
-verify只读引用父被动态和续算主动态，完整G1/G2应返回passed。结果不得覆盖重跑；render只读原始状态绘图但仍计入预算。历史失败保留。
+圆环verify只读引用父被动态和续算主动态，完整G1/G2应返回passed。当前轮廓verify应返回failed，
+不能把其非零退出当作需要自动重跑。结果不得覆盖重跑；冻结图包不静默重绘。历史失败保留。
 
 ## 目录与安全
 

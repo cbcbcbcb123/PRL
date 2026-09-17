@@ -1,15 +1,15 @@
 {
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-17",
-  "overall_status": "passed",
-  "summary": "F6-S0开源FEM基准通过：同一细网格仅压力腔面积+9.8974%、仅主动−4.3150%、组合+4.5566%。26个唯一平衡态，0重复求解；真实轮廓资格与实验标定尚未完成。",
+  "overall_status": "failed",
+  "summary": "F6-S1接回真实外轮廓；源几何与连通性通过，但45/1828单元低于20度，最小12.8687度。求解前停止，0新平衡态；下一步仅修薄构造层网格。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM解释斑马鱼心室跳动及发育，逐步研究组织结构、生长、ECM和心内膜反馈。",
-    "scope": "无量纲理想三层圆环，二维P2/P1三角形与三维平面应变本构；区域/材料未实测，不是真实心室。",
-    "current_stage": "F6-S0 G0/G1/G2 passed; F6-S1 image-derived outline not_run",
-    "current_location": "results/ventricle_fem/f6s0_active_completion_v01_20260917",
-    "evidence_basis_commit": "bc85d20239544db2baab59ae8fc8f5618dd75c0c",
+    "scope": "图像来源二维外轮廓；内腔/层界/材料仍为构造。被动力学尚未运行。",
+    "current_stage": "F6-S1 geometry failed; passive/active mechanics not_run",
+    "current_location": "results/ventricle_fem/f6s1_contour_passive_v01_20260917",
+    "evidence_basis_commit": "e1db43efb12847ac53542b9cb0081cef39a985ee",
     "evidence_checked_at": "2026-09-17",
     "git_workflow": {
       "branch": "main",
@@ -20,105 +20,122 @@
       "merge_commit": "bbc4b5be549a95766c6419c2aeb784e2c2cc7681",
       "remote_push": "passed",
       "published_integration_commit": "dd30620a1218aaed6e9e8458f38e060ce7b8c519",
-      "evidence_refs": ["project_control/main_branch_stage_commit_decision_v01.md", "project_control/remote_history_integration_execution_v01.md", "project_control/evidence/git_main_integration_v01/push_execution_v01.json"]
-    },
-    "freshness_note": "两网格26个唯一平衡态通过独立复核，82项汇总门passed；原读取失败与10个父状态原样保留。",
-    "model_overview": {
-      "model_type": "FEniCSx P2位移/P1混合压力三角形，有限变形平面应变",
-      "simulated_object": "理想三层圆环；896/3584单元两档，内半径20/27、外半径1",
-      "theory": "全层同一未标定Neo-Hookean mu=1、kappa=1000。内壁随动压力0→0.08；环向主动张力Ta=0→0.10仅作用于心肌。外壁自由、三个刚体规范自由度固定。",
-      "current_question": "理想圆环已验证压力扩张与主动缩腔的竞争；同一后端接到图像外轮廓后，局部近不可压性与主动响应能否仍合格？",
-      "pipeline": [
-        "G0固定镜像导入/JIT/微型装配通过",
-        "G1两档圆环10个被动压力态通过",
-        "G2仅补16个未运行主动/组合态并通过",
-        "独立场量、虚功、两网格及原始哈希检查通过",
-        "下一步接回图像外轮廓；仍未运行"
+      "evidence_refs": [
+        "project_control/main_branch_stage_commit_decision_v01.md",
+        "project_control/remote_history_integration_execution_v01.md",
+        "project_control/evidence/git_main_integration_v01/push_execution_v01.json"
       ],
-      "diagram": "results/ventricle_fem/f6s0_active_completion_v01_20260917/figures/model_structure.png",
-      "diagram_caption": "真实计算网格、三层标签、环向心肌纤维、内壁随动压力和刚体规范点。",
+      "current_stage_push": "not_run"
+    },
+    "freshness_note": "F6-S1实际执行以configuration/source_hashes/原始网格和failure为准；上述Git为进入阶段时父提交。218个父文件哈希保持。",
+    "model_overview": {
+      "model_type": "FEniCSx二维P2/P1三角形、有限变形平面应变（力学not_run）",
+      "simulated_object": "72 hpf Fish 4、z=39实测外轮廓；构造内腔与三层界面",
+      "theory": "计划沿用NH mu=1、kappa=1000，内壁随动压力0→0.08，外壁自由。A固定ux/uy，B固定uy；未求解。",
+      "current_question": "保持实际外多边形不变，薄构造层的共形网格能否通过20度门，再进入原被动压力资格？",
+      "pipeline": [
+        "源哈希与图像外轮廓通过",
+        "已有Gmsh生成1042顶点/1828单元",
+        "连通/层界/源轮廓误差通过",
+        "最小角12.8687度，45个单元未通过",
+        "0平衡求解；新质量网格尝试待确认"
+      ],
+      "diagram": "results/ventricle_fem/f6s1_contour_passive_v01_20260917/figures/FigS1_mesh_gate/FigS1_mesh_gate_v01_20260917/04_FigS1_mesh_gate_v01_20260917.png",
+      "diagram_caption": "保存的实际网格：左为构造区域，中为未过20度单元，右为角度CDF；红色不是应力。",
       "assumptions": [
-        "理想圆环与三层区域是构造基准",
-        "全层相同未标定NH材料",
-        "二维位移、三维平面应变本构",
-        "参考环向主动应力仅施于心肌区域",
-        "加载级是算法延拓，不是生理时间"
+        "只有外轮廓来自图像",
+        "内腔/层界为同心缩放",
+        "无应力参考态及材料未标定",
+        "二维平面应变不是自由三维心室",
+        "加载级不是生理时间"
       ],
       "methods": [
-        "FEniCSx/UFL一致残量和Jacobian，PETSc SNES",
-        "NumPy独立P2/P1运动学、本构及力装配",
-        "两网格、被动解析参照与主动虚功校验",
-        "五个真实加载状态、统一应力色标、1倍形变"
+        "固定镜像已有Gmsh，未安装",
+        "共形非结构三角形与共享层界",
+        "独立NumPy几何审计，失败即停止",
+        "真实网格Notebook图件，0新增力学场"
       ],
-      "scope_boundary": "仅F6-S0理想圆环资格通过；不是实验验证。F5真实轮廓失败保持，F6-S1未运行。GIF循环不是已求解的收缩舒张周期。",
+      "scope_boundary": "网格门failed；压力响应和主动收缩not_run。F6-S0圆环passed及F5 failed保持。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md",
-        "project_control/ventricle_fem_fenicsx_ring_active_contract_v01.md",
-        "results/ventricle_fem/f6s0_active_completion_v01_20260917/post_verification.json",
-        "results/ventricle_fem/f6s0_fenicsx_ring_active_v01_20260917/g0_runtime.json"
+        "project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md",
+        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/raw/M0_geometry_preflight.json",
+        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/failure.json",
+        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/delivery_audit.json"
       ]
     }
   },
   "roadmap": [
     {
-      "label": "FEniCSx运行时",
+      "label": "FEniCSx理想圆环",
       "status": "passed",
-      "summary": "固定镜像、DOLFINx/PETSc、JIT与微型装配通过"
+      "summary": "F6-S0被动/主动26个唯一平衡态通过，原证据保持"
     },
     {
-      "label": "理想圆环被动压力",
+      "label": "图像来源与共享层界",
       "status": "passed",
-      "summary": "两网格十态，解析、平衡与1%局部J门通过"
+      "summary": "mask IoU99.5882%，轮廓误差1.66974微米，连接与层面积通过"
     },
     {
-      "label": "心肌主动应力",
-      "status": "passed",
-      "summary": "16个新主动/组合态，方向、虚功、局部J与网格门通过"
-    },
-    {
-      "label": "真实轮廓非线性",
+      "label": "真实外轮廓网格质量",
       "status": "failed",
-      "summary": "保留F5局部体积失败；新后端接回尚未运行"
+      "summary": "45单元未过20度，均在构造心内膜/ECM薄层"
+    },
+    {
+      "label": "真实外轮廓被动/主动",
+      "status": "not_run",
+      "summary": "几何门失败，未进入力学"
     },
     {
       "label": "生理标定与反馈",
       "status": "not_run",
-      "summary": "实验、材料、时间、自由3D、生长与ECM后续"
+      "summary": "实测解剖、材料、时间、自由3D与反馈后续"
     }
   ],
   "active_work": [
     {
-      "title": "F6-S0开源后端资格完成",
-      "status": "passed",
-      "summary": "G0/G1/G2通过；主动力已能缩腔，并抵消部分压力扩张。两次科学容器共26个唯一平衡態，累计69秒。",
+      "title": "F6-S1几何失败保全与定位完成",
+      "status": "failed",
+      "summary": "一次正式容器9.131秒，0平衡求解、0自动重试。结构和质量图已保存，不冒充力学结果。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md",
-        "results/ventricle_fem/f6s0_active_completion_v01_20260917/summary.json",
-        "results/ventricle_fem/f6s0_active_completion_v01_20260917/post_verification.json"
+        "project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md",
+        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/summary.json",
+        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/index.html"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "真实外轮廓局部J资格待新后端验证",
+      "title": "薄构造层45个尖瘦单元",
       "status": "failed",
-      "summary": "原F5 max|J−1|=54.09%的失败保持；圆环通过不能代替真实轮廓资格。",
+      "summary": "心内膜20、ECM25、心肌0；最差12.8687度。均匀四分不改角度，需局部边长与质量剖分适配。",
       "evidence_refs": [
-        "project_control/ventricle_fem_contour_pressure_execution_v01.md"
+        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/geometry_diagnosis.json"
       ]
     },
     {
       "title": "实验标定尚未完成",
       "status": "not_run",
-      "summary": "真实内腔/壁厚/纤维、残余应力、材料及生理时间未标定；尚无真实自由3D运动。",
+      "summary": "真实内腔/壁厚/纤维、参考应力、材料、生理时间与自由三维均未标定。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md"
+        "project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md"
       ]
     }
   ],
   "results": [
     {
-      "title": "压力、主动及组合四组终态",
+      "title": "真实外轮廓结构与网格失败定位",
+      "status": "failed",
+      "summary": "源几何合格；45/1828坏角单元局限于两个薄构造层。无位移/应力/压力响应。",
+      "image": "results/ventricle_fem/f6s1_contour_passive_v01_20260917/figures/FigS1_mesh_gate/FigS1_mesh_gate_v01_20260917/04_FigS1_mesh_gate_v01_20260917.png",
+      "evidence_refs": [
+        "project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md",
+        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/raw/M0_geometry_preflight.json",
+        "results/ventricle_fem/f6s1_contour_passive_v01_20260917/rendering.json"
+      ],
+      "result_group": "current"
+    },
+    {
+      "title": "保留：F6-S0理想圆环四工况",
       "status": "passed",
       "summary": "仅压力+9.8974%、仅主动−4.3150%、组合+4.5566%；主动抵消5.3408个百分点的压力扩张。",
       "image": "results/ventricle_fem/f6s0_active_completion_v01_20260917/figures/four_conditions.png",
@@ -126,49 +143,26 @@
         "results/ventricle_fem/f6s0_active_completion_v01_20260917/post_verification.json",
         "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md"
       ],
-      "result_group": "current"
-    },
-    {
-      "title": "形变与局部体积：两档网格复核",
-      "status": "passed",
-      "summary": "纯主动与组合末态max|J−1|=0.007705%/0.005376%，均通过原1%门；两档腔响应差约1.6e-7。",
-      "image": "results/ventricle_fem/f6s0_active_completion_v01_20260917/figures/mechanics_results.png",
-      "evidence_refs": [
-        "results/ventricle_fem/f6s0_active_completion_v01_20260917/post_verification.json",
-        "results/ventricle_fem/f6s0_active_completion_v01_20260917/rendering.json"
-      ],
-      "result_group": "current"
-    },
-    {
-      "title": "五个真实主动加载状态",
-      "status": "passed",
-      "summary": "0、25%、50%、75%、100%主动幅度。1倍形变，共用总应力色标；不是生理周期。",
-      "image": "results/ventricle_fem/f6s0_active_completion_v01_20260917/figures/active_states.png",
-      "evidence_refs": [
-        "results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html",
-        "results/ventricle_fem/f6s0_active_completion_v01_20260917/rendering.json"
-      ],
-      "result_group": "current"
+      "result_group": "historical"
     }
   ],
   "next_actions": [
     {
-      "title": "F6-S1接回图像外轮廓",
+      "title": "F6-S1-M薄层质量网格",
       "status": "not_run",
-      "summary": "保留同一后端、材料和原误差标准；内腔/层界仍为构造几何。先通过被动压力与局部J门，再加入主动收缩。",
+      "summary": "待确认新的有界尝试：保持多边形、层界、材料及20度/1%J门；先改善局部剖分，再做两网格十态被动资格。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md",
-        "project_control/ventricle_fem_only_measured_contour_decision_v01.md"
+        "project_control/ventricle_fem_fenicsx_contour_passive_execution_v01.md"
       ]
     }
   ],
   "evidence_boundaries": [
-    "仅FEM，不恢复DCM。",
-    "理想圆环、构造三层标签、未标定材料；不是实测心室。",
-    "二维P2/P1与平面应变本构，不是自由3D。",
-    "G0/G1/G2通过；原第一次调用failed不改写。",
-    "10个被动态只读继承，16个新状态；0重复平衡求解。",
-    "F5真实轮廓失败保持；F6-S1、实验拟合及生理心动均not_run。",
-    "固定本地镜像、单CPU、禁网、0 GPU，无拉取/安装/删除/提交/推送。"
+    "仅FEM，无DCM前向运行。",
+    "外轮廓来自图像；内腔、层界和材料为构造假设。",
+    "网格门failed；0平衡求解，不提供虚构力学场。",
+    "F6-S0 passed和F5 failed都保持原记录。",
+    "153开发测试+27子测试通过不代表真实轮廓力学通过。",
+    "单CPU、禁网、固定已有镜像，0GPU/拉取/安装/删除/自动重跑。",
+    "本阶段本地main提交；不自动推送。"
   ]
 }

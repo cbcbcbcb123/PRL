@@ -25,7 +25,7 @@ from .workspace import find_workspace
 FEM_RUN_COMMANDS = frozenset({
     "fem-active-ellipse", "fem-synthetic-orientation", "fem-measured-contour",
     "fem-fixed-mesh", "fem-finite-strain", "fem-rotation", "fem-curved-pressure", "fem-contour-pressure",
-    "fem-fenicsx-ring",
+    "fem-fenicsx-ring", "fem-fenicsx-contour",
 })
 FEM_ONLY_DECISION = "project_control/ventricle_fem_only_measured_contour_decision_v01.md"
 
@@ -361,6 +361,9 @@ def _parser() -> argparse.ArgumentParser:
     fenicsx_render = render_commands.add_parser('fem-fenicsx-ring', help='render saved FEniCSx states')
     fenicsx_render.add_argument('--workspace', type=Path)
     fenicsx_render.add_argument('--result', type=Path)
+    for group in [run_commands,verify_commands,render_commands]:
+        contour=group.add_parser('fem-fenicsx-contour',help='F6-S1 image-derived passive contour')
+        contour.add_argument('--workspace',type=Path)
     return parser
 
 
@@ -442,6 +445,19 @@ def main(arguments: Sequence[str] | None = None) -> int:
 
         report = run_regular_2x2_load_hold(workspace)
         exit_code = 0 if report["status"] == "passed" else 1
+    elif ((parsed.command=='run' and parsed.run_command=='fem-fenicsx-contour') or
+          (parsed.command=='verify' and parsed.verify_command=='fem-fenicsx-contour') or
+          (parsed.command=='render' and parsed.render_command=='fem-fenicsx-contour')):
+        from .runs.fenicsx_contour import RESULT,run_contour
+        if parsed.command=='run':
+            report=run_contour(workspace)
+        elif parsed.command=='verify':
+            from .verification.fenicsx_contour import verify_contour
+            report=verify_contour(workspace/RESULT)
+        else:
+            from .rendering.fenicsx_contour import render_contour
+            report=render_contour(workspace/RESULT)
+        exit_code=0 if report['status']=='passed' else 1
     elif parsed.command == 'run' and parsed.run_command == 'fem-fenicsx-ring':
         from .runs.fenicsx_ring import run_fenicsx_ring, run_active_completion
 
