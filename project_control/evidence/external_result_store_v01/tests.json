@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "tests_passed": 64,
+  "subtests_passed": 21,
+  "elapsed_seconds": 22.58,
+  "command": "python -B -X utf8 -m pytest -p no:cacheprovider tests/prl/test_result_store.py tests/prl/test_fenicsx_mesh_repair.py tests/prl/test_fenicsx_contour.py tests/prl/test_fenicsx_ring.py tests/prl/test_fem_only_cli.py tests/prl/test_storage.py -q",
+  "environment": {
+    "PYTHONPATH": "E:/Temp-Projects/PRL/src",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1"
+  },
+  "scientific_solves": 0,
+  "docker_calls": 0
+}

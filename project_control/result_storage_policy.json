@@ -1,0 +1,12 @@
+{
+  "schema_version": "prl.external_results.v1",
+  "status": "approved",
+  "root": "E:/Temp-Projects/PRL-results",
+  "authorization": "User approved this exact external path and disk-free protection in the current conversation",
+  "decision": "project_control/external_result_store_decision_v01.md",
+  "fixed_stage_limit_bytes": null,
+  "disk_free_floor_bytes": 10737418240,
+  "minimum_stop_reserve_bytes": 67108864,
+  "existing_result_policy": "preserve_in_place_no_move_no_copy_no_delete",
+  "scientific_scope": "unchanged; storage authorization does not authorize another scientific invocation"
+}

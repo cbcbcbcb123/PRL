@@ -387,12 +387,10 @@ def main(arguments: Sequence[str] | None = None) -> int:
         return 1
     workspace = find_workspace(parsed.workspace)
     if parsed.command == "storage" and parsed.storage_command == "status":
-        report = evaluate_storage(
-            scan_workspace(workspace),
-            planned_new_bytes=parsed.planned_new_bytes,
-            stop_reserve_bytes=parsed.stop_reserve_bytes,
-        )
-        exit_code = 0
+        from .result_store import result_admission
+        report=result_admission(workspace,planned_new_bytes=parsed.planned_new_bytes or 0,
+                                stop_reserve_bytes=parsed.stop_reserve_bytes)
+        exit_code=0 if report['can_start'] else 1
     elif parsed.command == "verify" and parsed.verify_command == "long-doublet":
         report = verify_long_doublet(workspace, parsed.result)
         exit_code = 0 if report["status"] == "passed" else 1
@@ -452,13 +450,16 @@ def main(arguments: Sequence[str] | None = None) -> int:
           (parsed.command=='verify' and parsed.verify_command=='fem-fenicsx-contour') or
           (parsed.command=='render' and parsed.render_command=='fem-fenicsx-contour')):
         from .runs.fenicsx_contour import RESULT,REPAIR_RESULT,PASSIVE_RESULT,run_contour
-        contour_result=workspace/(PASSIVE_RESULT if parsed.retained_passive else REPAIR_RESULT if parsed.repair_thin_mesh else RESULT)
+        from .result_store import result_path
+        identifier=PASSIVE_RESULT if parsed.retained_passive else REPAIR_RESULT if parsed.repair_thin_mesh else RESULT
         if parsed.command=='run':
             report=run_contour(workspace,repair=parsed.repair_thin_mesh,retained=parsed.retained_passive)
         elif parsed.command=='verify':
+            contour_result=result_path(workspace,identifier)
             from .verification.fenicsx_contour import verify_contour,verify_mesh_repair
             report=verify_mesh_repair(contour_result) if parsed.repair_thin_mesh else verify_contour(contour_result)
         else:
+            contour_result=result_path(workspace,identifier)
             from .rendering.fenicsx_contour import render_contour
             report=render_contour(contour_result)
         exit_code=0 if report['status']=='passed' else 1

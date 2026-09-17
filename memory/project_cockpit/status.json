@@ -9,7 +9,7 @@
     "scope": "图像来源二维外轮廓、构造内腔/层界；首个非零压力态局部体积门failed，不是实验拟合。",
     "current_stage": "F6-S1-P local volume failed; M1 and active not_run",
     "current_location": "results/ventricle_fem/f6s1p_retained_passive_v01_20260917",
-    "evidence_basis_commit": "38e3310de4da930851980ba1c169673cd11ac6de",
+    "evidence_basis_commit": "7a7dc8a7b0e0a713f079234fe03c758203d38c3a",
     "evidence_checked_at": "2026-09-17",
     "git_workflow": {
       "branch": "main",
@@ -27,7 +27,7 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "308父文件保持。800 MiB为阶段默认预算，3 GiB总限保持；独立结果库路径等待用户确认，尚未外部写入。",
+    "freshness_note": "F6-S1-P按800 MiB历史预算完成。后续新结果使用已批准PRL-results及磁盘余量门，无固定阶段上限；571既有FEM文件哈希保持，存储验收0新求解。",
     "model_overview": {
       "model_type": "FEniCSx二维P2/P1三角形；三维平面应变有限变形NH",
       "simulated_object": "72 hpf Fish 4、z=39实测外轮廓；构造内腔与三层界面",
@@ -76,9 +76,9 @@
       "summary": "3541/14164单元；源形态与共享界面保持"
     },
     {
-      "label": "800 MiB阶段准入",
+      "label": "独立结果库",
       "status": "passed",
-      "summary": "已解除旧256 MiB阻断；3 GiB项目总限保持"
+      "summary": "PRL-results主机/Docker I/O通过；新结果无固定体积限额，代码仓仍3 GiB"
     },
     {
       "label": "实测外轮廓被动资格",
@@ -164,7 +164,7 @@
     "2个保存态含1个失败；不补造五态，不称生理时间。",
     "54开发测试+21子测试通过不等于科学通过。",
     "308父文件不变；0GPU/安装/删除/拉取/自动重跑。",
-    "阶段默认800 MiB，停止空间另64 MiB；外置结果库尚待精确路径确认。",
+    "新结果外置PRL-results；预计输出+至少64 MiB保全+10 GiB磁盘余量准入，无固定阶段体积上限；旧结果不迁移。",
     "本地main提交，不自动推送。"
   ]
 }

@@ -18,9 +18,11 @@ last_completed_contract: project_control/ventricle_fem_fenicsx_retained_passive_
 current_render_contract: results/ventricle_fem/f6s1p_retained_passive_v01_20260917/rendering.json
 next_stage_contract: pending_two_state_fine_mesh_diagnostic_approval
 current_authorization: f6s1p_first_failure_stop_no_automatic_retry
-default_new_stage_budget_mib: 800
+default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
-external_results_root: pending_exact_path_approval
+external_results_root: E:/Temp-Projects/PRL-results
+external_results_storage_decision: project_control/external_result_store_decision_v01.md
+external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
 execution_authorized: F6S1P_local_volume_failed_no_new_scientific_attempt
@@ -49,7 +51,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 当前：2026-09-17 F6-S1-P局部体积门失败
 
-用户将新阶段默认输出预算提高到800 MiB，原3 GiB项目硬限与64 MiB停止空间保持。
+本次科学调用按用户批准的800 MiB阶段预算执行，原3 GiB项目硬限与64 MiB停止空间保持。
 复用合格candidate_0，无Gmsh重生成；3541/14164单元两级几何与存储准入通过。
 一次25.932秒容器保存2态：零载passed；p/mu=0.02求解收敛但max|J−1|=6.71167%>1%，
 按合同停止。1态接受、1态失败，细网格力学及其余8态not_run，无自动重跑。
@@ -59,8 +61,10 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 308父文件不变；54测试+21子测试passed；结构/应力/局部J图及真实两帧GIF已验收。
 下一科学切片待确认：只补尚未运行的细网格0和0.02两态，不重跑粗网格，不恢复主动。
 
-用户另建议外置PRL-results结果库。当前已请求精确项目外路径确认；尚未外部新建、搬移或删除。
-既有results本来已被Git忽略；本次停止不是空间问题。外置后的磁盘余量规则与路径适配另验收。
+用户已批准`E:\Temp-Projects\PRL-results`。后续新结果取消固定阶段体积限额，使用磁盘余量准入；
+代码仓3 GiB硬限保留，旧结果不复制、不搬移、不删除。两轮主机读写及一次Docker挂载I/O passed，
+571个既有FEM文件哈希保持，0新科学求解。此次存储变更不改变上述局部J failed，也不授权新的求解。
+见[存储决定](external_result_store_decision_v01.md)及[工程验收](external_result_store_execution_v01.md)。
 
 [执行记录](ventricle_fem_fenicsx_retained_passive_execution_v01.md) ·
 [图件与动图](../results/ventricle_fem/f6s1p_retained_passive_v01_20260917/index.html)。

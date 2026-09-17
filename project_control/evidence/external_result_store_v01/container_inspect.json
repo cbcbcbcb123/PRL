@@ -1,0 +1,250 @@
+{
+  "Id": "d06e6dd1ebd85533ce8049370eb1649b81344e841ac88c26b15663db8eeed48b",
+  "Created": "2026-09-17T14:30:45.152245722Z",
+  "Path": "python3",
+  "Args": [
+    "-B",
+    "/workspace/project_control/evidence/external_result_store_v01/container_probe.py"
+  ],
+  "State": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-09-17T14:30:45.451532952Z",
+    "FinishedAt": "2026-09-17T14:30:46.097706053Z"
+  },
+  "Image": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+  "ResolvConfPath": "/var/lib/docker/containers/d06e6dd1ebd85533ce8049370eb1649b81344e841ac88c26b15663db8eeed48b/resolv.conf",
+  "HostnamePath": "/var/lib/docker/containers/d06e6dd1ebd85533ce8049370eb1649b81344e841ac88c26b15663db8eeed48b/hostname",
+  "HostsPath": "/var/lib/docker/containers/d06e6dd1ebd85533ce8049370eb1649b81344e841ac88c26b15663db8eeed48b/hosts",
+  "LogPath": "",
+  "Name": "/prl-external-results-io-v01-20260917",
+  "RestartCount": 0,
+  "Driver": "overlayfs",
+  "Platform": "linux",
+  "MountLabel": "",
+  "ProcessLabel": "",
+  "AppArmorProfile": "",
+  "ExecIDs": null,
+  "HostConfig": {
+    "Binds": null,
+    "ContainerIDFile": "",
+    "LogConfig": {
+      "Type": "none",
+      "Config": {}
+    },
+    "NetworkMode": "none",
+    "PortBindings": {},
+    "RestartPolicy": {
+      "Name": "no",
+      "MaximumRetryCount": 0
+    },
+    "AutoRemove": false,
+    "VolumeDriver": "",
+    "VolumesFrom": null,
+    "ConsoleSize": [
+      0,
+      0
+    ],
+    "CapAdd": null,
+    "CapDrop": [
+      "ALL"
+    ],
+    "CgroupnsMode": "private",
+    "Dns": null,
+    "DnsOptions": [],
+    "DnsSearch": [],
+    "ExtraHosts": null,
+    "GroupAdd": null,
+    "IpcMode": "private",
+    "Cgroup": "",
+    "Links": null,
+    "OomScoreAdj": 0,
+    "PidMode": "",
+    "Privileged": false,
+    "PublishAllPorts": false,
+    "ReadonlyRootfs": true,
+    "SecurityOpt": [
+      "no-new-privileges"
+    ],
+    "Tmpfs": {
+      "/root/.cache": "rw,exec,nosuid,nodev,size=536870912",
+      "/tmp": "rw,noexec,nosuid,nodev,size=268435456"
+    },
+    "UTSMode": "",
+    "UsernsMode": "",
+    "ShmSize": 67108864,
+    "Runtime": "runc",
+    "Isolation": "",
+    "CpuShares": 0,
+    "Memory": 8589934592,
+    "NanoCpus": 1000000000,
+    "CgroupParent": "",
+    "BlkioWeight": 0,
+    "BlkioWeightDevice": [],
+    "BlkioDeviceReadBps": [],
+    "BlkioDeviceWriteBps": [],
+    "BlkioDeviceReadIOps": [],
+    "BlkioDeviceWriteIOps": [],
+    "CpuPeriod": 0,
+    "CpuQuota": 0,
+    "CpuRealtimePeriod": 0,
+    "CpuRealtimeRuntime": 0,
+    "CpusetCpus": "",
+    "CpusetMems": "",
+    "Devices": [],
+    "DeviceCgroupRules": null,
+    "DeviceRequests": null,
+    "MemoryReservation": 0,
+    "MemorySwap": 8589934592,
+    "MemorySwappiness": null,
+    "OomKillDisable": null,
+    "PidsLimit": 256,
+    "Ulimits": [],
+    "CpuCount": 0,
+    "CpuPercent": 0,
+    "IOMaximumIOps": 0,
+    "IOMaximumBandwidth": 0,
+    "Mounts": [
+      {
+        "Type": "bind",
+        "Source": "E:\\Temp-Projects\\PRL",
+        "Target": "/workspace",
+        "ReadOnly": true
+      },
+      {
+        "Type": "bind",
+        "Source": "E:\\Temp-Projects\\PRL-results\\_storage_checks\\external_store_io_v01",
+        "Target": "/out"
+      }
+    ],
+    "MaskedPaths": [
+      "/proc/acpi",
+      "/proc/asound",
+      "/proc/interrupts",
+      "/proc/kcore",
+      "/proc/keys",
+      "/proc/latency_stats",
+      "/proc/sched_debug",
+      "/proc/scsi",
+      "/proc/timer_list",
+      "/proc/timer_stats",
+      "/sys/devices/virtual/powercap",
+      "/sys/firmware"
+    ],
+    "ReadonlyPaths": [
+      "/proc/bus",
+      "/proc/fs",
+      "/proc/irq",
+      "/proc/sys",
+      "/proc/sysrq-trigger"
+    ]
+  },
+  "Storage": {
+    "RootFS": {
+      "Snapshot": {
+        "Name": "overlayfs"
+      }
+    }
+  },
+  "Mounts": [
+    {
+      "Type": "bind",
+      "Source": "E:\\Temp-Projects\\PRL",
+      "Destination": "/workspace",
+      "Mode": "",
+      "RW": false,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "E:\\Temp-Projects\\PRL-results\\_storage_checks\\external_store_io_v01",
+      "Destination": "/out",
+      "Mode": "",
+      "RW": true,
+      "Propagation": "rprivate"
+    }
+  ],
+  "Config": {
+    "Hostname": "d06e6dd1ebd8",
+    "Domainname": "",
+    "User": "",
+    "AttachStdin": false,
+    "AttachStdout": true,
+    "AttachStderr": true,
+    "Tty": false,
+    "OpenStdin": false,
+    "StdinOnce": false,
+    "Env": [
+      "PYTHONDONTWRITEBYTECODE=1",
+      "PYTHONPATH=/workspace/src:/usr/local/dolfinx-real/lib/python3.12/dist-packages:/usr/local/lib:",
+      "OMP_NUM_THREADS=1",
+      "OPENBLAS_NUM_THREADS=1",
+      "MKL_NUM_THREADS=1",
+      "NUMEXPR_NUM_THREADS=1",
+      "VECLIB_MAXIMUM_THREADS=1",
+      "PATH=/dolfinx-env/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "OPENBLAS_VERBOSE=0",
+      "VIRTUAL_ENV=/dolfinx-env",
+      "PETSC_DIR=/usr/local/petsc",
+      "SLEPC_DIR=/usr/local/slepc",
+      "PKG_CONFIG_PATH=/usr/local/dolfinx-real/lib/pkgconfig:",
+      "CMAKE_PREFIX_PATH=/usr/local/dolfinx-real/lib/cmake:",
+      "PETSC_ARCH=linux-gnu-real64-32",
+      "LD_LIBRARY_PATH=/usr/local/dolfinx-real/lib:"
+    ],
+    "Cmd": [
+      "python3",
+      "-B",
+      "/workspace/project_control/evidence/external_result_store_v01/container_probe.py"
+    ],
+    "Image": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+    "Volumes": null,
+    "WorkingDir": "/root",
+    "Entrypoint": null,
+    "Labels": {
+      "description": "DOLFINx in 32-bit real and complex modes",
+      "maintainer": "FEniCS Steering Council <fenics-steering-council@googlegroups.com>",
+      "org.opencontainers.image.version": "24.04"
+    }
+  },
+  "NetworkSettings": {
+    "SandboxID": "",
+    "SandboxKey": "",
+    "Ports": {},
+    "Networks": {
+      "none": {
+        "IPAMConfig": null,
+        "Links": null,
+        "Aliases": null,
+        "DriverOpts": null,
+        "GwPriority": 0,
+        "NetworkID": "8972578c2e2a2bc9713fd345d224256d0aa1f3c80b3a0076a64818916be29431",
+        "EndpointID": "",
+        "Gateway": "",
+        "IPAddress": "",
+        "MacAddress": "",
+        "IPPrefixLen": 0,
+        "IPv6Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "DNSNames": null
+      }
+    }
+  },
+  "ImageManifestDescriptor": {
+    "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+    "digest": "sha256:58b27e84a2f26b98ce2d9ccc537b0ee6a59e2fcfdf386626d5ed9ddf43425ece",
+    "size": 4114,
+    "platform": {
+      "architecture": "amd64",
+      "os": "linux"
+    }
+  }
+}

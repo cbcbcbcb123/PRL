@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "checks": {
+    "fifty_unrelated_files_unchanged": true,
+    "existing_fem_manifests_valid": true,
+    "external_index_and_manifest_valid": true,
+    "cockpit_links": true,
+    "storage_admission": true,
+    "main_branch": true,
+    "existing_lock_preserved": true
+  },
+  "protected_unrelated_files": 50,
+  "legacy_drift": [],
+  "fem_files_verified": 571,
+  "fem_drift": [],
+  "fem_manifest_sha256": {
+    "results/ventricle_fem/f0_active_elliptic_pilot_v01_20260916/manifest.json": "4b0bcbcec4ebddc3dd982e9a60d25ced403f12c1a2d18188aa8ac7384529b1a9",
+    "results/ventricle_fem/f1s_synthetic_orientation_v01_20260916/manifest.json": "9d05420362fb98a8a533c586f165f59b756a9b916a669443b3bf6f49d128c289",
+    "results/ventricle_fem/f2_measured_contour_v01_20260917/manifest.json": "67503c849d363f78e3148c5f44fe66b67d283b92259efc05b07b3571626b1af7",
+    "results/ventricle_fem/f3a_fixed_mesh_v01_20260917/manifest.json": "1f363243d1419ca2b66425931edb10815c183d965f1b41bc4431cf40861622c7",
+    "results/ventricle_fem/f3b_finite_strain_v01_20260917/manifest.json": "76167e61c4cdaf38011f6cd11ab4f329fa4d4439d9f3bf5a40dfc213acd79dc3",
+    "results/ventricle_fem/f3c_rotation_repair_v01_20260917/manifest.json": "705f478f81818e5cc26de499a21ca8596372e816a8b773330293f070373ebf73",
+    "results/ventricle_fem/f4_curved_pressure_v01_20260917/manifest.json": "566a3caabfbcc672b5a62c5b4b21c6d25ad25a61bcbad29730195d09575d3d4f",
+    "results/ventricle_fem/f5_contour_pressure_v01_20260917/manifest.json": "529e86b1b2352e94db7b8ed8c7501bd13edb09a87b2157a783d37c235e08265a",
+    "results/ventricle_fem/f6s0_active_completion_v01_20260917/manifest.json": "998375ab5b1efc26d4b2c056b0d005ae6d96da1549253e3609d782c1d4650f9e",
+    "results/ventricle_fem/f6s0_fenicsx_ring_active_v01_20260917/manifest.json": "d67998771f87c8d91b94e87f0ec0bec645da4e5dcd61a5a585ec98e5c6438ecb",
+    "results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/manifest.json": "ceeb6d943070126ac83ddeff86272807108dcf9d059696cc5ebe49edaeaf90aa",
+    "results/ventricle_fem/f6s1p_retained_passive_v01_20260917/manifest.json": "d95884f5904e650516b178a5bf8067f0302edb74c59788649211c442b7da5e28",
+    "results/ventricle_fem/f6s1_contour_passive_v01_20260917/manifest.json": "fc01d86ffd85259695107989eec53d979c4aa11dc77c31d1502b5afc8d3c2d7f"
+  },
+  "cockpit": {
+    "schema_version": "prl.cockpit.links.v1",
+    "status": "passed",
+    "html_links": 24,
+    "evidence_paths": 321,
+    "missing": []
+  },
+  "storage": {
+    "repository_bytes": 2033861104,
+    "external_result_bytes": 1608,
+    "disk_free_bytes": 2227740475392,
+    "fixed_stage_limit_bytes": null
+  },
+  "scientific_solves": 0,
+  "deletions": 0,
+  "old_result_moves": 0,
+  "automatic_retries": 0
+}

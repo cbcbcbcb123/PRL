@@ -6,7 +6,7 @@
 
 ## 当前进展
 
-F6-S1-P已执行：800 MiB阶段预算生效，复用3541单元合格网格；粗/细几何均通过。
+F6-S1-P已按获准800 MiB预算执行，复用3541单元合格网格；粗/细几何均通过。
 零载passed；p/mu=0.02求解收敛但局部体积偏差6.71167%超过1%门，按合同停止。
 保存2态、接受1态；其余8态及细网格力学未运行。计算腔面积+20.10718%仅为失败态诊断。
 见[结构、形变应力、局部J及两帧动图](results/ventricle_fem/f6s1p_retained_passive_v01_20260917/index.html)和
@@ -39,14 +39,17 @@ python -B -X utf8 -m prl validate cockpit --workspace .
 圆环verify完整G1/G2应返回passed；不带修复参数的轮廓verify重读原F6-S1并返回failed。
 --repair-thin-mesh返回的是保存网格/预算核验passed，同时明确storage blocked、mechanics not_run，
 不能误读为力学资格通过。--retained-passive重读本次保存态，应为failed，不自动重跑。
-冻结图包不静默重绘。大型原始结果留在Git外。外置结果库的精确路径尚待确认，未迁移旧结果。
+冻结图包不静默重绘。后续大型结果使用已批准的`E:\Temp-Projects\PRL-results`，不进入Git；旧结果保持原位。
+当前FEniCSx轮廓输出接口及主机/Docker读写已验收；旧阶段ID仍拒绝重跑，新增科学阶段须按合同授权。
 
 ## 目录与安全
 
 - `src/prl/fem/`：运动学、材料、单元、图像轮廓几何及压力接口。
 - `src/prl/runs/`、`verification/`、`rendering/`：有界运行、独立复核和真实状态图。
 - `project_control/`：合同与裁决；`plan/`只放外部专家材料。
-- `results/ventricle_fem/`：FEM证据；`memory/project_cockpit/`只是状态投影。
+- `results/ventricle_fem/`：既有FEM证据，不迁移；新结果在`E:\Temp-Projects\PRL-results\ventricle_fem/`。
+- `project_control/result_storage_policy.json`：唯一结果根配置；`result_index/`保留小型路径与哈希索引。
+- `memory/project_cockpit/`只是状态投影。
 - 原SimuCell3D及C++应用仅历史保留，不参与当前FEM。
 
-只使用本地固定FEniCSx镜像，单CPU、0 GPU。项目2.4 GiB预警、3 GiB硬限；新阶段默认800 MiB加64 MiB保全余量，旧合同保持历史限额。公开大型数据按既有授权存E:\Data，不整包展开到项目。不自动删除或安装。阶段交付验收后直接本地提交`main`，不另开分支；远端推送按明确授权执行。
+只使用本地固定FEniCSx镜像，单CPU、0 GPU。代码仓2.4 GiB预警、3 GiB硬限；外置新结果无固定阶段体积上限，准入要求磁盘余量足够容纳预计输出、至少64 MiB保全空间及10 GiB安全余量。运行时限、首失败停止、不自动重跑保持；旧合同不追溯修改。见[存储决定与边界](project_control/external_result_store_decision_v01.md)。公开大型数据按既有授权存E:\Data，不整包展开到项目。不自动删除或安装。阶段交付验收后直接本地提交`main`，不另开分支；远端推送按明确授权执行。

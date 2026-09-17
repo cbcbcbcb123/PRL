@@ -18,7 +18,7 @@ updated_at: 2026-09-17
 
 ## 当前进展：已计算变形，局部体积门失败
 
-800 MiB阶段预算已生效。复用合格粗网格3541单元，细网格四分为14164单元；
+本次按获准800 MiB预算执行。复用合格粗网格3541单元，细网格四分为14164单元；
 两档几何通过，最小角23.0435度、源mask IoU99.5882%、轮廓误差1.66974微米保持。
 
 一次25.932秒容器保存两个平衡态：零载passed；p/mu=0.02收敛，但最大局部
@@ -46,8 +46,11 @@ updated_at: 2026-09-17
 
 ## 存储与历史证据
 
-新阶段默认800 MiB，另64 MiB停止空间，项目3 GiB硬限保持。用户建议外置PRL-results：
-精确项目外路径待确认，尚未搬移或外部新建。现有results已被Git忽略，不随普通提交同步。
+后续新结果使用已批准的`E:\Temp-Projects\PRL-results`，不进入GitHub。
+取消新结果的固定阶段体积限额，按预计输出量＋至少64 MiB停止空间＋10 GiB磁盘余量准入。
+代码仓仍保持3 GiB硬限；旧results原位保留，未复制、搬移或删除。
+两轮主机写入及一次Docker挂载I/O通过，0新科学求解，571个既有FEM文件哈希保持。
+见[存储决定](project_control/external_result_store_decision_v01.md)及[验收](project_control/external_result_store_execution_v01.md)。
 
 - [F6-S0理想圆环26态通过](results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html)：仅压力+9.8974%、仅主动−4.3150%、组合+4.5566%，不代表斑马鱼实验拟合。
 - [F6-S1-M薄层网格修复](results/ventricle_fem/f6s1m_thin_mesh_v01_20260917/index.html) · [原F6-S1网格失败](results/ventricle_fem/f6s1_contour_passive_v01_20260917/index.html) · [原F5局部J失败](results/ventricle_fem/f5_contour_pressure_v01_20260917/index.html)

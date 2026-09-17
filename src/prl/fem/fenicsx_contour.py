@@ -137,6 +137,15 @@ def retained_geometry(root,config):
         return {key:archive[key] for key in archive.files}
 
 
+def output_fits(root,config,planned_bytes):
+    """Historical caps stay frozen; new external outputs use actual free space."""
+    if config.get('output_storage',{}).get('mode')=='external_disk_free':
+        from prl.result_store import disk_admission
+        store=config['output_storage']
+        return disk_admission(root,planned_bytes,store['stop_reserve_bytes'],store['disk_free_floor_bytes'])['can_start']
+    return planned_bytes<=config['resources']['stage_bytes']
+
+
 def main():
     from prl.fem.fenicsx_ring import Ring,write_json
     from prl.verification.fenicsx_ring import load_arrays,state_audit
@@ -164,11 +173,11 @@ def main():
             # conservatively cover all saved fields/maps, plus 48 MiB for figures/control.
             predicted=len(coarse['triangles'])*5*5*12*32*8+48*1024**2
             candidates.append({'candidate':candidate,'factor':factor,'geometry':candidate_report,
-                               'predicted_bytes':predicted,'storage_passed':predicted<=stage_cap})
+                               'predicted_bytes':predicted,'storage_passed':output_fits(root,config,predicted)})
             if factor is not None:
                 np.savez_compressed(root/'raw'/f'candidate_{candidate}_mesh.npz',**coarse)
                 write_json(root/'mesh_candidates.json',candidates)
-            if candidate_report['status']=='passed' and predicted<=stage_cap:
+            if candidate_report['status']=='passed' and output_fits(root,config,predicted):
                 break
             if factor is None or candidate+1==len(config.get('mesh_size_candidates',[])):
                 np.savez_compressed(root/'raw'/'M0_input_mesh.npz',**coarse)
@@ -187,14 +196,16 @@ def main():
         # Conservative uncompressed storage bound: all quadrature fields, maps and states.
         predicted=sum(len(data['triangles'])*5*12*32*8 for data in geometries)+48*1024**2
         write_json(root/'raw_storage_bound.json',{'maximum_planned_bytes':predicted,'limit_bytes':stage_cap})
-        if predicted>stage_cap:
+        if not output_fits(root,config,predicted):
             raise ValueError('Predicted complete-state output cannot fit phase budget')
         for name,data in zip(['M0','M1'],geometries):
             current=Ring({'name':name},config,root,geometry_input=data)
             current.tangent_checks()
             initial=np.zeros_like(current.w.x.array)
             for i,pressure in enumerate(config['passive_loads']):
-                if time.monotonic()-started>1140 or sum(p.stat().st_size for p in root.rglob('*') if p.is_file())>stage_cap-32*1024**2:
+                low_space=(not output_fits(root,config,32*1024**2) if stage_cap is None else
+                           sum(p.stat().st_size for p in root.rglob('*') if p.is_file())>stage_cap-32*1024**2)
+                if time.monotonic()-started>1140 or low_space:
                     raise RuntimeError('Stop with reserved time/storage headroom')
                 attempted+=1
                 initial=current.solve(f'passive_{i}',pressure,0.,initial)

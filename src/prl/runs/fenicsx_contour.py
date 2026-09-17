@@ -65,11 +65,11 @@ def protected(workspace,repair=False,retained=False):
 
 def run_contour(workspace,repair=False,retained=False):
     from prl.verification.fenicsx_contour import SOURCE_SHA
+    from prl.result_store import result_path,result_admission,disk_admission,register_result,POLICY
 
     workspace=Path(workspace).resolve(strict=True)
     cfg=configuration(repair,retained)
-    stage_cap=cfg['resources']['stage_bytes']
-    root=workspace/(PASSIVE_RESULT if retained else REPAIR_RESULT if repair else RESULT)
+    root=result_path(workspace,PASSIVE_RESULT if retained else REPAIR_RESULT if repair else RESULT,new=True)
     contract=PASSIVE_CONTRACT if retained else REPAIR_CONTRACT if repair else CONTRACT
     if root.exists():
         raise FileExistsError('F6-S1 is create-only; no automatic rerun')
@@ -82,9 +82,19 @@ def run_contour(workspace,repair=False,retained=False):
         raise RuntimeError('Docker server unavailable; no restart or repair authorized')
     if read_docker('image','inspect',TAG,'--format','{{.Id}}')!=IMAGE:
         raise RuntimeError('Pinned local image unavailable or changed; no pull allowed')
-    admission=evaluate_storage(scan_workspace(workspace),planned_new_bytes=stage_cap,stop_reserve_bytes=64*1024**2)
+    forecast=cfg['resources']['stage_bytes']  # Estimate only, never an external-store cap.
+    if retained:
+        import numpy as np
+        with np.load(workspace/RETAINED_MESH,allow_pickle=False) as data:
+            forecast=len(data['triangles'])*76800+48*1024**2
+    admission=result_admission(workspace,planned_new_bytes=forecast,stop_reserve_bytes=64*1024**2)
     if not admission['can_start']:
         raise RuntimeError('Storage admission refused')
+    cfg['resources']['stage_bytes']=None
+    cfg['resources']['output_estimate_bytes']=forecast
+    cfg['output_storage']={'mode':'external_disk_free','root':str(root),
+                           'disk_free_floor_bytes':admission['disk_free_floor_bytes'],
+                           'stop_reserve_bytes':admission['stop_reserve_bytes']}
     parents=protected(workspace,repair,retained)
     with scientific_lock(workspace):
         root.mkdir(parents=True,exist_ok=False)
@@ -97,7 +107,8 @@ def run_contour(workspace,repair=False,retained=False):
             shutil.copyfile(workspace/RETAINED_MESH,root/'retained_mesh.npz')
         source_paths=['src/prl/fem/fenicsx_contour.py','src/prl/fem/fenicsx_ring.py','src/prl/fem/ring_geometry.py',
                       'src/prl/verification/fenicsx_contour.py','src/prl/verification/fenicsx_ring.py',
-                      'src/prl/runs/fenicsx_contour.py','src/prl/runs/fenicsx_runtime.py',contract.as_posix()]
+                      'src/prl/runs/fenicsx_contour.py','src/prl/runs/fenicsx_runtime.py',
+                      'src/prl/result_store.py',POLICY.as_posix(),contract.as_posix()]
         for relative in source_paths:
             target=root/'sources_at_execution'/relative
             target.parent.mkdir(parents=True,exist_ok=True)
@@ -113,9 +124,9 @@ def run_contour(workspace,repair=False,retained=False):
             process=subprocess.Popen(args,stdout=stdout,stderr=stderr)
             try:
                 while process.poll() is None:
-                    size=sum(p.stat().st_size for p in root.rglob('*') if p.is_file())
-                    if time.monotonic()-started>1200 or size>stage_cap-8*1024**2:
-                        reason='deadline or stage storage stop threshold'
+                    disk=disk_admission(root,0,admission['stop_reserve_bytes'],admission['disk_free_floor_bytes'])
+                    if time.monotonic()-started>1200 or not disk['can_start']:
+                        reason='deadline' if time.monotonic()-started>1200 else 'disk-free safety floor'
                         read_docker('stop','--time','5',name)
                         process.wait(timeout=20)
                         break
@@ -134,6 +145,7 @@ def run_contour(workspace,repair=False,retained=False):
                 'runtime_capability_probes':0 if repair or retained else 1,'automatic_retries':0,'gpu':0,'elapsed_seconds':time.monotonic()-started}
         save_json(root/'execution.json',report)
         save_json(root/'manifest.json',package_manifest(root))
+        register_result(workspace,root,report['status'],digest(root/'manifest.json'))
         return report
 
 
