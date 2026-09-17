@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checkpoint_commit": "bc85d20239544db2baab59ae8fc8f5618dd75c0c",
+  "merge_commit": "bbc4b5be549a95766c6419c2aeb784e2c2cc7681",
+  "remote_parent": "b45650a9e370be138a70acf305b6c3a21e6a7ed2",
+  "tree": "a8cd5f369b5193ef5848fbbbb7553ab025e298b8",
+  "merge_tree_identical_to_fem_parent": true,
+  "remote_heads_ancestors": 6,
+  "unmerged_index_entries": 0,
+  "excluded_files_hash_preserved": 50,
+  "source_hashes_unchanged": 76,
+  "f6_packages": [
+    {
+      "path": "results/ventricle_fem/f6s0_fenicsx_ring_active_v01_20260917",
+      "files": 69,
+      "status": "passed"
+    },
+    {
+      "path": "results/ventricle_fem/f6s0_active_completion_v01_20260917",
+      "files": 76,
+      "status": "passed"
+    }
+  ],
+  "storage": {
+    "bytes": 1993155457,
+    "files": 9831,
+    "scan_errors": []
+  },
+  "default_whitespace_check": "11 pre-existing blank-at-EOF warnings retained to preserve input source bytes; other whitespace checks passed",
+  "fem_tests": 348,
+  "fem_subtests": 44,
+  "remote_push": "not_run",
+  "force_push": false,
+  "branch_deletions": 0,
+  "new_work_branches": 0,
+  "scientific_stage_runs": 0
+  ,"git_fsck": {"exit_code": 0, "dangling_notices_retained": 32}
+  ,"cockpit_links": {"status": "passed", "html_links": 24, "evidence_paths": 308, "missing": []}
+}

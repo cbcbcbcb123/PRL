@@ -5,7 +5,8 @@ last_verified: 2026-09-17
 branch: main
 git_workflow_decision: project_control/main_branch_stage_commit_decision_v01.md
 git_integration_decision: project_control/remote_history_integration_decision_v01.md
-verified_commit: a61cb860cd83e50be59563f812390d3b9f7e2ab2
+git_integration_execution: project_control/remote_history_integration_execution_v01.md
+verified_commit: bbc4b5be549a95766c6419c2aeb784e2c2cc7681
 current_lifecycle: fem_only_f6s0_passive_and_active_ring_passed
 documentation_updated_at: 2026-09-17
 current_repository_cleanup: closure_v01_passed

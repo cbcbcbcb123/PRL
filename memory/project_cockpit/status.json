@@ -9,14 +9,17 @@
     "scope": "无量纲理想三层圆环，二维P2/P1三角形与三维平面应变本构；区域/材料未实测，不是真实心室。",
     "current_stage": "F6-S0 G0/G1/G2 passed; F6-S1 image-derived outline not_run",
     "current_location": "results/ventricle_fem/f6s0_active_completion_v01_20260917",
-    "evidence_basis_commit": "a61cb860cd83e50be59563f812390d3b9f7e2ab2",
+    "evidence_basis_commit": "bc85d20239544db2baab59ae8fc8f5618dd75c0c",
     "evidence_checked_at": "2026-09-17",
     "git_workflow": {
       "branch": "main",
       "stage_commits": "direct_local_commits_no_new_branches",
-      "configured_remotes": 0,
-      "remote_branch_merge": "blocked_missing_remote_url",
-      "evidence_refs": ["project_control/main_branch_stage_commit_decision_v01.md"]
+      "configured_remotes": 1,
+      "remote_url": "https://github.com/cbcbcbcb123/PRL.git",
+      "remote_branch_merge": "passed",
+      "merge_commit": "bbc4b5be549a95766c6419c2aeb784e2c2cc7681",
+      "remote_push": "not_run_pending_confirmation",
+      "evidence_refs": ["project_control/main_branch_stage_commit_decision_v01.md", "project_control/remote_history_integration_execution_v01.md"]
     },
     "freshness_note": "两网格26个唯一平衡态通过独立复核，82项汇总门passed；原读取失败与10个父状态原样保留。",
     "model_overview": {

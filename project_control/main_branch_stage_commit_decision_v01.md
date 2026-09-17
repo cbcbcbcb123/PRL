@@ -42,3 +42,10 @@ remote_branch_merge: blocked
 不自动使用 `--allow-unrelated-histories` 将已清理的旧历史重新引入。
 
 本次没有访问远端，没有fetch/push，没有执行科学计算，没有删除文件或分支。
+
+## 后续状态（2026-09-17）
+
+上述“无远端”是本决定首次执行时的历史状态。用户随后提供并确认同项目仓库地址，
+要求继续衔接；当前已完成六个旧分支历史到本地main的合并，FEM文件树保持不变。
+见[衔接决定](remote_history_integration_decision_v01.md)及[执行验收](remote_history_integration_execution_v01.md)。
+后续直接提交main的长期规则保持有效；普通推送状态以新执行记录为准。

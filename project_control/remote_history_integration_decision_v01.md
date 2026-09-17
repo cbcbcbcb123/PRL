@@ -4,7 +4,7 @@ status: adopted
 decided_at: 2026-09-17
 branch: main
 remote: https://github.com/cbcbcbcb123/PRL.git
-execution_status: not_run
+execution_status: passed_local_merge_remote_push_not_run
 ---
 
 # 远端旧历史与当前FEM主线的衔接
