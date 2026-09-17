@@ -1,32 +1,35 @@
 ---
 document_id: PRL-CURRENT-STATUS
 status: current
-last_verified: 2026-09-15
-branch: codex/clean-baseline
-verified_commit: d97c2a4c3d20b156532d1b4cd96c83216f689989
-current_lifecycle: cleanup_passed_contact_q_passed_extended_doublet_safe_equilibrium_failed_parent_z1_blocked
-documentation_updated_at: 2026-09-15
+last_verified: 2026-09-17
+branch: main
+git_workflow_decision: project_control/main_branch_stage_commit_decision_v01.md
+git_integration_decision: project_control/remote_history_integration_decision_v01.md
+verified_commit: a61cb860cd83e50be59563f812390d3b9f7e2ab2
+current_lifecycle: fem_only_f6s0_passive_and_active_ring_passed
+documentation_updated_at: 2026-09-17
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/repository_cleanup_closure_and_science_restart_proposal_v01.md
-last_completed_contract: project_control/ventricle_contact_performance_and_extended_equilibrium_contract_v01.md
-current_render_contract: results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/visual_qa.json
-next_stage_contract: not_yet_frozen_residual_force_decomposition
-current_authorization: closure_and_conditional_cpu_science_restart_v01_consumed
+current_contract: project_control/ventricle_fem_fenicsx_ring_active_contract_v01.md
+last_completed_contract: project_control/ventricle_fem_fenicsx_active_completion_contract_v01.md
+current_render_contract: results/ventricle_fem/f6s0_active_completion_v01_20260917/rendering.json
+next_stage_contract: not_created_F6S1_image_derived_outer_contour
+current_authorization: f6s0_bounded_continuation_completed_26_unique_equilibria
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
-current_geometry_decision: project_control/ventricle_bioform_intrinsic_mechanics_decision_v01.md
-execution_authorized: no_further_scientific_run_authorized
-current_execution_log: project_control/ventricle_contact_performance_and_extended_equilibrium_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_contact_performance_and_extended_equilibrium_execution_v01.md
-latest_result_package: results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/verdict.json
-latest_supervisor_decision: project_control/ventricle_stage_contracts_v03_adoption_v01.md
-current_theory_contract: plan/active/PRL_Codex_Stage_Contracts_v03/01_GLOBAL_EXECUTION_CONTRACT.md
+current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
+execution_authorized: completed_F6S0_no_automatic_repeat
+current_execution_log: project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md
+latest_completed_scientific_gate: F6-S0_G0_G1_G2_ideal_ring_qualification
+latest_result_package: results/ventricle_fem/f6s0_active_completion_v01_20260917/summary.json
+latest_supervisor_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
+current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
 historical_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
 preserved_legacy_lifecycle: prl_figure2_spatial_tolerance_st1_a1_cycle_stability_failed_human_gate
 preserved_legacy_contract: project_control/prl_figure2_spatial_tolerance_validation_contract_v02.md
-current_mainline: plan/active/PRL_Codex_Stage_Contracts_v03/00_README_START_HERE.md
-current_mainline_decision: project_control/ventricle_stage_contracts_v03_adoption_v01.md
+current_mainline: FEM_only_no_DCM_forward_execution
+current_mainline_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
 current_physical_removal_record: project_control/paper2_myocardial_dcm_physical_removal_execution_record_v01.md
 standing_authority: no_scientific_stage_or_cleanup_execution_without_applicable_confirmation
 historical_standing_authority: project_control/paper2_autonomous_execution_and_chart_reporting_decision_v01.md
@@ -38,13 +41,233 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前仓库与科学裁决：清理passed，Q passed，扩展平衡failed
+## 当前：2026-09-17 FEniCSx理想圆环G0/G1/G2全部通过
+
+896/3584单元两档P2/P1三角形，有限变形平面应变，未标定Neo-Hookean材料mu=1、kappa=1000。
+内壁随动压力、外壁自由；三个固定自由度仅消除刚体运动。参考环向主动张力只作用于心肌层。
+
+在p/mu=0或0.04、Ta/mu=0或0.10的四组终态中，细网格腔面积相对零载分别为：
+零载0%、仅压力+9.897410%、仅主动−4.314957%、压力＋主动+4.556580%。
+主动张力使同一压力下的腔面积响应降低5.340830个百分点；组合工况相对零载仍是扩张。
+主动与组合末态max|J−1|分别0.007705%和0.005376%，两网格腔响应绝对差1.62e-7和1.51e-7。
+82项汇总门、独立局部F/J/应力/力平衡与主动虚功门全部passed。
+
+第一次容器保存10个被动态后遇到单行压力字段读取错误；原failed调用和raw完整保留。
+修复读取后，按[有界续算范围](ventricle_fem_fenicsx_active_completion_contract_v01.md)只补16个未运行主动态。
+共2次科学容器、26个唯一平衡态、0重复平衡求解，累计69.032秒；原门限和总预算没有放宽。
+36个针对性测试及21子测试通过，四套结构/结果图和五个真实状态GIF已交付并通过样式及目检。
+全仓既有图像依赖/绝对路径静态问题不在本次范围，不宣称全仓测试全部通过。
+
+见[完成执行记录](ventricle_fem_fenicsx_active_completion_execution_v01.md)、
+[独立复核](../results/ventricle_fem/f6s0_active_completion_v01_20260917/post_verification.json)、
+[结果图与动图](../results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html)。
+原F5真实外轮廓失败保持；圆环通过不等于斑马鱼实验验证，也不是生理心动周期。
+唯一下一步为F6-S1：将同一后端接回72 hpf Fish 4图像外轮廓，明确内腔/层界仍为构造几何，
+先通过被动压力及1%局部J门，再加入主动收缩。F6-S1尚未运行。
+0 GPU/DCM、拉取、安装、删除、提交或推送；Docker隔离目录和退出容器均保留。
+
+## 历史工程阶段：2026-09-17 F6-S0主机运行时恢复
+
+F6-S0采用本机已有FEniCSx作为新的FEM主后端，先在理想三层圆环上验证近不可压有限变形、
+闭合随动压力和只作用于心肌层的方向性主动应力。它是开源后端资格，不是F5真实轮廓的重跑，
+也不自动修复F5的局部体积失败。见[F6-S0合同](ventricle_fem_fenicsx_ring_active_contract_v01.md)。
+
+Windows AF_UNIX error 1920阻断已按两批精确授权完成可逆隔离。Docker Desktop
+`4.89.0 (238018)`、Engine `29.7.2`和运行中的WSL2后端已核验；本地
+`dolfinx/dolfinx:v0.11.0`解析为固定image ID
+`sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8`。
+四个v01/v02隔离目录保留，`Docker\wsl`未触碰；0删除、0拉取、0安装、0更新、0 GPU。
+详见[运行时恢复记录](ventricle_fem_fenicsx_runtime_repair_execution_v01.md)。
+
+该恢复只通过宿主运行时与本地镜像身份门。容器创建、DOLFINx导入、FFCx JIT、微型装配、
+G1被动圆环和G2主动张力均为`not_run`，F6-S0科学执行尚未获得本轮授权。唯一下一步是另行确认
+G0受限容器资格；G0失败即保全停止，通过后才进入G1，G1通过后才进入G2。
+
+## 最近科学结果：2026-09-17 F5图像外轮廓被动压力资格failed
+
+按[F5合同](ventricle_fem_contour_pressure_contract_v01.md)把F4已通过的曲线Q2/Q1和当前面随动压力接到72 hpf Fish 4保留外轮廓。只有外边界来自图像；腔面/层界按20/27、21/27、22/27、1同心缩放，静态图像被假定为零压无应力参考态。全层同一NH `mu=1, kappa=1000`，全部`uz=0`，内压`p/mu=0→0.08`；仍是平面应变资格，不是真实自由3D心室。
+
+唯一正式单线程CPU调用完成144/288单元两档各五态，共10次新求解、0科学重跑。来源几何、参考映射、历史/初值链、独立场量、平衡、压力合力/力矩、虚功、跨z一致性、腔面积单调性和厚向全局响应比较均passed。细网格构造腔面积在`p/mu=.02/.08`增加19.83%/68.06%；两档末态仅差0.03315个百分点。
+
+整体资格仍为failed：两档网格四个正压态均超过局部`|J−1|<=1%`门，fine最大偏差为18.83%/33.54%/44.80%/54.09%，末态`Jmin=.6903`、`Jmax=1.5409`。边界保持简单嵌套且全部J为正；保存J与独立重算最大差1.34e-13，不支持验证器误判。末态加权平均J约1.00015却有43.17%的Gauss点超过门，表明总体近不可压掩盖局部压缩/膨胀模态；径向细化没有改善峰值。
+
+正式worker在独立验证写出failed后又因残差图symlog刻度样式异常退出1；原failure/progress不改，原正式清单以原字节和原SHA-256另存。随后仅修F5刻度并从保存态重绘一次，0新求解，raw/Newton/verification哈希不变；顶层manifest在交付末尾重建为完整最终清单。三套图通过外部样式检查和目检，明确显示`Qualification FAILED`。见[执行裁决](ventricle_fem_contour_pressure_execution_v01.md)、[模型](../docs/fem_contour_pressure_model.md)、[独立验证](../results/ventricle_fem/f5_contour_pressure_v01_20260917/verification.json)、[诊断](../results/ventricle_fem/f5_contour_pressure_v01_20260917/local_volume_diagnosis_v01.json)和[结果页](../results/ventricle_fem/f5_contour_pressure_v01_20260917/index.html)。
+
+唯一下一步是另行冻结F5-R1：保持外轮廓、材料、腔面、载荷定义和1%门不变，分离检查周向细化、参考网格/曲率热点及体积约束离散。通过前不恢复主动收缩；材料/周期标定、真实内腔和壁厚、自由3D、血流、生长与ECM反馈均not_run。无GPU/DCM、删除、安装、提交、推送或项目外新建。
+
+## 历史阶段：2026-09-17 F4曲线等参几何与随动压力资格passed
+
+用户同意继续曲线/压力资格。按[F4合同](ventricle_fem_curved_pressure_contract_v01.md)一次单线程CPU调用完成两档8/24单元、各五个压力平衡态。Q2等参参考Jacobian、当前表面压力力及一致切线已接入原Q2/Q1有限变形内核，旧affine路径保留、材料及Newton门不变。参考四分圆柱A=1、B=1.25、H=0.5，两切面施加对称约束、所有uz=0；这是平面应变工程资格，不是自由3D心室。
+
+NH mu=1、kappa=1000，内壁随动腔压0→0.08，无主动或端盖压力。峰值内壁参考面积加权径向位移coarse=0.144521854、fine=0.144525272；两档差0.00236493%，与不可压解析极限差0.08370%/0.08607%，均通过预设5%门。全部态最坏局部|J−1|0.04452%（fine0.02973%），最大独立自由力残差4.14e-12，弱压力残差1.28e-13，八项独立门全部passed。不可压参照不是相同有限kappa问题的精确解，不宣称网格误差单调收敛。
+
+十态完整保留，求解30.633秒、含验证绘图worker50.099秒，CLI退出0，无重试或后处理补跑。228开发测试+36子测试通过，三套结构/力学/真实五态图通过样式及目检。父F3-B62文件与F3-C38文件及manifest原哈希不变；所有历史失败保持。见[执行](ventricle_fem_curved_pressure_execution_v01.md)、[模型](../docs/fem_curved_pressure_model.md)、[独立验证](../results/ventricle_fem/f4_curved_pressure_v01_20260917/verification.json)和[结果图](../results/ventricle_fem/f4_curved_pressure_v01_20260917/index.html)。
+
+下一步接回已有真实外轮廓，明确构造内腔/厚度/层界与面外约束，先验证被动加载再恢复方向性主动收缩，新阶段not_run。不重做块梁/圆柱矩阵；无GPU/DCM、删除、安装、提交、推送或项目外新建。真实自由3D心室、材料/周期标定、血流、生长及ECM反馈仍not_run。
+
+## 历史阶段：2026-09-17 F3-C初值修复及有限变形组合工程资格passed
+
+按[补充合同](ventricle_fem_rotation_repair_contract_v01.md)，只补四个缺失刚转15°/30°/45°/60°和一次60°固定内部扰动恢复。一次单线程CPU调用、五次新求解、3.376秒；原13完整工况不重算，0°状态与history逐字段沿用。原F3-B的62文件与manifest哈希不变，原failed保留。
+
+初值修复只增加显式参考Q2位移增量延拓，内部27节点仍自由，压力、原材料和Newton门不改。五状态最大Green应变4.774e-15、总Cauchy应力7.911e-15、|J−1|4.885e-15。四个无扰动预测本身满足平衡；额外固定非仿射内部扰动经两次真实Newton更新，残差6.522e-3→2.419e-5→3.333e-11、恢复位移误差2.558e-12。独立六门及结合父13工况的组合资格passed，不宣称任意初值/复杂网格均通过。
+
+136项针对性测试与34个subtests通过；图件只读取保存状态。原控制器科学计算和独立验证passed，随后因log轴格式退出1；原failure/progress和原manifest保留，仅修绘图刻度后重绘通过，没有科学重试。见[执行裁决](ventricle_fem_rotation_repair_execution_v01.md)、[独立验证](../results/ventricle_fem/f3c_rotation_repair_v01_20260917/verification.json)、[图件](../results/ventricle_fem/f3c_rotation_repair_v01_20260917/index.html)及[最终交付审计](../results/ventricle_fem/f3c_rotation_repair_v01_20260917/postrender_execution_v01.json)。
+
+唯一下一步是曲线心壁等参几何与腔面随动压力资格，再回到已有真实轮廓；当前常Jacobian直方块实现不能直接用于任意曲线网格。本次不是三维真实心室或斑马鱼实验验证；旧F2/F3-A失败不改写，材料/时间标定、生长与ECM反馈仍not_run。新科学阶段尚未启动；0 GPU、0 DCM、0自动科学重试，无删除、安装、提交、推送或项目外文件新建。
+
+## 历史阶段：2026-09-17 F3-B三维有限变形已实现，13工况通过，刚转初猜失败
+
+用户同意升级非线性FEM。本次按[F3-B合同](ventricle_fem_finite_strain_contract_v01.md)实现三维Q2/Q1混合实体、Neo-Hookean / Guccione型等容超弹性及规定的第二Piola型纤维主动张力。对象是无量纲工程块/梁，不是真实心室，也不是F3-A二维轮廓的非线性解。
+
+一次单线程CPU正式调用完成13个完整工况和刚转0°，共78/82个有效状态。13完整工况均通过独立复核；Guccione主动块峰值轴缩16.857%、横向各增厚9.645%、体积变化−0.046106%；NH解析最大归一误差2.705e-10。梁两级网格末端位移差3.021%/3.030%，两κ细梁差0.343%，符合本次5%门。细梁局部|J−1|仍约2.123%，不能称为各积分点严格不可压或复杂心室已合格。
+
+刚转15°时，98边界节点已转，27内部节点却仍为0°初猜；216 Gauss点中12个J≤0，minJ=-1.183927，在本构求值及Newton前停止。这是非齐次Dirichlet初值提升缺失，不是材料失稳证据。阶段整体failed；配置矩阵存在不代表82状态已完成，材料点客观性不能替代缺失FE刚转资格。最后有效0°检查点与被拒绝初猜分开保全。
+
+见[模型](../docs/fem_finite_strain_model.md)、[执行与诊断](ventricle_fem_finite_strain_execution_v01.md)、[独立验证](../results/ventricle_fem/f3b_finite_strain_v01_20260917/verification.json)及[结构/力学/五状态图](../results/ventricle_fem/f3b_finite_strain_v01_20260917/index.html)。修订仅限后处理JSON标量序列化及失败包展示，原科学源和raw不变，0科学重试。旧F2/F3-A仍为原证据状态。
+
+唯一下一步是可行内部位移预测与前态到非零边界的集成回归，之后经明确授权仅补刚转资格，不重复已完成13工况。通过前不启动真实心室、心腔压力或新参数扫描。材料标定、生理时间、三维真实心室、生长/ECM反馈等仍not_run。0 GPU、0 DCM，无删除、安装、提交或推送。
+
+## 历史阶段：2026-09-17 F3-A固定输入细化工程passed，响应收敛和小应变门failed
+
+用户同意继续网格及有限变形资格并询问来源。本次已澄清：材料E/E_ref=1/0.5/2.5和nu=0.30是F0工程假设；模型仍是二维平面应变；3%余弦激活为规定准静态相位，没有实测周期/心率，见[来源说明](../docs/fem_model_sources_and_time.md)。
+
+按[F3-A合同](ventricle_fem_fixed_mesh_contract_v01.md)冻结原F2 G1的多边形、层界、主动张量和原节点规范，做两次共享边中点四分。一次单线程CPU调用完成6,144/24,576/98,304单元、每级5个真实静力状态。原F2相应状态重放误差0；独立几何、材料/主动继承、场量、平衡和嵌套能量检查passed。
+
+构造腔面积峰值变化为-2.6324%/-1.6332%/-0.8853%；最后两档差0.74791个百分点、相对84.481%，未通过全局响应门。最大应变分量升至11.306%，小应变门failed。固定输入后仍明显敏感，确认存在FE离散贡献，不再把F2差异全部归给轮廓/载荷变化。L2保存解中Green应变二次项范数为线性项的17.762%，只是有限变形必要性诊断，不是已运行有限变形。
+
+见[执行记录](ventricle_fem_fixed_mesh_execution_v01.md)、[独立验证](../results/ventricle_fem/f3a_fixed_mesh_v01_20260917/verification.json)和[结构/响应/应力/五状态图](../results/ventricle_fem/f3a_fixed_mesh_v01_20260917/index.html)。本轮不自动增加P1细化级；下一子阶段应以小型制造解/弯曲基准分离薄层网格和单元阶次，并验证有限变形本构/客观性/主动加载，再回到真实轮廓。有限变形、材料标定、三维心室、生理周期、腔压、血流、生长与反馈均not_run。只采用FEM，0 GPU、0 DCM、无删除或安装。
+
+## 历史阶段：2026-09-17 FEM唯一主线；F2真实外轮廓求解完成，数值资格failed
+
+用户明确排除本项目所有DCM前向建模；见[FEM唯一主线决定](ventricle_fem_only_measured_contour_decision_v01.md)。原DCM路线、恢复与比较停止，历史证据不删除。精细细胞分割退出主线前置条件，原候选资格保持原状态，不能因此升级为真值。
+
+按[F2合同](ventricle_fem_measured_contour_contract_v01.md)从已验收72 hpf Fish 4组织mask的最大占据XY切片（索引39）提取真实外轮廓；假设腔面及心内膜/ECM/心肌界面，沿用峰值3%主动应变、零牵引、无压自由边界。一次单线程CPU调用完成G0/G1各41个真实状态，0 DCM、0 GPU、0科学重跑。
+
+G1构造腔面积峰值变化-2.6324%、外面积-2.5128%、最大位移3.0053 µm；最大应变6.8936%，超过5%小应变门。G0--G1腔面积变化差0.96197个百分点，超过0.2个百分点门。几何、KKT平衡、场量独立复核和正面积门通过，但整体资格为failed；不把求解完成当作模型已收敛或实验吻合。见[执行与失败记录](ventricle_fem_measured_contour_execution_v01.md)、[验证](../results/ventricle_fem/f2_measured_contour_v01_20260917/verification.json)与[结构/结果/动图](../results/ventricle_fem/f2_measured_contour_v01_20260917/index.html)。
+
+下一步是固定该真实轮廓的FEM网格与有限变形资格，不是DCM，也不是等待逐细胞实例分割。完整三维跳动、实测内部腔面/层界、腔压、材料标定、血流、生长和反馈仍not_run。旧章节的“唯一下一步/当前”仅描述当时状态，均须服从本节最新决定。
+
+## 历史阶段：2026-09-17 F1-Seg-A 候选工程门 passed，人工验证 not_run
+
+按[候选分割合同](ventricle_fem_surface_cell_segmentation_candidate_contract_v01.md)直接读取 Zenodo `15509350` 的72 hpf处理后栈。Fish 4 是唯一开发样本：三个确定性曲面 ROI 比较12组预登记参数，冻结 `cfg03`；Fish 3/5 随后以同一配置哈希各运行一次，没有查看留出结果后调参。作者 surface point 只用于局部切平面，不能当作细胞中心。
+
+G0曲面提取 `passed`：三鱼各3个ROI，物理尺度一致，局部基正交误差小于 `1e-6`。G1候选工程门 `passed`：Fish 3/4/5 分别从101/97/90个分区中保留32/39/28个有限候选；面积中位数为50.404/54.331/45.126 µm²，跨鱼最大/最小1.204；长宽比中位数跨鱼最大/最小1.112。配置哈希一致，结果包8,409,761 bytes，低于64 MiB。见[执行记录](ventricle_fem_surface_cell_segmentation_candidate_execution_v01.md)和[结果包](../results/ventricle_fem/f1seg_surface_cell_candidate_v01_20260917/README.md)。
+
+G1只证明工程候选可复算。九ROI审计图显示部分边界与闭合高亮信号一致，但条带、模糊区和浅层曲面投影混叠同样会被分水岭闭合。项目没有独立人工实例标签，G2固定为`not_run`，总体为`blocked_human_validation`。这些候选不得称为真实细胞网格，也不得直接进入真实形态FEM/DCM。
+
+唯一下一步是 F1-Seg-B：冻结 Fish 3/5 的少量 ROI，由独立人工描绘可辨识实例边界，再一次性评价计数误差、边界重合、漏分割、并分割和闭合率。通过前不启动真实形态 FEM/DCM、材料标定、生长、ECM反馈或FSI。
+
+## 上一阶段：2026-09-16 F1-R 真实静态形态数据资格 passed
+
+公开包 `Data.zip` 为8,013,661,132 bytes，本地MD5与上游 `fc94a41c8654b817cdbe5cd131f4a90c` 一致；522个成员没有危险路径或链接，未整包解压，也未执行上游代码。冻结主样本 Fish 4 的110×1024×1024栈具有 `0.2071606 × 0.2071606 × 1 µm` 尺度；507个表面点带法向、director和局部nematic order。该阶段限定为 `real_static_morphology_resegmentable`；组织mask不是实例标签、Marker_X身份冲突未解、停跳静态数据不提供周期运动。见[执行记录](ventricle_fem_measured_cell_shape_data_qualification_execution_v01.md)。
+
+## 上一阶段：2026-09-16 F1-S 合成长轴方向场敏感性 passed，真实细胞形态场当时 not_run
+
+用户指出项目目前没有真实细胞形态场，并同意先完成均一场与受控随机场的 FEM 对照。按[合同](ventricle_fem_synthetic_orientation_sensitivity_contract_v01.md)完成唯一一次正式单线程 CPU 阶段调用：在 F0 同一二维三层椭圆环中，将心肌标记为2×24个材料赋值斑块；均一组沿局部切向，随机组使用固定种子、均值为零、RMS 7.655°、最大18°的方向偏移。两组几何、被动材料、主动应变幅度、相位和边界完全相同，斑块不是显式细胞或实验分割。
+
+G1峰值位移场相对差异为7.947%，心肌等效应力场面积加权相对差异为12.597%；对应G0--G1漂移为0.137%和0.814%，两项均通过预注册的1%门和两倍离散漂移门。uniform/random峰值腔面积变化分别为-5.9322%/-5.8857%，只相差0.0465个百分点。因此当前证据支持“合成长轴排列明显重分配局部位移与应力”，不支持“该随机场显著改变整体泵血”。随机组应力CV没有增加，也不能声称随机性必然增强应力集中。
+
+四条轨迹各保存41个真实准静态状态；全部有限、无翻转，最大应变0.04643，最大独立后向残差3.33e-16。独立验证从保存状态重建方向场并重算应变、应力、面内压力、腔面积、KKT残差和配对指标，误差均为0。结构图、裁决图已目检，GIF独立读取为41帧。见[执行记录](ventricle_fem_synthetic_orientation_sensitivity_execution_v01.md)和[结果页](../results/ventricle_fem/f1s_synthetic_orientation_v01_20260916/index.html)。
+
+本轮只通过合成方向接口门。其当时的唯一下一步是F1-R真实形态数据资格；该数据门现已由上文记录完成，但真实逐细胞分割和`measured / uniform-mean / shuffled`映射仍未运行。不得继续调大合成扰动替代数据。
+
+## 上一阶段：2026-09-16 二维三层主动 FEM 工程基线 passed，斑马鱼标定 not_run
+
+用户在此前暂停 FEM 后明确要求先做 FEM 尝试。按[合同](ventricle_fem_active_elliptic_pilot_contract_v01.md)完成一次正式单线程 CPU 阶段调用，内部求解 G0/G1 两级共形三层椭圆环；每级保存 41 个规定激活相位。模型由心内膜、薄 ECM 和心肌组成，仅心肌施加峰值 0.03 的局部切向主动本征应变；内外表面无牵引、无腔压，所有量为无量纲合成量。
+
+独立验证全部通过：G1 峰值腔面积变化 -5.9322%，最大绝对应变 0.04559，最小变形后三角形面积 5.001e-4；最大归一化后向残差 2.17e-16。G0/G1 峰值响应差 7.12e-4，低于 2e-3 门。独立重算应变、应力和腔面积误差均为 0，41 状态 GIF 和两张正式图已目检。见[执行记录](ventricle_fem_active_elliptic_pilot_execution_v01.md)和[结果包](../results/ventricle_fem/f0_active_elliptic_pilot_v01_20260916/README.md)。
+
+该通过只建立小应变连续体 FEM 工程路径。它没有离散细胞、随机形态、血流、腔压或真实几何，不能评价不规则细胞形态作用，也不等于斑马鱼实验吻合或 FEM 优于 DCM。现有公开 GFP 栈缺少冻结尺度、周期配准和心室分割，未用于标定。
+
+唯一下一步是 F1 实验数据资格：先冻结发育阶段、尺度、壁/腔分割、周期配准和留出形变观测，再制定有限变形、真实几何和明确负载的 FEM 合同。F1 尚未授权，不能继续以合成参数调图。
+
+## 上一状态：2026-09-16 规则2×2第0级进入显式松弛极限环，后续载荷未运行
+
+按[合同](ventricle_regular_2x2_load_hold_contract_v01.md)复用已验收长轴单细胞，建立四个完全相同细胞的规则2×2 DCM小片；方向性骨架和显式黏附—排斥接触开启，无随机性、收缩、永久连接或参考形状膜能。第0级盒壁不移动，唯一一次单线程CPU运行完成1200请求步、2993接受子步和9个真实状态，见[执行记录](ventricle_regular_2x2_load_hold_execution_v01.md)和[结果包](../results/ventricle_z1/z1_regular_2x2_load_hold_v01_20260916/verification.json)。
+
+数值安全通过：独立交叉0，最小角46.36°，最大相对本级输入体积变化0.786%，最小接触求积间隙0.0732，零回退。静力门失败：初始残力0.00255，第1步降到0.001998，但第5步过冲到0.338，末态0.3428；最初/最后200子步平均残力0.2498/0.2467，没有衰减。根因是显式过阻尼更新只按几何安全和固定边长比例限位，没有候选态残力下降门，`dt=0.25`过冲后形成有限振幅极限环。延长同参数运行无依据。
+
+第0级虽报告四个活跃胞对，但它们只是0.35截断范围内的黏附求积；最终真实曲面仍相距0.0933，不能称为连续组织界面。在该 R0-B 裁决时，0.20–0.40四级、规则5×5、随机异质性、收缩和FEM均为`not_run`；其后用户明确恢复了上文记录的 F0 FEM 尝试。
+
+该阶段为 DCM 路线留下的下一步是冻结R0-C最小收敛资格：同一第0级输入增加残力下降回退/线搜索，以两档稳定步长或等效阻尼检查轨迹一致性，并用真实间距、接触面积和牵引共同定义连续接触。不得直接重跑R0-B、增加拥挤或加入随机性。
+
+## 上一阶段：2026-09-16 R0-A回退/接触工程路径passed，规则片与FEM not_run
+
+按[共同极限合同](ventricle_regular_dcm_fem_common_limit_contract_v01.md)完成原位坐标事务回退、接触求积间隙限步、原生几何/快照自测和两细胞有界压近轨迹，见[执行记录](ventricle_regular_dcm_fem_common_limit_r0a_execution_v01.md)。21个真实状态全部安全，旧的全曲面距离步长地板未触发；但胞间距由0.070增至0.0805、末态残力0.2227，未进入近零接触或平衡。因此该结果只通过工程子门，不能作为组织或FEM比较对象。
+
+## 当前：2026-09-16 准静态双倍目标在接触形成处触发回退步长下限，K15未运行
+
+按[合同](ventricle_myocardial_crowded_quasistatic_growth_contract_v01.md)完成两个K30数值控制，见[执行记录](ventricle_myocardial_crowded_quasistatic_growth_execution_v01.md)和[失败结果包](../results/ventricle_z1/z1_myo_crowded_quasistatic_growth_v01_20260916/README.md)。初始25胞网格、异质目标和固定盒身份通过；最终目标仍为逐胞体积×2、面积×`2^(2/3)`、q不变。粗/精细接触控制分别使用0.40/0.05和0.20/0.01离散/运动尺度，单线程CPU、0 GPU、0自动重跑。
+
+两组均只保留状态0。粗控制完成33个接受子步，到目标分数0.55417、31个活跃细胞对时停止；精细控制完成77个接受子步，到0.57917、35对时停止。两者最后胞间曲面距离均约1.0e-8，接受步长分别缩到2.88e-10和1.40e-10，最终同以`crowded-box backtracked step reached the frozen floor`退出。此时接触积分最小有符号间隙仍为正值0.02224/0.008754，最小角45.68°/46.25°、壁面余量0.325/0.284均正常。
+
+因此首要问题不是盒壁或已验证的材料刚度，而是全三角距离守卫与接触积分的几何口径不一致：真实接触接近时，守卫先把步长压到0。目标也在自由力约0.75–0.79时继续增长，不是严格的载荷—平衡延拓。另有回退快照`cell→face→cell`强引用循环的性能缺陷，下一次运行前必须消除。K30粗细均未完成，数值收敛`failed`；K15按条件门为`not_run`，材料敏感性不可评价。静力平衡、最终接触网络、生物验证和收缩均未完成。
+
+唯一下一步是冻结X2-C接触形成资格：原位事务回退；连续无穿透接触判据；每个目标增量先松弛到残力门并保存网格；失败前保存最后有效态。工程探针通过后才可另立create-only结果比较K30/K15，不能直接放宽距离门或重跑。
+
+## 当前：2026-09-16 双倍异质参考体积在状态1前触发正间隙屏障，未形成组织态
+
+按[合同](ventricle_myocardial_crowded_volume_x2_contract_v01.md)完成一次单线程CPU、0 GPU、0自动重跑试验，见[执行记录](ventricle_myocardial_crowded_volume_x2_execution_v01.md)和[失败结果包](../results/ventricle_z1/z1_myo_crowded_volume_x2_v01_20260916/README.md)。25胞初始网格、材料/几何异质性、0.14间隙、接触、盒壁和5%平面压缩均与上一随机目标条件相同；每胞参考体积精确乘2、参考面积乘 `2^(2/3)`，逐胞q不变。目标与初始身份门全部通过。
+
+正式求解器只调用1次，在第一个0.02请求步完成前以`positive-gap barrier requires disjoint surfaces`停止。仅保留状态0和4条接受子步：状态0最大节点力34.6068、平均压力20.7894；最后接受坐标0.00494091、体积变化10.2547%、活跃胞对29、最小角46.55°、壁面余量0.3449、功耗散残差2.19e-16；审计中出现8.97e5力尖峰。由于没有状态1–8，数值保存态安全`failed`，静力平衡和接触网络均`unknown`，29对接触不得解释为形成组织。
+
+当前结论是：把参考体积从基线瞬时跳到2倍产生过强初始压力和多体接触碰撞，现有积分/正间隙屏障组合不能安全穿过接触形成事件。目标总体积约占最终盒体积81.16%，本结果不证明准静态增长一定失败，也不证明最终几何可实现。
+
+唯一下一步是先冻结“准静态目标增长资格”合同：体积目标尺度从1逐级延拓到2，面积按尺度的三分之二次方同步变化，并预注册增长步、接触事件步长、每级保存/回退和停止门。当前一次运行授权已消费，不能直接重跑、放宽门限或进入收缩。
+
+## 上一阶段：2026-09-16 高拥挤5×5统一/随机参考目标配对数值安全passed，静力平衡与接触网络failed
+
+按[合同](ventricle_myocardial_crowded_target_pair_contract_v01.md)完成两个预登记条件各一次单线程CPU运行，见[执行记录](ventricle_myocardial_crowded_target_pair_execution_v01.md)和[结果包](../results/ventricle_z1/z1_myo_crowded_target_pair_v01_20260916/summary.json)。两组使用同一个25胞初态、材料/几何异质性、盒壁与接触参数；初始相邻AABB间隙从0.24降至0.14。统一组每胞使用相同参考体积/面积，随机组在完全相同总体均值下使用逐胞冻结目标（体积CV 2.858%、面积CV 2.316%）。无收缩、固定节点、永久胞间连接或参考形状膜能。
+
+两组各9个真实状态的数值安全均`passed`：独立交叉筛查为0，最大相对自身初态体积变化分别7.338%/9.978%，最小三角角39.89°/40.35°，无穿壁，功—耗散门通过。最终最大节点力0.06215/0.06001均高于1e-3，静力平衡均`failed`。最终40个预登记网格邻接中均只有17对活跃，且同有细胞ID 4孤立，接触网络均`failed`。
+
+相对上一0.24间隙pilot，活跃接触由10对增至17对、最小胞间面距由0.2097降至0.1045/0.0768，说明拥挤确实增强，但仍不是汇合心肌层。随机目标组最终体积CV为2.857%，统一目标组仅0.027%，目标因子与最终配对体积差相关系数0.99999995；然而压力总体分布、平均长轴跨度和接触网络几乎不变。因此当前随机目标主要建立尺寸差异，尚未产生明显不规则多边形形态或贯通传力。
+
+唯一下一步是冻结“实际曲面距离控制的几何汇合初始化”合同：使40个正交邻接在无穿透下进入受控接触带，同时保持本轮随机目标、材料、5%盒压缩和接触参数不变。不得自动加大随机幅度、延长松弛或启动收缩。
+
+## 上一阶段：2026-09-16 透明薄盒5×5异质心肌细胞拥挤pilot数值安全passed，静力平衡failed
+
+按[合同](ventricle_myocardial_crowded_box_pilot_contract_v01.md)完成一次单线程CPU运行，见[执行记录](ventricle_myocardial_crowded_box_pilot_execution_v01.md)和[结果包](../results/ventricle_z1/z1_myo_crowded_box_pilot_v01_20260916/summary.json)。模型含25个独立闭合长轴细胞，无固定节点、无永久胞间材料连接、无主动缩短；x/y盒尺寸缓慢缩小5%，z高度不变。
+
+数值安全pilot通过：9个真实状态完整，保存态最小胞间面距0.2097，独立交叉筛查0，最大体积误差0.6003%，最小三角角39.75°。投影占据率从0.6506增至0.6991，最终10对细胞进入有效接触，平均去平移形变RMS为0.09639。
+
+结构并未形成汇合心肌层：5×5阵列仍较规则，40个最近邻对仅10对有效接触；接触牵引峰值约2.50e-4，显著低于盒壁牵引峰值约0.169，载荷主要由边界承受。最终最大节点力0.06301高于1e-3，静力平衡为`failed`。因此当前结果只能称为安全的有限松弛拥挤态；生物学验证与收缩均`not_run`。
+
+唯一下一步是先冻结第二个拥挤资格工况，优先只减小初始胞间间隙并保持5%盒压缩与现有力学参数不变；不得自动重跑或同时改变多项拥挤控制量。
+
+## 当前：2026-09-16 异质五细胞链数值稳态门通过，字段拆分门failed，v02 not_run
+
+按[合同](ventricle_myocardial_heterogeneous_row_equilibrium_contract_v01.md)完成一次单线程CPU运行，见[执行记录](ventricle_myocardial_heterogeneous_row_equilibrium_execution_v01.md)和[结果包](../results/ventricle_z1/z1_myo_heterogeneous_row_equilibrium_v01_20260916/summary.json)。模型使用此前长轴单细胞真实末态网格，5胞首尾材料连接、两端夹持；固定种子赋予细胞间长宽厚、低频起伏、体积模量、表面张力、面积模量和骨架预应力差异。未使用参考形状膜能，未开启周期收缩。
+
+稳态与安全数值达到预注册门：最终自由力4.052e-4，体积误差0.391%，最小角45.07°，固定端无位移，最终三轴跨度保留非零细胞间差异。但旧输出把零缩短下的被动轴向弹簧恢复力也记为`contraction_traction`，其最大值0.00609，不满足合同要求的0，因此总裁决仍为`failed`，不得称为验收通过。
+
+源码已在不改变总力的前提下，将被动`axial_traction`与主动缩短增量`contraction_traction`代数拆分；7项针对性测试、quick 42/42与C++编译通过，未重新运行。唯一下一步是用户明确批准全新create-only v02同参数单次运行；v02通过后才进入收缩。
+
+## 当前：2026-09-16 匹配心肌片几何passed，组合资格failed，松弛not_run
+
+按[合同](ventricle_myocardial_sheet_pair_contract_v01.md)完成规则/不规则4×4真实闭合DCM初态及18次静态调用，见[执行报告](ventricle_myocardial_sheet_pair_execution_v01.md)和[结果页](../results/ventricle_z1/z1_myo_sheet_pair_v01_20260916/index.html)。两组同体积/材料，固定两侧外端面，上下和横向自由；几何安全passed。
+
+平移方向组合力能差分误差1.194e-5/1.276e-5未达1e-6门，因此短程松弛停止于准入、未执行。误差随eps缩小10倍下降约80–95倍，不能据此确定接触公式错误。唯一下一步是冻结更小尺度与非对称方向的有限判别矩阵；不自动修公式或放宽门限。初始牵引差异同时受法向间距/面积/储能变化影响，不能解读成组织形态效应。
+
+## 历史：2026-09-16 被动力学修复passed（先于匹配片层）
+
+用户同意将第一目标明确为规则/不规则三维DCM心肌单层的匹配对照。已按[重定位与修复合同](ventricle_myocardial_irregular_sheet_recenter_v01.md)完成真实内核RED/GREEN测试；[执行报告](ventricle_myocardial_passive_repair_execution_v01.md)与[结果页](../results/ventricle_z1/z1_myo_passive_audit_v01_20260916/index.html)为当前证据。
+
+张力/压力/面积能账本已修复，面积力补齐当前体积依赖的链式导数；24组差分资格通过，独立复算最差组3.6172e-9，原门1e-6。新编译双胞入口要求共同显式Q0，禁止逐胞从形状推回材料目标。此次修复改变新轨迹，不改判任何旧结果；旧二进制保留，新程序在b/myo-mechanics-v01。
+
+更正：低接触功率不能排除接触对慢模态的影响，骨架功率大也不能单独证明残力根因。以下2026-09-15历史总结中的相反推断已撤回；其原始数据、拟合与负结果仍保留。
+
+唯一下一步是规则/不规则4×4匹配几何及新力学+接触组合预检，然后有界短程组织维持。不再默认追加双胞尾部延长。组织对照、周期收缩、心内膜、ECM仍not_run，生物验证blocked。无删除、GPU或提交；最终工程检查及存储在结果包acceptance.json登记。
+
+## 历史：2026-09-15 清理和Q passed，扩展平衡failed，残力渐近未解析
 
 旧Git已永久删除并替换为无远端`codex/clean-baseline`两提交基线；第一根提交`d53ca553`保全迁移前证据。当前Python统一入口、根级CMake和8个C++应用的正常库边界已通过构建与回归。Batch 5B同一冻结清单的其余30目标已全部永久删除：241文件、8子目录、133,839,393逻辑字节，保护路径无缺失、未处理未授权路径。
 
 正式Q 39/39调用并独立裁决`passed`：16胞静态接触组装中位加速2.5203×，2胞candidate/baseline比0.9432；9组逐节点力/能量/支撑等价且21/21旧回归通过。扩展E四条双胞轨迹均安全到算法坐标20，20个事件网格无穿透、包含或自交见证，粗细步长位移误差小于0.019%；但末态自由力0.01775–0.02133高于0.001门，严格裁决`failed_equilibrium`。
 
 绘图后的验收扫描约1.346 GB，仍低于2 GiB目标和3 GiB硬限。全过程单线程CPU、0 GPU、0自动重跑。结构、残力、安全质量、曲率/体积约束压力/接触牵引及两份五状态动图已生成并视觉验收；算法坐标不是生理时间。
+
+随后只读既有四条轨迹完成末态残力诊断，0次求解器调用。单一零渐近指数的留出误差显著较差；坐标10–20表观截距为END约0.00856、SIDE约0.01241，但冻结的慢双指数判据未在全部窗口通过，正式类别为`not_resolved_by_frozen_rules`。末态最大残力节点的接触力均为0，接触功率绝对占比低于0.7%；持续骨架功率占END约93.3%、SIDE约72.1%，因此接触不是当前限速项。诊断过程和独立12项复核`passed`，静态平衡、父Z1和生物验证仍`blocked`。
 
 依用户批准的[清理总合同](repository_cleanup_master_contract_v01.md)，科研阶段暂停；唯一活动主线仍为SimuCell3D心肌→心内膜→ECM。只读盘点登记34,406个普通文件、8,127,368,982 bytes，每文件含路径、字节、SHA-256和分类；目录reparse point不跟随。Batch 1为`passed`，只代表仓库盘点。
 
@@ -60,11 +283,11 @@ Batch 2裁决`passed`。[Batch 3A执行](repository_cleanup_batch03a_execution_v
 
 [清理收口与科学重启一次性审批包](repository_cleanup_closure_and_science_restart_proposal_v01.md)已按精确授权完成清理收口。旧`.git`首次因ReadOnly对象部分失败并如实停止；补充授权后仅在同一目标内清除9,994/9,994普通文件的ReadOnly属性并完成永久替换。冻结清单其余30目标也已永久删除，未处理未授权路径。本地`codex/clean-baseline`为两提交、远端0；Batch 6全构建、测试、证据、链接和存储验收均`passed`。现在仅执行已授权的单线程CPU正式Q；Q通过才进入扩展平衡E，GPU未启动。
 
-## 当前唯一下一步：末态残力来源诊断（尚未冻结或授权）
+## 历史下一步：最小尾部判别延长（已被2026-09-16主线重定位取代）
 
-先使用现有逐步账本判断残力尾部是继续衰减还是形成平台，并分解末态骨架、皮质/面积体积与接触力，定位非零残力来源。只有诊断支持“仅需更长松弛”时才另行冻结延长合同；若持续预应力不相容，则先修订物理机制。不得直接进入4×4动力学、心内膜、ECM或自动延长。
+现有数据已完成力分解并排除接触限速，但有限坐标尚不能区分正平台与更慢的零渐近模态。下一合同应仅覆盖END/SIDE细步长的有界延长，在预设坐标比较局部衰减率、表观截距稳定性和骨架功率；若慢率不恢复且截距稳定，再讨论持续预应力相容性修订。不得直接进入4×4动力学、心内膜、ECM或自动延长。
 
-[本轮执行报告](ventricle_contact_performance_and_extended_equilibrium_execution_v01.md)、[Q裁决](../results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/Q/verdict.json)、[E裁决](../results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/E/verdict.json)、[图像导航](../results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/README.md)。
+[诊断执行报告](ventricle_terminal_residual_diagnosis_execution_v01.md)、[诊断结果](../results/ventricle_z1/z1_myo_terminal_residual_diagnosis_v01_20260915/diagnosis.json)、[独立复核](../results/ventricle_z1/z1_myo_terminal_residual_diagnosis_v01_20260915/verification.json)、[图像导航](../results/ventricle_z1/z1_myo_terminal_residual_diagnosis_v01_20260915/README.md)。
 
 ## 上一阶段：2026-09-14 长程双胞数值资格passed，未达到静态平衡
 

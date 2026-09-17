@@ -1,70 +1,37 @@
-# PRL — 三维细胞分辨心室模型
+# PRL — 斑马鱼心室 FEM
 
-本仓库当前只维护受控 SimuCell3D 心肌→心内膜→ECM 三层主线。旧 Hybrid、Route H、Paper2/FEM 和 NCS 路线仅作为精选历史证据保留，不再是默认软件入口。
+目标是用FEM解释斑马鱼心室跳动及发育，逐步研究组织结构、生长、ECM和心内膜反馈。DCM不再运行、恢复或扩展；历史证据保留。精细逐细胞分割不是组织FEM的前置条件。
 
-开始工作前依次阅读：
+从[START_HERE](START_HERE.md)、[驾驶舱](memory/project_cockpit/index.html)、[专家材料索引](plan/INDEX.md)和[权威状态](project_control/CURRENT_STATUS.md)开始，遵循[工作约定](AGENTS.md)。
 
-1. [START_HERE.md](START_HERE.md)；
-2. [项目驾驶舱](memory/project_cockpit/index.html)；
-3. [当前权威状态](project_control/CURRENT_STATUS.md)；
-4. [外部专家计划索引](plan/INDEX.md)；
-5. [项目执行规则](AGENTS.md)。
+## 当前进展
 
-## 当前模型状态
+F6-S0的FEniCSx运行时、被动与主动圆环资格均通过。两档896/3584个P2/P1三角形，26个唯一平衡态。
+细网格四对照：零载0%、仅压力+9.8974%、仅主动−4.3150%、压力＋主动+4.5566%；均通过原1%局部体积门。
+首次调用在十个被动态保存后发生读取错误，修复后仅补16个未运行主动态，原失败保留，0重复平衡求解。
+见[结构、结果与动图](results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html)和[完成记录](project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md)。
 
-当前模型为END端对端与SIDE侧邻双心肌细胞的三维闭合曲面DCM：每胞194节点、384面，使用皮质/体积/面积约束、恒定方向骨架、独立黏附与正间隙排斥；没有参考形状膜能、ECM、心内膜、腔压、夹持或周期收缩。
+模型仍是无量纲理想圆环、平面应变、未标定同质材料，不能代表斑马鱼实验拟合。
+F5图像外轮廓局部体积失败保留。下一步F6-S1接回图像外轮廓，先复核被动压力及局部J，再加入主动收缩。
 
-长程双胞数值资格为`passed`，但有限时域末态残力约0.104，静态平衡为`failed`；父Z1和生物学验证仍为`blocked`。这些状态不能由工程测试通过替代。
-
-## 当前软件入口
-
-稳定Python入口位于`src/prl/`，提供有界存储检查、独立核验、工程回归、驾驶舱维护，以及当前冻结科学合同的运行/验证/绘图入口：
+## 软件入口
 
 ```powershell
 $env:PYTHONPATH = "$PWD\src"
+$env:PYTHONDONTWRITEBYTECODE = "1"
 python -B -X utf8 -m prl storage status --workspace .
-python -B -X utf8 -m prl verify long-doublet --workspace .
-python -B -X utf8 -m prl test quick --workspace .
-python -B -X utf8 -m prl render cockpit --workspace .
+python -B -X utf8 -m prl verify fem-fenicsx-ring --workspace . --result results/ventricle_fem/f6s0_active_completion_v01_20260917
 python -B -X utf8 -m prl validate cockpit --workspace .
 ```
 
-当前唯一科学任务使用分阶段、create-only命令；运行器会先检查清理裁决和存储准入，Q未通过时拒绝平衡阶段：
+verify只读引用父被动态和续算主动态，完整G1/G2应返回passed。结果不得覆盖重跑；render只读原始状态绘图但仍计入预算。历史失败保留。
 
-```powershell
-python -B -X utf8 -m prl run contact-performance-equilibrium --phase q --workspace .
-python -B -X utf8 -m prl verify contact-performance-equilibrium --phase q --workspace .
-python -B -X utf8 -m prl run contact-performance-equilibrium --phase equilibrium --workspace .
-python -B -X utf8 -m prl verify contact-performance-equilibrium --phase equilibrium --workspace .
-python -B -X utf8 -m prl render contact-performance-equilibrium --workspace .
-```
+## 目录与安全
 
-默认pytest仅收集当前`tests/prl/`：
+- `src/prl/fem/`：运动学、材料、单元、图像轮廓几何及压力接口。
+- `src/prl/runs/`、`verification/`、`rendering/`：有界运行、独立复核和真实状态图。
+- `project_control/`：合同与裁决；`plan/`只放外部专家材料。
+- `results/ventricle_fem/`：FEM证据；`memory/project_cockpit/`只是状态投影。
+- 原SimuCell3D及C++应用仅历史保留，不参与当前FEM。
 
-```powershell
-$env:PYTHONDONTWRITEBYTECODE = "1"
-$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD = "1"
-$env:PYTHONPATH = "$PWD\src"
-python -B -X utf8 -m pytest -q
-```
-
-只有上述`run`子命令会启动科研求解器；本合同强制单线程CPU且不自动重跑，所有其他命令均不启动求解器或GPU。
-
-## 代码与证据边界
-
-- `src/prl/`：当前稳定Python应用与验证入口；
-- `src/prl_ventricle_support/`：不含物理方程迁移的C++应用支撑库；
-- `external/simucell3d/`：唯一受控细胞表面、接触和重网格内核；
-- `tests/prl/`：默认当前工程测试；
-- `plan/`：外部专家原件、来源和哈希；
-- `project_control/`：采纳决定、合同、执行与失败记录；
-- `project_control/evidence/retired_routes_v01/`：旧路线精选证据与保全源码；
-- `results/`：正式计算结果和摘要；
-- `memory/project_cockpit/`：状态投影，不替代权威证据；
-- `tmp/`：非权威临时产物，不得存放唯一成果。
-
-旧路线的详细过程仍由`project_control/`和精选证据解释。不要从历史脚本、文件名中的`latest/final/pass`或已退役命令推断当前状态。
-
-## 存储与执行边界
-
-项目存储预警线为2.4 GiB、硬上限为3 GiB；当前仍超过硬上限，因此新科研任务保持`blocked`。[一次性收口审批包](project_control/repository_cleanup_closure_and_science_restart_proposal_v01.md)已冻结31个精确目标，但尚未取得删除与CPU运行确认。程序不自动删除证据；只有收口、独立验收和接触性能门全部通过，才会进入冻结的扩展双胞科学切片。
+只使用本地固定FEniCSx镜像，单CPU、0 GPU。项目2.4 GiB预警、3 GiB硬限；F6-S0为128 MiB阶段上限加64 MiB保全余量。公开大型数据按既有授权存E:\Data，不整包展开到项目。不自动删除或安装。阶段交付验收后直接本地提交`main`，不另开分支；远端推送按明确授权执行。

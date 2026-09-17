@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "command": [
+    "git",
+    "-c",
+    "gc.auto=0",
+    "-c",
+    "maintenance.auto=false",
+    "-c",
+    "http.lowSpeedLimit=1024",
+    "-c",
+    "http.lowSpeedTime=20",
+    "fetch",
+    "--no-auto-maintenance",
+    "--no-tags",
+    "--no-recurse-submodules",
+    "origin"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_seconds": 18.06408859998919,
+  "git_initial_bytes": 98136993,
+  "git_growth_bytes": 86987727,
+  "workspace_before_bytes": 1905987551,
+  "workspace_after_bytes": 1992975814,
+  "budget_bytes": 201326592,
+  "stop_reserve_bytes": 67108864,
+  "checkout": false,
+  "prune": false,
+  "push": false
+}

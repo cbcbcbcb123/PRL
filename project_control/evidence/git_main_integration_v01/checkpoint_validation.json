@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "scope": "Existing FEM source checkpoint and remote-history pre-merge checks; no new scientific phase",
+  "fem_regressions": {"passed": 348, "subtests_passed": 44, "elapsed_seconds": 32.62, "files": "preflight_manifest.json selected paths matching tests/prl/test_(fem|fenicsx|hyperelastic|mixed_hex)", "cache": false, "bytecode": false, "single_cpu_threads": true},
+  "excluded_files_hash_preserved": 50,
+  "credential_pattern_candidates": 0,
+  "remote_heads": {
+    "codex/simucell3d-hybrid-feasibility": "b45650a9e370be138a70acf305b6c3a21e6a7ed2",
+    "codex/stage0-closure": "8b3000bd8f1cbad01340385587eb933675ddc133",
+    "codex/stage0-v06-discretization": "16bf8843c2f351027763b51c134cac0514632c59",
+    "codex/stage1-passive-kernel": "2c8004f21c622c7075e45fbcf02d17512a03e6af",
+    "codex/stage2-gates-a-e": "a6150d51f23de5847a21209e02dd645271f2c278",
+    "main": "16bf8843c2f351027763b51c134cac0514632c59"
+  },
+  "all_remote_heads_included_in": "b45650a9e370be138a70acf305b6c3a21e6a7ed2",
+  "local_remote_common_ancestor_before_merge": null,
+  "repository_wide_static_quality": "known_failed_measured_contour_image_imports_and_absolute_data_path_not_changed",
+  "scientific_results": "Retain original stage verdicts; source checkpoint does not upgrade F5 or biology validation",
+  "push": "not_run"
+}

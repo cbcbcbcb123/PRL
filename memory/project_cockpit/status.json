@@ -1,250 +1,170 @@
 {
   "schema_version": "scientific_project_cockpit.v1",
-  "updated_at": "2026-09-15",
-  "overall_status": "blocked",
-  "summary": "清理收口与正式Q均passed；扩展双胞4/4轨迹安全到算法坐标20且步长一致，但末态残力0.01775–0.02133未过0.001门，裁决failed_equilibrium。",
+  "updated_at": "2026-09-17",
+  "overall_status": "passed",
+  "summary": "F6-S0开源FEM基准通过：同一细网格仅压力腔面积+9.8974%、仅主动−4.3150%、组合+4.5566%。26个唯一平衡态，0重复求解；真实轮廓资格与实验标定尚未完成。",
   "project": {
-    "name": "PRL｜三维细胞分辨心室模型",
-    "goal": "先用不含目标形状能的生物学启发机制分别得到可信的自由心肌和心内膜形态，再加入可变形 ECM、空间拥挤、接触、腔压和端部夹持形成三层组织，之后才进入周期主动力学、CFD/FSI 与真实数据验证。",
-    "scope": "当前完成正式接触性能Q与双胞至算法坐标20的安全松弛；尚无静态平衡、周期收缩或三层组织。",
-    "current_stage": "清理passed；Q passed；扩展平衡failed_equilibrium",
-    "current_location": "codex/clean-baseline无远端；诊断末态残力来源后再决定是否延长",
-    "evidence_basis_commit": "d97c2a4c3d20b156532d1b4cd96c83216f689989",
-    "evidence_checked_at": "2026-09-15",
-    "freshness_note": "正式Q 16胞2.520×、2胞比0.943且力学等价；E四轨迹安全、粗细步长误差<0.019%，但坐标20残力仍为门限17.7–21.3倍。最终验收扫描约1.346 GB。",
+    "name": "PRL｜斑马鱼心室 FEM",
+    "goal": "以FEM解释斑马鱼心室跳动及发育，逐步研究组织结构、生长、ECM和心内膜反馈。",
+    "scope": "无量纲理想三层圆环，二维P2/P1三角形与三维平面应变本构；区域/材料未实测，不是真实心室。",
+    "current_stage": "F6-S0 G0/G1/G2 passed; F6-S1 image-derived outline not_run",
+    "current_location": "results/ventricle_fem/f6s0_active_completion_v01_20260917",
+    "evidence_basis_commit": "a61cb860cd83e50be59563f812390d3b9f7e2ab2",
+    "evidence_checked_at": "2026-09-17",
+    "git_workflow": {
+      "branch": "main",
+      "stage_commits": "direct_local_commits_no_new_branches",
+      "configured_remotes": 0,
+      "remote_branch_merge": "blocked_missing_remote_url",
+      "evidence_refs": ["project_control/main_branch_stage_commit_decision_v01.md"]
+    },
+    "freshness_note": "两网格26个唯一平衡态通过独立复核，82项汇总门passed；原读取失败与10个父状态原样保留。",
     "model_overview": {
-      "model_type": "三维闭合曲面DCM；唯一SimuCell3D核心，显式心肌表面接触修订",
-      "simulated_object": "END端对端和SIDE侧邻双胞，全自由，每胞194节点384面；2/4/16胞另做静态性能调用，无16胞动力学。",
-      "theory": "原皮质/体积/面积能、恒定方向骨架；独立黏附与正间隙屏障、非相邻面距离约束步进。无参考形状膜能。",
-      "current_question": "坐标20的非零残力是继续衰减的有限时域效应，还是骨架、约束与接触之间的不相容平台？",
+      "model_type": "FEniCSx P2位移/P1混合压力三角形，有限变形平面应变",
+      "simulated_object": "理想三层圆环；896/3584单元两档，内半径20/27、外半径1",
+      "theory": "全层同一未标定Neo-Hookean mu=1、kappa=1000。内壁随动压力0→0.08；环向主动张力Ta=0→0.10仅作用于心肌。外壁自由、三个刚体规范自由度固定。",
+      "current_question": "理想圆环已验证压力扩张与主动缩腔的竞争；同一后端接到图像外轮廓后，局部近不可压性与主动响应能否仍合格？",
       "pipeline": [
-        "旧整片穿透失败保留",
-        "正间隙接触资格passed",
-        "双胞至算法坐标5数值资格passed",
-        "正式接触性能Q passed",
-        "扩展双胞安全passed、静态平衡failed",
-        "末态残力分解",
-        "二维心肌层静态平衡与形态异质性",
-        "周期心肌/心内膜/ECM"
+        "G0固定镜像导入/JIT/微型装配通过",
+        "G1两档圆环10个被动压力态通过",
+        "G2仅补16个未运行主动/组合态并通过",
+        "独立场量、虚功、两网格及原始哈希检查通过",
+        "下一步接回图像外轮廓；仍未运行"
       ],
-      "diagram": "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/figures/model_structure.png",
-      "diagram_caption": "正式Q实际使用的2/4/16胞网格；16胞只做静态组装，不是动力学结果。",
+      "diagram": "results/ventricle_fem/f6s0_active_completion_v01_20260917/figures/model_structure.png",
+      "diagram_caption": "真实计算网格、三层标签、环向心肌纤维、内壁随动压力和刚体规范点。",
       "assumptions": [
-        "骨架.060、周期驱动关闭",
-        "皮质.160、bulk30、area.050、bending0",
-        "独立黏附.04与rho.14正间隙屏障；rho尚未生物标定",
-        "双胞全自由；无ECM、腔压或目标形状能"
+        "理想圆环与三层区域是构造基准",
+        "全层相同未标定NH材料",
+        "二维位移、三维平面应变本构",
+        "参考环向主动应力仅施于心肌区域",
+        "加载级是算法延拓，不是生理时间"
       ],
       "methods": [
-        "2/4/16胞baseline/candidate各3次单线程静态组装",
-        "21项保留接触回归与逐节点力/能量等价复核",
-        "END/SIDE乘以两步长共4条至算法坐标20",
-        "0/5/10/15/20完整网格的独立穿透、质量和场量复核"
+        "FEniCSx/UFL一致残量和Jacobian，PETSc SNES",
+        "NumPy独立P2/P1运动学、本构及力装配",
+        "两网格、被动解析参照与主动虚功校验",
+        "五个真实加载状态、统一应力色标、1倍形变"
       ],
-      "scope_boundary": "安全和步长一致不等于静态平衡；有限坐标未达门不证明渐近不稳定。无16胞动力学、形态异质性、生理时间或生物学验证。",
+      "scope_boundary": "仅F6-S0理想圆环资格通过；不是实验验证。F5真实轮廓失败保持，F6-S1未运行。GIF循环不是已求解的收缩舒张周期。",
       "evidence_refs": [
-        "project_control/ventricle_contact_performance_and_extended_equilibrium_execution_v01.md",
-        "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/Q/verdict.json",
-        "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/E/verdict.json"
+        "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md",
+        "project_control/ventricle_fem_fenicsx_ring_active_contract_v01.md",
+        "results/ventricle_fem/f6s0_active_completion_v01_20260917/post_verification.json",
+        "results/ventricle_fem/f6s0_fenicsx_ring_active_v01_20260917/g0_runtime.json"
       ]
     }
   },
   "roadmap": [
     {
-      "label": "长程双胞与实际裁切",
+      "label": "FEniCSx运行时",
       "status": "passed",
-      "summary": "4条至坐标5、2条实际裁切，冻结数值门通过。",
-      "evidence_refs": [
-        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/long_verdict.json",
-        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/A/verdict.json"
-      ]
+      "summary": "固定镜像、DOLFINx/PETSc、JIT与微型装配通过"
     },
     {
-      "label": "扩展前性能测量",
+      "label": "理想圆环被动压力",
       "status": "passed",
-      "summary": "16胞静态一次13.735秒，接触12.150秒；尚未优化。",
-      "evidence_refs": [
-        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/P/verdict.json"
-      ]
+      "summary": "两网格十态，解析、平衡与1%局部J门通过"
     },
     {
-      "label": "接触性能优化",
+      "label": "心肌主动应力",
       "status": "passed",
-      "summary": "正式三重复Q passed：2胞比0.943、16胞2.520×，力/能量/支撑一致，21/21回归通过。",
-      "evidence_refs": [
-        "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/Q/verdict.json"
-      ]
+      "summary": "16个新主动/组合态，方向、虚功、局部J与网格门通过"
     },
     {
-      "label": "组织平衡与三层",
-      "status": "blocked",
-      "summary": "双胞安全到坐标20且步长一致，但末态残力0.01775–0.02133未达到.001；16胞动力学未运行。",
-      "evidence_refs": [
-        "project_control/ventricle_contact_performance_and_extended_equilibrium_execution_v01.md",
-        "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/E/verdict.json"
-      ]
+      "label": "真实轮廓非线性",
+      "status": "failed",
+      "summary": "保留F5局部体积失败；新后端接回尚未运行"
+    },
+    {
+      "label": "生理标定与反馈",
+      "status": "not_run",
+      "summary": "实验、材料、时间、自由3D、生长与ECM后续"
     }
   ],
   "active_work": [
     {
-      "title": "接触性能与扩展双胞平衡资格",
-      "status": "failed",
-      "summary": "Q passed且4条E轨迹数值安全；只因末态残力高于.001而裁决failed_equilibrium，当前不自动延长。",
-      "evidence_refs": [
-        "project_control/ventricle_contact_performance_and_extended_equilibrium_execution_v01.md",
-        "project_control/evidence/ventricle_contact_performance_equilibrium_v01/execution_summary_v01.json",
-        "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/verdict.json"
-      ]
-    },
-    {
-      "title": "全面清理Batch 2完成",
+      "title": "F6-S0开源后端资格完成",
       "status": "passed",
-      "summary": "用户单独授权同一30路径的.NET删除；30/30已移除，保护路径及结果哈希通过。",
+      "summary": "G0/G1/G2通过；主动力已能缩腔，并抵消部分压力扩张。两次科学容器共26个唯一平衡態，累计69秒。",
       "evidence_refs": [
-        "project_control/repository_cleanup_master_contract_v01.md",
-        "project_control/repository_cleanup_batch01_inventory_v01.md",
-        "project_control/repository_cleanup_batch02_deletion_proposal_v01.md",
-        "project_control/repository_cleanup_batch02_execution_v01.md",
-        "project_control/repository_cleanup_batch02_execution_v02.md"
-      ]
-    },
-    {
-      "title": "Batch 3A旧路线精选与删除",
-      "status": "passed",
-      "summary": "169文件/53.139 MiB精选证据哈希通过；19目录/1.528 GiB原结果删除，净释放1.476 GiB。",
-      "evidence_refs": [
-        "project_control/repository_cleanup_batch03a_legacy_results_proposal_v01.md",
-        "project_control/repository_cleanup_batch03a_execution_v01.md",
-        "project_control/repository_cleanup_retired_path_map_v01.md",
-        "project_control/evidence/repository_cleanup_v01/batch03a_retained_summary.json"
-      ]
-    },
-    {
-      "title": "Batch 3B被取代Z1与缓存删除",
-      "status": "passed",
-      "summary": "45目录/1,275文件/467.866 MiB已删除；13个保留Z1包及当前114+14项哈希通过。",
-      "evidence_refs": [
-        "project_control/repository_cleanup_batch03b_z1_proposal_v01.md",
-        "project_control/repository_cleanup_batch03b_execution_v01.md",
-        "project_control/repository_cleanup_retired_path_map_v01.md"
-      ]
-    },
-    {
-      "title": "Batch 4架构审计、安全切片与候选3源码退役",
-      "status": "passed",
-      "summary": "16个退役源码及包装已保全；38路径、61文件永久删除，32/32保护身份及19项默认与quick测试通过。",
-      "evidence_refs": [
-        "project_control/repository_cleanup_batch04_architecture_audit_v01.md",
-        "project_control/repository_cleanup_batch04_candidate01_execution_v01.md",
-        "project_control/repository_cleanup_batch04_candidate02_execution_v01.md",
-        "project_control/repository_cleanup_batch04_candidate04_execution_v01.md",
-        "project_control/evidence/repository_cleanup_v01/batch04_candidate04_acceptance.json",
-        "project_control/repository_cleanup_batch04_candidate03_execution_v01.md",
-        "project_control/evidence/repository_cleanup_v01/batch04_candidate03_acceptance.json",
-        "project_control/repository_cleanup_batch04_candidate03_source_copy_execution_v01.md",
-        "project_control/evidence/repository_cleanup_v01/batch04_candidate03_source_copy_acceptance.json",
-        "project_control/repository_cleanup_batch04_candidate03_deletion_readiness_audit_v01.md",
-        "project_control/repository_cleanup_batch04_candidate03_exit_safe_slice_execution_v01.md",
-        "project_control/evidence/repository_cleanup_v01/batch04_candidate03_exit_safe_slice_acceptance.json",
-        "project_control/repository_cleanup_batch04_candidate03_deletion_execution_v01.md",
-        "project_control/evidence/repository_cleanup_v01/batch04_candidate03_deletion_acceptance.json",
-        "project_control/repository_cleanup_retired_path_map_v01.md"
+        "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md",
+        "results/ventricle_fem/f6s0_active_completion_v01_20260917/summary.json",
+        "results/ventricle_fem/f6s0_active_completion_v01_20260917/post_verification.json"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "扩展双胞未达到静态平衡",
-      "status": "blocked",
-      "summary": "至坐标20残力仍为.01775–.02133；20个事件状态安全，但任意中间状态的普遍不折叠未证明。",
+      "title": "真实外轮廓局部J资格待新后端验证",
+      "status": "failed",
+      "summary": "原F5 max|J−1|=54.09%的失败保持；圆环通过不能代替真实轮廓资格。",
       "evidence_refs": [
-        "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/E/verdict.json"
+        "project_control/ventricle_fem_contour_pressure_execution_v01.md"
       ]
     },
     {
-      "title": "残力机制与生物形态",
-      "status": "blocked",
-      "summary": "正式Q已通过；末态残力分量、材料尺度、异质性和生理时间仍未诊断或标定。",
+      "title": "实验标定尚未完成",
+      "status": "not_run",
+      "summary": "真实内腔/壁厚/纤维、残余应力、材料及生理时间未标定；尚无真实自由3D运动。",
       "evidence_refs": [
-        "project_control/ventricle_contact_performance_and_extended_equilibrium_execution_v01.md",
-        "docs/myocardial_shape_variability_literature_v01.md"
+        "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md"
       ]
     }
   ],
   "results": [
     {
-      "title": "正式接触性能Q",
+      "title": "压力、主动及组合四组终态",
       "status": "passed",
-      "summary": "16胞静态接触组装2.520×；2胞无回退；数值等价和21项回归通过。",
-      "image": "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/figures/performance_gate.png",
-      "image_caption": "本机单线程三重复中位数；不是通用缩放律。",
+      "summary": "仅压力+9.8974%、仅主动−4.3150%、组合+4.5566%；主动抵消5.3408个百分点的压力扩张。",
+      "image": "results/ventricle_fem/f6s0_active_completion_v01_20260917/figures/four_conditions.png",
       "evidence_refs": [
-        "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/Q/verdict.json"
+        "results/ventricle_fem/f6s0_active_completion_v01_20260917/post_verification.json",
+        "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md"
       ],
-      "result_group": "current",
-      "interpretation_boundary": "只证明静态接触组装性能和等价性，不是16胞动力学。"
+      "result_group": "current"
     },
     {
-      "title": "扩展双胞残力",
-      "status": "failed",
-      "summary": "4条轨迹安全且步长一致，但坐标20残力仍高于平衡门17.7–21.3倍。",
-      "image": "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/figures/residual_vs_coordinate.png",
-      "image_caption": "算法松弛坐标，不是生理时间；失败类别为failed_equilibrium。",
+      "title": "形变与局部体积：两档网格复核",
+      "status": "passed",
+      "summary": "纯主动与组合末态max|J−1|=0.007705%/0.005376%，均通过原1%门；两档腔响应差约1.6e-7。",
+      "image": "results/ventricle_fem/f6s0_active_completion_v01_20260917/figures/mechanics_results.png",
       "evidence_refs": [
-        "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/E/verdict.json"
+        "results/ventricle_fem/f6s0_active_completion_v01_20260917/post_verification.json",
+        "results/ventricle_fem/f6s0_active_completion_v01_20260917/rendering.json"
       ],
-      "result_group": "current",
-      "interpretation_boundary": "轨迹安全不等于平衡；有限坐标失败不证明渐近不稳定。"
+      "result_group": "current"
     },
     {
-      "title": "真实逐胞形变",
+      "title": "五个真实主动加载状态",
       "status": "passed",
-      "summary": "END每胞长轴+6.36%，SIDE+12.21%；为恒定预应力松弛。",
-      "image": "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/figures/cell_length.png",
-      "image_caption": "逐胞曲线对称重合，无位移放大。",
+      "summary": "0、25%、50%、75%、100%主动幅度。1倍形变，共用总应力色标；不是生理周期。",
+      "image": "results/ventricle_fem/f6s0_active_completion_v01_20260917/figures/active_states.png",
       "evidence_refs": [
-        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/long_verdict.json",
-        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/index.html"
+        "results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html",
+        "results/ventricle_fem/f6s0_active_completion_v01_20260917/rendering.json"
       ],
-      "result_group": "current",
-      "interpretation_boundary": "非周期收缩；算法坐标不是生理时间，末态不是合格平衡。"
-    },
-    {
-      "title": "静态计算瓶颈",
-      "status": "passed",
-      "summary": "2/4/16胞静态探针显示接触组装占主要耗时。",
-      "image": "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/figures/static_cost.png",
-      "image_caption": "每规模一次真实计时，非统计缩放律。",
-      "evidence_refs": [
-        "results/ventricle_z1/z1_myo_long_doublet_v01_20260914/P/verdict.json"
-      ],
-      "result_group": "current",
-      "interpretation_boundary": "无16胞动态状态推进，不等于性能优化完成。"
+      "result_group": "current"
     }
   ],
   "next_actions": [
     {
-      "title": "诊断末态残力来源",
+      "title": "F6-S1接回图像外轮廓",
       "status": "not_run",
-      "summary": "先基于现有账本拟合尾部趋势并分解骨架、约束和接触力；诊断后再决定延长还是修订物理机制。",
+      "summary": "保留同一后端、材料和原误差标准；内腔/层界仍为构造几何。先通过被动压力与局部J门，再加入主动收缩。",
       "evidence_refs": [
-        "project_control/ventricle_contact_performance_and_extended_equilibrium_execution_v01.md",
-        "results/ventricle_z1/z1_myo_contact_performance_equilibrium_v01_20260915/E/verdict.json"
+        "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md",
+        "project_control/ventricle_fem_only_measured_contour_decision_v01.md"
       ]
     }
   ],
   "evidence_boundaries": [
-    "当前数值资格passed，静态平衡failed；父Z1及生物验证blocked。",
-    "原核心及动力学二进制哈希不变，旧失败包保留。",
-    "5帧GIF为实际算法状态，不是生理时间。",
-    "形态异质性和噪声只有文献候选方案，未计算。",
-    "无GPU；16胞仅做正式静态组装计时，没有动力学。",
-    "全面清理Batch 1–2 passed；Batch 2永久删除273.845 MiB，首次阻断记录仍保留。",
-    "Batch 3A已永久删除19个旧结果目录；仅169文件、55,720,718 bytes精选证据保留，原路线不再完整可复算。",
-    "Batch 3B已永久删除45个精确目录；13个保留Z1包完整，已退役开发/探索包不再完整可复算。",
-    "Batch 4候选3永久删除passed；38路径、61文件不再存在，仅16个精选源码及包装保留，旧路线不再完整可重跑。",
-    "旧Git已永久删除并替换为无远端本地仓库；旧历史不可恢复，第一根提交保留精选迁移前来源。",
-    "冻结清单其余30/30目标永久删除，未处理未授权路径；科学结果写入后工作区1,346,360,270 bytes，仍低于2 GiB和3 GiB硬限。",
-    "正式Q passed；扩展E数值安全和步长一致passed，但静态残力门failed，父Z1与生物学验证保持blocked。"
+    "仅FEM，不恢复DCM。",
+    "理想圆环、构造三层标签、未标定材料；不是实测心室。",
+    "二维P2/P1与平面应变本构，不是自由3D。",
+    "G0/G1/G2通过；原第一次调用failed不改写。",
+    "10个被动态只读继承，16个新状态；0重复平衡求解。",
+    "F5真实轮廓失败保持；F6-S1、实验拟合及生理心动均not_run。",
+    "固定本地镜像、单CPU、禁网、0 GPU，无拉取/安装/删除/提交/推送。"
   ]
 }

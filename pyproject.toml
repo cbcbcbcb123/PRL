@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "prl-cardioecm-model"
 version = "0.2.0"
-description = "Owned C++/Python cardiac-cell, ECM, and flow-coupling research platform"
+description = "FEM-only zebrafish ventricular mechanics with image-derived geometry"
 requires-python = ">=3.11"
 dependencies = [
   "matplotlib>=3.10",
@@ -16,6 +16,11 @@ dependencies = [
 
 [project.optional-dependencies]
 test = ["pytest>=8.0"]
+data = [
+  "h5py>=3.15",
+  "tifffile>=2025.9",
+  "scikit-image>=0.25",
+]
 
 [project.scripts]
 prl = "prl.cli:main"

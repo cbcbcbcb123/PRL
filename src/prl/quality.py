@@ -28,6 +28,8 @@ FORBIDDEN_IMPORT_ROOTS = {
     "paper2_m1",
     "scripts",
 }
+CONTAINER_ADAPTER_FILES = {'src/prl/fem/fenicsx_probe.py', 'src/prl/fem/fenicsx_ring.py'}
+CONTAINER_IMPORT_ROOTS = {'basix', 'dolfinx', 'ffcx', 'ufl', 'mpi4py', 'petsc4py'}
 WINDOWS_ABSOLUTE_PATH = re.compile(r"^[A-Za-z]:[\\/]")
 
 
@@ -124,6 +126,7 @@ def _python_boundary_errors(path: Path, workspace: Path) -> list[str]:
     allowed_roots = set(sys.stdlib_module_names) | {
         "PIL",
         "matplotlib",
+        "mpl_toolkits",
         "numpy",
         "prl",
         "scipy",
@@ -136,6 +139,8 @@ def _python_boundary_errors(path: Path, workspace: Path) -> list[str]:
             imported = (node.module,)
         for name in imported:
             root_name = name.split(".", 1)[0]
+            if relative in CONTAINER_ADAPTER_FILES and root_name in CONTAINER_IMPORT_ROOTS:
+                continue
             if root_name in FORBIDDEN_IMPORT_ROOTS:
                 errors.append(f"{relative}:{node.lineno}: forbidden import {name}")
             elif root_name not in allowed_roots:

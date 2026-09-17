@@ -1,0 +1,1538 @@
+{
+  "head": "6b7caefb295945abef7e897304e60ae199c53a9a",
+  "branch": "main",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "status": " M",
+      "bytes": 6750,
+      "reparse": false,
+      "sha256": "fce2c990fa72a5f542d2f68575619886cdbeb49d4b916f3bc28978987ac22b5e"
+    },
+    {
+      "path": "README.md",
+      "status": " M",
+      "bytes": 2558,
+      "reparse": false,
+      "sha256": "533bc1cf9894e6cf3406379d57dd6549d61d1256cfde959ea28177824353ea58"
+    },
+    {
+      "path": "START_HERE.md",
+      "status": " M",
+      "bytes": 3665,
+      "reparse": false,
+      "sha256": "1eea87b18cdb6553dcaaa9940119929e46447b87317532537ceb73d8ce100fe7"
+    },
+    {
+      "path": "external/simucell3d/include/contact_models/contact_node_face_via_spring.hpp",
+      "status": " M",
+      "bytes": 3411,
+      "reparse": false,
+      "sha256": "e9352a4b5969fd070ca71e4829593ef876f213346cc45eb119e761a890c4a05b"
+    },
+    {
+      "path": "external/simucell3d/include/contact_models/surface_separation_guard.hpp",
+      "status": " M",
+      "bytes": 5849,
+      "reparse": false,
+      "sha256": "9f9da30c3558f2aff0acada3a0e9eaea7202ffaafd0ef08a4f2cc31ea6302755"
+    },
+    {
+      "path": "external/simucell3d/include/mesh/cell.hpp",
+      "status": " M",
+      "bytes": 21943,
+      "reparse": false,
+      "sha256": "61d3b93cabaa1a87a4065580a6a4d38677f8702ed9a5da6460d088f8ea17c1c3"
+    },
+    {
+      "path": "external/simucell3d/include/mesh/node.hpp",
+      "status": " M",
+      "bytes": 9783,
+      "reparse": false,
+      "sha256": "5f7caf51b0122df23c1db40c3af158610243ab1ebdb3bb6c171982b9141684db"
+    },
+    {
+      "path": "external/simucell3d/include/prl_cell_engine/cell_surface_force.hpp",
+      "status": " M",
+      "bytes": 5106,
+      "reparse": false,
+      "sha256": "bd3b8b69f35e4daad12c33951180cc90eed526d6154bfc99bb6245c4e1d01a4a"
+    },
+    {
+      "path": "external/simucell3d/src/contact_models/contact_node_face_via_spring.cpp",
+      "status": " M",
+      "bytes": 29863,
+      "reparse": false,
+      "sha256": "66d4a2cbcf560b19f10d4d6eb3ac1053214c62de77b8cede3403a37b742ccffd"
+    },
+    {
+      "path": "external/simucell3d/src/mesh/cell.cpp",
+      "status": " M",
+      "bytes": 82727,
+      "reparse": false,
+      "sha256": "be9a01dd5aaddd7267f3f183ef4b1d5a25c62d85ff16c595ea7856cadff4895b"
+    },
+    {
+      "path": "external/simucell3d/src/triangulation_modules/cell_surface_force.cpp",
+      "status": " M",
+      "bytes": 20665,
+      "reparse": false,
+      "sha256": "e3e55dcabc3fbb6f4b067082cdcd0593eabe56a4c2fbc0ca7d1014a1be7b4051"
+    },
+    {
+      "path": "external/simucell3d/test/test_mesh/test_surface_tension_cache_precision/test_surface_tension_cache_precision.cpp",
+      "status": " M",
+      "bytes": 17711,
+      "reparse": false,
+      "sha256": "8acfbaa0f59789afe511a77fb9f6610d4b7b98fdc7702181a0b6c1efc2513d43"
+    },
+    {
+      "path": "memory/project_cockpit/status.json",
+      "status": " M",
+      "bytes": 8361,
+      "reparse": false,
+      "sha256": "cf9930851f8907d7c87ccf4a4c27af09886371feeafc235915c9d54f459d3f7f"
+    },
+    {
+      "path": "memory/project_cockpit/task_log.jsonl",
+      "status": " M",
+      "bytes": 79654,
+      "reparse": false,
+      "sha256": "6254902c5d8b924b9ff66995c3bc9f5b54272b3430ab5c7c4fd575e909b3ca15"
+    },
+    {
+      "path": "plan/INDEX.md",
+      "status": " M",
+      "bytes": 2747,
+      "reparse": false,
+      "sha256": "55e6be3868edee6a6a5341ed856fb8acfd2221c83e579f4215b5eb5bba5dd8f2"
+    },
+    {
+      "path": "project_control/CURRENT_STATUS.md",
+      "status": " M",
+      "bytes": 173578,
+      "reparse": false,
+      "sha256": "493c448dc8841848950188340c1abe71b68aca6821f6ff82c0e85e8ccac41e21"
+    },
+    {
+      "path": "pyproject.toml",
+      "status": " M",
+      "bytes": 724,
+      "reparse": false,
+      "sha256": "8b0d55ba5f86896da9793791e73c4c726fd3652678b4360781e3781512c82bdd"
+    },
+    {
+      "path": "src/prl/cli.py",
+      "status": " M",
+      "bytes": 43840,
+      "reparse": false,
+      "sha256": "5d9773c4a52644f9df2caec4bbedd6c9a1f3ff8efe356f661ae70b27c6351cfe"
+    },
+    {
+      "path": "src/prl/quality.py",
+      "status": " M",
+      "bytes": 12175,
+      "reparse": false,
+      "sha256": "c432703f383ea956a3cac5bcd8921c9a96408a1f0f30f90867d8bba0926132fe"
+    },
+    {
+      "path": "src/prl/rendering/__init__.py",
+      "status": " M",
+      "bytes": 1112,
+      "reparse": false,
+      "sha256": "b81e5be9c3bb964250b33c6838574650500dcc1e20a74e47d6990e940baa0d1e"
+    },
+    {
+      "path": "src/prl/runs/__init__.py",
+      "status": " M",
+      "bytes": 950,
+      "reparse": false,
+      "sha256": "c604d496d35d97c5996293433bd5573a693860a652e24cb9d384e7418bf5c4cb"
+    },
+    {
+      "path": "src/prl/verification/__init__.py",
+      "status": " M",
+      "bytes": 1298,
+      "reparse": false,
+      "sha256": "58e90c2dd1b690f082c0df03c62efd2e4c653849ca115701af82d654d781a580"
+    },
+    {
+      "path": "src/ventricle_bioform_myo/CMakeLists.txt",
+      "status": " M",
+      "bytes": 2916,
+      "reparse": false,
+      "sha256": "321ad4401f2b2e36c8c81083ab93e11289d819ec45dfa15036ab1e0b8e199b74"
+    },
+    {
+      "path": "src/ventricle_bioform_myo/ventricle_myo_strip_v01.cpp",
+      "status": " M",
+      "bytes": 53665,
+      "reparse": false,
+      "sha256": "e6ac9abd38e6e841823e0c30e77995c98a997565bfb8eda2553d84ff2cf60049"
+    },
+    {
+      "path": "src/ventricle_simucell3d_m0/CMakeLists.txt",
+      "status": " M",
+      "bytes": 3557,
+      "reparse": false,
+      "sha256": "e7c86eeebfc308d80e9fcc2888e23cd53da1d414d25adb015a0ff3c411c56136"
+    },
+    {
+      "path": "src/ventricle_simucell3d_m0/myo_contact_barrier_probe_v01.cpp",
+      "status": " M",
+      "bytes": 7373,
+      "reparse": false,
+      "sha256": "0d72b83a844063b6219705f1e708ae08d6cb6cc3c2cf7066e3f8423e35d2080d"
+    },
+    {
+      "path": "src/ventricle_simucell3d_m0/myo_contact_barrier_relaxation_v01.cpp",
+      "status": " M",
+      "bytes": 16777,
+      "reparse": false,
+      "sha256": "3386811c567525340505a872e41864ff9de8d424ff3a37a14d5fabcc4596de37"
+    },
+    {
+      "path": "src/ventricle_simucell3d_m0/myo_contact_scaling_probe_v01.cpp",
+      "status": " M",
+      "bytes": 6393,
+      "reparse": false,
+      "sha256": "6c5c8b17722b640e43b1e2642a1b5528c9bdda130a0362614e05d730eb7fd7ef"
+    },
+    {
+      "path": "tests/prl/quick_suite_v01.txt",
+      "status": " M",
+      "bytes": 786,
+      "reparse": false,
+      "sha256": "1376416fe70cbe7657c0ea08607ac9e32616afaa8be72c4f8b637c1b98fe266f"
+    },
+    {
+      "path": "tests/prl/test_cli.py",
+      "status": " M",
+      "bytes": 5907,
+      "reparse": false,
+      "sha256": "faf3c84c1c449b155eac587f7c0275b47e4ba5a13bc24836c078d587ee0631fa"
+    },
+    {
+      "path": "tests/prl/test_quality.py",
+      "status": " M",
+      "bytes": 3671,
+      "reparse": false,
+      "sha256": "15138900e81891d2b4dab810a28b96ce8578accbb4484d9e11cb09ff2036742d"
+    },
+    {
+      "path": "docs/adr/0002-fenicsx-primary-fem-backend.md",
+      "status": "??",
+      "bytes": 3188,
+      "reparse": false,
+      "sha256": "b1c4c196c5aaebc7bf6dadcf34db57b267e9c81c9cb0acfa56a2edad21b973d5"
+    },
+    {
+      "path": "docs/fem_contour_pressure_model.md",
+      "status": "??",
+      "bytes": 4154,
+      "reparse": false,
+      "sha256": "0f5721e122e543c63eebc82a9daab7726868d3a3f790b0a8e4081ec717e9072f"
+    },
+    {
+      "path": "docs/fem_curved_pressure_model.md",
+      "status": "??",
+      "bytes": 3475,
+      "reparse": false,
+      "sha256": "71932fa771dfcf02a1ddf781fa3339bfbdbc7301e9cc1400d1b7c6b6baae0185"
+    },
+    {
+      "path": "docs/fem_finite_strain_model.md",
+      "status": "??",
+      "bytes": 4901,
+      "reparse": false,
+      "sha256": "88d081f1a4ca5c38e41b4ccc3dfb89fd6d500d29d48291b2346df6075675778c"
+    },
+    {
+      "path": "docs/fem_model_sources_and_time.md",
+      "status": "??",
+      "bytes": 3918,
+      "reparse": false,
+      "sha256": "a5cf1b726d421803299a47587e31204e9cfad187146d89d6d9c9f227ff222595"
+    },
+    {
+      "path": "project_control/evidence/ventricle_terminal_residual_diagnosis_v01/diagnosis_summary_v01.json",
+      "status": "??",
+      "bytes": 2908,
+      "reparse": false,
+      "sha256": "f84df23ca5599b100619c98565aff8de42270d644296e48439206ab6469eba18"
+    },
+    {
+      "path": "project_control/external_large_data_storage_decision_v01.md",
+      "status": "??",
+      "bytes": 2210,
+      "reparse": false,
+      "sha256": "8dbd7f9612a0658d7164dda4ce8bc25783531f559c47339787d9e2391bad6645"
+    },
+    {
+      "path": "project_control/fem_scientific_execution.lock",
+      "status": "??",
+      "bytes": 1,
+      "reparse": false,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "project_control/public_zebrafish_experimental_data_map_v01.md",
+      "status": "??",
+      "bytes": 4042,
+      "reparse": false,
+      "sha256": "85ad5804ba1f8e59e0ff422626d247ce6dec411965ade31389d5dd3dba966f63"
+    },
+    {
+      "path": "project_control/ventricle_fem_active_elliptic_pilot_contract_v01.md",
+      "status": "??",
+      "bytes": 3816,
+      "reparse": false,
+      "sha256": "60b5cd1899df29f73eac48a52fcf8b1aa0d46afd0a37191d0c6ef7d4e9feb93e"
+    },
+    {
+      "path": "project_control/ventricle_fem_active_elliptic_pilot_execution_v01.md",
+      "status": "??",
+      "bytes": 4266,
+      "reparse": false,
+      "sha256": "ee36093de2d20916f51aeb3bf19ab78a27171d0c8395d03b0c77861328da03e1"
+    },
+    {
+      "path": "project_control/ventricle_fem_contour_pressure_contract_v01.md",
+      "status": "??",
+      "bytes": 6941,
+      "reparse": false,
+      "sha256": "c19395e1729ac2d11d14e20d163eb3ebe42c60ed617c876e9010adc0643f7cfb"
+    },
+    {
+      "path": "project_control/ventricle_fem_contour_pressure_execution_v01.md",
+      "status": "??",
+      "bytes": 4499,
+      "reparse": false,
+      "sha256": "8f22bcabf1c9482c21cf7ee50e6f4e1cb965fc939cea2a66048c47646caa2c9e"
+    },
+    {
+      "path": "project_control/ventricle_fem_curved_pressure_contract_v01.md",
+      "status": "??",
+      "bytes": 5093,
+      "reparse": false,
+      "sha256": "86fd4bc91377318fa190e9a5e60d788a9063f99a43d3fe135b16316be68e96a1"
+    },
+    {
+      "path": "project_control/ventricle_fem_curved_pressure_execution_v01.md",
+      "status": "??",
+      "bytes": 4295,
+      "reparse": false,
+      "sha256": "dd07c04a724cbc2efeb39a88f3be9f65368209c525d1eecd81a755157fc293dc"
+    },
+    {
+      "path": "project_control/ventricle_fem_fenicsx_active_completion_contract_v01.md",
+      "status": "??",
+      "bytes": 2414,
+      "reparse": false,
+      "sha256": "b1bc1413d16ce9897b82b48f252b2cbd36dc565478ccc6158d04f6809eac2764"
+    },
+    {
+      "path": "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md",
+      "status": "??",
+      "bytes": 5281,
+      "reparse": false,
+      "sha256": "5f86c143357665d72971c0f09d4230eda0fa461af4dba155e70c5706aaeaff44"
+    },
+    {
+      "path": "project_control/ventricle_fem_fenicsx_execution_adoption_v01.md",
+      "status": "??",
+      "bytes": 1093,
+      "reparse": false,
+      "sha256": "b3511ec1a955b8653a95f1f5f3d1e48cd3f0c4717c07835e2ca361df0a4a21e3"
+    },
+    {
+      "path": "project_control/ventricle_fem_fenicsx_ring_active_contract_v01.md",
+      "status": "??",
+      "bytes": 6519,
+      "reparse": false,
+      "sha256": "79e8094e41abe344e4cead5946178056eabb31a9babccc7c3555113b0b678e71"
+    },
+    {
+      "path": "project_control/ventricle_fem_fenicsx_ring_active_execution_v01.md",
+      "status": "??",
+      "bytes": 4958,
+      "reparse": false,
+      "sha256": "527f18334b2041f79f5e151ff3fea05a661ae9175d17041b7769d8005b778ac7"
+    },
+    {
+      "path": "project_control/ventricle_fem_fenicsx_runtime_preflight_blocker_v01.md",
+      "status": "??",
+      "bytes": 2120,
+      "reparse": false,
+      "sha256": "55d4ed5de350d642a2be82a029fd7964d40e8d82411362a13995f45c5555c4a3"
+    },
+    {
+      "path": "project_control/ventricle_fem_fenicsx_runtime_repair_execution_v01.md",
+      "status": "??",
+      "bytes": 3214,
+      "reparse": false,
+      "sha256": "5c3f39f07fb4ad93f5ba4ca1c59f126ffa66757e38496c498c1017f5a749a90a"
+    },
+    {
+      "path": "project_control/ventricle_fem_finite_strain_contract_v01.md",
+      "status": "??",
+      "bytes": 6305,
+      "reparse": false,
+      "sha256": "11c33c9b22054c3acec3c4250f90c6dac463096be4e2fe90168deb5b08d0f4e9"
+    },
+    {
+      "path": "project_control/ventricle_fem_finite_strain_execution_v01.md",
+      "status": "??",
+      "bytes": 7463,
+      "reparse": false,
+      "sha256": "bbebf0a60ad9af5a465b2ee4b10edb3ced4f93556b5c2e47b5d906f8ff607805"
+    },
+    {
+      "path": "project_control/ventricle_fem_fixed_mesh_contract_v01.md",
+      "status": "??",
+      "bytes": 3798,
+      "reparse": false,
+      "sha256": "32c55ecc31742e2f3c505b437cebd5d8526e906aa73ac4fe25e516aad17df787"
+    },
+    {
+      "path": "project_control/ventricle_fem_fixed_mesh_execution_v01.md",
+      "status": "??",
+      "bytes": 5032,
+      "reparse": false,
+      "sha256": "4e6d8bc837ff7ca7492eb07a11b670b52b1fb5f09fa37e6c558a8f0bfd715ac9"
+    },
+    {
+      "path": "project_control/ventricle_fem_measured_cell_shape_data_qualification_contract_v01.md",
+      "status": "??",
+      "bytes": 3735,
+      "reparse": false,
+      "sha256": "75fad4fc332c91c862d9c5c320cab95d39751f6870f9642c85aac0e274ec50a3"
+    },
+    {
+      "path": "project_control/ventricle_fem_measured_cell_shape_data_qualification_execution_v01.md",
+      "status": "??",
+      "bytes": 4884,
+      "reparse": false,
+      "sha256": "104765574aca7398b3668444e15ad0bf4e6d410ef496c0207b49947b94ac84e1"
+    },
+    {
+      "path": "project_control/ventricle_fem_measured_contour_contract_v01.md",
+      "status": "??",
+      "bytes": 3534,
+      "reparse": false,
+      "sha256": "ccafc8ec9a7497ba116b163400abcbd704bac91ec85f58cc88a5056e7a786ca8"
+    },
+    {
+      "path": "project_control/ventricle_fem_measured_contour_execution_v01.md",
+      "status": "??",
+      "bytes": 5441,
+      "reparse": false,
+      "sha256": "3a12dad5d671555ec49e2bfb8cbd808640b3ce4df54328ec251904dd6cecbdd8"
+    },
+    {
+      "path": "project_control/ventricle_fem_only_measured_contour_decision_v01.md",
+      "status": "??",
+      "bytes": 1303,
+      "reparse": false,
+      "sha256": "3b73c50d01892abb5ecde1388bbc2fa7c9efffde87d588f733b1fa0a2ca64936"
+    },
+    {
+      "path": "project_control/ventricle_fem_rotation_repair_contract_v01.md",
+      "status": "??",
+      "bytes": 4974,
+      "reparse": false,
+      "sha256": "742f869b7c2d6e2a117891cd1b8d96e5d19ad426c31d96302a1e13ad049990a8"
+    },
+    {
+      "path": "project_control/ventricle_fem_rotation_repair_execution_v01.md",
+      "status": "??",
+      "bytes": 5260,
+      "reparse": false,
+      "sha256": "38ba15b9765720bb129c78c03439243347b4ac5bbdeec64e3c34a89007defd01"
+    },
+    {
+      "path": "project_control/ventricle_fem_surface_cell_segmentation_candidate_contract_v01.md",
+      "status": "??",
+      "bytes": 4731,
+      "reparse": false,
+      "sha256": "17edf88036c7e0d763149d77dc75de249854b75fb22742ff58ff7dfd1c63dcfe"
+    },
+    {
+      "path": "project_control/ventricle_fem_surface_cell_segmentation_candidate_execution_v01.md",
+      "status": "??",
+      "bytes": 4511,
+      "reparse": false,
+      "sha256": "33899bb0ed97c034d409843c69591f31a04617f753cc8b0ad149df6d22340a81"
+    },
+    {
+      "path": "project_control/ventricle_fem_synthetic_orientation_sensitivity_contract_v01.md",
+      "status": "??",
+      "bytes": 5152,
+      "reparse": false,
+      "sha256": "360dc8f507033722bc513f9c4a3640efdcf178a715f3bf8e8a3f638ac33dea00"
+    },
+    {
+      "path": "project_control/ventricle_fem_synthetic_orientation_sensitivity_execution_v01.md",
+      "status": "??",
+      "bytes": 4625,
+      "reparse": false,
+      "sha256": "6964a5291cade360415c19d6a13ca32c3c8e5d8762056d7e9dfa4d5b3b577ad3"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_crowded_box_pilot_contract_v01.md",
+      "status": "??",
+      "bytes": 4509,
+      "reparse": false,
+      "sha256": "94b92442e35f76b07a4881ec43f42b017d067f477442b4009a943432bdb8e84d"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_crowded_box_pilot_execution_v01.md",
+      "status": "??",
+      "bytes": 3524,
+      "reparse": false,
+      "sha256": "666159d07e5d817c306d7145290cc807f26dee5ce89910d5f035733cc2119af6"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_crowded_quasistatic_growth_contract_v01.md",
+      "status": "??",
+      "bytes": 5816,
+      "reparse": false,
+      "sha256": "7b62d34658d118d949e50bf5d967bb6b98cdc8d4453f6fb34c033edfc7e58d07"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_crowded_quasistatic_growth_execution_v01.md",
+      "status": "??",
+      "bytes": 4716,
+      "reparse": false,
+      "sha256": "560981475b72394de41f39aaf7792d415e5af561a9424dae8c1e12799abfbeb8"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_crowded_target_pair_contract_v01.md",
+      "status": "??",
+      "bytes": 5197,
+      "reparse": false,
+      "sha256": "5fb197e4dc0fa64ee5e78079ed000cc0fc21fe0b465626157ce3f4e818cc82b7"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_crowded_target_pair_execution_v01.md",
+      "status": "??",
+      "bytes": 5677,
+      "reparse": false,
+      "sha256": "d3853d8200f3448679113238e0106c71a12384bc2f1da72ca2ba1939fdf985f8"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_crowded_volume_x2_contract_v01.md",
+      "status": "??",
+      "bytes": 4074,
+      "reparse": false,
+      "sha256": "edfc60060450d5f7220d410e6e7fdd709282f0a412ee0ce806e3284d8b7c9404"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_crowded_volume_x2_execution_v01.md",
+      "status": "??",
+      "bytes": 4951,
+      "reparse": false,
+      "sha256": "c8ea4c84e6c0b589f20935db8341c667aedca7ed85c8d9c6b0ac963607acbe93"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_heterogeneous_row_equilibrium_contract_v01.md",
+      "status": "??",
+      "bytes": 3537,
+      "reparse": false,
+      "sha256": "2cb459637d1fab3178a1f0f28c0db3b718e0eee8d37f51f7f5fe1d20a991893b"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_heterogeneous_row_equilibrium_execution_v01.md",
+      "status": "??",
+      "bytes": 3129,
+      "reparse": false,
+      "sha256": "68757d7d8f7e739c0ffd98af8423583c0c670114636c6b3ca963bb8079bbb357"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_irregular_sheet_recenter_v01.md",
+      "status": "??",
+      "bytes": 4001,
+      "reparse": false,
+      "sha256": "4a332d51885cdd4db25328e3f8cd23409560c175423b51bbde1334206569dc19"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_passive_repair_execution_v01.md",
+      "status": "??",
+      "bytes": 4623,
+      "reparse": false,
+      "sha256": "f03c1d90547044ead4ba86152d22b9c17c4fdd3d6cf5c2b270fa991a7973b651"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_sheet_pair_contract_v01.md",
+      "status": "??",
+      "bytes": 3897,
+      "reparse": false,
+      "sha256": "f47978ac5be97e8dfd4a13f17231f1154778496c0f4b005b3dfadb5b8f53492e"
+    },
+    {
+      "path": "project_control/ventricle_myocardial_sheet_pair_execution_v01.md",
+      "status": "??",
+      "bytes": 4158,
+      "reparse": false,
+      "sha256": "de69e735901f11c033d088c043c6475b5ca8da2628a0744f880a6078090992ed"
+    },
+    {
+      "path": "project_control/ventricle_regular_2x2_load_hold_contract_v01.md",
+      "status": "??",
+      "bytes": 3606,
+      "reparse": false,
+      "sha256": "b9e71139bfc8965f3425a6d33c98969da62e8b6c10621197a17eee64202b75b9"
+    },
+    {
+      "path": "project_control/ventricle_regular_2x2_load_hold_execution_v01.md",
+      "status": "??",
+      "bytes": 3543,
+      "reparse": false,
+      "sha256": "a224a7d5d0234f8307d173a2aa752540dfb44fab5648f41742a06722d541ae8b"
+    },
+    {
+      "path": "project_control/ventricle_regular_dcm_fem_common_limit_contract_v01.md",
+      "status": "??",
+      "bytes": 5165,
+      "reparse": false,
+      "sha256": "558689a4f3caab6a0b293f1df978d6618b6311af4bb6ff807c18007d956be990"
+    },
+    {
+      "path": "project_control/ventricle_regular_dcm_fem_common_limit_r0a_execution_v01.md",
+      "status": "??",
+      "bytes": 3403,
+      "reparse": false,
+      "sha256": "102a675d03b60ba4df5b36119f774dba4a05eff24dec84da64b940a0e8db989f"
+    },
+    {
+      "path": "project_control/ventricle_terminal_residual_diagnosis_contract_v01.md",
+      "status": "??",
+      "bytes": 4149,
+      "reparse": false,
+      "sha256": "76d1fd0653ec73810bacf91f8e7d860f0ca2f4abf17d1d4b893cc7015c5d5f13"
+    },
+    {
+      "path": "project_control/ventricle_terminal_residual_diagnosis_execution_v01.md",
+      "status": "??",
+      "bytes": 3855,
+      "reparse": false,
+      "sha256": "98a154b7aaea8555622228a7f1fa8e23560815be613adf47e1468ad354dbd857"
+    },
+    {
+      "path": "src/prl/diagnostics/__init__.py",
+      "status": "??",
+      "bytes": 156,
+      "reparse": false,
+      "sha256": "690ff52bce5de443522d96b51e1b127fcf7ef8ed86bc580421c61b0f8531f4e3"
+    },
+    {
+      "path": "src/prl/diagnostics/passive_mechanics.py",
+      "status": "??",
+      "bytes": 7341,
+      "reparse": false,
+      "sha256": "214ea1c58ee7e4a99b717fb6f49d0c17c3b7e127ba4fe42d149b9039e69814ae"
+    },
+    {
+      "path": "src/prl/diagnostics/terminal_residual.py",
+      "status": "??",
+      "bytes": 31498,
+      "reparse": false,
+      "sha256": "7b1129dd6c3af9f87a48e89eca78ec1ae1a31f9836c038a6334ce467c9d46bc3"
+    },
+    {
+      "path": "src/prl/fem/__init__.py",
+      "status": "??",
+      "bytes": 415,
+      "reparse": false,
+      "sha256": "395961a5e60b9ad0d9eb9add7fdc94bf8ba44b83ab9b86d3c48222a05774dcdd"
+    },
+    {
+      "path": "src/prl/fem/active_ellipse.py",
+      "status": "??",
+      "bytes": 18252,
+      "reparse": false,
+      "sha256": "a4f5bca2ff0d3bebcc1af559e5700685ca5eeafaf1398be36871cd794804f656"
+    },
+    {
+      "path": "src/prl/fem/contour_wall.py",
+      "status": "??",
+      "bytes": 11327,
+      "reparse": false,
+      "sha256": "d6c516d736bbbcce4a82c8bfc0bf42adbb4adcc6832884021b8d18c97a805842"
+    },
+    {
+      "path": "src/prl/fem/fenicsx_probe.py",
+      "status": "??",
+      "bytes": 3173,
+      "reparse": false,
+      "sha256": "3043d329e3345e673b453a6acaef4e0c4ea640bd5f6cb2e0bbc698d51bb24fad"
+    },
+    {
+      "path": "src/prl/fem/fenicsx_ring.py",
+      "status": "??",
+      "bytes": 14745,
+      "reparse": false,
+      "sha256": "10833b2386cf2c01caea355809f204b04fb0fed2a00e2c1f756a26c5c5ef2c0a"
+    },
+    {
+      "path": "src/prl/fem/follower_pressure.py",
+      "status": "??",
+      "bytes": 7299,
+      "reparse": false,
+      "sha256": "4694a3a89c75d28441142261303528f5871f0b017f161b7a270d02f1e52cd2d9"
+    },
+    {
+      "path": "src/prl/fem/hyperelastic.py",
+      "status": "??",
+      "bytes": 9459,
+      "reparse": false,
+      "sha256": "c9885ace0214a5689ff3062e7fcd41291cb2b9a5fe3965952704d264dfee2c57"
+    },
+    {
+      "path": "src/prl/fem/measured_contour.py",
+      "status": "??",
+      "bytes": 7349,
+      "reparse": false,
+      "sha256": "d2b6053b9737829c2675b1b12e089c2032657d76255f8ea4971f84d4afeedc8f"
+    },
+    {
+      "path": "src/prl/fem/mixed_hex.py",
+      "status": "??",
+      "bytes": 27674,
+      "reparse": false,
+      "sha256": "624ca0ca2720ff835ca245a8f4d0e10609b095f38fd185b44f3612f6da4c8382"
+    },
+    {
+      "path": "src/prl/fem/refinement.py",
+      "status": "??",
+      "bytes": 6433,
+      "reparse": false,
+      "sha256": "5f3569e4fb28ae9ab4edd07a3d2714592c21b22929bbf272a24a530465023b24"
+    },
+    {
+      "path": "src/prl/fem/ring_geometry.py",
+      "status": "??",
+      "bytes": 3094,
+      "reparse": false,
+      "sha256": "da6227cf28125c002060974cae14843d5e5f49e783728acc3fdce6526ba08ca7"
+    },
+    {
+      "path": "src/prl/fem/synthetic_orientation.py",
+      "status": "??",
+      "bytes": 13966,
+      "reparse": false,
+      "sha256": "6d79cffa77bfa136ad7aa9ec4b24624a202591aed552555bd39806d8bcaab5f5"
+    },
+    {
+      "path": "src/prl/rendering/cb_plot_unified_style.py",
+      "status": "??",
+      "bytes": 44337,
+      "reparse": false,
+      "sha256": "128906ff162de35b3e2223f40c7a975ba1e8a53ac1d8f7de8ab67b7455ae5b91"
+    },
+    {
+      "path": "src/prl/rendering/fem_active_ellipse.py",
+      "status": "??",
+      "bytes": 8645,
+      "reparse": false,
+      "sha256": "f69af363e33b9ad82af70aba5331bf4b3c44e7596316c6d0794f4d5e4a5b502f"
+    },
+    {
+      "path": "src/prl/rendering/fem_contour_pressure.py",
+      "status": "??",
+      "bytes": 27501,
+      "reparse": false,
+      "sha256": "2b9d52175a755e7340e11e16e5403cf1546bff59ab8d558927f81d1bca679a6e"
+    },
+    {
+      "path": "src/prl/rendering/fem_curved_pressure.py",
+      "status": "??",
+      "bytes": 24120,
+      "reparse": false,
+      "sha256": "6968bbf92c8ca41275b579d4901d7334821f509605cfb4552f8c5e6f47f6e9b8"
+    },
+    {
+      "path": "src/prl/rendering/fem_finite_strain.py",
+      "status": "??",
+      "bytes": 22294,
+      "reparse": false,
+      "sha256": "12663f076253a8347d386f2fdc1106ccefa4fcf9fe7ef516f6e0a7837d9c45f0"
+    },
+    {
+      "path": "src/prl/rendering/fem_fixed_mesh.py",
+      "status": "??",
+      "bytes": 14939,
+      "reparse": false,
+      "sha256": "6c382844843c30d7c5462361befe5e90bbbd90e1bdd52604fa9acc17a77d262e"
+    },
+    {
+      "path": "src/prl/rendering/fem_measured_contour.py",
+      "status": "??",
+      "bytes": 21733,
+      "reparse": false,
+      "sha256": "fbee933bfcf3c3773c07e654cc634113a637b05576fb8d8e90af8a13926ee385"
+    },
+    {
+      "path": "src/prl/rendering/fem_rotation.py",
+      "status": "??",
+      "bytes": 19383,
+      "reparse": false,
+      "sha256": "b71de378d1af33523a67c5e2e1cbd2e6c3c6426c97737ebfb6a639d5bae9d07c"
+    },
+    {
+      "path": "src/prl/rendering/fem_synthetic_orientation.py",
+      "status": "??",
+      "bytes": 13879,
+      "reparse": false,
+      "sha256": "c3dacd6b8495d39f3ddccf50b63fc057b449b94e6a4e113a23b813f513e07624"
+    },
+    {
+      "path": "src/prl/rendering/fenicsx_ring.py",
+      "status": "??",
+      "bytes": 20640,
+      "reparse": false,
+      "sha256": "6d6197cf178003e5e13d6f4e3825fefc8052f7b086b5db10b32c3990d27be3d2"
+    },
+    {
+      "path": "src/prl/rendering/myocardial_crowded_box.py",
+      "status": "??",
+      "bytes": 18239,
+      "reparse": false,
+      "sha256": "f4691f30e3c3364a8eeab1290e8ed808a83f6d3c80d69e40e91aea6947530c92"
+    },
+    {
+      "path": "src/prl/rendering/myocardial_crowded_quasistatic_growth.py",
+      "status": "??",
+      "bytes": 17189,
+      "reparse": false,
+      "sha256": "c8c113aa727f3598bbc833aa719e992b3de5d5d342309b0e94df9a8178169475"
+    },
+    {
+      "path": "src/prl/rendering/myocardial_crowded_target_pair.py",
+      "status": "??",
+      "bytes": 16453,
+      "reparse": false,
+      "sha256": "860b14024d7919c621116738ab70f4cb5af926c8efbba095092fac6fd8682366"
+    },
+    {
+      "path": "src/prl/rendering/myocardial_crowded_volume_x2.py",
+      "status": "??",
+      "bytes": 23740,
+      "reparse": false,
+      "sha256": "c617ca0a04080732b15d35154877dd7dfee1d1558028a9eae54caced953f1b6c"
+    },
+    {
+      "path": "src/prl/rendering/myocardial_row.py",
+      "status": "??",
+      "bytes": 12633,
+      "reparse": false,
+      "sha256": "c2d0b67ee2a14cf64e73da20b59f8090d1fb95084046f41991597c456c912c39"
+    },
+    {
+      "path": "src/prl/rendering/regular_2x2_load_hold.py",
+      "status": "??",
+      "bytes": 8809,
+      "reparse": false,
+      "sha256": "4e4cae67089493880db7fbb993ce3f060ae0b37c0b888eed063fce19fa38ddb8"
+    },
+    {
+      "path": "src/prl/rendering/regular_dcm_fem_common_limit.py",
+      "status": "??",
+      "bytes": 8052,
+      "reparse": false,
+      "sha256": "3e489f610a452782b98e07d9831c203161ff5c73ce4b4614abeee9764af07b52"
+    },
+    {
+      "path": "src/prl/runs/fem_active_ellipse.py",
+      "status": "??",
+      "bytes": 12734,
+      "reparse": false,
+      "sha256": "463ca7189b00689c8dfdd3d245286b46f1f96b0f49ef0cab01b0f3e972b3d76c"
+    },
+    {
+      "path": "src/prl/runs/fem_contour_pressure.py",
+      "status": "??",
+      "bytes": 21727,
+      "reparse": false,
+      "sha256": "1f8e6c45a045a2d87af49a9a4cd88cf12ceb3ff1cf346f6bedf2fc2a1f88feb7"
+    },
+    {
+      "path": "src/prl/runs/fem_curved_pressure.py",
+      "status": "??",
+      "bytes": 13867,
+      "reparse": false,
+      "sha256": "f1594363ab171c1da6d4093c2c1db515c57c1f7106d7ab1afad7395a68d590e6"
+    },
+    {
+      "path": "src/prl/runs/fem_finite_strain.py",
+      "status": "??",
+      "bytes": 17920,
+      "reparse": false,
+      "sha256": "48cccbf677bb7691ecf0afb3326a9a84e89b620b1069ab001aa4309d9cbddfae"
+    },
+    {
+      "path": "src/prl/runs/fem_fixed_mesh.py",
+      "status": "??",
+      "bytes": 8832,
+      "reparse": false,
+      "sha256": "88df939a386c97f8796d0437bdabf215683239751a250c2d64c5feb9f029b8dd"
+    },
+    {
+      "path": "src/prl/runs/fem_measured_contour.py",
+      "status": "??",
+      "bytes": 8805,
+      "reparse": false,
+      "sha256": "c73d51a16e125bcd2020e6d5935d2cb1ada11f12e751af5aec14257d83432120"
+    },
+    {
+      "path": "src/prl/runs/fem_rotation.py",
+      "status": "??",
+      "bytes": 16881,
+      "reparse": false,
+      "sha256": "55bfe6af5d95a15c888b0af6d5593a6b3c6acc81ea9e8bb3549eca778cf257c9"
+    },
+    {
+      "path": "src/prl/runs/fem_synthetic_orientation.py",
+      "status": "??",
+      "bytes": 17400,
+      "reparse": false,
+      "sha256": "398aec7dfaacd836b7500835eccd0d7ee0d67c92b7a6e7d9fc4373dd5a270529"
+    },
+    {
+      "path": "src/prl/runs/fenicsx_ring.py",
+      "status": "??",
+      "bytes": 19217,
+      "reparse": false,
+      "sha256": "476cd1fa8ff36bab4181da582429ef1267632b6245b85c70b3b90de8d4b0d1f0"
+    },
+    {
+      "path": "src/prl/runs/fenicsx_runtime.py",
+      "status": "??",
+      "bytes": 5094,
+      "reparse": false,
+      "sha256": "67eae499d47475d4993a9e94a2097d2ef6698255ec8ac5c089d749af16b5eb46"
+    },
+    {
+      "path": "src/prl/runs/myocardial_crowded_box.py",
+      "status": "??",
+      "bytes": 17931,
+      "reparse": false,
+      "sha256": "b6b052b368246d0faf9e203f7ddd1192355dfdb2b88c425f76473e5dc2f47c20"
+    },
+    {
+      "path": "src/prl/runs/myocardial_crowded_quasistatic_growth.py",
+      "status": "??",
+      "bytes": 14121,
+      "reparse": false,
+      "sha256": "91591e1fd08d01126ab546ed03de4479605466bd5c99d4885113364413649d62"
+    },
+    {
+      "path": "src/prl/runs/myocardial_crowded_target_pair.py",
+      "status": "??",
+      "bytes": 15164,
+      "reparse": false,
+      "sha256": "255be2ca5943d2c019337bd783567aaa3b5a389af1e45987fa8953fe03ddf3e0"
+    },
+    {
+      "path": "src/prl/runs/myocardial_crowded_volume_x2.py",
+      "status": "??",
+      "bytes": 15846,
+      "reparse": false,
+      "sha256": "5eba441eec3bba174844a81c6be3f6594ce7b607a24b6b71db3336f7a088f104"
+    },
+    {
+      "path": "src/prl/runs/myocardial_row.py",
+      "status": "??",
+      "bytes": 8893,
+      "reparse": false,
+      "sha256": "13b15e7e18c9c603f8b008758d09ad476ceb64106166ed886bfa3e8531f54565"
+    },
+    {
+      "path": "src/prl/runs/myocardial_sheet.py",
+      "status": "??",
+      "bytes": 9898,
+      "reparse": false,
+      "sha256": "231a091dbe82220248cfe2adc793a0e55bd6ed266b45bc60942ae33c6013620d"
+    },
+    {
+      "path": "src/prl/runs/regular_2x2_load_hold.py",
+      "status": "??",
+      "bytes": 16018,
+      "reparse": false,
+      "sha256": "a4a41e4f933837e918e69d7ad05a53046d3e1f0de2d431cd76d03783622d9c04"
+    },
+    {
+      "path": "src/prl/verification/fem_active_ellipse.py",
+      "status": "??",
+      "bytes": 8372,
+      "reparse": false,
+      "sha256": "0eb6ba424fd0719b8879f593f6d578436fee8e413c5374105652162ede745ca4"
+    },
+    {
+      "path": "src/prl/verification/fem_contour_pressure.py",
+      "status": "??",
+      "bytes": 37227,
+      "reparse": false,
+      "sha256": "c46555ac64c16c245e0f99864b92273a42a9612f4ea8e9a9ff241e29f27f6428"
+    },
+    {
+      "path": "src/prl/verification/fem_curved_pressure.py",
+      "status": "??",
+      "bytes": 26562,
+      "reparse": false,
+      "sha256": "dc8372c6f4d4f9e99d7847619e2bbe07439485cf38582f7829c9e916ea08a53f"
+    },
+    {
+      "path": "src/prl/verification/fem_finite_strain.py",
+      "status": "??",
+      "bytes": 41154,
+      "reparse": false,
+      "sha256": "fed4377f55aa32dad63e6f07c2f192d9be549cef189322bd5b28fd25a97ecff9"
+    },
+    {
+      "path": "src/prl/verification/fem_fixed_mesh.py",
+      "status": "??",
+      "bytes": 27557,
+      "reparse": false,
+      "sha256": "c7b46d61e11b2ff9df39e9ea0aef5dbfb5a0131f610a33fb0ccf6e8f1dede745"
+    },
+    {
+      "path": "src/prl/verification/fem_measured_contour.py",
+      "status": "??",
+      "bytes": 30532,
+      "reparse": false,
+      "sha256": "5cb6baa02a443dad202f37fc04b6d06359fe70da24761b0fd17c7341b6500dcc"
+    },
+    {
+      "path": "src/prl/verification/fem_rotation.py",
+      "status": "??",
+      "bytes": 24967,
+      "reparse": false,
+      "sha256": "d47bad6bd03f961640202d5be00fdbe17f6eedee6199143b0741f978f0e50841"
+    },
+    {
+      "path": "src/prl/verification/fem_synthetic_orientation.py",
+      "status": "??",
+      "bytes": 22918,
+      "reparse": false,
+      "sha256": "06f1fa223a5e1d9d5d6b2554cffd126de2dcf351f2f3ef86d49942af01f6cbfc"
+    },
+    {
+      "path": "src/prl/verification/fenicsx_ring.py",
+      "status": "??",
+      "bytes": 15361,
+      "reparse": false,
+      "sha256": "4d44f8140e329b6afea46ff490e83aa88c0299371a62106da7159e9d70fe8eff"
+    },
+    {
+      "path": "src/prl/verification/myocardial_crowded_box.py",
+      "status": "??",
+      "bytes": 17132,
+      "reparse": false,
+      "sha256": "6640bd8a167f9a26e5af7eae05bf99321a77dcc356d48f44e2492d87972f9dd0"
+    },
+    {
+      "path": "src/prl/verification/myocardial_crowded_quasistatic_growth.py",
+      "status": "??",
+      "bytes": 22763,
+      "reparse": false,
+      "sha256": "638cb6ff6965e365884f97e69b0ccde0ed8f7d9745f2a52651b6e958fa2f0179"
+    },
+    {
+      "path": "src/prl/verification/myocardial_crowded_target_pair.py",
+      "status": "??",
+      "bytes": 18975,
+      "reparse": false,
+      "sha256": "9a0b36afa20bdf51a7f9230380b7f6a9a5a081e370b954775a1ec2f9567f93c3"
+    },
+    {
+      "path": "src/prl/verification/myocardial_crowded_volume_x2.py",
+      "status": "??",
+      "bytes": 12918,
+      "reparse": false,
+      "sha256": "e6e3227d3102017b58431c9fb3221cdc07281fa942b265d599d07df960f24332"
+    },
+    {
+      "path": "src/prl/verification/myocardial_row.py",
+      "status": "??",
+      "bytes": 6463,
+      "reparse": false,
+      "sha256": "96c82f1d778d94e87c760f82108f1e6e291e880d4503ea98e60d0da523ecdd68"
+    },
+    {
+      "path": "src/prl/verification/myocardial_sheet.py",
+      "status": "??",
+      "bytes": 8039,
+      "reparse": false,
+      "sha256": "93d33fe87619003047e7fe6248a116afbeacf618e761d8ef2738d19f16f2f175"
+    },
+    {
+      "path": "src/prl/verification/passive_mechanics.py",
+      "status": "??",
+      "bytes": 6710,
+      "reparse": false,
+      "sha256": "f531d85599bfcaef393962bb89ccc70ac146eb9a7a1f08c2843b2377a7c07ff1"
+    },
+    {
+      "path": "src/prl/verification/regular_2x2_load_hold.py",
+      "status": "??",
+      "bytes": 10277,
+      "reparse": false,
+      "sha256": "4b6a38c7a7ccbca38bd08f82cd919826345fab5cb91e0b29cd3c56d2760daa8a"
+    },
+    {
+      "path": "src/prl/verification/regular_dcm_fem_common_limit.py",
+      "status": "??",
+      "bytes": 5689,
+      "reparse": false,
+      "sha256": "0fcc883e3ca431f8b29291e15c84a1042703d7299dd210297964097040f4b5a7"
+    },
+    {
+      "path": "src/prl/verification/terminal_residual.py",
+      "status": "??",
+      "bytes": 8467,
+      "reparse": false,
+      "sha256": "7810ec2ed542637a57b2418cad681784f4b82cce98b05963539b5d4f454408df"
+    },
+    {
+      "path": "src/ventricle_bioform_myo/passive_mechanics_probe.cpp",
+      "status": "??",
+      "bytes": 7993,
+      "reparse": false,
+      "sha256": "898580bc486633c94b379c58b061026ac5f4bca2bad2fd9ff0ce320b82d434c3"
+    },
+    {
+      "path": "src/ventricle_simucell3d_m0/myo_crowded_box_relaxation_v01.cpp",
+      "status": "??",
+      "bytes": 67916,
+      "reparse": false,
+      "sha256": "eddfaae58d9ec720b216eac625834c03b44521667bc62c00e0479ea178f87c52"
+    },
+    {
+      "path": "tests/prl/test_fem_active_ellipse.py",
+      "status": "??",
+      "bytes": 1314,
+      "reparse": false,
+      "sha256": "1a9a5eb08923e2616d2398585bd161577c9036ba0cc77fbd841a8fdb78a06533"
+    },
+    {
+      "path": "tests/prl/test_fem_contour_pressure_rendering.py",
+      "status": "??",
+      "bytes": 7382,
+      "reparse": false,
+      "sha256": "205d2d790dcc463d841043990002340245eb5ca540af20d135ecdcbc58d27b16"
+    },
+    {
+      "path": "tests/prl/test_fem_contour_pressure_runner.py",
+      "status": "??",
+      "bytes": 11647,
+      "reparse": false,
+      "sha256": "5f50cd029b2da632c3abfa58903a0f2b41e994245ef06096cbf5bf42369a118d"
+    },
+    {
+      "path": "tests/prl/test_fem_contour_pressure_verifier.py",
+      "status": "??",
+      "bytes": 15344,
+      "reparse": false,
+      "sha256": "70f42832bba05d54a8f3f4bb0915caccd0bf965c258c80f7b6b47b77c2d77102"
+    },
+    {
+      "path": "tests/prl/test_fem_contour_wall.py",
+      "status": "??",
+      "bytes": 9733,
+      "reparse": false,
+      "sha256": "0c21d4150fbf52df77c58fa764ca7a8a0de514ce08d90c2a32327fffa51d8cd2"
+    },
+    {
+      "path": "tests/prl/test_fem_curved_pressure_core.py",
+      "status": "??",
+      "bytes": 8797,
+      "reparse": false,
+      "sha256": "01f54d42e6eeb7c5f8a120b997f8dca3093f823f7f534adb001db62eff607e2f"
+    },
+    {
+      "path": "tests/prl/test_fem_curved_pressure_rendering.py",
+      "status": "??",
+      "bytes": 5276,
+      "reparse": false,
+      "sha256": "6713d31e45f629dea72129a5a6f4dea1f42e26ed0673230a9ba3d72dc773b1d6"
+    },
+    {
+      "path": "tests/prl/test_fem_curved_pressure_runner.py",
+      "status": "??",
+      "bytes": 7602,
+      "reparse": false,
+      "sha256": "93032f40c21bbff3616855ebe41fcbf06bc64532cfa9586ba704609287d9b057"
+    },
+    {
+      "path": "tests/prl/test_fem_curved_pressure_verifier.py",
+      "status": "??",
+      "bytes": 12961,
+      "reparse": false,
+      "sha256": "88c2ddbb6fad5609d7582623e5b519775a0140304571aab65aa1f1d619673472"
+    },
+    {
+      "path": "tests/prl/test_fem_finite_strain_runner.py",
+      "status": "??",
+      "bytes": 13051,
+      "reparse": false,
+      "sha256": "e3ec2b68a38f0d107a306c88abc2ca0e0cff5c9458777e6f641045f339166fff"
+    },
+    {
+      "path": "tests/prl/test_fem_finite_strain_verifier.py",
+      "status": "??",
+      "bytes": 10871,
+      "reparse": false,
+      "sha256": "138320b2dc9f2a5e5ea820bdfa92ff35ed6085a6ec374a246a5f5909b663b2a4"
+    },
+    {
+      "path": "tests/prl/test_fem_geometry_seam.py",
+      "status": "??",
+      "bytes": 6137,
+      "reparse": false,
+      "sha256": "e4a524552c9dc65d9202f9b2175edd1f677d13fe782dce9f23b31779fecc7eb8"
+    },
+    {
+      "path": "tests/prl/test_fem_only_cli.py",
+      "status": "??",
+      "bytes": 27072,
+      "reparse": false,
+      "sha256": "f8c24b99eef1b1348eba1654961fea29c9f9c5277d0de96957dc6ab6f3a5f958"
+    },
+    {
+      "path": "tests/prl/test_fem_refinement.py",
+      "status": "??",
+      "bytes": 9645,
+      "reparse": false,
+      "sha256": "c41e8f16bb20833966ff7096c7e30c4b71c7e9ead6caff7f854f9d7a66b38bab"
+    },
+    {
+      "path": "tests/prl/test_fem_rotation.py",
+      "status": "??",
+      "bytes": 11921,
+      "reparse": false,
+      "sha256": "d25b109c147c74ce268cfaca0d8b439e4fdc3df255793ae3c40e488932ebc0d2"
+    },
+    {
+      "path": "tests/prl/test_fem_rotation_runner.py",
+      "status": "??",
+      "bytes": 7872,
+      "reparse": false,
+      "sha256": "5f70a90b4cc5531610631dfca0129889c9c0cc8c252e56ab3700597f529a11fb"
+    },
+    {
+      "path": "tests/prl/test_fem_synthetic_orientation.py",
+      "status": "??",
+      "bytes": 2485,
+      "reparse": false,
+      "sha256": "6099b5a21821e5720a46e7caf5e4f4e762384a2fa4601e8892564bc9ac724fff"
+    },
+    {
+      "path": "tests/prl/test_fenicsx_ring.py",
+      "status": "??",
+      "bytes": 5516,
+      "reparse": false,
+      "sha256": "99db4617fcf90ada67c6167c5746d45ca114d759f87fe6e47eda0c7c84258b1a"
+    },
+    {
+      "path": "tests/prl/test_hyperelastic.py",
+      "status": "??",
+      "bytes": 10423,
+      "reparse": false,
+      "sha256": "022433c7a5114d1b9eb5c3eea5c85a34eab48c892b27401f71cf63615b0b99a8"
+    },
+    {
+      "path": "tests/prl/test_mixed_hex.py",
+      "status": "??",
+      "bytes": 6782,
+      "reparse": false,
+      "sha256": "34f64e89625a2e57ca5dadaf4306ef6736b0b10e4c783d6fdb00e4d9775ee8a0"
+    },
+    {
+      "path": "tests/prl/test_mixed_hex_lifting.py",
+      "status": "??",
+      "bytes": 8121,
+      "reparse": false,
+      "sha256": "5990d4e2b8edd6cda716a88b2dff1f3c64de038437761056f6b666bc6494055f"
+    },
+    {
+      "path": "tests/prl/test_myocardial_crowded_box.py",
+      "status": "??",
+      "bytes": 2632,
+      "reparse": false,
+      "sha256": "a7b6b00edd81bd1228b89d0057c18d0f7a1a1430d2a20ec0d5627c7480d77df5"
+    },
+    {
+      "path": "tests/prl/test_myocardial_crowded_quasistatic_growth.py",
+      "status": "??",
+      "bytes": 4192,
+      "reparse": false,
+      "sha256": "4e4a7d647cabc0c46f587a5579f790f5fbaec83ff5ae789afe9b5ed82e9227f9"
+    },
+    {
+      "path": "tests/prl/test_myocardial_crowded_target_pair.py",
+      "status": "??",
+      "bytes": 3671,
+      "reparse": false,
+      "sha256": "cc9a3f74264272519a84d21fb4d1ec5293fa934ad663f6e1aa81fb96225b38a5"
+    },
+    {
+      "path": "tests/prl/test_myocardial_crowded_volume_x2.py",
+      "status": "??",
+      "bytes": 4183,
+      "reparse": false,
+      "sha256": "8be3a4f59df50ee76b25ff1ed72aa14e8402e2eb87a298c1cce1838f5708a804"
+    },
+    {
+      "path": "tests/prl/test_myocardial_row.py",
+      "status": "??",
+      "bytes": 2232,
+      "reparse": false,
+      "sha256": "4b7589b093e99a9de41124e1a219846a15d0c88dfc4c2328bc7a9e94795fec14"
+    },
+    {
+      "path": "tests/prl/test_myocardial_sheet.py",
+      "status": "??",
+      "bytes": 1906,
+      "reparse": false,
+      "sha256": "133d403cb8aa04835db3ab05b8cd525369a598da40e948b8bf66057ce45f2d31"
+    },
+    {
+      "path": "tests/prl/test_passive_mechanics.py",
+      "status": "??",
+      "bytes": 1776,
+      "reparse": false,
+      "sha256": "4e9d602106f3a6d11925eaac3eb70a8fbad977ac12aa5fe5606af79b77e93f98"
+    },
+    {
+      "path": "tests/prl/test_regular_2x2_load_hold.py",
+      "status": "??",
+      "bytes": 2688,
+      "reparse": false,
+      "sha256": "0da971279aca5b30d1ac565e5df143813ce9f5014df13440899328127e0ebc7a"
+    },
+    {
+      "path": "tests/prl/test_terminal_residual_diagnosis.py",
+      "status": "??",
+      "bytes": 1414,
+      "reparse": false,
+      "sha256": "9d16b9d8d9b877d525599341204d40ffbacaa68ce4f66bec0d791d5e96c6285b"
+    },
+    {
+      "path": "tools/qualify_zenodo_15509350.py",
+      "status": "??",
+      "bytes": 14560,
+      "reparse": false,
+      "sha256": "ee824e3bbcf500720bb9a4cbf9b47724c8237c26812e88df1a24b0aa672a52b2"
+    },
+    {
+      "path": "tools/segment_zenodo_15509350_surface_cells.py",
+      "status": "??",
+      "bytes": 57702,
+      "reparse": false,
+      "sha256": "ba512ce57f52772c6707aed8384e7392b56f742fa346ea51459db8e5bddeafc6"
+    },
+    {
+      "path": "tools/verify_zenodo_15509350_surface_cells.py",
+      "status": "??",
+      "bytes": 11272,
+      "reparse": false,
+      "sha256": "516761b1576cd8fe4bd32e7f098e0186a0cbf1c02cf07c99611d70f9add38c99"
+    }
+  ],
+  "selected": [
+    "AGENTS.md",
+    "README.md",
+    "START_HERE.md",
+    "memory/project_cockpit/status.json",
+    "memory/project_cockpit/task_log.jsonl",
+    "plan/INDEX.md",
+    "project_control/CURRENT_STATUS.md",
+    "pyproject.toml",
+    "src/prl/cli.py",
+    "src/prl/quality.py",
+    "src/prl/rendering/__init__.py",
+    "src/prl/runs/__init__.py",
+    "src/prl/verification/__init__.py",
+    "tests/prl/test_cli.py",
+    "docs/adr/0002-fenicsx-primary-fem-backend.md",
+    "docs/fem_contour_pressure_model.md",
+    "docs/fem_curved_pressure_model.md",
+    "docs/fem_finite_strain_model.md",
+    "docs/fem_model_sources_and_time.md",
+    "project_control/external_large_data_storage_decision_v01.md",
+    "project_control/public_zebrafish_experimental_data_map_v01.md",
+    "project_control/ventricle_fem_active_elliptic_pilot_contract_v01.md",
+    "project_control/ventricle_fem_active_elliptic_pilot_execution_v01.md",
+    "project_control/ventricle_fem_contour_pressure_contract_v01.md",
+    "project_control/ventricle_fem_contour_pressure_execution_v01.md",
+    "project_control/ventricle_fem_curved_pressure_contract_v01.md",
+    "project_control/ventricle_fem_curved_pressure_execution_v01.md",
+    "project_control/ventricle_fem_fenicsx_active_completion_contract_v01.md",
+    "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md",
+    "project_control/ventricle_fem_fenicsx_execution_adoption_v01.md",
+    "project_control/ventricle_fem_fenicsx_ring_active_contract_v01.md",
+    "project_control/ventricle_fem_fenicsx_ring_active_execution_v01.md",
+    "project_control/ventricle_fem_fenicsx_runtime_preflight_blocker_v01.md",
+    "project_control/ventricle_fem_fenicsx_runtime_repair_execution_v01.md",
+    "project_control/ventricle_fem_finite_strain_contract_v01.md",
+    "project_control/ventricle_fem_finite_strain_execution_v01.md",
+    "project_control/ventricle_fem_fixed_mesh_contract_v01.md",
+    "project_control/ventricle_fem_fixed_mesh_execution_v01.md",
+    "project_control/ventricle_fem_measured_cell_shape_data_qualification_contract_v01.md",
+    "project_control/ventricle_fem_measured_cell_shape_data_qualification_execution_v01.md",
+    "project_control/ventricle_fem_measured_contour_contract_v01.md",
+    "project_control/ventricle_fem_measured_contour_execution_v01.md",
+    "project_control/ventricle_fem_only_measured_contour_decision_v01.md",
+    "project_control/ventricle_fem_rotation_repair_contract_v01.md",
+    "project_control/ventricle_fem_rotation_repair_execution_v01.md",
+    "project_control/ventricle_fem_surface_cell_segmentation_candidate_contract_v01.md",
+    "project_control/ventricle_fem_surface_cell_segmentation_candidate_execution_v01.md",
+    "project_control/ventricle_fem_synthetic_orientation_sensitivity_contract_v01.md",
+    "project_control/ventricle_fem_synthetic_orientation_sensitivity_execution_v01.md",
+    "src/prl/diagnostics/__init__.py",
+    "src/prl/diagnostics/passive_mechanics.py",
+    "src/prl/diagnostics/terminal_residual.py",
+    "src/prl/fem/__init__.py",
+    "src/prl/fem/active_ellipse.py",
+    "src/prl/fem/contour_wall.py",
+    "src/prl/fem/fenicsx_probe.py",
+    "src/prl/fem/fenicsx_ring.py",
+    "src/prl/fem/follower_pressure.py",
+    "src/prl/fem/hyperelastic.py",
+    "src/prl/fem/measured_contour.py",
+    "src/prl/fem/mixed_hex.py",
+    "src/prl/fem/refinement.py",
+    "src/prl/fem/ring_geometry.py",
+    "src/prl/fem/synthetic_orientation.py",
+    "src/prl/rendering/cb_plot_unified_style.py",
+    "src/prl/rendering/fem_active_ellipse.py",
+    "src/prl/rendering/fem_contour_pressure.py",
+    "src/prl/rendering/fem_curved_pressure.py",
+    "src/prl/rendering/fem_finite_strain.py",
+    "src/prl/rendering/fem_fixed_mesh.py",
+    "src/prl/rendering/fem_measured_contour.py",
+    "src/prl/rendering/fem_rotation.py",
+    "src/prl/rendering/fem_synthetic_orientation.py",
+    "src/prl/rendering/fenicsx_ring.py",
+    "src/prl/rendering/myocardial_crowded_box.py",
+    "src/prl/rendering/myocardial_crowded_quasistatic_growth.py",
+    "src/prl/rendering/myocardial_crowded_target_pair.py",
+    "src/prl/rendering/myocardial_crowded_volume_x2.py",
+    "src/prl/rendering/myocardial_row.py",
+    "src/prl/rendering/regular_2x2_load_hold.py",
+    "src/prl/rendering/regular_dcm_fem_common_limit.py",
+    "src/prl/runs/fem_active_ellipse.py",
+    "src/prl/runs/fem_contour_pressure.py",
+    "src/prl/runs/fem_curved_pressure.py",
+    "src/prl/runs/fem_finite_strain.py",
+    "src/prl/runs/fem_fixed_mesh.py",
+    "src/prl/runs/fem_measured_contour.py",
+    "src/prl/runs/fem_rotation.py",
+    "src/prl/runs/fem_synthetic_orientation.py",
+    "src/prl/runs/fenicsx_ring.py",
+    "src/prl/runs/fenicsx_runtime.py",
+    "src/prl/runs/myocardial_crowded_box.py",
+    "src/prl/runs/myocardial_crowded_quasistatic_growth.py",
+    "src/prl/runs/myocardial_crowded_target_pair.py",
+    "src/prl/runs/myocardial_crowded_volume_x2.py",
+    "src/prl/runs/myocardial_row.py",
+    "src/prl/runs/myocardial_sheet.py",
+    "src/prl/runs/regular_2x2_load_hold.py",
+    "src/prl/verification/fem_active_ellipse.py",
+    "src/prl/verification/fem_contour_pressure.py",
+    "src/prl/verification/fem_curved_pressure.py",
+    "src/prl/verification/fem_finite_strain.py",
+    "src/prl/verification/fem_fixed_mesh.py",
+    "src/prl/verification/fem_measured_contour.py",
+    "src/prl/verification/fem_rotation.py",
+    "src/prl/verification/fem_synthetic_orientation.py",
+    "src/prl/verification/fenicsx_ring.py",
+    "src/prl/verification/myocardial_crowded_box.py",
+    "src/prl/verification/myocardial_crowded_quasistatic_growth.py",
+    "src/prl/verification/myocardial_crowded_target_pair.py",
+    "src/prl/verification/myocardial_crowded_volume_x2.py",
+    "src/prl/verification/myocardial_row.py",
+    "src/prl/verification/myocardial_sheet.py",
+    "src/prl/verification/passive_mechanics.py",
+    "src/prl/verification/regular_2x2_load_hold.py",
+    "src/prl/verification/regular_dcm_fem_common_limit.py",
+    "src/prl/verification/terminal_residual.py",
+    "tests/prl/test_fem_active_ellipse.py",
+    "tests/prl/test_fem_contour_pressure_rendering.py",
+    "tests/prl/test_fem_contour_pressure_runner.py",
+    "tests/prl/test_fem_contour_pressure_verifier.py",
+    "tests/prl/test_fem_contour_wall.py",
+    "tests/prl/test_fem_curved_pressure_core.py",
+    "tests/prl/test_fem_curved_pressure_rendering.py",
+    "tests/prl/test_fem_curved_pressure_runner.py",
+    "tests/prl/test_fem_curved_pressure_verifier.py",
+    "tests/prl/test_fem_finite_strain_runner.py",
+    "tests/prl/test_fem_finite_strain_verifier.py",
+    "tests/prl/test_fem_geometry_seam.py",
+    "tests/prl/test_fem_only_cli.py",
+    "tests/prl/test_fem_refinement.py",
+    "tests/prl/test_fem_rotation.py",
+    "tests/prl/test_fem_rotation_runner.py",
+    "tests/prl/test_fem_synthetic_orientation.py",
+    "tests/prl/test_fenicsx_ring.py",
+    "tests/prl/test_hyperelastic.py",
+    "tests/prl/test_mixed_hex.py",
+    "tests/prl/test_mixed_hex_lifting.py",
+    "tools/qualify_zenodo_15509350.py",
+    "tools/segment_zenodo_15509350_surface_cells.py",
+    "tools/verify_zenodo_15509350_surface_cells.py"
+  ],
+  "excluded": [
+    "external/simucell3d/include/contact_models/contact_node_face_via_spring.hpp",
+    "external/simucell3d/include/contact_models/surface_separation_guard.hpp",
+    "external/simucell3d/include/mesh/cell.hpp",
+    "external/simucell3d/include/mesh/node.hpp",
+    "external/simucell3d/include/prl_cell_engine/cell_surface_force.hpp",
+    "external/simucell3d/src/contact_models/contact_node_face_via_spring.cpp",
+    "external/simucell3d/src/mesh/cell.cpp",
+    "external/simucell3d/src/triangulation_modules/cell_surface_force.cpp",
+    "external/simucell3d/test/test_mesh/test_surface_tension_cache_precision/test_surface_tension_cache_precision.cpp",
+    "src/ventricle_bioform_myo/CMakeLists.txt",
+    "src/ventricle_bioform_myo/ventricle_myo_strip_v01.cpp",
+    "src/ventricle_simucell3d_m0/CMakeLists.txt",
+    "src/ventricle_simucell3d_m0/myo_contact_barrier_probe_v01.cpp",
+    "src/ventricle_simucell3d_m0/myo_contact_barrier_relaxation_v01.cpp",
+    "src/ventricle_simucell3d_m0/myo_contact_scaling_probe_v01.cpp",
+    "tests/prl/quick_suite_v01.txt",
+    "project_control/evidence/ventricle_terminal_residual_diagnosis_v01/diagnosis_summary_v01.json",
+    "project_control/fem_scientific_execution.lock",
+    "project_control/ventricle_myocardial_crowded_box_pilot_contract_v01.md",
+    "project_control/ventricle_myocardial_crowded_box_pilot_execution_v01.md",
+    "project_control/ventricle_myocardial_crowded_quasistatic_growth_contract_v01.md",
+    "project_control/ventricle_myocardial_crowded_quasistatic_growth_execution_v01.md",
+    "project_control/ventricle_myocardial_crowded_target_pair_contract_v01.md",
+    "project_control/ventricle_myocardial_crowded_target_pair_execution_v01.md",
+    "project_control/ventricle_myocardial_crowded_volume_x2_contract_v01.md",
+    "project_control/ventricle_myocardial_crowded_volume_x2_execution_v01.md",
+    "project_control/ventricle_myocardial_heterogeneous_row_equilibrium_contract_v01.md",
+    "project_control/ventricle_myocardial_heterogeneous_row_equilibrium_execution_v01.md",
+    "project_control/ventricle_myocardial_irregular_sheet_recenter_v01.md",
+    "project_control/ventricle_myocardial_passive_repair_execution_v01.md",
+    "project_control/ventricle_myocardial_sheet_pair_contract_v01.md",
+    "project_control/ventricle_myocardial_sheet_pair_execution_v01.md",
+    "project_control/ventricle_regular_2x2_load_hold_contract_v01.md",
+    "project_control/ventricle_regular_2x2_load_hold_execution_v01.md",
+    "project_control/ventricle_regular_dcm_fem_common_limit_contract_v01.md",
+    "project_control/ventricle_regular_dcm_fem_common_limit_r0a_execution_v01.md",
+    "project_control/ventricle_terminal_residual_diagnosis_contract_v01.md",
+    "project_control/ventricle_terminal_residual_diagnosis_execution_v01.md",
+    "src/ventricle_bioform_myo/passive_mechanics_probe.cpp",
+    "src/ventricle_simucell3d_m0/myo_crowded_box_relaxation_v01.cpp",
+    "tests/prl/test_myocardial_crowded_box.py",
+    "tests/prl/test_myocardial_crowded_quasistatic_growth.py",
+    "tests/prl/test_myocardial_crowded_target_pair.py",
+    "tests/prl/test_myocardial_crowded_volume_x2.py",
+    "tests/prl/test_myocardial_row.py",
+    "tests/prl/test_myocardial_sheet.py",
+    "tests/prl/test_passive_mechanics.py",
+    "tests/prl/test_regular_2x2_load_hold.py",
+    "tests/prl/test_terminal_residual_diagnosis.py",
+    "tests/prl/test_quality.py"
+  ]
+}
