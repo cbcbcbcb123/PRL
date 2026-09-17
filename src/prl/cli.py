@@ -367,6 +367,7 @@ def _parser() -> argparse.ArgumentParser:
         contour_mode=contour.add_mutually_exclusive_group()
         contour_mode.add_argument('--repair-thin-mesh',action='store_true',help='F6-S1-M bounded thin-layer mesh repair')
         contour_mode.add_argument('--retained-passive',action='store_true',help='F6-S1-P reuse qualified mesh, 800 MiB stage')
+        contour_mode.add_argument('--fine-diagnostic',action='store_true',help='F6-S1-Q: only M1 at p=0 and 0.02, external results')
     return parser
 
 
@@ -449,18 +450,21 @@ def main(arguments: Sequence[str] | None = None) -> int:
     elif ((parsed.command=='run' and parsed.run_command=='fem-fenicsx-contour') or
           (parsed.command=='verify' and parsed.verify_command=='fem-fenicsx-contour') or
           (parsed.command=='render' and parsed.render_command=='fem-fenicsx-contour')):
-        from .runs.fenicsx_contour import RESULT,REPAIR_RESULT,PASSIVE_RESULT,run_contour
+        from .runs.fenicsx_contour import RESULT,REPAIR_RESULT,PASSIVE_RESULT,FINE_RESULT,run_contour
         from .result_store import result_path
-        identifier=PASSIVE_RESULT if parsed.retained_passive else REPAIR_RESULT if parsed.repair_thin_mesh else RESULT
+        identifier=FINE_RESULT if parsed.fine_diagnostic else PASSIVE_RESULT if parsed.retained_passive else REPAIR_RESULT if parsed.repair_thin_mesh else RESULT
         if parsed.command=='run':
-            report=run_contour(workspace,repair=parsed.repair_thin_mesh,retained=parsed.retained_passive)
+            report=run_contour(workspace,repair=parsed.repair_thin_mesh,retained=parsed.retained_passive,fine=parsed.fine_diagnostic)
         elif parsed.command=='verify':
             contour_result=result_path(workspace,identifier)
             from .verification.fenicsx_contour import verify_contour,verify_mesh_repair
-            report=verify_mesh_repair(contour_result) if parsed.repair_thin_mesh else verify_contour(contour_result)
+            from .verification.fenicsx_fine import verify_fine
+            report=verify_fine(contour_result) if parsed.fine_diagnostic else verify_mesh_repair(contour_result) if parsed.repair_thin_mesh else verify_contour(contour_result)
         else:
             contour_result=result_path(workspace,identifier)
             from .rendering.fenicsx_contour import render_contour
+            if parsed.fine_diagnostic:
+                raise ValueError('Fine diagnostic uses its frozen Notebook; no implicit figure overwrite')
             report=render_contour(contour_result)
         exit_code=0 if report['status']=='passed' else 1
     elif parsed.command == 'run' and parsed.run_command == 'fem-fenicsx-ring':

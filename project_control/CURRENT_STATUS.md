@@ -9,15 +9,15 @@ git_integration_execution: project_control/remote_history_integration_execution_
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
 verified_commit: bbc4b5be549a95766c6419c2aeb784e2c2cc7681
-current_lifecycle: fem_only_f6s1p_local_volume_failed
+current_lifecycle: fem_only_f6s1q_refinement_local_volume_failed
 documentation_updated_at: 2026-09-17
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_fenicsx_retained_passive_contract_v01.md
-last_completed_contract: project_control/ventricle_fem_fenicsx_retained_passive_contract_v01.md
-current_render_contract: results/ventricle_fem/f6s1p_retained_passive_v01_20260917/rendering.json
-next_stage_contract: pending_two_state_fine_mesh_diagnostic_approval
-current_authorization: f6s1p_first_failure_stop_no_automatic_retry
+current_contract: project_control/ventricle_fem_fenicsx_fine_diagnostic_contract_v01.md
+last_completed_contract: project_control/ventricle_fem_fenicsx_fine_diagnostic_contract_v01.md
+current_render_contract: ../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/rendering.json
+next_stage_contract: pending_boundary_and_volume_discretization_separation_decision
+current_authorization: f6s1q_two_state_scope_completed_no_automatic_retry
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
 external_results_root: E:/Temp-Projects/PRL-results
@@ -25,11 +25,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: F6S1P_local_volume_failed_no_new_scientific_attempt
-current_execution_log: project_control/ventricle_fem_fenicsx_retained_passive_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_fenicsx_retained_passive_execution_v01.md
+execution_authorized: F6S1Q_local_volume_failed_no_new_scientific_attempt
+current_execution_log: project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md
 latest_completed_scientific_gate: F6-S0_G0_G1_G2_ideal_ring_qualification
-latest_result_package: results/ventricle_fem/f6s1p_retained_passive_v01_20260917/summary.json
+latest_result_package: ../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/summary.json
 latest_supervisor_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -49,7 +49,20 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-17 F6-S1-P局部体积门失败
+## 当前：2026-09-17 F6-S1-Q细网格局部体积门仍失败
+
+只补14164单元M1的p/mu=0及0.02两态，与已保存M0对照；一次40.770秒容器，0粗网格重跑。
+非零载局部J峰值6.71167%→11.15248%，超限积分权重参考体积分数0.48565%→0.14100%。
+腔面积变化20.10718%/20.12104%，只差0.01387个百分点；全局面积门通过而局部1%门失败。
+热点靠近外边界、远离规范固定点，尚不能确定是几何局部效应还是体积约束离散主导。
+零载passed，非零载仅local_volume失败；后续载荷、主动和生物验证not_run。
+
+375父文件与50无关既有改动保持；73测试/21子测试通过，结构、应力、J粗细图和两帧GIF冻结。
+新包已使用外置PRL-results；当前授权完成，不自动重复。下一步为边界/离散分离对照的合同与裁决。
+见[执行记录](ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md)及
+[本地结果页](../../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/index.html)。
+
+## 历史：2026-09-17 F6-S1-P局部体积门失败
 
 本次科学调用按用户批准的800 MiB阶段预算执行，原3 GiB项目硬限与64 MiB停止空间保持。
 复用合格candidate_0，无Gmsh重生成；3541/14164单元两级几何与存储准入通过。

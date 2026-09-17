@@ -127,3 +127,90 @@ def draw_passive(mesh_path,state_paths,geometry_path,verification_path,diagnosis
     frames[0].save(gif_path,save_all=True,append_images=frames[1:],duration=1200,loop=0)
     plt.close(preview)
     return {'states':2,'equilibria_accepted':1,'scientific_gate':'failed','scientific_solves':0}
+
+
+def draw_fine(mesh_paths,state_paths,geometry_path,verification_path,png_path,svg_path,gif_path,
+              style_module,axis_box_size_in=(3.6,3.6),figure_size_in=(14.4,13.6)):
+    """Same-field M0/M1 comparison, only actual retained equilibria."""
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.collections import PolyCollection
+    from matplotlib.colors import Normalize
+    from matplotlib.ticker import FixedLocator,MaxNLocator
+    from PIL import Image
+
+    meshes=[load(path) for path in mesh_paths]
+    coarse,rest,fine=[load(path) for path in state_paths]
+    geometry=load(geometry_path)
+    report=json.loads(Path(verification_path).read_text())
+    if [float(s['load']) for s in [coarse,rest,fine]]!=[.02,0.,.02]:
+        raise ValueError('Expected retained M0 loaded, new M1 rest/loaded states')
+    style=style_module.StyleSpec(axis_box_size_in=axis_box_size_in,tick_label_size=16.,axis_label_size=18.,
+        annotation_font_size=16.,sample_size_and_stat_font_size=14.,legend_font_size=14.,axes_line_width=1.5,
+        major_tick_length_pt=5.,major_tick_width_pt=1.,minor_tick_length_pt=3.,minor_tick_width_pt=.8,
+        data_line_width=1.5,tick_label_pad_pt=4.,axis_label_pad_pt=8.)
+    default=asdict(style_module.DEFAULT_STYLE)
+    overrides=[style_module.StyleOverride(field=k,reason='Reuse accepted compact FEM comparison style; equal spatial aspect and fixed panel sizes.')
+               for k,v in asdict(style).items() if v!=default[k]]
+    fig=plt.figure(figsize=figure_size_in); width,height=figure_size_in; side=axis_box_size_in[0]
+    axes=[fig.add_axes((x/width,y/height,side/width,side/height)) for x,y in [(1.3,8.0),(8.1,8.0),(1.3,2.8),(8.1,2.8)]]
+    nodes=np.concatenate([meshes[0]['coordinates']+coarse['u'],meshes[1]['coordinates']+rest['u'],meshes[1]['coordinates']+fine['u']])
+    center=(nodes.min(axis=0)+nodes.max(axis=0))/2; half=max(np.ptp(nodes,axis=0))*.56
+    def spatial(ax):
+        ax.set(xlim=(center[0]-half,center[0]+half),ylim=(center[1]-half,center[1]+half),xlabel='x / L',ylabel='y / L')
+        ax.set_aspect('equal')
+        for axis,limits in [(ax.xaxis,ax.get_xlim()),(ax.yaxis,ax.get_ylim())]:
+            values=MaxNLocator(nbins=4).tick_values(*limits)
+            axis.set_major_locator(FixedLocator(values[(values>=limits[0])&(values<=limits[1])]))
+    polygons=[boundary_polygons(mesh,state['u']) for mesh,state in [(meshes[0],coarse),(meshes[1],rest),(meshes[1],fine)]]
+    palette=np.array(['#4C9F70','#D6B656','#5B8DB8'])
+    axes[0].add_collection(PolyCollection(polygons[1],facecolors=palette[meshes[1]['layers']-1],edgecolors=(.1,.1,.1,.3),linewidths=.10))
+    for point,label,marker in zip(geometry['anchors'],['A','B'],['s','^']):
+        axes[0].plot(*point,marker=marker,color='#B3463E',ms=7)
+        axes[0].annotate(label,point,xytext=(5,8),textcoords='offset points',fontsize=14)
+    stresses=[stress_values(meshes[1],s) for s in [rest,fine]]
+    stress_peak=max(float(s.max()) for s in stresses)
+    sc=PolyCollection(polygons[2],array=stresses[1],norm=Normalize(0,stress_peak),cmap='YlGnBu',edgecolors=(.1,.1,.1,.22),linewidths=.10)
+    axes[1].add_collection(sc)
+    deviations=[np.max(np.abs(s['J']-1),axis=1)*100 for s in [coarse,fine]]
+    norm=Normalize(0,max(float(d.max()) for d in deviations))
+    for ax,polygon,deviation in zip(axes[2:],[polygons[0],polygons[2]],deviations):
+        vc=PolyCollection(polygon,array=deviation,norm=norm,cmap='YlOrRd',edgecolors=(.1,.1,.1,.22),linewidths=.10)
+        ax.add_collection(vc)
+    for ax in axes[1:]:
+        for key in ['inner_nodes','outer_nodes']:
+            curve=geometry['xy'][geometry[key]]; curve=np.vstack((curve,curve[0]))
+            ax.plot(curve[:,0],curve[:,1],ls='--',color='#777777',lw=.8)
+    def colorbar(collection,y,label):
+        cax=fig.add_axes((12.05/width,y/height,.22/width,side/height))
+        cb=fig.colorbar(collection,cax=cax); cb.set_label(label,labelpad=8,fontsize=18)
+        cax.tick_params(labelsize=16,direction='out')
+    colorbar(sc,8.0,'Mean von Mises / mu')
+    colorbar(vc,2.8,'Max |J - 1| per cell (%)')
+    status=report['cases']['M1']['passive_1']['status'].upper()
+    titles=['A  M1 reference; 14,164 cells',f'B  M1 at p / mu = 0.02; {status}',
+            f'C  Retained M0: peak {deviations[0].max():.3f}%',f'D  New M1: peak {deviations[1].max():.3f}%']
+    for ax,title in zip(axes,titles):
+        spatial(ax); style_module.apply_axes_style(ax,style=style); style_module.add_top_information(ax,title,style=style)
+    comp=report['comparison']
+    fig.text(.065,.960,f'F6-S1-Q | two-state fine-grid diagnostic: {report["status"].upper()} | 1x deformation',fontsize=16)
+    fig.text(.065,.928,f'Cavity change: M0 {100*comp["cavity_change_M0"]:.4f}%, M1 {100*comp["cavity_change_M1"]:.4f}%; local-J gate remains 1%.',fontsize=14)
+    fig.text(.065,.136,'Assumed endocardium / ECM / myocardium. A: ux=uy=0; B: uy=0; pressure inside, outer wall free.',fontsize=12)
+    fig.text(.065,.103,'C and D share one color scale. Gray dashes: reference contours. Only the outer shape is image-derived.',fontsize=12)
+    fig.text(.065,.070,'M0 is retained evidence, not rerun. M1: two actual states; no active contraction or physiological time.',fontsize=12)
+    fig.text(.065,.037,'Local-J failures are not accepted physical responses; two mesh levels do not establish asymptotic convergence.',fontsize=12)
+    exported=style_module.export_figure(fig,axes,Path(png_path).with_suffix(''),style=style,overrides=overrides)
+    Path(exported.svg).replace(svg_path)
+    manifest=json.loads(Path(exported.manifest).read_text()); manifest['exports']['svg']=str(Path(svg_path).resolve())
+    Path(exported.manifest).write_text(json.dumps(manifest,indent=2),encoding='utf-8'); plt.close(fig)
+    preview=plt.figure(figsize=(6.3,6.6),dpi=110); ax=preview.add_axes((.17,.21,.65,.65)); frames=[]
+    preview.text(.09,.075,'Two actual M1 states; 1x deformation; no time interpolation.',fontsize=10)
+    preview.text(.09,.040,'Loop playback is NOT a simulated cardiac cycle.',fontsize=10)
+    for i,state in enumerate([rest,fine]):
+        ax.clear(); ax.add_collection(PolyCollection(polygons[i+1],array=stresses[i],norm=Normalize(0,stress_peak),cmap='YlGnBu',edgecolors=(.1,.1,.1,.18),linewidths=.08))
+        spatial(ax)
+        ax.set_title(f'M1 p/mu={float(state["load"]):.2f}; '+report['cases']['M1'][f'passive_{i}']['status'].upper(),fontsize=13)
+        preview.canvas.draw(); frames.append(Image.fromarray(np.asarray(preview.canvas.buffer_rgba()).copy()).convert('RGB'))
+    frames[0].save(gif_path,save_all=True,append_images=frames[1:],duration=1200,loop=0); plt.close(preview)
+    return {'scientific_solves':0,'new_states_shown':2,'coarse_states_recomputed':0,'scientific_gate':report['status']}

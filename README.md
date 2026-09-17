@@ -6,11 +6,12 @@
 
 ## 当前进展
 
-F6-S1-P已按获准800 MiB预算执行，复用3541单元合格网格；粗/细几何均通过。
-零载passed；p/mu=0.02求解收敛但局部体积偏差6.71167%超过1%门，按合同停止。
-保存2态、接受1态；其余8态及细网格力学未运行。计算腔面积+20.10718%仅为失败态诊断。
-见[结构、形变应力、局部J及两帧动图](results/ventricle_fem/f6s1p_retained_passive_v01_20260917/index.html)和
-[本次执行记录](project_control/ventricle_fem_fenicsx_retained_passive_execution_v01.md)。
+F6-S1-Q已完成细网格14164单元的零载/0.02两态，粗网格3541单元不重跑。
+加密后局部体积峰值6.71167%→11.15248%，仍超1%门；超限参考体积分数0.48565%→0.14100%。
+两档腔面积响应只差0.01387个百分点，但局部门未通过，不能接受为已验证响应。
+一次40.770秒容器保存2态、接受1态，无自动重试或主动收缩。
+见[本地结构、应力、粗细局部J及两帧动图](../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/index.html)和
+[本次执行记录](project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md)。大图与原始数据不随GitHub同步。
 
 最近通过的力学阶段保持如下：
 
@@ -20,8 +21,8 @@ F6-S0的FEniCSx运行时、被动与主动圆环资格均通过。两档896/3584
 见[结构、结果与动图](results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html)和[完成记录](project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md)。
 
 上述力学结果仍是理想圆环、平面应变、未标定同质材料，不能代表斑马鱼实验拟合。
-F5局部体积、F6-S1网格及F6-S1-M预算阻断原记录保留。下一步待确认：只计算尚未运行的
-细网格0及0.02两态，检验局部离散精度，不改材料与1%J门，不重跑粗网格。
+历史失败原记录保留。下一步待确认：边界拐角与局部体积约束离散的最小分离对照；
+不盲目再加密、不改材料与1%J门，不继续加压或主动收缩。
 
 ## 软件入口
 
@@ -33,12 +34,13 @@ python -B -X utf8 -m prl verify fem-fenicsx-ring --workspace . --result results/
 python -B -X utf8 -m prl verify fem-fenicsx-contour --workspace .
 python -B -X utf8 -m prl verify fem-fenicsx-contour --repair-thin-mesh --workspace .
 python -B -X utf8 -m prl verify fem-fenicsx-contour --retained-passive --workspace .
+python -B -X utf8 -m prl verify fem-fenicsx-contour --fine-diagnostic --workspace .
 python -B -X utf8 -m prl validate cockpit --workspace .
 ```
 
 圆环verify完整G1/G2应返回passed；不带修复参数的轮廓verify重读原F6-S1并返回failed。
 --repair-thin-mesh返回的是保存网格/预算核验passed，同时明确storage blocked、mechanics not_run，
-不能误读为力学资格通过。--retained-passive重读本次保存态，应为failed，不自动重跑。
+不能误读为力学资格通过。--retained-passive和--fine-diagnostic重读对应保存态，应为failed，不自动重跑。
 冻结图包不静默重绘。后续大型结果使用已批准的`E:\Temp-Projects\PRL-results`，不进入Git；旧结果保持原位。
 当前FEniCSx轮廓输出接口及主机/Docker读写已验收；旧阶段ID仍拒绝重跑，新增科学阶段须按合同授权。
 

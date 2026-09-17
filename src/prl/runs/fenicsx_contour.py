@@ -22,11 +22,13 @@ PASSIVE_RESULT=Path('results/ventricle_fem/f6s1p_retained_passive_v01_20260917')
 PASSIVE_CONTRACT=Path('project_control/ventricle_fem_fenicsx_retained_passive_contract_v01.md')
 RETAINED_MESH=REPAIR_RESULT/'raw/candidate_0_mesh.npz'
 RETAINED_MESH_SHA='157265c350367a95f36c40c5951117272ceeccac9f273ec65e5000eb81627f65'
+FINE_RESULT=Path('results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917')
+FINE_CONTRACT=Path('project_control/ventricle_fem_fenicsx_fine_diagnostic_contract_v01.md')
 
 
-def configuration(repair=False,retained=False):
-    if repair and retained:
-        raise ValueError('Choose mesh repair or retained passive execution, not both')
+def configuration(repair=False,retained=False,fine=False):
+    if sum([repair,retained,fine])>1:
+        raise ValueError('Choose one contour execution mode')
     cfg=ring_configuration()
     cfg.update({'schema_version':'prl.fenicsx_contour_passive.v1','geometry_kind':'image_polygon',
                 'meshes':[{'name':'M0'},{'name':'M1'}],'active_peak':0.,'scope':'image-derived outer polygon; assumed cavity/layers; passive plane strain; uncalibrated',
@@ -37,21 +39,26 @@ def configuration(repair=False,retained=False):
         cfg['mesh_size_candidates']=[1.2,.9,.7]
         cfg['mesher']['size_rule']='min(0.09, factor * distance to adjacent fixed polygonal interface)'
         cfg['mesher']['selection']='first geometry-and-budget-qualified candidate; maximum three geometry generations'
-    if retained:
+    if retained or fine:
         cfg['retained_mesh']={'path':RETAINED_MESH.as_posix(),'sha256':RETAINED_MESH_SHA}
         cfg['mesher']={'mode':'retained candidate 0; no Gmsh calls','fine':'midpoint four-way subdivision'}
         cfg['resources']['stage_bytes']=800*1024**2
+    if fine:
+        cfg.update(diagnostic='fine_two_state',execution_meshes=['M1'],passive_loads=[0.,.02],
+                   meshes=[{'name':'M1'}],parent_result=PASSIVE_RESULT.as_posix())
     return cfg
 
 
-def protected(workspace,repair=False,retained=False):
+def protected(workspace,repair=False,retained=False,fine=False):
     values={}
     names=['f2_measured_contour_v01_20260917','f5_contour_pressure_v01_20260917',
            'f6s0_fenicsx_ring_active_v01_20260917','f6s0_active_completion_v01_20260917']
-    if repair or retained:
+    if repair or retained or fine:
         names.append(RESULT.name)
-    if retained:
+    if retained or fine:
         names.append(REPAIR_RESULT.name)
+    if fine:
+        names.append(PASSIVE_RESULT.name)
     for name in names:
         base=workspace/'results/ventricle_fem'/name
         manifest=json.loads((base/'manifest.json').read_text())
@@ -63,19 +70,19 @@ def protected(workspace,repair=False,retained=False):
     return values
 
 
-def run_contour(workspace,repair=False,retained=False):
+def run_contour(workspace,repair=False,retained=False,fine=False):
     from prl.verification.fenicsx_contour import SOURCE_SHA
     from prl.result_store import result_path,result_admission,disk_admission,register_result,POLICY
 
     workspace=Path(workspace).resolve(strict=True)
-    cfg=configuration(repair,retained)
-    root=result_path(workspace,PASSIVE_RESULT if retained else REPAIR_RESULT if repair else RESULT,new=True)
-    contract=PASSIVE_CONTRACT if retained else REPAIR_CONTRACT if repair else CONTRACT
+    cfg=configuration(repair,retained,fine)
+    root=result_path(workspace,FINE_RESULT if fine else PASSIVE_RESULT if retained else REPAIR_RESULT if repair else RESULT,new=True)
+    contract=FINE_CONTRACT if fine else PASSIVE_CONTRACT if retained else REPAIR_CONTRACT if repair else CONTRACT
     if root.exists():
         raise FileExistsError('F6-S1 is create-only; no automatic rerun')
     if digest(workspace/SOURCE)!=SOURCE_SHA:
         raise ValueError('Frozen geometry source changed')
-    if retained and digest(workspace/RETAINED_MESH)!=RETAINED_MESH_SHA:
+    if (retained or fine) and digest(workspace/RETAINED_MESH)!=RETAINED_MESH_SHA:
         raise ValueError('Retained qualified mesh changed')
     version=json.loads(read_docker('version','--format','{{json .}}'))
     if not version.get('Server'):
@@ -87,6 +94,8 @@ def run_contour(workspace,repair=False,retained=False):
         import numpy as np
         with np.load(workspace/RETAINED_MESH,allow_pickle=False) as data:
             forecast=len(data['triangles'])*76800+48*1024**2
+    if fine:
+        forecast=256*1024**2  # Conservative forecast, not a stage cap.
     admission=result_admission(workspace,planned_new_bytes=forecast,stop_reserve_bytes=64*1024**2)
     if not admission['can_start']:
         raise RuntimeError('Storage admission refused')
@@ -95,7 +104,7 @@ def run_contour(workspace,repair=False,retained=False):
     cfg['output_storage']={'mode':'external_disk_free','root':str(root),
                            'disk_free_floor_bytes':admission['disk_free_floor_bytes'],
                            'stop_reserve_bytes':admission['stop_reserve_bytes']}
-    parents=protected(workspace,repair,retained)
+    parents=protected(workspace,repair,retained,fine)
     with scientific_lock(workspace):
         root.mkdir(parents=True,exist_ok=False)
         save_json(root/'storage_preflight.json',admission)
@@ -103,18 +112,31 @@ def run_contour(workspace,repair=False,retained=False):
         save_json(root/'docker_version.json',version)
         save_json(root/'protected_preflight.json',parents)
         shutil.copyfile(workspace/SOURCE,root/'geometry_source.npz')
-        if retained:
+        if retained or fine:
             shutil.copyfile(workspace/RETAINED_MESH,root/'retained_mesh.npz')
+        if fine:
+            comparison=root/'comparison'; comparison.mkdir()
+            names=['configuration.json','verification.json','raw/M0_mesh.npz','raw/M1_input_mesh.npz',
+                   'raw/M0_state_passive_0.npz','raw/M0_state_passive_0.json',
+                   'raw/M0_state_passive_1.npz','raw/M0_state_passive_1.json']
+            identities={}
+            for relative in names:
+                source=workspace/PASSIVE_RESULT/relative
+                shutil.copyfile(source,comparison/source.name)
+                identities[source.name]={'parent_path':(PASSIVE_RESULT/relative).as_posix(),'sha256':digest(source)}
+            save_json(comparison/'source_identity.json',identities)
         source_paths=['src/prl/fem/fenicsx_contour.py','src/prl/fem/fenicsx_ring.py','src/prl/fem/ring_geometry.py',
                       'src/prl/verification/fenicsx_contour.py','src/prl/verification/fenicsx_ring.py',
                       'src/prl/runs/fenicsx_contour.py','src/prl/runs/fenicsx_runtime.py',
                       'src/prl/result_store.py',POLICY.as_posix(),contract.as_posix()]
+        if fine:
+            source_paths.append('src/prl/verification/fenicsx_fine.py')
         for relative in source_paths:
             target=root/'sources_at_execution'/relative
             target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(workspace/relative,target)
         save_json(root/'source_hashes.json',{p:digest(workspace/p) for p in source_paths})
-        name='prl-f6s1p-retained-passive-v01-20260917' if retained else 'prl-f6s1m-thin-mesh-v01-20260917' if repair else 'prl-f6s1-contour-passive-v01-20260917'
+        name='prl-f6s1q-fine-diagnostic-v01-20260917' if fine else 'prl-f6s1p-retained-passive-v01-20260917' if retained else 'prl-f6s1m-thin-mesh-v01-20260917' if repair else 'prl-f6s1-contour-passive-v01-20260917'
         args=container_command(workspace,name,'/workspace/src/prl/fem/fenicsx_contour.py',root)
         save_json(root/'command.json',args)
         save_json(root/'science_started.json',{'invocations':1,'container':name,'automatic_retries':0})
@@ -142,10 +164,11 @@ def run_contour(workspace,repair=False,retained=False):
         report={'status':'passed' if process.returncode==0 and all(settings.values()) and unchanged and reason is None else 'failed',
                 'exit_code':process.returncode,'stop_reason':reason,'container_checks':settings,
                 'protected_parent_files':len(parents),'parents_unchanged':unchanged,'scientific_invocations':1,
-                'runtime_capability_probes':0 if repair or retained else 1,'automatic_retries':0,'gpu':0,'elapsed_seconds':time.monotonic()-started}
+                'runtime_capability_probes':0 if repair or retained or fine else 1,'automatic_retries':0,'gpu':0,'elapsed_seconds':time.monotonic()-started}
         save_json(root/'execution.json',report)
         save_json(root/'manifest.json',package_manifest(root))
-        register_result(workspace,root,report['status'],digest(root/'manifest.json'))
+        if not fine:  # New diagnostic index is frozen only after postprocessing.
+            register_result(workspace,root,report['status'],digest(root/'manifest.json'))
         return report
 
 

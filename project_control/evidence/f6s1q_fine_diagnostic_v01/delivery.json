@@ -1,0 +1,29 @@
+{
+  "result_root": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\f6s1q_fine_diagnostic_v01_20260917",
+  "scientific_status": "failed",
+  "manifest_sha256": "ce22000d46768c361d5fafbde78d230970c427c3015bc38a5801bf796cd33d58",
+  "status": "passed",
+  "formal_invocation_files_unchanged": 54,
+  "protected_parent_files_unchanged": 375,
+  "unrelated_dirty_files_unchanged": 50,
+  "source_at_execution_unchanged": true,
+  "figure_input_hash_matches": 7,
+  "tests": {
+    "passed": 73,
+    "subtests_passed": 21
+  },
+  "cockpit": {
+    "schema_version": "prl.cockpit.links.v1",
+    "status": "passed",
+    "html_links": 24,
+    "evidence_paths": 320,
+    "missing": []
+  },
+  "repository_bytes": 2034077612,
+  "external_stage_bytes_before_final_metadata": 78183726,
+  "disk_free_bytes": 2227660349440,
+  "fixed_stage_limit_bytes": null,
+  "scientific_solves_in_finalization": 0,
+  "deletions": 0,
+  "moves": 0
+}

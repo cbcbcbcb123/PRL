@@ -146,6 +146,17 @@ def output_fits(root,config,planned_bytes):
     return planned_bytes<=config['resources']['stage_bytes']
 
 
+def execution_meshes(config):
+    """No arbitrary partial-run escape; only the frozen two-state diagnostic."""
+    if config.get('diagnostic')=='fine_two_state':
+        if config.get('execution_meshes')!=['M1'] or config['passive_loads']!=[0.,.02] or config['active_peak']!=0.:
+            raise ValueError('Fine diagnostic is exactly M1 at p=0 and 0.02, passive only')
+        return ['M1']
+    if 'execution_meshes' in config or 'diagnostic' in config:
+        raise ValueError('Unknown partial execution scope')
+    return ['M0','M1']
+
+
 def main():
     from prl.fem.fenicsx_ring import Ring,write_json
     from prl.verification.fenicsx_ring import load_arrays,state_audit
@@ -153,6 +164,7 @@ def main():
 
     root=Path('/out')
     config=json.loads((root/'configuration.json').read_text())
+    selected=execution_meshes(config)
     stage_cap=config['resources']['stage_bytes']
     started=time.monotonic()
     completed=0
@@ -193,12 +205,18 @@ def main():
             data['metrics']=report
             if report['status']!='passed':
                 raise ValueError('Independent geometry gate: '+str(report['failed_checks']))
+        if config.get('diagnostic')=='fine_two_state':
+            prior=load_arrays(root/'comparison/M1_input_mesh.npz')
+            if set(prior)!=set(fine)-{'metrics'} or not all(np.array_equal(prior[k],fine[k]) for k in prior):
+                raise ValueError('Fine geometry differs from the already retained M1')
         # Conservative uncompressed storage bound: all quadrature fields, maps and states.
-        predicted=sum(len(data['triangles'])*5*12*32*8 for data in geometries)+48*1024**2
+        predicted=sum(len(data['triangles'])*len(config['passive_loads'])*12*32*8 for name,data in zip(['M0','M1'],geometries) if name in selected)+48*1024**2
         write_json(root/'raw_storage_bound.json',{'maximum_planned_bytes':predicted,'limit_bytes':stage_cap})
         if not output_fits(root,config,predicted):
             raise ValueError('Predicted complete-state output cannot fit phase budget')
         for name,data in zip(['M0','M1'],geometries):
+            if name not in selected:
+                continue
             current=Ring({'name':name},config,root,geometry_input=data)
             current.tangent_checks()
             initial=np.zeros_like(current.w.x.array)
@@ -216,7 +234,11 @@ def main():
                     raise ValueError('Independent state gate: '+str([k for k,v in report['checks'].items() if not v]))
                 completed+=1
                 write_json(root/'last_valid.json',{'mesh':name,'label':f'passive_{i}','completed_states':completed})
-        report=verify_contour(root,save=True)
+        if config.get('diagnostic')=='fine_two_state':
+            from prl.verification.fenicsx_fine import verify_fine
+            report=verify_fine(root,save=True)
+        else:
+            report=verify_contour(root,save=True)
         write_json(root/'solver_execution.json',{'status':report['status'],'attempted_states':attempted,
                     'completed_states':completed,'automatic_retries':0,'elapsed_seconds':time.monotonic()-started})
         return 0 if report['status']=='passed' else 2

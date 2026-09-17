@@ -2,14 +2,14 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-17",
   "overall_status": "failed",
-  "summary": "800 MiB预算已生效，粗/细几何passed；粗网格首个非零压力态收敛但局部J偏差6.71167%>1%。保存2态、1通过、1失败；细网格力学和后续8态not_run。",
+  "summary": "只补细网格两态，粗网格不重跑。局部J峰值6.71167%→11.15248%，超限体积分数0.48565%→0.14100%；全局腔面积一致不能替代局部1%门。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM解释斑马鱼心室跳动及发育，逐步研究组织结构、生长、ECM和心内膜反馈。",
     "scope": "图像来源二维外轮廓、构造内腔/层界；首个非零压力态局部体积门failed，不是实验拟合。",
-    "current_stage": "F6-S1-P local volume failed; M1 and active not_run",
-    "current_location": "results/ventricle_fem/f6s1p_retained_passive_v01_20260917",
-    "evidence_basis_commit": "7a7dc8a7b0e0a713f079234fe03c758203d38c3a",
+    "current_stage": "F6-S1-Q two-state diagnostic completed; local volume failed",
+    "current_location": "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917",
+    "evidence_basis_commit": "297615d",
     "evidence_checked_at": "2026-09-17",
     "git_workflow": {
       "branch": "main",
@@ -27,21 +27,20 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "F6-S1-P按800 MiB历史预算完成。后续新结果使用已批准PRL-results及磁盘余量门，无固定阶段上限；571既有FEM文件哈希保持，存储验收0新求解。",
+    "freshness_note": "一次40.770秒容器；375父文件与50无关改动保持，外置结果库。两档仅支持敏感性判断，不证明渐近收敛。",
     "model_overview": {
       "model_type": "FEniCSx二维P2/P1三角形；三维平面应变有限变形NH",
       "simulated_object": "72 hpf Fish 4、z=39实测外轮廓；构造内腔与三层界面",
       "theory": "mu=1、kappa=1000；内壁随动压力0→0.02后停止，外壁自由，A固定ux/uy、B固定uy。主动为0。",
-      "current_question": "同一载荷下，尚未运行的细网格能否减小局部体积误差？",
+      "current_question": "外边界非光滑局部效应与体积约束离散如何分别影响局部J？",
       "pipeline": [
-        "复用3541单元粗网格，0次Gmsh",
-        "四分细网格14164单元；两级几何passed",
-        "800 MiB输出准入passed",
-        "零载passed，p=0.02收敛但局部J偏差6.71167%",
-        "首失败停止；只保存2态"
+        "沿用M0旧状态，0新粗网格求解",
+        "M1 14164单元，与已保存几何一致",
+        "仅p=0和0.02两态，保存2/接受1",
+        "非零载局部J偏差11.15248%，失败即停"
       ],
-      "diagram": "results/ventricle_fem/f6s1p_retained_passive_v01_20260917/figures/FigS1P_passive_failure/FigS1P_passive_failure_v01_20260917/04_FigS1P_passive_failure_v01_20260917.png",
-      "diagram_caption": "零载结构、1倍失败态应力、逐单元最大体积偏差和两态腔面积；不是通过的心室响应。",
+      "diagram": "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/figures/FigS1Q_fine_diagnostic/FigS1Q_fine_diagnostic_v01_20260917/04_FigS1Q_fine_diagnostic_v01_20260917.png",
+      "diagram_caption": "M1结构/应力、共享色标M0与M1局部J；真实1倍变形，非零载均FAILED。",
       "assumptions": [
         "只有外轮廓来自图像",
         "内腔/层界为同心缩放",
@@ -55,12 +54,11 @@
         "弱压力残量小不等于局部体积精度",
         "保全两态；Notebook及两帧GIF，不补造状态"
       ],
-      "scope_boundary": "几何与存储passed；被动局部体积failed；细网格力学、主动与生物验证not_run。",
+      "scope_boundary": "几何与全局腔响应对照passed；局部体积failed；后续载荷、主动、生物验证not_run。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_retained_passive_execution_v01.md",
-        "results/ventricle_fem/f6s1p_retained_passive_v01_20260917/verification.json",
-        "results/ventricle_fem/f6s1p_retained_passive_v01_20260917/local_volume_diagnosis.json",
-        "results/ventricle_fem/f6s1p_retained_passive_v01_20260917/delivery_audit.json"
+        "project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/verification.json",
+        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/hotspot_geometry.json"
       ]
     }
   },
@@ -81,36 +79,36 @@
       "summary": "PRL-results主机/Docker I/O通过；新结果无固定体积限额，代码仓仍3 GiB"
     },
     {
-      "label": "实测外轮廓被动资格",
+      "label": "M1两态对照",
       "status": "failed",
-      "summary": "首个非零载局部J偏差6.71167%>1%，未继续"
+      "summary": "局部峰值升高，超限区域缩小；整体面积门通过"
     },
     {
-      "label": "细网格对照及主动",
+      "label": "边界/离散分离修复",
       "status": "not_run",
-      "summary": "先检验离散敏感性，未授权新调用"
+      "summary": "待最小合同和科学裁决；不盲目加密或加压"
     }
   ],
   "active_work": [
     {
-      "title": "被动失败态保全及局部定位",
+      "title": "两态诊断交付完成",
       "status": "passed",
-      "summary": "一次25.932秒容器，2态保存，1态接受。308父文件不变；图件和两帧GIF验收。",
+      "summary": "73测试+21子测试、可复算结构/应力/J图与两帧GIF；科学裁决仍failed。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_retained_passive_execution_v01.md",
-        "results/ventricle_fem/f6s1p_retained_passive_v01_20260917/summary.json",
-        "results/ventricle_fem/f6s1p_retained_passive_v01_20260917/index.html"
+        "project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/verification.json",
+        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/index.html"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "局部不可压精度未过门",
+      "title": "均匀加密未解决局部不可压精度",
       "status": "failed",
-      "summary": "69单元含超限积分点；平均J−1仅0.002858%，最大却6.71167%。空间离散影响待细网格对照。",
+      "summary": "峰值11.15%，加权超限体积分数0.141%；热点近外边界、远离固定点，根因尚未确定。",
       "evidence_refs": [
-        "results/ventricle_fem/f6s1p_retained_passive_v01_20260917/local_volume_diagnosis.json",
-        "results/ventricle_fem/f6s1p_retained_passive_v01_20260917/raw/M0_state_passive_1_audit.json"
+        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/verification.json",
+        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/hotspot_geometry.json"
       ]
     },
     {
@@ -118,20 +116,20 @@
       "status": "not_run",
       "summary": "内腔/壁厚/纤维、材料、参考应力、生理时间和自由3D均未标定。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_retained_passive_execution_v01.md"
+        "project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md"
       ]
     }
   ],
   "results": [
     {
-      "title": "结构、失败态形变和局部J",
+      "title": "粗细局部J与细网格结构/应力",
       "status": "failed",
-      "summary": "实际腔面积+20.10718%仅诊断；力平衡通过但局部J未通过，不是已验证生理响应。",
-      "image": "results/ventricle_fem/f6s1p_retained_passive_v01_20260917/figures/FigS1P_passive_failure/FigS1P_passive_failure_v01_20260917/04_FigS1P_passive_failure_v01_20260917.png",
+      "summary": "腔面积只差0.01387个百分点，不能替代1%局部体积门。外部图件仅在本地可用，不上传GitHub。",
+      "image": "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/figures/FigS1Q_fine_diagnostic/FigS1Q_fine_diagnostic_v01_20260917/04_FigS1Q_fine_diagnostic_v01_20260917.png",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_retained_passive_execution_v01.md",
-        "results/ventricle_fem/f6s1p_retained_passive_v01_20260917/verification.json",
-        "results/ventricle_fem/f6s1p_retained_passive_v01_20260917/rendering.json"
+        "project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/verification.json",
+        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/index.html"
       ],
       "result_group": "current"
     },
@@ -149,11 +147,11 @@
   ],
   "next_actions": [
     {
-      "title": "M1细网格零载及0.02两态对照（待确认）",
+      "title": "制定边界拐角/体积离散分离对照（待确认）",
       "status": "not_run",
-      "summary": "只补尚未计算的两个细网格状态，保持物理/门限；不重跑粗网格，不继续加压，不加入主动。",
+      "summary": "明确几何允许误差与离散选择；不改材料或放宽1%门，不继续加压或主动。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_retained_passive_execution_v01.md"
+        "project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md"
       ]
     }
   ],
@@ -162,8 +160,8 @@
     "只有外轮廓实测，内部解剖及材料未标定。",
     "局部J失败不能用收敛、力平衡或平均J替代。",
     "2个保存态含1个失败；不补造五态，不称生理时间。",
-    "54开发测试+21子测试通过不等于科学通过。",
-    "308父文件不变；0GPU/安装/删除/拉取/自动重跑。",
+    "73开发测试+21子测试通过不等于科学通过。",
+    "375父文件、50无关改动不变；0GPU/安装/删除/拉取/粗网格重跑。",
     "新结果外置PRL-results；预计输出+至少64 MiB保全+10 GiB磁盘余量准入，无固定阶段体积上限；旧结果不迁移。",
     "本地main提交，不自动推送。"
   ]
