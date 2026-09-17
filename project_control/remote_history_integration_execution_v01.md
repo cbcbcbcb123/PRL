@@ -2,7 +2,7 @@
 record_id: PRL-REMOTE-HISTORY-INTEGRATION-EXECUTION-V01
 executed_at: 2026-09-17
 local_merge: passed
-remote_push: not_run
+remote_push: passed
 scientific_stage_execution: not_run
 ---
 
@@ -44,6 +44,8 @@ scientific_stage_execution: not_run
 
 ## 远端发布
 
-当前尚未推送，远端main仍为`16bf8843`。已向用户询问本次普通推送是否获准。
-本地main已包含该远端main，因此可以普通快进推送，无需强推；执行前须再核验远端分支无漂移。
-如获准，只更新main并核验其余五个分支头不变。后续阶段继续直接本地提交main。
+用户随后明确授权“普通推送main”。2026-09-17已普通快进推送，将远端main从`16bf8843`
+更新至`dd30620a`，随后提交并普通推送本次状态回执。没有force选项、没有推送tags或其他分支。
+初次推送后读取全部heads确认其余五个分支头逐项未变；50项原有未提交文件哈希仍一致。
+见[推送回执](evidence/git_main_integration_v01/push_execution_v01.json)。
+后续阶段继续直接本地提交main；本次明确推送不扩大为自动强推或删除远端分支的权限。

@@ -6,6 +6,8 @@ branch: main
 git_workflow_decision: project_control/main_branch_stage_commit_decision_v01.md
 git_integration_decision: project_control/remote_history_integration_decision_v01.md
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
+git_remote_push: passed
+git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
 verified_commit: bbc4b5be549a95766c6419c2aeb784e2c2cc7681
 current_lifecycle: fem_only_f6s0_passive_and_active_ring_passed
 documentation_updated_at: 2026-09-17
