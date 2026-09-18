@@ -245,6 +245,11 @@ def _parser() -> argparse.ArgumentParser:
     passive_diagnosis = diagnose_commands.add_parser("passive-mechanics", help="bounded RED/GREEN kernel qualification, not tissue dynamics")
     passive_diagnosis.add_argument("--workspace", type=Path)
     passive_diagnosis.add_argument("--phase", choices=("red", "green", "regressions"), required=True)
+    linear_diagnosis = diagnose_commands.add_parser(
+        "fem-fenicsx-linear",
+        help="diagnose one retained mixed tangent without a nonlinear equilibrium solve",
+    )
+    linear_diagnosis.add_argument("--workspace", type=Path)
 
     render = commands.add_parser("render", help="render retained results and cockpit")
     render_commands = render.add_subparsers(dest="render_command", required=True)
@@ -710,6 +715,11 @@ def main(arguments: Sequence[str] | None = None) -> int:
         from .diagnostics.passive_mechanics import run_audit, run_regressions
 
         report = run_regressions(workspace) if parsed.phase == "regressions" else run_audit(parsed.phase, workspace)
+        exit_code = 0 if report["status"] == "passed" else 1
+    elif parsed.command == "diagnose" and parsed.diagnose_command == "fem-fenicsx-linear":
+        from .runs.fenicsx_linear_system import run_diagnosis
+
+        report = run_diagnosis(workspace)
         exit_code = 0 if report["status"] == "passed" else 1
     elif (
         parsed.command == "render"
