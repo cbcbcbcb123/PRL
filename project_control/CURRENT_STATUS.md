@@ -8,16 +8,16 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 548e17b
-current_lifecycle: fem_only_f6s1s5_coarse_pressure_passed_fine_native_failed
+verified_commit: 66702ae
+current_lifecycle: fem_only_f6s1s6_two_mesh_passive_passed_zero_newton_diagnostic_repaired
 documentation_updated_at: 2026-09-18
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_ring_passive_qualification_contract_v01.md
-last_completed_contract: project_control/ventricle_fem_ring_passive_qualification_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/rendering.json
-next_stage_contract: pending_zero_newton_native_microprobe_then_five_fine_ring_states
-current_authorization: f6s1s5_stopped_on_fine_native_failure_no_automatic_retry
+current_contract: project_control/ventricle_fem_fine_ring_recovery_contract_v01.md
+last_completed_contract: project_control/ventricle_fem_fine_ring_recovery_contract_v01.md
+current_render_contract: ../PRL-results/ventricle_fem/f6s1s6_fine_ring_v01_20260918/rendering.json
+next_stage_contract: pending_original_contour_two_mesh_zero_and_first_pressure_maximum_four_states
+current_authorization: f6s1s6_completed_five_fine_states_no_coarse_rerun_or_scope_expansion
 development_route: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -26,11 +26,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: F6S1S5_consumed_one_invocation_three_new_accepted_then_stop
-current_execution_log: project_control/ventricle_fem_ring_passive_qualification_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_ring_passive_qualification_execution_v01.md
-latest_completed_scientific_gate: F6-S1-S5_full_coarse_DG2_passive_only_fine_incomplete
-latest_result_package: ../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/summary.json
+execution_authorized: F6S1S6_consumed_native_negative_control_then_interface_and_five_fine_states
+current_execution_log: project_control/ventricle_fem_fine_ring_recovery_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_fine_ring_recovery_execution_v01.md
+latest_completed_scientific_gate: F6-S1-S6_original_two_mesh_DG2_passive_ring_qualification
+latest_result_package: ../PRL-results/ventricle_fem/f6s1s6_fine_ring_v01_20260918/summary.json
 latest_supervisor_decision: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,32 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 F6-S1-S5粗圆环5态通过，细圆环零载原生退出
+## 当前：2026-09-18 F6-S1-S6零载诊断修复，原两网格被动资格通过
+
+5个M1新态全部接受，5个M0态全部复用，0粗网格重算。69项独立数值检查passed，原物理与门限不变。
+细网格峰值腔面积+22.460165%，壁局部max|J−1|=0.01219238%（门1%）；
+最大相对不可压解析面积响应误差0.0722750%、径向L2误差0.0589786%（门均1%）。
+粗细峰值响应差0.000865913个百分点，相对差0.00385533%，满足原门。
+仅为未标定二维圆环的两级被动资格，不是多级渐近、热点收敛、真实心室或生物学验证。
+
+原生6自由度负例确认：SNES reason=2、0次Newton返回后，getMumpsInfog(1)崩溃；
+Mat对象实际上非空，最初空句柄假设及其failed分类保留。修复仅跳过本次无更新时的当前/陈旧因子读取。
+真实零载/非零载/已有解接口检查passed后，M1零载获得完整末态与最终SNES报告，因子明确not_run/null；
+正压均3次Newton更新，实际MUMPS余量100、INFOG=0。共17个M1真实Newton向量保留。
+
+负例6.407秒、修复后接口及5态51.511秒，2个预声明容器/1次科学调用，单CPU/8GiB/禁网/0GPU。
+980父文件、162正式调用文件和50项无关修改保持；76测试+21子测试通过。无安装、拉取、删除或自动重跑。
+两套Notebook、结构/场量/5压力态PNG/SVG已验收，1倍形变，压力延拓不是生理时间。
+包110,166,407 bytes、214文件；213个manifest条目哈希通过，manifest SHA-256为
+`0f98f486aea555bb84d3691fc3c821d8fc049e20c86c4f8b0494dcd0df4345c4`。
+上轮S5原生失败及旧轮廓CG1局部J失败保持原始裁决，没有回写为passed。
+
+唯一下一步待确认：原图像外轮廓、构造内腔/层界的粗细网格，零载和首个p/mu=0.02，最多4态。
+同一P2/DG2/材料/1%门，单CPU/0GPU/失败即停，不再重算圆环，不夹带主动/三维/FSI/生长。
+见[执行、负例定位及修复](ventricle_fem_fine_ring_recovery_execution_v01.md)与
+[结构/5个细网格压力态场量及Notebook](../../PRL-results/ventricle_fem/f6s1s6_fine_ring_v01_20260918/index.html)。
+
+## 历史：2026-09-18 F6-S1-S5粗圆环5态通过，细圆环零载原生退出
 
 一次23.705秒单CPU/8GiB/禁网容器，尝试4态、接受3个新M0态，0自动重跑/GPU。
 结合复用的零载与0.02态，粗网格0/0.02/0.04/0.06/0.08全部通过原1%局部J及M0的2%解析门。
