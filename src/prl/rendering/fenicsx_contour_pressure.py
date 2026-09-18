@@ -18,7 +18,8 @@ def plot_data(path, mechanics):
             state = {k[len(prefix):]:v for k,v in data.items() if k.startswith(prefix)}
             values = mechanics.fields(mesh,state,float(data['mu']),float(data['kappa']))
             area = mechanics.cavity(mesh,state['u'],float(state['load']))[0]
-            record = report['cases'][name][f'passive_{index}']
+            label_prefix = str(data.get('state_prefix','passive'))
+            record = report['cases'][name][f'{label_prefix}_{index}']
             if abs(area-record['cavity_area']) > 1e-10 or abs(np.max(np.abs(values['J']-1))-record['max_abs_J_minus_one']) > 1e-10:
                 raise ValueError('Plotted raw fields disagree with independent accepted/failure report')
             stress = values['stress']
@@ -26,6 +27,12 @@ def plot_data(path, mechanics):
             cases[name].append({'index':int(index),'u':state['u'],'load':float(state['load']),'status':record['status'],
                 'stress':np.sqrt(1.5*np.sum(deviator**2,axis=(-1,-2))).mean(axis=1)/float(data['mu']),
                 'volume':np.max(np.abs(values['J']-1),axis=1)*100,'area_percent':record['cavity_area_change']*100})
+            if label_prefix == 'active':
+                active_tensor=values['active_stress']
+                active_dev=active_tensor-np.trace(active_tensor,axis1=-2,axis2=-1)[...,None,None]*np.eye(3)/3
+                cases[name][-1].update(activation=float(state['activation']),
+                    active_stress=np.sqrt(1.5*np.sum(active_dev**2,axis=(-1,-2))).mean(axis=1)/float(data['mu']),
+                    active_area_percent=record['area_change_from_pressurized_baseline']*100)
         prefix = name+'_CG1_mesh_'
         if not any(k.startswith(prefix) for k in data):
             continue  # Later passive stages do not invent unavailable old-CG1 controls.
@@ -41,7 +48,7 @@ def plot_data(path, mechanics):
 
 
 def draw(data_path,png_path,svg_path,style_module,mechanics,mode,axis_box_size_in=(3.6,3.6),figure_size_in=(14.4,13.6)):
-    if mode in ['passive_overview','passive_states']:
+    if mode in ['passive_overview','passive_states','active_overview','active_states']:
         return draw_passive(data_path,png_path,svg_path,style_module,mechanics,mode,axis_box_size_in,figure_size_in)
     import matplotlib
     matplotlib.use('Agg')
@@ -166,6 +173,7 @@ def draw_passive(data_path,png_path,svg_path,style_module,mechanics,mode,axis_bo
     from matplotlib.ticker import MaxNLocator, FixedLocator
 
     data,meshes,cases,_,report=plot_data(data_path,mechanics)
+    active=mode.startswith('active_')
     selected=max(['M0','M1'],key=lambda name:(len(cases[name]),name))
     frames=cases[selected]; mesh=meshes[selected]; peak=frames[-1]
     style=style_module.StyleSpec(axis_box_size_in=axis_box_size_in,tick_label_size=16.,axis_label_size=18.,
@@ -206,18 +214,21 @@ def draw_passive(data_path,png_path,svg_path,style_module,mechanics,mode,axis_bo
     def response(axis,key,title):
         for name,color,marker in [('M0','#20694D','o'),('M1','#3872A6','s')]:
             values=cases[name]
-            ordinate=[v['area_percent'] if key=='area' else float(v['volume'].max()) for v in values]
-            axis.plot([v['load'] for v in values],ordinate,marker=marker,color=color,lw=1.5,label=name)
+            ordinate=[v['active_area_percent' if active else 'area_percent'] if key=='area' else float(v['volume'].max()) for v in values]
+            abscissa='activation' if active else 'load'
+            axis.plot([v[abscissa] for v in values],ordinate,marker=marker,color=color,lw=1.5,label=name)
             for frame,value in zip(values,ordinate):
                 if frame['status']!='passed':
-                    axis.plot(frame['load'],value,'x',color='#B13A36',ms=12,mew=2,label='Failed state')
+                    axis.plot(frame[abscissa],value,'x',color='#B13A36',ms=12,mew=2,label='Failed state')
         if key=='volume':
             axis.axhline(1.,color='#B13A36',ls='--',lw=1.5,label='Original 1% gate')
-        axis.set(xlabel='Pressure / mu',ylabel='Cavity area change (%)' if key=='area' else 'max |J - 1| (%)',xlim=(-.005,.085))
-        axis.set_xticks([0,.02,.04,.06,.08]); axis.yaxis.set_major_locator(MaxNLocator(nbins=5))
+        axis.set(xlabel='Active tension / mu' if active else 'Pressure / mu',
+            ylabel=('Area vs pressured baseline (%)' if active else 'Cavity area change (%)') if key=='area' else 'max |J - 1| (%)',
+            xlim=(-.005,.105) if active else (-.005,.085))
+        axis.set_xticks([0,.025,.05,.075,.1] if active else [0,.02,.04,.06,.08]); axis.yaxis.set_major_locator(MaxNLocator(nbins=5))
         axis.legend(loc='upper left',frameon=False)
         style_module.apply_axes_style(axis,style=style); style_module.add_top_information(axis,title,style=style)
-    if mode=='passive_overview':
+    if mode in ['passive_overview','active_overview']:
         palette=np.array(['#4C9F70','#D6B656','#5B8DB8'])
         polygons=mesh['coordinates'][mesh['cells'][:,parts]].reshape(-1,3,2)
         axes[0].add_collection(PolyCollection(polygons,facecolors=np.repeat(palette[mesh['layers']-1],4),edgecolors=(0,0,0,.28),linewidths=.065))
@@ -230,30 +241,47 @@ def draw_passive(data_path,png_path,svg_path,style_module,mechanics,mode,axis_bo
             normal=np.array([delta[1],-delta[0]])/np.linalg.norm(delta); point=(a+b)/2
             axes[0].annotate('',xy=point+.09*normal,xytext=point-.14*normal,arrowprops={'arrowstyle':'->','color':'#B3463E','lw':1.2})
         spatial(axes[0],f'A  {selected} reference; assumed layers')
+        if active:
+            centroids=mesh['coordinates'][mesh['cells'][:,:3]].mean(axis=1)[mesh['layers']==3]
+            centers=centroids[np.linspace(0,len(centroids)-1,24,dtype=int)]
+            fibres=np.column_stack((-centers[:,1],centers[:,0]))/np.linalg.norm(centers,axis=1)[:,None]
+            axes[0].quiver(*centers.T,*fibres.T,angles='xy',scale_units='xy',scale=6.,color='#1B2540',width=.006,pivot='mid')
         artist=field(axes[1],peak,'stress',stress_max)
-        spatial(axes[1],f'B  {selected} p / mu = {peak["load"]:.2f}: {peak["status"].upper()}')
+        spatial(axes[1],f'B  {selected} '+(f'Ta / mu = {peak["activation"]:.3f}' if active else f'p / mu = {peak["load"]:.2f}')+f': {peak["status"].upper()}')
         colorbar(artist,12.05,8.,'Mean equivalent stress / mu')
-        artist=field(axes[2],peak,'volume',max(float(peak['volume'].max()),1e-12))
-        spatial(axes[2],f'C  Same state; local volume deviation')
+        volume_axis=axes[3] if active else axes[2]
+        artist=field(volume_axis,peak,'volume',max(float(peak['volume'].max()),1e-12))
+        spatial(volume_axis,('D' if active else 'C')+'  Same state; local volume deviation')
         colorbar(artist,5.25,2.8,'Element max |J - 1| (%)')
-        response(axes[3],'area','D  Actual saved load responses')
+        if active:
+            artist=field(axes[2],peak,'active_stress',max(float(peak['active_stress'].max()),1e-12))
+            spatial(axes[2],'C  Active stress: outer layer only')
+            colorbar(artist,18.85,8.,'Mean active equivalent stress / mu')
+            response(axes[4],'area','E  Contraction at fixed pressure')
+            response(axes[5],'volume','F  Original local volume gate')
+        else:
+            response(axes[3],'area','D  Actual saved load responses')
         layer_note='Green / yellow / blue: assumed endo / ECM / myo. Same passive material; A: ux=uy=0, B: uy=0.'
     else:
         for axis,frame in zip(axes[:5],frames):
             artist=field(axis,frame,'stress',stress_max)
-            origin='reused' if frame['index']<2 else 'new'
-            spatial(axis,f'{selected} p / mu = {frame["load"]:.2f}; {origin}\n{frame["status"].upper()}; cavity {frame["area_percent"]:+.2f}%')
+            origin='reused' if frame['index']<(1 if active else 2) else 'new'
+            load_label=f'Ta / mu = {frame["activation"]:.3f}' if active else f'p / mu = {frame["load"]:.2f}'
+            area=frame['active_area_percent'] if active else frame['area_percent']
+            spatial(axis,f'{selected} {load_label}; {origin}\n{frame["status"].upper()}; cavity {area:+.2f}%')
         for axis in axes[len(frames):5]:
             axis.text(.5,.5,'NOT RUN',transform=axis.transAxes,ha='center'); axis.set_axis_off()
         colorbar(artist,18.85,8.,'Common equivalent stress / mu')
         response(axes[5],'volume','Local volume gate at saved loads')
         layer_note='State panels show equivalent stress, not layer identity. Dashed gray outlines: undeformed boundaries.'
-    figure.text(.06,.965,f'Original-contour passive continuation: {report["status"].upper()} | no active contraction',fontsize=16)
+    heading='Active myocardial response at fixed p / mu = 0.02' if active else 'Original-contour passive continuation'
+    figure.text(.06,.965,f'{heading}: {report["status"].upper()}'+('' if active else ' | no active contraction'),fontsize=16)
     figure.text(.06,.934,f'New solves: {report["attempted_equilibria"]}; accepted: {report["accepted_new_equilibria"]}. Four prior states reused; no retries.',fontsize=14)
     figure.text(.06,.136,layer_note,fontsize=12)
     figure.text(.06,.103,'Follower pressure inside, outer wall free. Only outer contour is image-derived; cavity/layers and material are uncalibrated.',fontsize=12)
-    figure.text(.06,.070,'Actual 1x deformation; pressure levels are NOT heartbeat time. Missing load states are not fabricated.',fontsize=12)
-    figure.text(.06,.037,'Fields reconstructed from saved u/p; first failed original gate stops further solves. No 3D, FSI, growth or biological validation.',fontsize=12)
+    figure.text(.06,.070,('Actual 1x deformation. Assumed origin-circumferential fibres; NOT measured. Cavity change is relative to Ta=0 at p/mu=0.02.'
+        if active else 'Actual 1x deformation; pressure levels are NOT heartbeat time. Missing load states are not fabricated.'),fontsize=12)
+    figure.text(.06,.037,'Fields reconstructed from saved u/p; load levels are NOT heartbeat time. No 3D, FSI, growth or biological validation.',fontsize=12)
     exported=style_module.export_figure(figure,axes,Path(png_path).with_suffix(''),style=style,overrides=overrides)
     Path(exported.svg).replace(svg_path)
     manifest=json.loads(Path(exported.manifest).read_text()); manifest['exports']['svg']=str(Path(svg_path).resolve())
@@ -263,20 +291,23 @@ def draw_passive(data_path,png_path,svg_path,style_module,mechanics,mode,axis_bo
         'displayed_states':len(frames),'new_FEM_solves':0,'deformation_scale':1}
 
 
-def prepare(workspace,skill_root,complete_passive=False):
+def prepare(workspace,skill_root,complete_passive=False,*,active=False):
     import re
     import subprocess
     import sys
     import nbformat
     from prl.result_store import result_path,result_admission
-    from prl.runs.fenicsx_contour_pressure import RESULT,PASSIVE_COMPLETION
+    from prl.runs.fenicsx_contour_pressure import RESULT,PASSIVE_COMPLETION,ACTIVE_RESULT
     from prl.runs.fenicsx_ring import digest
     from prl.runs.fenicsx_runtime import save_json
     from prl.verification.fenicsx_contour_pressure import verify_contour_pressure,verify_contour_passive
     from prl.verification.fenicsx_ring import load_arrays
+    from prl.verification.fenicsx_contour_active import verify_contour_active,state_path
 
     workspace=Path(workspace).resolve(strict=True); skills=Path(skill_root)
-    root=result_path(workspace,PASSIVE_COMPLETION if complete_passive else RESULT)
+    if active and complete_passive:
+        raise ValueError('Select one frozen stage')
+    root=result_path(workspace,ACTIVE_RESULT if active else PASSIVE_COMPLETION if complete_passive else RESULT)
     if (root/'post_verification.json').exists() or (root/'figures').exists():
         raise FileExistsError('Contour figure preparation is create-only')
     if not result_admission(workspace,128*1024**2)['can_start']:
@@ -284,34 +315,38 @@ def prepare(workspace,skill_root,complete_passive=False):
     formal=json.loads((root/'formal_invocation_manifest.json').read_text())
     if not all(digest(root/item['path'])==item['sha256'] for item in formal['files']):
         raise ValueError('Formal invocation changed')
-    report=(verify_contour_passive(root) if complete_passive else verify_contour_pressure(root))
+    report=(verify_contour_active(root) if active else verify_contour_passive(root) if complete_passive else verify_contour_pressure(root))
     save_json(root/'post_verification.json',report)
     config=json.loads((root/'configuration.json').read_text())
     data={'verification':np.array(json.dumps(report)),'mu':np.array(config['mu']),'kappa':np.array(config['kappa'])}
+    if active:
+        data['state_prefix']=np.array('active')
     data.update({'geometry_'+key:value for key,value in load_arrays(root/'input/M0_input_mesh.npz').items()})
     for name in ['M0','M1']:
         meshpath=root/'raw'/f'{name}_mesh.npz'
-        if complete_passive and not meshpath.exists():
+        if (complete_passive or active) and not meshpath.exists():
             meshpath=root/'retained'/f'{name}_mesh.npz'
         if meshpath.exists():
             data.update({name+'_mesh_'+k:v for k,v in load_arrays(meshpath).items()})
         indices=[]
-        for index in (range(5) if complete_passive else [0,1]):
+        for index in (range(5) if complete_passive or active else [0,1]):
             folder='retained' if complete_passive and index<2 else 'raw'
             path=root/folder/f'{name}_state_passive_{index}.npz'
+            if active:
+                path=state_path(root,name,index)
             if path.exists():
                 indices.append(index)
                 state=load_arrays(path)
                 data.update({f'{name}_{index}_{k}':state[k] for k in ['u','pressure','load','activation']})
         data[name+'_indices']=np.array(indices,dtype=int)
-        if not complete_passive:
+        if not (complete_passive or active):
             data.update({name+'_CG1_mesh_'+k:v for k,v in load_arrays(root/'comparison'/name/'mesh.npz').items()})
             old=load_arrays(root/'comparison'/name/'state.npz')
             data.update({name+'_CG1_state_'+k:old[k] for k in ['u','pressure','load','activation']})
     np.savez_compressed(root/'figure_data.npz',**data)
     revisions=[]
-    main_id='S1S8' if complete_passive else 'S1S7'
-    for mode in (['passive_overview','passive_states'] if complete_passive else ['qualification','pressure_states']):
+    main_id='S1S9' if active else 'S1S8' if complete_passive else 'S1S7'
+    for mode in (['active_overview','active_states'] if active else ['passive_overview','passive_states'] if complete_passive else ['qualification','pressure_states']):
         subprocess.run([sys.executable,'-B','-X','utf8',str(skills/'cb-paper-figure-workflow/scripts/init_figure_revision.py'),
             str(root/'figures'),'--main',main_id,'--analysis-key',mode,'--data',str(root/'figure_data.npz'),
             '--python','helper='+str(Path(__file__).resolve()),'--python','mechanics='+str(workspace/'src/prl/verification/fenicsx_ring.py'),
@@ -334,7 +369,7 @@ OUTPUT_SVG = REVISION_DIR / f"05_{{PREFIX}}.svg"
 STYLE_SOURCE = 'Existing compact FEM diagnostics with CB explicit overrides'
 DPI = 600
 axis_box_size_in = (3.6, 3.6)
-FIGURE_SIZE_IN = {(21.2,13.6) if mode=='passive_states' else (14.4,13.6)!r}
+FIGURE_SIZE_IN = {(21.2,13.6) if active or mode=='passive_states' else (14.4,13.6)!r}
 def load_snapshot(name, filename):
     spec = importlib.util.spec_from_file_location(name, REVISION_DIR / filename)
     module = importlib.util.module_from_spec(spec)
@@ -360,6 +395,11 @@ helper.draw(DATA_PATH, OUTPUT_PNG, OUTPUT_SVG, style, mechanics, {mode!r}, axis_
             nbformat.write(notebook,revision/f'03_{prefix}_plot.ipynb')
             values['数据/模型变换']='从物理复制网格/u/p独立重算F/J/Cauchy应力；等效应力为每单元积分点von Mises均值，J为每单元积分点最大偏差。P2三角拆四个显示三角，实际1倍形变；全部积分点参与验收。失败态如实标红，不用场均值掩盖峰值。'
             values['统计方法与不确定性']='确定性载荷续算，无生物样本/误差棒/假设检验。零载和0.02复用；其余仅实存态。状态图选实存态较多的网格，另一网格仅画已有曲线点；不插值缺失态。两个网格不证明渐近或热点收敛。'
+        if active:
+            notebook.cells[0].source='# 原轮廓低压主动收缩对照\n固定p/mu=0.02；只在构造外侧心肌域施加既有主动能量。环向纤维是关于原点的假设，不是图像测量。真实1倍形变，加载级非心动时间。'
+            nbformat.write(notebook,revision/f'03_{prefix}_plot.ipynb')
+            values['数据/模型变换']='由物理复制u/p独立重算F/J及总/主动Cauchy应力。等效应力为单元积分点von Mises均值；局部J为单元最大偏差。P2拆四显示三角、实际1倍形变，无平滑。纤维箭头f0=(-Y,X,0)/sqrt(X²+Y²)仅构造心肌域；原点环向假设不是逐点轮廓切向或实验方向。面积收缩相对同压力Ta=0基线；全部积分点验收不使用显示均值。'
+            values['统计方法与不确定性']='两级确定性网格、p/mu=0.02固定，Ta/mu=0/0.025/0.05/0.075/0.1。零张力基线复用，仅展示实存态，缺失not_run；不插值成生理时间。非生物样本，无误差棒/显著性检验；两网格通过不代表热点或渐近收敛。高压0.08失败保留，未重算。'
         for key,value in values.items():
             content=re.sub(r'(?m)^- '+re.escape(key)+r':.*$',lambda match:'- '+key+': '+value,content)
         methods.write_text(content,encoding='utf-8'); revisions.append(str(revision))

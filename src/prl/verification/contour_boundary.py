@@ -46,7 +46,7 @@ def curve(nodes,edges,subdivisions):
     return LinearRing(np.einsum('qa,eai->eqi',basis,nodes[edges]).reshape(-1,2))
 
 
-def passive_observations(root):
+def passive_observations(root, *, active=False):
     root=Path(root); config=json.loads((root/'configuration.json').read_text())
     report=json.loads((root/'post_verification.json').read_text())
     records={}; inputs={}
@@ -63,6 +63,9 @@ def passive_observations(root):
         coordinates=np.einsum('qa,cai->cqi',basis,mesh['coordinates'][mesh['cells']])
         for label,audit in report['cases'][name].items():
             index=int(label.split('_')[-1]); path=root/('retained' if index<2 else 'raw')/f'{name}_state_{label}.npz'
+            if active:
+                from .fenicsx_contour_active import state_path
+                path=state_path(root,name,index)
             state=load_arrays(path); values=fields(mesh,state,config['mu'],config['kappa'])
             inputs[path.relative_to(root).as_posix()]=hashlib.sha256(path.read_bytes()).hexdigest()
             nodes=mesh['coordinates']+state['u']; samples={}
@@ -79,6 +82,7 @@ def passive_observations(root):
             pressure_basis=shape(mesh['qpoints'])[0]
             local_pressure=np.einsum('qa,ca->cq',pressure_basis,state['pressure'].reshape(-1)[mesh['pressure_cells']])
             records[f'{name}_{label}']={'mechanical_status':audit['status'],'load':float(state['load']),
+                'activation':float(state['activation']),
                 'samples':samples,'J_at_extreme':float(values['J'][cell,quadrature]),
                 'pressure_at_extreme_over_mu':float(local_pressure[cell,quadrature]/config['mu']),
                 'cell_index':int(cell),'quadrature_index':int(quadrature),'layer':int(mesh['layers'][cell]),

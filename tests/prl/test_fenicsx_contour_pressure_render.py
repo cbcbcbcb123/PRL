@@ -58,6 +58,24 @@ def test_continuation_plot_does_not_require_nonexistent_CG1_controls():
     assert len(cases['M0'])==1 and controls=={}
 
 
+def test_active_plot_uses_only_saved_frames_and_pressurized_baseline():
+    data,mechanics=plotting_fixture()
+    for key in list(data):
+        if '_CG1_' in key:
+            data.pop(key)
+    report=json.loads(str(data['verification']))
+    for name in ['M0','M1']:
+        audit=report['cases'][name].pop('passive_0')
+        audit['area_change_from_pressurized_baseline']=0.
+        report['cases'][name]['active_0']=audit
+    data['state_prefix']=np.array('active'); data['verification']=np.array(json.dumps(report))
+    mechanics.fields=lambda *args:{'J':np.ones((1,2)),'stress':np.zeros((1,2,3,3)),'active_stress':np.zeros((1,2,3,3))}
+    _,_,cases,_,_=plot_data(None,mechanics)
+    assert all(len(rows)==1 for rows in cases.values())
+    assert cases['M0'][0]['active_area_percent']==0. and cases['M0'][0]['activation']==0.
+    assert np.array_equal(cases['M0'][0]['active_stress'],[0.])
+
+
 def test_delivery_accepts_observed_finite_difference_cancellation_only():
     from prl.rendering.fenicsx_contour_pressure import audit_agreement
     native={'pressure':.02,'cavity_area':3.7694874817876047,'pressure_area_difference_work':.0007491571274442776,

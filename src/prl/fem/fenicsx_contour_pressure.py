@@ -86,21 +86,35 @@ def advance_passive_mesh(solver, initial, before, validate):
         validate(label)
 
 
-def passive_main(root=Path('/out')):
+def advance_active_mesh(solver, initial, before, validate):
+    """Frozen low-pressure ladder; stop immediately on either callback failure."""
+    for index,activation in enumerate([.025,.05,.075,.1],1):
+        label = f'active_{index}'
+        before(label)
+        initial = solver.solve(label,.02,activation,initial)
+        validate(label)
+
+
+def passive_main(root=Path('/out'), *, active=False):
     from prl.fem.fenicsx_ring import Ring, write_json
     from prl.verification.fenicsx_ring import load_arrays, pressure_basis
     from prl.verification.fenicsx_contour import geometry_audit
     from prl.verification.fenicsx_pressure import saved_iterates_audit
     from prl.verification.fenicsx_contour_pressure import (completion_scope_checks,contour_state_audit,
         verify_contour_passive,same_mixed_mesh,response_comparison,GEOMETRY_HASHES)
+    from prl.verification.fenicsx_contour_active import active_scope_checks,verify_contour_active,fibre_audit
     import hashlib
 
     config = json.loads((root/'configuration.json').read_text())
     qualified = json.loads((root/'prerequisite/configuration.json').read_text())
     started = time.monotonic(); attempted = accepted = 0; current = None; label = None
     record = {'status':'unknown','attempted_states':0,'accepted_states':0}
+    scope = active_scope_checks if active else completion_scope_checks
+    verify = verify_contour_active if active else verify_contour_passive
+    advance = advance_active_mesh if active else advance_passive_mesh
+    maximum = 8 if active else 6
     try:
-        if not all(completion_scope_checks(config,qualified).values()):
+        if not all(scope(config,qualified).values()):
             raise ValueError('Approved continuation scope changed')
         (root/'raw').mkdir(exist_ok=False)
         source = load_arrays(root/'geometry_source.npz')
@@ -115,11 +129,13 @@ def passive_main(root=Path('/out')):
             pressure_basis(current.mesh_data)
             if not same_mixed_mesh(current.mesh_data,load_arrays(root/'retained'/f'{name}_mesh.npz')):
                 raise ValueError('Exact mixed restart map differs; no remapping authorized')
+            if active and fibre_audit(current.mesh_data)['status'] != 'passed':
+                raise ValueError('Assumed myocardial fibre radius is singular')
             current.tangent_checks()
             initial = load_arrays(root/'retained'/f'{name}_state_passive_1.npz')['mixed_state'].copy()
             def before(next_label):
                 nonlocal attempted,label,record
-                if attempted >= 6 or time.monotonic()-started > 1140 or shutil.disk_usage(root).free < 10*1024**3+64*1024**2:
+                if attempted >= maximum or time.monotonic()-started > 1140 or shutil.disk_usage(root).free < 10*1024**3+64*1024**2:
                     raise RuntimeError('Authorization, time or disk headroom exhausted')
                 label = next_label; attempted += 1
                 record = {'status':'unknown','mesh':name,'state':label,'attempted_states':attempted,'accepted_states':accepted}
@@ -130,7 +146,9 @@ def passive_main(root=Path('/out')):
                 path = root/'raw'/f'{name}_state_{current_label}.npz'
                 state = load_arrays(path); meta = json.loads(path.with_suffix('.json').read_text())
                 report = contour_state_audit(current.mesh_data,state,meta,config)
-                iteration = saved_iterates_audit(root/'iterates'/f'{name}_{current_label}',current.mesh_data,state,meta,config)
+                activation = [0.,.025,.05,.075,.1][int(current_label.split('_')[-1])] if active else 0.
+                iteration = saved_iterates_audit(root/'iterates'/f'{name}_{current_label}',current.mesh_data,state,meta,config,
+                    expected_activation=activation)
                 report['checks']['saved_iterates'] = iteration['status'] == 'passed'
                 if name == 'M1':
                     coarse = json.loads((root/'raw'/f'M0_state_{current_label}_audit.json').read_text())
@@ -145,11 +163,11 @@ def passive_main(root=Path('/out')):
                 write_json(root/'progress.json',record)
                 write_json(root/'continuation_ledger.json',record)
             try:
-                advance_passive_mesh(current,initial,before,validate)
+                advance(current,initial,before,validate)
             finally:
                 write_json(root/'progress.json',record)
             current = None
-        report = verify_contour_passive(root)
+        report = verify(root)
         write_json(root/'verification.json',report)
         write_json(root/'progress.json',{**record,'status':report['status']})
         write_json(root/'continuation_ledger.json',{**record,'status':report['status']})
@@ -164,7 +182,7 @@ def passive_main(root=Path('/out')):
                 u=current.w.x.array[current.vmap].reshape(-1,2),pressure=current.w.x.array[current.pmap],
                 load=float(current.load.value),activation=float(current.activation.value))
         try:
-            write_json(root/'verification.json',verify_contour_passive(root))
+            write_json(root/'verification.json',verify(root))
         except Exception as audit_error:
             write_json(root/'verification_error.json',{'status':'failed','error':str(audit_error)})
         traceback.print_exc()
@@ -173,4 +191,5 @@ def passive_main(root=Path('/out')):
 
 if __name__ == '__main__':
     mode = json.loads(Path('/out/configuration.json').read_text())['schema_version']
-    raise SystemExit(passive_main() if mode == 'prl.contour_passive_completion.v1' else main())
+    raise SystemExit(passive_main(active=mode=='prl.contour_active.v1') if mode in
+        ['prl.contour_passive_completion.v1','prl.contour_active.v1'] else main())

@@ -150,15 +150,16 @@ def passive_state_audit(mesh,state,metadata,config,name,old):
     return report
 
 
-def saved_iterates_audit(directory,mesh,state,metadata,config):
+def saved_iterates_audit(directory,mesh,state,metadata,config,*,expected_activation=0.):
     """Check raw-vector identity and independently reconstruct actual Newton states."""
     paths=sorted(Path(directory).glob('iterate_*.npz'))
     history=metadata['history']
-    checks={'all_iterates_saved':len(paths)==metadata['iterations']+1==len(history)}
+    checks={'all_iterates_saved':len(paths)==metadata['iterations']+1==len(history),
+            'expected_activation':float(state.get('activation',np.nan))==expected_activation}
     records=[]; first=None; last=None
     for index,path in enumerate(paths):
         item=load_arrays(path)
-        checks[f'iterate_{index}_identity']=int(item['iteration'])==index and index<len(history) and float(item['residual'])==history[index]['residual'] and np.array_equal(item['u'].ravel(),item['mixed_state'][mesh['mixed_u_map']]) and np.array_equal(item['pressure'].ravel(),item['mixed_state'][mesh['mixed_p_map']]) and float(item['load'])==float(state['load']) and float(item['activation'])==0.
+        checks[f'iterate_{index}_identity']=int(item['iteration'])==index and index<len(history) and float(item['residual'])==history[index]['residual'] and np.array_equal(item['u'].ravel(),item['mixed_state'][mesh['mixed_u_map']]) and np.array_equal(item['pressure'].ravel(),item['mixed_state'][mesh['mixed_p_map']]) and float(item['load'])==float(state['load']) and float(item['activation'])==expected_activation
         actual=fields(mesh,item,config['mu'],config['kappa'])
         area,external,_=cavity(mesh,item['u'],float(item['load']))
         records.append({'iteration':index,'solver_residual':float(item['residual']),

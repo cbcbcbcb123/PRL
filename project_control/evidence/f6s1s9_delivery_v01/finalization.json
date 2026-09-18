@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "delivery": "passed",
+  "audit": {
+    "status": "passed",
+    "formal_invocation_files_unchanged": 140,
+    "protected_parent_files_unchanged": 1518,
+    "preexisting_dirty_files_unchanged": 50,
+    "input_copies_match": 41,
+    "host_native_independent_agreement": "passed",
+    "stop_checks": {
+      "attempts_exact_prefix": true,
+      "attempt_count": true,
+      "first_failure_stops": true,
+      "single_invocation": true,
+      "runtime_isolation": true,
+      "parents_preserved": true,
+      "no_gpu_or_retry": true,
+      "no_recomputation": true
+    },
+    "tests": {
+      "status": "passed",
+      "passed": 152,
+      "subtests_passed": 21,
+      "elapsed_seconds": 4.62,
+      "python": "F:\\python\\python.exe",
+      "scope": "12 explicit FEM suites including active loading, exact iterate activation, first-failure stop, real-frame renderer, pressure/physics, CLI and boundary regressions",
+      "new_FEM_solves": 0,
+      "gpu": 0,
+      "notes": "Rendering-code regression run; Notebook execution and visual QA are separate gates. CuPy emitted a missing CUDA-path warning only; no GPU worker was used."
+    },
+    "notebook_execution": "passed",
+    "style_validation": "passed",
+    "visual_qa": "passed",
+    "postprocessing_new_FEM_solves": 0,
+    "repository_bytes": 2037224725
+  },
+  "manifest_sha256": "80b0ecbe6bd35e6d00479fbeb1e424c89969e862a01bdb0885bb43dab9734c2b",
+  "files": 201,
+  "logical_bytes": 350554617
+}

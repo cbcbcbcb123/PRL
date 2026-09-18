@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "passed": 151,
+  "subtests_passed": 21,
+  "elapsed_seconds": 4.65,
+  "scope": "12 explicit FEM protocol, mechanics, CLI, renderer and boundary suites including new active protocol; synthetic fixtures are not scientific equilibria",
+  "python": "F:\\python\\python.exe",
+  "pytest_options": ["-q", "-p", "no:cacheprovider"],
+  "new_equilibria": 0,
+  "gpu": 0
+}
