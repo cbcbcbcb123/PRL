@@ -1,0 +1,45 @@
+{
+  "status": "failed",
+  "evidence_delivery": "passed",
+  "manifest_sha256": "7bd712585b82c5ca4689f56292536a918b060ace2acf9051790ecba9a790e0f4",
+  "files": 128,
+  "bytes": 41493908,
+  "audit": {
+    "status": "passed",
+    "checks": {
+      "formal_invocation_unchanged": true,
+      "protected_ancestors_and_dirty": true,
+      "execution_sources_unchanged": true,
+      "input_copies_unchanged": true,
+      "mechanics_unchanged": true,
+      "single_bounded_invocation": true,
+      "exact_two_state_scope": true,
+      "first_failure_stopped": true,
+      "raw_state_count_two": true,
+      "runtime_isolation": true,
+      "zero_accepted_pressure_rejected": true,
+      "old_failure_not_relabelled": true,
+      "host_native_agreement": true,
+      "matched_loads": true,
+      "tests_passed": true,
+      "figure_executed_visual_and_style": true,
+      "figure_data_copy": true,
+      "portable_helper_matches": true,
+      "portable_probe_matches": true
+    },
+    "formal_files_unchanged": 75,
+    "protected_parent_files_unchanged": 1940,
+    "preexisting_dirty_files_unchanged": 50,
+    "tests": {
+      "status": "passed",
+      "passed": 91,
+      "elapsed_seconds": 3.39,
+      "command": "python -B -X utf8 -m pytest -q -p no:cacheprovider tests/prl/test_ventricle_mesh_probe.py tests/prl/test_ventricle_3d.py tests/prl/test_ventricle_3d_delivery.py tests/prl/test_fenicsx_contour_active.py tests/prl/test_fenicsx_contour_pressure.py tests/prl/test_fenicsx_contour_passive.py tests/prl/test_fenicsx_ring.py",
+      "new_FEM_solves": 0,
+      "figure_notebook_execution": "passed",
+      "scope": "M1 two-state protocol, immutable physical configuration, non-masking comparison, existing 3D/2D regressions. Numerical stage remains failed."
+    },
+    "repository_bytes": 2038436718,
+    "new_scientific_solves_in_postprocessing": 0
+  }
+}

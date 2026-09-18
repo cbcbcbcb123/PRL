@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "passed": 91,
+  "elapsed_seconds": 3.35,
+  "command": "python -B -X utf8 -m pytest -q -p no:cacheprovider tests/prl/test_ventricle_mesh_probe.py tests/prl/test_ventricle_3d.py tests/prl/test_ventricle_3d_delivery.py tests/prl/test_fenicsx_contour_active.py tests/prl/test_fenicsx_contour_pressure.py tests/prl/test_fenicsx_contour_passive.py tests/prl/test_fenicsx_ring.py",
+  "new_FEM_solves": 0,
+  "scope": "Exact two-state M1 selection, configuration immutability, failure-preserving comparison, CLI exclusivity, create-only guard and existing 3D/2D regressions. Import-only CuPy warning does not start GPU computation."
+}

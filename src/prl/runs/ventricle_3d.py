@@ -18,6 +18,9 @@ CONTRACT='project_control/ventricle_fem_idealized_3d_contract_v01.md'
 RESUME_RESULT=Path('results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918')
 RESUME_CONTRACT='project_control/ventricle_fem_idealized_3d_resume_contract_v01.md'
 RESUME_PARENT_SHA='991710ecfb62d72bca971f8254199f119518d8fe199312e1bcea7949645d3e42'
+FINE_RESULT=Path('results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918')
+FINE_CONTRACT='project_control/ventricle_fem_3d_fine_pressure_contract_v01.md'
+FINE_PARENT_SHA='cb846ad96711d6706a7a9b2912ddf9100a65c2a3645e9dd7f7af14c0eafd455c'
 SOURCES=[CONTRACT,'project_control/ventricle_3d_before_growth_decision_v01.md',
     'src/prl/fem/ventricle_geometry.py','src/prl/fem/fenicsx_ventricle.py','src/prl/fem/fenicsx_ring.py',
     'src/prl/fem/ring_geometry.py','src/prl/verification/ventricle_3d.py','src/prl/verification/fenicsx_ring.py',
@@ -56,12 +59,23 @@ def resume_configuration(parent):
     return {**cfg,'reuse_m0_zero':True,'maximum_equilibrium_solves':13}
 
 
-def run(workspace,*,resume=False):
+def fine_pressure_configuration(parent):
+    previous=json.loads((Path(parent)/'configuration.json').read_text())
+    cfg=configuration()
+    if previous!={**cfg,'reuse_m0_zero':True,'maximum_equilibrium_solves':13}:
+        raise ValueError('Original scientific configuration changed')
+    return {**cfg,'meshes':[cfg['meshes'][1]],'states':cfg['states'][:2],
+            'maximum_equilibrium_solves':2,'diagnostic_scope':'M1 zero and first pressure only'}
+
+
+def run(workspace,*,resume=False,fine_pressure=False):
+    if resume and fine_pressure:
+        raise ValueError('Choose one explicitly authorized slice')
     workspace=Path(workspace).resolve(strict=True)
-    root=result_path(workspace,RESUME_RESULT if resume else RESULT,new=True)
-    parent=result_path(workspace,RESULT if resume else PARENT)
-    contract=RESUME_CONTRACT if resume else CONTRACT
-    expected_sha=RESUME_PARENT_SHA if resume else PARENT_SHA
+    root=result_path(workspace,FINE_RESULT if fine_pressure else RESUME_RESULT if resume else RESULT,new=True)
+    parent=result_path(workspace,RESUME_RESULT if fine_pressure else RESULT if resume else PARENT)
+    contract=FINE_CONTRACT if fine_pressure else RESUME_CONTRACT if resume else CONTRACT
+    expected_sha=FINE_PARENT_SHA if fine_pressure else RESUME_PARENT_SHA if resume else PARENT_SHA
     if not (workspace/contract).is_file() or digest(parent/'manifest.json')!=expected_sha:
         raise ValueError('Contract or frozen ancestor identity mismatch')
     parent_manifest=json.loads((parent/'manifest.json').read_text())
@@ -73,11 +87,17 @@ def run(workspace,*,resume=False):
     dirty=json.loads((parent/'preexisting_changes.json').read_text())
     if not protected_unchanged(workspace,internal,external,dirty):
         raise ValueError('Protected ancestors/unrelated edits changed')
-    cfg=resume_configuration(parent) if resume else configuration()
-    identity=mechanical_identity(workspace,parent) if resume else {}
+    cfg=fine_pressure_configuration(parent) if fine_pressure else resume_configuration(parent) if resume else configuration()
+    identity=mechanical_identity(workspace,parent) if resume or fine_pressure else {}
     if resume and (not all(identity.values()) or
                    json.loads((parent/'interface_diagnosis.json').read_text())['status']!='passed'):
         raise ValueError('Mechanical identity or retained-zero diagnosis rejected')
+    if fine_pressure:
+        for relative in ['src/prl/fem/fenicsx_ventricle.py','src/prl/verification/ventricle_3d.py',
+                         'src/prl/fem/ventricle_protocol.py']:
+            identity[relative]=digest(workspace/relative)==digest(parent/'sources_at_delivery'/relative)
+        if not all(identity.values()) or json.loads((parent/'restart_interface.json').read_text())['status']!='passed':
+            raise ValueError('Fine probe changed mechanics or parent interface')
     version=json.loads(read_docker('version','--format','{{json .}}'))
     if not version.get('Server') or read_docker('image','inspect',TAG,'--format','{{.Id}}')!=IMAGE:
         raise RuntimeError('Pinned runtime unavailable; no repair/pull/restart authorized')
@@ -88,7 +108,7 @@ def run(workspace,*,resume=False):
         raise RuntimeError('Storage refused')
     geometries=[]
     for case in cfg['meshes']:
-        if resume:
+        if resume or fine_pressure:
             with np.load(parent/'input'/f'{case["name"]}_geometry.npz',allow_pickle=False) as saved:
                 data={k:saved[k] for k in saved.files}
         else:
@@ -103,7 +123,7 @@ def run(workspace,*,resume=False):
         ('external_protected_preflight.json',external),('preexisting_changes.json',dirty)]:
         save_json(root/filename,value)
     for name,data,metrics in geometries:
-        if resume:
+        if resume or fine_pressure:
             for extension in ['npz','json']:
                 filename=f'{name}_geometry.{extension}'
                 shutil.copyfile(parent/'input'/filename,root/'input'/filename)
@@ -113,6 +133,15 @@ def run(workspace,*,resume=False):
     copies=[(parent/'manifest.json',root/'prerequisite/parent_manifest.json'),
             (parent/'summary.json',root/'prerequisite/parent_summary.json')]
     sources=SOURCES+([RESUME_CONTRACT] if resume else [])
+    if fine_pressure:
+        sources += [FINE_CONTRACT,'src/prl/verification/ventricle_mesh_probe.py','tests/prl/test_ventricle_mesh_probe.py']
+        save_json(root/'mechanical_identity.json',{'status':'passed','checks':identity})
+        copies.extend((parent/'raw'/filename,root/'retained'/filename) for filename in
+            ['M0_mesh.npz','M0_state_pressure_1.npz','M0_state_pressure_1.json'])
+        copies.extend((parent/'retained'/filename,root/'retained'/filename) for filename in
+            ['M0_state_zero.npz','M0_state_zero.json'])
+        copies.extend((parent/filename,root/'prerequisite'/filename) for filename in
+            ['failure.json','offline_diagnosis.json','post_verification.json'])
     if resume:
         save_json(root/'mechanical_identity.json',{'status':'passed','checks':identity})
         copies.extend((parent/'raw'/filename,root/'retained'/filename) for filename in
@@ -129,6 +158,8 @@ def run(workspace,*,resume=False):
         for p in (root/'input').iterdir()})
     with scientific_lock(workspace):
         name='prl-f6s2r-idealized-3d-resume-v01-20260918' if resume else 'prl-f6s2-idealized-3d-v01-20260918'
+        if fine_pressure:
+            name='prl-f6s2d1-3d-fine-pressure-v01-20260918'
         report=invoke_bounded(workspace,root,name,
             '/workspace/src/prl/fem/fenicsx_ventricle.py',seconds=cfg['resources']['seconds'])
     report.update(parents_unchanged=protected_unchanged(workspace,internal,external,dirty),

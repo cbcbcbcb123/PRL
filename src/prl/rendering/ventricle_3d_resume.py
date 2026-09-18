@@ -23,7 +23,9 @@ def report_agreement(native,host,path=''):
     return [] if same else [path+': values differ']
 
 
-def draw(data_path,png_path,svg_path,style_module,mechanics,geometry,kind='overview'):
+def draw(data_path,png_path,svg_path,style_module,mechanics,geometry,kind='overview',probe=None):
+    if kind=='mesh_comparison':
+        return draw_mesh_comparison(data_path,png_path,svg_path,style_module,mechanics,geometry,probe)
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -145,17 +147,101 @@ def draw(data_path,png_path,svg_path,style_module,mechanics,geometry,kind='overv
     return {'status':'passed','scientific_status':report['status'],'states':available,'deformation_scale':1,'new_FEM_solves':0}
 
 
-def prepare(workspace,skills):
+def draw_mesh_comparison(data_path,png_path,svg_path,style_module,mechanics,geometry,probe):
+    """Same-load cutaways: two real meshes, shared stress/J scales, no smoothing."""
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.collections import PolyCollection
+    from matplotlib.colors import Normalize,to_rgba
+    data=mechanics.load_arrays(data_path); cfg=json.loads(str(data['configuration'].item()))
+    report=json.loads(str(data['verification'].item())); records=report['cases']
+    meshes={name:{k[8:]:v for k,v in data.items() if k.startswith('mesh_'+name+'_')} for name in ['M0','M1']}
+    states={}; measures={}
+    for name in meshes:
+        prefix=f'state_{name}_pressure_1__'
+        states[name]={k[len(prefix):]:v for k,v in data.items() if k.startswith(prefix)}
+        if states[name]:
+            measures[name]=probe.cell_measures(meshes[name],states[name],cfg,mechanics)
+    style=style_module.StyleSpec(axis_box_size_in=(3.6,3.6),tick_label_size=16.,axis_label_size=18.,
+        annotation_font_size=16.,sample_size_and_stat_font_size=14.,legend_font_size=14.,axes_line_width=1.5,
+        major_tick_length_pt=5.,major_tick_width_pt=1.,minor_tick_length_pt=3.,minor_tick_width_pt=.8,
+        data_line_width=1.5,tick_label_pad_pt=4.,axis_label_pad_pt=8.)
+    defaults=asdict(style_module.DEFAULT_STYLE)
+    overrides=[style_module.StyleOverride(field=k,reason='Reuse compact 3D FEM diagnostic axes; same projection and scales for both meshes.')
+               for k,v in asdict(style).items() if v!=defaults[k]]
+    width,height=18.8,12.8; figure=plt.figure(figsize=(width,height)); axes=[]
+    view=np.array([1.8,-2.4,1.6]); view/=np.linalg.norm(view)
+    horizontal=np.cross([0.,0.,1.],view); horizontal/=np.linalg.norm(horizontal)
+    projection=np.stack([horizontal,np.cross(view,horizontal)],axis=1)
+    coordinates=np.concatenate([mesh['coordinates']+states[name].get('u',0.) for name,mesh in meshes.items() if mesh])@projection
+    center=(coordinates.min(axis=0)+coordinates.max(axis=0))/2; half=np.ptp(coordinates,axis=0).max()*.57
+    norms={'equivalent_stress':Normalize(0,max(float(item['equivalent_stress'].max()) for item in measures.values()) or 1.),
+           'max_abs_J_minus_one':Normalize(0,max(1.,max(float(item['max_abs_J_minus_one'].max())*100 for item in measures.values())))}
+    pieces=np.array([[0,5,4],[5,1,3],[4,3,2],[5,3,4]]); colors=np.array([to_rgba(c) for c in ['#4C9F70','#D6B656','#5B8DB8']])
+    for row,name in enumerate(['M0','M1']):
+        mesh=meshes[name]; y=7.6 if row==0 else 2.8
+        if mesh:
+            faces,owners=geometry.boundary_faces(mesh)
+        for col,field in enumerate([None,'equivalent_stress','max_abs_J_minus_one']):
+            axis=figure.add_axes(([1.25,7.,12.8][col]/width,y/height,3.6/width,3.6/height)); axes.append(axis)
+            axis.set(xlim=(center[0]-half,center[0]+half),ylim=(center[1]-half,center[1]+half),
+                     xticks=[-1,0,1],yticks=[-1,0,1],xlabel='Projected x / L',ylabel='Projected height / L',aspect='equal')
+            title=chr(65+row*3+col)+'  '+name+' '+['reference','stress','local volume'][col]
+            style_module.apply_axes_style(axis,style=style); style_module.add_top_information(axis,title,style=style)
+            if not mesh or (field is not None and name not in measures):
+                axis.text(.5,.5,'NOT RUN',ha='center',transform=axis.transAxes)
+                continue
+            nodes=mesh['coordinates']+(states[name]['u'] if field else 0.)
+            surface=nodes[faces[:,pieces]].reshape(-1,3,3); order=np.argsort(surface.mean(axis=1)@view)
+            if field is None:
+                facecolors=np.repeat(colors[mesh['layers'][owners]-1],4,axis=0)
+                normal=np.cross(surface[:,1]-surface[:,0],surface[:,2]-surface[:,0]); normal/=np.linalg.norm(normal,axis=1)[:,None]
+                facecolors[:,:3]*=(.72+.28*np.abs(normal@view))[:,None]
+                artist=PolyCollection((surface@projection)[order],facecolors=facecolors[order],edgecolors=(.1,.15,.2,.4),linewidths=.12)
+                base=(np.abs(nodes[:,2])<1e-12)&(nodes[:,1]>=0)
+                axis.plot(*(nodes[base]@projection).T,'o',color='#A83935',ms=1.3)
+            else:
+                values=measures[name][field]*(100 if field=='max_abs_J_minus_one' else 1.)
+                artist=PolyCollection((surface@projection)[order],array=np.repeat(values[owners],4)[order],norm=norms[field],
+                    cmap='viridis',edgecolors=(.1,.15,.2,.35),linewidths=.1)
+                if row==0:
+                    cax=figure.add_axes(([0,10.95,16.75][col]/width,y/height,.2/width,3.6/height))
+                    label='Cell-mean equivalent stress / mu' if col==1 else 'Cell max |J - 1| (%)'
+                    figure.colorbar(artist,cax=cax).set_label(label,fontsize=16,labelpad=8); cax.tick_params(labelsize=14,direction='out')
+            axis.add_collection(artist)
+            if field=='equivalent_stress':
+                audit=records[name]['pressure_1']
+                axis.text(.03,.035,f'dV = {audit["volume_change"]*100:+.4f}%\n{audit["status"].upper()}',
+                    transform=axis.transAxes,fontsize=14,color='#A83935' if audit['status']=='failed' else '#20694D')
+    figure.text(.055,.963,'Same-load 3D mesh diagnostic | '+report['status'].upper(),fontsize=18)
+    figure.text(.055,.930,'p/mu = 0.01, Ta = 0; same material, basal clamp and P2/P1 formulation. True 1x deformation.',fontsize=14)
+    figure.text(.055,.145,'Reference: endo green / ECM yellow / myo blue; fixed basal ring red. Full 3D wall solved; cutaway is display-only.',fontsize=12)
+    outcomes=[]
+    for name in ['M0','M1']:
+        if name in measures:
+            outcomes.append(f'{name}: max |J-1| = {measures[name]["max_abs_J_minus_one"].max()*100:.4f}%')
+    figure.text(.055,.113,'; '.join(outcomes)+'. Original local gate: 1%. Each column uses a shared scale.',fontsize=12)
+    figure.text(.055,.081,'J: quadrature + 56 extra points/cell; no smoothing. M0 retained, M1 newly solved. Missing states are not fabricated.',fontsize=12)
+    figure.text(.055,.049,'Two discrete curved geometries; not pure h-refinement or asymptotic convergence. No contraction, growth, flow or biological validation.',fontsize=12)
+    exported=style_module.export_figure(figure,axes,Path(png_path).with_suffix(''),style=style,overrides=overrides)
+    Path(exported.svg).replace(svg_path)
+    manifest=json.loads(Path(exported.manifest).read_text()); manifest['exports']['svg']=str(Path(svg_path).resolve())
+    Path(exported.manifest).write_text(json.dumps(manifest,indent=2),encoding='utf-8'); plt.close(figure)
+    return {'status':'passed','scientific_status':report['status'],'displayed_pressure_states':list(measures),'deformation_scale':1,'new_FEM_solves':0}
+
+
+def prepare(workspace,skills,*,fine_pressure=False):
     import re
     import subprocess
     import sys
     import nbformat
     from prl.result_store import result_path,result_admission
-    from prl.runs.ventricle_3d import RESUME_RESULT
+    from prl.runs.ventricle_3d import RESUME_RESULT,FINE_RESULT
     from prl.runs.fenicsx_runtime import save_json
     from prl.runs.fenicsx_ring import digest
     from prl.verification.ventricle_3d import verify,load_arrays,state_path
-    workspace=Path(workspace); skills=Path(skills); root=result_path(workspace,RESUME_RESULT)
+    workspace=Path(workspace); skills=Path(skills); root=result_path(workspace,FINE_RESULT if fine_pressure else RESUME_RESULT)
     if (root/'post_verification.json').exists() or (root/'figures').exists():
         raise FileExistsError('Create-only postprocessing')
     if not result_admission(workspace,256*1024**2)['can_start']:
@@ -170,31 +256,40 @@ def prepare(workspace,skills):
     if differences:
         raise ValueError('Host/native comparison failed')
     save_json(root/'post_verification.json',report)
+    if fine_pressure:
+        from prl.verification.ventricle_mesh_probe import verify_probe
+        diagnostic=verify_probe(root); save_json(root/'mesh_diagnostic.json',diagnostic)
+        report={'status':diagnostic['status'],'cases':{'M0':{'pressure_1':diagnostic['retained_coarse']},**report['cases']}}
     cfg=json.loads((root/'configuration.json').read_text()); identities={}
     data={'configuration':np.array(json.dumps(cfg)),'verification':np.array(json.dumps(report))}
     for name,records in report['cases'].items():
-        mesh_path=root/'raw'/f'{name}_mesh.npz'
+        folder='retained' if fine_pressure and name=='M0' else 'raw'
+        mesh_path=root/folder/f'{name}_mesh.npz'
         if not mesh_path.exists():
             continue
         identities[mesh_path.relative_to(root).as_posix()]=digest(mesh_path)
         data.update({f'mesh_{name}_'+k:v for k,v in load_arrays(mesh_path).items()})
         for label in records:
-            path=state_path(root,cfg,name,label); identities[path.relative_to(root).as_posix()]=digest(path)
+            path=root/folder/f'{name}_state_{label}.npz' if fine_pressure else state_path(root,cfg,name,label)
+            identities[path.relative_to(root).as_posix()]=digest(path)
             data.update({f'state_{name}_{label}__'+k:v for k,v in load_arrays(path).items()
                          if k in ['u','pressure','load','activation']})
     data['source_identities']=np.array(json.dumps(identities)); np.savez_compressed(root/'figure_data.npz',**data)
     revisions=[]
-    kinds=['overview','states'] if len(report['cases']['M0'])>=5 else ['overview']
+    kinds=['mesh_comparison'] if fine_pressure else ['overview','states'] if len(report['cases']['M0'])>=5 else ['overview']
+    main='S2D1' if fine_pressure else 'S2R'
     for kind in kinds:
         command=[sys.executable,'-B','-X','utf8',str(skills/'cb-paper-figure-workflow/scripts/init_figure_revision.py'),
-            str(root/'figures'),'--main','S2R','--analysis-key','3d_'+kind,'--data',str(root/'figure_data.npz')]
+            str(root/'figures'),'--main',main,'--analysis-key','3d_'+kind,'--data',str(root/'figure_data.npz')]
         snapshots={'helper':Path(__file__).resolve(),'mechanics':workspace/'src/prl/verification/ventricle_3d.py',
                    'geometry':workspace/'src/prl/rendering/ventricle_3d.py','style':skills/'cb-plot-unified-style/assets/cb_plot_unified_style.py'}
+        if fine_pressure:
+            snapshots['probe']=workspace/'src/prl/verification/ventricle_mesh_probe.py'
         for key,path in snapshots.items():
             command.extend(['--python',key+'='+str(path)])
         command.extend(['--model','config='+str(root/'configuration.json'),'--model','verification='+str(root/'post_verification.json')])
         subprocess.run(command,check=True)
-        revision=next((root/f'figures/FigS2R_3d_{kind}').glob('FigS2R_*')); prefix=revision.name
+        revision=next((root/f'figures/Fig{main}_3d_{kind}').glob('Fig'+main+'_*')); prefix=revision.name
         filenames={key:next(revision.glob(f'*_{key}.py')).name for key in snapshots}
         code=f'''from pathlib import Path
 import importlib.util
@@ -209,7 +304,7 @@ OUTPUT_SVG = REVISION_DIR / f"05_{{PREFIX}}.svg"
 STYLE_SOURCE = 'Existing compact FEM diagnostic style'
 DPI = 600
 axis_box_size_in = (3.6, 3.6)
-FIGURE_SIZE_IN = {(14.4,13.6) if kind=='overview' else (18.8,13.6)!r}
+FIGURE_SIZE_IN = {(18.8,12.8) if fine_pressure else (14.4,13.6) if kind=='overview' else (18.8,13.6)!r}
 def load_snapshot(name, filename):
     spec = importlib.util.spec_from_file_location(name, REVISION_DIR / filename)
     module = importlib.util.module_from_spec(spec)
@@ -217,9 +312,9 @@ def load_snapshot(name, filename):
     spec.loader.exec_module(module)
     return module
 snapshots = {{key: load_snapshot('f6s2r_'+key, filename) for key,filename in {filenames!r}.items()}}
-snapshots['helper'].draw(DATA_PATH, OUTPUT_PNG, OUTPUT_SVG, snapshots['style'], snapshots['mechanics'], snapshots['geometry'], kind={kind!r})'''
+snapshots['helper'].draw(DATA_PATH, OUTPUT_PNG, OUTPUT_SVG, snapshots['style'], snapshots['mechanics'], snapshots['geometry'], kind={kind!r}, probe=snapshots.get('probe'))'''
         notebook=nbformat.v4.new_notebook(cells=[nbformat.v4.new_markdown_cell(
-            '# 三维固体实际状态\n原无载复用；只画实存数值状态，失败状态明确标注。加载级不是心动时间，无FSI/生长/实验标定。'),
+            '# 三维固体实际状态\n只画保存的数值状态；M0历史数据保留，缺失或失败状态明确标注。加载级不是心动时间，无FSI/生长/实验标定。'),
             nbformat.v4.new_code_cell(code),nbformat.v4.new_code_cell('display(Image(filename=str(OUTPUT_PNG), width=1100))')],
             metadata={'kernelspec':{'name':'python3','display_name':'Python 3','language':'python'}})
         nbformat.write(notebook,revision/f'03_{prefix}_plot.ipynb')

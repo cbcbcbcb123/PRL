@@ -398,7 +398,9 @@ def _parser() -> argparse.ArgumentParser:
     for group in [run_commands,verify_commands]:
         solid=group.add_parser('fem-idealized-3d',help='bounded idealized 3D solid qualification; no growth or flow')
         solid.add_argument('--workspace',type=Path)
-        solid.add_argument('--resume-qualified-zero',action='store_true',help='reuse retained M0 zero; only the original remaining 13 states')
+        solid_mode=solid.add_mutually_exclusive_group()
+        solid_mode.add_argument('--resume-qualified-zero',action='store_true',help='reuse retained M0 zero; only the original remaining 13 states')
+        solid_mode.add_argument('--fine-first-pressure',action='store_true',help='only existing M1 zero and p=0.01; compare with preserved M0 failure')
     return parser
 
 
@@ -538,11 +540,13 @@ def main(arguments: Sequence[str] | None = None) -> int:
         exit_code=0 if report['status']=='passed' else 1
     elif ((parsed.command=='run' and parsed.run_command=='fem-idealized-3d') or
           (parsed.command=='verify' and parsed.verify_command=='fem-idealized-3d')):
-        from .runs.ventricle_3d import run,RESULT,RESUME_RESULT
+        from .runs.ventricle_3d import run,RESULT,RESUME_RESULT,FINE_RESULT
         from .result_store import result_path
         from .verification.ventricle_3d import verify
-        report=(run(workspace,resume=parsed.resume_qualified_zero) if parsed.command=='run' else
-                verify(result_path(workspace,RESUME_RESULT if parsed.resume_qualified_zero else RESULT)))
+        from .verification.ventricle_mesh_probe import verify_probe
+        report=(run(workspace,resume=parsed.resume_qualified_zero,fine_pressure=parsed.fine_first_pressure)
+                if parsed.command=='run' else verify_probe(result_path(workspace,FINE_RESULT))
+                if parsed.fine_first_pressure else verify(result_path(workspace,RESUME_RESULT if parsed.resume_qualified_zero else RESULT)))
         exit_code=0 if report['status']=='passed' else 1
     elif parsed.command == 'run' and parsed.run_command == 'fem-fenicsx-ring':
         from .runs.fenicsx_ring import run_fenicsx_ring, run_active_completion
