@@ -175,6 +175,88 @@ def mumps_failure_cause(report):
             0:'mumps_no_reported_error'}.get(code,'unknown_mumps_failure')
 
 
+def saved_solution_metrics(matrix,rhs,solution,reference):
+    """Independent saved-vector checks, with no linear solve or factorization."""
+    finite=bool(np.isfinite(solution).all())
+    return {'finite':finite,
+            'relative_residual':float(np.linalg.norm(matrix@solution-rhs)/np.linalg.norm(rhs)) if finite else None,
+            'relative_solution_difference':float(np.linalg.norm(solution-reference)/np.linalg.norm(reference)) if finite else None,
+            'reference_relative_residual':float(np.linalg.norm(matrix@reference-rhs)/np.linalg.norm(rhs))}
+
+
+def verify_workspace_result(root,workspace,save=False):
+    """Audit the saved S3 matrix/solution; outcome is separate from preservation."""
+    root=Path(root).resolve(strict=True); workspace=Path(workspace).resolve(strict=True)
+    diagnosis=_load_json(root/'diagnosis.json'); execution=_load_json(root/'execution.json')
+    config=_load_json(root/'configuration.json'); old_config=_load_json(root/'previous_configuration.json')
+    mumps=_load_json(root/'mumps_diagnosis.json'); old=_load_json(root/'previous_mumps_diagnosis.json')
+    formal=_identities(root,_load_json(root/'formal_invocation_manifest.json')['files'])
+    sources=_load_json(root/'source_result_preflight.json'); parents=_load_json(root/'protected_preflight.json')
+    with np.load(root/'matrix_csr.npz',allow_pickle=False) as data:
+        arrays={key:data[key] for key in data.files}
+    with np.load(root/'previous_matrix_csr.npz',allow_pickle=False) as data:
+        identities={key:np.array_equal(arrays[key],data[key]) for key in data.files}
+    with np.load(root/'matrix_after.npz',allow_pickle=False) as data:
+        after={key:np.array_equal(arrays[key],data[key]) for key in data.files}
+    with np.load(root/'state_identity.npz',allow_pickle=False) as data:
+        state={key:data[key].tobytes()==arrays['initial'].tobytes() for key in data.files}
+    with np.load(root/'mumps_linear_solution.npz',allow_pickle=False) as data:
+        actual=data['solution']
+    with np.load(root/'reference_superlu_solution.npz',allow_pickle=False) as data:
+        reference=data['solution']
+    size=len(arrays['rhs'])
+    matrix=sparse.csr_matrix((arrays['data'],arrays['indices'],arrays['indptr']),shape=(size,size))
+    metrics=saved_solution_metrics(matrix,arrays['rhs'],actual,reference)
+    controls=mumps.get('mumps',{})
+    control_identity={f'{group}_{key}':controls.get(group,{}).get(key)==value
+                      for group in ('icntl','cntl') for key,value in old['mumps'][group].items()
+                      if not (group=='icntl' and key=='14')}
+    physics=['radii','meshes','mu','kappa','quadrature_degree','pressure_space','loads']
+    declared={'matrix_assemblies':0,'mumps_factorizations':1,'superlu_factorizations':0,
+              'nonlinear_equilibrium_solves':0,'newton_updates':0,'automatic_retries':0,'gpu':0}
+    checks={
+        'formal_files_preserved':bool(formal) and all(formal.values()),
+        'sources_preserved':bool(sources) and all(_digest(path)==sha for path,sha in sources.items()),
+        'parents_preserved':bool(parents) and all(_digest(workspace/path)==sha for path,sha in parents.items()),
+        'matrix_rhs_and_maps_identical':len(identities)==11 and all(identities.values()),
+        'native_matrix_after_identical':len(after)==3 and all(after.values()),
+        'state_bytes_unchanged':len(state)==2 and all(state.values()),
+        'physics_unchanged':all(config[key]==old_config[key] for key in physics),
+        'only_one_solver_setting_changed':config['solver']=={**old_config['solver'],'mat_mumps_icntl_14':100},
+        'old_margin_failure_is_retained':old['mumps']['infog']['1']==-9 and old['mumps']['icntl']['14']==20,
+        'actual_controls_except_margin_unchanged':all(control_identity.values()),
+        'backend_and_prefix_preserved':all(mumps[key]==old[key] for key in ['ksp_type','pc_type','factor_solver_type','ksp_options_prefix','matrix_type']),
+        'single_bounded_container':execution['diagnostic_container_invocations']==1 and all(execution['container_checks'].values()),
+        'no_oom':not _load_json(root/'container_inspect.json')['State']['OOMKilled'],
+        'attempt_counts_and_no_updates':all(diagnosis[key]==value for key,value in declared.items()) and mumps['attempts']==1,
+        'report_matches_saved_vector_finiteness':metrics['finite']==mumps['solution_finite'],
+        'report_matches_diagnosis':mumps==diagnosis['mumps'],
+        'reference_residual_acceptable':metrics['reference_relative_residual']<=1e-8,
+    }
+    if metrics['finite']:
+        checks['reported_residual_matches']=bool(np.isclose(metrics['relative_residual'],mumps['relative_residual'],rtol=1e-3,atol=1e-14))
+        checks['reported_solution_difference_matches']=bool(np.isclose(metrics['relative_solution_difference'],diagnosis['relative_solution_difference'],rtol=1e-10,atol=1e-14))
+    linear={'infog_zero':controls.get('infog',{}).get('1')==0,
+            'ksp_positive':mumps['converged_reason']>0,'pc_zero':mumps['pc_failed_reason']==0,
+            'actual_margin_100':controls.get('icntl',{}).get('14')==100,
+            'solution_finite':metrics['finite'],
+            'relative_residual':metrics['finite'] and metrics['relative_residual']<=1e-8,
+            'solution_agreement':metrics['finite'] and metrics['relative_solution_difference']<=1e-6}
+    report={'verification_status':'passed' if all(checks.values()) else 'failed',
+            'linear_solver_status':'passed' if all(linear.values()) and all(checks.values()) else 'failed',
+            'checks':checks,'linear_checks':linear,'metrics':metrics,
+            'mumps_infog_1':controls.get('infog',{}).get('1'),'mumps_infog_2':controls.get('infog',{}).get('2'),
+            'mumps_icntl_14':controls.get('icntl',{}).get('14'),'ksp_reason':mumps['converged_reason'],
+            'pc_failed_reason':mumps['pc_failed_reason'],'other_control_identity':control_identity,
+            'formal_files_checked':len(formal),'source_files_checked':len(sources),'parent_files_checked':len(parents),
+            'matrix_arrays_checked':len(identities),'native_csr_arrays_checked':len(after),'state_arrays_checked':len(state),
+            'postprocess_factorizations':0,'new_equilibria':0,'scientific_pressure_space_status':'failed',
+            'contour':'not_run','three_dimensional_model':'not_run','fsi':'not_run','growth':'not_run'}
+    if save:
+        (root/'post_verification.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n',encoding='utf-8')
+    return report
+
+
 def verify_replay_result(root, workspace, save=False):
     """Verify the S2 reports and saved solutions using matvecs, without any solve."""
     root=Path(root).resolve(strict=True); workspace=Path(workspace).resolve(strict=True)

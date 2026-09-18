@@ -26,6 +26,154 @@ _REQUIRED_ARRAYS = {
 }
 
 
+def prepare_workspace_figure(workspace,skill_root):
+    """Create a self-contained notebook figure from already verified S3 data."""
+    import re
+    import subprocess
+    import sys
+    import nbformat
+    from prl.result_store import result_path,result_admission
+    from prl.runs.fenicsx_linear_system import WORKSPACE_RESULT
+
+    workspace=Path(workspace).resolve(strict=True); skills=Path(skill_root)
+    root=result_path(workspace,WORKSPACE_RESULT)
+    if (root/'figures').exists():
+        raise FileExistsError('Figure preparation is create-only')
+    if not result_admission(workspace,32*1024**2)['can_start']:
+        raise RuntimeError('Figure storage admission refused')
+    report=json.loads((root/'post_verification.json').read_text())
+    if report['verification_status']!='passed':
+        raise ValueError('Saved evidence must pass independent verification first')
+    with np.load(root/'source_f6s1r/M0_mesh.npz',allow_pickle=False) as mesh:
+        data={key:mesh[key] for key in ['coordinates','cells','layers','fixed']}
+    data.update(mumps_residual=np.array(report['metrics']['relative_residual'],dtype=float),
+                superlu_residual=np.array(report['metrics']['reference_relative_residual']),
+                solution_difference=np.array(report['metrics']['relative_solution_difference'],dtype=float),
+                infog=np.array(report['mumps_infog_1']),margin=np.array(report['mumps_icntl_14']),
+                linear_status=np.array(report['linear_solver_status']))
+    np.savez_compressed(root/'figure_data.npz',**data)
+    subprocess.run([sys.executable,'-B','-X','utf8',str(skills/'cb-paper-figure-workflow/scripts/init_figure_revision.py'),
+        str(root/'figures'),'--main','S1S3','--analysis-key','workspace_check','--data',str(root/'figure_data.npz'),
+        '--python','helper='+str(Path(__file__).resolve()),
+        '--python','style='+str(skills/'cb-plot-unified-style/assets/cb_plot_unified_style.py'),
+        '--model','verification='+str(root/'post_verification.json'),
+        '--data-role','matrix='+str(root/'matrix_csr.npz'),
+        '--data-role','mumps_solution='+str(root/'mumps_linear_solution.npz'),
+        '--data-role','superlu_solution='+str(root/'reference_superlu_solution.npz')],check=True)
+    revision=next((root/'figures/FigS1S3_workspace_check').glob('FigS1S3_*')); prefix=revision.name
+    helper=next(revision.glob('*_helper.py')).name; style=next(revision.glob('*_style.py')).name
+    notebook=nbformat.v4.new_notebook(cells=[
+        nbformat.v4.new_markdown_cell('# F6-S1-S3：同矩阵工作空间验证\n真实保留的初始网格及线性解；0次非线性求解、0个新平衡态。\n## 作图调整参数\n沿用项目紧凑FEM诊断风格；每轴3.7英寸方框，显式留白；不做统计推断。'),
+        nbformat.v4.new_code_cell(f'''from pathlib import Path
+import importlib.util
+import sys
+from IPython.display import Image, display
+REVISION_DIR = Path.cwd().resolve()
+PREFIX = {prefix!r}
+DATA_PATH = REVISION_DIR / f"01_{{PREFIX}}_data.npz"
+OUTPUT_PNG = REVISION_DIR / f"04_{{PREFIX}}.png"
+OUTPUT_SVG = REVISION_DIR / f"05_{{PREFIX}}.svg"
+axis_box_size_in = (3.7, 3.7)
+STYLE_SOURCE = 'Project compact FEM diagnostics with CB unified style'
+FIGURE_SIZE_IN = (11.4, 7.0)
+figure_size_in = FIGURE_SIZE_IN
+DPI = 600
+def load_snapshot(name, filename):
+    spec = importlib.util.spec_from_file_location(name, REVISION_DIR / filename)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+helper = load_snapshot('workspace_plot_snapshot', {helper!r})
+style = load_snapshot('workspace_style_snapshot', {style!r})
+helper.draw_workspace_figure(DATA_PATH, OUTPUT_PNG, OUTPUT_SVG, style, axis_box_size_in, figure_size_in)'''),
+        nbformat.v4.new_code_cell('display(Image(filename=str(OUTPUT_PNG), width=1000))')],
+        metadata={'kernelspec':{'name':'python3','display_name':'Python 3','language':'python'}})
+    nbformat.write(notebook,revision/f'03_{prefix}_plot.ipynb')
+    methods=revision/f'02_{prefix}_methods.txt'; content=methods.read_text(encoding='utf-8')
+    replacements={
+        '风格来源':'沿用项目紧凑FEM诊断；CB统一风格，3.7英寸方轴、显式留白、中文微软雅黑；600 dpi PNG/可编辑SVG。',
+        '用户提供的期刊规格':'未指定；用于阶段诊断，不是正式投稿版式。',
+        '03_材料方法来源':'PRL src/prl/rendering/fenicsx_linear_system.py与独立verification审计；版本包保留helper/style/verification快照；未采用独立03_材料方法目录。',
+        '数据/模型变换':'保存CSR和解的稀疏乘法独立残量；初始P2网格拆成4个显示子三角，不平滑。旧20%配置失败无有限残量，不伪造为0；图中SuperLU来自上轮，未新求解。',
+        '统计方法与不确定性':'确定性单矩阵、每后端一次尝试；无生物重复、误差棒或显著性检验。标注线性门1e-8；两解相对差门1e-6。',
+        '生物学分组颜色':'不适用；蓝/黄/绿为构造材料域，非生物实验分组。'}
+    for key,value in replacements.items():
+        content=re.sub(r'(?m)^- '+re.escape(key)+r':.*$',lambda match:'- '+key+': '+value,content)
+    methods.write_text(content,encoding='utf-8')
+    runtime=root/'figure_runtime'; runtime.mkdir(exist_ok=False)
+    (runtime/'README.md').write_text('Owner: F6-S1-S3 figure preparation. Purpose: bounded Jupyter/Matplotlib runtime. No original data. Cleanup requires explicit path approval.\n',encoding='utf-8')
+    return {'status':'passed','revision':str(revision),'runtime':str(runtime)}
+
+
+def draw_workspace_figure(data_path,png_path,svg_path,style_module,axis_box_size_in=(3.7,3.7),figure_size_in=(11.4,7.0)):
+    from dataclasses import asdict
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.collections import PolyCollection
+    from matplotlib.ticker import FixedLocator,NullFormatter
+
+    with np.load(data_path,allow_pickle=False) as archive:
+        data={key:archive[key] for key in archive.files}
+    style=style_module.StyleSpec(axis_box_size_in=axis_box_size_in,
+        tick_label_size=16.,axis_label_size=18.,annotation_font_size=16.,sample_size_and_stat_font_size=14.,
+        legend_font_size=14.,axes_line_width=1.5,major_tick_length_pt=5.,major_tick_width_pt=1.,
+        minor_tick_length_pt=3.,minor_tick_width_pt=.8,data_line_width=1.5,tick_label_pad_pt=4.,axis_label_pad_pt=8.,
+        font_candidates=('Microsoft YaHei','Calibri','DejaVu Sans'),show_minor_ticks=False)
+    defaults=asdict(style_module.DEFAULT_STYLE)
+    overrides=[style_module.StyleOverride(field=key,reason='Categorical solver labels have no intermediate numerical ticks; logarithmic y minors are explicit.' if key=='show_minor_ticks' else 'Established compact FEM diagnostic panels with Chinese labels and explicit margins.')
+               for key,value in asdict(style).items() if value!=defaults[key]]
+    width,height=figure_size_in; side=axis_box_size_in[0]
+    fig=plt.figure(figsize=figure_size_in)
+    axes=[fig.add_axes((left/width,1.65/height,side/width,side/height)) for left in (1.,6.5)]
+    subtriangles=np.array([[0,5,4],[5,1,3],[4,3,2],[5,3,4]])
+    polygons=data['coordinates'][data['cells'][:,subtriangles]].reshape(-1,3,2)
+    colors=np.array(['#6FAACB','#E6C777','#83B499'])
+    axes[0].add_collection(PolyCollection(polygons,facecolors=np.repeat(colors[data['layers']-1],4),
+        edgecolors=(.1,.1,.1,.20),linewidths=.15))
+    fixed_nodes=np.flatnonzero(np.any(data['fixed'],axis=1))
+    axes[0].plot(*data['coordinates'][fixed_nodes].T,'o',color='#B23B37',ms=6)
+    for angle in np.linspace(0,2*np.pi,8,endpoint=False):
+        direction=np.array([np.cos(angle),np.sin(angle)])
+        axes[0].annotate('',xy=.79*direction,xytext=.60*direction,
+            arrowprops={'arrowstyle':'->','color':'#B23B37','lw':1.1})
+    axes[0].set(xlim=(-1.15,1.15),ylim=(-1.15,1.15),xlabel='x / L',ylabel='y / L')
+    axes[0].set_aspect('equal')
+    axes[0].xaxis.set_major_locator(FixedLocator([-1,0,1])); axes[0].yaxis.set_major_locator(FixedLocator([-1,0,1]))
+    axes[0].text(0,0,'初始构形\np / μ = 0.02\n主动张力 = 0',ha='center',va='center')
+    style_module.apply_axes_style(axes[0],style=style)
+    style_module.add_top_information(axes[0],'A  三层圆环及原边界条件',style=style)
+    values=[float(data['mumps_residual']),float(data['superlu_residual'])]
+    for index,value in enumerate(values):
+        if np.isfinite(value) and value>0:
+            axes[1].plot(index,value,'o',color=('#237857','#637B8A')[index],ms=9)
+            axes[1].annotate(f'{value:.2e}',(index,value),xytext=(0,-25),textcoords='offset points',ha='center')
+    axes[1].axhline(1e-8,color='#B23B37',linestyle='--',lw=1.5)
+    axes[1].set(xlim=(-.65,1.65),ylim=(1e-15,1e-6),yscale='log',ylabel='相对线性残量')
+    axes[1].set_xticks([0,1],['MUMPS\n100%余量','SuperLU\n上轮保留'])
+    axes[1].yaxis.set_major_locator(FixedLocator([1e-15,1e-12,1e-9,1e-6]))
+    style_module.apply_axes_style(axes[1],style=style)
+    axes[1].xaxis.set_minor_locator(FixedLocator([]))
+    axes[1].yaxis.set_minor_locator(FixedLocator([1e-14,1e-13,1e-11,1e-10,1e-8,1e-7]))
+    axes[1].yaxis.set_minor_formatter(NullFormatter())
+    style_module.add_top_information(axes[1],'B  同一矩阵的独立残量',style=style)
+    axes[1].text(.03,.69,'验收线：1e-8',transform=axes[1].transAxes,color='#B23B37')
+    status=str(data['linear_status']).upper()
+    fig.text(.088,.925,f"20%余量：INFOG = -9（上轮）  →  100%余量：INFOG = {int(data['infog'])}，{status}",fontsize=15)
+    fig.text(.088,.862,f"与保留SuperLU解的相对差 = {float(data['solution_difference']):.2e}；门限1e-6",fontsize=14)
+    fig.text(.088,.080,'蓝：心内膜；黄：ECM；绿：心肌。外壁自由；红点为去刚体位移约束。',fontsize=12)
+    fig.text(.088,.034,'本轮0次非线性求解、0个新平衡态；原1%局部体积门仍未通过。',fontsize=12)
+    exported=style_module.export_figure(fig,axes,Path(png_path).with_suffix(''),style=style,overrides=overrides)
+    if Path(exported.svg)!=Path(svg_path):
+        Path(exported.svg).replace(svg_path)
+        manifest=json.loads(Path(exported.manifest).read_text())
+        manifest['exports']['svg']=str(Path(svg_path).resolve())
+        Path(exported.manifest).write_text(json.dumps(manifest,indent=2),encoding='utf-8')
+    plt.close(fig)
+    return {'linear_solver_status':status,'new_equilibria':0,'source':'preserved matrices and vectors only'}
+
+
 def load_saved_matrix(path: str | Path) -> tuple[sparse.csr_matrix, dict[str, np.ndarray]]:
     """Load and validate the create-only CSR evidence package."""
 

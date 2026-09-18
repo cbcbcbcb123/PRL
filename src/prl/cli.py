@@ -250,8 +250,11 @@ def _parser() -> argparse.ArgumentParser:
         help="diagnose one retained mixed tangent without a nonlinear equilibrium solve",
     )
     linear_diagnosis.add_argument("--workspace", type=Path)
-    linear_diagnosis.add_argument("--report-replay", action="store_true",
+    linear_mode = linear_diagnosis.add_mutually_exclusive_group()
+    linear_mode.add_argument("--report-replay", action="store_true",
                                   help="approved F6-S1-S2 same-initial-state diagnostic replay")
+    linear_mode.add_argument("--workspace-margin", action="store_true",
+                            help="approved F6-S1-S3 one MUMPS attempt on saved CSR with ICNTL(14)=100")
 
     render = commands.add_parser("render", help="render retained results and cockpit")
     render_commands = render.add_subparsers(dest="render_command", required=True)
@@ -721,7 +724,7 @@ def main(arguments: Sequence[str] | None = None) -> int:
     elif parsed.command == "diagnose" and parsed.diagnose_command == "fem-fenicsx-linear":
         from .runs.fenicsx_linear_system import run_diagnosis
 
-        report = run_diagnosis(workspace, replay=parsed.report_replay)
+        report = run_diagnosis(workspace, replay=parsed.report_replay, workspace_margin=parsed.workspace_margin)
         exit_code = 0 if report["status"] == "passed" else 1
     elif (
         parsed.command == "render"

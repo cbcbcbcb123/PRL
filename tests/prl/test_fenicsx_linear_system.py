@@ -89,3 +89,41 @@ def test_workspace_exhaustion_is_not_misreported_as_singularity():
     assert mumps_failure_cause(report(-10))=='mumps_numerical_singularity_or_zero_pivot'
     assert mumps_failure_cause(report(-13))=='mumps_memory_allocation_failure'
     assert mumps_failure_cause({})=='unknown_mumps_failure'
+
+
+def test_workspace_margin_is_one_factorization_without_assembly_or_superlu():
+    from prl.runs.fenicsx_linear_system import configuration
+    cfg=configuration(workspace_margin=True)
+    assert cfg['solver']['mat_mumps_icntl_14']==100
+    assert cfg['matrix_assemblies']==cfg['superlu_factorizations']==0
+    assert cfg['mumps_factorizations']==1 and cfg['nonlinear_equilibrium_solves']==0
+    assert cfg['relative_residual_limit']==1e-8
+    assert cfg['relative_solution_difference_limit']==1e-6
+    original=configuration()
+    assert 'mat_mumps_icntl_14' not in original['solver']
+
+
+def test_workspace_margin_is_create_only_and_mutually_exclusive():
+    from prl.runs.fenicsx_linear_system import run_diagnosis,WORKSPACE_RESULT
+    from prl.cli import _parser
+    import pytest
+    with patch('prl.runs.fenicsx_linear_system.result_path',side_effect=FileExistsError) as paths, patch('prl.runs.fenicsx_linear_system.read_docker') as docker:
+        with pytest.raises(FileExistsError):
+            run_diagnosis(Path(__file__).resolve().parents[2],workspace_margin=True)
+        assert paths.call_args.args[1]==WORKSPACE_RESULT
+        docker.assert_not_called()
+    parsed=_parser().parse_args(['diagnose','fem-fenicsx-linear','--workspace-margin'])
+    assert parsed.workspace_margin and not parsed.report_replay
+    with pytest.raises(SystemExit):
+        _parser().parse_args(['diagnose','fem-fenicsx-linear','--workspace-margin','--report-replay'])
+
+
+def test_saved_solution_metrics_reject_nonfinite_or_wrong_solution():
+    from prl.verification.fenicsx_linear_system_result import saved_solution_metrics
+    matrix=sparse.diags([2.,3.]).tocsr(); rhs=np.array([2.,6.]); reference=np.array([1.,2.])
+    good=saved_solution_metrics(matrix,rhs,reference,reference)
+    assert good['finite'] and good['relative_residual']==0 and good['relative_solution_difference']==0
+    wrong=saved_solution_metrics(matrix,rhs,np.array([1.,3.]),reference)
+    assert wrong['relative_residual']>1e-8 and wrong['relative_solution_difference']>1e-6
+    bad=saved_solution_metrics(matrix,rhs,np.array([np.inf,0.]),reference)
+    assert not bad['finite'] and bad['relative_residual'] is None

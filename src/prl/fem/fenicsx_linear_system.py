@@ -54,8 +54,8 @@ def _mumps_values(factor):
     return result
 
 
-def _mumps_attempt(snes,matrix,rhs,output=None):
-    ksp=snes.getKSP(); pc=ksp.getPC()
+def _mumps_attempt(ksp,matrix,rhs,output=None):
+    pc=ksp.getPC()
     try:
         factor_solver_type=pc.getFactorSolverType()
     except Exception as error:
@@ -120,11 +120,78 @@ def _superlu_attempt(matrix,rhs,output=None):
             'elapsed_seconds':time.monotonic()-started}
 
 
+def _workspace_margin_attempt(root,config):
+    """Import the retained matrix verbatim; never assemble or update FEM fields."""
+    started=time.monotonic()
+    with np.load(root/'previous_matrix_csr.npz',allow_pickle=False) as archive:
+        arrays={key:archive[key].copy() for key in archive.files}
+    previous=json.loads((root/'previous_mumps_diagnosis.json').read_text())
+    old_config=json.loads((root/'previous_configuration.json').read_text())
+    expected_options={**old_config['solver'],'mat_mumps_icntl_14':100}
+    if config['solver']!=expected_options or previous['mumps']['icntl']['14']!=20:
+        raise ValueError('Only the approved 20-to-100 workspace change is permitted')
+    size=len(arrays['rhs'])
+    matrix=PETSc.Mat().createAIJ(size=(size,size),comm=PETSc.COMM_SELF,
+        csr=(np.asarray(arrays['indptr'],dtype=PETSc.IntType),
+             np.asarray(arrays['indices'],dtype=PETSc.IntType),
+             np.asarray(arrays['data'],dtype=PETSc.ScalarType)))
+    matrix.assemble()
+    native_before=tuple(value.copy() for value in matrix.getValuesCSR())
+    identity={key:bool(np.array_equal(value,arrays[key]))
+              for key,value in zip(('indptr','indices','data'),native_before)}
+    write_json(root/'matrix_identity.json',identity)
+    if not all(identity.values()) or matrix.getType()!=previous['matrix_type']:
+        raise ValueError('PETSc CSR import changed the retained matrix')
+    np.savez_compressed(root/'matrix_csr.npz',**arrays)
+    state_before=arrays['initial'].copy()
+    ksp=PETSc.KSP().create(comm=PETSc.COMM_SELF)
+    prefix=previous['ksp_options_prefix']; ksp.setOptionsPrefix(prefix)
+    options=PETSc.Options()
+    for name,value in config['solver'].items():
+        if name.startswith(('ksp_','pc_','mat_')):
+            options[prefix+name]=value
+    ksp.setFromOptions()
+    mumps=_mumps_attempt(ksp,matrix,arrays['rhs'],root)
+    write_json(root/'mumps_diagnosis.json',finite_json(mumps))
+    native_after=matrix.getValuesCSR()
+    np.savez_compressed(root/'matrix_after.npz',indptr=native_after[0],indices=native_after[1],data=native_after[2])
+    np.savez_compressed(root/'state_identity.npz',before=state_before,after=arrays['initial'])
+    with np.load(root/'mumps_linear_solution.npz',allow_pickle=False) as actual, np.load(root/'reference_superlu_solution.npz',allow_pickle=False) as reference:
+        difference=float(np.linalg.norm(actual['solution']-reference['solution'])/np.linalg.norm(reference['solution']))
+    controls=mumps.get('mumps',{})
+    unchanged_controls={f'{group}_{key}':value==previous['mumps'][group].get(key)
+                        for group in ('icntl','cntl') for key,value in controls.get(group,{}).items()
+                        if not (group=='icntl' and key=='14')}
+    unchanged_matrix=all(np.array_equal(a,b) for a,b in zip(native_before,native_after))
+    checks={'infog_zero':controls.get('infog',{}).get('1')==0,
+            'ksp_converged':mumps['converged_reason']>0,'pc_ok':mumps['pc_failed_reason']==0,
+            'solution_finite':mumps['solution_finite'],
+            'relative_residual':mumps['relative_residual']<=config['relative_residual_limit'],
+            'reference_solution':difference<=config['relative_solution_difference_limit'],
+            'margin_100':controls.get('icntl',{}).get('14')==100,
+            'other_controls_unchanged':bool(unchanged_controls) and all(unchanged_controls.values()),
+            'matrix_unchanged':unchanged_matrix,
+            'state_unchanged':state_before.tobytes()==arrays['initial'].tobytes()}
+    report={'status':'passed' if all(checks.values()) else 'failed','checks':checks,
+            'mumps':mumps,'unchanged_controls':unchanged_controls,'relative_solution_difference':difference,
+            'matrix_assemblies':0,'mumps_factorizations':1,'superlu_factorizations':0,
+            'nonlinear_equilibrium_solves':0,'newton_updates':0,'automatic_retries':0,'gpu':0,
+            'scientific_pressure_space_status':'failed','contour':'not_run',
+            'versions':{'petsc':PETSc.Sys.getVersion(),'scipy':scipy.__version__,'python':platform.python_version()},
+            'elapsed_seconds':time.monotonic()-started}
+    write_json(root/'diagnosis.json',finite_json(report))
+    print('PRL_F6S1S3_JSON='+json.dumps(finite_json(report),allow_nan=False),flush=True)
+    ksp.destroy(); matrix.destroy()
+    return 0 if report['status']=='passed' else 2
+
+
 def main():
     root=Path('/out'); started=time.monotonic()
     config=json.loads((root/'configuration.json').read_text())
-    source=root/'source_f6s1r'; assembly=root/'assembly'; (assembly/'raw').mkdir(parents=True,exist_ok=False)
     try:
+        if config.get('workspace_margin'):
+            return _workspace_margin_attempt(root,config)
+        source=root/'source_f6s1r'; assembly=root/'assembly'; (assembly/'raw').mkdir(parents=True,exist_ok=False)
         previous_mesh=load_arrays(source/'M0_mesh.npz')
         zero=load_arrays(source/'M0_state_passive_0.npz')
         failed=load_arrays(source/'M0_state_passive_1.npz')
@@ -170,7 +237,7 @@ def main():
         superlu=_superlu_attempt(matrix,rhs,root)
         write_json(root/'superlu_diagnosis.json',finite_json(superlu))
         print('PRL_SUPERLU_JSON='+json.dumps(finite_json(superlu),allow_nan=False),flush=True)
-        mumps=_mumps_attempt(snes,problem.A,rhs,root)
+        mumps=_mumps_attempt(snes.getKSP(),problem.A,rhs,root)
         write_json(root/'mumps_diagnosis.json',finite_json(mumps))
         print('PRL_MUMPS_JSON='+json.dumps(finite_json(mumps),allow_nan=False),flush=True)
         np.savez_compressed(root/'state_identity.npz',initial=initial,before=before,
