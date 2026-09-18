@@ -8,17 +8,17 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 7bb061b
-current_lifecycle: fem_only_f6s1s9_low_pressure_active_contour_two_mesh_passed
+verified_commit: dd06d0c
+current_lifecycle: fem_only_f6s2_idealized_3d_zero_interface_failed_offline_fix
 documentation_updated_at: 2026-09-18
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_contour_active_contract_v01.md
+current_contract: project_control/ventricle_fem_idealized_3d_contract_v01.md
 last_completed_contract: project_control/ventricle_fem_contour_active_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/rendering.json
-next_stage_contract: pending_user_decision_idealized_3d_ventricular_solid
-current_authorization: f6s1s9_completed_no_further_scientific_execution
-development_route: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
+current_render_contract: ../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/rendering.json
+next_stage_contract: pending_confirmation_bounded_3d_resume_13_states
+current_authorization: f6s2_first_failure_stopped_no_automatic_rerun
+development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
 external_results_root: E:/Temp-Projects/PRL-results
@@ -26,12 +26,12 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: none_remaining_after_F6S1S9_completed
-current_execution_log: project_control/ventricle_fem_contour_active_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_contour_active_execution_v01.md
+execution_authorized: none_remaining_after_F6S2_first_failure
+current_execution_log: project_control/ventricle_fem_idealized_3d_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_idealized_3d_execution_v01.md
 latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
-latest_result_package: ../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/summary.json
-latest_supervisor_decision: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
+latest_result_package: ../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/summary.json
+latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
 historical_theory_contract: project_control/paper2_figure1_three_layer_theory_contract_v02.md
@@ -50,7 +50,27 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 F6-S1-S9低压主动收缩对照通过
+## 当前：2026-09-18 F6-S2三维结构建成，首接口失败后停止
+
+半椭球三层壳、三维P2/P1四面体；M0/M1几何1344/3960单元通过预定几何门。
+基底环固定、外壁自由；计划内腔随动压力及心肌切平面分散张力，几何/材料未标定。
+一次26.462148秒单CPU/8GiB/禁网/0GPU调用，仅完成M0无载SNES（0Newton、残差1.2368e-16）。
+
+原生独立复核遇压力数组(1,325)按一维读取的IndexError，首失败停，原failed保持。
+已用实际保留数据回放并最小修正映射/读取接口；离线无载26项检查passed：u=0、J=1。
+81测试与可执行Notebook/PNG/SVG验收passed；这不代表修正生产端已在原生运行中验证。
+压力、主动、组合和M1平衡余13态均not_run；FSI/生长/生物学验证not_run。
+
+[结构与真实无载图](../../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/index.html) ·
+[执行及修正证据](ventricle_fem_idealized_3d_execution_v01.md)。
+外置98文件10,616,566 bytes，97项manifest，SHA-256：
+991710ecfb62d72bca971f8254199f119518d8fe199312e1bcea7949645d3e42。
+1719父文件、53原调用文件、50项无关修改保持；无删除/拉取/安装/自动重跑。
+
+唯一下一步待确认：只读复用原M0无载，核对修正后的精确DOF映射，再有界续算余13态。
+不扩参数、放宽门限或加入生长/FSI。路线调整见[先三维再生长](ventricle_3d_before_growth_decision_v01.md)。
+
+## 历史：2026-09-18 F6-S1-S9低压主动收缩对照通过
 
 固定p/mu=0.02，从原受压态增加Ta/mu=0.025/0.05/0.075/0.10，M0/M1共8个新平衡全部接受。
 相对同压力零张力基线，最高张力缩腔1.846775%/1.844892%；相对无载参考仍扩张17.839020%/17.889685%。

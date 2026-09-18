@@ -1,15 +1,15 @@
 {
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-18",
-  "overall_status": "unknown",
-  "summary": "低压0.02下两网格8个主动收缩态全部通过。最高张力相对受压零张力基线缩腔约1.85%，仍比无载参考大约17.9%；是部分抵消压力扩张，不是实验心跳。高压旧失败保留，下一步三维固体待确认。",
+  "overall_status": "failed",
+  "summary": "三维半椭球三层固体已建立；首个无载求解完成后，独立读取遇数组布局错误而停止。接口离线修复和原无载复核通过，压力/收缩余13态尚未运行，不自动重跑。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
-    "scope": "当前为二维低压主动固体对照；三维、双向FSI、连续生长与实验验证not_run。",
-    "current_stage": "F6-S1-S9 low-pressure active contour comparison passed on both meshes",
-    "current_location": "../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918",
-    "evidence_basis_commit": "7bb061b",
+    "scope": "当前理想化三维固体，仅粗网格无载；加载资格、FSI、生长和生物学验证未完成。",
+    "current_stage": "F6-S2 idealized 3D: first interface failure retained; zero audited offline",
+    "current_location": "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918",
+    "evidence_basis_commit": "dd06d0c",
     "evidence_checked_at": "2026-09-18",
     "git_workflow": {
       "branch": "main",
@@ -27,97 +27,97 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "一次201.218秒，8新态全部接受，32个Newton向量、4旧态复用。1518父文件/140调用文件/50无关修改保持；152测试+21子测试和图件验收passed。本地main未推送。",
+    "freshness_note": "一次26.462秒；1无载态，0Newton更新，0重跑。81测试和图件交付通过；1719父文件/53调用文件/50无关修改保持。本地main未推送。",
     "model_overview": {
-      "model_type": "FEniCSx二维P2/DG2平面应变有限变形NH；固定低压+外层心肌主动张力",
-      "simulated_object": "原3541/14164三角形；只有72 hpf Fish 4外边界来自图像，内腔与三层界面构造",
-      "theory": "mu=1、kappa=1000未标定；p/mu=0.02随动内压，外壁自由，A固定ux/uy、B固定uy。仅外层施加Ta/2(|Ff0|²−1)，原点环向纤维是假设。",
-      "current_question": "主动收缩能否抵消压力扩张？当前方向正确但缩腔仅约1.85%，尚无实验幅度和时间标定。",
+      "model_type": "FEniCSx三维有限变形NH，P2位移/P1压力四面体",
+      "simulated_object": "理想化半椭球三层壳；1344/3960四面体输入，只有粗网格无载已求解",
+      "theory": "同mu=1、kappa=1000未标定；基底环全固定，外壁自由。计划内压与仅心肌层切平面等权分散张力。无载状态当前p=Ta=0。",
+      "current_question": "修正DOF映射布局后，三维压力/主动/组合加载能否满足原1%局部体积及独立力学门？尚未运行。",
       "pipeline": [
-        "精确复用两网格0.02混合状态及DOF映射；原内核与独立力学公式不变。",
-        "Ta/mu=0.025/0.05/0.075/0.10，两网格共8新态全部接受。",
-        "总/主动应力、局部J及虚功独立复算；原1%局部门与粗细面积门不变。",
-        "两套可执行Notebook显示真实1倍形变与五个张力态；不是生理时间。"
+        "确定性三维分层网格及内外/基底面检查passed。",
+        "粗网格无载0Newton后，独立读取遇压力(1,325)形状错误，首失败停止。",
+        "实际数组回放、最小接口修正与81测试passed；原无载u=0/J=1离线通过。",
+        "真实结构及唯一无载结果图交付；余13态不补造，不自动重跑。"
       ],
-      "diagram": "../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/figures/FigS1S9_active_overview/FigS1S9_active_overview_v01_20260918/04_FigS1S9_active_overview_v01_20260918.png",
-      "diagram_caption": "结构/固定点/压力与假设纤维、总/主动应力、局部J及缩腔曲线；实际1倍形变。",
+      "diagram": "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/figures/FigS2_3d_start/FigS2_3d_start_v01_20260918/04_FigS2_3d_start_v01_20260918.png",
+      "diagram_caption": "显示剖开三层壳和基底约束、真实无载J场及几何误差；不是加载结果。",
       "assumptions": [
-        "只有外轮廓实测；内腔、层界、纤维和无应力参考态为假设",
-        "三层同被动材料，材料/压力/心动时序未标定",
-        "f0为关于原点的环向，不是实验方向或逐点轮廓切向",
-        "二维平面应变不等于三维心室"
+        "半椭球/层界/材料未标定，尚非morphoHeart拟合形态",
+        "三层同被动材料；主动切平面分散是假设，不是实测螺旋纤维",
+        "基底固定、外壁自由；腔压力及主动张力仍未实际加载",
+        "加载级不是心动时间，无生长/血流"
       ],
       "methods": [
-        "最高张力M0/M1相对受压基线缩腔1.846775%/1.844892%，差0.001883个百分点。",
-        "相对无载参考仍扩张17.839020%/17.889685%；主动张力部分抵消扩张。",
-        "最高张力局部J偏差0.342390%/0.330124%，各态都低于原1%门。",
-        "73项独立汇总及原粗细面积门passed；边界24/48段采样passed，不是全局证明。"
+        "几何1344/3960单元通过，腔体积近似误差6.2594%/2.8227%是几何指标。",
+        "原无载SNES残差1.2368e-16；离线26项状态检查通过，压力/主动门尚未测试。",
+        "原失败/native复核保持，接口修正有前后代码SHA和真实载荷回放。"
       ],
-      "scope_boundary": "低压二维主动对照passed；旧0.08高压局部体积资格仍failed。没有热点/渐近收敛、三维、FSI、生长或实验吻合证据。",
+      "scope_boundary": "本阶段failed；离线无载复核passed不替代加载或原生修正验证。两网格输入不等于力学收敛。",
       "evidence_refs": [
-        "project_control/ventricle_fem_contour_active_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/post_verification.json",
-        "../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/boundary_observations.json",
-        "../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/summary.json",
-        "project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md"
+        "project_control/ventricle_fem_idealized_3d_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/summary.json",
+        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/interface_diagnosis.json",
+        "project_control/ventricle_3d_before_growth_decision_v01.md"
       ]
     }
   },
   "roadmap": [
     {
-      "label": "圆环与原轮廓首压力资格",
+      "label": "二维低压主动",
       "status": "passed",
-      "summary": "圆环完整被动、原轮廓0/0.02两网格资格只读复用。"
+      "summary": "历史两网格8态通过，缩腔约1.85%，保持不变。"
     },
     {
-      "label": "原轮廓高压被动序列",
+      "label": "三维几何与无载复核",
+      "status": "passed",
+      "summary": "三层半椭球建立；原M0无载经修正读取离线通过。"
+    },
+    {
+      "label": "三维加载资格",
       "status": "failed",
-      "summary": "0.08局部J偏差1.1737%超原1%门，失败保留，未重算。"
+      "summary": "原接口错误导致停止；压力/主动/细网格余13态not_run。"
     },
     {
-      "label": "原轮廓低压主动收缩",
-      "status": "passed",
-      "summary": "8个新态全部接受；最高张力约1.85%缩腔，仍为二维未标定对照。"
-    },
-    {
-      "label": "三维固体→FSI→生长/ECM",
+      "label": "生长→FSI→反馈/ECM",
       "status": "not_run",
-      "summary": "下一步只推进理想化三维固体；待确认，暂不加血流或生长。"
+      "summary": "路线已记录，不能跳过三维加载资格，后续另行确认。"
     }
   ],
   "active_work": [
     {
-      "title": "低压主动响应及图件交付",
+      "title": "接口修正与失败交付",
       "status": "passed",
-      "summary": "8新态、32新Newton向量；152测试+21子测试、两套Notebook/PNG/SVG验收通过。无GPU/自动重跑/删除。",
+      "summary": "实际数组回放、81测试及真实结构/无载Notebook通过；未重跑科学计算。",
       "evidence_refs": [
-        "project_control/ventricle_fem_contour_active_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/index.html",
-        "../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/delivery_audit.json"
+        "project_control/ventricle_fem_idealized_3d_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/delivery_audit.json"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "缩腔较小，生理与三维假设仍未验证",
-      "status": "not_run",
-      "summary": "约1.85%缩腔只说明当前假设模型的方向性响应。材料、参考态、纤维、压力及心动时序未实验标定；二维约束仍在。",
-      "evidence_refs": [
-        "project_control/ventricle_fem_contour_active_execution_v01.md",
-        "project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md"
-      ]
-    },
-    {
-      "title": "高压局部体积问题保持",
+      "title": "三维加载资格仍未完成",
       "status": "failed",
-      "summary": "0.08局部J偏差1.1737%失败，几何凹口/网格依赖/有限bulk贡献尚未区分；低压通过不消除该限制。",
+      "summary": "已修正布局接口但未原生复验；不能把零载J=1视为压力或收缩验证。",
       "evidence_refs": [
-        "project_control/ventricle_fem_contour_passive_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/failure.json"
+        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/failure.json",
+        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/interface_diagnosis.json"
       ]
     }
   ],
   "results": [
+    {
+      "title": "三维结构与唯一真实无载态",
+      "status": "passed",
+      "summary": "无载u=0、J=1；原运行因接口failed。图件明确标注压力/收缩not_run，未伪造多帧。",
+      "image": "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/figures/FigS2_3d_start/FigS2_3d_start_v01_20260918/04_FigS2_3d_start_v01_20260918.png",
+      "evidence_refs": [
+        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/index.html",
+        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/post_verification.json",
+        "project_control/ventricle_fem_idealized_3d_execution_v01.md"
+      ],
+      "result_group": "current"
+    },
     {
       "title": "低压主动收缩：五个真实张力态",
       "status": "passed",
@@ -128,38 +128,25 @@
         "../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/index.html",
         "../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/post_verification.json"
       ],
-      "result_group": "current"
-    },
-    {
-      "title": "高压被动失败保持",
-      "status": "failed",
-      "summary": "M0 0.08局部J偏差1.1737%，未放宽1%门、未重跑、未覆盖失败。",
-      "image": "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/figures/FigS1S8_passive_overview/FigS1S8_passive_overview_v01_20260918/04_FigS1S8_passive_overview_v01_20260918.png",
-      "evidence_refs": [
-        "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/index.html",
-        "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/failure.json"
-      ],
       "result_group": "historical"
     }
   ],
   "next_actions": [
     {
-      "title": "理想化三维心室固体（待确认）",
+      "title": "确认后有界续算原定余13态",
       "status": "not_run",
-      "summary": "建立几何、网格和可解释纤维方向，再检查低压与主动载荷；三维需独立资格，不直接继承二维DG2结论。不加FSI或生长。",
+      "summary": "复用原M0无载，先核对修正接口和精确DOF映射，再依序压力/主动/组合及M1；仍首失败停止，不加生长/FSI。",
       "evidence_refs": [
-        "project_control/ventricle_fem_contour_active_execution_v01.md"
+        "project_control/ventricle_fem_idealized_3d_execution_v01.md"
       ]
     }
   ],
   "evidence_boundaries": [
-    "FEM唯一主线；当前仅二维低压准静态主动响应，不能称为三维心动或实验吻合。",
-    "两网格8个新平衡全部接受；4旧态复用、32新Newton向量，无自动重跑。",
-    "缩腔百分数以同压力Ta=0面积为分母；相对无载参考仍扩张约17.9%。",
-    "原点环向纤维、内腔/层界、材料和参考态是假设；加载级不是生理时间。",
-    "高压0.08原failed保持；两级总面积通过不证明应力热点或渐近收敛。",
-    "1518父/祖先文件、140调用文件、50无关修改保持；0GPU/网格重建/安装/拉取/删除。",
-    "外置201文件约334.3MiB不进GitHub；代码仓3GiB及磁盘余量保护保持。",
-    "本地main阶段提交，不自动推送；当前合同完成，三维/FSI/生长需下一步确认。"
+    "FEM唯一主线；本轮是理想化真三维固体，不是二维挤出或实验心室。",
+    "只实际求解M0无载，零Newton；剩余13态not_run，原阶段failed。",
+    "原数组未改，接口修正后的离线无载复核passed；原生生产端修正复验not_run。",
+    "1719父文件、53调用文件、50无关修改保持；无GPU、自动重跑、安装、拉取或删除。",
+    "外置结果约10.1MiB不进GitHub；代码仓3GiB和磁盘余量门保持。",
+    "本地main阶段提交未推送；后续有界续算需确认。"
   ]
 }
