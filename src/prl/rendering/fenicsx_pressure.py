@@ -248,3 +248,211 @@ def draw(data_path,png_path,svg_path,style_module,axis_box_size_in=(3.7,3.7),fig
         Path(exported.manifest).write_text(json.dumps(manifest,indent=2),encoding='utf-8')
     plt.close(figure)
     return {'object':str(data['object']),'old_peak_percent':old_peak,'DG2_status':'failed','equilibria_computed':0}
+
+
+def prepare_resume_failure(workspace,skill_root):
+    """Save an honest monitor-failure figure; do not fabricate a pressure state."""
+    import re
+    import subprocess
+    import sys
+    import nbformat
+    from prl.result_store import result_path,result_admission
+    from prl.runs.fenicsx_pressure import RESUME_RESULT
+    from prl.runs.fenicsx_ring import digest
+    from prl.verification.fenicsx_pressure import verify_pressure
+    from prl.verification.fenicsx_ring import load_arrays,fields,cavity
+    root=result_path(workspace,RESUME_RESULT); skills=Path(skill_root)
+    if (root/'post_verification.json').exists() or (root/'figures').exists():
+        raise FileExistsError('Failure figure preparation is create-only')
+    if not result_admission(workspace,32*1024**2)['can_start']:
+        raise RuntimeError('Figure storage admission refused')
+    formal=json.loads((root/'formal_invocation_manifest.json').read_text())
+    if not all(digest(root/item['path'])==item['sha256'] for item in formal['files']):
+        raise ValueError('Original invocation changed')
+    report=verify_pressure(root)
+    if report['state'] is not None or not report['checks'].get('failed_initial_preserved'):
+        raise ValueError('This figure requires the saved, unchanged initial failure state')
+    (root/'post_verification.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
+    mesh=load_arrays(root/'ring/raw/M0_mesh.npz')
+    mixed=load_arrays(root/'last_attempt.npz')['mixed_state']
+    state={'u':mixed[mesh['mixed_u_map']].reshape(-1,2),'pressure':mixed[mesh['mixed_p_map']],
+           'load':.02,'activation':0.}
+    actual=fields(mesh,state); force=actual['force']-cavity(mesh,state['u'],.02)[1]
+    data={k:mesh[k] for k in ['coordinates','cells','fixed','layers','inner_edges']}
+    data.update(force=force,u=state['u'],free_norm=np.linalg.norm(force[~mesh['fixed']]))
+    np.savez_compressed(root/'figure_data.npz',**data)
+    command=[sys.executable,'-B','-X','utf8',str(skills/'cb-paper-figure-workflow/scripts/init_figure_revision.py'),
+        str(root/'figures'),'--main','S1S4','--analysis-key','monitor_failure','--data',str(root/'figure_data.npz'),
+        '--python','helper='+str(Path(__file__).resolve()),
+        '--python','style='+str(skills/'cb-plot-unified-style/assets/cb_plot_unified_style.py'),
+        '--data-role','mesh='+str(root/'ring/raw/M0_mesh.npz'),
+        '--data-role','initial='+str(root/'ring/raw/M0_attempt.npz'),
+        '--data-role','last_attempt='+str(root/'last_attempt.npz'),
+        '--model','verification='+str(root/'post_verification.json'),
+        '--model','failure='+str(root/'failure.json')]
+    subprocess.run(command,check=True)
+    revision=next((root/'figures/FigS1S4_monitor_failure').glob('FigS1S4_*')); prefix=revision.name
+    helper=next(revision.glob('*_helper.py')).name; style=next(revision.glob('*_style.py')).name
+    notebook=nbformat.v4.new_notebook(cells=[
+        nbformat.v4.new_markdown_cell('# F6-S1-S4 监测接口失败证据\n保存初始态未更新；不是受压平衡。只读复算，不重新求解。'),
+        nbformat.v4.new_code_cell(f'''from pathlib import Path
+import importlib.util
+import sys
+from IPython.display import Image, display
+REVISION_DIR = Path.cwd().resolve()
+PREFIX = {prefix!r}
+DATA_PATH = REVISION_DIR / f"01_{{PREFIX}}_data.npz"
+OUTPUT_PNG = REVISION_DIR / f"04_{{PREFIX}}.png"
+OUTPUT_SVG = REVISION_DIR / f"05_{{PREFIX}}.svg"
+# 作图调整参数：沿用项目紧凑FEM诊断风格；不放大初始形变。
+STYLE_SOURCE = 'Existing compact FEM diagnostic style with CB style'
+DPI = 600
+axis_box_size_in = (3.7, 3.7)
+FIGURE_SIZE_IN = (14.4, 7.4)
+def load_snapshot(name, filename):
+    spec = importlib.util.spec_from_file_location(name, REVISION_DIR / filename)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+helper = load_snapshot('pressure_failure_plot', {helper!r})
+style = load_snapshot('cb_style_snapshot', {style!r})
+helper.draw_resume_failure(DATA_PATH, OUTPUT_PNG, OUTPUT_SVG, style, axis_box_size_in, FIGURE_SIZE_IN)'''),
+        nbformat.v4.new_code_cell('display(Image(filename=str(OUTPUT_PNG), width=1000))')],
+        metadata={'kernelspec':{'name':'python3','display_name':'Python 3','language':'python'}})
+    nbformat.write(notebook,revision/f'03_{prefix}_plot.ipynb')
+    methods=revision/f'02_{prefix}_methods.txt'; content=methods.read_text(encoding='utf-8')
+    replacements={
+        '风格来源':'沿用紧凑FEM诊断图，CB统一风格；3.7英寸方轴，显式边距；600 dpi PNG和可编辑SVG。',
+        '用户提供的期刊规格':'未指定；内部失败诊断，不是投稿成图。',
+        '03_材料方法来源':'不适用通用模板目录；本项目稳定方法为src/prl/verification/fenicsx_ring.py，复制的mesh/initial/last_attempt及verification构成本图输入。helper/style为版本内物理快照。',
+        '数据/模型变换':'从保存混合初值映射u/p，独立积分内力减去随动腔压外力；每节点残量向量取2范数，单元显示六节点最大值，无插值平滑。六节点三角形拆四个显示子三角。初始u=0；不是计算出的受压形变或接受态。',
+        '统计方法与不确定性':'确定性离散初值，无生物统计/误差棒/显著性。保留初值与末次尝试逐字节相同。回调失败于首次Newton更新前，因此无多时刻结果、不补造帧。',
+        '生物学分组颜色':'不适用；三种颜色仅为假设的材料域标签，当前被动材料相同。'}
+    for key,value in replacements.items():
+        content=re.sub(r'(?m)^- '+re.escape(key)+r':.*$',lambda match:'- '+key+': '+value,content)
+    methods.write_text(content,encoding='utf-8')
+    return {'revision':str(revision),'scientific_status':'failed','new_equilibria':0}
+
+
+def draw_resume_failure(data_path,png_path,svg_path,style_module,axis_box_size_in=(3.7,3.7),figure_size_in=(14.4,7.4)):
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.collections import PolyCollection
+    from matplotlib.ticker import FixedLocator
+    with np.load(data_path,allow_pickle=False) as archive:
+        data={k:archive[k] for k in archive.files}
+    style=style_module.StyleSpec(axis_box_size_in=axis_box_size_in,
+        tick_label_size=16.,axis_label_size=18.,annotation_font_size=16.,sample_size_and_stat_font_size=14.,
+        legend_font_size=14.,axes_line_width=1.5,major_tick_length_pt=5.,major_tick_width_pt=1.,
+        minor_tick_length_pt=3.,minor_tick_width_pt=.8,data_line_width=1.5,tick_label_pad_pt=4.,axis_label_pad_pt=8.)
+    baseline=asdict(style_module.DEFAULT_STYLE)
+    overrides=[style_module.StyleOverride(field=k,reason='Existing compact FEM diagnostics; equal-scale spatial panels and explicit margins.')
+               for k,v in asdict(style).items() if v!=baseline[k]]
+    width,height=figure_size_in; side=axis_box_size_in[0]
+    figure=plt.figure(figsize=figure_size_in)
+    axes=[figure.add_axes((left/width,1.65/height,side/width,side/height)) for left in [1.1,8.0]]
+    parts=np.array([[0,5,4],[5,1,3],[4,3,2],[5,3,4]])
+    triangles=data['coordinates'][data['cells'][:,parts]].reshape(-1,3,2)
+    colors=np.array(['#4C9F70','#D6B656','#5B8DB8'])
+    axes[0].add_collection(PolyCollection(triangles,facecolors=np.repeat(colors[data['layers']-1],4),edgecolors=(0,0,0,.25),linewidths=.12))
+    for component,marker in [(0,'s'),(1,'^')]:
+        indices=np.flatnonzero(data['fixed'][:,component])
+        axes[0].plot(*data['coordinates'][indices].T,linestyle='none',marker=marker,color='#BA3E34',ms=6)
+    angles=np.linspace(0,2*np.pi,12,endpoint=False)
+    for angle in angles:
+        direction=np.array([np.cos(angle),np.sin(angle)])
+        axes[0].annotate('',xy=direction*.76,xytext=direction*.60,
+                         arrowprops={'arrowstyle':'->','color':'#A92D28','lw':1.2})
+    axes[0].text(0,0,'p / mu = 0.02\nactive = 0\nouter wall free',ha='center',va='center')
+    value=np.linalg.norm(data['force'],axis=1)[data['cells']].max(axis=1)
+    field=PolyCollection(triangles,array=np.repeat(value,4),cmap='magma',edgecolors=(0,0,0,.15),linewidths=.1)
+    axes[1].add_collection(field)
+    axes[1].text(0,0,f"Initial guess only\nFree residual norm\n{float(data['free_norm']):.3e}",ha='center',va='center')
+    for axis,title in zip(axes,['A  Reference mesh and gauges','B  Initial force imbalance']):
+        axis.set(xlim=(-1.16,1.16),ylim=(-1.16,1.16),xlabel='x / L',ylabel='y / L',aspect='equal')
+        axis.xaxis.set_major_locator(FixedLocator([-1,0,1])); axis.yaxis.set_major_locator(FixedLocator([-1,0,1]))
+        style_module.apply_axes_style(axis,style=style)
+        style_module.add_top_information(axis,title,style=style)
+    cax=figure.add_axes((12.05/width,1.65/height,.20/width,side/height))
+    figure.colorbar(field,cax=cax).set_label('Max nodal residual per element',fontsize=14,labelpad=10)
+    cax.tick_params(labelsize=14)
+    figure.text(.077,.885,'F6-S1-S4 FAILED: monitor requested writable access to a read-locked PETSc vector.',fontsize=14)
+    figure.text(.077,.825,'No accepted pressure equilibrium; saved state unchanged; no physiological time or volume qualification.',fontsize=14)
+    figure.text(.077,.055,'Green / yellow / blue: assumed endo / ECM / myo domains (same passive law). Red squares/triangles: x/y gauges.',fontsize=13)
+    exported=style_module.export_figure(figure,axes,Path(png_path).with_suffix(''),style=style,overrides=overrides)
+    if Path(exported.svg)!=Path(svg_path):
+        Path(exported.svg).replace(svg_path)
+        manifest=json.loads(Path(exported.manifest).read_text()); manifest['exports']['svg']=str(Path(svg_path).resolve())
+        Path(exported.manifest).write_text(json.dumps(manifest,indent=2),encoding='utf-8')
+    plt.close(figure)
+    return {'scientific_status':'failed','accepted_pressure_states':0,'free_initial_residual':float(data['free_norm'])}
+
+
+def finalize_resume_failure(workspace):
+    """Freeze the failed invocation and separately identify unvalidated patches."""
+    import shutil
+    from prl.result_store import result_path,register_result
+    from prl.runs.fenicsx_pressure import RESUME_RESULT
+    from prl.runs.fenicsx_ring import digest,package_manifest
+    from prl.runs.fenicsx_runtime import save_json
+    workspace=Path(workspace).resolve(strict=True); root=result_path(workspace,RESUME_RESULT)
+    if (root/'manifest.json').exists():
+        raise FileExistsError('Failure package already frozen')
+    original=json.loads((root/'formal_invocation_manifest.json').read_text())
+    internal=json.loads((root/'protected_preflight.json').read_text())
+    external=json.loads((root/'external_protected_preflight.json').read_text())
+    unchanged=all(digest(root/item['path'])==item['sha256'] for item in original['files'])
+    parents=all(digest(workspace/p)==sha for p,sha in internal.items()) and all(digest(p)==sha for p,sha in external.items())
+    preexisting=json.loads((root/'preexisting_changes.json').read_text())
+    dirty_unchanged=all(digest(workspace/item['path'])==item['sha256'] for item in preexisting)
+    if not unchanged or not parents or not dirty_unchanged:
+        raise ValueError('Protected evidence or unrelated edits changed')
+    report=json.loads((root/'post_verification.json').read_text())
+    if report['accepted_equilibria']!=0 or report['state'] is not None or not report['checks'].get('failed_initial_preserved'):
+        raise ValueError('Expected unchanged initial-state failure')
+    revision=next((root/'figures/FigS1S4_monitor_failure').glob('FigS1S4_*')); prefix=revision.name
+    if '- 包状态: 最终包' not in (revision/f'02_{prefix}_methods.txt').read_text(encoding='utf-8'):
+        raise ValueError('Final figure QA required')
+    rendering={'status':'passed','visual_qa':'passed','style_validation':'passed','new_equilibrium_solves':0,
+               'notebook':(revision/f'03_{prefix}_plot.ipynb').relative_to(root).as_posix(),
+               'png':(revision/f'04_{prefix}.png').relative_to(root).as_posix(),
+               'svg':(revision/f'05_{prefix}.svg').relative_to(root).as_posix(),
+               'meaning':'Initial loaded guess and force imbalance, NOT a deformed pressure equilibrium',
+               'temporary_cleanup':'not_authorized; figure_runtime retained'}
+    summary={'status':'failed','engineering_execution':'failed','evidence_delivery':'passed',
+             'cause':'new monitor used writable Vec.array on a read-locked PETSc vector; error 73/101 before first Newton update',
+             'newton_updates':0,'nonlinear_attempts':1,'accepted_pressure_equilibria':0,'zero_load_reruns':0,
+             'automatic_retries':0,'gpu':0,'independent_initial_free_force':report['failed_initial']['independent_free_force_norm'],
+             'patch_written':True,'patch_protocol_tests':'passed','patch_original_runtime_verification':'not_run',
+             'actual_mumps_margin_this_attempt':None,'volume_qualification_this_attempt':'not_run',
+             'old_contour_volume_gate':'failed','contour':'not_run','active_contraction':'not_run','three_dimensional_model':'not_run','fsi':'not_run','growth':'not_run',
+             'next_action':'pending approval: same-environment observer/options microtest, then one original first-pressure state; fail-stop, no automatic retry'}
+    save_json(root/'rendering.json',rendering); save_json(root/'summary.json',summary)
+    sources=list(json.loads((root/'source_hashes.json').read_text()))+[
+        'src/prl/rendering/fenicsx_pressure.py','src/prl/cli.py','tests/prl/test_fenicsx_pressure.py',
+        'project_control/ventricle_fem_ring_resume_execution_v01.md']
+    for relative in sources:
+        target=root/'sources_at_delivery'/relative; target.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copyfile(workspace/relative,target)
+    save_json(root/'delivery_audit.json',{'status':'passed','scientific_execution':'failed',
+        'formal_invocation_files_unchanged':len(original['files']),
+        'protected_files_unchanged':len(internal)+len(external),'preexisting_dirty_files_unchanged':len(preexisting),
+        'before_run_tests':58,'after_patch_tests':60,'subtests':21,'original_runtime_patch_check':'not_run',
+        'postprocess_new_fem_solves':0,'postprocess_global_factorizations':0,'visual_qa':'passed',
+        'runtime_source_sha256':digest(root/'runtime_source/dolfinx_petsc.py')})
+    page=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>F6-S1-S4 初始监测失败</title>
+<style>body{{max-width:1100px;margin:32px auto;padding:0 20px;color:#173e2e;font:16px/1.7 'Microsoft YaHei',sans-serif}}img{{width:100%}}a{{color:#176b4d}}</style>
+<h1>F6-S1-S4：监测接口失败，尚无受压平衡</h1>
+<p>科学/工程执行failed；失败证据保全与图件passed。新增记录代码错误地对只读锁定向量请求可写访问，首次Newton更新前退出。</p>
+<img src="{rendering['png']}" alt="保存的三层圆环初值、载荷及独立重算未平衡力">
+<p>加载初值自由力残量0.00866704，状态逐字节未变。J=1不代表局部体积资格；不生成虚假形变或多时刻图。</p>
+<p>一次16.914秒单CPU容器，0 GPU/零载复算/自动重跑。619父文件和50项无关工作区变更保持。</p>
+<p>只读获取与选项生命周期补丁已写入，60测试+21子测试通过；原PETSc/DOLFINx环境复验not_run。需先接口烟测，再另行批准恢复同一首压力态。</p>
+<p><a href="failure.json">原始失败堆栈</a> · <a href="post_verification.json">独立复核</a> · <a href="summary.json">状态摘要</a> · <a href="{rendering['notebook']}">可复算Notebook</a> · <a href="runtime_source/dolfinx_petsc.py">实际运行时源码</a></p>
+<p>当前仍是理想二维平面应变；真实外轮廓、主动收缩、三维、FSI与生长本轮未运行。</p></html>'''
+    (root/'index.html').write_text(page,encoding='utf-8')
+    save_json(root/'manifest.json',package_manifest(root))
+    register_result(workspace,root,'failed',digest(root/'manifest.json'))
+    return summary

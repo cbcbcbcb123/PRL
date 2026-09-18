@@ -78,6 +78,79 @@ def test_frozen_execution_scope():
     assert _parser().parse_args(['verify','fem-fenicsx-pressure']).verify_command=='fem-fenicsx-pressure'
 
 
+def test_resume_is_one_original_pressure_with_only_workspace_change():
+    cfg=configuration(resume_first_ring=True)
+    old=configuration()
+    assert cfg['objects']==['ring'] and cfg['passive_loads']==[.02]
+    assert cfg['maximum_equilibrium_solves']==1 and cfg['retain_solver_iterates']
+    assert cfg['solver']=={**old['solver'],'mat_mumps_icntl_14':100}
+    for key in ['mu','kappa','meshes','radii','quadrature_degree','resources']:
+        assert cfg[key]==old[key]
+    assert 'mat_mumps_icntl_14' not in old['solver']
+    from prl.cli import _parser
+    for command in ['run','verify']:
+        assert _parser().parse_args([command,'fem-fenicsx-pressure','--resume-first-ring']).resume_first_ring
+
+
+def test_resume_create_only_refusal_precedes_docker():
+    from prl.runs.fenicsx_pressure import RESUME_RESULT
+    with patch('prl.runs.fenicsx_pressure.result_path',side_effect=FileExistsError) as target,patch('prl.runs.fenicsx_pressure.read_docker') as docker:
+        with pytest.raises(FileExistsError):
+            run_pressure(Path(__file__).resolve().parents[2],resume_first_ring=True)
+        assert target.call_args.args[1]==RESUME_RESULT
+        docker.assert_not_called()
+
+
+def test_observer_uses_read_only_vector_access():
+    # Execute the real small method without importing unavailable host DOLFINx.
+    # This protocol regression is not a PETSc integration test or scientific solve.
+    import ast
+    from types import SimpleNamespace
+    source=Path(__file__).resolve().parents[2]/'src/prl/fem/fenicsx_ring.py'
+    tree=ast.parse(source.read_text())
+    ring=next(item for item in tree.body if isinstance(item,ast.ClassDef) and item.name=='Ring')
+    method=next(item for item in ring.body if isinstance(item,ast.FunctionDef) and item.name=='monitor')
+    namespace={'np':np,'write_json':lambda *args:None}
+    exec(compile(ast.Module(body=[method],type_ignores=[]),str(source),'exec'),namespace)
+    vector=np.arange(8,dtype=float); before=vector.copy()
+    class LockedVector:
+        @property
+        def array(self):
+            raise RuntimeError('VecGetArray cannot write a read-locked SNES monitor vector')
+        def getArray(self,readonly=False):
+            assert readonly is True
+            return vector
+    solver=SimpleNamespace(getSolution=lambda:LockedVector())
+    observer=SimpleNamespace(history=[],config={'retain_solver_iterates':True},
+        iterate_root=Path('nonexistent_test_observer'),vmap=np.arange(4),pmap=np.arange(4,8),
+        load=SimpleNamespace(value=.02),activation=SimpleNamespace(value=0.))
+    with patch('numpy.savez_compressed') as writer:
+        namespace['monitor'](observer,solver,0,.01)
+    assert observer.history==[{'iteration':0,'residual':.01}]
+    assert np.array_equal(vector,before)
+    stored=writer.call_args.kwargs
+    assert np.array_equal(stored['mixed_state'],before)
+    assert not np.shares_memory(stored['mixed_state'],vector)
+
+
+def test_factor_option_uses_actual_ksp_prefix_and_outlives_constructor_options():
+    import ast
+    from types import SimpleNamespace
+    source=Path(__file__).resolve().parents[2]/'src/prl/fem/fenicsx_ring.py'
+    tree=ast.parse(source.read_text())
+    ring=next(item for item in tree.body if isinstance(item,ast.ClassDef) and item.name=='Ring')
+    method=next(item for item in ring.body if isinstance(item,ast.FunctionDef) and item.name=='bind_factor_options')
+    options={}; namespace={'PETSc':SimpleNamespace(Options=lambda:options)}
+    exec(compile(ast.Module(body=[method],type_ignores=[]),str(source),'exec'),namespace)
+    owner=SimpleNamespace(config=configuration(True),problem=SimpleNamespace(
+        solver=SimpleNamespace(getKSP=lambda:SimpleNamespace(getOptionsPrefix=lambda:'dynamic_prefix_'))))
+    result=namespace['bind_factor_options'](owner)
+    assert options=={'dynamic_prefix_mat_mumps_icntl_14':100}
+    assert result['actual_readback_required'] is True
+    owner.config=configuration()
+    assert namespace['bind_factor_options'](owner) is None
+
+
 def test_create_only_refusal_precedes_docker():
     with patch('prl.runs.fenicsx_pressure.result_path',side_effect=FileExistsError),patch('prl.runs.fenicsx_pressure.read_docker') as docker:
         with pytest.raises(FileExistsError):

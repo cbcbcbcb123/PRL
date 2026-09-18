@@ -125,7 +125,8 @@ class Ring:
         self.area_form=fem.form(cavity_area)
         self.active_energy_form=fem.form(active_energy)
         self.problem=petsc.NonlinearProblem(residual,self.w,bcs=bcs,petsc_options_prefix=self.name+'_',
-                        petsc_options=config['solver'])
+                        petsc_options={k:v for k,v in config['solver'].items() if k!='mat_mumps_icntl_14'})
+        self.factor_options=self.bind_factor_options()
         chi_space=fem.functionspace(domain,('DG',0))
         chi=fem.Function(chi_space)
         for c in self.cell_ids:
@@ -156,7 +157,38 @@ class Ring:
             self.mesh_data['pressure_space']=np.array('DG2')
         np.savez_compressed(root/'raw'/f'{self.name}_mesh.npz',**self.mesh_data)
         self.history=[]
-        self.problem.solver.setMonitor(lambda solver,iteration,norm:self.history.append({'iteration':int(iteration),'residual':float(norm)}))
+        self.problem.solver.setMonitor(self.monitor)
+
+    def bind_factor_options(self):
+        """Keep the matrix-factor option alive until LU setup, not just SNES setup.
+
+        DOLFINx removes its temporary petsc_options before the first factorization.
+        The actual MUMPS ICNTL readback after solving is still required.
+        """
+        margin=self.config['solver'].get('mat_mumps_icntl_14')
+        if margin is None:
+            return None
+        ksp=self.problem.solver.getKSP()
+        prefix=ksp.getOptionsPrefix()
+        if not prefix:
+            raise ValueError('Refusing an unscoped global factor option')
+        key=prefix+'mat_mumps_icntl_14'
+        PETSc.Options()[key]=margin
+        return {'key':key,'requested':margin,'actual_readback_required':True}
+
+    def monitor(self,solver,iteration,norm):
+        """Observe accepted SNES iterates; never alter the nonlinear solution."""
+        record={'iteration':int(iteration),'residual':float(norm)}
+        self.history.append(record)
+        if self.config.get('retain_solver_iterates',False):
+            write_json(self.iterate_root/'history.json',self.history)
+            mixed=solver.getSolution().getArray(readonly=True).copy()
+            path=self.iterate_root/f'iterate_{iteration:03d}.npz'
+            if path.exists():
+                raise FileExistsError('Refusing to overwrite a retained Newton iterate')
+            np.savez_compressed(path,mixed_state=mixed,u=mixed[self.vmap].reshape(-1,2),
+                                pressure=mixed[self.pmap],load=float(self.load.value),
+                                activation=float(self.activation.value),iteration=iteration,residual=norm)
 
     def vector(self,form):
         vector=petsc.assemble_vector(form)
@@ -205,6 +237,10 @@ class Ring:
         self.load.value=pressure
         self.activation.value=activation
         self.history=[]
+        if self.config.get('retain_solver_iterates',False):
+            self.iterate_root=self.root/'iterates'/f'{self.name}_{label}'
+            self.iterate_root.mkdir(parents=True,exist_ok=False)
+            write_json(self.iterate_root/'factor_option_binding.json',self.factor_options)
         np.savez_compressed(self.root/'raw'/f'{self.name}_attempt.npz',initial=initial,load=pressure,activation=activation)
         write_json(self.root/'progress.json',{'status':'unknown','mesh':self.name,'state':label,'load':pressure,'activation':activation})
         print(f'{self.name} {label}: p={pressure:.3f} Ta={activation:.3f}',flush=True)
@@ -218,6 +254,16 @@ class Ring:
                   'cavity_area':float(fem.assemble_scalar(self.area_form)),
                   'active_energy':float(fem.assemble_scalar(self.active_energy_form)),
                   'elapsed_seconds':time.monotonic()-started}
+        if self.config.get('retain_solver_iterates',False):
+            ksp=self.problem.solver.getKSP(); pc=ksp.getPC()
+            metadata['linear_solver']={'ksp_reason':int(ksp.getConvergedReason()),
+                                       'pc_failed_reason':int(pc.getFailedReason())}
+            try:
+                factor=pc.getFactorMatrix()
+                metadata['linear_solver'].update(mumps_infog_1=int(factor.getMumpsInfog(1)),
+                    mumps_infog_2=int(factor.getMumpsInfog(2)),mumps_icntl_14=int(factor.getMumpsIcntl(14)))
+            except Exception as error:
+                metadata['linear_solver']['diagnostic_error']=str(error)
         state={'u':self.w.x.array[self.vmap].reshape(-1,2).copy(),
                'pressure':self.w.x.array[self.pmap].copy(),
                'mixed_state':self.w.x.array.copy(),'initial_mixed':initial.copy(),

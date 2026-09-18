@@ -17,7 +17,8 @@ def main():
     root=Path('/out'); config=json.loads((root/'configuration.json').read_text())
     started=time.monotonic(); attempted=0; accepted=0; current=None
     try:
-        for kind in ['ring','contour']:
+        resumed=config.get('resume_first_ring',False)
+        for kind in config['objects']:
             case={'name':'M0','segments':64,'radial':[1,1,5]}
             cfg={**config,'geometry_kind':'ring' if kind=='ring' else 'image_polygon'}
             child=root/kind; (child/'raw').mkdir(parents=True,exist_ok=False)
@@ -39,7 +40,20 @@ def main():
                             json.loads((old_root/'configuration.json').read_text()))
             current.tangent_checks()
             initial=np.zeros_like(current.w.x.array)
-            for i,load in enumerate([0.,.02]):
+            states=list(enumerate(config['passive_loads']))
+            if resumed:
+                retained=root/'retained_zero'
+                original_mesh=load_arrays(retained/'mesh.npz')
+                if set(original_mesh)!=set(current.mesh_data) or not all(np.array_equal(original_mesh[k],current.mesh_data[k]) for k in original_mesh):
+                    raise ValueError('Retained DG2 mesh or mixed-state map changed')
+                zero=load_arrays(retained/'state.npz')
+                zero_report=diagnostic_state(original_mesh,zero,json.loads((retained/'state.json').read_text()),cfg)
+                write_json(root/'retained_zero_audit.json',zero_report)
+                if zero_report['status']!='passed' or float(zero['load'])!=0. or float(zero['activation'])!=0.:
+                    raise ValueError('Retained zero state failed its independent gate')
+                initial=zero['mixed_state'].copy()
+                states=[(1,.02)]
+            for i,load in states:
                 if time.monotonic()-started>1140 or shutil.disk_usage(root).free<10*1024**3+64*1024**2:
                     raise RuntimeError('Time or disk headroom reached before next state')
                 attempted+=1

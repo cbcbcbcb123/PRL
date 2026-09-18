@@ -14,22 +14,30 @@ from prl.runs.fenicsx_runtime import read_docker,IMAGE,TAG,container_command,sav
 
 RESULT=Path('results/ventricle_fem/f6s1r_pressure_space_v01_20260918')
 CONTRACT=Path('project_control/ventricle_fem_pressure_space_contract_v01.md')
+RESUME_RESULT=Path('results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918')
+RESUME_CONTRACT=Path('project_control/ventricle_fem_ring_resume_contract_v01.md')
 
 
-def configuration():
+def configuration(resume_first_ring=False):
     cfg=ring_configuration()
     cfg.update(schema_version='prl.pressure_space_diagnostic.v1',pressure_space='DG2',
                passive_loads=[0.,.02],active_peak=0.,meshes=[cfg['meshes'][0]],
                scope='finite bulk, plane strain, same geometry; no physiological clock or 3D claim',
                objects=['ring','contour'],maximum_equilibrium_solves=4,
                resources={'seconds':1200,'threads':1,'gpu':0,'automatic_retries':0})
+    if resume_first_ring:
+        cfg.update(resume_first_ring=True,retain_solver_iterates=True,objects=['ring'],
+                   passive_loads=[.02],maximum_equilibrium_solves=1,
+                   scope='one original first-pressure ring equilibrium from retained accepted zero; no zero rerun')
+        cfg['solver']['mat_mumps_icntl_14']=100
     return cfg
 
 
-def run_pressure(workspace):
+def run_pressure(workspace,resume_first_ring=False):
     workspace=Path(workspace).resolve(strict=True)
-    root=result_path(workspace,RESULT,new=True)
-    if not (workspace/CONTRACT).is_file() or digest(workspace/RETAINED_MESH)!=RETAINED_MESH_SHA:
+    contract=RESUME_CONTRACT if resume_first_ring else CONTRACT
+    root=result_path(workspace,RESUME_RESULT if resume_first_ring else RESULT,new=True)
+    if not (workspace/contract).is_file() or (not resume_first_ring and digest(workspace/RETAINED_MESH)!=RETAINED_MESH_SHA):
         raise ValueError('Contract or retained mesh missing/changed')
     version=json.loads(read_docker('version','--format','{{json .}}'))
     if not version.get('Server') or read_docker('image','inspect',TAG,'--format','{{.Id}}')!=IMAGE:
@@ -38,18 +46,44 @@ def run_pressure(workspace):
     if not admission['can_start']:
         raise RuntimeError('Storage admission refused')
     parents=protected(workspace,fine=True)
-    fine=result_path(workspace,Path('results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917'))
-    external_parents={str(p):digest(p) for p in fine.rglob('*') if p.is_file()}
+    if resume_first_ring:
+        from prl.runs.fenicsx_linear_system import WORKSPACE_RESULT
+        source=result_path(workspace,RESULT)
+        qualified=result_path(workspace,WORKSPACE_RESULT)
+        external_parents=json.loads((qualified/'source_result_preflight.json').read_text())
+        for package in [source,qualified]:
+            manifest=json.loads((package/'manifest.json').read_text())
+            if not all(digest(package/item['path'])==item['sha256'] for item in manifest['files']):
+                raise ValueError('Retained source manifest changed')
+            external_parents.update({str(p):digest(p) for p in package.rglob('*') if p.is_file()})
+        if not all(digest(path)==sha for path,sha in external_parents.items()):
+            raise ValueError('Ancestor evidence changed')
+        qualification=json.loads((qualified/'post_verification.json').read_text())
+        if qualification['verification_status']!='passed' or qualification['linear_solver_status']!='passed':
+            raise ValueError('Original workspace-margin prerequisite not passed')
+    else:
+        fine=result_path(workspace,Path('results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917'))
+        external_parents={str(p):digest(p) for p in fine.rglob('*') if p.is_file()}
     with scientific_lock(workspace):
         root.mkdir(parents=True,exist_ok=False)
         save_json(root/'storage_preflight.json',admission)
-        save_json(root/'configuration.json',configuration())
+        save_json(root/'configuration.json',configuration(resume_first_ring))
         save_json(root/'docker_version.json',version)
         save_json(root/'protected_preflight.json',parents)
         save_json(root/'external_protected_preflight.json',external_parents)
-        shutil.copyfile(workspace/RETAINED_MESH,root/'retained_mesh.npz')
-        shutil.copyfile(workspace/SOURCE,root/'geometry_source.npz')
-        for kind,name in [('ring','f6s0_fenicsx_ring_active_v01_20260917'),('contour','f6s1p_retained_passive_v01_20260917')]:
+        if resume_first_ring:
+            retained=root/'retained_zero'; retained.mkdir()
+            for before,after in [('ring/raw/M0_mesh.npz','mesh.npz'),('ring/raw/M0_state_passive_0.npz','state.npz'),
+                                 ('ring/raw/M0_state_passive_0.json','state.json'),('configuration.json','configuration.json')]:
+                shutil.copyfile(source/before,retained/after)
+            shutil.copyfile(qualified/'post_verification.json',root/'workspace_prerequisite.json')
+        else:
+            shutil.copyfile(workspace/RETAINED_MESH,root/'retained_mesh.npz')
+            shutil.copyfile(workspace/SOURCE,root/'geometry_source.npz')
+        comparisons=[('ring','f6s0_fenicsx_ring_active_v01_20260917')]
+        if not resume_first_ring:
+            comparisons.append(('contour','f6s1p_retained_passive_v01_20260917'))
+        for kind,name in comparisons:
             source=workspace/'results/ventricle_fem'/name
             target=root/'comparison'/kind; target.mkdir(parents=True)
             for before,after in [('raw/M0_mesh.npz','mesh.npz'),('raw/M0_state_passive_1.npz','state.npz'),
@@ -60,13 +94,13 @@ def run_pressure(workspace):
                  'src/prl/verification/fenicsx_contour.py','src/prl/fem/fenicsx_contour.py',
                  'src/prl/runs/fenicsx_pressure.py','src/prl/runs/fenicsx_contour.py','src/prl/runs/fenicsx_runtime.py',
                  'src/prl/runs/fenicsx_ring.py','src/prl/runs/fem_finite_strain.py','src/prl/result_store.py',
-                 'project_control/result_storage_policy.json',CONTRACT.as_posix()]
+                 'project_control/result_storage_policy.json',contract.as_posix()]
         for relative in sources:
             destination=root/'sources_at_execution'/relative
             destination.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(workspace/relative,destination)
         save_json(root/'source_hashes.json',{p:digest(workspace/p) for p in sources})
-        name='prl-f6s1r-pressure-space-v01-20260918'
+        name='prl-f6s1s4-ring-first-pressure-v01-20260918' if resume_first_ring else 'prl-f6s1r-pressure-space-v01-20260918'
         args=container_command(workspace,name,'/workspace/src/prl/fem/fenicsx_pressure.py',root)
         save_json(root/'command.json',args)
         save_json(root/'science_started.json',{'invocations':1,'container':name,'automatic_retries':0})

@@ -381,6 +381,7 @@ def _parser() -> argparse.ArgumentParser:
     for group in [run_commands,verify_commands]:
         pressure=group.add_parser('fem-fenicsx-pressure',help='bounded same-geometry DG2 pressure diagnostic')
         pressure.add_argument('--workspace',type=Path)
+        pressure.add_argument('--resume-first-ring',action='store_true',help='one original pressured ring state from retained zero, ICNTL(14)=100')
     return parser
 
 
@@ -482,13 +483,13 @@ def main(arguments: Sequence[str] | None = None) -> int:
         exit_code=0 if report['status']=='passed' else 1
     elif ((parsed.command=='run' and parsed.run_command=='fem-fenicsx-pressure') or
           (parsed.command=='verify' and parsed.verify_command=='fem-fenicsx-pressure')):
-        from .runs.fenicsx_pressure import RESULT,run_pressure
+        from .runs.fenicsx_pressure import RESULT,RESUME_RESULT,run_pressure
         from .result_store import result_path
         if parsed.command=='run':
-            report=run_pressure(workspace)
+            report=run_pressure(workspace,resume_first_ring=parsed.resume_first_ring)
         else:
             from .verification.fenicsx_pressure import verify_pressure
-            report=verify_pressure(result_path(workspace,RESULT))
+            report=verify_pressure(result_path(workspace,RESUME_RESULT if parsed.resume_first_ring else RESULT))
         exit_code=0 if report['status']=='passed' else 1
     elif parsed.command == 'run' and parsed.run_command == 'fem-fenicsx-ring':
         from .runs.fenicsx_ring import run_fenicsx_ring, run_active_completion
