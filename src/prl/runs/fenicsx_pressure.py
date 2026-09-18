@@ -16,9 +16,20 @@ RESULT=Path('results/ventricle_fem/f6s1r_pressure_space_v01_20260918')
 CONTRACT=Path('project_control/ventricle_fem_pressure_space_contract_v01.md')
 RESUME_RESULT=Path('results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918')
 RESUME_CONTRACT=Path('project_control/ventricle_fem_ring_resume_contract_v01.md')
+RESUME_V2_RESULT=Path('results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918')
+RESUME_V2_CONTRACT=Path('project_control/ventricle_fem_ring_resume_contract_v02.md')
 
 
-def configuration(resume_first_ring=False):
+def pressure_target(resume_first_ring=False,resume_revision=1):
+    if resume_revision not in (1,2) or (resume_revision!=1 and not resume_first_ring):
+        raise ValueError('Resume revision requires the explicitly bounded resume mode')
+    if not resume_first_ring:
+        return RESULT,CONTRACT
+    return (RESUME_V2_RESULT,RESUME_V2_CONTRACT) if resume_revision==2 else (RESUME_RESULT,RESUME_CONTRACT)
+
+
+def configuration(resume_first_ring=False,resume_revision=1):
+    pressure_target(resume_first_ring,resume_revision)
     cfg=ring_configuration()
     cfg.update(schema_version='prl.pressure_space_diagnostic.v1',pressure_space='DG2',
                passive_loads=[0.,.02],active_peak=0.,meshes=[cfg['meshes'][0]],
@@ -30,13 +41,15 @@ def configuration(resume_first_ring=False):
                    passive_loads=[.02],maximum_equilibrium_solves=1,
                    scope='one original first-pressure ring equilibrium from retained accepted zero; no zero rerun')
         cfg['solver']['mat_mumps_icntl_14']=100
+    if resume_revision==2:
+        cfg.update(resume_revision=2,runtime_interface_gate=True)
     return cfg
 
 
-def run_pressure(workspace,resume_first_ring=False):
+def run_pressure(workspace,resume_first_ring=False,resume_revision=1):
     workspace=Path(workspace).resolve(strict=True)
-    contract=RESUME_CONTRACT if resume_first_ring else CONTRACT
-    root=result_path(workspace,RESUME_RESULT if resume_first_ring else RESULT,new=True)
+    target,contract=pressure_target(resume_first_ring,resume_revision)
+    root=result_path(workspace,target,new=True)
     if not (workspace/contract).is_file() or (not resume_first_ring and digest(workspace/RETAINED_MESH)!=RETAINED_MESH_SHA):
         raise ValueError('Contract or retained mesh missing/changed')
     version=json.loads(read_docker('version','--format','{{json .}}'))
@@ -51,7 +64,10 @@ def run_pressure(workspace,resume_first_ring=False):
         source=result_path(workspace,RESULT)
         qualified=result_path(workspace,WORKSPACE_RESULT)
         external_parents=json.loads((qualified/'source_result_preflight.json').read_text())
-        for package in [source,qualified]:
+        packages=[source,qualified]
+        if resume_revision==2:
+            packages.append(result_path(workspace,RESUME_RESULT))
+        for package in packages:
             manifest=json.loads((package/'manifest.json').read_text())
             if not all(digest(package/item['path'])==item['sha256'] for item in manifest['files']):
                 raise ValueError('Retained source manifest changed')
@@ -67,7 +83,7 @@ def run_pressure(workspace,resume_first_ring=False):
     with scientific_lock(workspace):
         root.mkdir(parents=True,exist_ok=False)
         save_json(root/'storage_preflight.json',admission)
-        save_json(root/'configuration.json',configuration(resume_first_ring))
+        save_json(root/'configuration.json',configuration(resume_first_ring,resume_revision))
         save_json(root/'docker_version.json',version)
         save_json(root/'protected_preflight.json',parents)
         save_json(root/'external_protected_preflight.json',external_parents)
@@ -100,7 +116,7 @@ def run_pressure(workspace,resume_first_ring=False):
             destination.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(workspace/relative,destination)
         save_json(root/'source_hashes.json',{p:digest(workspace/p) for p in sources})
-        name='prl-f6s1s4-ring-first-pressure-v01-20260918' if resume_first_ring else 'prl-f6s1r-pressure-space-v01-20260918'
+        name=f'prl-f6s1s4-ring-first-pressure-v{resume_revision:02d}-20260918' if resume_first_ring else 'prl-f6s1r-pressure-space-v01-20260918'
         args=container_command(workspace,name,'/workspace/src/prl/fem/fenicsx_pressure.py',root)
         save_json(root/'command.json',args)
         save_json(root/'science_started.json',{'invocations':1,'container':name,'automatic_retries':0})

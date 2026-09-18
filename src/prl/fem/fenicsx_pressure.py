@@ -13,11 +13,67 @@ from prl.verification.fenicsx_ring import load_arrays,state_audit,pressure_basis
 from prl.verification.fenicsx_pressure import diagnostic_state,verify_pressure,same_displacement_mesh
 
 
+def runtime_interface_probe(root,config):
+    """One explicit six-DOF interface fixture, not a FEM/scientific equilibrium.
+
+    Run the production observer and factor-option binder in a real SNES callback
+    before any expensive geometry or mechanical assembly is created.
+    """
+    from types import SimpleNamespace
+    from petsc4py import PETSc
+    from prl.verification.fenicsx_pressure import verify_interface_probe
+    target=root/'runtime_interface'; target.mkdir(exist_ok=False)
+    diagonal=np.arange(2.,8.); right=np.arange(1.,7.)
+    matrix=PETSc.Mat().createAIJ(size=(6,6),csr=(np.arange(7,dtype=PETSc.IntType),
+        np.arange(6,dtype=PETSc.IntType),diagonal),comm=PETSc.COMM_SELF)
+    matrix.assemble()
+    solution=PETSc.Vec().createSeq(6,comm=PETSc.COMM_SELF); solution.set(0.)
+    residual=solution.duplicate(); rhs=PETSc.Vec().createWithArray(right,comm=PETSc.COMM_SELF)
+    solver=PETSc.SNES().create(comm=PETSc.COMM_SELF)
+    prefix='prl_interface_'; solver.setOptionsPrefix(prefix); matrix.setOptionsPrefix(prefix+'A_')
+    def function(snes,vector,value):
+        matrix.mult(vector,value); value.axpy(-1.,rhs)
+    def jacobian(snes,vector,jac,preconditioner):
+        pass  # The already assembled constant diagonal is the exact Jacobian.
+    solver.setFunction(function,residual); solver.setJacobian(jacobian,matrix,matrix)
+    options=PETSc.Options()
+    temporary={key:value for key,value in config['solver'].items() if key!='mat_mumps_icntl_14'}
+    for key,value in temporary.items():
+        options[prefix+key]=value
+    solver.setFromOptions()
+    for key in temporary:
+        options.delValue(prefix+key)  # PETSc options database only; no filesystem deletion.
+    observer=object.__new__(Ring)
+    observer.config=config; observer.problem=SimpleNamespace(solver=solver)
+    observer.history=[]; observer.vmap=np.arange(4); observer.pmap=np.arange(4,6)
+    observer.load=SimpleNamespace(value=0.); observer.activation=SimpleNamespace(value=0.)
+    observer.iterate_root=target/'iterates'; observer.iterate_root.mkdir()
+    binding=observer.bind_factor_options(); solver.setMonitor(observer.monitor)
+    write_json(target/'started.json',{'fixture_snes_solves':1,'fixture_dofs':6,'fem_equilibria':0,'binding':binding})
+    solver.solve(None,solution)
+    np.savez_compressed(target/'fixture.npz',diagonal=diagonal,rhs=right,initial=np.zeros(6),
+                        solution=solution.getArray(readonly=True).copy())
+    ksp=solver.getKSP(); pc=ksp.getPC(); factor=pc.getFactorMatrix()
+    write_json(target/'solver.json',{'snes_reason':int(solver.getConvergedReason()),
+        'iterations':int(solver.getIterationNumber()),'ksp_reason':int(ksp.getConvergedReason()),
+        'pc_failed_reason':int(pc.getFailedReason()),'mumps_infog_1':int(factor.getMumpsInfog(1)),
+        'mumps_icntl_14':int(factor.getMumpsIcntl(14)),
+        'ksp_prefix':ksp.getOptionsPrefix(),'factor_prefix':factor.getOptionsPrefix()})
+    report=verify_interface_probe(target); write_json(target/'verification.json',report)
+    solver.destroy(); rhs.destroy(); residual.destroy(); solution.destroy(); matrix.destroy()
+    if report['status']!='passed':
+        raise ValueError('Real PETSc interface preflight failed: '+str(report))
+    print('Runtime interface gate passed; now permit the one approved FEM equilibrium.',flush=True)
+    return report
+
+
 def main():
     root=Path('/out'); config=json.loads((root/'configuration.json').read_text())
     started=time.monotonic(); attempted=0; accepted=0; current=None
     try:
         resumed=config.get('resume_first_ring',False)
+        if config.get('runtime_interface_gate',False):
+            runtime_interface_probe(root,config)
         for kind in config['objects']:
             case={'name':'M0','segments':64,'radial':[1,1,5]}
             cfg={**config,'geometry_kind':'ring' if kind=='ring' else 'image_polygon'}

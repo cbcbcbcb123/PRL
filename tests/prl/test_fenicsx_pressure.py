@@ -101,6 +101,27 @@ def test_resume_create_only_refusal_precedes_docker():
         docker.assert_not_called()
 
 
+def test_resume_v2_requires_interface_gate_without_changing_physics():
+    cfg=configuration(resume_first_ring=True,resume_revision=2)
+    original=configuration(resume_first_ring=True)
+    for key in original:
+        assert cfg[key]==original[key]
+    assert cfg['runtime_interface_gate'] and cfg['resume_revision']==2
+    from prl.cli import _parser
+    assert _parser().parse_args(['run','fem-fenicsx-pressure','--resume-first-ring','--resume-revision','2']).resume_revision==2
+    with pytest.raises(ValueError):
+        configuration(resume_revision=2)
+
+
+def test_resume_v2_create_only_before_runtime():
+    from prl.runs.fenicsx_pressure import RESUME_V2_RESULT
+    with patch('prl.runs.fenicsx_pressure.result_path',side_effect=FileExistsError) as target,patch('prl.runs.fenicsx_pressure.read_docker') as docker:
+        with pytest.raises(FileExistsError):
+            run_pressure(Path(__file__).resolve().parents[2],resume_first_ring=True,resume_revision=2)
+        assert target.call_args.args[1]==RESUME_V2_RESULT
+        docker.assert_not_called()
+
+
 def test_observer_uses_read_only_vector_access():
     # Execute the real small method without importing unavailable host DOLFINx.
     # This protocol regression is not a PETSc integration test or scientific solve.
@@ -168,3 +189,31 @@ def test_same_geometry_accepts_renumbering_but_not_moved_nodes():
     assert same_displacement_mesh(changed,mesh)
     changed['coordinates']=changed['coordinates'].copy(); changed['coordinates'][0,0]+=.001
     assert not same_displacement_mesh(changed,mesh)
+
+
+def test_plot_recomputes_raw_vectors_and_retains_quadrature_maximum():
+    from types import SimpleNamespace
+    from prl.rendering.fenicsx_pressure import resumed_plot_data
+    mesh=fixture()
+    data={f'mesh_{key}':value for key,value in mesh.items()}
+    data.update(mu=np.array(1.),kappa=np.array(1000.),iterations=np.array([0,1]),residuals=np.array([1.,1e-12]))
+    for index in range(2):
+        data.update({f'state_{index}_u':np.full((6,2),index*.01),
+                     f'state_{index}_pressure':np.full(6,index*.2),
+                     f'state_{index}_activation':np.array(0.),f'state_{index}_load':np.array(.02)})
+    calls=[]
+    def independent_fields(mesh,state,mu,kappa):
+        calls.append(state['u'].copy())
+        stress=np.zeros((1,2,3,3)); stress[0,:,0,0]=[2.,4.]
+        return {'stress':stress,'J':np.array([[1.001,.99]])}
+    mechanics=SimpleNamespace(load_arrays=lambda path:data,fields=independent_fields,
+                              cavity=lambda mesh,u,p:(2.+float(u.sum()),None,None))
+    _,frames=resumed_plot_data('explicit_in_memory_fixture',mechanics)
+    assert len(calls)==len(frames)==2 and [item['iteration'] for item in frames]==[0,1]
+    np.testing.assert_allclose(frames[1]['volume_percent'],[1.],atol=1e-12)
+    np.testing.assert_allclose(frames[1]['equivalent'],[3.],atol=1e-12)
+    np.testing.assert_allclose(frames[1]['displacement'],[np.sqrt(2)*.01])
+    assert frames[0]['area_percent']==0. and frames[1]['area_percent']==pytest.approx(6.)
+    data['iterations']=np.array([0,2])
+    with pytest.raises(ValueError,match='All actual Newton'):
+        resumed_plot_data('gapped_fixture',mechanics)

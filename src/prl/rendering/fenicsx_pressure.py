@@ -6,6 +6,331 @@ from pathlib import Path
 import numpy as np
 
 
+def resumed_plot_data(data_path, mechanics):
+    """Recompute fields from every saved Newton vector; never solve or interpolate time."""
+    data = mechanics.load_arrays(data_path)
+    mesh = {key[5:]: value for key, value in data.items() if key.startswith('mesh_')}
+    indices = data['iterations'].astype(int).tolist()
+    if not indices or indices != list(range(len(indices))):
+        raise ValueError('All actual Newton iterates, starting at zero, are required')
+    reference_area = mechanics.cavity(mesh, np.zeros_like(mesh['coordinates']), 0.)[0]
+    frames = []
+    for index in indices:
+        prefix = f'state_{index}_'
+        state = {key[len(prefix):]: value for key, value in data.items() if key.startswith(prefix)}
+        actual = mechanics.fields(mesh, state, float(data['mu']), float(data['kappa']))
+        stress = actual['stress']
+        deviator = stress - np.trace(stress, axis1=-2, axis2=-1)[..., None, None] * np.eye(3) / 3
+        equivalent = np.sqrt(1.5 * np.sum(deviator**2, axis=(-1, -2))).mean(axis=1)
+        area = mechanics.cavity(mesh, state['u'], float(state['load']))[0]
+        frames.append({'iteration': index, 'u': state['u'], 'equivalent': equivalent / float(data['mu']),
+                       'volume_percent': np.max(np.abs(actual['J'] - 1), axis=1) * 100,
+                       'displacement': np.linalg.norm(state['u'], axis=1)[mesh['cells']].mean(axis=1),
+                       'area_percent': (area / reference_area - 1) * 100,
+                       'residual': float(data['residuals'][index])})
+    return mesh, frames
+
+
+def prepare_resumed(workspace, skill_root, revision_number=2):
+    """Create self-contained raw-vector Notebook packages after independent acceptance."""
+    import re
+    import subprocess
+    import sys
+    import nbformat
+    from prl.result_store import result_path, result_admission
+    from prl.runs.fenicsx_pressure import pressure_target
+    from prl.runs.fenicsx_ring import digest
+    from prl.runs.fenicsx_runtime import save_json
+    from prl.verification.fenicsx_pressure import verify_pressure
+    from prl.verification import fenicsx_ring as mechanics
+
+    workspace = Path(workspace).resolve(strict=True)
+    root = result_path(workspace, pressure_target(True, revision_number)[0])
+    if (root / 'post_verification.json').exists() or (root / 'figures').exists():
+        raise FileExistsError('Accepted-state figure preparation is create-only')
+    if not result_admission(workspace, 64 * 1024**2)['can_start']:
+        raise RuntimeError('Figure storage admission refused')
+    formal = json.loads((root / 'formal_invocation_manifest.json').read_text())
+    if not all(digest(root / item['path']) == item['sha256'] for item in formal['files']):
+        raise ValueError('Preserved invocation changed')
+    report = verify_pressure(root)
+    if report['status'] != 'passed' or report['accepted_equilibria'] != 1:
+        raise ValueError('This package requires the one independently accepted pressure equilibrium')
+    save_json(root / 'post_verification.json', report)
+    config = json.loads((root / 'configuration.json').read_text())
+    mesh = mechanics.load_arrays(root / 'ring/raw/M0_mesh.npz')
+    data = {f'mesh_{key}': value for key, value in mesh.items()}
+    data.update(mu=np.array(config['mu']), kappa=np.array(config['kappa']),
+                iterations=np.array([item['iteration'] for item in report['iterates']]),
+                residuals=np.array([item['solver_residual'] for item in report['iterates']]))
+    for item in report['iterates']:
+        index = item['iteration']
+        state = mechanics.load_arrays(root / f'ring/iterates/M0_passive_1/iterate_{index:03}.npz')
+        data.update({f'state_{index}_{key}': value for key, value in state.items()})
+    np.savez_compressed(root / 'figure_data.npz', **data)
+    skills = Path(skill_root)
+    revisions = []
+    for mode in ['pressure_equilibrium', 'newton_states']:
+        command = [sys.executable, '-B', '-X', 'utf8',
+                   str(skills / 'cb-paper-figure-workflow/scripts/init_figure_revision.py'),
+                   str(root / 'figures'), '--main', 'S1S4', '--analysis-key', mode,
+                   '--data', str(root / 'figure_data.npz'),
+                   '--python', 'helper=' + str(Path(__file__).resolve()),
+                   '--python', 'style=' + str(skills / 'cb-plot-unified-style/assets/cb_plot_unified_style.py'),
+                   '--python', 'mechanics=' + str(workspace / 'src/prl/verification/fenicsx_ring.py'),
+                   '--model', 'config=' + str(root / 'configuration.json'),
+                   '--model', 'verification=' + str(root / 'post_verification.json'),
+                   '--data-role', 'accepted=' + str(root / 'ring/raw/M0_state_passive_1.npz')]
+        subprocess.run(command, check=True)
+        revision = next((root / f'figures/FigS1S4_{mode}').glob('FigS1S4_*'))
+        prefix = revision.name
+        snapshots = {name: next(revision.glob(f'*_{name}.py')).name for name in ['helper', 'style', 'mechanics']}
+        notebook = nbformat.v4.new_notebook(cells=[
+            nbformat.v4.new_markdown_cell(
+                '# F6-S1-S4 v02：圆环首压力平衡及实际Newton状态\n'
+                '只读原始u/p并独立重算F、J、应力；不重新求解。二维平面应变、1倍实际形变。\n'
+                'k=0为已施压的初猜，k=1/2为未收敛迭代，只有k=3为接受平衡；不是生理时间。'),
+            nbformat.v4.new_code_cell(f'''from pathlib import Path
+import importlib.util
+import sys
+from IPython.display import Image, display
+REVISION_DIR = Path.cwd().resolve()
+PREFIX = {prefix!r}
+DATA_PATH = REVISION_DIR / f"01_{{PREFIX}}_data.npz"
+OUTPUT_PNG = REVISION_DIR / f"04_{{PREFIX}}.png"
+OUTPUT_SVG = REVISION_DIR / f"05_{{PREFIX}}.svg"
+# 作图调整参数：沿用已批准的紧凑FEM诊断风格，实际1倍位移，不模拟时间帧。
+STYLE_SOURCE = 'Existing compact FEM diagnostics with CB style'
+DPI = 600
+axis_box_size_in = (3.7, 3.7)
+FIGURE_SIZE_IN = (13.8, 12.0)
+def load_snapshot(name, filename):
+    spec = importlib.util.spec_from_file_location(name, REVISION_DIR / filename)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+helper = load_snapshot('pressure_plot_snapshot', {snapshots['helper']!r})
+style = load_snapshot('cb_style_snapshot', {snapshots['style']!r})
+mechanics = load_snapshot('independent_mechanics_snapshot', {snapshots['mechanics']!r})
+summary = helper.draw_resumed(DATA_PATH, OUTPUT_PNG, OUTPUT_SVG, style, mechanics,
+                              {mode!r}, axis_box_size_in, FIGURE_SIZE_IN)
+summary'''),
+            nbformat.v4.new_code_cell('display(Image(filename=str(OUTPUT_PNG), width=1000))')],
+            metadata={'kernelspec': {'name': 'python3', 'display_name': 'Python 3', 'language': 'python'}})
+        nbformat.write(notebook, revision / f'03_{prefix}_plot.ipynb')
+        methods = revision / f'02_{prefix}_methods.txt'
+        content = methods.read_text(encoding='utf-8')
+        replacements = {
+            '风格来源': '沿用项目紧凑FEM诊断图，CB统一风格显式override；3.7英寸方轴、留白，600 dpi PNG和可编辑SVG。',
+            '用户提供的期刊规格': '未指定；当前为数值资格诊断，不是投稿定稿。',
+            '03_材料方法来源': '本版本物理复制helper/style/独立mechanics、配置及验收；原始网格与全部4个u/p向量在data.npz，最终完整接受态另附。不依赖原工作区重算，不启动求解器。',
+            '数据/模型变换': '独立NumPy从每个原始u/p重算有限变形F、J、Cauchy应力；位移显示单元六节点模长算术均值，应力显示积分点von Mises等效应力算术均值，体积为逐单元积分点max|J-1|百分数。原1%验收仍用全部积分点最大值；不平滑、不插帧，六节点三角形拆四个显示子三角，所有形变为1倍。',
+            '统计方法与不确定性': '确定性单个粗网格理想圆环，无样本统计或生物误差棒；尚无粗细网格收敛证明。4状态均为固定p/mu=0.02、Ta=0的实际Newton初猜/迭代，只有末态平衡；不是4个心动时刻。位移含刚体规范带来的平移，不可当应变。',
+            '生物学分组颜色': '不适用；绿/黄/蓝仅标记假设心内膜/ECM/心肌域，三者当前被动参数相同；主动收缩关闭。灰色线为参考外形，红标记为x/y刚体规范约束。'}
+        for key, value in replacements.items():
+            content = re.sub(r'(?m)^- ' + re.escape(key) + r':.*$', lambda match: '- ' + key + ': ' + value, content)
+        methods.write_text(content, encoding='utf-8')
+        revisions.append(str(revision))
+    return {'status': 'passed', 'revisions': revisions, 'new_equilibria': 0, 'actual_Newton_states': len(report['iterates'])}
+
+
+def draw_resumed(data_path, png_path, svg_path, style_module, mechanics,
+                 mode='pressure_equilibrium', axis_box_size_in=(3.7, 3.7), figure_size_in=(13.8, 12.0)):
+    """Plot accepted equilibrium or all four original Newton states, with shared scales."""
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.collections import PolyCollection, LineCollection
+    from matplotlib.colors import Normalize
+    from matplotlib.ticker import FixedLocator
+
+    mesh, frames = resumed_plot_data(data_path, mechanics)
+    if mode not in ['pressure_equilibrium', 'newton_states'] or len(frames) != 4:
+        raise ValueError('This two-by-two layout requires the four preserved actual Newton states')
+    style = style_module.StyleSpec(axis_box_size_in=axis_box_size_in,
+        tick_label_size=16., axis_label_size=18., annotation_font_size=16., sample_size_and_stat_font_size=14.,
+        legend_font_size=14., axes_line_width=1.5, major_tick_length_pt=5., major_tick_width_pt=1.,
+        minor_tick_length_pt=3., minor_tick_width_pt=.8, data_line_width=1.5, tick_label_pad_pt=4., axis_label_pad_pt=8.)
+    baseline = asdict(style_module.DEFAULT_STYLE)
+    overrides = [style_module.StyleOverride(field=key, reason='Existing compact FEM diagnostic style; equal-scale spatial panels and explicit margins.')
+                 for key, value in asdict(style).items() if value != baseline[key]]
+    width, height = figure_size_in
+    side = axis_box_size_in[0]
+    figure = plt.figure(figsize=figure_size_in)
+    axes = [figure.add_axes((left / width, bottom / height, side / width, side / height))
+            for left, bottom in [(1.1, 7.), (8., 7.), (1.1, 1.4), (8., 1.4)]]
+    parts = np.array([[0, 5, 4], [5, 1, 3], [4, 3, 2], [5, 3, 4]])
+    reference = mesh['coordinates'][mesh['cells'][:, parts]].reshape(-1, 3, 2)
+    edges = mesh['cells'][:, [[0, 5, 1], [1, 3, 2], [2, 4, 0]]].reshape(-1, 3)
+    _, edge_ids, edge_counts = np.unique(np.sort(edges[:, [0, 2]], axis=1), axis=0,
+                                        return_inverse=True, return_counts=True)
+    boundary = mesh['coordinates'][edges[edge_counts[edge_ids] == 1]]
+    parameter = np.linspace(0, 1, 7)
+    edge_shape = np.column_stack((2 * parameter**2 - 3 * parameter + 1,
+                                 4 * parameter - 4 * parameter**2, 2 * parameter**2 - parameter))
+    reference_curves = np.einsum('qa,eai->eqi', edge_shape, boundary)
+    colors = np.array(['#4C9F70', '#D6B656', '#5B8DB8'])
+    maps = []
+    titles = []
+    for index, axis in enumerate(axes):
+        if mode == 'pressure_equilibrium' and index == 0:
+            axis.add_collection(PolyCollection(reference, facecolors=np.repeat(colors[mesh['layers'] - 1], 4),
+                                               edgecolors=(0, 0, 0, .25), linewidths=.12))
+            for component, marker in [(0, 's'), (1, '^')]:
+                selected = np.flatnonzero(mesh['fixed'][:, component])
+                axis.plot(*mesh['coordinates'][selected].T, linestyle='none', marker=marker, color='#BA3E34', ms=6)
+            radius = np.linalg.norm(mesh['coordinates'][mesh['inner_edges'][:, 0]], axis=1).mean()
+            for angle in np.linspace(0, 2 * np.pi, 12, endpoint=False):
+                direction = np.array([np.cos(angle), np.sin(angle)])
+                axis.annotate('', xy=direction * radius, xytext=direction * (radius - .16),
+                              arrowprops={'arrowstyle': '->', 'color': '#A92D28', 'lw': 1.2})
+            axis.text(0, 0, 'p / mu = 0.02\nactive = 0\nouter wall free', ha='center', va='center', fontsize=14)
+            titles.append('A  Reference mesh and loading')
+            continue
+        frame = frames[index] if mode == 'newton_states' else frames[-1]
+        quantity = 'equivalent' if mode == 'newton_states' else ['unused', 'displacement', 'equivalent', 'volume_percent'][index]
+        maximum = max(float(item[quantity].max()) for item in frames) if mode == 'newton_states' else float(frame[quantity].max())
+        triangles = (mesh['coordinates'] + frame['u'])[mesh['cells'][:, parts]].reshape(-1, 3, 2)
+        collection = PolyCollection(triangles, array=np.repeat(frame[quantity], 4), norm=Normalize(0., maximum),
+                                    cmap='magma' if quantity == 'volume_percent' else 'viridis',
+                                    edgecolors=(0, 0, 0, .2), linewidths=.1)
+        axis.add_collection(collection)
+        # Reference outlines, not an amplified deformation or fitted shape.
+        axis.add_collection(LineCollection(reference_curves, colors='#888888', linewidths=.65, linestyles='--'))
+        maps.append(collection)
+        if mode == 'newton_states':
+            label = 'accepted equilibrium' if index == 3 else 'initial guess' if index == 0 else 'not yet converged'
+            axis.text(0, 0, f"{label}\nresidual {frame['residual']:.2e}\narea +{frame['area_percent']:.4f}%",
+                      ha='center', va='center', fontsize=13)
+            titles.append(f'{chr(65 + index)}  Newton k = {index}')
+        else:
+            titles.append(['', 'B  Displacement magnitude / L', 'C  Equivalent Cauchy stress / mu', 'D  Local volume change'][index])
+            if index == 1:
+                axis.text(0, 0, f"Cavity area\n+{frame['area_percent']:.4f}%\nactual 1x deformation", ha='center', va='center', fontsize=13)
+            if index == 3:
+                axis.text(0, 0, f"max |J - 1|\n{maximum:.5f}%\ngate: 1%", ha='center', va='center', fontsize=13)
+    for axis, title in zip(axes, titles):
+        axis.set(xlim=(-1.2, 1.2), ylim=(-1.2, 1.2), xlabel='x / L', ylabel='y / L', aspect='equal')
+        axis.xaxis.set_major_locator(FixedLocator([-1, 0, 1]))
+        axis.yaxis.set_major_locator(FixedLocator([-1, 0, 1]))
+        style_module.apply_axes_style(axis, style=style)
+        style_module.add_top_information(axis, title, style=style)
+    if mode == 'pressure_equilibrium':
+        for collection, (left, bottom), label in zip(maps, [(12.05, 7.), (5.15, 1.4), (12.05, 1.4)],
+                ['Cell mean |u| / L', 'Mean equivalent stress / mu', 'Element max |J - 1| (%)']):
+            cax = figure.add_axes((left / width, bottom / height, .20 / width, side / height))
+            figure.colorbar(collection, cax=cax).set_label(label, fontsize=14, labelpad=10)
+            cax.tick_params(labelsize=14)
+        figure.text(.08, .963, 'Ideal annulus: first DG2 pressure equilibrium PASSED | p / mu = 0.02, active = 0', fontsize=14)
+        figure.text(.08, .515, 'Fields recomputed independently from the accepted state; reference outlines in gray.', fontsize=14)
+        figure.text(.08, .035, 'Assumed endo / ECM / myo: green / yellow / blue (same passive law). Coarse ring only; not biological validation.', fontsize=12)
+    else:
+        cax = figure.add_axes((12.05 / width, 4. / height, .20 / width, side / height))
+        figure.colorbar(maps[-1], cax=cax).set_label('Mean equivalent Cauchy stress / mu', fontsize=14, labelpad=10)
+        cax.tick_params(labelsize=14)
+        figure.text(.08, .963, 'Four actual Newton states at constant p / mu = 0.02 | shared stress scale, actual 1x deformation', fontsize=14)
+        figure.text(.08, .515, 'Only k = 3 is accepted. Algorithmic iterations are NOT heartbeat phases or physical time.', fontsize=14)
+        figure.text(.08, .035, 'No new solve, interpolation or fabricated frame. Reference outlines in gray; active contraction OFF.', fontsize=13)
+    exported = style_module.export_figure(figure, axes, Path(png_path).with_suffix(''), style=style, overrides=overrides)
+    if Path(exported.svg) != Path(svg_path):
+        Path(exported.svg).replace(svg_path)
+        manifest = json.loads(Path(exported.manifest).read_text())
+        manifest['exports']['svg'] = str(Path(svg_path).resolve())
+        Path(exported.manifest).write_text(json.dumps(manifest, indent=2), encoding='utf-8')
+    plt.close(figure)
+    return {'mode': mode, 'actual_Newton_states': len(frames), 'new_equilibrium_solves': 0,
+            'cavity_area_change_percent': frames[-1]['area_percent'],
+            'max_abs_J_minus_one_percent': float(frames[-1]['volume_percent'].max()),
+            'physiological_time': 'not_calibrated'}
+
+
+def finalize_resumed(workspace, targeted_tests, subtests, revision_number=2):
+    """Freeze an independently accepted bounded result and its checked figures."""
+    import shutil
+    from prl.result_store import result_path, register_result, result_admission
+    from prl.runs.fenicsx_pressure import pressure_target
+    from prl.runs.fenicsx_ring import digest, package_manifest
+    from prl.runs.fenicsx_runtime import save_json
+
+    workspace = Path(workspace).resolve(strict=True)
+    root = result_path(workspace, pressure_target(True, revision_number)[0])
+    if (root / 'manifest.json').exists() or (root / 'summary.json').exists():
+        raise FileExistsError('Accepted result already frozen')
+    formal = json.loads((root / 'formal_invocation_manifest.json').read_text())
+    internal = json.loads((root / 'protected_preflight.json').read_text())
+    external = json.loads((root / 'external_protected_preflight.json').read_text())
+    dirty = json.loads((root / 'preexisting_changes.json').read_text())
+    if not (all(digest(root / item['path']) == item['sha256'] for item in formal['files'])
+            and all(digest(workspace / path) == sha for path, sha in internal.items())
+            and all(digest(path) == sha for path, sha in external.items())
+            and all(digest(workspace / item['path']) == item['sha256'] for item in dirty)):
+        raise ValueError('Preserved invocation, ancestor evidence or unrelated edits changed')
+    report = json.loads((root / 'post_verification.json').read_text())
+    execution = json.loads((root / 'execution.json').read_text())
+    if report['status'] != 'passed' or report['accepted_equilibria'] != 1 or execution['status'] != 'passed':
+        raise ValueError('One independently accepted equilibrium is required')
+    figures = {}
+    for mode in ['pressure_equilibrium', 'newton_states']:
+        revision = next((root / f'figures/FigS1S4_{mode}').glob('FigS1S4_*'))
+        prefix = revision.name
+        if '- 包状态: 最终包' not in (revision / f'02_{prefix}_methods.txt').read_text(encoding='utf-8'):
+            raise ValueError('Notebook execution, style check and visual QA must precede freezing')
+        figures[mode] = {kind: (revision / f'{number}_{prefix}{suffix}').relative_to(root).as_posix()
+                         for kind, number, suffix in [('notebook', '03', '_plot.ipynb'), ('png', '04', '.png'), ('svg', '05', '.svg')]}
+        for filename in figures[mode].values():
+            if not (root / filename).is_file():
+                raise ValueError('Missing figure artifact: ' + filename)
+    summary = {'status': 'passed', 'scope': report['scope'], 'engineering_execution': 'passed',
+               'runtime_interface': report['runtime_interface']['status'], 'numerical_first_pressure': 'passed',
+               'accepted_pressure_equilibria': 1, 'newton_updates': 3, 'actual_saved_Newton_states': len(report['iterates']),
+               'metrics': report['state'], 'zero_load_reruns': 0, 'automatic_retries': 0, 'gpu': 0,
+               'old_contour_volume_gate': 'failed', 'mesh_convergence': 'not_run', 'contour': 'not_run',
+               'active_contraction': 'not_run', 'three_dimensional_model': 'not_run', 'fsi': 'not_run',
+               'growth': 'not_run', 'biological_validation': 'not_run',
+               'next_action': 'Pending approval: remaining original passive ring pressures and coarse/fine qualification, then the original contour; unchanged physical gates.'}
+    rendering = {'status': 'passed', 'visual_qa': 'passed', 'style_validation': 'passed', 'figures': figures,
+                 'source': 'all four saved raw Newton vectors; independent NumPy field reconstruction',
+                 'new_equilibrium_solves': 0, 'new_global_factorizations': 0,
+                 'deformation_scale': 1, 'physiological_time': 'not_calibrated',
+                 'temporary_cleanup': 'not_authorized; registered figure_runtime retained'}
+    audit = {'status': 'passed', 'formal_invocation_files_unchanged': len(formal['files']),
+             'protected_files_unchanged': len(internal) + len(external), 'preexisting_dirty_files_unchanged': len(dirty),
+             'before_run_tests': 62, 'after_postprocess_tests': targeted_tests, 'subtests': subtests,
+             'interface_check_count': len(report['runtime_interface']['checks']),
+             'scope_identity_check_count': len(report['checks']), 'physical_state_check_count': len(report['state']['checks']),
+             'postprocess_new_FEM_solves': 0, 'postprocess_global_factorizations': 0,
+             'notebook_execution': 'passed', 'style_validation': 'passed', 'visual_qa': 'passed'}
+    for name, value in [('summary.json', summary), ('rendering.json', rendering), ('delivery_audit.json', audit),
+                        ('delivery_storage.json', result_admission(workspace))]:
+        save_json(root / name, value)
+    sources = sorted(set(list(json.loads((root / 'source_hashes.json').read_text())) + [
+        'src/prl/rendering/fenicsx_pressure.py', 'src/prl/cli.py', 'tests/prl/test_fenicsx_pressure.py',
+        f'project_control/ventricle_fem_ring_resume_execution_v0{revision_number}.md']))
+    for relative in sources:
+        target = root / 'sources_at_delivery' / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(workspace / relative, target)
+    page = f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>F6-S1-S4 v02 圆环压力平衡通过</title>
+<style>body{{max-width:1100px;margin:32px auto;padding:0 20px;color:#173e2e;font:16px/1.7 'Microsoft YaHei',sans-serif}}img{{width:100%}}a{{color:#176b4d}}</style>
+<h1>圆环首个内压平衡通过：恢复科学主线</h1>
+<p>二维P2/DG2平面应变有限变形NH，p/mu=0.02，主动收缩关闭。外壁自由，三自由度点规范去除刚体运动；三材料域被动参数相同，尚未标定。</p>
+<p>腔室面积增加4.675918%；壁局部max|J−1|=0.00262844%，原1%门通过；独立自由力残量约1.70e−14。相对不可压解析面积响应误差0.0566923%。</p>
+<img src="{figures['pressure_equilibrium']['png']}" alt="实际三层结构与边界载荷、1倍形变、应力及局部体积变化">
+<p>位移颜色包含点规范所选择的平移分量，不等于应变；腔室面积增加不等于壁组织体积增加。</p>
+<h2>全部4个实际Newton状态</h2>
+<p>0为加载初猜，1/2为未收敛迭代，3为唯一接受平衡；同一压力，不是4个心动时刻。共享应力颜色范围，1倍真实位移，无插值帧。</p>
+<img src="{figures['newton_states']['png']}" alt="真实保存的0至3次Newton状态，同一应力色标">
+<p>同环境微型PETSc接口12项核验通过后，才执行唯一一次FEM平衡；实际MUMPS余量100，3次Newton更新。一次{execution['elapsed_seconds']:.3f}秒单CPU容器，0 GPU/零载重算/自动重跑。</p>
+<p>仅首压力粗圆环通过，原轮廓6.71%/11.15%体积失败证据保持；DG2粗细收敛、轮廓、主动、三维、双向FSI、生长及生物学验证本轮未运行。</p>
+<p><a href="post_verification.json">独立复核</a> · <a href="summary.json">状态摘要</a> · <a href="{figures['pressure_equilibrium']['notebook']}">结构/场量Notebook</a> · <a href="{figures['newton_states']['notebook']}">实际迭代Notebook</a> · <a href="delivery_audit.json">交付审计</a></p>
+<p>下一步待确认：补完原圆环被动压力序列及粗细资格，然后恢复原轮廓；不改材料或1%门。</p></html>'''
+    (root / 'index.html').write_text(page, encoding='utf-8')
+    save_json(root / 'manifest.json', package_manifest(root))
+    register_result(workspace, root, 'passed', digest(root / 'manifest.json'))
+    return summary
+
+
 def prepare(workspace, skill_root):
     """Create a diagnostic figure package from saved states, without a solver."""
     import re

@@ -129,11 +129,42 @@ def verify_pressure(root):
             'mesh_convergence':'not_run','active_contraction':'not_run','biological_validation':'not_run'}
 
 
+def verify_interface_probe(root):
+    """Read-only NumPy check of the explicitly synthetic six-DOF API fixture."""
+    root=Path(root)
+    if not (root/'fixture.npz').is_file() or not (root/'solver.json').is_file():
+        return {'status':'failed','checks':{'fixture_and_report_saved':False},'fem_equilibria':0}
+    data=load_arrays(root/'fixture.npz'); meta=json.loads((root/'solver.json').read_text())
+    relative=float(np.linalg.norm(data['diagonal']*data['solution']-data['rhs'])/np.linalg.norm(data['rhs']))
+    error=float(np.linalg.norm(data['solution']-data['rhs']/data['diagonal']))
+    paths=sorted((root/'iterates').glob('iterate_*.npz'))
+    snapshots=[load_arrays(path) for path in paths]
+    checks={'fixture_identity':np.array_equal(data['diagonal'],np.arange(2.,8.)) and np.array_equal(data['rhs'],np.arange(1.,7.)),
+            'finite_solution':bool(np.isfinite(data['solution']).all()),'relative_residual':relative<=1e-12,
+            'known_solution':error<=1e-12,'snes_converged':meta['snes_reason']>0,
+            'linear_solver':meta['ksp_reason']>0 and meta['pc_failed_reason']==0 and meta['mumps_infog_1']==0,
+            'actual_margin_100':meta['mumps_icntl_14']==100,
+            'actual_monitor_used':len(snapshots)>=2 and len(snapshots)==meta['iterations']+1,
+            'initial_not_mutated':bool(snapshots) and np.array_equal(snapshots[0]['mixed_state'],data['initial']),
+            'final_snapshot_exact':bool(snapshots) and np.array_equal(snapshots[-1]['mixed_state'],data['solution'])}
+    for index,item in enumerate(snapshots):
+        residual=float(np.linalg.norm(data['diagonal']*item['mixed_state']-data['rhs']))
+        checks[f'iterate_{index}_consistent']=int(item['iteration'])==index and abs(residual-float(item['residual']))<=1e-12 and np.array_equal(item['u'].ravel(),item['mixed_state'][:4]) and np.array_equal(item['pressure'],item['mixed_state'][4:])
+    return {'status':'passed' if all(checks.values()) else 'failed','checks':checks,
+            'relative_residual':relative,'solution_error':error,'saved_fixture_iterates':len(snapshots),
+            'meaning':'synthetic interface fixture only; not a tissue or scientific equilibrium','fem_equilibria':0}
+
+
 def verify_resumed_ring(root):
     """Independent saved-state gate for a single resumed original equilibrium."""
     root=Path(root); cfg=json.loads((root/'configuration.json').read_text())
     cfg={**cfg,'geometry_kind':'ring'}
     retained=root/'retained_zero'; raw=root/'ring/raw'; old=root/'comparison/ring'
+    interface=verify_interface_probe(root/'runtime_interface') if cfg.get('runtime_interface_gate') else None
+    if not (raw/'M0_mesh.npz').is_file():
+        return {'status':'failed','checks':{'scientific_mesh_created':False},'runtime_interface':interface,
+                'state':None,'iterates':[],'nonlinear_equilibrium_attempts':0,'accepted_equilibria':0,
+                'scope':'stopped before scientific mesh; no FEM equilibrium'}
     reference=load_arrays(retained/'mesh.npz'); mesh=load_arrays(raw/'M0_mesh.npz')
     zero=load_arrays(retained/'state.npz')
     previous_cfg=json.loads((retained/'configuration.json').read_text())
@@ -148,6 +179,8 @@ def verify_resumed_ring(root):
             'single_pressure_scope':cfg['objects']==['ring'] and cfg['passive_loads']==[.02] and cfg['maximum_equilibrium_solves']==1,
             'no_new_zero_or_extra_states':all(p.name=='M0_state_passive_1.npz' for p in raw.glob('*_state_*.npz')),
             'no_contour':not (root/'contour').exists()}
+    if interface is not None:
+        checks['runtime_interface_gate']=interface['status']=='passed'
     tangent=json.loads((raw/'M0_tangent.json').read_text())
     checks['tangent']=all(tangent.get(k,np.inf)<=v for k,v in [('pressure',2e-6),('active',2e-6),('total',2e-5)])
     state_path=raw/'M0_state_passive_1.npz'; report=None; iterate_metrics=[]
@@ -189,7 +222,7 @@ def verify_resumed_ring(root):
                         'max_abs_J_minus_one':float(np.max(np.abs(physical['J']-1))),
                         'interpretation':'Loaded initial guess only; J=1 is not a qualified volume response.'}
     return {'status':'passed' if all(checks.values()) else 'failed','checks':checks,'state':report,
-            'retained_zero':zero_report,'retained_CG1':old_report,'iterates':iterate_metrics,
+            'retained_zero':zero_report,'retained_CG1':old_report,'iterates':iterate_metrics,'runtime_interface':interface,
             'nonlinear_equilibrium_attempts':1,'accepted_equilibria':int(report is not None and report['status']=='passed'),
             'zero_load_reruns':0,'automatic_retries':0,'failed_initial':failed_initial,
             'scope':'one coarse ideal annulus passive equilibrium; Newton iteration is not physiological time',
