@@ -25,7 +25,7 @@ from .workspace import find_workspace
 FEM_RUN_COMMANDS = frozenset({
     "fem-active-ellipse", "fem-synthetic-orientation", "fem-measured-contour",
     "fem-fixed-mesh", "fem-finite-strain", "fem-rotation", "fem-curved-pressure", "fem-contour-pressure",
-    "fem-fenicsx-ring", "fem-fenicsx-contour", "fem-fenicsx-pressure", "fem-fenicsx-fine-ring", "fem-fenicsx-contour-pressure", "fem-idealized-3d",
+    "fem-fenicsx-ring", "fem-fenicsx-contour", "fem-fenicsx-pressure", "fem-fenicsx-fine-ring", "fem-fenicsx-contour-pressure", "fem-idealized-3d", "fem-mesh-quality",
 })
 FEM_ONLY_DECISION = "project_control/ventricle_fem_only_measured_contour_decision_v01.md"
 
@@ -401,6 +401,9 @@ def _parser() -> argparse.ArgumentParser:
         solid_mode=solid.add_mutually_exclusive_group()
         solid_mode.add_argument('--resume-qualified-zero',action='store_true',help='reuse retained M0 zero; only the original remaining 13 states')
         solid_mode.add_argument('--fine-first-pressure',action='store_true',help='only existing M1 zero and p=0.01; compare with preserved M0 failure')
+    for group in [run_commands,verify_commands]:
+        quality=group.add_parser('fem-mesh-quality',help='retained M0/M1 mesh quality audit; zero new FEM solves')
+        quality.add_argument('--workspace',type=Path)
     return parser
 
 
@@ -425,6 +428,12 @@ def main(arguments: Sequence[str] | None = None) -> int:
         report=result_admission(workspace,planned_new_bytes=parsed.planned_new_bytes or 0,
                                 stop_reserve_bytes=parsed.stop_reserve_bytes)
         exit_code=0 if report['can_start'] else 1
+    elif ((parsed.command=='run' and parsed.run_command=='fem-mesh-quality') or
+          (parsed.command=='verify' and parsed.verify_command=='fem-mesh-quality')):
+        from .runs.ventricle_mesh_quality import run,verify,RESULT
+        from .result_store import result_path
+        report=run(workspace) if parsed.command=='run' else verify(result_path(workspace,RESULT))
+        exit_code=0 if report['status']=='passed' else 1
     elif parsed.command == "verify" and parsed.verify_command == "long-doublet":
         report = verify_long_doublet(workspace, parsed.result)
         exit_code = 0 if report["status"] == "passed" else 1
