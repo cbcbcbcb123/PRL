@@ -25,7 +25,7 @@ from .workspace import find_workspace
 FEM_RUN_COMMANDS = frozenset({
     "fem-active-ellipse", "fem-synthetic-orientation", "fem-measured-contour",
     "fem-fixed-mesh", "fem-finite-strain", "fem-rotation", "fem-curved-pressure", "fem-contour-pressure",
-    "fem-fenicsx-ring", "fem-fenicsx-contour", "fem-fenicsx-pressure", "fem-fenicsx-fine-ring", "fem-fenicsx-contour-pressure",
+    "fem-fenicsx-ring", "fem-fenicsx-contour", "fem-fenicsx-pressure", "fem-fenicsx-fine-ring", "fem-fenicsx-contour-pressure", "fem-idealized-3d",
 })
 FEM_ONLY_DECISION = "project_control/ventricle_fem_only_measured_contour_decision_v01.md"
 
@@ -395,6 +395,9 @@ def _parser() -> argparse.ArgumentParser:
         contour_mode=contour_pressure.add_mutually_exclusive_group()
         contour_mode.add_argument('--complete-passive',action='store_true',help='only six remaining contour pressures from retained 0.02 states')
         contour_mode.add_argument('--active-at-qualified-pressure',action='store_true',help='only eight active contour states at retained pressure 0.02')
+    for group in [run_commands,verify_commands]:
+        solid=group.add_parser('fem-idealized-3d',help='bounded idealized 3D solid qualification; no growth or flow')
+        solid.add_argument('--workspace',type=Path)
     return parser
 
 
@@ -531,6 +534,13 @@ def main(arguments: Sequence[str] | None = None) -> int:
             report=(verify_contour_active(result_path(workspace,ACTIVE_RESULT)) if parsed.active_at_qualified_pressure else
                 verify_contour_passive(result_path(workspace,PASSIVE_COMPLETION)) if parsed.complete_passive
                 else verify_contour_pressure(result_path(workspace,RESULT)))
+        exit_code=0 if report['status']=='passed' else 1
+    elif ((parsed.command=='run' and parsed.run_command=='fem-idealized-3d') or
+          (parsed.command=='verify' and parsed.verify_command=='fem-idealized-3d')):
+        from .runs.ventricle_3d import run,RESULT
+        from .result_store import result_path
+        from .verification.ventricle_3d import verify
+        report=run(workspace) if parsed.command=='run' else verify(result_path(workspace,RESULT))
         exit_code=0 if report['status']=='passed' else 1
     elif parsed.command == 'run' and parsed.run_command == 'fem-fenicsx-ring':
         from .runs.fenicsx_ring import run_fenicsx_ring, run_active_completion

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "passed": 81,
+  "elapsed_seconds": 2.99,
+  "command": "F:\\python\\python.exe -B -X utf8 -m pytest -q tests/prl/test_ventricle_3d.py tests/prl/test_fenicsx_contour_active.py tests/prl/test_fenicsx_contour_pressure.py tests/prl/test_fenicsx_contour_passive.py tests/prl/test_fenicsx_ring.py",
+  "regression_red": "row-shaped retained pressure payload test failed with IndexError before the minimum interface fix",
+  "scope": "3D synthetic mechanics, actual-shape interface regression, rejection of invalid pressure shapes, nonmutating cutaway, existing 2D FEM protocols",
+  "new_FEM_solves": 0,
+  "native_fix_reexecution": "not_run",
+  "gpu": 0,
+  "figure_validation": "Notebook executed; PNG inspected; style passed; visual QA passed; package marked final",
+  "initial_figure_validation": "not_run: methods omitted the not-applicable marker for biological group colors; corrected the classification before notebook execution, no numerical data changed"
+}

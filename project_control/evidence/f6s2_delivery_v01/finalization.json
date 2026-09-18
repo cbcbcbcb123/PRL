@@ -1,0 +1,60 @@
+{
+  "status": "failed",
+  "evidence_delivery": "passed",
+  "manifest_sha256": "991710ecfb62d72bca971f8254199f119518d8fe199312e1bcea7949645d3e42",
+  "files": 98,
+  "bytes": 10616566,
+  "audit": {
+    "status": "passed",
+    "checks": {
+      "formal_failed_invocation_unchanged": true,
+      "protected_ancestors_and_dirty": true,
+      "inputs_unchanged": true,
+      "source_changes_only_recorded_fix": true,
+      "single_invocation_and_no_retry": true,
+      "first_failure_stopped": true,
+      "raw_state_count_one": true,
+      "runtime_isolation": true,
+      "original_failure_preserved": true,
+      "diagnosis_passed": true,
+      "offline_zero_passed": true,
+      "stage_still_incomplete": true,
+      "tests_passed": true,
+      "notebook_visual_and_style": true,
+      "figure_data_copy": true
+    },
+    "formal_files_unchanged": 53,
+    "protected_parent_files_unchanged": 1719,
+    "preexisting_dirty_files_unchanged": 50,
+    "tests": {
+      "status": "passed",
+      "passed": 81,
+      "elapsed_seconds": 2.99,
+      "command": "F:\\python\\python.exe -B -X utf8 -m pytest -q tests/prl/test_ventricle_3d.py tests/prl/test_fenicsx_contour_active.py tests/prl/test_fenicsx_contour_pressure.py tests/prl/test_fenicsx_contour_passive.py tests/prl/test_fenicsx_ring.py",
+      "regression_red": "row-shaped retained pressure payload test failed with IndexError before the minimum interface fix",
+      "scope": "3D synthetic mechanics, actual-shape interface regression, rejection of invalid pressure shapes, nonmutating cutaway, existing 2D FEM protocols",
+      "new_FEM_solves": 0,
+      "native_fix_reexecution": "not_run",
+      "gpu": 0,
+      "figure_validation": "Notebook executed; PNG inspected; style passed; visual QA passed; package marked final",
+      "initial_figure_validation": "not_run: methods omitted the not-applicable marker for biological group colors; corrected the classification before notebook execution, no numerical data changed"
+    },
+    "repository_bytes": 2037663269,
+    "new_scientific_solves_in_postprocessing": 0,
+    "source_changes": {
+      "src/prl/fem/fenicsx_ventricle.py": {
+        "at_execution": "57d1727d448bfd7fcad4dfae7d78149275ab2b7dffdbab5155c80a87699cb8a2",
+        "after_fix": "b2b4d56c613eb6d33fc684ba99630401ee793be72516145b0b34a2e5f51cc05c"
+      },
+      "src/prl/verification/ventricle_3d.py": {
+        "at_execution": "20cd08c62fed306a9b1be2e40a30c2669146108fe9cb308f933cf5e7b0114ac6",
+        "after_fix": "e7e1d793626cfa28256ad1b5a4d33d2f541460aa1bbc68b72bf2e6a518c82763"
+      },
+      "tests/prl/test_ventricle_3d.py": {
+        "at_execution": "660cc3263b911ab012bee77dc686b71119e7c6447faa455182b72201ab372605",
+        "after_fix": "a79b5071813c5d93f0860872767f314976dfc4ab3388fc78e9a7d63e3ea7ead4"
+      }
+    },
+    "native_and_host_report_difference": "Explicit: native row-layout failure preserved; patched host audit accepts only the retained zero. No assertion of whole-report equality."
+  }
+}

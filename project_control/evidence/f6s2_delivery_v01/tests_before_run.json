@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "passed": 76,
+  "elapsed_seconds": 2.69,
+  "command": "F:\\python\\python.exe -B -X utf8 -m pytest -q tests/prl/test_ventricle_3d.py tests/prl/test_fenicsx_contour_active.py tests/prl/test_fenicsx_contour_pressure.py tests/prl/test_fenicsx_contour_passive.py tests/prl/test_fenicsx_ring.py",
+  "scope": "synthetic 3D algebra/geometry/protocol tests and existing 2D regressions, not scientific equilibria",
+  "initial_test_collection": "not_run: initial command included nonexistent test_fenicsx_runtime.py; no tests or scientific computation ran in that call",
+  "new_equilibria": 0,
+  "gpu": 0
+}
