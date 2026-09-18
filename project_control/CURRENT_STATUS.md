@@ -8,16 +8,16 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 06fc699
-current_lifecycle: fem_only_f6s1s4_observer_failure_patches_written_runtime_not_run
+verified_commit: 1196c7d
+current_lifecycle: fem_only_f6s1s4_v02_first_coarse_ring_pressure_passed
 documentation_updated_at: 2026-09-18
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_ring_resume_contract_v01.md
-last_completed_contract: project_control/ventricle_fem_ring_resume_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/rendering.json
-next_stage_contract: pending_same_runtime_interface_gate_then_single_pressure_resume_v02
-current_authorization: f6s1s4_consumed_one_attempt_failed_no_automatic_retry
+current_contract: project_control/ventricle_fem_ring_resume_contract_v02.md
+last_completed_contract: project_control/ventricle_fem_ring_resume_contract_v02.md
+current_render_contract: ../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/rendering.json
+next_stage_contract: pending_remaining_ring_passive_pressures_and_mesh_qualification
+current_authorization: f6s1s4_v02_consumed_one_accepted_equilibrium_no_automatic_retry
 development_route: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -26,11 +26,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: F6S1S4_consumed_monitor_failed_before_first_newton_update
-current_execution_log: project_control/ventricle_fem_ring_resume_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_ring_resume_execution_v01.md
-latest_completed_scientific_gate: F6-S0_G0_G1_G2_ideal_ring_qualification
-latest_result_package: ../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/summary.json
+execution_authorized: F6S1S4_v02_completed_interface_then_one_original_pressure_equilibrium
+current_execution_log: project_control/ventricle_fem_ring_resume_execution_v02.md
+latest_completed_execution_log: project_control/ventricle_fem_ring_resume_execution_v02.md
+latest_completed_scientific_gate: F6-S1-S4_v02_single_coarse_DG2_ring_pressure_only
+latest_result_package: ../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/summary.json
 latest_supervisor_decision: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,28 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 F6-S1-S4监测接口失败；修复已写入，原环境未复验
+## 当前：2026-09-18 F6-S1-S4 v02首个DG2粗圆环压力平衡通过
+
+同环境真实监测/因子选项12项接口检查passed后，仅从原保存零载续算p/mu=0.02、Ta=0。
+一次21.891秒单CPU容器，FEM求解约0.554秒；3次Newton更新得到1个接受态，0零载重算/自动重跑/GPU。
+实际MUMPS余量100、INFOG=0。材料、边界、网格和1%门不变；21项范围检查及20项末态物理门通过。
+
+腔室面积+4.675918128%，壁局部max|J−1|=0.002628443%，独立自由力残量约1.70e-14。
+相对不可压解析面积响应误差0.0566923%；相对旧CG1同网格面积响应差0.00123356%。
+这些是单个粗圆环被动压力点的数值证据，不是整个DG2粗细收敛或生物学验证。
+全部4个实际Newton状态与独立重算形变/应力/J图保留，1倍位移、无虚构帧；迭代不是生理时间。
+
+63测试+21子测试passed；709父/祖先文件及50项无关改动保持，61个正式调用文件哈希未变。
+本包40,774,544 bytes、117文件（含manifest）；116个清单文件逐项通过，manifest SHA-256为
+`e5caa254680ebe03111d67213d8635ab6cac848540344d228a0b92106103444f`。
+原v01监测失败包及CG1轮廓6.71%/11.15%局部J失败仍冻结保留。本轮不运行原轮廓或主动收缩。
+
+唯一下一步待确认：补完原粗圆环0.04/0.06/0.08和细圆环零载至0.08，最多8个新平衡，
+不重算已接受态、不改材料/1%门、首失败停止。通过后再回原轮廓；三维/FSI/生长未在本轮执行。
+见[本轮执行](ventricle_fem_ring_resume_execution_v02.md)与
+[结构/场量/实际Newton状态及Notebook](../../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/index.html)。
+
+## 历史：2026-09-18 F6-S1-S4监测接口失败；修复已写入，当时原环境未复验
 
 从保留零载态仅尝试圆环p/mu=0.02。一次16.914秒单CPU容器，在第0次监测回调的可写Vec.array访问处失败；
 PETSc只读锁错误73/101来自Codex本轮新增的记录代码，首次Newton更新前终止。0个接受受压态。
