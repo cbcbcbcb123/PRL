@@ -2,14 +2,14 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-18",
   "overall_status": "failed",
-  "summary": "发育路线已采纳：理想化三维+公开morphoHeart，后续自有实验替换。当前DG2压力对照在圆环p=0.02首个线性求解失败；轮廓未运行，局部体积修复未证明。",
+  "summary": "F6-S1-S保存了圆环首个受压初值的P2/DG2切线；结构复核支持严重块尺度差，但MUMPS明细因inf序列化失败未保留，根因仍not_evaluable。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
     "scope": "当前仍为二维固体资格；理想化三维、双向FSI、连续生长与实验验证not_run。",
-    "current_stage": "F6-S1-R pressure-space diagnostic stopped at first nonzero-load linear solve",
-    "current_location": "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918",
-    "evidence_basis_commit": "c52ecb3",
+    "current_stage": "F6-S1-S retained mixed-tangent diagnosis; report serialization failed",
+    "current_location": "../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918",
+    "evidence_basis_commit": "7a2d750",
     "evidence_checked_at": "2026-09-18",
     "git_workflow": {
       "branch": "main",
@@ -27,20 +27,20 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "一次17.002秒容器；保存2态/接受1态，455父文件不变。DG2的J=1是未更新初始迭代，不是修复证据。",
+    "freshness_note": "一次16.327秒诊断容器、0平衡求解/重跑；保存9,216阶CSR。375父文件和76个F6-S1-R文件不变，51测试+21子测试通过。",
     "model_overview": {
-      "model_type": "FEniCSx二维P2位移/CG1原压力；DG2逐单元压力有界对照；三维平面应变NH",
-      "simulated_object": "本轮仅理想圆环M0 896三角形；原72 hpf轮廓未进入新求解",
-      "theory": "mu=1、kappa=1000、原1%门不变。内壁随动压力0→0.02、外壁自由；A固定ux/uy、B固定uy；主动为0。",
-      "current_question": "DG2混合线性系统为何在首个Newton更新前失败？",
+      "model_type": "FEniCSx二维P2位移/DG2逐单元压力，三维平面应变NH；本轮只分析已保存切线",
+      "simulated_object": "理想圆环M0 896三角形在p/mu=0.02失败初值；无新平衡态，原72 hpf轮廓未运行",
+      "theory": "mu=1、kappa=1000、原1%门不变。内壁随动压力0.02、外壁自由；A固定ux/uy、B固定uy；主动为0。",
+      "current_question": "严重块尺度差是否触发MUMPS小主元；当前因错误码未保留而不能确认",
       "pipeline": [
-        "读取旧CG1状态，不重算对照",
-        "同一圆环网格，DG2零载通过",
-        "p=0.02线性求解失败，SNES=-3、更新0次",
-        "失败即停，轮廓及后续载荷not_run"
+        "复用F6-S1-R零载接受态与首个受压失败初值",
+        "组装一次9,216阶P2/DG2切线并保存CSR",
+        "各调用一次MUMPS/SuperLU；严格JSON在非有限MUMPS值处失败",
+        "独立只读复核矩阵；不重跑、不因子化、不生成平衡态"
       ],
-      "diagram": "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/figures/FigS1R_pressure_failure/FigS1R_pressure_failure_v01_20260918/04_FigS1R_pressure_failure_v01_20260918.png",
-      "diagram_caption": "同一结构；应力/J来自明确标注的旧CG1平衡解；新DG2只显示未收敛残量。",
+      "diagram": "../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/figures/FigS1S_linear_system_diagnosis_v02_20260918.png",
+      "diagram_caption": "保存切线的块稀疏结构、行/对角尺度、逐单元压力块谱和失败证据边界；不是形变结果。",
       "assumptions": [
         "材料及参考态未标定",
         "二维平面应变不是自由三维心室",
@@ -48,16 +48,16 @@
         "morphoHeart静态形态不是连续个体心动或生长轨迹"
       ],
       "methods": [
-        "独立NumPy重算力、F/J及应力",
-        "旧CG1体积偏差L2投影分析，不是新平衡计算",
-        "Notebook保留源数据和代码快照",
-        "失败线性求解不能据此诊断体积锁死"
+        "独立SciPy稀疏结构秩、零行列和块范数复核，无全局分解",
+        "逐单元6×6压力块SVD与局部p-u耦合秩统计",
+        "正式调用清单、源结果和父证据逐文件SHA-256复核",
+        "未保留MUMPS错误码时不把尺度假设升级为已确认根因"
       ],
-      "scope_boundary": "数值对照failed；轮廓新求解not_run；局部体积修复unknown；三维/FSI/生长not_run。",
+      "scope_boundary": "原诊断执行/交付failed；保存矩阵复核passed；求解器根因not_evaluable；轮廓/三维/FSI/生长not_run。",
       "evidence_refs": [
-        "project_control/ventricle_fem_pressure_space_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/post_verification.json",
-        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/volume_projection.json",
+        "project_control/ventricle_fem_mixed_linear_diagnosis_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/post_verification.json",
+        "../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/summary.json",
         "project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md"
       ]
     }
@@ -69,9 +69,9 @@
       "summary": "F6-S0原26态保留，不因新压力空间失败改写。"
     },
     {
-      "label": "压力空间有界对照",
+      "label": "DG2矩阵诊断",
       "status": "failed",
-      "summary": "圆环首个非零载线性求解失败，未进入原轮廓。"
+      "summary": "保存矩阵复核通过，但求解器报告因inf序列化失败，根因未确认；未进入原轮廓。"
     },
     {
       "label": "理想化三维+公开资料路线",
@@ -86,24 +86,24 @@
   ],
   "active_work": [
     {
-      "title": "失败保全与独立交付",
-      "status": "passed",
-      "summary": "原始状态、失败码、源快照、投影分析及Notebook图件保全；科学裁决failed。",
+      "title": "F6-S1-S失败保全与矩阵独立复核",
+      "status": "failed",
+      "summary": "原执行/交付failed；9,216阶CSR、源快照、正式调用清单和图件保全，独立结构复核passed但根因not_evaluable。",
       "evidence_refs": [
-        "project_control/ventricle_fem_pressure_space_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/index.html",
-        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/post_verification.json"
+        "project_control/ventricle_fem_mixed_linear_diagnosis_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/index.html",
+        "../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/post_verification.json"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "新DG2受压平衡未得到",
+      "title": "MUMPS/SuperLU明细未持久化",
       "status": "failed",
-      "summary": "SNES=-3，0次Newton更新，残量0.008667；尚缺KSP/MUMPS详细错误，不判断奇异/锁死根因。",
+      "summary": "非有限MUMPS诊断值触发严格JSON失败；确切字段、KSP/PC reason、INFOG和SuperLU结果均未保留，不能确认根因。",
       "evidence_refs": [
-        "project_control/ventricle_fem_pressure_space_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/failure.json"
+        "project_control/ventricle_fem_mixed_linear_diagnosis_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/failure.json"
       ]
     },
     {
@@ -125,14 +125,14 @@
   ],
   "results": [
     {
-      "title": "压力空间对照：圆环线性求解失败",
+      "title": "保存P2/DG2切线：结构完整但尺度差显著",
       "status": "failed",
-      "summary": "结构与旧CG1应力/J保留对照，新DG2无受压平衡解；静态诊断，不制作伪心动动画。",
-      "image": "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/figures/FigS1R_pressure_failure/FigS1R_pressure_failure_v01_20260918/04_FigS1R_pressure_failure_v01_20260918.png",
+      "summary": "满结构秩、0零行列、压力块满秩；uu/pp范数比3.14e7且至少2,688个弱耦合高阶压力模态。根因仍not_evaluable。",
+      "image": "../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/figures/FigS1S_linear_system_diagnosis_v02_20260918.png",
       "evidence_refs": [
-        "project_control/ventricle_fem_pressure_space_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/post_verification.json",
-        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/index.html"
+        "project_control/ventricle_fem_mixed_linear_diagnosis_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/post_verification.json",
+        "../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/index.html"
       ],
       "result_group": "current"
     },
@@ -162,11 +162,11 @@
   ],
   "next_actions": [
     {
-      "title": "混合线性系统最小诊断（新求解待确认）",
+      "title": "同一矩阵的修正报告重放（待确认）",
       "status": "not_run",
-      "summary": "先获取KSP/MUMPS原因、切线矩阵与固定自由度信息；检查有限kappa压力块及消元等价性。保持几何、材料和1%门，不自动重跑。",
+      "summary": "只用已修正的非有限序列化重放一次相同初值诊断，获取KSP/PC/MUMPS/SuperLU明细；不求平衡、不更新状态、不改参数。",
       "evidence_refs": [
-        "project_control/ventricle_fem_pressure_space_execution_v01.md"
+        "project_control/ventricle_fem_mixed_linear_diagnosis_execution_v01.md"
       ]
     }
   ],
@@ -174,9 +174,9 @@
     "仅FEM，无DCM。",
     "理想化三维+公开morphoHeart路线已记录，实现和自有实验验证未完成。",
     "静态、横断面个体资料不能补造成同一个体连续生长。",
-    "两保存态只接受零载；非零载J=1是初始迭代，不是平衡响应。",
+    "本轮保存的是失败初值切线，不是平衡形变；非零载J=1仍不能作为体积修复。",
     "局部J失败不能由总体残量或平均体积替代。",
-    "455父文件不变；单CPU、0GPU/安装/拉取/自动重跑/删除。",
+    "375父文件和76个F6-S1-R源文件不变；单CPU、0GPU/安装/拉取/自动重跑/删除。",
     "结果外置PRL-results；磁盘余量准入及仓库3GiB门保持，旧证据原位保留。",
     "本地main阶段提交，不自动推送。"
   ]

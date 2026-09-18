@@ -18,32 +18,34 @@ updated_at: 2026-09-18
 
 当前仍是二维P2三角形、三维平面应变有限变形NH固体，不是已完成的三维/FSI。
 mu=1、kappa=1000未标定；内壁随动压力、外壁自由，A固定ux/uy、B固定uy去除刚体运动。
-本轮仅将连续线性压力CG1换为逐单元二次压力DG2，保留原几何、材料、加载和1%局部体积门。
+F6-S1-S只诊断F6-S1-R圆环`p/mu=0.02`失败初值的P2/DG2切线，不改变几何、材料、加载或1%局部体积门。
 
-F6-S1-R一次17.002秒单CPU调用：896单元圆环零载通过；p/mu=0.02在首个线性求解失败，
-SNES=-3，Newton更新0次，残量0.008667。保存2态，只接受1态；原轮廓新求解not_run。
-失败初值J=1不代表体积误差修复，也不能据此认定体积锁死。没有自动重跑。
+唯一一次16.327秒单CPU容器完成1次矩阵组装以及各1次MUMPS/SuperLU尝试，但在写报告时，
+MUMPS报告中的非有限值`inf`被严格JSON拒绝。原执行与诊断交付均failed；没有自动重跑、非线性平衡求解或新状态。
+独立事后复核passed：9,216阶矩阵有限、无零行/列、满结构秩，896个单元压力块均满秩。
+`uu/pp`块范数比约3.14e7，至少2,688个高阶压力模态只受很小的压力块约束，支持尺度/小主元风险；
+但KSP、PC、MUMPS INFOG和SuperLU结论未保留，所以求解器根因仍为not_evaluable。
 
-![圆环结构、旧CG1对照和DG2失败诊断](../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/figures/FigS1R_pressure_failure/FigS1R_pressure_failure_v01_20260918/04_FigS1R_pressure_failure_v01_20260918.png)
+![P2/DG2混合切线结构、尺度和证据边界](../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/figures/FigS1S_linear_system_diagnosis_v02_20260918.png)
 
-[可复算图件与Notebook](../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/index.html) ·
-[执行记录](project_control/ventricle_fem_pressure_space_execution_v01.md)
+[矩阵证据与结果页](../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/index.html) ·
+[执行记录](project_control/ventricle_fem_mixed_linear_diagnosis_execution_v01.md)
 
 ## 核心难点与唯一下一步
 
-旧轮廓CG1粗/细网格max|J−1|为6.71%/11.15%，原1%门仍failed。
-只读投影显示，其体积偏差平方L2范数约99.92%/99.75%位于CG1压力空间不能直接约束的分量；
-这不是超限组织体积分数，也不能单凭此排除边界几何影响。
+旧轮廓CG1粗/细网格max|J−1|为6.71%/11.15%，原1%门仍failed；本轮没有运行轮廓。
+当前已经排除结构零行、结构秩亏和单元压力质量块奇异，但没有恢复MUMPS实际错误码，不能把尺度假设写成已确认根因。
 
-下一步先诊断DG2混合线性系统：获取KSP/MUMPS详细原因、检查切线矩阵、固定自由度和压力块。
-本次失败授权已经用完；新求解须明确确认，不改材料或门限，不继续加压或加入主动。
+唯一下一步待确认：用已修复的非有限值序列化，仅重放同一个保留初值的矩阵诊断一次，
+获取KSP/PC/MUMPS/SuperLU明细；仍不求平衡、不更新状态、不改材料或门限。之后才裁决块缩放或局部静态消元。
 三维/FSI/生长仍not_run；数值测试通过不等于生物学验证。
 
 ## 存储与历史
 
 新结果在已批准的 `E:\Temp-Projects\PRL-results`，不进GitHub；旧证据不搬移、不删除。
 按预计输出＋至少64MiB停止空间＋10GiB磁盘余量准入；代码仓3GiB硬限保持。
-455父文件哈希保持；0 GPU/安装/拉取/删除。阶段直接本地提交main，不自动推送。
+375个父文件和76个F6-S1-R源结果文件哈希保持；51项测试和21项子测试通过；0 GPU/安装/拉取/删除。
+阶段直接本地提交main，不自动推送。
 
 - [F6-S0理想圆环26态](results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html)：已通过的旧CG1基准保留。
 - [F6-S1-Q粗细网格局部J失败](../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/index.html)：只有外轮廓来自72hpf Fish4，内腔及三层界面仍为构造。
