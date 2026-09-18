@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "date": "2026-09-18",
+  "scientific_code_commit": "4927e5f8a93e419d11e28932c6b936fec82515a8",
+  "cockpit_render": "passed",
+  "html_links": 31,
+  "evidence_paths": 359,
+  "missing": [],
+  "current_scientific_status": "failed",
+  "current_delivery_status": "passed",
+  "next_stage_authorized": false,
+  "remote_push": "not_run"
+}

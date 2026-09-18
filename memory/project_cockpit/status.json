@@ -2,14 +2,14 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-18",
   "overall_status": "unknown",
-  "summary": "原外轮廓P2/DG2两网格零载/首压力4态通过：局部J偏差0.3234%/0.3581%，低于原1%门。完整压力序列/主动/三维/FSI/生长尚未完成；下一步仅补原两网格余下6个被动态待确认。",
+  "summary": "粗网格0.04/0.06压力通过，0.08局部J偏差1.1737%超过原1%门后停止；细网格后续未运行。完整被动资格failed，失败保全/图件交付passed。建议在已通过两网格的0.02基线上研究主动收缩，路线调整待确认。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
     "scope": "当前仍为二维固体资格；理想化三维、双向FSI、连续生长与实验验证not_run。",
-    "current_stage": "F6-S1-S7 original-contour two-mesh zero/first-pressure qualification passed",
-    "current_location": "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918",
-    "evidence_basis_commit": "cd90e60",
+    "current_stage": "F6-S1-S8 passive continuation failed at M0 p/mu=0.08; controlled stop and delivery passed",
+    "current_location": "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918",
+    "evidence_basis_commit": "4927e5f",
     "evidence_checked_at": "2026-09-18",
     "git_workflow": {
       "branch": "main",
@@ -27,20 +27,20 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "一次122.067秒容器、4态全部接受、24个Newton向量；40独立范围门及110测试+21子测试通过。1194父文件/102调用文件/50项无关修改保持；交付有限差分舍入比较已修复，0科学重跑。",
+    "freshness_note": "一次57.462秒、3个新态/2接受/1失败，17个Newton向量；4旧态复用、0重跑。1358父文件/94调用文件/50无关修改保持，132测试+21子测试与图件验收通过；本地main未推送。",
     "model_overview": {
-      "model_type": "FEniCSx二维P2/DG2平面应变有限变形NH；原图像外轮廓两网格零载和p/mu=0.02，Ta=0",
-      "simulated_object": "M0 3541 / M1 14164三角形，直接加载原保存网格；只有72 hpf Fish 4外边界来自图像，内腔/三层为构造",
-      "theory": "mu=1、kappa=1000未标定，三层被动材料相同；内壁随动压力、外壁自由，A固定ux/uy、B固定uy；原1%局部J门保持。",
-      "current_question": "首压力已过关；同一非圆形几何能否继续通过原0.04/0.06/0.08被动压力序列，然后进入心肌主动收缩？",
+      "model_type": "FEniCSx二维P2/DG2平面应变有限变形NH；原外轮廓被动加载，Ta=0",
+      "simulated_object": "原3541/14164三角形；M0续算0.04/0.06/0.08，M1后续未启动；仅72hpf Fish4外边界来自图像",
+      "theory": "mu=1、kappa=1000未标定，构造三层同被动材料；内壁随动压力、外壁自由，A固定ux/uy、B固定uy。原1%局部J门保持。",
+      "current_question": "高压已暴露局部超限；是否保留该适用边界，改在两网格已通过的0.02载荷范围内研究主动缩腔？",
       "pipeline": [
-        "原两网格DG2圆环资格只读复用，不重算圆环或原生微测",
-        "保持原轮廓网格、材料、规范固定点与压力；只改变旧CG1的局部压力表示",
-        "粗细零载和首压力全部通过；24个真实Newton向量独立重算，旧失败不改写",
-        "结构/场量/4态图从物理复制u/p生成；交付比较的单字段舍入差已单独核验"
+        "原两网格零载/0.02只读复用，严格核对混合自由度编号；无网格重建。",
+        "M0的0.04/0.06通过；0.08虽力平衡收敛但局部体积超原门。",
+        "首失败后停止，M1的0.04/0.06/0.08均not_run；不调材料或放宽门。",
+        "五个真实M0压力态与局部场独立重算；生理时间/主动/三维/FSI/生长未运行。"
       ],
-      "diagram": "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/figures/FigS1S7_qualification/FigS1S7_qualification_v01_20260918/04_FigS1S7_qualification_v01_20260918.png",
-      "diagram_caption": "实际参考三层、压力/固定点、1倍受压形变应力、局部J及旧CG1失败对照。只有首压力两级数值资格，不是实验验证。",
+      "diagram": "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/figures/FigS1S8_passive_overview/FigS1S8_passive_overview_v01_20260918/04_FigS1S8_passive_overview_v01_20260918.png",
+      "diagram_caption": "实际三层结构、0.08失败态应力与局部J、保存态面积响应；1倍形变。旧0/0.02复用，M1后续点未补造。",
       "assumptions": [
         "材料、压力和无应力参考态未标定",
         "内腔与三层界面为构造，当前三层同被动材料",
@@ -48,76 +48,88 @@
         "静态公开morphoHeart不是同一个体的连续心动/生长轨迹"
       ],
       "methods": [
-        "粗/细腔面积扩张20.056188%/20.105502%；局部max|J−1|=0.323434%/0.358062%",
-        "旧CG1粗/细6.71167%/11.15248%仍failed；不能用面积一致替代局部体积门",
-        "粗细响应差0.0493142个百分点、相对差0.245277%；原0.002/5%门通过",
-        "2个网格各2个真实载荷态，统一应力色标、1倍形变；载荷和Newton迭代均非生理时间"
+        "M0腔面积扩张：0.04为32.8079%，0.06为48.0560%，0.08为68.2662%。",
+        "M0局部max|J−1|：0.587402%、0.920140%、1.173743%；最后一态failed。",
+        "0.08独立自由力约4.281e-14、点态体积约束约2.487e-13；并非Newton或MUMPS不收敛。",
+        "1/3541单元、2个积分点超限，靠近构造心肌域外轮廓凹口；因果和网格依赖尚未区分。"
       ],
-      "scope_boundary": "首压力两级passed；完整轮廓被动压力序列/多级渐近/热点收敛未完成。主动、三维、FSI、生长、生物学验证本轮not_run。附加边界采样未见自交，但不是精确全局单射证明。",
+      "scope_boundary": "完整高压被动序列failed；只有0.02具两网格资格，不能把M0的0.04/0.06通过视为粗细资格。采样边界无自交不是全局证明；无生物学标定。",
       "evidence_refs": [
-        "project_control/ventricle_fem_contour_dg2_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/post_verification.json",
-        "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/summary.json",
-        "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/boundary_screen.json",
-        "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/cross_platform_agreement.json",
+        "project_control/ventricle_fem_contour_passive_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/post_verification.json",
+        "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/boundary_observations.json",
+        "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/failure.json",
+        "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/summary.json",
         "project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md"
       ]
     }
   },
   "roadmap": [
     {
-      "label": "DG2理想圆环两网格被动资格",
+      "label": "两网格DG2圆环被动资格",
       "status": "passed",
-      "summary": "原五个压力级已完成，解析参照与局部J门通过；本轮只读复用。"
+      "summary": "原五个压力级全部通过；只读复用，不再重算。"
     },
     {
-      "label": "原外轮廓零载/首压力两网格",
+      "label": "原轮廓两网格首压力",
       "status": "passed",
-      "summary": "4态全部接受，局部J 0.3234%/0.3581%<1%；旧CG1失败保留。"
+      "summary": "0/0.02已通过，局部J 0.3234%/0.3581%；构造内腔和三层。"
     },
     {
-      "label": "原轮廓完整被动→主动收缩",
-      "status": "not_run",
-      "summary": "下一步拟仅补两网格0.04/0.06/0.08，最多6态，待确认；之后再裁决主动。"
+      "label": "原轮廓高压被动序列",
+      "status": "failed",
+      "summary": "M0 0.04/0.06通过，0.08局部J 1.1737%失败即停；M1后续未运行。"
     },
     {
-      "label": "三维→双向FSI→生长→ECM",
+      "label": "主动→三维→FSI/生长/ECM",
       "status": "not_run",
-      "summary": "理想化三维+公开资料路线已采纳，后续以自有实验替换；不把当前二维数值门当实验通过。"
+      "summary": "建议从已通过0.02基线做主动；改变完整高压先行顺序需确认。"
     }
   ],
   "active_work": [
     {
-      "title": "原轮廓两网格首压力与图件交付",
+      "title": "本轮受控停止与可复算交付",
       "status": "passed",
-      "summary": "40独立门、110测试+21子测试通过；4态/24Newton向量真实保留。两套Notebook/600dpi PNG/SVG验收；本地main提交，未推送。",
+      "summary": "科学资格failed保持；7保存态（4复用、3新）、17新Newton向量完整，132测试+21子测试通过，单CPU/0GPU/0重跑。",
       "evidence_refs": [
-        "project_control/ventricle_fem_contour_dg2_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/index.html",
-        "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/delivery_audit.json"
+        "project_control/ventricle_fem_contour_passive_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/index.html",
+        "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/delivery_audit.json"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "完整轮廓被动资格和热点收敛尚未建立",
-      "status": "not_run",
-      "summary": "目前仅首压力；细网格J峰值仍略高于粗网格。不得据此宣称所有压力或局部热点收敛。",
+      "title": "高压局部体积超限，后续粗细资格未完成",
+      "status": "failed",
+      "summary": "不是平均体积失控：峰值1.1737%，平均J约1.000152；不能忽略最坏点。几何凹口/网格依赖/有限bulk贡献尚未区分。",
       "evidence_refs": [
-        "project_control/ventricle_fem_contour_dg2_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/post_verification.json"
+        "project_control/ventricle_fem_contour_passive_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/boundary_observations.json"
       ]
     },
     {
-      "title": "实验标定与三维心动尚未完成",
+      "title": "实验与三维生理边界仍缺",
       "status": "not_run",
-      "summary": "材料/压力/参考态和内腔层界未由自有实验标定；当前没有真实生理时间或三维FSI/生长。",
+      "summary": "材料、压力和参考态未标定；仅外轮廓实测。当前二维载荷延拓不是三维心动或实验吻合。",
       "evidence_refs": [
         "project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md"
       ]
     }
   ],
   "results": [
+    {
+      "title": "五个真实压力态：0.08失败如实保留",
+      "status": "failed",
+      "summary": "M0从0到0.08实际1倍形变、统一应力色标；最后态1.1737%超原1%门。M1只保留已接受0/0.02，不伪造后续。",
+      "image": "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/figures/FigS1S8_passive_states/FigS1S8_passive_states_v01_20260918/04_FigS1S8_passive_states_v01_20260918.png",
+      "evidence_refs": [
+        "project_control/ventricle_fem_contour_passive_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/index.html",
+        "../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/post_verification.json"
+      ],
+      "result_group": "current"
+    },
     {
       "title": "原轮廓首压力资格：结构、应力与原局部体积门",
       "status": "passed",
@@ -128,61 +140,29 @@
         "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/post_verification.json",
         "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/index.html"
       ],
-      "result_group": "current"
-    },
-    {
-      "title": "两个网格、四个真实保存状态",
-      "status": "passed",
-      "summary": "各零载和p/mu=0.02，统一等效应力色标、1倍形变。细网格腔面积+20.1055%；不是心动时刻或实验拟合。",
-      "image": "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/figures/FigS1S7_pressure_states/FigS1S7_pressure_states_v01_20260918/04_FigS1S7_pressure_states_v01_20260918.png",
-      "evidence_refs": [
-        "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/rendering.json",
-        "../PRL-results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918/index.html"
-      ],
-      "result_group": "current"
-    },
-    {
-      "title": "粗细局部J与细网格结构/应力",
-      "status": "failed",
-      "summary": "腔面积只差0.01387个百分点，不能替代1%局部体积门。外部图件仅在本地可用，不上传GitHub。",
-      "image": "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/figures/FigS1Q_fine_diagnostic/FigS1Q_fine_diagnostic_v01_20260917/04_FigS1Q_fine_diagnostic_v01_20260917.png",
-      "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/verification.json",
-        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/index.html"
-      ],
-      "result_group": "historical"
-    },
-    {
-      "title": "保留：F6-S0理想圆环四工况",
-      "status": "passed",
-      "summary": "仅压力+9.8974%、仅主动−4.3150%、组合+4.5566%；主动抵消5.3408个百分点的压力扩张。",
-      "image": "results/ventricle_fem/f6s0_active_completion_v01_20260917/figures/four_conditions.png",
-      "evidence_refs": [
-        "results/ventricle_fem/f6s0_active_completion_v01_20260917/post_verification.json",
-        "project_control/ventricle_fem_fenicsx_active_completion_execution_v01.md"
-      ],
       "result_group": "historical"
     }
   ],
   "next_actions": [
     {
-      "title": "补齐原轮廓余下被动压力级（待确认）",
+      "title": "已通过0.02基线上的主动收缩（待明确确认）",
       "status": "not_run",
-      "summary": "复用M0/M1已接受0.02态，仅补0.04/0.06/0.08，最多6新态；同几何/材料/P2-DG2/1%门，单CPU/0GPU，首失败即停。零载/0.02和圆环不重算；不夹带主动/三维/FSI。",
+      "summary": "建议保留0.08失败、暂停追高压，在两网格已通过的0.02基线上做有界心肌张力递增。此为改变完整高压先行顺序，未自动授权；原物理/1%门及首失败停止不变。",
       "evidence_refs": [
-        "project_control/ventricle_fem_contour_dg2_execution_v01.md"
+        "project_control/ventricle_fem_contour_passive_execution_v01.md"
       ]
     }
   ],
   "evidence_boundaries": [
-    "仅FEM，无DCM；当前二维固体资格，不等于已完成三维/FSI/生长。",
-    "本轮只通过原外轮廓两网格零载/首压力，完整被动序列、多级渐近和热点收敛未完成。",
-    "只有外轮廓来自图像，内腔/三层界面构造；三层同被动材料，未做生物学标定。",
-    "腔面积变化不是壁体积变化，位移模长不是应变；载荷延拓不是心动时间。",
-    "4态与24个Newton向量真实保存；没有插值假帧；旧CG1失败原样保持。",
-    "1194父/祖先、102调用文件和50项无关修改保持；0GPU/网格生成/圆环重算/自动重跑/删除。",
-    "交付层仅对唯一有限差分虚功显示量使用机器精度缩放比较余量；所有物理门和分类精确不变，原failed比较与红绿测试保留。",
-    "外置结果约176.1MiB不进GitHub；磁盘余量/仓库3GiB门保持；本地main阶段提交，不自动推送。"
+    "仅FEM，无DCM前向；当前仍二维固体资格，不等于三维/FSI/生长或实验验证。",
+    "完整原轮廓被动资格failed；M0中间压力通过，M1后续未运行；只有0.02为两网格通过。",
+    "只有外轮廓来自图像，内腔和层界为构造，三层同被动材料且未标定。",
+    "腔面积扩张不等于壁体积改变；压力延拓和Newton迭代都不是心动时间。",
+    "三新态/二接受/一失败，四旧态只读复用；17新Newton向量，无插值假帧或自动重跑。",
+    "失败局限于1单元2积分点仍不能豁免1%门；未证明应力热点收敛或因果机制。",
+    "1358父/祖先、94调用文件、50项无关修改保持；0GPU/网格重建/圆环重算/安装/拉取/删除。",
+    "交付有限差分舍入界只传播到由其计算的误差显示量，并核验代数一致；物理门和failed判定不变，原失败比较保留。",
+    "外置结果约110MiB不进GitHub；仓库3GiB及磁盘余量门保持；本地main阶段提交，不自动推送。",
+    "下一步主动提议须用户确认路线调整，当前无剩余可继续执行的科学授权。"
   ]
 }
