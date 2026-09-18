@@ -2,14 +2,14 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-18",
   "overall_status": "failed",
-  "summary": "三维半椭球三层固体已建立；首个无载求解完成后，独立读取遇数组布局错误而停止。接口离线修复和原无载复核通过，压力/收缩余13态尚未运行，不自动重跑。",
+  "summary": "三维续算原生接口通过；首压力平衡收敛，但局部体积偏差1.5227%超过1%门，首失败停。96个超限单元均与固定基底相接；剩余12态、收缩/生长/FSI未运行。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
-    "scope": "当前理想化三维固体，仅粗网格无载；加载资格、FSI、生长和生物学验证未完成。",
-    "current_stage": "F6-S2 idealized 3D: first interface failure retained; zero audited offline",
-    "current_location": "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918",
-    "evidence_basis_commit": "dd06d0c",
+    "scope": "理想化三维固体；原无载复用、首压力已求解但局部体积门失败。无生长/FSI或生物学验证。",
+    "current_stage": "F6-S2-R native restart passed; first pressure rejected by local volume gate",
+    "current_location": "../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918",
+    "evidence_basis_commit": "39d9b0b",
     "evidence_checked_at": "2026-09-18",
     "git_workflow": {
       "branch": "main",
@@ -27,36 +27,36 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "一次26.462秒；1无载态，0Newton更新，0重跑。81测试和图件交付通过；1719父文件/53调用文件/50无关修改保持。本地main未推送。",
+    "freshness_note": "一次31.453秒；原无载复用，新压力态3次Newton，0接受/0重跑。87测试及图件通过；1817父文件/71调用文件/50无关修改保持。本地main未推送。",
     "model_overview": {
       "model_type": "FEniCSx三维有限变形NH，P2位移/P1压力四面体",
-      "simulated_object": "理想化半椭球三层壳；1344/3960四面体输入，只有粗网格无载已求解",
-      "theory": "同mu=1、kappa=1000未标定；基底环全固定，外壁自由。计划内压与仅心肌层切平面等权分散张力。无载状态当前p=Ta=0。",
-      "current_question": "修正DOF映射布局后，三维压力/主动/组合加载能否满足原1%局部体积及独立力学门？尚未运行。",
+      "simulated_object": "理想化半椭球三层壳；1344/3960四面体输入，M0首压力平衡已求解但未通过局部质量门",
+      "theory": "同mu=1、kappa=1000未标定；基底环全固定、外壁自由，内腔随动压力p/mu=0.01。Ta=0；心肌分散主动张力尚未运行。",
+      "current_question": "基底邻近局部体积失真与网格/夹持/压力空间分别有何关系？先需同载M1对照，不能放宽1%门。",
       "pipeline": [
-        "确定性三维分层网格及内外/基底面检查passed。",
-        "粗网格无载0Newton后，独立读取遇压力(1,325)形状错误，首失败停止。",
-        "实际数组回放、最小接口修正与81测试passed；原无载u=0/J=1离线通过。",
-        "真实结构及唯一无载结果图交付；余13态不补造，不自动重跑。"
+        "原M0无载精确复用、原生接口passed，没有再次求解无载。",
+        "p=0.01首压力3次Newton达到平衡，MUMPS及独立场量重算passed。",
+        "max abs(J-1)=1.5227%超过1%门，首失败停；96个超限单元均与基底相接。",
+        "真实结构/压力应力/J/响应图与87测试通过，余12态未运行。"
       ],
-      "diagram": "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/figures/FigS2_3d_start/FigS2_3d_start_v01_20260918/04_FigS2_3d_start_v01_20260918.png",
-      "diagram_caption": "显示剖开三层壳和基底约束、真实无载J场及几何误差；不是加载结果。",
+      "diagram": "../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/figures/FigS2R_3d_overview/FigS2R_3d_overview_v01_20260918/04_FigS2R_3d_overview_v01_20260918.png",
+      "diagram_caption": "三层结构、失败压力态真实1倍应力/J场、腔体积响应；红叉为未接受状态。",
       "assumptions": [
         "半椭球/层界/材料未标定，尚非morphoHeart拟合形态",
         "三层同被动材料；主动切平面分散是假设，不是实测螺旋纤维",
-        "基底固定、外壁自由；腔压力及主动张力仍未实际加载",
+        "基底固定、外壁自由；已加载首腔压力，主动张力尚未运行",
         "加载级不是心动时间，无生长/血流"
       ],
       "methods": [
-        "几何1344/3960单元通过，腔体积近似误差6.2594%/2.8227%是几何指标。",
-        "原无载SNES残差1.2368e-16；离线26项状态检查通过，压力/主动门尚未测试。",
-        "原失败/native复核保持，接口修正有前后代码SHA和真实载荷回放。"
+        "几何1344/3960单元通过；细网格平衡未运行，不能声称三维网格收敛。",
+        "首压力腔体积+1.0895%、最大位移0.004042L；仅local_volume状态检查失败。",
+        "原生/独立残差约1e-16；弱压力残差约1.8e-18不能替代逐点门。"
       ],
-      "scope_boundary": "本阶段failed；离线无载复核passed不替代加载或原生修正验证。两网格输入不等于力学收敛。",
+      "scope_boundary": "本阶段failed；数值平衡passed不等于局部体积质量合格。无收缩、网格响应、生长或FSI资格。",
       "evidence_refs": [
-        "project_control/ventricle_fem_idealized_3d_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/summary.json",
-        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/interface_diagnosis.json",
+        "project_control/ventricle_fem_idealized_3d_resume_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/summary.json",
+        "../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/offline_diagnosis.json",
         "project_control/ventricle_3d_before_growth_decision_v01.md"
       ]
     }
@@ -68,14 +68,14 @@
       "summary": "历史两网格8态通过，缩腔约1.85%，保持不变。"
     },
     {
-      "label": "三维几何与无载复核",
+      "label": "三维几何与原生接口",
       "status": "passed",
-      "summary": "三层半椭球建立；原M0无载经修正读取离线通过。"
+      "summary": "三层半椭球建立；原M0无载精确复用，修正后的原生接口通过。"
     },
     {
       "label": "三维加载资格",
       "status": "failed",
-      "summary": "原接口错误导致停止；压力/主动/细网格余13态not_run。"
+      "summary": "首压力局部体积1.5227%超过1%门；剩余12态not_run。"
     },
     {
       "label": "生长→FSI→反馈/ECM",
@@ -85,36 +85,36 @@
   ],
   "active_work": [
     {
-      "title": "接口修正与失败交付",
+      "title": "续算停止与局部失真定位交付",
       "status": "passed",
-      "summary": "实际数组回放、81测试及真实结构/无载Notebook通过；未重跑科学计算。",
+      "summary": "主机/容器复核一致；96个超限单元均与基底相接。87测试及真实结构/压力Notebook通过。",
       "evidence_refs": [
-        "project_control/ventricle_fem_idealized_3d_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/delivery_audit.json"
+        "project_control/ventricle_fem_idealized_3d_resume_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/delivery_audit.json"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "三维加载资格仍未完成",
+      "title": "基底邻近局部体积失真",
       "status": "failed",
-      "summary": "已修正布局接口但未原生复验；不能把零载J=1视为压力或收缩验证。",
+      "summary": "平衡与场量重算均通过，但局部体积门失败；网格、夹持与压力空间贡献尚未分离。",
       "evidence_refs": [
-        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/failure.json",
-        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/interface_diagnosis.json"
+        "../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/failure.json",
+        "../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/offline_diagnosis.json"
       ]
     }
   ],
   "results": [
     {
-      "title": "三维结构与唯一真实无载态",
-      "status": "passed",
-      "summary": "无载u=0、J=1；原运行因接口failed。图件明确标注压力/收缩not_run，未伪造多帧。",
-      "image": "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/figures/FigS2_3d_start/FigS2_3d_start_v01_20260918/04_FigS2_3d_start_v01_20260918.png",
+      "title": "三维首压力：平衡收敛但局部门失败",
+      "status": "failed",
+      "summary": "腔体积+1.0895%，局部体积最大1.5227%；真实应力/形变/J图。图件交付passed，不代表状态接受。",
+      "image": "../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/figures/FigS2R_3d_overview/FigS2R_3d_overview_v01_20260918/04_FigS2R_3d_overview_v01_20260918.png",
       "evidence_refs": [
-        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/index.html",
-        "../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/post_verification.json",
-        "project_control/ventricle_fem_idealized_3d_execution_v01.md"
+        "../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/index.html",
+        "../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/post_verification.json",
+        "project_control/ventricle_fem_idealized_3d_resume_execution_v01.md"
       ],
       "result_group": "current"
     },
@@ -133,20 +133,20 @@
   ],
   "next_actions": [
     {
-      "title": "确认后有界续算原定余13态",
+      "title": "待确认：M1零载与同p=0.01对照",
       "status": "not_run",
-      "summary": "复用原M0无载，先核对修正接口和精确DOF映射，再依序压力/主动/组合及M1；仍首失败停止，不加生长/FSI。",
+      "summary": "仅两个新态与保留M0失败比较；不改材料/边界/离散/1%门，首失败停，不进主动/生长/FSI。",
       "evidence_refs": [
-        "project_control/ventricle_fem_idealized_3d_execution_v01.md"
+        "project_control/ventricle_fem_idealized_3d_resume_execution_v01.md"
       ]
     }
   ],
   "evidence_boundaries": [
     "FEM唯一主线；本轮是理想化真三维固体，不是二维挤出或实验心室。",
-    "只实际求解M0无载，零Newton；剩余13态not_run，原阶段failed。",
-    "原数组未改，接口修正后的离线无载复核passed；原生生产端修正复验not_run。",
-    "1719父文件、53调用文件、50无关修改保持；无GPU、自动重跑、安装、拉取或删除。",
-    "外置结果约10.1MiB不进GitHub；代码仓3GiB和磁盘余量门保持。",
-    "本地main阶段提交未推送；后续有界续算需确认。"
+    "原无载精确复用，新首压力平衡收敛但局部质量failed；剩余12态not_run。",
+    "原生接口passed；原F6-S2历史失败不改写；M1平衡与3D主动资格仍未取得。",
+    "1817父文件、71调用文件、50无关修改保持；无GPU、自动重跑、安装、拉取或删除。",
+    "外置结果约16.94MiB不进GitHub；代码仓3GiB和磁盘余量门保持。",
+    "本地main阶段提交未推送；下一步同载M1诊断需确认。"
   ]
 }

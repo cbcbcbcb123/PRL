@@ -8,16 +8,16 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: dd06d0c
-current_lifecycle: fem_only_f6s2_idealized_3d_zero_interface_failed_offline_fix
+verified_commit: 39d9b0b
+current_lifecycle: fem_only_f6s2r_3d_first_pressure_local_volume_failed
 documentation_updated_at: 2026-09-18
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_idealized_3d_contract_v01.md
+current_contract: project_control/ventricle_fem_idealized_3d_resume_contract_v01.md
 last_completed_contract: project_control/ventricle_fem_contour_active_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/rendering.json
-next_stage_contract: pending_confirmation_bounded_3d_resume_13_states
-current_authorization: f6s2_first_failure_stopped_no_automatic_rerun
+current_render_contract: ../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/rendering.json
+next_stage_contract: pending_confirmation_M1_zero_and_pressure_001_only
+current_authorization: f6s2r_first_failure_stopped_no_automatic_rerun
 development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -26,11 +26,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: none_remaining_after_F6S2_first_failure
-current_execution_log: project_control/ventricle_fem_idealized_3d_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_idealized_3d_execution_v01.md
+execution_authorized: none_remaining_after_F6S2R_first_failure
+current_execution_log: project_control/ventricle_fem_idealized_3d_resume_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_idealized_3d_resume_execution_v01.md
 latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
-latest_result_package: ../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/summary.json
+latest_result_package: ../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/summary.json
 latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,28 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 F6-S2三维结构建成，首接口失败后停止
+## 当前：2026-09-18 F6-S2-R原生接口通过，三维首压力局部体积门失败
+
+原M0无载逐项身份/原生接口门passed，不重新求解无载；材料、几何、边界、力学公式及门限不变。
+一次31.453212秒单CPU/0GPU/0重跑，新增M0 p=0.01、Ta=0一个状态。
+3次Newton达到平衡，MUMPS passed，残差1.69e-16；腔体积扩大1.089525%、最大位移0.004042L。
+局部max abs(J-1)=1.522743%超过原1%，积分点本身也为1.314813%；首失败停止。
+新态接受0，原无载复用1；后续12态、主动、M1平衡、生长、FSI及生物学验证not_run。
+
+只读定位：96个超限单元全部与固定基底相接，非相邻单元最大0.529615%。
+弱压力残差1.81e-18不能替代逐点体积门；网格、夹持和连续P1压力空间的贡献未分离。
+87测试、主机/容器复核一致、真实结构/应力/J/响应图及Notebook验收passed，不改failed科学裁决。
+
+[结果图及证据](../../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/index.html) ·
+[执行与定位](ventricle_fem_idealized_3d_resume_execution_v01.md)。
+123文件17,765,106 bytes，manifest122项，SHA-256：
+cb846ad96711d6706a7a9b2912ddf9100a65c2a3645e9dd7f7af14c0eafd455c。
+1817父文件、71调用文件、50项无关修改保持；原F6-S2 failed不改写。
+
+唯一下一步待确认：已有M1仅零载及同p=0.01两个状态，对照保留M0失败；
+不改材料/边界/离散/1%门、不进入主动/生长/FSI，首失败停。通过也只代表有界离散诊断。
+
+## 历史：2026-09-18 F6-S2三维结构建成，首接口失败后停止
 
 半椭球三层壳、三维P2/P1四面体；M0/M1几何1344/3960单元通过预定几何门。
 基底环固定、外壁自由；计划内腔随动压力及心肌切平面分散张力，几何/材料未标定。

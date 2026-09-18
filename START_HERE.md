@@ -16,33 +16,34 @@ updated_at: 2026-09-18
 ## 当前模型与结果
 
 真正三维半椭球壳，构造心内膜/ECM/心肌三域；P2位移/P1压力四面体。
-基底环全固定、外壁自由；计划内壁随动压力与心肌切平面分散主动张力。
+基底环全固定、外壁自由；内壁随动压力，心肌切平面分散主动张力尚未运行。
 mu=1、kappa=1000、几何及纤维分布均未标定。不是二维挤出，也不是实验心室。
 
-**F6-S2：三维结构已建成，但运行在无载复核接口处failed。**
-粗/细网格1344/3960单元，输入几何门passed；目前仅粗网格无载态实际求解。
-无载自由残差1.24e-16、0次Newton更新，随后压力数组多一维导致IndexError，按约定停止。
-离线最小回放定位并修正读取，原数组复核u=0、J=1、26项状态检查passed。
-原失败不改写；修正后的原生适配器、压力/收缩/细网格平衡仍not_run。
+**F6-S2-R：原生接口已通过，首个三维压力态因局部体积门failed而停止。**
+粗/细输入1344/3960单元，复用原M0无载，不重算。p/mu=0.01、Ta=0经3次Newton平衡，残差1.69e-16。
+腔体积扩大1.0895%，但局部max abs(J-1)=1.5227%，超过原1%门；此态不接受。
+96个超限单元全部与固定基底相接，非相邻单元最大0.5296%。不是接口或线性求解失败。
+原失败保留；后续12态、收缩、细网格平衡、生长及FSI均not_run。
 
-![三维结构与唯一真实无载结果](../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/figures/FigS2_3d_start/FigS2_3d_start_v01_20260918/04_FigS2_3d_start_v01_20260918.png)
+![三维结构、首压力应力与局部体积失败](../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/figures/FigS2R_3d_overview/FigS2R_3d_overview_v01_20260918/04_FigS2R_3d_overview_v01_20260918.png)
 
-[结构图、Notebook和原失败](../PRL-results/ventricle_fem/f6s2_idealized_3d_v01_20260918/index.html) ·
-[执行与接口修正边界](project_control/ventricle_fem_idealized_3d_execution_v01.md)
+[结构图、Notebook和失败定位](../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/index.html) ·
+[本次执行及边界](project_control/ventricle_fem_idealized_3d_resume_execution_v01.md)
 
-只有1个真实无载态，不补造5帧。图为显示剖开与实际1倍坐标，不是生理时间。
-一次26.462秒、单CPU/0GPU/0重跑；81测试及图件交付passed，不等于加载资格通过。
+只展示原无载与首压力实存状态，另保存4个Newton状态；不补造5个平衡态或生理时间。
+一次31.453秒、单CPU/0GPU/0重跑；87测试及图件交付passed，不等于加载资格通过。
 
 ## 主要难点与唯一下一步
 
-当前是已定位的工程接口错误，尚无三维加载成败证据。
-**待确认：复用原M0无载态，核对修正接口和精确DOF映射，仅续原定余13态。**
-不重算已保存无载，不扩大压力/张力或放宽1%门；首失败停。暂不加生长/FSI。
+当前是基底邻近的局部体积失真；弱平衡满足不代表逐点体积约束满足。
+网格、夹持和压力空间贡献尚未分离。
+**待确认：已有M1网格仅做零载与同p=0.01两个状态，对照保留M0失败。**
+材料/边界/离散/1%门保持，首失败停；不继续收缩、生长或FSI。
 
 ## 证据与存储
 
 结果在已批准的E:\Temp-Projects\PRL-results，不进GitHub。
-本包约10.1MiB；1719父文件、53调用文件、50项无关修改保持，仓库低于3GiB。
+本包约16.94MiB；1817父文件、71调用文件、50项无关修改保持，仓库低于3GiB。
 本地main阶段提交，未推送；无删除、安装或拉取。
 
 - [上一阶段二维低压主动passed](../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/index.html)：相对受压基线缩腔约1.85%，不是三维或实验心跳。
