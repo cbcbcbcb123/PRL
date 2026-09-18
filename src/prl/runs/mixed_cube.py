@@ -16,6 +16,15 @@ from prl.verification.mixed_cube import verify
 
 RESULT=Path('results/ventricle_fem/mixed_cube_benchmark_v01_20260918')
 CONTRACT='project_control/ventricle_volume_qualification_adoption_v01.md'
+BATCHES={
+    'v01':{'result':RESULT,'contract':CONTRACT,
+        'authorization':'new_FEM_authorization: user_confirmed_eight_case_batch_20260918',
+        'container':'prl-mixed-cube-benchmark-v01-20260918'},
+    'v02':{'result':Path('results/ventricle_fem/mixed_cube_benchmark_v02_20260918'),
+        'contract':'project_control/ventricle_mixed_cube_benchmark_v02.md',
+        'authorization':'new_FEM_authorization: user_confirmed_same_eight_case_v02_20260919',
+        'container':'prl-mixed-cube-benchmark-v02-20260919'}}
+V01_MANIFEST='5d3c7d623c4cb80404946a7bd04f1be104296b48ab0f213bb1a5b240c4b575fb'
 PREREQUISITES={
     'results/ventricle_fem/volume_projection_audit_v01_20260918':'78a9542bd69d6373a4e25f4bec421f6ea5441a49e4d5334932811201cd85628b',
     'results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918':'7bd712585b82c5ca4689f56292536a918b060ace2acf9051790ecba9a790e0f4'}
@@ -57,13 +66,34 @@ def protection(workspace):
     return references,len(dirty)
 
 
-def run(workspace):
+def batch_spec(batch):
+    if batch not in BATCHES:
+        raise ValueError('Only explicitly authorized batch versions are registered')
+    return BATCHES[batch]
+
+
+def run(workspace,batch='v01'):
     workspace=Path(workspace).resolve(strict=True)
-    root=result_path(workspace,RESULT,new=True)
-    if 'new_FEM_authorization: user_confirmed_eight_case_batch_20260918' not in (workspace/CONTRACT).read_text(encoding='utf-8'):
+    selected=batch_spec(batch)
+    root=result_path(workspace,selected['result'],new=True)
+    if selected['authorization'] not in (workspace/selected['contract']).read_text(encoding='utf-8'):
         raise ValueError('Explicit eight-case authorization missing')
     references,dirty_count=protection(workspace)
-    for name in SOURCES:
+    config=configuration()
+    if batch=='v02':
+        previous=result_path(workspace,RESULT)
+        if digest(previous/'manifest.json')!=V01_MANIFEST:
+            raise ValueError('v01 frozen manifest drift')
+        for item in json.loads((previous/'manifest.json').read_text(encoding='utf-8'))['files']:
+            path=previous/item['path']
+            if digest(path)!=item['sha256']:
+                raise ValueError('v01 frozen evidence drift: '+str(path))
+            references[str(path)]=item['sha256']
+        references[str(previous/'manifest.json')]=V01_MANIFEST
+        if config!=json.loads((previous/'configuration.json').read_text(encoding='utf-8')):
+            raise ValueError('v02 must retain every v01 physical/numerical configuration field')
+    sources=list(dict.fromkeys([selected['contract'],*SOURCES]))
+    for name in sources:
         if name.endswith('.py'):
             ast.parse((workspace/name).read_text(encoding='utf-8'))
     admission=result_admission(workspace,256*1024**2,64*1024**2)
@@ -74,7 +104,6 @@ def run(workspace):
         raise RuntimeError('Pinned runtime unavailable; no restart/repair/pull allowed')
     if read_docker('ps','-q'):
         raise RuntimeError('Another container is running')
-    config=configuration()
     root.mkdir(parents=True,exist_ok=False); (root/'input').mkdir()
     save_json(root/'configuration.json',config); save_json(root/'docker_preflight.json',version)
     save_json(root/'storage_preflight.json',admission)
@@ -82,7 +111,7 @@ def run(workspace):
     for n in [2,4,8]:
         np.savez_compressed(root/'input'/f'n{n}.npz',**cube(n))
     hashes={}
-    for name in SOURCES:
+    for name in sources:
         target=root/'sources_at_execution'/name; target.parent.mkdir(parents=True,exist_ok=True)
         shutil.copy2(workspace/name,target); hashes[name]=digest(workspace/name)
     save_json(root/'source_hashes.json',hashes)
@@ -98,7 +127,7 @@ def run(workspace):
     with scientific_lock(workspace):
         if read_docker('ps','-q'):
             raise RuntimeError('A container appeared after preflight; stop')
-        execution=invoke_bounded(workspace,root,'prl-mixed-cube-benchmark-v01-20260918',
+        execution=invoke_bounded(workspace,root,selected['container'],
             '/workspace/src/prl/fem/fenicsx_mixed_cube.py',seconds=1800)
     protected=all(digest(path)==expected for path,expected in references.items())
     sources=all(digest(workspace/name)==expected for name,expected in hashes.items())

@@ -1,16 +1,16 @@
 {
   "schema_version": "scientific_project_cockpit.v1",
-  "updated_at": "2026-09-18",
+  "updated_at": "2026-09-19",
   "overall_status": "failed",
-  "summary": "八工况基准已按授权启动，但首patch在求解前接口失败；0次SNES，八个平衡工况均not_run。候选修订与46项宿主测试完成，原生复验未运行；原心室1%体积门仍failed。",
+  "summary": "v02两个非零patch passed；κ=100误差随细化下降但最细位移/J精度未达门；κ=1000粗网格第1Newton步额外点出现负J而安全停止。6次尝试、5个有效终态、2例未运行，无自动重跑。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
-    "scope": "FEM唯一主线；当前为标准立方体实现资格，不是新心室结果。主动/生长/FSI not_run。",
-    "current_stage": "Mixed cube interface failed; all eight equilibrium cases not_run; native retry requires new confirmation",
-    "current_location": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918",
-    "evidence_basis_commit": "8d17942",
-    "evidence_checked_at": "2026-09-18",
+    "scope": "FEM唯一主线；当前标准立方体资格仍failed，原心室1%门failed不变；主动/生长/FSI not_run。",
+    "current_stage": "Nonzero patches passed; manufactured-field accuracy and high-kappa safety failed",
+    "current_location": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918",
+    "evidence_basis_commit": "7c5c931",
+    "evidence_checked_at": "2026-09-19",
     "git_workflow": {
       "branch": "main",
       "stage_commits": "direct_local_commits_no_new_branches",
@@ -27,37 +27,37 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "一次容器14.443秒停止，0 SNES/0 GPU/0重跑；208保护文件和50原有改动不变。81文件1,007,051 bytes；失败与修订源码分开保存。原始分类缺陷由新裁决显式更正，原件不覆盖。本地main阶段提交不推送。",
+    "freshness_note": "一次v02容器64.026秒，6次SNES；5终态/24监测态离线复算一致；49宿主测试passed。289保护文件含v01完整包/50旧改动未变。145文件16,593,908 bytes，已保存用户要求的记忆更新。本地main阶段提交不推送。",
     "model_overview": {
       "model_type": "FEniCSx三维有限变形NH，P2位移/P1压力四面体",
       "simulated_object": "当前资格基准：单位立方体P2/P1；主研究对象仍为理想化三层心室",
       "theory": "基准μ=1，κ=100/1000；X=0解析位移，其余五面解析参考牵引与配套体力。两个非零patch及六MMS已预注册；没有收缩、生长或流体。",
-      "current_question": "先排除新基准接口故障，再判定现有近不可压离散的实现与误差收敛；不将工程失败当作材料失败。",
+      "current_question": "基础非零实现门通过，但精度和变形安全未通过：不能用残差或积分点正J代替场资格。",
       "pipeline": [
-        "实际首patch原生网格建立并保存，表达式读取发生坐标单元hash不匹配。",
-        "一次容器停止，0次SNES，八个平衡工况均not_run；原始故障/插值检查态保全。",
-        "候选零体力网格绑定修订及逐表达式诊断完成，46项宿主测试passed；原生症状消失unknown。",
-        "待一次确认修订版v02：先接口门，再同一八工况；不放宽门限、不自动重跑。"
+        "按新确认执行一次v02；表达式hash匹配，两个非零patch passed。",
+        "κ=100三网格完成，末段阶次达门，最细位移及J绝对精度未过门。",
+        "κ=1000 n=2首Newton步在6个单元检出额外点负J，监测器停止；剩余两例not_run。",
+        "保全并独立复算全部状态；下一步只建议有界试探步保护/精度复验，未获新授权。"
       ],
-      "diagram": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/diagnostic.png",
-      "diagram_caption": "实际48四面体参考网格与执行统计；不是应力、形变或心动结果。160dpi探索图。",
+      "diagram": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/diagnostic.png",
+      "diagram_caption": "实际参考结构、κ=100误差/门限比、4个真实Newton状态、κ=1000失败迭代两套J采样；不是生理时间。",
       "assumptions": [
-        "基准不是心室，不具备生物标定或收缩含义",
-        "失败快照只是解析位移插值、p=0，非平衡状态",
-        "主心室仍为未标定三层半椭球，基底固定、腔压随动、外壁自由",
-        "原心室局部体积1.4496%超1%门的原因仍未分离"
+        "标准立方体制造解用于数值资格，不是心室或实验标定",
+        "κ变化同时改变制造压力/体力/牵引，不是固定载荷锁死试验",
+        "生产点正J不能保证其他位置正J；采样全正也不是全域单射证明",
+        "原心室理想化材料与几何未标定，1%局部体积门failed不变"
       ],
       "methods": [
-        "一次固定镜像容器，1CPU/8GiB/0GPU/禁网，14.443秒退出2；无超时/OOM。",
-        "原生源码确认错误来自坐标单元hash比较；零体力丢域是高可信候选，key未记录，归因unknown。",
-        "两patch体力改网格绑定零Constant，MMS体力/所有门限不改；宿主46测试不替代原生验证。",
-        "原空集合汇总/读回分类缺陷保留并显式纠正；8例not_run、0个平衡态通过验证。"
+        "2patch完整passed，旧表达式故障未复现；原旧key缺失的证据边界仍保留。",
+        "κ=100 n=8位移L2/H1为4.3239%/43.6485%，J误差RMS=0.15618%，超过2%/15%/0.1%门。",
+        "κ=1000 n=2：积分点min J=+0.023899；额外min J=−0.176372，6个单元检出负J。",
+        "5个终态/24个监测态独立复算，派生数组逐值一致；47运行前/49交付时宿主测试通过。"
       ],
-      "scope_boundary": "失败保全/宿主检查passed，原生执行failed，科学资格not_run三者分开；再次容器尚未授权。",
+      "scope_boundary": "基础实现passed不等于精度passed；κ=100序列failed，高κ粗网格安全failed，后2例not_run。不继续心室/主动/生长/FSI，不自动重跑。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_benchmark_execution_v01.md",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_interpretation.json",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_audit.json",
+        "project_control/ventricle_mixed_cube_benchmark_v02.md",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_analysis.json",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_audit.json",
         "project_control/ventricle_volume_qualification_adoption_v01.md"
       ]
     }
@@ -86,45 +86,45 @@
   ],
   "active_work": [
     {
-      "title": "八工况失败保全与候选接口修订",
+      "title": "v02有界执行与失败/精度证据已交付",
       "status": "failed",
-      "summary": "原生复验未运行，不宣称接口已修好。结构、配置、原始日志和20份执行源码已保全。",
+      "summary": "整体资格failed。试探步保护尚未实现或授权；后两个工况未追加求解。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_benchmark_execution_v01.md",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_interpretation.json"
+        "project_control/ventricle_mixed_cube_benchmark_v02.md",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/index.html"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "首patch求解前接口故障",
+      "title": "κ=100的最细场精度仍不足",
       "status": "failed",
-      "summary": "坐标单元hash不一致。仿射零体力丢域是候选，原日志未定位key；八个平衡工况均未运行。",
+      "summary": "误差下降、阶次达门，但位移L2/H1及J RMS仍超门；压力误差达门不能替代其他场。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_benchmark_execution_v01.md",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/failure.json"
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_analysis.json",
+        "project_control/ventricle_mixed_cube_benchmark_v02.md"
       ]
     },
     {
-      "title": "局部体积资格未通过，原因仍待分离",
+      "title": "高κ粗网格的试探步几何失效",
       "status": "failed",
-      "summary": "M1 max|J−1|=1.4496%>1%；p_m/κ很小，弱压力矩约1e−18。不能据此判定失稳或只归咎固定面。",
+      "summary": "残差下降且所有生产积分点J>0，但额外点检出6个单元负J；安全停止。不能放宽或删除该检查。",
       "evidence_refs": [
-        "../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/summary.json",
-        "project_control/ventricle_volume_qualification_adoption_v01.md"
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/failure.json",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_analysis.json"
       ]
     }
   ],
   "results": [
     {
-      "title": "实际基准网格及失败现场：0/8平衡工况",
+      "title": "基准已产生实测结果：两个patch通过，整体资格未通过",
       "status": "failed",
-      "summary": "单容器停止，0SNES/0重跑。候选修订46项宿主测试passed；不是机械精度通过或失败。",
-      "image": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/diagnostic.png",
+      "summary": "6次SNES、5有效终态、1安全失败、2not_run。原生接口修订验证通过；小几何本身尚未满足精度/安全，不进入复杂心室。",
+      "image": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/diagnostic.png",
       "evidence_refs": [
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/index.html",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_interpretation.json",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_audit.json"
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/index.html",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_analysis.json",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_audit.json"
       ],
       "result_group": "current"
     },
@@ -153,20 +153,20 @@
   ],
   "next_actions": [
     {
-      "title": "确认后运行修订版v02同八工况",
+      "title": "制定并确认有界正J试探步保护及精度复验",
       "status": "not_run",
-      "summary": "一次额外容器，先逐表达式/装配接口检查，后2patch+6MMS；同配置与门限，1CPU/0GPU、1800秒、0自动重跑。不包括心室、主动、生长或FSI。",
+      "summary": "将几何准入前移到试探步接受前，再独立验证精度；保持材料/P2/P1/原门。不保证步长保护会解决精度问题，新的运行需要一次确认。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_benchmark_execution_v01.md"
+        "project_control/ventricle_mixed_cube_benchmark_v02.md"
       ]
     }
   ],
   "evidence_boundaries": [
-    "FEM唯一主线；基准不是心室，理想化心室也尚未实验标定。",
-    "本批工程执行failed，八工况科学资格not_run；不能当作八个力学失败。",
-    "原summary/空集合读回的状态缺陷未被覆盖，新裁决显式纠正。",
-    "原心室1%门failed保持，主动/生长/FSI not_run。",
-    "图为真实参考网格与执行统计；160dpi探索布局passed、600dpi投稿检查failed照录。",
-    "失败包约0.96MiB外置，208保护文件与50旧改动不变；0删除/安装/GPU/推送。"
+    "FEM唯一主线；数值资格不等于心室或生物验证。",
+    "本轮两个非零patch passed；κ=100序列精度failed；κ=1000 n2安全failed、n4/n8 not_run。",
+    "额外点负J不能由积分点正J或残差下降掩盖；保留无效迭代但不称平衡态。",
+    "原心室1%门和全部历史失败不变；不自动执行薄层/主动/生长/FSI。",
+    "160dpi探索图，投稿600dpi检查failed照录；四个Newton状态不是四个生理时间点。",
+    "145文件约15.83MiB外置；289保护文件与50旧改动不变；已写用户要求的Codex记忆。"
   ]
 }

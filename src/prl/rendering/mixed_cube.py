@@ -56,3 +56,76 @@ def draw(root, style_module):
     exports=style_module.export_figure(figure,[left,right],root/'diagnostic',style=style,overrides=overrides)
     plt.close(figure)
     return {'png':str(exports.png),'svg':str(exports.svg),'manifest':str(exports.manifest)}
+
+
+def draw_batch(root,style_module):
+    """A native mesh, actual error sequence, and saved Newton/safety diagnostics."""
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.collections import PolyCollection
+    root=Path(root)
+    report=json.loads((root/'delivery_analysis.json').read_text())
+    config=json.loads((root/'configuration.json').read_text())
+    with np.load(root/'raw/patch_affine_mesh.npz',allow_pickle=False) as data:
+        coordinates=data['coordinates']; faces=data['boundary_faces']; tags=data['boundary_tags']
+    with np.load(root/'delivery_arrays.npz',allow_pickle=False) as data:
+        arrays={key:data[key] for key in data.files}
+    style=style_module.StyleSpec(axis_box_size_in=(3.6,3.6),tick_label_size=14.,axis_label_size=17.,
+        annotation_font_size=14.,sample_size_and_stat_font_size=14.,legend_font_size=12.,
+        axes_line_width=1.4,major_tick_length_pt=5.,major_tick_width_pt=1.,
+        minor_tick_length_pt=3.,minor_tick_width_pt=.8,data_line_width=1.5,
+        tick_label_pad_pt=4.,axis_label_pad_pt=8.,export_dpi=160)
+    defaults=asdict(style_module.DEFAULT_STYLE)
+    overrides=[style_module.StyleOverride(field=key,
+        reason='Approved compact exploratory benchmark page; 160dpi, actual states and error data; not publication final.')
+        for key,value in asdict(style).items() if value!=defaults[key]]
+    width,height=14.2,13.4
+    figure=plt.figure(figsize=(width,height))
+    axes=[figure.add_axes([x/width,y/height,3.6/width,3.6/height]) for x,y in [(1.25,7.9),(8.6,7.9),(1.25,2.7),(8.6,2.7)]]
+    view=np.array([-1.8,-2.4,1.6]); view/=np.linalg.norm(view)
+    horizontal=np.cross([0.,0.,1.],view); horizontal/=np.linalg.norm(horizontal)
+    projection=np.stack([horizontal,np.cross(view,horizontal)],axis=1)
+    surface=coordinates[faces[:,:3]]; order=np.argsort(surface.mean(axis=1)@view)
+    colors=np.array(['#CE817A' if tag==1 else '#9CC5D5' for tag in tags])
+    axes[0].add_collection(PolyCollection((surface@projection)[order],facecolors=colors[order],
+        edgecolors='#2F4B52',linewidths=.6))
+    xy=coordinates@projection; center=(xy.max(axis=0)+xy.min(axis=0))/2
+    axes[0].set(xlim=(center[0]-.95,center[0]+.95),ylim=(center[1]-.95,center[1]+.95),
+        aspect='equal',xlabel='Projected X / L',ylabel='Projected height / L')
+    rows=[row for row in report['cases'] if row['kind']=='mms' and row['kappa']==100 and 'metrics' in row]
+    for label,metric,gate,color,marker in [
+        ('u L2','relative_u_L2','fine_relative_u_L2','#207052','o'),
+        ('u H1','relative_u_H1','fine_relative_u_H1','#AC6D25','s'),
+        ('p L2','relative_pressure_L2','fine_relative_pressure_L2','#397DA6','^'),
+        ('J RMS','J_error_RMS','fine_J_error_RMS','#A44850','D')]:
+        axes[1].plot([row['n'] for row in rows],[row['metrics'][metric]/config['mms_gates'][gate] for row in rows],
+            marker=marker,color=color,ms=5,lw=1.5,label=label)
+    axes[1].axhline(1.,color='#555555',ls='--',lw=1.)
+    axes[1].set(xscale='log',yscale='log',xlim=(1.7,9.5),ylim=(.07,2000),
+        xlabel='Grid divisions n (2, 4, 8)',ylabel='Error / fine-grid limit')
+    axes[1].set_xticks([2,4,8],['2','4','8']); axes[1].legend(loc='upper right')
+    history=report['iterate_diagnostics']['mms_k100_n8']
+    axes[2].plot([x['iteration'] for x in history],[x['residual'] for x in history],'o-',color='#207052',lw=1.5)
+    axes[2].set(yscale='log',xlim=(-.2,3.2),ylim=(1e-16,1),xticks=[0,1,2,3],
+        xlabel='Newton iteration (not time)',ylabel='Native SNES residual norm')
+    for label,color,marker in [('production','#397DA6','o'),('extra','#A44850','x')]:
+        value=arrays[f'mms_k1000_n2_1_{label}_cell_minimum_J']
+        axes[3].plot(np.arange(len(value)),value,marker=marker,ls='none',color=color,ms=4,label=label)
+    axes[3].axhline(0,color='#555555',ls='--',lw=1.)
+    axes[3].set(xlim=(-2,49),ylim=(-.3,1.35),xticks=[0,12,24,36,48],yticks=[-.25,0,.25,.5,.75,1.,1.25],
+        xlabel='Tetrahedron index',ylabel='Cell minimum sampled J')
+    axes[3].legend(loc='upper center')
+    for axis,title in zip(axes,['A  Actual n=2 cube, 48 tetrahedra','B  kappa=100: fine-grid limit = 1',
+                               'C  kappa=100, n=8: saved states','D  kappa=1000, n=2: STOP at step 1']):
+        style_module.apply_axes_style(axis,style=style); style_module.add_top_information(axis,title,style=style)
+    # Sixteen residual decades make Matplotlib's default minor locator empty.
+    axes[2].yaxis.set_minor_locator(matplotlib.ticker.LogLocator(base=10,subs=[2,5],numticks=100))
+    figure.text(.075,.963,'Two patches pass; field accuracy and high-kappa safety do not. No automatic retries.',fontsize=14)
+    figure.text(.075,.930,'Six attempted solves / five equilibria / two cases not run. Engineering consistency is not field qualification.',fontsize=12)
+    figure.text(.075,.110,'A: red X=0 exact displacement; other faces exact reference traction. MMS also uses compatible body force.',fontsize=11)
+    figure.text(.075,.078,'B: errors decrease, but three n=8 metrics remain above their gates. C: four real saved Newton states.',fontsize=11)
+    figure.text(.075,.046,'D: production-point min J is positive; extra points detect six inverted cells. Failed iterate is not equilibrium.',fontsize=11)
+    outputs=style_module.export_figure(figure,axes,root/'diagnostic',style=style,overrides=overrides)
+    plt.close(figure)
+    return {'png':str(outputs.png),'svg':str(outputs.svg),'manifest':str(outputs.manifest)}

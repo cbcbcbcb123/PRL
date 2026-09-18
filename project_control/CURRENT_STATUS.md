@@ -1,23 +1,23 @@
 ---
 document_id: PRL-CURRENT-STATUS
 status: current
-last_verified: 2026-09-18
+last_verified: 2026-09-19
 branch: main
 git_workflow_decision: project_control/main_branch_stage_commit_decision_v01.md
 git_integration_decision: project_control/remote_history_integration_decision_v01.md
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 8d17942
-current_lifecycle: fem_only_mixed_cube_interface_failed_all_eight_equilibrium_cases_not_run
-documentation_updated_at: 2026-09-18
+verified_commit: 7c5c931
+current_lifecycle: fem_only_mixed_cube_patches_passed_field_accuracy_and_high_kappa_safety_failed
+documentation_updated_at: 2026-09-19
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_volume_qualification_adoption_v01.md
+current_contract: project_control/ventricle_mixed_cube_benchmark_v02.md
 last_completed_contract: project_control/ventricle_fem_3d_unstructured_comparison_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_audit.json
-next_stage_contract: project_control/ventricle_mixed_cube_benchmark_execution_v01.md
-current_authorization: approved_v01_one_container_consumed_candidate_fix_native_retest_requires_confirmation
+current_render_contract: ../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_audit.json
+next_stage_contract: project_control/ventricle_mixed_cube_benchmark_v02.md
+current_authorization: v02_one_container_consumed_no_native_retry
 development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -26,11 +26,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: no_native_retry_until_new_explicit_confirmation
-current_execution_log: project_control/ventricle_mixed_cube_benchmark_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_mixed_cube_benchmark_execution_v01.md
+execution_authorized: no_further_native_runs_without_new_confirmation
+current_execution_log: project_control/ventricle_mixed_cube_benchmark_v02.md
+latest_completed_execution_log: project_control/ventricle_mixed_cube_benchmark_v02.md
 latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
-latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_interpretation.json
+latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_analysis.json
 latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,21 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 八工况基准接口失败，八个平衡工况not_run
+## 当前：2026-09-19 v02非零patch通过；场精度和高κ变形安全failed
+
+按用户“同意，记忆”批准的一次v02执行完成。64.026秒，6次SNES尝试、5个有效终态、1个安全失败、2例未运行。
+两个非零patch passed，原表达式接口症状未复现。κ=100三网格误差下降、阶次达门，但n=8
+u L2/H1相对误差4.3239%/43.6485%、J误差RMS 0.15618%，分别超过2%/15%/0.1%门；压力误差2.0733%达门。
+κ=1000、n=2的第1Newton步：积分点min J=+0.023899，额外点min J=−0.176372、6个单元检出负J，触发安全停止。
+不把残差下降、弱矩满足或积分点正J当成精度/有效形变证明。后两例not_run；未自动重跑或修改门限。
+5个终态/24个监测状态独立复算通过，49项宿主测试passed；原生数值源码运行后未改。
+289保护文件与50旧改动保持，原v01完整失败保留；用户要求的记忆更新已保存，明确候选/验证和权限边界。
+145文件16,593,908 bytes；manifest `c59044955f3609509f8b8c61d620384ae800f9e2cebfa469d005cd61a9aaedda`。
+[执行与裁决](ventricle_mixed_cube_benchmark_v02.md) · [结果入口](../../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/index.html)。
+唯一下一步：制定并确认试探步正J保护及同基准精度复验的有界批次，尚未授权；不进入心室、主动、生长或FSI。
+探索图160dpi非投稿；首次绘图次刻度问题及合成测试参数选错记录保留，修正仅涉及显示/测试，不改生产门限。
+
+## 历史：2026-09-18 八工况基准接口失败，八个平衡工况not_run
 
 用户确认后执行一次固定镜像容器，单CPU/0GPU/禁网，14.443秒退出2；无超时/OOM/自动重跑。
 首patch读取表达式时坐标单元hash检查失败，尚未SNES，0个平衡态；不是材料或误差收敛结论。

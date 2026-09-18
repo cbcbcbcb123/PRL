@@ -142,3 +142,47 @@ def test_existing_result_refuses_before_runtime_and_cli_is_fem_scoped():
         with pytest.raises(FileExistsError):
             run(Path(__file__).resolve().parents[2])
         runtime.assert_not_called()
+
+
+def test_v02_is_explicit_and_does_not_reuse_v01_container_or_directory():
+    from prl.runs.mixed_cube import batch_spec,run,RESULT
+    from prl.cli import _parser
+    assert batch_spec('v01')['result']==RESULT
+    assert batch_spec('v02')['result']!=RESULT
+    assert batch_spec('v02')['container']!=batch_spec('v01')['container']
+    assert _parser().parse_args(['run','fem-mixed-cube','--batch','v02']).batch=='v02'
+    with pytest.raises(ValueError,match='explicitly authorized'):
+        batch_spec('v03')
+    with patch('prl.runs.mixed_cube.result_path',side_effect=FileExistsError),patch('prl.runs.mixed_cube.read_docker') as runtime:
+        with pytest.raises(FileExistsError):
+            run(Path(__file__).resolve().parents[2],'v02')
+        runtime.assert_not_called()
+
+
+def test_production_quadrature_can_miss_a_negative_p2_jacobian():
+    from prl.runs.mixed_cube_delivery import describe_iterate
+    data=fixture(); displacement=np.zeros_like(data['coordinates']); x=data['coordinates'][:,0]
+    # Exactly represented quadratic: J=2X-0.0001. Interior rule is positive,
+    # but X=0 boundary samples are negative; neither condition may be hidden.
+    displacement[:,0]=x*x-1.0001*x
+    pressure=np.zeros(len(data['pressure_coordinates']))
+    data['mixed_u_map']=np.arange(displacement.size)
+    data['mixed_p_map']=np.arange(displacement.size,displacement.size+pressure.size)
+    state={'u':displacement,'pressure':pressure,'mixed_state':np.r_[displacement.ravel(),pressure]}
+    report,arrays=describe_iterate(data,state)
+    assert report['production']['minimum_J']>0
+    assert report['extra']['minimum_J']==pytest.approx(-.0001)
+    assert report['extra']['cells_with_nonpositive_J']>0
+    assert not report['valid_at_sampled_points']
+    assert len(arrays['extra_cell_minimum_J'])==48
+
+
+def test_offline_iterate_diagnostics_reject_map_drift():
+    from prl.runs.mixed_cube_delivery import describe_iterate
+    data=fixture(); displacement=np.zeros_like(data['coordinates'])
+    pressure=np.zeros(len(data['pressure_coordinates']))
+    data['mixed_u_map']=np.arange(displacement.size)
+    data['mixed_p_map']=np.arange(displacement.size,displacement.size+pressure.size)
+    mixed=np.r_[displacement.ravel(),pressure]; mixed[0]=1
+    with pytest.raises(ValueError,match='mapping drift'):
+        describe_iterate(data,{'u':displacement,'pressure':pressure,'mixed_state':mixed})

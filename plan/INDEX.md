@@ -1,14 +1,14 @@
 ---
 index_id: PRL-EXTERNAL-EXPERT-PLAN-INDEX
 status: current
-updated_at: 2026-09-18
+updated_at: 2026-09-19
 ---
 
 # 外部专家指导方案索引
 
 | 方案 ID | 主题 | 状态 | 原件 | 适用范围 | 采纳/约束记录 |
 |---|---|---|---|---|---|
-| `EXP-20260918-FEM-review-v01` | 当前FEM局部体积资格与有界诊断提速 | `current_input_partial_adoption` | `plan/active/EXP-20260918-FEM-review-v01/source/`；原意见与补充ZIP均保留哈希，专家身份unknown | 当前FEM主线：先保存态分解、混合离散基准；不放宽旧1%门、不自动进入FSI/生长 | `project_control/ventricle_volume_qualification_adoption_v01.md`；A离线分析获本轮授权，B具体新FEM批次待一次确认 |
+| `EXP-20260918-FEM-review-v01` | 当前FEM局部体积资格与有界诊断提速 | `current_input_partial_adoption` | `plan/active/EXP-20260918-FEM-review-v01/source/`；原意见与补充ZIP均保留哈希，专家身份unknown | 当前FEM主线：先保存态分解、混合离散基准；不放宽旧1%门、不自动进入FSI/生长 | `project_control/ventricle_volume_qualification_adoption_v01.md`；A离线分析完成；B的v01接口failed、平衡not_run。2026-09-19获批的v02已执行：patch passed，场精度failed，第6例负J停止，后2例not_run；权限已消耗，见`project_control/ventricle_mixed_cube_benchmark_v02.md` |
 | `PRL_Codex_Stage_Contracts_v03` | 三维细胞分辨心室 Z0–Z11 分阶段执行合同 | `retired_forward_execution_evidence_preserved` | `plan/active/PRL_Codex_Stage_Contracts_v03/`，原件及原哈希保留 | 2026-09-17用户明确取消所有DCM前向运行、恢复、扩展和DCM--FEM比较，改为FEM唯一主线。该包仍用于解释历史结果；其内核和执行顺序不再约束当前FEM。路径保留在active中不等于当前有效；未改写专家原件。 | `project_control/ventricle_fem_only_measured_contour_decision_v01.md`；历史采纳：`project_control/ventricle_stage_contracts_v03_adoption_v01.md`；历史执行：`project_control/ventricle_simucell3d_trilayer_shape_formation_execution_record_v01.md` |
 | `EXP-20260802-scientific-review-v01` | Hybrid X1-H 以后科学与软件主张约束 | `retired_evidence_only` | `unknown`，当前工作区未定位到 | Hybrid已退出前向主线；原约束仅用于解释精选历史证据，不再授予执行权限 | `project_control/external_guidance_adoption_EXP-20260802_v01.md`；`project_control/external_scientific_review_constraints_v01.md`；`project_control/repository_cleanup_retired_path_map_v01.md` |
 | `EXP-20260909-001-paper2-lineage-ecm` | Paper 2 分裂可见性、有限心内膜细胞层与 ECM 选择性记忆 | `retired_evidence_only` | `plan/active/EXP-20260909-001-paper2-lineage-ecm/source/review-and-execution-plan.html` | 专家原件保留但Paper2前向执行已被用户当前主线决定取代；仅保留谱系奇模态精选结果和治理记录 | `project_control/external_guidance_adoption_EXP-20260909-001-paper2-lineage-ecm_v01.md`；`project_control/paper2_lineage_ecm_active_execution_plan_v01.md`；`project_control/repository_cleanup_retired_path_map_v01.md` |

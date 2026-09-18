@@ -408,6 +408,7 @@ def _parser() -> argparse.ArgumentParser:
         unstructured.add_argument('--workspace',type=Path)
         mixed_cube=group.add_parser('fem-mixed-cube',help='approved two patches and six 3D MMS cases; no retries')
         mixed_cube.add_argument('--workspace',type=Path)
+        mixed_cube.add_argument('--batch',choices=['v01','v02'],default='v01')
     return parser
 
 
@@ -434,10 +435,10 @@ def main(arguments: Sequence[str] | None = None) -> int:
         exit_code=0 if report['can_start'] else 1
     elif ((parsed.command=='run' and parsed.run_command=='fem-mixed-cube') or
           (parsed.command=='verify' and parsed.verify_command=='fem-mixed-cube')):
-        from .runs.mixed_cube import run,RESULT
+        from .runs.mixed_cube import run,batch_spec
         from .verification.mixed_cube import verify
         from .result_store import result_path
-        report=run(workspace) if parsed.command=='run' else verify(result_path(workspace,RESULT))
+        report=run(workspace,parsed.batch) if parsed.command=='run' else verify(result_path(workspace,batch_spec(parsed.batch)['result']))
         exit_code=0 if report['status']=='passed' else 1
     elif ((parsed.command=='run' and parsed.run_command=='fem-unstructured-3d') or
           (parsed.command=='verify' and parsed.verify_command=='fem-unstructured-3d')):
