@@ -8,16 +8,16 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 7a2d750
-current_lifecycle: fem_only_f6s1s_retained_matrix_diagnosis_report_serialization_failed
+verified_commit: b2e4639
+current_lifecycle: fem_only_f6s1s2_diagnosis_passed_mumps_workspace_failure_confirmed
 documentation_updated_at: 2026-09-18
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_mixed_linear_diagnosis_contract_v01.md
-last_completed_contract: project_control/ventricle_fem_mixed_linear_diagnosis_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/rendering.json
-next_stage_contract: pending_corrected_same_matrix_report_replay
-current_authorization: f6s1s_failed_report_serialization_no_automatic_retry
+current_contract: project_control/ventricle_fem_mixed_linear_replay_contract_v01.md
+last_completed_contract: project_control/ventricle_fem_mixed_linear_replay_contract_v01.md
+current_render_contract: ../PRL-results/ventricle_fem/f6s1s2_linear_report_replay_v01_20260918/rendering.json
+next_stage_contract: pending_same_matrix_mumps_workspace_margin_check
+current_authorization: f6s1s2_completed_no_equilibrium_or_parameter_change
 development_route: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -26,11 +26,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: F6S1S_consumed_failed_no_repeat_without_confirmation
-current_execution_log: project_control/ventricle_fem_mixed_linear_diagnosis_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_mixed_linear_diagnosis_execution_v01.md
+execution_authorized: F6S1S2_consumed_diagnostic_delivery_passed
+current_execution_log: project_control/ventricle_fem_mixed_linear_replay_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_mixed_linear_replay_execution_v01.md
 latest_completed_scientific_gate: F6-S0_G0_G1_G2_ideal_ring_qualification
-latest_result_package: ../PRL-results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918/summary.json
+latest_result_package: ../PRL-results/ventricle_fem/f6s1s2_linear_report_replay_v01_20260918/summary.json
 latest_supervisor_decision: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,23 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 F6-S1-S保存矩阵可审计；求解器明细写出失败
+## 当前：2026-09-18 F6-S1-S2诊断通过；直接故障为MUMPS工作空间不足
+
+一次15.351秒单CPU容器，可靠保存同一初值的MUMPS/SuperLU报告。11组CSR/右端/映射与上轮相同，
+5组前后FEM状态逐字节相同；无非线性平衡或状态更新、无自动重跑。
+MUMPS返回KSP=-11、PC=3、INFOG(1)=-9、INFOG(2)=1321、ICNTL(14)=20。
+`-9`为内部数值工作数组过小，而不是`-10`的数值奇异/零主元；容器OOMKilled=false。
+同矩阵SuperLU独立残量3.16997e-13；估计1-范数条件数1.09e9，尺度/精度风险仍在。
+这纠正了上轮未取得错误码时的假设优先级；不能将小残量视为非线性或1%体积资格。
+
+诊断交付及19项独立复核passed；原DG2受压平衡与轮廓1%局部J门仍failed。
+375父文件及120个F6-S1-R/S文件保持；53测试+21子测试passed。原失败包原位保留。
+唯一下一步待确认：同一保存矩阵只将MUMPS ICNTL(14)由20改为100，一次线性验证，不更新状态；
+通过后再另行恢复圆环非线性被动资格。轮廓、三维、FSI与生长未在本轮运行。
+见[本轮执行](ventricle_fem_mixed_linear_replay_execution_v01.md)及
+[结构与结果图](../../PRL-results/ventricle_fem/f6s1s2_linear_report_replay_v01_20260918/index.html)。
+
+## 历史：2026-09-18 F6-S1-S保存矩阵可审计；求解器明细写出失败
 
 用户同意先用理想化三维与morphoHeart公开资料，后续补自有实验并替换输入。
 路线为固体资格→三维主动心室→双向FSI→基础生长→力学生长反馈→ECM反馈。
