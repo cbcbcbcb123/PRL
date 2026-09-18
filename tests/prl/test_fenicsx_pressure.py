@@ -217,3 +217,82 @@ def test_plot_recomputes_raw_vectors_and_retains_quadrature_maximum():
     data['iterations']=np.array([0,2])
     with pytest.raises(ValueError,match='All actual Newton'):
         resumed_plot_data('gapped_fixture',mechanics)
+
+
+def test_complete_passive_scope_reuses_original_physics_and_only_eight_states():
+    from prl.fem.ring_geometry import configuration as original_configuration
+    from prl.runs.fenicsx_pressure import pressure_target,PASSIVE_RESULT
+    from prl.cli import _parser
+    cfg=configuration(complete_passive_ring=True); old=original_configuration()
+    for key in ['mu','kappa','radii','quadrature_degree','meshes','passive_loads']:
+        assert cfg[key]==old[key]
+    assert cfg['execution_plan']=={'M0':[2,3,4],'M1':[0,1,2,3,4]}
+    assert cfg['maximum_equilibrium_solves']==8 and cfg['active_peak']==0
+    assert cfg['solver']==configuration(True,2)['solver']
+    assert cfg['resources']==configuration(True,2)['resources']
+    assert not cfg.get('runtime_interface_gate',False)
+    assert pressure_target(complete_passive_ring=True)[0]==PASSIVE_RESULT
+    for command in ['run','verify']:
+        assert _parser().parse_args([command,'fem-fenicsx-pressure','--complete-passive-ring']).complete_passive_ring
+    with pytest.raises(ValueError):
+        configuration(True,complete_passive_ring=True)
+    with pytest.raises(ValueError):
+        configuration(resume_revision=2,complete_passive_ring=True)
+
+
+def test_complete_passive_create_only_refusal_precedes_docker():
+    from prl.runs.fenicsx_pressure import PASSIVE_RESULT
+    with patch('prl.runs.fenicsx_pressure.result_path',side_effect=FileExistsError) as target,patch('prl.runs.fenicsx_pressure.read_docker') as docker:
+        with pytest.raises(FileExistsError):
+            run_pressure(Path(__file__).resolve().parents[2],complete_passive_ring=True)
+        assert target.call_args.args[1]==PASSIVE_RESULT
+        docker.assert_not_called()
+
+
+def test_full_passive_gate_does_not_relax_original_analytic_or_factor_checks():
+    from prl.verification.fenicsx_pressure import passive_state_audit
+    def diagnostic(*args):
+        return {'status':'passed','checks':{'pilot_gate':True},'analytic_relative_error':.015,'radial_displacement_l2_error':.008}
+    meta={'iterations':3,'linear_solver':{'ksp_reason':4,'pc_failed_reason':0,'mumps_infog_1':0,'mumps_icntl_14':100}}
+    with patch('prl.verification.fenicsx_pressure.diagnostic_state',side_effect=diagnostic):
+        assert passive_state_audit({}, {'load':.02},meta,{},'M0',{})['status']=='passed'
+        assert passive_state_audit({}, {'load':.02},meta,{},'M1',{})['status']=='failed'
+        meta['linear_solver']['mumps_icntl_14']=20
+        assert passive_state_audit({}, {'load':.02},meta,{},'M0',{})['status']=='failed'
+        zero=passive_state_audit({}, {'load':0.},{'iterations':0},{},'M1',{})
+        assert zero['status']=='passed' and zero['factorization_status']=='not_run'
+
+
+def test_missing_saved_iterations_cannot_pass():
+    from prl.verification.fenicsx_pressure import saved_iterates_audit
+    with patch.object(Path,'glob',return_value=iter([])):
+        report=saved_iterates_audit('explicit_missing_fixture',{},
+                                   {'initial_mixed':np.zeros(1),'mixed_state':np.ones(1)},
+                                   {'iterations':1,'history':[{},{}]}, {})
+    assert report['status']=='failed' and not report['checks']['endpoints_exact']
+
+
+def test_passive_plot_does_not_invent_missing_fine_states():
+    import json
+    from types import SimpleNamespace
+    from prl.rendering.fenicsx_passive import draw_passive,draw_fine
+    from prl.rendering.fenicsx_passive_ring import plot_data
+    assert callable(draw_passive) and callable(draw_fine)
+    mesh=fixture(); data={f'M0_mesh_{key}':value for key,value in mesh.items()}
+    report={'status':'failed','cases':{'M0':{},'M1':{}}}
+    data.update(mu=np.array(1.),kappa=np.array(1000.),M0_indices=np.arange(5),M1_indices=np.array([],dtype=int))
+    for index in range(5):
+        data.update({f'M0_{index}_u':np.full((6,2),index*.01),f'M0_{index}_pressure':np.zeros(6),
+                     f'M0_{index}_load':np.array(index*.02),f'M0_{index}_activation':np.array(0.)})
+        report['cases']['M0'][f'passive_{index}']={'status':'passed','cavity_area':2.+.12*index,
+                                                  'source':'new' if index>1 else 'retained_without_solve'}
+    data['verification']=np.array(json.dumps(report))
+    mechanics=SimpleNamespace(load_arrays=lambda path:data,
+        fields=lambda *args:{'stress':np.zeros((1,2,3,3)),'J':np.ones((1,2))},
+        cavity=lambda mesh,u,p:(2.+float(u.sum()),None,None))
+    _,cases,selected,outcome=plot_data('explicit_synthetic_plot_fixture',mechanics)
+    assert selected=='M0' and len(cases['M0'])==5 and cases['M1']==[] and outcome['status']=='failed'
+    report['cases']['M0']['passive_4']['status']='failed'
+    data['verification']=np.array(json.dumps(report))
+    with pytest.raises(ValueError,match='accepted, unchanged'):
+        plot_data('rejected_synthetic_plot_fixture',mechanics)

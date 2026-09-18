@@ -13,6 +13,77 @@ from prl.verification.fenicsx_ring import load_arrays,state_audit,pressure_basis
 from prl.verification.fenicsx_pressure import diagnostic_state,verify_pressure,same_displacement_mesh
 
 
+def complete_passive_ring(root,config):
+    """Complete only the eight approved states using the existing production Ring."""
+    from prl.verification.fenicsx_pressure import passive_state_audit,saved_iterates_audit
+    child=root/'ring'; (child/'raw').mkdir(parents=True,exist_ok=False)
+    started=time.monotonic(); attempted=0; accepted=0; current=None; label=None
+    original=json.loads((root/'comparison/configuration.json').read_text())
+    try:
+        if config['execution_plan']!={'M0':[2,3,4],'M1':[0,1,2,3,4]} or config['maximum_equilibrium_solves']!=8:
+            raise ValueError('Unapproved passive execution plan')
+        for case in config['meshes']:
+            name=case['name']; current=Ring(case,config,child)
+            pressure_basis(current.mesh_data)
+            old_mesh=load_arrays(root/'comparison'/f'{name}_mesh.npz')
+            if not same_displacement_mesh(current.mesh_data,old_mesh):
+                raise ValueError('Displacement mesh changed from original CG1 control')
+            current.tangent_checks()
+            initial=np.zeros_like(current.w.x.array)
+            if name=='M0':
+                retained=root/'retained_passive'
+                mesh=load_arrays(retained/'M0_mesh.npz')
+                if set(mesh)!=set(current.mesh_data) or not all(np.array_equal(mesh[key],current.mesh_data[key]) for key in mesh):
+                    raise ValueError('Retained coarse DG2 mesh/mixed maps changed')
+                previous=None
+                for index in [0,1]:
+                    path=retained/f'M0_state_passive_{index}.npz'
+                    state=load_arrays(path)
+                    old_path=root/'comparison'/f'M0_state_passive_{index}.npz'
+                    old=state_audit(old_mesh,load_arrays(old_path),json.loads(old_path.with_suffix('.json').read_text()),original)
+                    report=passive_state_audit(mesh,state,json.loads(path.with_suffix('.json').read_text()),config,name,old)
+                    expected=np.zeros_like(state['mixed_state']) if previous is None else previous
+                    if report['status']!='passed' or old['status']!='passed' or not np.array_equal(state['initial_mixed'],expected):
+                        raise ValueError('Retained accepted-state prerequisite failed')
+                    previous=state['mixed_state']
+                initial=previous.copy()
+            for index in config['execution_plan'][name]:
+                if time.monotonic()-started>1140 or shutil.disk_usage(root).free<10*1024**3+64*1024**2:
+                    raise RuntimeError('Time or disk headroom reached before next state')
+                if attempted>=8:
+                    raise RuntimeError('Eight-state authorization exhausted')
+                pressure=config['passive_loads'][index]; label=f'passive_{index}'
+                attempted+=1
+                write_json(root/'progress.json',{'status':'unknown','mesh':name,'state':label,'attempted_states':attempted,'accepted_states':accepted})
+                initial=current.solve(label,pressure,0.,initial)
+                path=child/'raw'/f'{name}_state_{label}.npz'; state=load_arrays(path)
+                meta=json.loads(path.with_suffix('.json').read_text())
+                old_path=root/'comparison'/f'{name}_state_{label}.npz'
+                old=state_audit(old_mesh,load_arrays(old_path),json.loads(old_path.with_suffix('.json').read_text()),original)
+                report=passive_state_audit(current.mesh_data,state,meta,config,name,old)
+                report['checks']['CG1_control']=old['status']=='passed'
+                iterates=saved_iterates_audit(child/f'iterates/{name}_{label}',current.mesh_data,state,meta,config)
+                report['checks']['saved_iterates']=iterates['status']=='passed'
+                report['status']='passed' if all(report['checks'].values()) else 'failed'
+                write_json(path.with_name(path.stem+'_audit.json'),report)
+                if report['status']!='passed':
+                    raise ValueError('Independent gate failed: '+str([key for key,value in report['checks'].items() if not value]))
+                accepted+=1
+                write_json(root/'last_valid.json',{'mesh':name,'label':label,'accepted_states':accepted})
+                write_json(root/'progress.json',{'status':'unknown','attempted_states':attempted,'accepted_states':accepted})
+        report=verify_pressure(root); write_json(root/'verification.json',report)
+        write_json(root/'progress.json',{'status':report['status'],'attempted_states':attempted,'accepted_states':accepted})
+        return 0 if report['status']=='passed' else 2
+    except Exception as error:
+        write_json(root/'failure.json',{'status':'failed','error':str(error),'traceback':traceback.format_exc(),
+                   'mesh':current.name if current else None,'label':label,'attempted_states':attempted,'accepted_states':accepted})
+        if current is not None:
+            np.savez_compressed(root/'last_attempt.npz',mixed_state=current.w.x.array,mesh_name=np.array(current.name),
+                                load=float(current.load.value),activation=float(current.activation.value))
+        traceback.print_exc()
+        return 2
+
+
 def runtime_interface_probe(root,config):
     """One explicit six-DOF interface fixture, not a FEM/scientific equilibrium.
 
@@ -69,6 +140,8 @@ def runtime_interface_probe(root,config):
 
 def main():
     root=Path('/out'); config=json.loads((root/'configuration.json').read_text())
+    if config.get('complete_passive_ring',False):
+        return complete_passive_ring(root,config)
     started=time.monotonic(); attempted=0; accepted=0; current=None
     try:
         resumed=config.get('resume_first_ring',False)

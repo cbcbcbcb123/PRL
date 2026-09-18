@@ -381,7 +381,9 @@ def _parser() -> argparse.ArgumentParser:
     for group in [run_commands,verify_commands]:
         pressure=group.add_parser('fem-fenicsx-pressure',help='bounded same-geometry DG2 pressure diagnostic')
         pressure.add_argument('--workspace',type=Path)
-        pressure.add_argument('--resume-first-ring',action='store_true',help='one original pressured ring state from retained zero, ICNTL(14)=100')
+        pressure_mode=pressure.add_mutually_exclusive_group()
+        pressure_mode.add_argument('--resume-first-ring',action='store_true',help='one original pressured ring state from retained zero, ICNTL(14)=100')
+        pressure_mode.add_argument('--complete-passive-ring',action='store_true',help='at most eight new states to complete original passive two-mesh qualification')
         pressure.add_argument('--resume-revision',type=int,choices=[1,2],default=1,help='approved resume revision; v2 requires a real runtime interface gate')
     return parser
 
@@ -487,10 +489,10 @@ def main(arguments: Sequence[str] | None = None) -> int:
         from .runs.fenicsx_pressure import pressure_target,run_pressure
         from .result_store import result_path
         if parsed.command=='run':
-            report=run_pressure(workspace,resume_first_ring=parsed.resume_first_ring,resume_revision=parsed.resume_revision)
+            report=run_pressure(workspace,resume_first_ring=parsed.resume_first_ring,resume_revision=parsed.resume_revision,complete_passive_ring=parsed.complete_passive_ring)
         else:
             from .verification.fenicsx_pressure import verify_pressure
-            target,_=pressure_target(parsed.resume_first_ring,parsed.resume_revision)
+            target,_=pressure_target(parsed.resume_first_ring,parsed.resume_revision,parsed.complete_passive_ring)
             report=verify_pressure(result_path(workspace,target))
         exit_code=0 if report['status']=='passed' else 1
     elif parsed.command == 'run' and parsed.run_command == 'fem-fenicsx-ring':
