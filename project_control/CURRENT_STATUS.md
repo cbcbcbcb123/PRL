@@ -8,16 +8,16 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: b2e4639
-current_lifecycle: fem_only_f6s1s2_diagnosis_passed_mumps_workspace_failure_confirmed
+verified_commit: 8237412
+current_lifecycle: fem_only_f6s1s3_saved_tangent_workspace_fix_passed_nonlinear_pending
 documentation_updated_at: 2026-09-18
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_mixed_linear_replay_contract_v01.md
-last_completed_contract: project_control/ventricle_fem_mixed_linear_replay_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/f6s1s2_linear_report_replay_v01_20260918/rendering.json
-next_stage_contract: pending_same_matrix_mumps_workspace_margin_check
-current_authorization: f6s1s2_completed_no_equilibrium_or_parameter_change
+current_contract: project_control/ventricle_fem_mumps_workspace_contract_v01.md
+last_completed_contract: project_control/ventricle_fem_mumps_workspace_contract_v01.md
+current_render_contract: ../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/rendering.json
+next_stage_contract: pending_original_ring_first_pressure_nonlinear_qualification
+current_authorization: f6s1s3_completed_one_linear_attempt_no_equilibrium
 development_route: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -26,11 +26,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: F6S1S2_consumed_diagnostic_delivery_passed
-current_execution_log: project_control/ventricle_fem_mixed_linear_replay_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_mixed_linear_replay_execution_v01.md
+execution_authorized: F6S1S3_consumed_linear_workspace_verification_passed
+current_execution_log: project_control/ventricle_fem_mumps_workspace_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_mumps_workspace_execution_v01.md
 latest_completed_scientific_gate: F6-S0_G0_G1_G2_ideal_ring_qualification
-latest_result_package: ../PRL-results/ventricle_fem/f6s1s2_linear_report_replay_v01_20260918/summary.json
+latest_result_package: ../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/summary.json
 latest_supervisor_decision: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,22 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 F6-S1-S2诊断通过；直接故障为MUMPS工作空间不足
+## 当前：2026-09-18 F6-S1-S3同矩阵工作空间修复验证通过
+
+同一保存CSR上仅ICNTL(14)由20改100；一次8.380秒单CPU容器，MUMPS INFOG(1)=0、KSP=4、PC=0。
+独立残量7.47726e-11低于1e-8，与保留SuperLU向量相对差1.44635e-8低于1e-6。
+矩阵/右端/初值不变，14个其他可读控制项相同；0重组装/新SuperLU因子化/非线性求解/状态更新/求解重跑。
+19项证据检查及7项线性门passed；375父文件和176来源文件保持，56测试+21子测试通过。
+首次Docker镜像查询超时未创建结果或容器；只读SHA/空容器列表检查恢复响应后才启动首次科学调用，0重启/拉取/安装。
+
+线性工作空间问题在保存切线上已消除，原DG2受压平衡和轮廓1%局部J门仍failed。
+一次小残量不证明所有后续切线、非线性资格或生物学有效；三维/FSI/生长仍not_run。
+唯一下一步待确认：从保留零载接受态，以余量100只续算圆环首个p/mu=0.02非线性被动态，原门限不变、首失败保全。
+不重跑零载；通过后再裁决其余圆环压力点/粗细资格与真实外轮廓，不在本轮扩大运行。
+见[执行记录](ventricle_fem_mumps_workspace_execution_v01.md)及
+[结构/残量图与Notebook](../../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/index.html)。
+
+## 历史：2026-09-18 F6-S1-S2诊断通过；直接故障为MUMPS工作空间不足
 
 一次15.351秒单CPU容器，可靠保存同一初值的MUMPS/SuperLU报告。11组CSR/右端/映射与上轮相同，
 5组前后FEM状态逐字节相同；无非线性平衡或状态更新、无自动重跑。
