@@ -77,5 +77,100 @@ def main(root=Path('/out')):
         return 2
 
 
+def advance_passive_mesh(solver, initial, before, validate):
+    """The next load is unreachable if solving or independent validation raises."""
+    for index,pressure in [(2,.04),(3,.06),(4,.08)]:
+        label = f'passive_{index}'
+        before(label)
+        initial = solver.solve(label,pressure,0.,initial)
+        validate(label)
+
+
+def passive_main(root=Path('/out')):
+    from prl.fem.fenicsx_ring import Ring, write_json
+    from prl.verification.fenicsx_ring import load_arrays, pressure_basis
+    from prl.verification.fenicsx_contour import geometry_audit
+    from prl.verification.fenicsx_pressure import saved_iterates_audit
+    from prl.verification.fenicsx_contour_pressure import (completion_scope_checks,contour_state_audit,
+        verify_contour_passive,same_mixed_mesh,response_comparison,GEOMETRY_HASHES)
+    import hashlib
+
+    config = json.loads((root/'configuration.json').read_text())
+    qualified = json.loads((root/'prerequisite/configuration.json').read_text())
+    started = time.monotonic(); attempted = accepted = 0; current = None; label = None
+    record = {'status':'unknown','attempted_states':0,'accepted_states':0}
+    try:
+        if not all(completion_scope_checks(config,qualified).values()):
+            raise ValueError('Approved continuation scope changed')
+        (root/'raw').mkdir(exist_ok=False)
+        source = load_arrays(root/'geometry_source.npz')
+        for name in ['M0','M1']:
+            path = root/'input'/f'{name}_input_mesh.npz'
+            if hashlib.sha256(path.read_bytes()).hexdigest() != GEOMETRY_HASHES[name]:
+                raise ValueError('Frozen input geometry changed')
+            geometry = load_arrays(path); geometry['metrics'] = geometry_audit(geometry,source)
+            if geometry['metrics']['status'] != 'passed':
+                raise ValueError('Original geometry gate failed')
+            current = Ring({'name':name},config,root,geometry_input=geometry)
+            pressure_basis(current.mesh_data)
+            if not same_mixed_mesh(current.mesh_data,load_arrays(root/'retained'/f'{name}_mesh.npz')):
+                raise ValueError('Exact mixed restart map differs; no remapping authorized')
+            current.tangent_checks()
+            initial = load_arrays(root/'retained'/f'{name}_state_passive_1.npz')['mixed_state'].copy()
+            def before(next_label):
+                nonlocal attempted,label,record
+                if attempted >= 6 or time.monotonic()-started > 1140 or shutil.disk_usage(root).free < 10*1024**3+64*1024**2:
+                    raise RuntimeError('Authorization, time or disk headroom exhausted')
+                label = next_label; attempted += 1
+                record = {'status':'unknown','mesh':name,'state':label,'attempted_states':attempted,'accepted_states':accepted}
+                write_json(root/'progress.json',record)
+                write_json(root/'continuation_ledger.json',record)
+            def validate(current_label):
+                nonlocal accepted,record
+                path = root/'raw'/f'{name}_state_{current_label}.npz'
+                state = load_arrays(path); meta = json.loads(path.with_suffix('.json').read_text())
+                report = contour_state_audit(current.mesh_data,state,meta,config)
+                iteration = saved_iterates_audit(root/'iterates'/f'{name}_{current_label}',current.mesh_data,state,meta,config)
+                report['checks']['saved_iterates'] = iteration['status'] == 'passed'
+                if name == 'M1':
+                    coarse = json.loads((root/'raw'/f'M0_state_{current_label}_audit.json').read_text())
+                    report['mesh_comparison'] = response_comparison(coarse['cavity_area_change'],report['cavity_area_change'])
+                    report['checks']['mesh_response'] = report['mesh_comparison']['status'] == 'passed'
+                report['status'] = 'passed' if all(report['checks'].values()) else 'failed'
+                write_json(path.with_name(path.stem+'_audit.json'),report)
+                if report['status'] != 'passed':
+                    raise ValueError('Independent gate failed: '+str([k for k,v in report['checks'].items() if not v]))
+                accepted += 1; record['accepted_states'] = accepted
+                write_json(root/'last_valid.json',{'mesh':name,'state':current_label,'accepted_states':accepted})
+                write_json(root/'progress.json',record)
+                write_json(root/'continuation_ledger.json',record)
+            try:
+                advance_passive_mesh(current,initial,before,validate)
+            finally:
+                write_json(root/'progress.json',record)
+            current = None
+        report = verify_contour_passive(root)
+        write_json(root/'verification.json',report)
+        write_json(root/'progress.json',{**record,'status':report['status']})
+        write_json(root/'continuation_ledger.json',{**record,'status':report['status']})
+        return 0 if report['status'] == 'passed' else 2
+    except Exception as error:
+        write_json(root/'failure.json',{'status':'failed','error':str(error),'traceback':traceback.format_exc(),
+            'mesh':current.name if current else None,'label':label,'attempted_states':attempted,'accepted_states':accepted})
+        write_json(root/'progress.json',{**record,'status':'failed'})
+        write_json(root/'continuation_ledger.json',{**record,'status':'failed'})
+        if current is not None:
+            np.savez_compressed(root/'last_attempt.npz',mixed_state=current.w.x.array,
+                u=current.w.x.array[current.vmap].reshape(-1,2),pressure=current.w.x.array[current.pmap],
+                load=float(current.load.value),activation=float(current.activation.value))
+        try:
+            write_json(root/'verification.json',verify_contour_passive(root))
+        except Exception as audit_error:
+            write_json(root/'verification_error.json',{'status':'failed','error':str(audit_error)})
+        traceback.print_exc()
+        return 2
+
+
 if __name__ == '__main__':
-    raise SystemExit(main())
+    mode = json.loads(Path('/out/configuration.json').read_text())['schema_version']
+    raise SystemExit(passive_main() if mode == 'prl.contour_passive_completion.v1' else main())

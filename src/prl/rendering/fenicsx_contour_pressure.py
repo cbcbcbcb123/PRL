@@ -27,6 +27,8 @@ def plot_data(path, mechanics):
                 'stress':np.sqrt(1.5*np.sum(deviator**2,axis=(-1,-2))).mean(axis=1)/float(data['mu']),
                 'volume':np.max(np.abs(values['J']-1),axis=1)*100,'area_percent':record['cavity_area_change']*100})
         prefix = name+'_CG1_mesh_'
+        if not any(k.startswith(prefix) for k in data):
+            continue  # Later passive stages do not invent unavailable old-CG1 controls.
         oldmesh = {k[len(prefix):]:v for k,v in data.items() if k.startswith(prefix)}
         prefix = name+'_CG1_state_'
         oldstate = {k[len(prefix):]:v for k,v in data.items() if k.startswith(prefix)}
@@ -39,6 +41,8 @@ def plot_data(path, mechanics):
 
 
 def draw(data_path,png_path,svg_path,style_module,mechanics,mode,axis_box_size_in=(3.6,3.6),figure_size_in=(14.4,13.6)):
+    if mode in ['passive_overview','passive_states']:
+        return draw_passive(data_path,png_path,svg_path,style_module,mechanics,mode,axis_box_size_in,figure_size_in)
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -152,19 +156,127 @@ def draw(data_path,png_path,svg_path,style_module,mechanics,mode,axis_box_size_i
     return {'status':'passed','scientific_gate':report['status'],'actual_states':len(frames),'new_FEM_solves':0,'deformation_scale':1}
 
 
-def prepare(workspace,skill_root):
+def draw_passive(data_path,png_path,svg_path,style_module,mechanics,mode,axis_box_size_in,figure_size_in):
+    """Real retained/new load states, with failure visibly distinct from acceptance."""
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.collections import PolyCollection
+    from matplotlib.colors import Normalize
+    from matplotlib.ticker import MaxNLocator, FixedLocator
+
+    data,meshes,cases,_,report=plot_data(data_path,mechanics)
+    selected=max(['M0','M1'],key=lambda name:(len(cases[name]),name))
+    frames=cases[selected]; mesh=meshes[selected]; peak=frames[-1]
+    style=style_module.StyleSpec(axis_box_size_in=axis_box_size_in,tick_label_size=16.,axis_label_size=18.,
+        annotation_font_size=16.,sample_size_and_stat_font_size=14.,legend_font_size=14.,axes_line_width=1.5,
+        major_tick_length_pt=5.,major_tick_width_pt=1.,minor_tick_length_pt=3.,minor_tick_width_pt=.8,
+        data_line_width=1.5,tick_label_pad_pt=4.,axis_label_pad_pt=8.)
+    defaults=asdict(style_module.DEFAULT_STYLE)
+    overrides=[style_module.StyleOverride(field=k,reason='Reuse compact FEM panel style with fixed equal-scale spatial boxes.')
+        for k,v in asdict(style).items() if v!=defaults[k]]
+    width,height=figure_size_in; side=axis_box_size_in[0]
+    figure=plt.figure(figsize=figure_size_in)
+    positions=([(1.3,8.),(8.1,8.),(1.3,2.8),(8.1,2.8)] if mode=='passive_overview'
+        else [(x,y) for y in [8.,2.8] for x in [1.3,8.1,14.9]])
+    axes=[figure.add_axes((x/width,y/height,side/width,side/height)) for x,y in positions]
+    parts=np.array([[0,5,4],[5,1,3],[4,3,2],[5,3,4]])
+    nodes=np.concatenate([mesh['coordinates']+frame['u'] for frame in frames])
+    center=(nodes.min(axis=0)+nodes.max(axis=0))/2; half=float(np.ptp(nodes,axis=0).max()*.57)
+    stress_max=max(float(frame['stress'].max()) for frame in frames)
+    def spatial(axis,title):
+        axis.set(xlim=(center[0]-half,center[0]+half),ylim=(center[1]-half,center[1]+half),xlabel='x / L',ylabel='y / L',aspect='equal')
+        for coordinate,limits in [(axis.xaxis,axis.get_xlim()),(axis.yaxis,axis.get_ylim())]:
+            ticks=MaxNLocator(nbins=4).tick_values(*limits)
+            coordinate.set_major_locator(FixedLocator(ticks[(ticks>=limits[0])&(ticks<=limits[1])]))
+        style_module.apply_axes_style(axis,style=style); style_module.add_top_information(axis,title,style=style)
+    def field(axis,frame,key,maximum):
+        polygons=(mesh['coordinates']+frame['u'])[mesh['cells'][:,parts]].reshape(-1,3,2)
+        artist=PolyCollection(polygons,array=np.repeat(frame[key],4),norm=Normalize(0,maximum),
+            cmap='magma' if key=='volume' else 'viridis',edgecolors=(0,0,0,.22),linewidths=.065)
+        axis.add_collection(artist)
+        for loop in ['inner_nodes','outer_nodes']:
+            curve=data['geometry_xy'][data['geometry_'+loop]]; curve=np.vstack((curve,curve[0]))
+            axis.plot(*curve.T,ls='--',color='#888888',lw=.8)
+        return artist
+    def colorbar(artist,x,y,label):
+        cax=figure.add_axes((x/width,y/height,.22/width,side/height))
+        figure.colorbar(artist,cax=cax).set_label(label,labelpad=10,fontsize=18)
+        cax.tick_params(labelsize=16,direction='out')
+    def response(axis,key,title):
+        for name,color,marker in [('M0','#20694D','o'),('M1','#3872A6','s')]:
+            values=cases[name]
+            ordinate=[v['area_percent'] if key=='area' else float(v['volume'].max()) for v in values]
+            axis.plot([v['load'] for v in values],ordinate,marker=marker,color=color,lw=1.5,label=name)
+            for frame,value in zip(values,ordinate):
+                if frame['status']!='passed':
+                    axis.plot(frame['load'],value,'x',color='#B13A36',ms=12,mew=2,label='Failed state')
+        if key=='volume':
+            axis.axhline(1.,color='#B13A36',ls='--',lw=1.5,label='Original 1% gate')
+        axis.set(xlabel='Pressure / mu',ylabel='Cavity area change (%)' if key=='area' else 'max |J - 1| (%)',xlim=(-.005,.085))
+        axis.set_xticks([0,.02,.04,.06,.08]); axis.yaxis.set_major_locator(MaxNLocator(nbins=5))
+        axis.legend(loc='upper left',frameon=False)
+        style_module.apply_axes_style(axis,style=style); style_module.add_top_information(axis,title,style=style)
+    if mode=='passive_overview':
+        palette=np.array(['#4C9F70','#D6B656','#5B8DB8'])
+        polygons=mesh['coordinates'][mesh['cells'][:,parts]].reshape(-1,3,2)
+        axes[0].add_collection(PolyCollection(polygons,facecolors=np.repeat(palette[mesh['layers']-1],4),edgecolors=(0,0,0,.28),linewidths=.065))
+        for point,label,marker in zip(data['geometry_anchors'],['A','B'],['s','^']):
+            axes[0].plot(*point,marker=marker,color='#B3463E',ms=7)
+            axes[0].annotate(label,point,xytext=(5,8),textcoords='offset points')
+        inner=data['geometry_xy'][data['geometry_inner_nodes']]
+        for index in np.linspace(0,len(inner)-1,10,dtype=int):
+            a,b=inner[[index,(index+1)%len(inner)]]; delta=b-a
+            normal=np.array([delta[1],-delta[0]])/np.linalg.norm(delta); point=(a+b)/2
+            axes[0].annotate('',xy=point+.09*normal,xytext=point-.14*normal,arrowprops={'arrowstyle':'->','color':'#B3463E','lw':1.2})
+        spatial(axes[0],f'A  {selected} reference; assumed layers')
+        artist=field(axes[1],peak,'stress',stress_max)
+        spatial(axes[1],f'B  {selected} p / mu = {peak["load"]:.2f}: {peak["status"].upper()}')
+        colorbar(artist,12.05,8.,'Mean equivalent stress / mu')
+        artist=field(axes[2],peak,'volume',max(float(peak['volume'].max()),1e-12))
+        spatial(axes[2],f'C  Same state; local volume deviation')
+        colorbar(artist,5.25,2.8,'Element max |J - 1| (%)')
+        response(axes[3],'area','D  Actual saved load responses')
+        layer_note='Green / yellow / blue: assumed endo / ECM / myo. Same passive material; A: ux=uy=0, B: uy=0.'
+    else:
+        for axis,frame in zip(axes[:5],frames):
+            artist=field(axis,frame,'stress',stress_max)
+            origin='reused' if frame['index']<2 else 'new'
+            spatial(axis,f'{selected} p / mu = {frame["load"]:.2f}; {origin}\n{frame["status"].upper()}; cavity {frame["area_percent"]:+.2f}%')
+        for axis in axes[len(frames):5]:
+            axis.text(.5,.5,'NOT RUN',transform=axis.transAxes,ha='center'); axis.set_axis_off()
+        colorbar(artist,18.85,8.,'Common equivalent stress / mu')
+        response(axes[5],'volume','Local volume gate at saved loads')
+        layer_note='State panels show equivalent stress, not layer identity. Dashed gray outlines: undeformed boundaries.'
+    figure.text(.06,.965,f'Original-contour passive continuation: {report["status"].upper()} | no active contraction',fontsize=16)
+    figure.text(.06,.934,f'New solves: {report["attempted_equilibria"]}; accepted: {report["accepted_new_equilibria"]}. Four prior states reused; no retries.',fontsize=14)
+    figure.text(.06,.136,layer_note,fontsize=12)
+    figure.text(.06,.103,'Follower pressure inside, outer wall free. Only outer contour is image-derived; cavity/layers and material are uncalibrated.',fontsize=12)
+    figure.text(.06,.070,'Actual 1x deformation; pressure levels are NOT heartbeat time. Missing load states are not fabricated.',fontsize=12)
+    figure.text(.06,.037,'Fields reconstructed from saved u/p; first failed original gate stops further solves. No 3D, FSI, growth or biological validation.',fontsize=12)
+    exported=style_module.export_figure(figure,axes,Path(png_path).with_suffix(''),style=style,overrides=overrides)
+    Path(exported.svg).replace(svg_path)
+    manifest=json.loads(Path(exported.manifest).read_text()); manifest['exports']['svg']=str(Path(svg_path).resolve())
+    Path(exported.manifest).write_text(json.dumps(manifest,indent=2),encoding='utf-8')
+    plt.close(figure)
+    return {'status':'passed','scientific_gate':report['status'],'selected_mesh':selected,
+        'displayed_states':len(frames),'new_FEM_solves':0,'deformation_scale':1}
+
+
+def prepare(workspace,skill_root,complete_passive=False):
     import re
     import subprocess
     import sys
     import nbformat
     from prl.result_store import result_path,result_admission
-    from prl.runs.fenicsx_contour_pressure import RESULT
+    from prl.runs.fenicsx_contour_pressure import RESULT,PASSIVE_COMPLETION
     from prl.runs.fenicsx_ring import digest
     from prl.runs.fenicsx_runtime import save_json
-    from prl.verification.fenicsx_contour_pressure import verify_contour_pressure
+    from prl.verification.fenicsx_contour_pressure import verify_contour_pressure,verify_contour_passive
     from prl.verification.fenicsx_ring import load_arrays
 
-    workspace=Path(workspace).resolve(strict=True); skills=Path(skill_root); root=result_path(workspace,RESULT)
+    workspace=Path(workspace).resolve(strict=True); skills=Path(skill_root)
+    root=result_path(workspace,PASSIVE_COMPLETION if complete_passive else RESULT)
     if (root/'post_verification.json').exists() or (root/'figures').exists():
         raise FileExistsError('Contour figure preparation is create-only')
     if not result_admission(workspace,128*1024**2)['can_start']:
@@ -172,34 +284,40 @@ def prepare(workspace,skill_root):
     formal=json.loads((root/'formal_invocation_manifest.json').read_text())
     if not all(digest(root/item['path'])==item['sha256'] for item in formal['files']):
         raise ValueError('Formal invocation changed')
-    report=verify_contour_pressure(root); save_json(root/'post_verification.json',report)
+    report=(verify_contour_passive(root) if complete_passive else verify_contour_pressure(root))
+    save_json(root/'post_verification.json',report)
     config=json.loads((root/'configuration.json').read_text())
     data={'verification':np.array(json.dumps(report)),'mu':np.array(config['mu']),'kappa':np.array(config['kappa'])}
     data.update({'geometry_'+key:value for key,value in load_arrays(root/'input/M0_input_mesh.npz').items()})
     for name in ['M0','M1']:
         meshpath=root/'raw'/f'{name}_mesh.npz'
+        if complete_passive and not meshpath.exists():
+            meshpath=root/'retained'/f'{name}_mesh.npz'
         if meshpath.exists():
             data.update({name+'_mesh_'+k:v for k,v in load_arrays(meshpath).items()})
         indices=[]
-        for index in [0,1]:
-            path=root/'raw'/f'{name}_state_passive_{index}.npz'
+        for index in (range(5) if complete_passive else [0,1]):
+            folder='retained' if complete_passive and index<2 else 'raw'
+            path=root/folder/f'{name}_state_passive_{index}.npz'
             if path.exists():
                 indices.append(index)
                 state=load_arrays(path)
                 data.update({f'{name}_{index}_{k}':state[k] for k in ['u','pressure','load','activation']})
         data[name+'_indices']=np.array(indices,dtype=int)
-        data.update({name+'_CG1_mesh_'+k:v for k,v in load_arrays(root/'comparison'/name/'mesh.npz').items()})
-        old=load_arrays(root/'comparison'/name/'state.npz')
-        data.update({name+'_CG1_state_'+k:old[k] for k in ['u','pressure','load','activation']})
+        if not complete_passive:
+            data.update({name+'_CG1_mesh_'+k:v for k,v in load_arrays(root/'comparison'/name/'mesh.npz').items()})
+            old=load_arrays(root/'comparison'/name/'state.npz')
+            data.update({name+'_CG1_state_'+k:old[k] for k in ['u','pressure','load','activation']})
     np.savez_compressed(root/'figure_data.npz',**data)
     revisions=[]
-    for mode in ['qualification','pressure_states']:
+    main_id='S1S8' if complete_passive else 'S1S7'
+    for mode in (['passive_overview','passive_states'] if complete_passive else ['qualification','pressure_states']):
         subprocess.run([sys.executable,'-B','-X','utf8',str(skills/'cb-paper-figure-workflow/scripts/init_figure_revision.py'),
-            str(root/'figures'),'--main','S1S7','--analysis-key',mode,'--data',str(root/'figure_data.npz'),
+            str(root/'figures'),'--main',main_id,'--analysis-key',mode,'--data',str(root/'figure_data.npz'),
             '--python','helper='+str(Path(__file__).resolve()),'--python','mechanics='+str(workspace/'src/prl/verification/fenicsx_ring.py'),
             '--python','style='+str(skills/'cb-plot-unified-style/assets/cb_plot_unified_style.py'),
             '--model','config='+str(root/'configuration.json'),'--model','verification='+str(root/'post_verification.json')],check=True)
-        revision=next((root/f'figures/FigS1S7_{mode}').glob('FigS1S7_*')); prefix=revision.name
+        revision=next((root/f'figures/Fig{main_id}_{mode}').glob(f'Fig{main_id}_*')); prefix=revision.name
         snapshots={key:next(revision.glob(f'*_{key}.py')).name for key in ['helper','mechanics','style']}
         notebook=nbformat.v4.new_notebook(cells=[
             nbformat.v4.new_markdown_cell('# 原图像外轮廓：两网格零载与首压力\n内腔和层界为构造，材料未标定。所有场量由保存u/p独立复算；实际1倍形变，不是心动时间。'),
@@ -216,7 +334,7 @@ OUTPUT_SVG = REVISION_DIR / f"05_{{PREFIX}}.svg"
 STYLE_SOURCE = 'Existing compact FEM diagnostics with CB explicit overrides'
 DPI = 600
 axis_box_size_in = (3.6, 3.6)
-FIGURE_SIZE_IN = (14.4, 13.6)
+FIGURE_SIZE_IN = {(21.2,13.6) if mode=='passive_states' else (14.4,13.6)!r}
 def load_snapshot(name, filename):
     spec = importlib.util.spec_from_file_location(name, REVISION_DIR / filename)
     module = importlib.util.module_from_spec(spec)
@@ -237,6 +355,11 @@ helper.draw(DATA_PATH, OUTPUT_PNG, OUTPUT_SVG, style, mechanics, {mode!r}, axis_
             '数据/模型变换':'由u/p独立重算F/J/Cauchy应力；等效应力为每单元积分点von Mises均值，J图为每单元积分点最大绝对偏差百分数。六节点三角拆四个显示三角，实际1倍形变，不平滑。CG1峰值也从保留u/p重算，不改写其failed。验收基于全部原始积分点而非显示均值。',
             '统计方法与不确定性':'确定性两网格各零载/首压力，没有生物样本、误差棒或假设检验。按实存状态展示，不插值为时间帧；通过首压力不等于完整被动资格、多级渐近或热点收敛。',
             '生物学分组颜色':'不适用。绿/黄/蓝表示构造心内膜/ECM/心肌几何域，当前相同被动参数，不是实验生物学分组。'}
+        if complete_passive:
+            notebook.cells[0].source='# 原外轮廓被动续算：通过态与首个失败态\n复用零载和0.02；只展示实际保存状态，未运行细网格压力不补造。实际1倍形变；载荷延拓非生理时间。'
+            nbformat.write(notebook,revision/f'03_{prefix}_plot.ipynb')
+            values['数据/模型变换']='从物理复制网格/u/p独立重算F/J/Cauchy应力；等效应力为每单元积分点von Mises均值，J为每单元积分点最大偏差。P2三角拆四个显示三角，实际1倍形变；全部积分点参与验收。失败态如实标红，不用场均值掩盖峰值。'
+            values['统计方法与不确定性']='确定性载荷续算，无生物样本/误差棒/假设检验。零载和0.02复用；其余仅实存态。状态图选实存态较多的网格，另一网格仅画已有曲线点；不插值缺失态。两个网格不证明渐近或热点收敛。'
         for key,value in values.items():
             content=re.sub(r'(?m)^- '+re.escape(key)+r':.*$',lambda match:'- '+key+': '+value,content)
         methods.write_text(content,encoding='utf-8'); revisions.append(str(revision))
@@ -257,7 +380,9 @@ def audit_agreement(actual,expected):
             if np.isclose(a,b,rtol=1e-10,atol=1e-12):
                 return True
             allowance=0.
-            if path.startswith('/cases/') and path.endswith('/pressure_area_difference_work'):
+            derived_error = path.endswith('/pressure_virtual_work_error')
+            derived_consistent = None
+            if path.startswith('/cases/') and (path.endswith('/pressure_area_difference_work') or derived_error):
                 # The independent audit evaluates p*(A_plus-A_minus)/(2h), h=1e-5.
                 # Only this reported finite-difference diagnostic gets a cancellation
                 # allowance, scaled by machine precision, pressure, area and h.
@@ -265,15 +390,142 @@ def audit_agreement(actual,expected):
                 pressure=max(abs(parent_a['pressure']),abs(parent_b['pressure']))
                 area=max(1.,abs(parent_a['cavity_area']),abs(parent_b['cavity_area']))
                 allowance=16*np.finfo(float).eps*pressure*area/1e-5
+                if derived_error:
+                    # This is exactly abs(work - finite_difference_work)/max(1,abs(work)).
+                    # Propagate the same cancellation bound, only after checking that
+                    # BOTH reported errors really derive from their saved operands.
+                    pairs=[(a,parent_a),(b,parent_b)]
+                    derived_consistent=all(abs(value-abs(parent['pressure_virtual_work']-parent['pressure_area_difference_work'])
+                        /max(1.,abs(parent['pressure_virtual_work']))) <= 8*np.finfo(float).eps
+                        for value,parent in pairs)
+                    wa,wb=parent_a['pressure_virtual_work'],parent_b['pressure_virtual_work']
+                    na,nb=max(1.,abs(wa)),max(1.,abs(wb))
+                    allowance=((allowance+abs(wa-wb))+max(abs(a),abs(b))*abs(na-nb))/min(na,nb) if derived_consistent else 0.
             accepted=bool(np.isfinite(a) and np.isfinite(b) and abs(a-b)<=allowance)
             differences.append({'path':path,'host':a,'container':b,'absolute_difference':abs(a-b),
                 'finite_difference_roundoff_allowance':allowance,'accepted':accepted})
+            if derived_error:
+                differences[-1]['derived_error_consistent']=derived_consistent
             return accepted
         return a==b
     matched=compare(actual,expected)
     return {'status':'passed' if matched else 'failed','base_rtol':1e-10,'base_atol':1e-12,
         'finite_difference_step':1e-5,'differences_beyond_base_comparison':differences,
         'physical_gates_changed':False,'categorical_checks_must_match_exactly':True}
+
+
+def finalize_passive(workspace,tests_filename='tests_after_rendering.json'):
+    """Freeze the bounded continuation, including a failed scientific gate unchanged."""
+    import shutil
+    from prl.result_store import result_path,result_admission,register_result
+    from prl.runs.fenicsx_contour_pressure import PASSIVE_COMPLETION,completion_sources,protected_unchanged
+    from prl.runs.fenicsx_ring import digest,package_manifest
+    from prl.runs.fenicsx_runtime import save_json
+
+    workspace=Path(workspace).resolve(strict=True); root=result_path(workspace,PASSIVE_COMPLETION)
+    if (root/'manifest.json').exists() or (root/'summary.json').exists():
+        raise FileExistsError('Delivery already frozen')
+    formal=json.loads((root/'formal_invocation_manifest.json').read_text())
+    internal=json.loads((root/'protected_preflight.json').read_text())
+    external=json.loads((root/'external_protected_preflight.json').read_text())
+    dirty=json.loads((root/'preexisting_changes.json').read_text())
+    identities=json.loads((root/'input_identities.json').read_text())
+    if (not protected_unchanged(workspace,internal,external,dirty)
+        or not all(digest(root/item['path'])==item['sha256'] for item in formal['files'])
+        or not all(digest(root/path)==item['sha256'] for path,item in identities.items())
+        or not all(digest(workspace/path)==sha for path,sha in json.loads((root/'source_hashes.json').read_text()).items())):
+        raise ValueError('Protected evidence, input or formal science source drift')
+    report=json.loads((root/'post_verification.json').read_text())
+    native=json.loads((root/'verification.json').read_text())
+    agreement=audit_agreement(report,native)
+    if agreement['status']!='passed':
+        save_json(root/'delivery_comparison_failure.json',agreement)
+        raise ValueError('Independent host/native reports differ; no science rerun')
+    runtime=json.loads((root/'execution.json').read_text())
+    observations=json.loads((root/'boundary_observations.json').read_text())
+    tests=json.loads((root/tests_filename).read_text())
+    if tests['status']!='passed' or observations['status']!='passed':
+        raise ValueError('Tests or supplementary boundary screen need attention')
+    planned=[f'{name}_passive_{i}' for name in ['M0','M1'] for i in [2,3,4]]
+    actual=[key for key in planned if (root/'iterates'/key).is_dir()]
+    stopped_after_failure=True
+    for position,key in enumerate(actual):
+        name,label=key.split('_',1)
+        if report['cases'][name][label]['status']=='failed':
+            stopped_after_failure=position==len(actual)-1 and (root/'failure.json').exists()
+    stop_checks={'attempts_exact_prefix':actual==planned[:len(actual)],
+        'attempt_count':len(actual)==report['attempted_equilibria'],
+        'first_failure_stops':stopped_after_failure,'single_invocation':runtime['scientific_invocations']==1,
+        'runtime_isolation':all(runtime['container_checks'].values()),'parents_preserved':runtime['parents_unchanged'],
+        'no_gpu_or_retry':runtime['gpu']==0 and runtime['automatic_retries']==0,
+        'no_recomputation':runtime['retained_equilibria_recomputed']==0}
+    if not all(stop_checks.values()):
+        raise ValueError('Controlled stop or execution scope could not be validated')
+    figures={}
+    for mode in ['passive_overview','passive_states']:
+        revision=next((root/f'figures/FigS1S8_{mode}').glob('FigS1S8_*')); prefix=revision.name
+        methods=(revision/f'02_{prefix}_methods.txt').read_text(encoding='utf-8')
+        style=json.loads((revision/f'04_{prefix}_style_manifest.json').read_text())
+        if '- 包状态: 最终包' not in methods or '人工/代理视觉验收: 通过' not in methods or not style['validation']['passed']:
+            raise ValueError('Executed/final Notebook, CB style and visual QA required')
+        if digest(revision/f'01_{prefix}_data.npz')!=digest(root/'figure_data.npz'):
+            raise ValueError('Figure source copy mismatch')
+        figures[mode]={kind:(revision/f'{number}_{prefix}{suffix}').relative_to(root).as_posix()
+            for kind,number,suffix in [('notebook','03','_plot.ipynb'),('png','04','.png'),('svg','05','.svg')]}
+    admission=result_admission(workspace,4*1024**2)
+    if not admission['can_start']:
+        raise RuntimeError('Final storage admission refused')
+    states=[{'mesh':name,'label':label,'source':'retained' if int(label.split('_')[-1])<2 else 'new',
+        'status':case['status'],'pressure':case['pressure'],'cavity_area_change':case['cavity_area_change'],
+        'max_abs_J_minus_one':case['max_abs_J_minus_one']} for name,rows in report['cases'].items() for label,case in rows.items()]
+    summary={'status':report['status'],'execution':runtime['status'],'runtime_isolation':'passed','controlled_stop':'passed',
+        'evidence_delivery':'passed','attempted_new_equilibria':report['attempted_equilibria'],
+        'accepted_new_equilibria':report['accepted_new_equilibria'],'reused_equilibria':4,'states':states,
+        'saved_new_Newton_vectors':sum(len(case['states']) for rows in report['iterates'].values() for case in rows.values()),
+        'elapsed_seconds':runtime['elapsed_seconds'],'independent_checks':len(report['checks']),
+        'failed_checks':report['failed_checks'],'gpu':0,'automatic_retries':0,'ring_reruns':0,
+        'mesh_generation_calls':0,'active_contraction':'not_run','three_dimensional_model':'not_run',
+        'fsi':'not_run','growth':'not_run','biological_validation':'not_run',
+        'next_action':'Pending explicit decision: retain high-pressure failure; use already two-mesh-qualified p/mu=0.02 for a bounded myocardial active-tension comparison. This changes the full-passive-before-active route; do not execute automatically.'}
+    audit={'status':'passed','formal_invocation_files_unchanged':len(formal['files']),
+        'protected_parent_files_unchanged':len(internal)+len(external),'preexisting_dirty_files_unchanged':len(dirty),
+        'input_copies_match':len(identities),'host_native_independent_agreement':'passed','stop_checks':stop_checks,
+        'tests':tests,'notebook_execution':'passed','style_validation':'passed','visual_qa':'passed',
+        'postprocessing_new_FEM_solves':0,'repository_bytes':admission['repository']['usage']['logical_bytes']}
+    rendering={'status':'passed','visual_qa':'passed','style_validation':'passed','figures':figures,
+        'actual_saved_states':len(states),'new_FEM_solves':0,'deformation_scale':1,'interpolated_frames':0,
+        'physiological_time':'not_calibrated','source':'physical copies of raw meshes/u/p and independent NumPy reconstruction'}
+    for filename,value in [('summary.json',summary),('rendering.json',rendering),('delivery_audit.json',audit),
+        ('delivery_storage.json',admission),('cross_platform_agreement.json',agreement)]:
+        save_json(root/filename,value)
+    sources=completion_sources()+['src/prl/rendering/fenicsx_contour_pressure.py','src/prl/verification/contour_boundary.py',
+        'tests/prl/test_fenicsx_contour_pressure_render.py','tests/prl/test_contour_boundary.py']
+    for relative in sorted(set(sources)):
+        target=root/'sources_at_delivery'/relative; target.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copyfile(workspace/relative,target)
+    rows=''.join(f'<tr><td>{s["mesh"]}</td><td>{s["pressure"]:.2f}</td><td>{s["source"]}</td><td>{s["cavity_area_change"]*100:+.6f}%</td><td>{s["max_abs_J_minus_one"]*100:.6f}%</td><td>{s["status"]}</td></tr>' for s in states)
+    page=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>F6-S1-S8 原轮廓被动压力续算</title><style>body{{max-width:1200px;margin:32px auto;padding:0 20px;color:#173e2e;font:16px/1.7 'Microsoft YaHei',sans-serif}}img{{width:100%}}a{{color:#176b4d}}td,th{{padding:8px 16px;border-bottom:1px solid #ccd}}</style>
+<h1>被动压力续算：{report['status']}；首失败后停止</h1>
+<p>二维P2/DG2平面应变有限变形NH，mu=1、kappa=1000未标定。只有外轮廓来自图像，内腔与三层界面为构造；三层同被动参数。内壁随动压力、外壁自由，A固定ux/uy、B固定uy。主动关闭。</p>
+<p>4个零载/0.02态只读复用。本次尝试{report['attempted_equilibria']}态，接受{report['accepted_new_equilibria']}态。0.08粗网格仅局部体积门失败，细网格后续0.04/0.06/0.08全部not_run。门限、物理和求解内核未修改；没有自动重跑。</p>
+<table><tr><th>网格</th><th>p/mu</th><th>来源</th><th>腔面积变化</th><th>局部max|J−1|</th><th>原门</th></tr>{rows}</table>
+<img src="{figures['passive_overview']['png']}" alt="实际结构、失败态应力、局部J和载荷响应">
+<h2>五个真实粗网格压力态及原1%门</h2><p>实际1倍形变、统一应力色标。图中最后一态failed；不是心动时间，不插值缺失细网格态。</p>
+<img src="{figures['passive_states']['png']}" alt="0至0.08的真实粗网格压力态，最后一态失败">
+<h2>失败的含义</h2><p>失败态力平衡、真实MUMPS与DG2点态约束通过；max|J−1|=1.173743%，J最小0.988263。3541个单元中1个单元的2个积分点超原1%门，位于构造心肌域、靠近外轮廓凹口，而非固定点邻域。该定位来自保存态，不是通过改变网格/参数验证的因果归因。</p>
+<p>平均壁J=1.00015246不能代替局部门。当前是已收敛有限bulk离散解的局部高压响应；仍不能区分轮廓尖角应力集中与网格依赖。24/48段二次边界采样未见自交，但不是全局单射证明。完整压力序列、后续粗细和热点收敛未通过。</p>
+<h2>下一步需明确裁决</h2><p>建议保留0.08失败，不继续冲高压；在两网格已通过的p/mu=0.02基线上做有界心肌主动张力对照。这是将“完整高压资格先于主动”改为“已通过载荷范围内研究主动”，需用户确认后另立合同。本轮没有主动、三维、FSI、生长或实验验证。</p>
+<p>一次{runtime['elapsed_seconds']:.3f}秒，单CPU/8GiB/禁网/0GPU。{summary['saved_new_Newton_vectors']}个新Newton向量保留。
+{tests['passed']}测试+{tests['subtests_passed']}子测试通过，{len(internal)+len(external)}父/祖先文件和{len(dirty)}项无关修改保持。原failed始终保留。</p>
+<p><a href="post_verification.json">独立核验</a> · <a href="boundary_observations.json">边界和局部超限定位</a> · <a href="failure.json">原失败</a> · <a href="delivery_audit.json">交付验收</a> · <a href="command.json">唯一调用</a> · <a href="configuration.json">配置</a> · <a href="{figures['passive_overview']['notebook']}">结构/结果Notebook</a> · <a href="{figures['passive_states']['notebook']}">五态Notebook</a></p>
+<p>只读复核：python -B -X utf8 -m prl verify fem-fenicsx-contour-pressure --complete-passive。
+其failed返回值是保留的科学裁决，不是要求重跑。图件新版本可独立执行，无需求解器；当前最终包已冻结。</p></html>'''
+    (root/'index.html').write_text(page,encoding='utf-8')
+    save_json(root/'manifest.json',package_manifest(root))
+    register_result(workspace,root,summary['status'],digest(root/'manifest.json'))
+    return {'status':summary['status'],'delivery':'passed','audit':audit,'manifest_sha256':digest(root/'manifest.json'),
+        'files':sum(p.is_file() for p in root.rglob('*')),'logical_bytes':sum(p.stat().st_size for p in root.rglob('*') if p.is_file())}
 
 
 def finalize(workspace):

@@ -15,6 +15,9 @@ from prl.verification.fenicsx_contour_pressure import GEOMETRY_HASHES
 RESULT = Path('results/ventricle_fem/f6s1s7_contour_dg2_v01_20260918')
 PREREQUISITE = Path('results/ventricle_fem/f6s1s6_fine_ring_v01_20260918')
 CONTRACT = Path('project_control/ventricle_fem_contour_dg2_contract_v01.md')
+PASSIVE_COMPLETION = Path('results/ventricle_fem/f6s1s8_contour_passive_v01_20260918')
+PASSIVE_CONTRACT = Path('project_control/ventricle_fem_contour_passive_contract_v01.md')
+PARENT_MANIFEST_SHA = '524b1560a9ba63a0b99a19f20188cdaf704bd05a0d507a65e32c1cf21ccf0704'
 SOURCES = [CONTRACT.as_posix(), 'src/prl/cli.py', 'src/prl/fem/fenicsx_contour_pressure.py',
     'src/prl/fem/fenicsx_ring.py','src/prl/fem/ring_geometry.py',
     'src/prl/verification/fenicsx_contour_pressure.py','src/prl/verification/fenicsx_contour.py',
@@ -42,6 +45,80 @@ def protected_unchanged(workspace, internal, external, dirty):
     return (all(digest(workspace/path) == sha for path,sha in internal.items())
         and all(digest(path) == sha for path,sha in external.items())
         and all(digest(workspace/item['path']) == item['sha256'] for item in dirty))
+
+
+def completion_configuration():
+    config = configuration()
+    config.update(schema_version='prl.contour_passive_completion.v1', passive_loads=[0.,.02,.04,.06,.08],
+        reused_loads=[0.,.02], new_loads=[.04,.06,.08], maximum_equilibrium_solves=6,
+        scope='complete remaining original contour passive states only; no active/3D/FSI/growth')
+    return config
+
+
+def completion_sources():
+    return sorted(set(SOURCES+[PASSIVE_CONTRACT.as_posix(),'tests/prl/test_fenicsx_contour_passive.py']))
+
+
+def run_contour_passive(workspace):
+    workspace = Path(workspace).resolve(strict=True)
+    root = result_path(workspace, PASSIVE_COMPLETION, new=True)
+    parent = result_path(workspace, RESULT)
+    if not (workspace/PASSIVE_CONTRACT).is_file() or digest(parent/'manifest.json') != PARENT_MANIFEST_SHA:
+        raise ValueError('Approved contract or frozen parent identity mismatch')
+    manifest = json.loads((parent/'manifest.json').read_text())
+    if not all(digest(parent/item['path']) == item['sha256'] for item in manifest['files']):
+        raise ValueError('Frozen contour prerequisite changed')
+    qualification = json.loads((parent/'post_verification.json').read_text())
+    if qualification['status'] != 'passed' or not all(qualification['checks'].values()):
+        raise ValueError('Contour prerequisite not passed')
+    previous_sources = json.loads((parent/'source_hashes.json').read_text())
+    for relative in ['src/prl/fem/fenicsx_ring.py','src/prl/fem/ring_geometry.py',
+        'src/prl/verification/fenicsx_ring.py','src/prl/verification/fenicsx_pressure.py']:
+        if digest(workspace/relative) != previous_sources[relative]:
+            raise ValueError('Qualified mechanical kernel or independent physics changed')
+    internal = json.loads((parent/'protected_preflight.json').read_text())
+    external = json.loads((parent/'external_protected_preflight.json').read_text())
+    external.update({str(p):digest(p) for p in parent.rglob('*') if p.is_file()})
+    dirty = json.loads((parent/'preexisting_changes.json').read_text())
+    if not protected_unchanged(workspace,internal,external,dirty):
+        raise ValueError('Ancestor or unrelated edit drift')
+    version = json.loads(read_docker('version','--format','{{json .}}'))
+    if not version.get('Server') or read_docker('image','inspect',TAG,'--format','{{.Id}}') != IMAGE:
+        raise RuntimeError('Pinned runtime unavailable; no restart/repair/install/pull authorized')
+    if read_docker('ps','-q'):
+        raise RuntimeError('Another container is running')
+    admission = result_admission(workspace,512*1024**2,64*1024**2)
+    if not admission['can_start']:
+        raise RuntimeError('Storage admission refused')
+    root.mkdir(parents=True,exist_ok=False)
+    for filename,value in [('configuration.json',completion_configuration()),('docker_version.json',version),
+        ('storage_preflight.json',admission),('protected_preflight.json',internal),
+        ('external_protected_preflight.json',external),('preexisting_changes.json',dirty)]:
+        save_json(root/filename,value)
+    copies = [(parent/'geometry_source.npz',root/'geometry_source.npz')]
+    for filename in ['configuration.json','post_verification.json','manifest.json']:
+        copies.append((parent/filename,root/'prerequisite'/filename))
+    for name in ['M0','M1']:
+        copies.append((parent/'input'/f'{name}_input_mesh.npz',root/'input'/f'{name}_input_mesh.npz'))
+        for filename in [f'{name}_mesh.npz',f'{name}_tangent.json']+[
+            f'{name}_state_passive_{index}.{extension}' for index in [0,1] for extension in ['npz','json']]:
+            copies.append((parent/'raw'/filename,root/'retained'/filename))
+    for relative in completion_sources():
+        copies.append((workspace/relative,root/'sources_at_execution'/relative))
+    for source,target in copies:
+        target.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile(source,target)
+    save_json(root/'source_hashes.json',{p:digest(workspace/p) for p in completion_sources()})
+    save_json(root/'input_identities.json',{target.relative_to(root).as_posix():{'source':str(source),'sha256':digest(source)} for source,target in copies})
+    with scientific_lock(workspace):
+        report = invoke_bounded(workspace,root,'prl-f6s1s8-contour-passive-v01-20260918',
+            '/workspace/src/prl/fem/fenicsx_contour_pressure.py')
+    report.update(parents_unchanged=protected_unchanged(workspace,internal,external,dirty),
+        scientific_invocations=1,runtime_microprobes=0,mesh_generation_calls=0,retained_equilibria_recomputed=0)
+    if not report['parents_unchanged']:
+        report['status'] = 'failed'
+    save_json(root/'execution.json',report)
+    save_json(root/'formal_invocation_manifest.json',package_manifest(root))
+    return report
 
 
 def run_contour_pressure(workspace):

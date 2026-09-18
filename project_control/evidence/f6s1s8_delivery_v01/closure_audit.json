@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "checks": {
+    "manifest_identity": true,
+    "manifest_all_files": true,
+    "manifest_hashes": true,
+    "parents_and_dirty": true,
+    "exact_task_git_scope": true,
+    "branch_main": true,
+    "index_empty": true,
+    "storage": true,
+    "input_hashes": true
+  },
+  "unexpected_git_paths": [],
+  "manifest_entries": 158,
+  "result_files": 160,
+  "result_bytes": 115310640,
+  "protected_files": 1358,
+  "dirty_files": 50,
+  "repository_bytes": 2036853574,
+  "result_manifest_sha256": "58a708f93a3b3c0f290912054a19a00c3b17a9ec94aa2008247322416d6b3c21",
+  "pre_stage_commit": "ed9b34379ddef15821319686db893ccf18e69bb0",
+  "no_new_scientific_solves": true,
+  "explanation": "Final closure checks direct and input-identity SHA chains. The earlier direct-only coverage check is retained; no frozen file changed.",
+  "indirect_manifest_entries": [
+    "prerequisite/manifest.json"
+  ],
+  "coverage": {
+    "all_files_sha_covered": true,
+    "direct_entries": 158,
+    "indirect_entries": [
+      "prerequisite/manifest.json"
+    ],
+    "input_hashes": true,
+    "manifest_hashes": true,
+    "unexpected": []
+  }
+}

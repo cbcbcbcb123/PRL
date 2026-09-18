@@ -392,6 +392,7 @@ def _parser() -> argparse.ArgumentParser:
     for group in [run_commands,verify_commands]:
         contour_pressure=group.add_parser('fem-fenicsx-contour-pressure',help='only two retained contour meshes at zero and first pressure, P2/DG2')
         contour_pressure.add_argument('--workspace',type=Path)
+        contour_pressure.add_argument('--complete-passive',action='store_true',help='only six remaining contour pressures from retained 0.02 states')
     return parser
 
 
@@ -516,13 +517,14 @@ def main(arguments: Sequence[str] | None = None) -> int:
         exit_code=0 if report['status']=='passed' else 1
     elif ((parsed.command=='run' and parsed.run_command=='fem-fenicsx-contour-pressure') or
           (parsed.command=='verify' and parsed.verify_command=='fem-fenicsx-contour-pressure')):
-        from .runs.fenicsx_contour_pressure import run_contour_pressure,RESULT
+        from .runs.fenicsx_contour_pressure import run_contour_pressure,run_contour_passive,RESULT,PASSIVE_COMPLETION
         from .result_store import result_path
         if parsed.command=='run':
-            report=run_contour_pressure(workspace)
+            report=run_contour_passive(workspace) if parsed.complete_passive else run_contour_pressure(workspace)
         else:
-            from .verification.fenicsx_contour_pressure import verify_contour_pressure
-            report=verify_contour_pressure(result_path(workspace,RESULT))
+            from .verification.fenicsx_contour_pressure import verify_contour_pressure,verify_contour_passive
+            report=(verify_contour_passive(result_path(workspace,PASSIVE_COMPLETION)) if parsed.complete_passive
+                else verify_contour_pressure(result_path(workspace,RESULT)))
         exit_code=0 if report['status']=='passed' else 1
     elif parsed.command == 'run' and parsed.run_command == 'fem-fenicsx-ring':
         from .runs.fenicsx_ring import run_fenicsx_ring, run_active_completion

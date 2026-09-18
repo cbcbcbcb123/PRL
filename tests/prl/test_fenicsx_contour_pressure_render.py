@@ -49,12 +49,40 @@ def test_failure_status_remains_failure_in_plot():
     assert cases['M1'][0]['status']=='failed'
 
 
+def test_continuation_plot_does_not_require_nonexistent_CG1_controls():
+    data,mechanics=plotting_fixture()
+    for key in list(data):
+        if '_CG1_' in key:
+            data.pop(key)
+    _,_,cases,controls,_=plot_data(None,mechanics)
+    assert len(cases['M0'])==1 and controls=={}
+
+
 def test_delivery_accepts_observed_finite_difference_cancellation_only():
     from prl.rendering.fenicsx_contour_pressure import audit_agreement
     native={'pressure':.02,'cavity_area':3.7694874817876047,'pressure_area_difference_work':.0007491571274442776,
             'checks':{'local_volume':True,'pressure_virtual_work':True}}
     host={**native,'pressure_area_difference_work':.0007491571287765453}
     assert audit_agreement({'cases':{'M0':{'passive_1':host}}},{'cases':{'M0':{'passive_1':native}}})['status']=='passed'
+
+
+def test_delivery_roundoff_propagates_to_derived_virtual_work_error():
+    from prl.rendering.fenicsx_contour_pressure import audit_agreement
+    native={'pressure':.08,'cavity_area':5.28316917861778,
+        'pressure_virtual_work':.003566139170837072,'pressure_area_difference_work':.0035661391670771536}
+    host={**native,'pressure_area_difference_work':.00356613916352444}
+    for report in [native,host]:
+        report['pressure_virtual_work_error']=abs(report['pressure_virtual_work']-report['pressure_area_difference_work'])
+        report['checks']={'local_volume':False,'pressure_virtual_work':True}
+    assert audit_agreement({'cases':{'M0':{'passive_4':host}}},{'cases':{'M0':{'passive_4':native}}})['status']=='passed'
+
+
+def test_delivery_rejects_forged_derived_error_even_inside_roundoff_allowance():
+    from prl.rendering.fenicsx_contour_pressure import audit_agreement
+    native={'pressure':.08,'cavity_area':5.28316917861778,'pressure_virtual_work':.0035,
+        'pressure_area_difference_work':.0035,'pressure_virtual_work_error':0.}
+    host={**native,'pressure_virtual_work_error':3e-12}
+    assert audit_agreement({'cases':{'M0':{'passive_4':host}}},{'cases':{'M0':{'passive_4':native}}})['status']=='failed'
 
 
 @pytest.mark.parametrize('changed',[
