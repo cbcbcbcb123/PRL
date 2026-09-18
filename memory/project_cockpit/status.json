@@ -2,14 +2,14 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-18",
   "overall_status": "blocked",
-  "summary": "首个P2/DG2粗圆环受压平衡passed：腔面积+4.675918%，局部体积变化0.00262844%，原1%门不变。接口阻断已消除；完整压力/粗细资格待做，原轮廓局部J仍failed。",
+  "summary": "DG2粗圆环完整5个压力态passed：峰值腔面积+22.4593%，局部体积变化0.0134833%。细圆环零载发生PETSc原生段错误，未接受末态；整阶段failed，粗细比较not_run。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
     "scope": "当前仍为二维固体资格；理想化三维、双向FSI、连续生长与实验验证not_run。",
-    "current_stage": "F6-S1-S4 v02 first coarse DG2 ring pressure passed; full passive qualification pending",
-    "current_location": "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918",
-    "evidence_basis_commit": "1196c7d",
+    "current_stage": "F6-S1-S5 coarse passive sequence passed; fine zero-load native failure; mesh comparison not_run",
+    "current_location": "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918",
+    "evidence_basis_commit": "548e17b",
     "evidence_checked_at": "2026-09-18",
     "git_workflow": {
       "branch": "main",
@@ -27,20 +27,20 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "一次21.891秒单CPU容器，3次Newton更新、1个接受态；0零载重算/自动重跑。709父文件和50项无关修改保持，63测试+21子测试通过。",
+    "freshness_note": "一次23.705秒单CPU容器；3个新接受态、2个复用态，细网格零载原生退出后停止。826父文件/98正式调用文件/50项无关修改保持；68测试+21子测试通过。",
     "model_overview": {
-      "model_type": "FEniCSx二维P2/DG2平面应变有限变形NH；原圆环p/mu=0.02、Ta=0",
-      "simulated_object": "理想三层圆环M0，896三角形、1920位移节点；从原保存零载续算一个受压平衡",
-      "theory": "mu=1、kappa=1000、原1%门不变。内壁随动压力0.02、外壁自由；A固定ux/uy、B固定uy；主动为0。",
-      "current_question": "新压力空间在原完整压力序列与细网格是否仍满足1%局部J和响应门，再能否推广到原轮廓？",
+      "model_type": "FEniCSx二维P2/DG2平面应变有限变形NH；原圆环p/mu=0至0.08、Ta=0",
+      "simulated_object": "理想三层圆环M0完整5压力态；M1几何/切线通过，但零载原生退出，没有接受末态",
+      "theory": "mu=1、kappa=1000未标定，原1%局部J门及原G1解析门不变。内壁随动压力、外壁自由；A固定ux/uy、B固定uy；主动为0。",
+      "current_question": "先定位细网格零载的原生接口故障，再完成细网格压力资格；能否在原1%局部J门下推广到原轮廓？",
       "pipeline": [
-        "同一实际PETSc/MUMPS环境完成6自由度接口夹具，12项检查通过；不是科学平衡",
-        "保留零载及同一DG2网格/混合映射验证通过，不重算零载",
-        "仅p/mu=0.02、Ta=0：实际余量100，3次Newton更新得到1个接受平衡",
-        "独立重算F/J/应力/残量，保存并绘制全部4个真实Newton状态；21范围及20物理门通过"
+        "只读复用粗网格零载与0.02，不重复已接受求解；几何/混合映射逐数组不变",
+        "粗网格0.04/0.06/0.08全部通过，每态3次Newton更新，实际MUMPS余量100",
+        "细网格几何与切线通过；零载monitor-0后SIGSEGV 11，没有最终收敛报告，按原合同停止",
+        "从保存u/p独立重算5个粗网格压力态的应力/J和解析响应；不补造细网格或时间帧"
       ],
-      "diagram": "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/figures/FigS1S4_pressure_equilibrium/FigS1S4_pressure_equilibrium_v01_20260918/04_FigS1S4_pressure_equilibrium_v01_20260918.png",
-      "diagram_caption": "实际三层参考网格、压力与规范约束、1倍形变、等效应力和局部J。三层当前相同被动参数，主动关闭。",
+      "diagram": "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/figures/FigS1S5_qualification/FigS1S5_qualification_v01_20260918/04_FigS1S5_qualification_v01_20260918.png",
+      "diagram_caption": "三层参考网格、压力/规范约束、1倍峰值位移、解析响应与1%局部J门；只有粗网格完成，细网格原生失败。",
       "assumptions": [
         "材料及参考态未标定",
         "二维平面应变不是自由三维心室",
@@ -48,30 +48,30 @@
         "morphoHeart静态形态不是连续个体心动或生长轨迹"
       ],
       "methods": [
-        "腔室面积+4.675918%，壁局部max|J−1|=0.00262844%；是不同几何量",
-        "独立自由力残量1.70e-14，DG2点态体积约束误差2.67e-14",
-        "相对不可压解析面积响应误差0.0566923%；尚不构成粗细收敛",
-        "从物理复制u/p与独立力学源码快照复算Notebook；600dpi PNG/SVG、样式与目检通过"
+        "峰值腔面积+22.4593%，壁局部max|J−1|=0.0134833%；是不同几何量",
+        "最高独立自由力残量1.64e-13，DG2点态体积约束误差1.934e-13",
+        "最大相对不可压解析面积响应误差0.0684168%，通过原M0的2%门；粗细比较未完成",
+        "物理复制输入与独立力学源码快照复算Notebook；600dpi PNG/SVG、样式与目检通过"
       ],
-      "scope_boundary": "仅粗圆环首压力点passed。原轮廓局部J仍failed；完整DG2压力/粗细资格、主动、三维、FSI、生长和生物学验证本轮not_run。",
+      "scope_boundary": "粗网格5态passed，但整阶段failed；细网格没有接受末态，崩溃准确调用点未知、未修复。原轮廓局部J仍failed；本轮无主动/三维/FSI/生长或生物验证。",
       "evidence_refs": [
-        "project_control/ventricle_fem_ring_resume_execution_v02.md",
-        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/post_verification.json",
-        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/summary.json",
+        "project_control/ventricle_fem_ring_passive_qualification_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/post_verification.json",
+        "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/summary.json",
         "project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md"
       ]
     }
   },
   "roadmap": [
     {
-      "label": "圆环首受压态恢复",
+      "label": "粗圆环完整被动压力",
       "status": "passed",
-      "summary": "真实接口及首个非线性平衡均通过，局部J=0.00262844%，原1%门不变。"
+      "summary": "5个实际接受态，2态复用/3态新增；峰值局部J偏差0.0134833%，原1%及解析门不变。"
     },
     {
-      "label": "完整被动压力/粗细资格",
-      "status": "not_run",
-      "summary": "下一步拟补原粗网格3态和细网格5态；不重算本次接受态。"
+      "label": "细圆环与粗细资格",
+      "status": "failed",
+      "summary": "细网格零载SIGSEGV 11；没有末态，准确调用点未知，粗细比较not_run。"
     },
     {
       "label": "原外轮廓固体资格",
@@ -86,24 +86,25 @@
   ],
   "active_work": [
     {
-      "title": "首压力平衡与结构/力学图交付完成",
+      "title": "粗网格5态与细网格失败证据交付",
       "status": "passed",
-      "summary": "一个真实接受态，保存全部4个Newton状态；数值迭代不是4个心动时刻，未额外计算。",
+      "summary": "5个真实压力态、共享应力色标、1倍形变；图件passed不改变整阶段failed。没有额外计算或Ring修复。",
       "evidence_refs": [
-        "project_control/ventricle_fem_ring_resume_execution_v02.md",
-        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/index.html",
-        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/delivery_audit.json"
+        "project_control/ventricle_fem_ring_passive_qualification_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/index.html",
+        "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/delivery_audit.json"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "新离散尚缺完整压力与粗细验证",
-      "status": "not_run",
-      "summary": "单个粗网格压力态通过不证明后续切线、完整被动响应或网格收敛；拟先补最多8态。",
+      "title": "细网格零载的原生接口故障尚未定位",
+      "status": "failed",
+      "summary": "monitor-0残量2.175e-16之后原生SIGSEGV 11，OOMKilled=false。优先排查零次Newton因子诊断，但无原生栈，不能宣称根因已证实。",
       "evidence_refs": [
-        "project_control/ventricle_fem_ring_resume_execution_v02.md",
-        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/post_verification.json"
+        "project_control/ventricle_fem_ring_passive_qualification_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/failure_diagnosis.json",
+        "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/failed_initial_audit.json"
       ]
     },
     {
@@ -125,25 +126,25 @@
   ],
   "results": [
     {
-      "title": "首压力平衡：结构/形变/应力/局部J",
+      "title": "粗网格完整压力：结构与数值门",
       "status": "passed",
-      "summary": "p/mu=0.02，Ta=0；腔面积+4.675918%，max|J−1|=0.00262844%，独立自由力约1.70e-14。",
-      "image": "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/figures/FigS1S4_pressure_equilibrium/FigS1S4_pressure_equilibrium_v01_20260918/04_FigS1S4_pressure_equilibrium_v01_20260918.png",
+      "summary": "最高p/mu=0.08：腔面积+22.4593%，局部J偏差0.0134833%，最大解析响应误差0.0684168%；细网格未完成。",
+      "image": "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/figures/FigS1S5_qualification/FigS1S5_qualification_v01_20260918/04_FigS1S5_qualification_v01_20260918.png",
       "evidence_refs": [
-        "project_control/ventricle_fem_ring_resume_execution_v02.md",
-        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/post_verification.json",
-        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/index.html"
+        "project_control/ventricle_fem_ring_passive_qualification_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/post_verification.json",
+        "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/index.html"
       ],
       "result_group": "current"
     },
     {
-      "title": "全部4个实际Newton状态",
+      "title": "5个真实压力态的应力网格图",
       "status": "passed",
-      "summary": "加载初猜→2个未收敛迭代→最终接受态；同一压力、共享应力色标、1倍形变，不是生理时间。",
-      "image": "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/figures/FigS1S4_newton_states/FigS1S4_newton_states_v01_20260918/04_FigS1S4_newton_states_v01_20260918.png",
+      "summary": "p/mu=0/0.02复用，0.04/0.06/0.08新接受；统一应力色标、1倍形变。载荷延拓不是生理时间。",
+      "image": "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/figures/FigS1S5_pressure_states/FigS1S5_pressure_states_v01_20260918/04_FigS1S5_pressure_states_v01_20260918.png",
       "evidence_refs": [
-        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/rendering.json",
-        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v02_20260918/index.html"
+        "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/rendering.json",
+        "../PRL-results/ventricle_fem/f6s1s5_ring_passive_v01_20260918/index.html"
       ],
       "result_group": "current"
     },
@@ -173,22 +174,23 @@
   ],
   "next_actions": [
     {
-      "title": "补完原圆环被动压力与粗细资格（待确认）",
+      "title": "定位零载接口故障，再只补细网格5态（待确认）",
       "status": "not_run",
-      "summary": "粗网格续算0.04/0.06/0.08，细网格零载及0.02/0.04/0.06/0.08；最多8态，不改材料/1%门、单CPU、首失败停止。通过后再回原轮廓，不夹带主动/三维/FSI。",
+      "summary": "同环境微型接口测试取得调用边界与回溯，定位后最小修复；通过后仅做M1零载及4个压力态。不重算粗网格、不改物理/原门限，单CPU、0GPU、失败即停。",
       "evidence_refs": [
-        "project_control/ventricle_fem_ring_resume_execution_v02.md"
+        "project_control/ventricle_fem_ring_passive_qualification_execution_v01.md"
       ]
     }
   ],
   "evidence_boundaries": [
     "仅FEM，无DCM。",
-    "理想化三维+公开morphoHeart路线已采纳；静态个体资料不能补造成同一个体连续生长。",
-    "本轮仅一个粗圆环压力点passed；不是完整压力/粗细资格、轮廓或生物学通过。",
+    "理想化三维+公开morphoHeart路线已采纳；静态资料不能补造成同一个体连续生长。",
+    "本轮粗圆环5态passed，整阶段failed；细网格执行failed、粗细比较not_run，不是轮廓或生物学通过。",
     "腔室面积变化不等于壁组织体积变化；位移模长包含点规范平移，不是应变。",
-    "4个Newton状态是算法初猜/迭代；只有末态接受，无生理时间或虚构帧。",
-    "709父/祖先文件和50项无关改动保持；0GPU/零载重算/安装/拉取/自动重跑/删除。",
-    "结果外置PRL-results；本包约38.9MiB，不进GitHub；磁盘余量与仓库3GiB门保持。",
+    "5个压力态是实际静力平衡；载荷延拓不是生理时间，无虚构帧。",
+    "细网格只保存初猜/monitor-0；微小初始残量不能代替最终求解报告，准确崩溃调用点未知。",
+    "826父文件、98正式调用文件及50项无关修改保持；0GPU/粗网格已接受态重算/安装/拉取/自动重跑/删除。",
+    "结果外置PRL-results；本包约54.9MiB，不进GitHub；磁盘余量与仓库3GiB门保持。",
     "本地main阶段提交，不自动推送。"
   ]
 }
