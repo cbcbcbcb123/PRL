@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "checks": {
+    "manifest_files": true,
+    "index_manifest": true,
+    "parents_and_unrelated_edits": true,
+    "formal_sources_unchanged": true,
+    "result_page_links": true,
+    "cockpit_links": true,
+    "storage": true
+  },
+  "evidence_basis_commit": "cd90e60",
+  "manifest_sha256": "524b1560a9ba63a0b99a19f20188cdaf704bd05a0d507a65e32c1cf21ccf0704",
+  "manifest_entries": 163,
+  "files": 164,
+  "result_bytes": 184644758,
+  "protected_parent_files": 1194,
+  "preexisting_dirty_files": 50,
+  "repository_bytes": 2036624392,
+  "external_free_bytes": 2208956436480,
+  "cockpit": {
+    "schema_version": "prl.cockpit.links.v1",
+    "status": "passed",
+    "html_links": 35,
+    "evidence_paths": 356,
+    "missing": []
+  },
+  "result_page_link_count": 10,
+  "missing_result_links": [],
+  "new_FEM_solves_during_delivery": 0,
+  "push": "not_run",
+  "cleanup": "not_authorized"
+}
