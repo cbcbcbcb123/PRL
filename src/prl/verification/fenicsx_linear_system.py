@@ -107,7 +107,7 @@ def classify(metrics, mumps, superlu):
     if mumps_ok and superlu_ok:
         return 'matrix_solved_by_both_direct_paths_original_snes_failure_not_reproduced'
     if not mumps_ok and superlu_ok:
-        return 'mumps_numeric_factorization_path_failure_not_exact_algebraic_singularity'
+        return 'mumps_backend_failure_with_superlu_small_residual'
     if not mumps_ok and not superlu_ok:
         return 'numerically_singular_or_severely_ill_conditioned_mixed_system'
     return 'cross_solver_disagreement_requires_further_diagnosis'

@@ -37,6 +37,16 @@ def _mumps_values(factor):
             result['rinfog'][str(index)]=float(factor.getMumpsRinfog(index))
         except Exception as error:
             result['rinfog'][str(index)]='unavailable:'+type(error).__name__
+    for label,method,entries,cast in [
+        ('icntl','getMumpsIcntl',[6,7,8,10,14,18,22,24,28,29],int),
+        ('cntl','getMumpsCntl',[1,2,3,4,5],float),
+    ]:
+        result[label]={}
+        for index in entries:
+            try:
+                result[label][str(index)]=cast(getattr(factor,method)(index))
+            except Exception as error:
+                result[label][str(index)]='unavailable:'+type(error).__name__
     try:
         result['inertia']=[int(x) for x in factor.getInertia()]
     except Exception as error:
@@ -44,14 +54,15 @@ def _mumps_values(factor):
     return result
 
 
-def _mumps_attempt(snes,matrix,rhs):
+def _mumps_attempt(snes,matrix,rhs,output=None):
     ksp=snes.getKSP(); pc=ksp.getPC()
     try:
         factor_solver_type=pc.getFactorSolverType()
     except Exception as error:
         factor_solver_type='unavailable:'+type(error).__name__
     report={'ksp_type':ksp.getType(),'pc_type':pc.getType(),
-            'factor_solver_type':factor_solver_type,'attempts':1}
+            'factor_solver_type':factor_solver_type,'attempts':1,
+            'ksp_options_prefix':ksp.getOptionsPrefix(),'matrix_type':matrix.getType()}
     solution=matrix.createVecRight(); solution.set(0)
     right=matrix.createVecLeft(); right.array[:]=rhs
     error=None
@@ -62,24 +73,29 @@ def _mumps_attempt(snes,matrix,rhs):
     except Exception as caught:
         error=_json_error(caught)
     report.update(converged_reason=int(ksp.getConvergedReason()),iterations=int(ksp.getIterationNumber()),
-                  pc_failed_reason=int(pc.getFailedReason()),exception=error,
-                  solution_finite=bool(np.all(np.isfinite(solution.array))),
-                  solution_norm=float(solution.norm()))
-    residual=matrix.createVecLeft(); matrix.mult(solution,residual); residual.axpy(-1,right)
-    report['relative_residual']=float(residual.norm()/max(right.norm(),1e-300))
+                  pc_failed_reason=int(pc.getFailedReason()),exception=error)
     try:
         report['mumps']=_mumps_values(pc.getFactorMatrix())
     except Exception as caught:
         report['mumps']={'factor_matrix_error':_json_error(caught)}
+    if output is not None:
+        write_json(output/'mumps_factorization.json',finite_json(report))
+        np.savez_compressed(output/'mumps_linear_solution.npz',solution=solution.array.copy())
+    report.update(solution_finite=bool(np.all(np.isfinite(solution.array))),
+                  solution_norm=float(solution.norm()))
+    residual=matrix.createVecLeft(); matrix.mult(solution,residual); residual.axpy(-1,right)
+    report['relative_residual']=float(residual.norm()/max(right.norm(),1e-300))
     residual.destroy(); right.destroy(); solution.destroy()
     return report
 
 
-def _superlu_attempt(matrix,rhs):
+def _superlu_attempt(matrix,rhs,output=None):
     started=time.monotonic()
     try:
         factor=splu(matrix.tocsc())
         solution=factor.solve(rhs)
+        if output is not None:
+            np.savez_compressed(output/'superlu_linear_solution.npz',solution=solution)
         relative=float(np.linalg.norm(matrix@solution-rhs)/max(np.linalg.norm(rhs),1e-300))
         pivots=np.abs(factor.U.diagonal())
     except Exception as error:
@@ -143,13 +159,29 @@ def main():
                             rhs=rhs,residual=residual,displacement=ring.vmap,pressure=ring.pmap,
                             displacement_cells=displacement_cells,pressure_cells=pressure_cells,
                             fixed=ring.fixed_mixed,initial=initial)
-        superlu=_superlu_attempt(matrix,rhs)
-        mumps=_mumps_attempt(snes,problem.A,rhs)
+        same_matrix=None
+        if config.get('report_replay'):
+            with np.load(root/'previous_matrix_csr.npz',allow_pickle=False) as previous, np.load(root/'matrix_csr.npz',allow_pickle=False) as current:
+                same_matrix={key:bool(np.array_equal(previous[key],current[key])) for key in previous.files}
+            write_json(root/'matrix_identity.json',same_matrix)
+            if not all(same_matrix.values()):
+                raise ValueError('Matrix replay differs from retained F6-S1-S CSR or maps')
+        write_json(root/'matrix_metrics.json',finite_json(metrics))
+        superlu=_superlu_attempt(matrix,rhs,root)
+        write_json(root/'superlu_diagnosis.json',finite_json(superlu))
+        print('PRL_SUPERLU_JSON='+json.dumps(finite_json(superlu),allow_nan=False),flush=True)
+        mumps=_mumps_attempt(snes,problem.A,rhs,root)
+        write_json(root/'mumps_diagnosis.json',finite_json(mumps))
+        print('PRL_MUMPS_JSON='+json.dumps(finite_json(mumps),allow_nan=False),flush=True)
+        np.savez_compressed(root/'state_identity.npz',initial=initial,before=before,
+                            after_assembly=after_assembly,after_factorization=ring.w.x.array.copy(),
+                            problem_after=problem.x.array.copy())
         state_unchanged=bool(np.array_equal(before,ring.w.x.array) and np.array_equal(before,after_assembly)
                              and np.array_equal(initial,problem.x.array))
         verdict=classify(metrics,mumps,superlu)
         report={'status':'passed','diagnostic_delivery':'passed','scientific_pressure_space_status':'failed',
                 'cause_class':verdict,'same_displacement_mesh':same_mesh,'retained_state_chain':state_chain,
+                'same_saved_matrix':same_matrix,
                 'original_failure':failed_metadata,'matrix':metrics,'mumps':mumps,'superlu':superlu,
                 'state_unchanged':state_unchanged,'nonlinear_equilibrium_solves':0,'newton_updates':0,
                 'matrix_assemblies':1,'mumps_factorizations':1,'superlu_factorizations':1,

@@ -30,7 +30,7 @@ def test_classification_separates_backend_failure_from_exact_singularity():
     report=sparse_metrics(*fixture())
     actual=classify(report,{'converged_reason':-11,'relative_residual':1.},
                     {'status':'passed','relative_residual':1e-14})
-    assert actual=='mumps_numeric_factorization_path_failure_not_exact_algebraic_singularity'
+    assert actual=='mumps_backend_failure_with_superlu_small_residual'
     broken={**report,'zero_rows':1}
     assert classify(broken,{},{} )=='structurally_singular_assembled_system'
 
@@ -57,12 +57,35 @@ def test_cli_exposes_bounded_linear_diagnosis():
     parsed=_parser().parse_args(['diagnose','fem-fenicsx-linear'])
     assert parsed.command=='diagnose'
     assert parsed.diagnose_command=='fem-fenicsx-linear'
+    replay=_parser().parse_args(['diagnose','fem-fenicsx-linear','--report-replay'])
+    assert replay.report_replay
 
 
 def test_nonfinite_solver_diagnostics_are_serializable():
     from prl.verification.fenicsx_linear_system import finite_json
     import json
-    report=finite_json({'positive':np.inf,'negative':-np.inf,'missing':np.nan,'ok':1.})
-    assert report=={'positive':'positive_infinity','negative':'negative_infinity',
-                    'missing':'nan','ok':1.}
-    json.dumps(report,allow_nan=False)
+    report=finite_json({'mumps':{'converged_reason':-11,'solution_norm':np.inf,
+                               'relative_residual':np.nan,'rinfog':[0.,-np.inf]},'ok':1.})
+    assert report=={'mumps':{'converged_reason':-11,'solution_norm':'positive_infinity',
+                             'relative_residual':'nan','rinfog':[0.,'negative_infinity']},'ok':1.}
+    assert json.loads(json.dumps(report,allow_nan=False))==report
+
+
+def test_replay_is_create_only_before_docker():
+    from prl.runs.fenicsx_linear_system import run_diagnosis,REPLAY_RESULT
+    import pytest
+    with patch('prl.runs.fenicsx_linear_system.result_path',side_effect=FileExistsError) as paths, patch('prl.runs.fenicsx_linear_system.read_docker') as docker:
+        with pytest.raises(FileExistsError):
+            run_diagnosis(Path(__file__).resolve().parents[2],replay=True)
+        assert paths.call_args.args[1]==REPLAY_RESULT
+        docker.assert_not_called()
+
+
+def test_workspace_exhaustion_is_not_misreported_as_singularity():
+    from prl.verification.fenicsx_linear_system_result import mumps_failure_cause
+    def report(code):
+        return {'mumps':{'infog':{'1':code}}}
+    assert mumps_failure_cause(report(-9))=='mumps_internal_real_workspace_too_small'
+    assert mumps_failure_cause(report(-10))=='mumps_numerical_singularity_or_zero_pivot'
+    assert mumps_failure_cause(report(-13))=='mumps_memory_allocation_failure'
+    assert mumps_failure_cause({})=='unknown_mumps_failure'

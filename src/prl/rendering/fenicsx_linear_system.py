@@ -320,3 +320,95 @@ def render(
         "local_pressure_block_svd_count": diagnostics["pressure_cells"],
         "mumps_details": "not_retained_due_to_json_inf_serialization_failure",
     }
+
+
+def render_replay(result_root):
+    """Model structure and saved solve diagnostics; no assembly or factorization."""
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.collections import PolyCollection
+    from matplotlib.patches import Patch
+
+    root=Path(result_root).resolve(strict=True)
+    report=json.loads((root/'post_verification.json').read_text(encoding='utf-8'))
+    if report['status']!='passed':
+        raise ValueError('Independent replay verification must pass before rendering')
+    with np.load(root/'assembly/raw/M0_mesh.npz',allow_pickle=False) as mesh:
+        coords=mesh['coordinates']; cells=mesh['cells']; layers=mesh['layers']; fixed=mesh['fixed']
+    mumps=json.loads((root/'mumps_diagnosis.json').read_text())
+    superlu=json.loads((root/'superlu_diagnosis.json').read_text())
+    target=root/'figures/FigS1S2_report_replay_v02_20260918'
+    if target.with_suffix('.png').exists() or target.with_suffix('.svg').exists():
+        raise FileExistsError('Replay figure is create-only')
+    target.parent.mkdir(parents=True,exist_ok=True)
+    with plt.rc_context({'font.family':'Microsoft YaHei','font.size':11,
+                         'axes.spines.top':False,'axes.spines.right':False,'svg.fonttype':'none'}):
+        fig,axes=plt.subplots(2,2,figsize=(12.8,9.8),layout='constrained')
+        ax=axes[0,0]
+        palette={1:'#77add0',2:'#e4c884',3:'#8fba9e'}
+        patches=PolyCollection(coords[cells[:,:3]],facecolors=[palette[int(k)] for k in layers],
+                               edgecolors='#52655b',linewidths=.22)
+        ax.add_collection(patches)
+        ax.scatter(coords[fixed.any(axis=1),0],coords[fixed.any(axis=1),1],c='#972d35',s=35,zorder=4)
+        for angle in np.linspace(0,2*np.pi,12,endpoint=False):
+            direction=np.array([np.cos(angle),np.sin(angle)])
+            ax.annotate('',xy=direction*.82,xytext=direction*.60,
+                        arrowprops={'arrowstyle':'->','color':'#b64040','lw':1.2})
+        ax.text(0,0,'保留初始构形\np/μ = 0.02\n主动张力 = 0',ha='center',va='center',fontsize=11)
+        ax.set(xlim=(-1.17,1.17),ylim=(-1.17,1.17),aspect='equal',xlabel='X（无量纲）',ylabel='Y（无量纲）')
+        ax.set_title('A  三层圆环与原始边界条件',loc='left',fontweight='bold')
+        ax.legend(handles=[Patch(color=palette[k],label=label) for k,label in [(1,'心内膜'),(2,'ECM'),(3,'心肌')]],
+                  loc='upper right',fontsize=9,frameon=False)
+        ax.text(.01,.015,'外壁自由；红点为3个位移约束',transform=ax.transAxes,fontsize=9)
+
+        ax=axes[0,1]; ax.axis('off')
+        ax.set_title('B  MUMPS直接失败原因已定位',loc='left',fontweight='bold')
+        rows=[['KSP reason',str(mumps['converged_reason'])+'  (PC failed)'],
+              ['MUMPS INFOG(1)',str(report['mumps_infog_1'])+'  工作数组过小'],
+              ['INFOG(2)',str(report['mumps_infog_2'])+' 个缺少的数值条目'],
+              ['ICNTL(14)',str(report['mumps_icntl_14'])+'% 工作空间余量'],
+              ['容器OOM退出','否'],['矩阵、右端、DOF映射','与上轮逐项相同']]
+        table=ax.table(cellText=rows,colLabels=['保存指标','本次观察'],cellLoc='left',
+                       colLoc='left',colWidths=[.38,.62],bbox=[0,.30,1,.62])
+        table.auto_set_font_size(False); table.set_fontsize(10)
+        for (row,_),cell in table.get_celld().items():
+            cell.set_edgecolor('#d7e1dc'); cell.set_facecolor('#e6f0ea' if row==0 else 'white')
+        ax.text(0,.19,'-9：内部工作数组不足\n-10才是数值奇异/零主元错误码',va='top',color='#9d3b31',fontsize=12)
+
+        ax=axes[1,0]
+        relative=report['superlu_independent_relative_residual']
+        values=[1.,relative]
+        bars=ax.bar([0,1],values,color=['#aab7b0','#2d8464'],width=.52)
+        ax.set_yscale('log'); ax.set_ylim(1e-15,1e2)
+        ax.set_xticks([0,1],['初始残量','SuperLU线性解残量'])
+        ax.set_ylabel('相对残量 ||Ax − b|| / ||b||')
+        for bar,value in zip(bars,values):
+            ax.text(bar.get_x()+bar.get_width()/2,value*2.2,f'{value:.2e}',ha='center',fontsize=11)
+        ax.axhline(1e-8,color='#9d3b31',ls='--',lw=1)
+        ax.text(.04,1.5e-8,'线性诊断检查阈值',color='#9d3b31',fontsize=9)
+        ax.set_title('C  同矩阵SuperLU解通过独立残量检查',loc='left',fontweight='bold')
+        ax.text(.03,.04,'这是线性诊断向量，未施加到FEM状态。',transform=ax.transAxes,fontsize=9)
+
+        ax=axes[1,1]; ax.axis('off')
+        ax.set_title('D  本轮裁决与下一步',loc='left',fontweight='bold')
+        lines=['诊断交付：PASSED；DG2受压平衡：仍FAILED',
+               '', '保存CSR：9,216阶；245,760个存储项',
+               '独立复核：前后状态逐字节相同',
+               '估计1-范数条件数：约 1.09e9',
+               '尺度风险仍在；不是已确认的奇异矩阵',
+               '', '已确认：MUMPS内部工作空间不足',
+               '下一步：先验证工作空间余量20% → 100%',
+               '', '本轮0个新平衡态，0次自动重跑，0 GPU',
+               '材料、几何、压力和1%体积门保持',
+               '轮廓、三维、FSI和生长：未运行']
+        ax.text(0,.96,'\n'.join(lines),va='top',fontsize=11,linespacing=1.55,
+                bbox={'boxstyle':'round,pad=.8','fc':'#f0f5f2','ec':'#c9d8cf'})
+        fig.suptitle('F6-S1-S2｜同一初值诊断重放：MUMPS工作空间不足',fontsize=17,fontweight='bold')
+        for extension in ['png','svg']:
+            fig.savefig(target.with_suffix('.'+extension),dpi=220,facecolor='white')
+        plt.close(fig)
+    return {'status':'passed','scientific_status':'failed','postprocess_factorizations':0,
+            'new_equilibria':0,'png':target.with_suffix('.png').relative_to(root).as_posix(),
+            'svg':target.with_suffix('.svg').relative_to(root).as_posix(),
+            'source_files':['assembly/raw/M0_mesh.npz','post_verification.json','mumps_diagnosis.json','superlu_diagnosis.json']}

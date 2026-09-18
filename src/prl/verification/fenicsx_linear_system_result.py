@@ -162,3 +162,83 @@ def verify_linear_system_result(root, workspace=None, save=False):
             encoding="utf-8",
         )
     return report
+
+
+def mumps_failure_cause(report):
+    """Interpret a saved MUMPS error code without inferring it from block scales."""
+    code=report.get('mumps',{}).get('infog',{}).get('1')
+    return {-9:'mumps_internal_real_workspace_too_small',
+            -8:'mumps_internal_integer_workspace_too_small',
+            -10:'mumps_numerical_singularity_or_zero_pivot',
+            -6:'mumps_structural_singularity',
+            -13:'mumps_memory_allocation_failure',
+            0:'mumps_no_reported_error'}.get(code,'unknown_mumps_failure')
+
+
+def verify_replay_result(root, workspace, save=False):
+    """Verify the S2 reports and saved solutions using matvecs, without any solve."""
+    root=Path(root).resolve(strict=True); workspace=Path(workspace).resolve(strict=True)
+    diagnostic=_load_json(root/'diagnosis.json'); execution=_load_json(root/'execution.json')
+    mumps=_load_json(root/'mumps_diagnosis.json'); superlu=_load_json(root/'superlu_diagnosis.json')
+    formal=_load_json(root/'formal_invocation_manifest.json')
+    identity=_identities(root,formal['files'])
+    sources=_load_json(root/'source_result_preflight.json')
+    parents=_load_json(root/'protected_preflight.json')
+    with np.load(root/'matrix_csr.npz',allow_pickle=False) as saved:
+        arrays={key:saved[key] for key in saved.files}
+    with np.load(root/'previous_matrix_csr.npz',allow_pickle=False) as previous:
+        same_matrix={key:np.array_equal(previous[key],arrays[key]) for key in previous.files}
+    size=len(arrays['rhs'])
+    matrix=sparse.csr_matrix((arrays['data'],arrays['indices'],arrays['indptr']),shape=(size,size))
+    with np.load(root/'state_identity.npz',allow_pickle=False) as states:
+        same_state={key:states[key].tobytes()==arrays['initial'].tobytes() for key in states.files}
+    with np.load(root/'superlu_linear_solution.npz',allow_pickle=False) as solution:
+        superlu_vector=solution['solution']
+    with np.load(root/'mumps_linear_solution.npz',allow_pickle=False) as solution:
+        mumps_finite=bool(np.isfinite(solution['solution']).all())
+    relative=float(np.linalg.norm(matrix@superlu_vector-arrays['rhs'])/np.linalg.norm(arrays['rhs']))
+    fixed=arrays['fixed']; reference=np.zeros((len(fixed),size))
+    reference[np.arange(len(fixed)),fixed]=1.
+    gauge_error=float(np.max(np.abs(matrix[fixed].toarray()-reference)))
+    inspection=_load_json(root/'container_inspect.json')
+    snapshot_hashes=_load_json(root/'source_hashes.json')
+    checks={
+        'formal_files_preserved':all(identity.values()),
+        'source_packages_preserved':all(_digest(path)==sha for path,sha in sources.items()),
+        'parent_files_preserved':all(_digest(workspace/path)==sha for path,sha in parents.items()),
+        'source_snapshots_preserved':all(_digest(root/'sources_at_execution'/path)==sha for path,sha in snapshot_hashes.items()),
+        'identical_saved_matrix_rhs_and_maps':bool(all(same_matrix.values())),
+        'state_bytes_unchanged':bool(all(same_state.values())),
+        'fixed_dofs_have_unit_rows':gauge_error<1e-14,
+        'negated_residual_is_rhs':bool(np.array_equal(-arrays['residual'],arrays['rhs'])),
+        'superlu_solution_finite':bool(np.isfinite(superlu_vector).all()),
+        'superlu_relative_residual':relative<1e-8,
+        'superlu_saved_residual_matches':bool(np.isclose(relative,superlu['relative_residual'],rtol=1e-3,atol=1e-14)),
+        'mumps_report_consistency':mumps==diagnostic['mumps'] and superlu==diagnostic['superlu'],
+        'mumps_nonfinite_flag_matches':mumps_finite==mumps['solution_finite'],
+        'diagnostic_execution_passed':execution['status']=='passed' and diagnostic['status']=='passed',
+        'one_container':execution['diagnostic_container_invocations']==1,
+        'one_factorization_each':mumps['attempts']==superlu['attempts']==1,
+        'zero_equilibria_and_newton_updates':diagnostic['nonlinear_equilibrium_solves']==diagnostic['newton_updates']==0,
+        'zero_automatic_retries_and_gpu':execution['automatic_retries']==execution['gpu']==0,
+        'container_not_oom_killed':not inspection['State']['OOMKilled'],
+    }
+    report={'status':'passed' if all(checks.values()) else 'failed','checks':checks,
+            'diagnostic_delivery':'passed' if all(checks.values()) else 'failed',
+            'scientific_pressure_space_status':'failed','cause':mumps_failure_cause(mumps),
+            'ksp_reason':mumps['converged_reason'],'pc_failed_reason':mumps['pc_failed_reason'],
+            'mumps_infog_1':mumps['mumps']['infog']['1'],'mumps_infog_2':mumps['mumps']['infog']['2'],
+            'mumps_icntl_14':mumps['mumps']['icntl']['14'],
+            'superlu_independent_relative_residual':relative,
+            'superlu_estimated_condition_1':superlu['estimated_condition_1'],
+            'fixed_row_max_error':gauge_error,'matrix_arrays_checked':len(same_matrix),
+            'state_arrays_checked':len(same_state),'formal_files_checked':len(identity),
+            'source_result_files_checked':len(sources),'protected_parent_files_checked':len(parents),
+            'postprocess_factorizations':0,'new_equilibria':0,'state_updated':False,
+            'interpretation':'MUMPS workarray capacity was exhausted. Block scale separation may contribute to pivoting and fill-in, but this run does not establish that causal link. SuperLU gives a small residual for this right-hand side; nonlinear mechanics and local J remain untested.',
+            'documentation':[
+                'https://mumps-solver.org/doc/userguide_5.9.1.pdf',
+                'https://petsc.org/release/manualpages/Mat/MATSOLVERMUMPS/']}
+    if save:
+        (root/'post_verification.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n',encoding='utf-8')
+    return report

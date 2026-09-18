@@ -17,6 +17,8 @@ from prl.runs.fenicsx_runtime import read_docker,IMAGE,TAG,container_command,sav
 RESULT=Path('results/ventricle_fem/f6s1s_linear_system_diagnosis_v01_20260918')
 SOURCE_RESULT=Path('results/ventricle_fem/f6s1r_pressure_space_v01_20260918')
 CONTRACT=Path('project_control/ventricle_fem_mixed_linear_diagnosis_contract_v01.md')
+REPLAY_RESULT=Path('results/ventricle_fem/f6s1s2_linear_report_replay_v01_20260918')
+REPLAY_CONTRACT=Path('project_control/ventricle_fem_mixed_linear_replay_contract_v01.md')
 
 
 def configuration():
@@ -29,10 +31,11 @@ def configuration():
     return cfg
 
 
-def run_diagnosis(workspace):
+def run_diagnosis(workspace, replay=False):
     workspace=Path(workspace).resolve(strict=True)
-    root=result_path(workspace,RESULT,new=True)
-    if not (workspace/CONTRACT).is_file():
+    contract=REPLAY_CONTRACT if replay else CONTRACT
+    root=result_path(workspace,REPLAY_RESULT if replay else RESULT,new=True)
+    if not (workspace/contract).is_file():
         raise ValueError('Approved diagnosis contract is missing')
     source=result_path(workspace,SOURCE_RESULT)
     source_manifest=json.loads((source/'manifest.json').read_text())
@@ -46,10 +49,20 @@ def run_diagnosis(workspace):
         raise RuntimeError('Storage admission refused')
     parents=protected(workspace,fine=True)
     source_hashes={str(path):digest(path) for path in source.rglob('*') if path.is_file()}
+    previous=result_path(workspace,RESULT) if replay else None
+    if previous is not None:
+        prior_manifest=json.loads((previous/'manifest.json').read_text())
+        if not all(digest(previous/item['path'])==item['sha256'] for item in prior_manifest['files']):
+            raise ValueError('F6-S1-S evidence identity drift')
+        source_hashes.update({str(path):digest(path) for path in previous.rglob('*') if path.is_file()})
     with scientific_lock(workspace):
         root.mkdir(parents=True,exist_ok=False)
         save_json(root/'storage_preflight.json',admission)
-        save_json(root/'configuration.json',configuration())
+        cfg=configuration()
+        cfg['report_replay']=replay
+        save_json(root/'configuration.json',cfg)
+        if previous is not None:
+            shutil.copyfile(previous/'matrix_csr.npz',root/'previous_matrix_csr.npz')
         save_json(root/'docker_version.json',version)
         save_json(root/'protected_preflight.json',parents)
         save_json(root/'source_result_preflight.json',source_hashes)
@@ -62,13 +75,13 @@ def run_diagnosis(workspace):
                  'src/prl/verification/fenicsx_pressure.py','src/prl/verification/fenicsx_ring.py',
                  'src/prl/runs/fenicsx_linear_system.py','src/prl/runs/fenicsx_runtime.py',
                  'src/prl/runs/fem_finite_strain.py','src/prl/result_store.py',
-                 'project_control/result_storage_policy.json',CONTRACT.as_posix()]
+                 'project_control/result_storage_policy.json',contract.as_posix()]
         for relative in sources:
             destination=root/'sources_at_execution'/relative
             destination.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(workspace/relative,destination)
         save_json(root/'source_hashes.json',{relative:digest(workspace/relative) for relative in sources})
-        name='prl-f6s1s-linear-diagnosis-v01-20260918'
+        name='prl-f6s1s2-linear-report-replay-v01-20260918' if replay else 'prl-f6s1s-linear-diagnosis-v01-20260918'
         args=container_command(workspace,name,'/workspace/src/prl/fem/fenicsx_linear_system.py',root)
         save_json(root/'command.json',args)
         save_json(root/'diagnostic_started.json',{'container_invocations':1,'nonlinear_equilibrium_solves':0,
@@ -163,3 +176,50 @@ def finalize_diagnosis(workspace):
     return {'status':'failed','delivery_status':'failed','post_verification':'passed',
             'root_cause':'not_evaluable','equilibrium_solves':0,
             'package_bytes':sum(path.stat().st_size for path in root.rglob('*') if path.is_file())}
+
+
+def finalize_replay(workspace):
+    """Seal verified same-matrix evidence, retaining the scientific failure."""
+    from prl.result_store import register_result
+    from prl.verification.fenicsx_linear_system_result import verify_replay_result
+    workspace=Path(workspace).resolve(strict=True); root=result_path(workspace,REPLAY_RESULT)
+    index=workspace/'project_control/result_index'/f'{root.name}.json'
+    if index.exists():
+        raise FileExistsError('Replay delivery already sealed')
+    verification=verify_replay_result(root,workspace,save=True)
+    if verification['status']!='passed':
+        raise ValueError('Replay delivery verification failed')
+    rendering=json.loads((root/'rendering.json').read_text())
+    rendering.update(visual_qa='passed_v02_font_and_layout_review',
+                     retained_draft='figures/FigS1S2_report_replay_v01_20260918.png')
+    save_json(root/'rendering.json',rendering)
+    summary={'status':'passed','diagnostic_delivery':'passed','scientific_pressure_space_status':'failed',
+             'cause':verification['cause'],'mumps_infog_1':verification['mumps_infog_1'],
+             'mumps_infog_2':verification['mumps_infog_2'],'mumps_icntl_14':verification['mumps_icntl_14'],
+             'superlu_relative_residual':verification['superlu_independent_relative_residual'],
+             'same_saved_matrix':True,'state_unchanged':True,'nonlinear_equilibrium_solves':0,
+             'automatic_retries':0,'gpu':0,'contour':'not_run','fsi':'not_run','growth':'not_run',
+             'figure':rendering['png'],'next_action':'proposed: same CSR, one MUMPS attempt with ICNTL(14)=100; no equilibrium solve',
+             'caution':'workspace exhaustion is confirmed; a successful nonlinear pressure equilibrium and the 1% local volume gate remain unverified'}
+    save_json(root/'summary.json',summary)
+    for relative in ['src/prl/rendering/fenicsx_linear_system.py',
+                     'src/prl/verification/fenicsx_linear_system_result.py',
+                     'src/prl/runs/fenicsx_linear_system.py',
+                     'project_control/ventricle_fem_mixed_linear_replay_execution_v01.md']:
+        destination=root/'sources_at_delivery'/relative
+        destination.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copyfile(workspace/relative,destination)
+    page=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>F6-S1-S2 同矩阵诊断</title>
+<style>body{{max-width:1100px;margin:32px auto;padding:0 20px;color:#183c2b;font:16px/1.7 'Microsoft YaHei',sans-serif}}img{{width:100%}}a{{color:#167153}}code{{background:#eef3ef;padding:3px}}</style>
+<h1>F6-S1-S2：已定位MUMPS内部工作空间不足</h1>
+<p>诊断交付passed；原DG2受压平衡仍failed。一次单CPU诊断，0个新平衡态，状态前后逐字节相同。</p>
+<img src="{rendering['png']}" alt="三层圆环与同矩阵求解器对照">
+<p>原配置返回<code>INFOG(1)=-9</code>，即内部数值工作数组过小；<code>INFOG(2)=1321</code>，<code>ICNTL(14)=20</code>。同一CSR的SuperLU线性解独立相对残量为3.17e-13。</p>
+<p>这将直接失败原因从先前的数值奇异假设定位到工作空间预分配。矩阵条件数估计约1.09e9，仍需后续精度检查。当前证据不证明非线性平衡或1%体积门已经通过。</p>
+<p><a href="post_verification.json">独立复核</a> · <a href="mumps_diagnosis.json">MUMPS明细</a> · <a href="superlu_diagnosis.json">SuperLU明细</a> · <a href="matrix_identity.json">新旧矩阵身份</a> · <a href="summary.json">阶段摘要</a></p>
+<p>复算入口：prl.verification.fenicsx_linear_system_result.verify_replay_result；绘图入口：prl.rendering.fenicsx_linear_system.render_replay。原始CSR、解向量、输入、执行与绘图源快照均在本包中。</p>
+<p>文档依据：<a href="https://mumps-solver.org/doc/userguide_5.9.1.pdf">MUMPS用户指南</a>及<a href="https://petsc.org/release/manualpages/Mat/MATSOLVERMUMPS/">PETSc MUMPS选项</a>。</p></html>'''
+    (root/'index.html').write_text(page,encoding='utf-8')
+    save_json(root/'manifest.json',package_manifest(root))
+    register_result(workspace,root,'passed',digest(root/'manifest.json'))
+    return summary
