@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "checks": {
+    "manifest_identity": true,
+    "manifest_exact_coverage": true,
+    "all_manifest_hashes": true,
+    "protected_evidence_and_dirty": true,
+    "delivery_sources_match": true,
+    "strict_navigation": true,
+    "git_exact_scope": true,
+    "original_dirty_set_present": true,
+    "branch_main": true,
+    "index_empty": true,
+    "storage": true
+  },
+  "unexpected_git_paths": [],
+  "task_git_paths": [
+    "START_HERE.md",
+    "memory/project_cockpit/status.json",
+    "memory/project_cockpit/task_log.jsonl",
+    "project_control/CURRENT_STATUS.md",
+    "project_control/evidence/f6s2d1_delivery_v01/closure_audit.py",
+    "project_control/evidence/f6s2d1_delivery_v01/navigation_validation.json"
+  ],
+  "checked_commit": "7c77b2dcc425a5037a4e9a101bc4a4c98ebb98de",
+  "result_files": 128,
+  "manifest_entries": 127,
+  "result_bytes": 41493908,
+  "protected_files": 1940,
+  "dirty_files": 50,
+  "repository_bytes": 2038515222,
+  "scientific_status": "failed",
+  "fine_zero": "passed",
+  "fine_pressure": "failed",
+  "new_scientific_solves": 0,
+  "result_manifest_sha256": "7bd712585b82c5ca4689f56292536a918b060ace2acf9051790ecba9a790e0f4"
+}

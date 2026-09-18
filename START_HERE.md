@@ -19,31 +19,31 @@ updated_at: 2026-09-18
 基底环全固定、外壁自由；内壁随动压力，心肌切平面分散主动张力尚未运行。
 mu=1、kappa=1000、几何及纤维分布均未标定。不是二维挤出，也不是实验心室。
 
-**F6-S2-R：原生接口已通过，首个三维压力态因局部体积门failed而停止。**
-粗/细输入1344/3960单元，复用原M0无载，不重算。p/mu=0.01、Ta=0经3次Newton平衡，残差1.69e-16。
-腔体积扩大1.0895%，但局部max abs(J-1)=1.5227%，超过原1%门；此态不接受。
-96个超限单元全部与固定基底相接，非相邻单元最大0.5296%。不是接口或线性求解失败。
-原失败保留；后续12态、收缩、细网格平衡、生长及FSI均not_run。
+**F6-S2-D1：细网格仍未通过局部体积门，单纯加密未解决问题。**
+M0/M1为1344/3960单元；同p/mu=0.01、Ta=0，腔体积增加1.0895%/1.1059%。
+整体响应相对差1.48%，但max abs(J-1)=1.5227%/1.4496%，两者都超过原1%门。
+细网格仅改善局部最大值约4.8%；120个超限单元全部与固定基底相接。
+两网格均达到数值平衡，非接口或MUMPS失败。M1零载passed；压力态不接受，停止后续加载。
 
-![三维结构、首压力应力与局部体积失败](../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/figures/FigS2R_3d_overview/FigS2R_3d_overview_v01_20260918/04_FigS2R_3d_overview_v01_20260918.png)
+![粗细网格结构、同压力应力与局部体积偏差](../PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/figures/FigS2D1_3d_mesh_comparison/FigS2D1_3d_mesh_comparison_v01_20260918/04_FigS2D1_3d_mesh_comparison_v01_20260918.png)
 
-[结构图、Notebook和失败定位](../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/index.html) ·
-[本次执行及边界](project_control/ventricle_fem_idealized_3d_resume_execution_v01.md)
+[结构图、Notebook和粗细对照](../PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/index.html) ·
+[本次执行及边界](project_control/ventricle_fem_3d_fine_pressure_execution_v01.md)
 
-只展示原无载与首压力实存状态，另保存4个Newton状态；不补造5个平衡态或生理时间。
-一次31.453秒、单CPU/0GPU/0重跑；87测试及图件交付passed，不等于加载资格通过。
+本轮只新增M1无载/首压力，M0原数据保留；保存全部Newton状态，图为真实1倍形变和共同色标。
+一次44.488秒、单CPU/0GPU/0重跑；91测试及图件交付passed，不等于加载资格通过。
 
 ## 主要难点与唯一下一步
 
-当前是基底邻近的局部体积失真；弱平衡满足不代表逐点体积约束满足。
-网格、夹持和压力空间贡献尚未分离。
-**待确认：已有M1网格仅做零载与同p=0.01两个状态，对照保留M0失败。**
-材料/边界/离散/1%门保持，首失败停；不继续收缩、生长或FSI。
+整体响应接近但局部体积仍失真；网格/曲面近似/夹持/压力空间的贡献尚未分离。
+**待确认：先形成近不可压体积约束离散的单变量资格方案。**
+暂不改材料、载荷或基底；审查三维压力表示、稳定性/锁死及小基准，不直接照搬二维结论。
+方案审查不启动FEM；新的小基准/壳对照再按合同确认。不继续收缩、生长或FSI。
 
 ## 证据与存储
 
 结果在已批准的E:\Temp-Projects\PRL-results，不进GitHub。
-本包约16.94MiB；1817父文件、71调用文件、50项无关修改保持，仓库低于3GiB。
+本包约39.57MiB；1940父文件、75调用文件、50项无关修改保持，仓库低于3GiB。
 本地main阶段提交，未推送；无删除、安装或拉取。
 
 - [上一阶段二维低压主动passed](../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/index.html)：相对受压基线缩腔约1.85%，不是三维或实验心跳。

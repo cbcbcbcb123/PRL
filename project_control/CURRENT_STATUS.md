@@ -8,16 +8,16 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 39d9b0b
-current_lifecycle: fem_only_f6s2r_3d_first_pressure_local_volume_failed
+verified_commit: 7c77b2d
+current_lifecycle: fem_only_f6s2d1_3d_fine_mesh_local_volume_failed
 documentation_updated_at: 2026-09-18
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_idealized_3d_resume_contract_v01.md
+current_contract: project_control/ventricle_fem_3d_fine_pressure_contract_v01.md
 last_completed_contract: project_control/ventricle_fem_contour_active_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/rendering.json
-next_stage_contract: pending_confirmation_M1_zero_and_pressure_001_only
-current_authorization: f6s2r_first_failure_stopped_no_automatic_rerun
+current_render_contract: ../PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/rendering.json
+next_stage_contract: pending_confirmation_volumetric_discretization_design_review_no_FEM
+current_authorization: f6s2d1_first_failure_stopped_two_state_scope_consumed
 development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -26,11 +26,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: none_remaining_after_F6S2R_first_failure
-current_execution_log: project_control/ventricle_fem_idealized_3d_resume_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_idealized_3d_resume_execution_v01.md
+execution_authorized: none_remaining_after_F6S2D1_first_failure
+current_execution_log: project_control/ventricle_fem_3d_fine_pressure_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_3d_fine_pressure_execution_v01.md
 latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
-latest_result_package: ../PRL-results/ventricle_fem/f6s2r_idealized_3d_resume_v01_20260918/summary.json
+latest_result_package: ../PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/summary.json
 latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,28 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 F6-S2-R原生接口通过，三维首压力局部体积门失败
+## 当前：2026-09-18 F6-S2-D1细网格同压力仍不满足局部体积门
+
+仅新增M1零载和p/mu=0.01、Ta=0两态，保留M0失败不重算；生产/协议/原独立力学文件哈希不变。
+一次44.488051秒、1CPU/8GiB/禁网/0GPU/0重跑。M1零载passed；首压力3次Newton收敛，
+MUMPS及独立场量passed，但max abs(J-1)=1.449560%仍超过原1%门，首失败停。
+
+M0/M1单元1344/3960，腔体积增加1.089525%/1.105919%，响应相对差1.482348%通过参考门；
+局部最大偏差1.522743%/1.449560%，仅改善4.805976%，两压力态均failed。
+M1的120个超限单元全部与基底相接，远区最大0.459731%；夹持/压力空间/几何贡献未分离。
+不能以整体响应接近宣称局部或渐近收敛；不改材料、门限或夹持，不继续主动、生长、FSI。
+
+91测试、主机/容器复核、真实1倍/共同色标结构-应力-J图及Notebook交付passed。
+结果128文件41,493,908 bytes、manifest127项，SHA-256：
+7bd712585b82c5ca4689f56292536a918b060ace2acf9051790ecba9a790e0f4。
+1940父文件、75调用文件、50项无关修改保持；本地main提交，不推送。
+
+[粗细对照图及证据](../../PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/index.html) ·
+[执行及科学边界](ventricle_fem_3d_fine_pressure_execution_v01.md)。
+唯一下一步待确认：先形成局部体积约束离散的单变量资格方案，材料/载荷/基底暂不变；
+审查三维压力表示、自由度/稳定性/锁死与小基准门。方案审查不启动FEM，新运行另按合同确认。
+
+## 历史：2026-09-18 F6-S2-R原生接口通过，三维首压力局部体积门失败
 
 原M0无载逐项身份/原生接口门passed，不重新求解无载；材料、几何、边界、力学公式及门限不变。
 一次31.453212秒单CPU/0GPU/0重跑，新增M0 p=0.01、Ta=0一个状态。
