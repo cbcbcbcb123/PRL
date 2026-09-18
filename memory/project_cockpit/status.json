@@ -2,14 +2,14 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-18",
   "overall_status": "failed",
-  "summary": "F6-S1-S3仅将MUMPS工作空间余量20改100，同一保存切线的线性故障已消除：残量7.48e-11。原非线性受压平衡与1%局部体积门仍failed。",
+  "summary": "F6-S1-S4恢复首压力态时，新增监测代码触发PETSc只读锁错误，Newton更新前停止。0个新平衡态；补丁和60测试通过，原环境复验not_run。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
     "scope": "当前仍为二维固体资格；理想化三维、双向FSI、连续生长与实验验证not_run。",
-    "current_stage": "F6-S1-S3 same-CSR workspace correction passed; nonlinear qualification pending",
-    "current_location": "../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918",
-    "evidence_basis_commit": "8237412",
+    "current_stage": "F6-S1-S4 observer failure; patches written, original runtime validation not_run",
+    "current_location": "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918",
+    "evidence_basis_commit": "06fc699",
     "evidence_checked_at": "2026-09-18",
     "git_workflow": {
       "branch": "main",
@@ -27,20 +27,20 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "一次8.380秒单CPU容器，0重组装/非线性更新/新SuperLU因子化。375父文件/176源文件保持，56测试+21子测试通过。",
+    "freshness_note": "一次16.914秒单CPU容器，0 Newton更新/接受态/自动重跑。619父文件、50项无关改动保持；60测试+21子测试通过。",
     "model_overview": {
-      "model_type": "FEniCSx二维P2/DG2平面应变NH；本輪只读取保存CSR作一次MUMPS工作空间对照",
-      "simulated_object": "理想圆环M0 896三角形在p/mu=0.02失败初值；无新平衡态，原72 hpf轮廓未运行",
+      "model_type": "FEniCSx二维P2/DG2平面应变NH；仅尝试原圆环首个p/mu=0.02",
+      "simulated_object": "理想圆环M0 896三角形；保留零载为初值，监测失败后状态未更新",
       "theory": "mu=1、kappa=1000、原1%门不变。内壁随动压力0.02、外壁自由；A固定ux/uy、B固定uy；主动为0。",
-      "current_question": "线性故障已消除；恢复首个圆环受压非线性平衡后能否通过原1%局部J门？",
+      "current_question": "先验证真实PETSc监测/选项接口，再判断首个非线性压力平衡是否合格。",
       "pipeline": [
-        "读取S2保存的同一CSR、右端及初值；0重组装",
-        "保持preonly/LU/MUMPS及M0_前缀，只改ICNTL(14)为100",
-        "一次MUMPS尝试；不新算SuperLU，直接比较保留向量",
-        "独立稀疏乘法残量与矩阵/状态身份复核；0非线性更新"
+        "读取保留零载并验证同一DG2网格/混合映射，不重算零载",
+        "按已批准的p/mu=0.02尝试一次非线性调用",
+        "新增monitor请求可写向量，遇只读锁错误73/101，首次更新前终止",
+        "保全现场并写入只读/选项生命周期补丁；原环境不自动重跑"
       ],
-      "diagram": "../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/figures/FigS1S3_workspace_check/FigS1S3_workspace_check_v01_20260918/04_FigS1S3_workspace_check_v01_20260918.png",
-      "diagram_caption": "实际三层初始网格及同矩阵线性残量；SuperLU为上轮保留，不是新的形变或生理状态。",
+      "diagram": "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/figures/FigS1S4_monitor_failure/FigS1S4_monitor_failure_v01_20260918/04_FigS1S4_monitor_failure_v01_20260918.png",
+      "diagram_caption": "实际初值结构、边界/载荷和从保存状态重算的未平衡力；不是受压形变或接受态。",
       "assumptions": [
         "材料及参考态未标定",
         "二维平面应变不是自由三维心室",
@@ -48,16 +48,16 @@
         "morphoHeart静态形态不是连续个体心动或生长轨迹"
       ],
       "methods": [
-        "实际MUMPS INFOG=0、KSP=4、PC=0；其余14项已记录控制保持",
-        "独立相对残量7.48e-11；与保留SuperLU解相对差1.45e-8",
-        "11组矩阵数组、3组求解后原生CSR、2组初值字节核验",
-        "375父文件与176来源文件哈希不变；Notebook、样式及目检通过"
+        "原零载18项门与3项切线差分检查通过",
+        "初始向量/末次尝试逐字节一致；独立自由力残量0.00866704",
+        "从停止容器只读取实际DOLFINx源码，核查选项生命周期，无额外容器",
+        "60项协议/力学测试+21子测试通过；原PETSc接口复验not_run"
       ],
-      "scope_boundary": "同矩阵线性修复验证passed；原DG2受压平衡/轮廓局部J仍failed；三维/FSI/生长not_run。",
+      "scope_boundary": "科学/工程执行failed；保全/图件passed；原1%门未恢复，轮廓/三维/FSI/生长not_run。",
       "evidence_refs": [
-        "project_control/ventricle_fem_mumps_workspace_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/post_verification.json",
-        "../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/summary.json",
+        "project_control/ventricle_fem_ring_resume_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/post_verification.json",
+        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/summary.json",
         "project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md"
       ]
     }
@@ -71,7 +71,12 @@
     {
       "label": "同矩阵线性修复",
       "status": "passed",
-      "summary": "工作空间额外余量100通过；下一步恢复圆环首个受压非线性资格。"
+      "summary": "保存切线余量100验证保持passed；接回非线性时先修复和验证监测/选项接口。"
+    },
+    {
+      "label": "圆环首受压态恢复",
+      "status": "failed",
+      "summary": "新增monitor接口在首次Newton更新前失败；补丁尚未原环境复验。"
     },
     {
       "label": "理想化三维+公开资料路线",
@@ -86,24 +91,24 @@
   ],
   "active_work": [
     {
-      "title": "F6-S1-S3同矩阵工作空间验证",
-      "status": "passed",
-      "summary": "一次线性尝试INFOG=-9→0，残量与SuperLU向量差通过；未更新FEM状态。",
+      "title": "F6-S1-S4失败保全与接口补丁",
+      "status": "failed",
+      "summary": "保存初值未更新，0个接受受压态；补丁已写入、原环境not_run，不自动重跑。",
       "evidence_refs": [
-        "project_control/ventricle_fem_mumps_workspace_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/index.html",
-        "../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/post_verification.json"
+        "project_control/ventricle_fem_ring_resume_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/index.html",
+        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/post_verification.json"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "DG2非线性压力平衡仍待恢复",
+      "title": "新增监测接口失败，修复未原环境复验",
       "status": "failed",
-      "summary": "保存切线的线性故障已消除，不等于后续Newton切线或1%体积精度通过；不重跑零载，先只补首个压力态。",
+      "summary": "PETSc只读锁禁止Vec.array可写访问；构造器临时因子选项也需保持到LU设置。先微型接口烟测，不可把协议测试当成集成通过。",
       "evidence_refs": [
-        "project_control/ventricle_fem_mumps_workspace_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/summary.json"
+        "project_control/ventricle_fem_ring_resume_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/failure.json"
       ]
     },
     {
@@ -125,6 +130,18 @@
   ],
   "results": [
     {
+      "title": "首压力态在监测接口停止：初值未平衡",
+      "status": "failed",
+      "summary": "未平衡力范数0.00866704；J=1只是未更新的初值。没有形变结果，不补造多时刻。",
+      "image": "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/figures/FigS1S4_monitor_failure/FigS1S4_monitor_failure_v01_20260918/04_FigS1S4_monitor_failure_v01_20260918.png",
+      "evidence_refs": [
+        "project_control/ventricle_fem_ring_resume_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/post_verification.json",
+        "../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/index.html"
+      ],
+      "result_group": "current"
+    },
+    {
       "title": "额外工作空间20→100：线性验证通过",
       "status": "passed",
       "summary": "MUMPS INFOG=0，独立残量7.48e-11，与保留SuperLU向量差1.45e-8；0个新平衡态。",
@@ -134,7 +151,7 @@
         "../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/post_verification.json",
         "../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/index.html"
       ],
-      "result_group": "current"
+      "result_group": "historical"
     },
     {
       "title": "粗细局部J与细网格结构/应力",
@@ -162,11 +179,11 @@
   ],
   "next_actions": [
     {
-      "title": "恢复圆环首个受压非线性资格（待确认）",
+      "title": "同环境接口烟测后恢复一个压力态（待确认）",
       "status": "not_run",
-      "summary": "从保留零载态以ICNTL(14)=100只续算p/mu=0.02；不改物理/原1%门，不重跑零载，首失败保全。通过后再裁决其余压力及粗细资格。",
+      "summary": "先只读锁向量/因子选项微测，再从保留零载续算p/mu=0.02；单CPU，原1%门不变、首失败停止，不重跑零载或扩展科学工况。",
       "evidence_refs": [
-        "project_control/ventricle_fem_mumps_workspace_execution_v01.md"
+        "project_control/ventricle_fem_ring_resume_execution_v01.md"
       ]
     }
   ],
@@ -174,9 +191,9 @@
     "仅FEM，无DCM。",
     "理想化三维+公开morphoHeart路线已记录，实现和自有实验验证未完成。",
     "静态、横断面个体资料不能补造成同一个体连续生长。",
-    "本轮只有保存CSR的一次线性求解，未施加到FEM状态；0个新平衡态。",
+    "本轮一次非线性尝试在首次更新前失败，0个新接受态；未更新初值不能充当体积修复。",
     "局部J失败不能由总体残量或平均体积替代。",
-    "375父文件和176来源文件保持；单CPU，0GPU/安装/拉取/非线性求解/计算重跑/删除。",
+    "619父/祖先文件和50项无关改动保持；单CPU、0GPU/安装/拉取/自动重跑/删除。",
     "结果外置PRL-results；磁盘余量准入及仓库3GiB门保持，旧证据原位保留。",
     "本地main阶段提交，不自动推送。"
   ]

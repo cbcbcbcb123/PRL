@@ -8,16 +8,16 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 8237412
-current_lifecycle: fem_only_f6s1s3_saved_tangent_workspace_fix_passed_nonlinear_pending
+verified_commit: 06fc699
+current_lifecycle: fem_only_f6s1s4_observer_failure_patches_written_runtime_not_run
 documentation_updated_at: 2026-09-18
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_mumps_workspace_contract_v01.md
-last_completed_contract: project_control/ventricle_fem_mumps_workspace_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/rendering.json
-next_stage_contract: pending_original_ring_first_pressure_nonlinear_qualification
-current_authorization: f6s1s3_completed_one_linear_attempt_no_equilibrium
+current_contract: project_control/ventricle_fem_ring_resume_contract_v01.md
+last_completed_contract: project_control/ventricle_fem_ring_resume_contract_v01.md
+current_render_contract: ../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/rendering.json
+next_stage_contract: pending_same_runtime_interface_gate_then_single_pressure_resume_v02
+current_authorization: f6s1s4_consumed_one_attempt_failed_no_automatic_retry
 development_route: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -26,11 +26,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: F6S1S3_consumed_linear_workspace_verification_passed
-current_execution_log: project_control/ventricle_fem_mumps_workspace_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_mumps_workspace_execution_v01.md
+execution_authorized: F6S1S4_consumed_monitor_failed_before_first_newton_update
+current_execution_log: project_control/ventricle_fem_ring_resume_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_ring_resume_execution_v01.md
 latest_completed_scientific_gate: F6-S0_G0_G1_G2_ideal_ring_qualification
-latest_result_package: ../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/summary.json
+latest_result_package: ../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/summary.json
 latest_supervisor_decision: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,24 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 F6-S1-S3同矩阵工作空间修复验证通过
+## 当前：2026-09-18 F6-S1-S4监测接口失败；修复已写入，原环境未复验
+
+从保留零载态仅尝试圆环p/mu=0.02。一次16.914秒单CPU容器，在第0次监测回调的可写Vec.array访问处失败；
+PETSc只读锁错误73/101来自Codex本轮新增的记录代码，首次Newton更新前终止。0个接受受压态。
+保存初值与末次尝试完全相同；独立初始自由力残量0.00866704，不满足平衡，初始J=1不构成体积资格。
+619父/祖先证据文件及50项无关修改保持，44个正式调用文件未变；单CPU、0 GPU/零载复算/自动重跑/安装/删除。
+
+补丁改为只读读取，并根据实际安装DOLFINx源码修正矩阵因子选项的生命周期；本次实际MUMPS余量unknown。
+60项测试+21子测试passed，但接口协议夹具不等同于原环境验证，补丁原环境复验not_run。
+科学与工程执行failed；证据保全和可复算结构/失败图passed；不生成虚假形变或多时刻状态。
+本包11,523,182 bytes，89个manifest文件哈希一致，SHA-256为f6f8d75d3ea8282b1a08214b15e6bcdd2282c227032ab18f13e177b5315765b9。
+
+唯一下一步待确认：同一固定环境先做只读锁向量及MUMPS选项微型接口烟测，通过后才恢复同一首个压力态；
+不改物理/1%门、不重跑零载、任何失败即停。其余压力、轮廓、主动、3D、FSI、生长均不在本轮运行。
+见[执行记录](ventricle_fem_ring_resume_execution_v01.md)及
+[结构与初始未平衡力图/Notebook](../../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/index.html)。
+
+## 历史：2026-09-18 F6-S1-S3同矩阵工作空间修复验证通过
 
 同一保存CSR上仅ICNTL(14)由20改100；一次8.380秒单CPU容器，MUMPS INFOG(1)=0、KSP=4、PC=0。
 独立残量7.47726e-11低于1e-8，与保留SuperLU向量相对差1.44635e-8低于1e-6。

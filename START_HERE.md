@@ -18,34 +18,33 @@ updated_at: 2026-09-18
 
 当前仍是二维P2三角形、三维平面应变有限变形NH固体，不是已完成的三维/FSI。
 mu=1、kappa=1000未标定；内壁随动压力、外壁自由，A固定ux/uy、B固定uy去除刚体运动。
-F6-S1-S3只检查圆环`p/mu=0.02`保存切线上的MUMPS工作空间设置，物理及1%局部体积门保持。
+F6-S1-S4尝试从原零载续算圆环`p/mu=0.02`，物理及1%局部体积门保持。
 
-只将额外工作空间`ICNTL(14): 20 → 100`后，MUMPS错误码从-9变为0，线性修复验证passed。
-独立相对残量7.48e-11（门1e-8）；与保留SuperLU解的相对差1.45e-8（门1e-6）。
-一次8.380秒单CPU容器，1次MUMPS尝试；0重组装、0新SuperLU因子化、0非线性平衡或状态更新。
-矩阵、右端及初值保持，14个其他已记录控制项相同。原DG2受压平衡仍failed，不能用线性通过替代。
+本轮failed：Codex新增的监测代码对PETSc只读锁定向量请求可写访问，首次Newton更新前退出。
+一次16.914秒单CPU容器；接受受压态0个，初值与末次尝试逐字节相同，独立自由力残量0.00866704。
+这不是新的材料/网格失败证据；初值J=1不能当成体积精度改善。
+只读记录和MUMPS选项生命周期补丁已写入，60测试+21子测试通过，原容器复验not_run。
+此前F6-S1-S3保存切线的MUMPS余量100验证仍passed，但不能替代本次非线性验收。
 
-![实际圆环结构与工作空间修复后的线性残量](../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/figures/FigS1S3_workspace_check/FigS1S3_workspace_check_v01_20260918/04_FigS1S3_workspace_check_v01_20260918.png)
+![实际圆环结构与加载初值的未平衡力](../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/figures/FigS1S4_monitor_failure/FigS1S4_monitor_failure_v01_20260918/04_FigS1S4_monitor_failure_v01_20260918.png)
 
-[结构/残量图与可复算Notebook](../PRL-results/ventricle_fem/f6s1s3_mumps_workspace_v01_20260918/index.html) ·
-[执行记录](project_control/ventricle_fem_mumps_workspace_execution_v01.md)
+[结构/失败诊断图与Notebook](../PRL-results/ventricle_fem/f6s1s4_ring_first_pressure_v01_20260918/index.html) ·
+[执行记录与修复边界](project_control/ventricle_fem_ring_resume_execution_v01.md)
 
 ## 核心难点与唯一下一步
 
 旧轮廓CG1粗/细网格max|J−1|为6.71%/11.15%，原1%门仍failed；本轮没有运行轮廓。
-已消除保存切线的工作空间故障，但后续Newton切线、非线性平衡及局部体积精度尚未验证。
-原矩阵条件数约1e9仍是精度风险，不能从一次小残量推断全部后续状态稳定。
+当前直接阻断是新增监测接口；配置测试不足以覆盖真实PETSc只读锁和选项生命周期。
 
-唯一下一步待确认：将已验证的余量100接回原圆环P2/DG2求解器，从保留零载态继续首个`p/mu=0.02`被动态，
-不重跑零载、不改物理或1%门。一次有界非线性调用、首失败保全，检查平衡/积分点J/独立力平衡。
+唯一下一步待确认：在同一固定环境先做只读向量/因子选项的微型接口烟测，通过后才从保留零载
+续算同一首个`p/mu=0.02`被动态。不重跑零载、不改物理或1%门，一次有界调用、首失败保全。
 三维/FSI/生长仍not_run；数值测试通过不等于生物学验证。
 
 ## 存储与历史
 
 新结果在已批准的 `E:\Temp-Projects\PRL-results`，不进GitHub；旧证据不搬移、不删除。
 按预计输出＋至少64MiB停止空间＋10GiB磁盘余量准入；代码仓3GiB硬限保持。
-375个父文件和176个来源文件哈希保持；56项测试和21项子测试通过；0 GPU/安装/拉取/删除。
-首次镜像检查超时发生在容器创建前，只读确认运行时恢复响应后才开始首次求解；没有Docker重启或计算重跑。
+本包约11.0MiB；619个父/祖先文件和50项无关工作区改动保持；0 GPU/安装/拉取/删除/自动重跑。
 阶段直接本地提交main，不自动推送。
 
 - [F6-S0理想圆环26态](results/ventricle_fem/f6s0_active_completion_v01_20260917/index.html)：已通过的旧CG1基准保留。
