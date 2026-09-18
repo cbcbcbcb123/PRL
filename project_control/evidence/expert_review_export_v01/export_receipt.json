@@ -1,0 +1,73 @@
+{
+  "status": "passed",
+  "created_utc": "2026-09-18T13:54:44.286205+00:00",
+  "folder": "C:\\Users\\chenb\\Desktop\\PRL_FEM_Expert_Review_20260918_v01",
+  "zip": "C:\\Users\\chenb\\Desktop\\PRL_FEM_Expert_Review_20260918_v01.zip",
+  "source_head": "1913bfbc5d8a3b0a2e86d650805804adcb78c1d3",
+  "files": 404,
+  "folder_bytes": 247431103,
+  "zip_bytes": 123117396,
+  "zip_sha256": "d4874e773bfebc8ac2604249430431b943bee5ca68789bfe9503009296eed3ea",
+  "package_manifest_sha256": "d6cc69a85d4b753aa59525d9746d8aa23dbdea9bc25e6324964a2513e1412322",
+  "core_modules": 30,
+  "full_figure_packages": 5,
+  "copied_files": 392,
+  "integrity": {
+    "status": "passed",
+    "manifest_files_checked": 403,
+    "copied_source_files_checked": 392,
+    "core_python_syntax_checked": 30,
+    "portal_links_checked": 81,
+    "scientific_status_changed": false,
+    "notebook_execution": "not_run"
+  },
+  "numerics": {
+    "evidence_reproduction": "passed",
+    "scientific_pass": false,
+    "results": {
+      "M0": {
+        "status": "failed",
+        "failed_checks": [
+          "local_volume"
+        ],
+        "max_abs_J_minus_one": 0.015227429672391546,
+        "volume_change": 0.010895251484987822,
+        "max_displacement": 0.004041971396290787,
+        "independent_free_force": 1.9552040540356363e-16
+      },
+      "M1": {
+        "status": "failed",
+        "failed_checks": [
+          "local_volume"
+        ],
+        "max_abs_J_minus_one": 0.014495602988764067,
+        "volume_change": 0.011059187106941426,
+        "max_displacement": 0.004139627167102452,
+        "independent_free_force": 1.5810855380693821e-16
+      },
+      "candidate": {
+        "status": "failed",
+        "failed_checks": [
+          "global_q05_improves_5percent"
+        ],
+        "same_surfaces": true,
+        "tetrahedra": 2611,
+        "q05": 0.24885680850759945,
+        "scientific_pressure_gate": "not_run"
+      }
+    },
+    "new_FEM_solves": 0,
+    "new_mesher_calls": 0,
+    "notebook_execution": "not_run"
+  },
+  "zip_crc_and_all_file_hashes": "passed",
+  "original_source_postcheck": "passed",
+  "scientific_scope_changed": false,
+  "new_FEM_solves": 0,
+  "new_mesher_calls": 0,
+  "new_Docker_launches": 0,
+  "notebook_execution": "not_run",
+  "deletions": 0,
+  "temporary_export_folders": [],
+  "push": "not_run"
+}
