@@ -17,6 +17,7 @@ import ufl
 from prl.fem.fenicsx_ring import Ring,write_json
 from prl.verification.ventricle_3d import load_arrays,state_audit,mapping_checks,verify
 from prl.fem.ventricle_protocol import advance_case,restart_identity
+from prl.fem.mixed_material import passive_energy
 
 
 class VentricularSolid(Ring):
@@ -73,7 +74,7 @@ class VentricularSolid(Ring):
         normal=ufl.as_vector([x[k]/config['axes'][k]**2 for k in range(3)])
         normal=normal/ufl.sqrt(ufl.inner(normal,normal))
         active_tensor=(ufl.Identity(3)-ufl.outer(normal,normal))/2
-        passive=config['mu']/2*(J**(-2/3)*ufl.inner(F,F)-3)+pressure*(J-1)-pressure**2/(2*config['kappa'])
+        passive=passive_energy(F,J,pressure,config['mu'],config['kappa'],ufl.inner)
         active=self.activation/2*(ufl.inner(F*active_tensor,F)-ufl.tr(active_tensor))
         dx=ufl.Measure('dx',domain=domain,subdomain_data=cell_tags,metadata={'quadrature_degree':6})
         ds=ufl.Measure('ds',domain=domain,subdomain_data=facet_tags,metadata={'quadrature_degree':6})

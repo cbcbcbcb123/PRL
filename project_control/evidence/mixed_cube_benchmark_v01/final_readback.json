@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "scope": "frozen failure package and project navigation; not scientific qualification",
+  "payload_files_hash_verified": 80,
+  "manifest_sha256": "5d3c7d623c4cb80404946a7bd04f1be104296b48ab0f213bb1a5b240c4b575fb",
+  "protected_files_unchanged": 208,
+  "preexisting_dirty_files_unchanged": 50,
+  "cockpit_links": {
+    "schema_version": "prl.cockpit.links.v1",
+    "status": "passed",
+    "html_links": 32,
+    "evidence_paths": 392,
+    "missing": []
+  },
+  "repository_bytes_before_commit": 2040461821,
+  "repository_files_before_commit": 11156,
+  "preexisting_reparse_points_not_followed": 78,
+  "scan_errors": [],
+  "hard_limit_bytes": 3221225472,
+  "within_hard_limit": true,
+  "native_execution": "failed",
+  "SNES_calls": 0,
+  "scientific_qualification": "not_run",
+  "native_candidate_fix_verified": "not_run"
+}

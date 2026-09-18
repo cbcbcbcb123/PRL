@@ -5,7 +5,7 @@ status: passed
 authority: user requested absorption of the supplied expert review and continuation
 saved_state_analysis: authorized
 new_FEM_batch: not_run
-new_FEM_authorization: pending_one_confirmation_of_the_batch_below
+new_FEM_authorization: user_confirmed_eight_case_batch_20260918
 ---
 
 # 采纳专家意见：一个局部体积资格问题，一个有界诊断批次
@@ -138,3 +138,27 @@ P*由原能量解析求导，b*/t*由这个兼容P*构造，并以独立差分/�
 整包21文件、1,664,438 bytes（约1.59MiB）；manifest SHA-256
 `78a9542bd69d6373a4e25f4bec421f6ea5441a49e4d5334932811201cd85628b`。
 无删除/安装/外部服务/GPU/推送；本地main仅提交本轮明确文件，不纳入50项旧改动。
+
+## B授权生效与实现说明（2026-09-18，计算前登记）
+
+用户最新明确回复：**“确认执行八工况基准批次”**。本条使上述B由待确认转为已授权；
+保留原方案及原阈值，不扩展到C/D、心室主动、生长或FSI。一次容器、八次求解上限不变。
+执行入口`python -m prl run fem-mixed-cube`，结果create-only：
+`E:\Temp-Projects\PRL-results\ventricle_fem\mixed_cube_benchmark_v01_20260918`。
+
+必要适配为单位立方体网格、非零Dirichlet、制造体力及五面参考牵引。
+将原三维NH能量逐项原样抽成`mixed_material.passive_energy`，原心室与新基准共同调用；
+不改变其方程、参数、求解选项或压力表示。独立NumPy验证不导入这个生产公式。
+每例在唯一SNES前做非平衡插值态的载荷/装配对照与Jacobian方向差分，此处没有平衡求解。
+原阈值沿用：装配/应力差≤2e-7、运动学差≤1e-10、Jacobian相对差≤2e-5、
+自由力≤2e-6、弱压力≤1e-8、求解器自由残差≤1e-9、力/矩平衡≤2e-6。
+单位立方体L=1、μ=1，力/矩标度为μL²/μL³=1；patch六面力逐面独立积分，
+并额外比较固定面节点反力，绝不拿总体平均应力替代逐面反力。
+高阶独立积分采用每轴6点Gauss-Duffy（体216点、面36点），测试所有总次数≤8单项式；
+采样max还纳入原56额外点。保存每次接受的Newton迭代，标记为算法迭代而非生理时间。
+报告生产六阶弱残差与高阶误差分开，避免把不同积分规则的离散残差直接互比。
+
+同批MMS中的普通非收敛/精度失败继续其余预登记工况；负J、载荷/装配/映射不一致等硬失败整批停止。
+容器中停止保全由接受迭代监测和120秒预留触发；宿主1800秒硬停止，保留初始及最后接受状态。
+新增接口参考DOLFINx官方API说明，实际可用性以固定本地0.11.0镜像内独立原生检查为准，
+不凭其他版本文档宣称验收通过。绘图沿用已采纳160dpi探索例外，使用统一风格布局，不制作投稿终稿。

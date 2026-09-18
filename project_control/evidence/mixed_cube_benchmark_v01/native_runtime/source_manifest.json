@@ -1,0 +1,29 @@
+{
+  "source_image": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+  "container": "prl-mixed-cube-benchmark-v01-20260918",
+  "method": "docker cp from already stopped container; no exec/start/new container",
+  "scope": "unmodified diagnostic source evidence only, not imported into production",
+  "license": "Original copyright and LGPL/SPDX headers retained",
+  "files": [
+    {
+      "path": "function.py",
+      "native_path": "/usr/local/dolfinx-real/lib/python3.12/dist-packages/dolfinx/fem/function.py",
+      "sha256": "4bafa43564ce6cc4e7a22c8427bcbe8d9752891086e6c50b82e52a4697e206c8"
+    },
+    {
+      "path": "Expression.h",
+      "native_path": "/usr/local/dolfinx-real/include/dolfinx/fem/Expression.h",
+      "sha256": "4e8de29242c3fb72196bd4d94879d46be750af1057ee6bca787754f05e61d684"
+    },
+    {
+      "path": "assembler.h",
+      "native_path": "/usr/local/dolfinx-real/include/dolfinx/fem/assembler.h",
+      "sha256": "345edbbcea0415baf705467547400e0777690403b630a66dd8deab8cb142715c"
+    },
+    {
+      "path": "ffcx_representation.py",
+      "native_path": "/dolfinx-env/lib/python3.12/site-packages/ffcx/ir/representation.py",
+      "sha256": "9c7d603487d6c6c50eb89fa0d47535f42edc1635a114a0b4705fca0cd757a9a6"
+    }
+  ]
+}

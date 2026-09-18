@@ -11,3 +11,6 @@
 *.log -text -whitespace
 # Received expert originals must survive Git checkout byte-for-byte.
 plan/active/EXP-20260918-FEM-review-v01/source/** -text
+# Installed-runtime diagnostic sources retain their original bytes and hashes.
+project_control/evidence/mixed_cube_benchmark_v01/native_runtime/** -text
+project_control/evidence/mixed_cube_benchmark_v01/native_runtime/source_manifest.json text eol=lf

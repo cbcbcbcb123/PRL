@@ -8,16 +8,16 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 012f59d
-current_lifecycle: fem_only_saved_state_projection_audit_passed_original_pressure_failed
+verified_commit: 8d17942
+current_lifecycle: fem_only_mixed_cube_interface_failed_all_eight_equilibrium_cases_not_run
 documentation_updated_at: 2026-09-18
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
 current_contract: project_control/ventricle_volume_qualification_adoption_v01.md
 last_completed_contract: project_control/ventricle_fem_3d_unstructured_comparison_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/delivery_audit.json
-next_stage_contract: project_control/ventricle_volume_qualification_adoption_v01.md#B_pending_batch_confirmation
-current_authorization: offline_saved_state_analysis_completed_new_eight_case_FEM_batch_pending
+current_render_contract: ../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_audit.json
+next_stage_contract: project_control/ventricle_mixed_cube_benchmark_execution_v01.md
+current_authorization: approved_v01_one_container_consumed_candidate_fix_native_retest_requires_confirmation
 development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -26,11 +26,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: no_new_FEM_until_one_confirmation_of_registered_eight_case_batch
-current_execution_log: project_control/ventricle_volume_qualification_adoption_v01.md
-latest_completed_execution_log: project_control/ventricle_volume_qualification_adoption_v01.md
+execution_authorized: no_native_retry_until_new_explicit_confirmation
+current_execution_log: project_control/ventricle_mixed_cube_benchmark_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_mixed_cube_benchmark_execution_v01.md
 latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
-latest_result_package: ../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/summary.json
+latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_interpretation.json
 latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,21 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 专家意见采纳与保存态投影诊断完成，新基准待整批确认
+## 当前：2026-09-18 八工况基准接口失败，八个平衡工况not_run
+
+用户确认后执行一次固定镜像容器，单CPU/0GPU/禁网，14.443秒退出2；无超时/OOM/自动重跑。
+首patch读取表达式时坐标单元hash检查失败，尚未SNES，0个平衡态；不是材料或误差收敛结论。
+高可信候选为零体力编译化简丢域，但原日志未记录表达式key，归因unknown。
+已改为网格绑定零Constant并增加逐表达式诊断；46项宿主测试passed，原生症状消失尚未验证。
+原summary把缺失MMS写成failed、空集合读回写成passed，两份原件保持，新增裁决明确八例not_run。
+实际结构及执行统计图已交付，不用插值检查态冒充平衡/应力/心动结果。
+81文件1,007,051 bytes，manifest `5d3c7d623c4cb80404946a7bd04f1be104296b48ab0f213bb1a5b240c4b575fb`。
+208保护文件/50原有改动保持；20份失败时源码与修订后源码分版保存。原三维压力门仍failed。
+[完整执行](ventricle_mixed_cube_benchmark_execution_v01.md) ·
+[结果入口](../../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/index.html)。
+唯一下一步：待确认修订版v02同八工况一次容器，原参数与门限不变；无其他新求解授权。
+
+## 历史：2026-09-18 专家意见采纳与保存态投影诊断完成，新基准待整批确认
 
 用户提供专家意见及八成员复核ZIP，原件/附件哈希验收并登记于plan/active。
 新代码仅独立分析已有M0/M1压力态，生产本构、原验证器、配置与原D1证据127文件未改。

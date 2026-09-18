@@ -25,7 +25,7 @@ from .workspace import find_workspace
 FEM_RUN_COMMANDS = frozenset({
     "fem-active-ellipse", "fem-synthetic-orientation", "fem-measured-contour",
     "fem-fixed-mesh", "fem-finite-strain", "fem-rotation", "fem-curved-pressure", "fem-contour-pressure",
-    "fem-fenicsx-ring", "fem-fenicsx-contour", "fem-fenicsx-pressure", "fem-fenicsx-fine-ring", "fem-fenicsx-contour-pressure", "fem-idealized-3d", "fem-mesh-quality", "fem-unstructured-3d",
+    "fem-fenicsx-ring", "fem-fenicsx-contour", "fem-fenicsx-pressure", "fem-fenicsx-fine-ring", "fem-fenicsx-contour-pressure", "fem-idealized-3d", "fem-mesh-quality", "fem-unstructured-3d", "fem-mixed-cube",
 })
 FEM_ONLY_DECISION = "project_control/ventricle_fem_only_measured_contour_decision_v01.md"
 
@@ -406,6 +406,8 @@ def _parser() -> argparse.ArgumentParser:
         quality.add_argument('--workspace',type=Path)
         unstructured=group.add_parser('fem-unstructured-3d',help='one fixed-boundary candidate; quality gate before two conditional FEM states')
         unstructured.add_argument('--workspace',type=Path)
+        mixed_cube=group.add_parser('fem-mixed-cube',help='approved two patches and six 3D MMS cases; no retries')
+        mixed_cube.add_argument('--workspace',type=Path)
     return parser
 
 
@@ -430,6 +432,13 @@ def main(arguments: Sequence[str] | None = None) -> int:
         report=result_admission(workspace,planned_new_bytes=parsed.planned_new_bytes or 0,
                                 stop_reserve_bytes=parsed.stop_reserve_bytes)
         exit_code=0 if report['can_start'] else 1
+    elif ((parsed.command=='run' and parsed.run_command=='fem-mixed-cube') or
+          (parsed.command=='verify' and parsed.verify_command=='fem-mixed-cube')):
+        from .runs.mixed_cube import run,RESULT
+        from .verification.mixed_cube import verify
+        from .result_store import result_path
+        report=run(workspace) if parsed.command=='run' else verify(result_path(workspace,RESULT))
+        exit_code=0 if report['status']=='passed' else 1
     elif ((parsed.command=='run' and parsed.run_command=='fem-unstructured-3d') or
           (parsed.command=='verify' and parsed.verify_command=='fem-unstructured-3d')):
         from .runs.ventricle_unstructured import run,verify,RESULT

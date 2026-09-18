@@ -2,14 +2,14 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-18",
   "overall_status": "failed",
-  "summary": "专家意见及附件已验收；已有M0/M1投影诊断passed。RMS下降27.30%，但局部最大偏差1.4496%仍超1%门。固定距离复核不能把峰值归为仅固定面问题；新八工况基准待一次确认。",
+  "summary": "八工况基准已按授权启动，但首patch在求解前接口失败；0次SNES，八个平衡工况均not_run。候选修订与46项宿主测试完成，原生复验未运行；原心室1%体积门仍failed。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
-    "scope": "FEM唯一主线；保存态离线诊断，不是新求解。原三维压力failed，主动/生长/FSI not_run。",
-    "current_stage": "Saved-state projection audit passed; original pressure gate failed; new benchmark batch not_run",
-    "current_location": "../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918",
-    "evidence_basis_commit": "012f59d",
+    "scope": "FEM唯一主线；当前为标准立方体实现资格，不是新心室结果。主动/生长/FSI not_run。",
+    "current_stage": "Mixed cube interface failed; all eight equilibrium cases not_run; native retry requires new confirmation",
+    "current_location": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918",
+    "evidence_basis_commit": "8d17942",
     "evidence_checked_at": "2026-09-18",
     "git_workflow": {
       "branch": "main",
@@ -27,38 +27,38 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "2026-09-18独立复算、14项数学测试和轻量图交付通过；专家9文件及原D1 127文件哈希不变。结果21文件1,664,438 bytes；探索图160dpi。此提交前源码基线012f59d，阶段本地main提交不推送。",
+    "freshness_note": "一次容器14.443秒停止，0 SNES/0 GPU/0重跑；208保护文件和50原有改动不变。81文件1,007,051 bytes；失败与修订源码分开保存。原始分类缺陷由新裁决显式更正，原件不覆盖。本地main阶段提交不推送。",
     "model_overview": {
       "model_type": "FEniCSx三维有限变形NH，P2位移/P1压力四面体",
-      "simulated_object": "理想化三层半椭球壳；已有M0/M1首压力态，无新的FEM计算",
-      "theory": "同mu=1、kappa=1000未标定；基底环全固定、外壁自由，内腔随动压力p/mu=0.01。Ta=0；心肌分散主动张力尚未运行。",
-      "current_question": "弱压力方程已满足但局部体积偏差仍超1%；先用标准非零patch/制造解区分实现与离散问题。",
+      "simulated_object": "当前资格基准：单位立方体P2/P1；主研究对象仍为理想化三层心室",
+      "theory": "基准μ=1，κ=100/1000；X=0解析位移，其余五面解析参考牵引与配套体力。两个非零patch及六MMS已预注册；没有收缩、生长或流体。",
+      "current_question": "先排除新基准接口故障，再判定现有近不可压离散的实现与误差收敛；不将工程失败当作材料失败。",
       "pipeline": [
-        "保全专家原件和复核ZIP，独立复算原M0/M1，不执行附件脚本。",
-        "拆分J−1=p_m/κ+r，以参考体积权重计算全域/每层/固定距离RMS，保留全部局部max。",
-        "复算与数学测试passed；原压力failed，不将投影缺陷等同于锁死或inf-sup失稳。",
-        "待一次整批确认：2个非零patch+3网格×2κ制造解；再决定一个薄层鉴别。"
+        "实际首patch原生网格建立并保存，表达式读取发生坐标单元hash不匹配。",
+        "一次容器停止，0次SNES，八个平衡工况均not_run；原始故障/插值检查态保全。",
+        "候选零体力网格绑定修订及逐表达式诊断完成，46项宿主测试passed；原生症状消失unknown。",
+        "待一次确认修订版v02：先接口门，再同一八工况；不放宽门限、不自动重跑。"
       ],
-      "diagram": "../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/diagnostic.png",
-      "diagram_caption": "实际M1结构、全部5304单元局部偏差、固定距离分区与材料压缩尺度。旧状态离线诊断；160dpi探索图非投稿终稿。",
+      "diagram": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/diagnostic.png",
+      "diagram_caption": "实际48四面体参考网格与执行统计；不是应力、形变或心动结果。160dpi探索图。",
       "assumptions": [
-        "半椭球/层界/材料未标定，尚非morphoHeart拟合形态",
-        "三层同被动材料；主动切平面分散是假设，不是实测螺旋纤维",
-        "基底固定、外壁自由；已加载首腔压力，主动张力尚未运行",
-        "加载级不是心动时间，无生长/血流"
+        "基准不是心室，不具备生物标定或收缩含义",
+        "失败快照只是解析位移插值、p=0，非平衡状态",
+        "主心室仍为未标定三层半椭球，基底固定、腔压随动、外壁自由",
+        "原心室局部体积1.4496%超1%门的原因仍未分离"
       ],
       "methods": [
-        "现有独立P2运动学；原24积分点+56额外采样点，max保持采样意义，不宣称全域上界。",
-        "r的参考体积加权RMS 0.165124%→0.120037%；max|p_m/κ|仅0.001722%/0.002044%。",
-        "固定分区0.15/0.30/0.45L；M1峰值d=0.301956L。一个区间RMS略升，不是纯h收敛。",
-        "14项针对性数学测试、专家数字和原始来源哈希一致；0 FEM/0 Docker/0 GPU。"
+        "一次固定镜像容器，1CPU/8GiB/0GPU/禁网，14.443秒退出2；无超时/OOM。",
+        "原生源码确认错误来自坐标单元hash比较；零体力丢域是高可信候选，key未记录，归因unknown。",
+        "两patch体力改网格绑定零Constant，MMS体力/所有门限不改；宿主46测试不替代原生验证。",
+        "原空集合汇总/读回分类缺陷保留并显式纠正；8例not_run、0个平衡态通过验证。"
       ],
-      "scope_boundary": "离线交付passed与原三维压力门failed并存；单一因果根因unknown。新基准尚未授权运行。",
+      "scope_boundary": "失败保全/宿主检查passed，原生执行failed，科学资格not_run三者分开；再次容器尚未授权。",
       "evidence_refs": [
-        "project_control/ventricle_volume_qualification_adoption_v01.md",
-        "../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/summary.json",
-        "../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/delivery_audit.json",
-        "plan/active/EXP-20260918-FEM-review-v01/README.md"
+        "project_control/ventricle_mixed_cube_benchmark_execution_v01.md",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_interpretation.json",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_audit.json",
+        "project_control/ventricle_volume_qualification_adoption_v01.md"
       ]
     }
   },
@@ -86,16 +86,25 @@
   ],
   "active_work": [
     {
-      "title": "专家采纳与原始状态投影诊断已完成",
-      "status": "passed",
-      "summary": "一页结构/误差图和可复算数据交付；不增加投稿级图包，不修改原失败或门限。",
+      "title": "八工况失败保全与候选接口修订",
+      "status": "failed",
+      "summary": "原生复验未运行，不宣称接口已修好。结构、配置、原始日志和20份执行源码已保全。",
       "evidence_refs": [
-        "project_control/ventricle_volume_qualification_adoption_v01.md",
-        "../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/delivery_audit.json"
+        "project_control/ventricle_mixed_cube_benchmark_execution_v01.md",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_interpretation.json"
       ]
     }
   ],
   "blockers": [
+    {
+      "title": "首patch求解前接口故障",
+      "status": "failed",
+      "summary": "坐标单元hash不一致。仿射零体力丢域是候选，原日志未定位key；八个平衡工况均未运行。",
+      "evidence_refs": [
+        "project_control/ventricle_mixed_cube_benchmark_execution_v01.md",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/failure.json"
+      ]
+    },
     {
       "title": "局部体积资格未通过，原因仍待分离",
       "status": "failed",
@@ -108,6 +117,18 @@
   ],
   "results": [
     {
+      "title": "实际基准网格及失败现场：0/8平衡工况",
+      "status": "failed",
+      "summary": "单容器停止，0SNES/0重跑。候选修订46项宿主测试passed；不是机械精度通过或失败。",
+      "image": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/diagnostic.png",
+      "evidence_refs": [
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/index.html",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_interpretation.json",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v01_20260918/delivery_audit.json"
+      ],
+      "result_group": "current"
+    },
+    {
       "title": "已有压力态诊断完成：平均改善，局部仍超限",
       "status": "passed",
       "summary": "RMS 0.1651%→0.1200%，峰值仍1.4496%。固定d≥0.30L区域包含峰值；一固定区间RMS略升。此passed仅指复算交付。",
@@ -117,7 +138,7 @@
         "../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/summary.json",
         "../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/delivery_audit.json"
       ],
-      "result_group": "current"
+      "result_group": "historical"
     },
     {
       "title": "原三维压力失败保留",
@@ -132,20 +153,20 @@
   ],
   "next_actions": [
     {
-      "title": "一次确认八工况：2非零patch+6制造解",
+      "title": "确认后运行修订版v02同八工况",
       "status": "not_run",
-      "summary": "预注册n=2/4/8与κ=100/1000、同P2/P1。单CPU/0GPU、整批1800秒、0自动重跑；先patch实现门，再六例独立诊断。只请求一次整批确认。",
+      "summary": "一次额外容器，先逐表达式/装配接口检查，后2patch+6MMS；同配置与门限，1CPU/0GPU、1800秒、0自动重跑。不包括心室、主动、生长或FSI。",
       "evidence_refs": [
-        "project_control/ventricle_volume_qualification_adoption_v01.md"
+        "project_control/ventricle_mixed_cube_benchmark_execution_v01.md"
       ]
     }
   ],
   "evidence_boundaries": [
-    "FEM唯一主线；理想化未标定心室，不是实验复现。",
-    "旧科学压力门failed、根因unknown；新基准not_run，不能由专家意见自动授权。",
-    "离线分析保存所有单元和全局max，固定距离分区不排除热点；M0/M1不是纯h收敛。",
-    "160dpi探索图布局passed；600dpi投稿风格检查failed保留，不标成投稿终稿。",
-    "本包外置约1.59MiB不进Git；仓库3GiB和磁盘余量规则不变。",
-    "保留原失败、50项既有无关修改和缓存；无删除、安装、Docker、GPU或推送。"
+    "FEM唯一主线；基准不是心室，理想化心室也尚未实验标定。",
+    "本批工程执行failed，八工况科学资格not_run；不能当作八个力学失败。",
+    "原summary/空集合读回的状态缺陷未被覆盖，新裁决显式纠正。",
+    "原心室1%门failed保持，主动/生长/FSI not_run。",
+    "图为真实参考网格与执行统计；160dpi探索布局passed、600dpi投稿检查failed照录。",
+    "失败包约0.96MiB外置，208保护文件与50旧改动不变；0删除/安装/GPU/推送。"
   ]
 }
