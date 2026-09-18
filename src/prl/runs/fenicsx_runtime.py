@@ -58,6 +58,38 @@ def verify_container_settings(inspect):
     }
 
 
+def invoke_bounded(workspace, output, name, script, seconds=1200):
+    """One create-only invocation; the caller holds the scientific execution lock."""
+    from prl.result_store import disk_admission
+    output = Path(output)
+    if (output/'started.json').exists():
+        raise FileExistsError('Invocation consumed; no automatic retry')
+    args = container_command(workspace, name, script, output)
+    save_json(output/'command.json', args)
+    save_json(output/'started.json', {'container':name,'invocations':1,'automatic_retries':0})
+    started = time.monotonic(); stop = None
+    with (output/'stdout.log').open('x',encoding='utf-8') as stdout, (output/'stderr.log').open('x',encoding='utf-8') as stderr:
+        process = subprocess.Popen(args,stdout=stdout,stderr=stderr)
+        try:
+            while process.poll() is None:
+                if time.monotonic()-started > seconds or not disk_admission(output,0)['can_start']:
+                    stop = 'time_or_disk_limit'
+                    read_docker('stop','--time','5',name); process.wait(timeout=20)
+                    break
+                time.sleep(.5)
+        except BaseException:
+            read_docker('stop','--time','5',name); process.wait(timeout=20)
+            raise
+    inspection = json.loads(read_docker('inspect',name))[0]
+    settings = verify_container_settings(inspection)
+    save_json(output/'container_inspect.json',inspection)
+    report = {'status':'passed' if process.returncode == 0 and all(settings.values()) and stop is None else 'failed',
+        'exit_code':process.returncode,'stop_reason':stop,'container_checks':settings,
+        'OOMKilled':inspection['State']['OOMKilled'],'elapsed_seconds':time.monotonic()-started,'gpu':0,'automatic_retries':0}
+    save_json(output/'execution.json',report)
+    return report
+
+
 def run_g0(workspace):
     workspace = Path(workspace).resolve(strict=True)
     root = workspace/RESULT

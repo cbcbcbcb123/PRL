@@ -25,7 +25,7 @@ from .workspace import find_workspace
 FEM_RUN_COMMANDS = frozenset({
     "fem-active-ellipse", "fem-synthetic-orientation", "fem-measured-contour",
     "fem-fixed-mesh", "fem-finite-strain", "fem-rotation", "fem-curved-pressure", "fem-contour-pressure",
-    "fem-fenicsx-ring", "fem-fenicsx-contour", "fem-fenicsx-pressure", "fem-fenicsx-fine-ring",
+    "fem-fenicsx-ring", "fem-fenicsx-contour", "fem-fenicsx-pressure", "fem-fenicsx-fine-ring", "fem-fenicsx-contour-pressure",
 })
 FEM_ONLY_DECISION = "project_control/ventricle_fem_only_measured_contour_decision_v01.md"
 
@@ -389,6 +389,9 @@ def _parser() -> argparse.ArgumentParser:
         fine=group.add_parser('fem-fenicsx-fine-ring',help='bounded native diagnosis then only five original fine passive states')
         fine.add_argument('--workspace',type=Path)
         fine.add_argument('--phase',choices=['diagnose','complete'],default='complete')
+    for group in [run_commands,verify_commands]:
+        contour_pressure=group.add_parser('fem-fenicsx-contour-pressure',help='only two retained contour meshes at zero and first pressure, P2/DG2')
+        contour_pressure.add_argument('--workspace',type=Path)
     return parser
 
 
@@ -510,6 +513,16 @@ def main(arguments: Sequence[str] | None = None) -> int:
         else:
             from .verification.fenicsx_pressure import verify_pressure
             report=verify_pressure(result_path(workspace,RESULT))
+        exit_code=0 if report['status']=='passed' else 1
+    elif ((parsed.command=='run' and parsed.run_command=='fem-fenicsx-contour-pressure') or
+          (parsed.command=='verify' and parsed.verify_command=='fem-fenicsx-contour-pressure')):
+        from .runs.fenicsx_contour_pressure import run_contour_pressure,RESULT
+        from .result_store import result_path
+        if parsed.command=='run':
+            report=run_contour_pressure(workspace)
+        else:
+            from .verification.fenicsx_contour_pressure import verify_contour_pressure
+            report=verify_contour_pressure(result_path(workspace,RESULT))
         exit_code=0 if report['status']=='passed' else 1
     elif parsed.command == 'run' and parsed.run_command == 'fem-fenicsx-ring':
         from .runs.fenicsx_ring import run_fenicsx_ring, run_active_completion
