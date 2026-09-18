@@ -16,6 +16,7 @@ import ufl
 
 from prl.fem.fenicsx_ring import Ring,write_json
 from prl.verification.ventricle_3d import load_arrays,state_audit,mapping_checks,verify
+from prl.fem.ventricle_protocol import advance_case,restart_identity
 
 
 class VentricularSolid(Ring):
@@ -157,6 +158,38 @@ class VentricularSolid(Ring):
         return self.w.x.array.copy()
 
 
+def reuse_zero(solid,config,root):
+    """Exercise the fixed real adapter without calling SNES or updating a state."""
+    retained_mesh=load_arrays(root/'retained/M0_mesh.npz')
+    retained=load_arrays(root/'retained/M0_state_zero.npz')
+    metadata=json.loads((root/'retained/M0_state_zero.json').read_text())
+    checks=restart_identity(solid.mesh_data,retained_mesh,retained,len(solid.w.x.array))
+    report={'status':'failed','checks':checks,'new_equilibrium_solves':0,'newton_updates':0}
+    write_json(root/'restart_interface.json',report)
+    if not all(checks.values()):
+        raise ValueError('Retained restart identity mismatch')
+    solid.w.x.array[:]=retained['mixed_state']; solid.w.x.scatter_forward()
+    solid.load.value=0.; solid.activation.value=0.
+    residual=solid.vector(solid.residual_form)
+    current={**retained,'u':solid.w.x.array[solid.vmap].reshape(-1,3).copy(),
+        'pressure':solid.w.x.array[solid.pmap].copy(),
+        'force_residual':residual[solid.vmap].reshape(-1,3),'weak_residual':residual[solid.pmap]}
+    current.update({key:np.asarray(expression.eval(solid.domain,solid.cell_ids)) for key,expression in solid.expressions.items()})
+    np.savez_compressed(root/'restart_interface_state.npz',**current)
+    for key in ['u','pressure','F','J','stress','active_stress','force_residual','weak_residual']:
+        checks['retained_'+key]=bool(np.allclose(current[key].ravel(),retained[key].ravel(),rtol=0,atol=1e-12))
+    checks['native_pressure_flat']=current['pressure'].shape==(len(solid.mesh_data['pressure_coordinates']),)
+    checks['mixed_vector_unchanged']=bool(np.array_equal(solid.w.x.array,retained['mixed_state']))
+    audit=state_audit(solid.mesh_data,current,metadata,config)
+    checks['independent_zero']=audit['status']=='passed'
+    report.update(status='passed' if all(checks.values()) else 'failed',checks=checks,audit=audit)
+    write_json(root/'restart_interface.json',report)
+    if report['status']!='passed':
+        raise ValueError('Native zero-state interface check failed')
+    print('M0 retained-zero interface passed; zero SNES calls, no state update',flush=True)
+    return retained['mixed_state'].copy()
+
+
 def main():
     root=Path('/out'); config=json.loads((root/'configuration.json').read_text())
     (root/'raw').mkdir(exist_ok=False)
@@ -164,11 +197,18 @@ def main():
     try:
         for case in config['meshes']:
             current=VentricularSolid(case,config,root); current.tangent_checks(); states={}
-            for spec in config['states']:
+            if config.get('reuse_m0_zero',False) and case['name']=='M0':
+                states['zero']=reuse_zero(current,config,root)
+            def before_solve(next_spec):
+                nonlocal spec,attempted
+                spec=next_spec
                 if time.monotonic()-start>1680:
                     raise TimeoutError('Stop with 120 seconds state preservation reserve')
-                initial=np.zeros_like(current.w.x.array) if spec['initial'] is None else states[spec['initial']]
-                attempted+=1; states[spec['label']]=current.solve(spec,initial); accepted+=1
+                attempted+=1
+            def after_solve(accepted_spec):
+                nonlocal accepted
+                accepted+=1
+            advance_case(current,config,states,before_solve,after_solve)
         report=verify(root); write_json(root/'verification.json',report)
         write_json(root/'solver_execution.json',{'status':report['status'],'attempted_states':attempted,
             'accepted_states':accepted,'elapsed_seconds':time.monotonic()-start,'dolfinx_version':dolfinx.__version__,

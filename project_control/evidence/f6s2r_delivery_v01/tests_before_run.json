@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "passed": 85,
+  "seconds": 3.32,
+  "command": "python -B -X utf8 -m pytest -q -p no:cacheprovider tests/prl/test_ventricle_3d.py tests/prl/test_fenicsx_contour_active.py tests/prl/test_fenicsx_contour_pressure.py tests/prl/test_fenicsx_contour_passive.py tests/prl/test_fenicsx_ring.py",
+  "scientific_equilibria": 0,
+  "note": "Protocol fixtures test 13-call bound, branch seeds, exact restart maps, first-failure stop, and create-only admission. CuPy import emitted an unused CUDA-path warning; no GPU worker or computation."
+}

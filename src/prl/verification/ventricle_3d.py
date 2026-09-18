@@ -6,6 +6,16 @@ import numpy as np
 EDGES=[(2,3),(1,3),(1,2),(0,3),(0,2),(0,1)]
 
 
+def is_retained(config,name,label):
+    return bool(config.get('reuse_m0_zero',False) and name=='M0' and label=='zero')
+
+
+def state_path(root,config,name,label):
+    # Path bookkeeping is local so a frozen verifier remains independently portable.
+    folder='retained' if is_retained(config,name,label) else 'raw'
+    return Path(root)/folder/f'{name}_state_{label}.npz'
+
+
 def load_arrays(path):
     with np.load(path,allow_pickle=False) as saved:
         return {k:saved[k] for k in saved.files}
@@ -172,7 +182,10 @@ def state_audit(data,state,metadata,config):
 
 def verify(root):
     root=Path(root); config=json.loads((root/'configuration.json').read_text())
-    cases={}; checks={}; iterates={}; attempted=0; accepted=0
+    cases={}; checks={}; iterates={}; attempted=0; accepted=0; reused=0
+    if config.get('reuse_m0_zero',False):
+        interface=root/'restart_interface.json'
+        checks['native_restart_interface']=interface.exists() and json.loads(interface.read_text())['status']=='passed'
     for case in config['meshes']:
         name=case['name']; cases[name]={}; iterates[name]={}
         mesh_path=root/'raw'/f'{name}_mesh.npz'
@@ -188,22 +201,24 @@ def verify(root):
             tangent=json.loads(tangent_path.read_text())
             checks[name+'_tangent']=all(tangent[k]<=v for k,v in [('pressure',2e-6),('active',2e-6),('total',2e-5)])
         for spec in config['states']:
-            label=spec['label']; path=root/'raw'/f'{name}_state_{label}.npz'
+            label=spec['label']; retained=is_retained(config,name,label)
+            path=state_path(root,config,name,label)
             if not path.exists():
                 continue
-            attempted+=1
+            attempted+=int(not retained); reused+=int(retained)
             state=load_arrays(path); metadata=json.loads(path.with_suffix('.json').read_text())
             try:
                 audit=state_audit(data,state,metadata,config)
             except Exception as error:
                 audit={'status':'failed','reason':repr(error)}
+            audit['source']='retained' if retained else 'new'
             cases[name][label]=audit
             checks[name+'_'+label]=audit['status']=='passed'
-            accepted+=int(audit['status']=='passed')
-            initial=np.zeros_like(state['mixed_state']) if spec['initial'] is None else load_arrays(root/'raw'/f'{name}_state_{spec["initial"]}.npz')['mixed_state']
+            accepted+=int(audit['status']=='passed' and not retained)
+            initial=np.zeros_like(state['mixed_state']) if spec['initial'] is None else load_arrays(state_path(root,config,name,spec['initial']))['mixed_state']
             checks[name+'_'+label+'_initial']=bool(np.array_equal(initial,state['initial_mixed']))
             checks[name+'_'+label+'_loads']=float(state['load'])==spec['p'] and float(state['activation'])==spec['Ta']
-            paths=sorted((root/'iterates'/f'{name}_{label}').glob('iterate_*.npz'))
+            paths=sorted((root/('retained/iterates' if retained else 'iterates')/f'{name}_{label}').glob('iterate_*.npz'))
             saved=[]
             for entry in paths:
                 saved_state=load_arrays(entry)
@@ -237,5 +252,5 @@ def verify(root):
             checks[label+'_mesh_response']=absolute<=.002 and relative<=.05
     return {'status':'passed' if all(checks.values()) else 'failed','checks':checks,
             'failed_checks':[k for k,v in checks.items() if not v], 'cases':cases,'iterates':iterates,
-            'attempted_states':attempted,'accepted_states':accepted,'comparison':comparison,
+            'attempted_states':attempted,'accepted_states':accepted,'reused_states':reused,'comparison':comparison,
             'biological_validation':'not_run','fsi':'not_run','growth':'not_run'}

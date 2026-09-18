@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "passed": 87,
+  "elapsed_seconds": 2.96,
+  "command": "python -B -X utf8 -m pytest -q -p no:cacheprovider tests/prl/test_ventricle_3d.py tests/prl/test_ventricle_3d_delivery.py tests/prl/test_fenicsx_contour_active.py tests/prl/test_fenicsx_contour_pressure.py tests/prl/test_fenicsx_contour_passive.py tests/prl/test_fenicsx_ring.py",
+  "new_FEM_solves": 0,
+  "first_figure_validation": "Notebook executed and rendered, but metadata check failed because FIGURE_SIZE_IN was absent. Added the explicit figure-size parameter to the source, portable helper and notebook; re-executed only plotting. No scientific data or gate changed.",
+  "final_figure_execution": "passed"
+}

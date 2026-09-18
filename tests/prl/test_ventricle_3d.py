@@ -152,3 +152,59 @@ def test_render_cutaway_does_not_change_input_mesh():
     assert len({tuple(sorted(face[:3])) for face in faces})==len(faces)
     assert np.all(data['coordinates'][data['cells'][owners,:4]].mean(axis=1)[:,1]>0)
     assert all(np.array_equal(data[k],v) for k,v in before.items())
+
+
+def test_resume_only_remaining_thirteen_with_original_branch_seeds():
+    from types import SimpleNamespace
+    from prl.fem.ventricle_protocol import advance_case,remaining_states
+    cfg={**configuration(),'reuse_m0_zero':True}; calls=[]
+    zero=np.array([123.])
+    for name in ['M0','M1']:
+        def solve(spec,initial):
+            calls.append((name,spec['label'],initial.copy()))
+            return np.array([len(calls)],dtype=float)
+        solid=SimpleNamespace(name=name,w=SimpleNamespace(x=SimpleNamespace(array=np.zeros(1))),solve=solve)
+        states={'zero':zero.copy()} if name=='M0' else {}
+        advance_case(solid,cfg,states,lambda spec:None,lambda spec:None)
+        active_seed=next(x[2] for x in calls if x[:2]==(name,'active_1'))
+        combined_seed=next(x[2] for x in calls if x[:2]==(name,'combined_1'))
+        assert np.array_equal(active_seed,states['zero'])
+        assert np.array_equal(combined_seed,states['pressure_2'])
+    assert len(calls)==13 and calls[0][:2]==('M0','pressure_1')
+    assert len(remaining_states(configuration(),'M0'))==7
+
+
+def test_resume_does_not_retry_or_continue_after_first_failure():
+    from types import SimpleNamespace
+    from prl.fem.ventricle_protocol import advance_case
+    cfg={**configuration(),'reuse_m0_zero':True}; attempted=[]; accepted=[]
+    def fail(spec,initial):
+        raise ValueError('synthetic gate failure')
+    solid=SimpleNamespace(name='M0',w=SimpleNamespace(x=SimpleNamespace(array=np.zeros(1))),solve=fail)
+    with pytest.raises(ValueError,match='synthetic gate failure'):
+        advance_case(solid,cfg,{'zero':np.zeros(1)},attempted.append,accepted.append)
+    assert len(attempted)==1 and attempted[0]['label']=='pressure_1' and not accepted
+
+
+def test_restart_allows_only_known_map_layout_change():
+    from prl.fem.ventricle_protocol import restart_identity
+    current={'coordinates':np.arange(6).reshape(2,3),'mixed_u_map':np.arange(6),'mixed_p_map':np.arange(6,8)}
+    retained={k:(v[None,:] if k.startswith('mixed') else v.copy()) for k,v in current.items()}
+    state={'mixed_state':np.arange(8),'u':np.arange(6).reshape(2,3),'pressure':np.arange(6,8)[None,:],
+           'load':0.,'activation':0.}
+    assert all(restart_identity(current,retained,state,8).values())
+    altered={**current,'mixed_p_map':current['mixed_p_map'][::-1]}
+    assert not all(restart_identity(altered,retained,state,8).values())
+    altered={**current,'coordinates':current['coordinates']+1}
+    assert not all(restart_identity(altered,retained,state,8).values())
+    assert not all(restart_identity(current,retained,state,9).values())
+
+
+def test_resume_create_only_and_cli():
+    from prl.cli import _parser
+    for command in ['run','verify']:
+        assert _parser().parse_args([command,'fem-idealized-3d','--resume-qualified-zero']).resume_qualified_zero
+    with patch('prl.runs.ventricle_3d.result_path',side_effect=FileExistsError),patch('prl.runs.ventricle_3d.read_docker') as docker:
+        with pytest.raises(FileExistsError):
+            run(Path(__file__).resolve().parents[2],resume=True)
+        docker.assert_not_called()

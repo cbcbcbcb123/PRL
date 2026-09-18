@@ -1,0 +1,45 @@
+{
+  "status": "failed",
+  "evidence_delivery": "passed",
+  "manifest_sha256": "cb846ad96711d6706a7a9b2912ddf9100a65c2a3645e9dd7f7af14c0eafd455c",
+  "files": 123,
+  "bytes": 17765106,
+  "audit": {
+    "status": "passed",
+    "checks": {
+      "formal_invocation_unchanged": true,
+      "protected_ancestors_and_dirty": true,
+      "scientific_execution_sources_unchanged": true,
+      "input_copies_unchanged": true,
+      "native_exact_restart_passed": true,
+      "mechanics_unchanged": true,
+      "single_bounded_invocation": true,
+      "first_failure_stopped": true,
+      "new_raw_state_count_one": true,
+      "runtime_isolation": true,
+      "only_local_volume_rejected": true,
+      "remaining_not_run": true,
+      "host_native_agreement": true,
+      "offline_diagnosis_passed": true,
+      "tests_passed": true,
+      "figure_executed_visual_and_style": true,
+      "figure_physical_data_copy": true,
+      "portable_helper_matches": true,
+      "portable_mechanics_matches": true
+    },
+    "formal_files_unchanged": 71,
+    "protected_parent_files_unchanged": 1817,
+    "preexisting_dirty_files_unchanged": 50,
+    "tests": {
+      "status": "passed",
+      "passed": 87,
+      "elapsed_seconds": 2.96,
+      "command": "python -B -X utf8 -m pytest -q -p no:cacheprovider tests/prl/test_ventricle_3d.py tests/prl/test_ventricle_3d_delivery.py tests/prl/test_fenicsx_contour_active.py tests/prl/test_fenicsx_contour_pressure.py tests/prl/test_fenicsx_contour_passive.py tests/prl/test_fenicsx_ring.py",
+      "new_FEM_solves": 0,
+      "first_figure_validation": "Notebook executed and rendered, but metadata check failed because FIGURE_SIZE_IN was absent. Added the explicit figure-size parameter to the source, portable helper and notebook; re-executed only plotting. No scientific data or gate changed.",
+      "final_figure_execution": "passed"
+    },
+    "repository_bytes": 2038053451,
+    "new_scientific_solves_in_postprocessing": 0
+  }
+}
