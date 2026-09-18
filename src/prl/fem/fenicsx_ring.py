@@ -71,7 +71,12 @@ class Ring:
         assert len(inner)==len(inner_vertices)
         facet_tags=mesh.meshtags(domain,1,np.sort(inner),np.ones(len(inner),dtype=np.int32))
         displacement_element=basix.ufl.element('Lagrange','triangle',2,shape=(2,))
-        pressure_element=basix.ufl.element('Lagrange','triangle',1)
+        pressure_space=config.get('pressure_space','CG1')
+        if pressure_space not in {'CG1','DG2'}:
+            raise ValueError('Only frozen CG1 or explicitly selected finite-bulk DG2 pressure is supported')
+        if pressure_space=='DG2' and (not np.isfinite(config['kappa']) or config['kappa']<=0):
+            raise ValueError('DG2 diagnostic requires positive finite bulk modulus; not an incompressible-limit pair')
+        pressure_element=basix.ufl.element('Lagrange','triangle',2,discontinuous=True) if pressure_space=='DG2' else basix.ufl.element('Lagrange','triangle',1)
         self.space=fem.functionspace(domain,basix.ufl.mixed_element([displacement_element,pressure_element]))
         self.w=fem.Function(self.space)
         self.vspace,self.vmap=self.space.sub(0).collapse()
@@ -147,6 +152,8 @@ class Ring:
                        'pressure_cells':self.pcells,'inner_edges':np.array(self.inner_edges),
                        'fixed':self.fixed,'qpoints':self.qpoints,'qweights':self.qweights,
                        'mixed_u_map':self.vmap,'mixed_p_map':self.pmap}
+        if pressure_space=='DG2':
+            self.mesh_data['pressure_space']=np.array('DG2')
         np.savez_compressed(root/'raw'/f'{self.name}_mesh.npz',**self.mesh_data)
         self.history=[]
         self.problem.solver.setMonitor(lambda solver,iteration,norm:self.history.append({'iteration':int(iteration),'residual':float(norm)}))

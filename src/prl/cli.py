@@ -25,7 +25,7 @@ from .workspace import find_workspace
 FEM_RUN_COMMANDS = frozenset({
     "fem-active-ellipse", "fem-synthetic-orientation", "fem-measured-contour",
     "fem-fixed-mesh", "fem-finite-strain", "fem-rotation", "fem-curved-pressure", "fem-contour-pressure",
-    "fem-fenicsx-ring", "fem-fenicsx-contour",
+    "fem-fenicsx-ring", "fem-fenicsx-contour", "fem-fenicsx-pressure",
 })
 FEM_ONLY_DECISION = "project_control/ventricle_fem_only_measured_contour_decision_v01.md"
 
@@ -368,6 +368,9 @@ def _parser() -> argparse.ArgumentParser:
         contour_mode.add_argument('--repair-thin-mesh',action='store_true',help='F6-S1-M bounded thin-layer mesh repair')
         contour_mode.add_argument('--retained-passive',action='store_true',help='F6-S1-P reuse qualified mesh, 800 MiB stage')
         contour_mode.add_argument('--fine-diagnostic',action='store_true',help='F6-S1-Q: only M1 at p=0 and 0.02, external results')
+    for group in [run_commands,verify_commands]:
+        pressure=group.add_parser('fem-fenicsx-pressure',help='bounded same-geometry DG2 pressure diagnostic')
+        pressure.add_argument('--workspace',type=Path)
     return parser
 
 
@@ -466,6 +469,16 @@ def main(arguments: Sequence[str] | None = None) -> int:
             if parsed.fine_diagnostic:
                 raise ValueError('Fine diagnostic uses its frozen Notebook; no implicit figure overwrite')
             report=render_contour(contour_result)
+        exit_code=0 if report['status']=='passed' else 1
+    elif ((parsed.command=='run' and parsed.run_command=='fem-fenicsx-pressure') or
+          (parsed.command=='verify' and parsed.verify_command=='fem-fenicsx-pressure')):
+        from .runs.fenicsx_pressure import RESULT,run_pressure
+        from .result_store import result_path
+        if parsed.command=='run':
+            report=run_pressure(workspace)
+        else:
+            from .verification.fenicsx_pressure import verify_pressure
+            report=verify_pressure(result_path(workspace,RESULT))
         exit_code=0 if report['status']=='passed' else 1
     elif parsed.command == 'run' and parsed.run_command == 'fem-fenicsx-ring':
         from .runs.fenicsx_ring import run_fenicsx_ring, run_active_completion

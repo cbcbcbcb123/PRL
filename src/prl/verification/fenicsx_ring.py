@@ -25,6 +25,23 @@ def shape(points):
     return np.stack(values,axis=1),np.stack(deriv,axis=1),bary
 
 
+def pressure_basis(mesh):
+    """Independent scalar basis; old archives unambiguously default to CG1."""
+    kind=str(np.asarray(mesh.get('pressure_space','CG1')).item())
+    n,_,bary=shape(mesh['qpoints'])
+    basis={'CG1':bary,'DG2':n}.get(kind)
+    if basis is None or mesh['pressure_cells'].shape[1]!=basis.shape[1]:
+        raise ValueError('Unrecognized pressure basis or cell map')
+    if kind=='DG2':
+        local=mesh['pressure_cells'].ravel()
+        if len(np.unique(local))!=len(local):
+            raise ValueError('DG2 pressure degrees of freedom must be cell-local')
+        if 'pressure_coordinates' not in mesh or not np.allclose(
+                mesh['pressure_coordinates'][mesh['pressure_cells']],mesh['coordinates'][mesh['cells']],rtol=0,atol=1e-12):
+            raise ValueError('DG2 pressure coordinate ordering differs from independent quadratic basis')
+    return basis
+
+
 def fields(mesh,state,mu=1.,kappa=1000.):
     nodes,cells=mesh['coordinates'],mesh['cells']
     v=nodes[cells[:,:3]]
@@ -43,7 +60,8 @@ def fields(mesh,state,mu=1.,kappa=1000.):
     if pressure_values.shape not in ((expected,),(1,expected)):
         raise ValueError('saved pressure has an unrecognized shape')
     pressure_values=pressure_values.reshape(expected)
-    pressure=np.einsum('qa,ca->cq',bary,pressure_values[mesh['pressure_cells']])
+    pressure_shape=pressure_basis(mesh)
+    pressure=np.einsum('qa,ca->cq',pressure_shape,pressure_values[mesh['pressure_cells']])
     inverse_t=np.linalg.inv(deformation).swapaxes(-1,-2)
     invariant=np.sum(deformation*deformation,axis=(-1,-2))
     passive=mu*determinant[:,:,None,None]**(-2/3)*(deformation-invariant[:,:,None,None]/3*inverse_t)
@@ -61,7 +79,7 @@ def fields(mesh,state,mu=1.,kappa=1000.):
     local=np.einsum('cqij,cqaj,cq->cai',piola[:,:,:2,:2],gradients,weights)
     np.add.at(force,cells.ravel(),local.reshape(-1,2))
     pressure_residual=np.zeros_like(pressure_values)
-    local_pressure=np.einsum('qa,cq,cq->ca',bary,determinant-1-pressure/kappa,weights)
+    local_pressure=np.einsum('qa,cq,cq->ca',pressure_shape,determinant-1-pressure/kappa,weights)
     np.add.at(pressure_residual,mesh['pressure_cells'].ravel(),local_pressure.ravel())
     active_energy=.5*float(state['activation'])*np.sum(weights*(mesh['layers']==3)[:,None]*(np.sum(stretched**2,axis=-1)-1))
     active_local=np.einsum('cqij,cqaj,cq->cai',active[:,:,:2,:2],gradients,weights)

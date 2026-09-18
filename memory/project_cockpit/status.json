@@ -1,16 +1,16 @@
 {
   "schema_version": "scientific_project_cockpit.v1",
-  "updated_at": "2026-09-17",
+  "updated_at": "2026-09-18",
   "overall_status": "failed",
-  "summary": "只补细网格两态，粗网格不重跑。局部J峰值6.71167%→11.15248%，超限体积分数0.48565%→0.14100%；全局腔面积一致不能替代局部1%门。",
+  "summary": "发育路线已采纳：理想化三维+公开morphoHeart，后续自有实验替换。当前DG2压力对照在圆环p=0.02首个线性求解失败；轮廓未运行，局部体积修复未证明。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
-    "goal": "以FEM解释斑马鱼心室跳动及发育，逐步研究组织结构、生长、ECM和心内膜反馈。",
-    "scope": "图像来源二维外轮廓、构造内腔/层界；首个非零压力态局部体积门failed，不是实验拟合。",
-    "current_stage": "F6-S1-Q two-state diagnostic completed; local volume failed",
-    "current_location": "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917",
-    "evidence_basis_commit": "297615d",
-    "evidence_checked_at": "2026-09-17",
+    "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
+    "scope": "当前仍为二维固体资格；理想化三维、双向FSI、连续生长与实验验证not_run。",
+    "current_stage": "F6-S1-R pressure-space diagnostic stopped at first nonzero-load linear solve",
+    "current_location": "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918",
+    "evidence_basis_commit": "c52ecb3",
+    "evidence_checked_at": "2026-09-18",
     "git_workflow": {
       "branch": "main",
       "stage_commits": "direct_local_commits_no_new_branches",
@@ -27,100 +27,115 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "一次40.770秒容器；375父文件与50无关改动保持，外置结果库。两档仅支持敏感性判断，不证明渐近收敛。",
+    "freshness_note": "一次17.002秒容器；保存2态/接受1态，455父文件不变。DG2的J=1是未更新初始迭代，不是修复证据。",
     "model_overview": {
-      "model_type": "FEniCSx二维P2/P1三角形；三维平面应变有限变形NH",
-      "simulated_object": "72 hpf Fish 4、z=39实测外轮廓；构造内腔与三层界面",
-      "theory": "mu=1、kappa=1000；内壁随动压力0→0.02后停止，外壁自由，A固定ux/uy、B固定uy。主动为0。",
-      "current_question": "外边界非光滑局部效应与体积约束离散如何分别影响局部J？",
+      "model_type": "FEniCSx二维P2位移/CG1原压力；DG2逐单元压力有界对照；三维平面应变NH",
+      "simulated_object": "本轮仅理想圆环M0 896三角形；原72 hpf轮廓未进入新求解",
+      "theory": "mu=1、kappa=1000、原1%门不变。内壁随动压力0→0.02、外壁自由；A固定ux/uy、B固定uy；主动为0。",
+      "current_question": "DG2混合线性系统为何在首个Newton更新前失败？",
       "pipeline": [
-        "沿用M0旧状态，0新粗网格求解",
-        "M1 14164单元，与已保存几何一致",
-        "仅p=0和0.02两态，保存2/接受1",
-        "非零载局部J偏差11.15248%，失败即停"
+        "读取旧CG1状态，不重算对照",
+        "同一圆环网格，DG2零载通过",
+        "p=0.02线性求解失败，SNES=-3、更新0次",
+        "失败即停，轮廓及后续载荷not_run"
       ],
-      "diagram": "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/figures/FigS1Q_fine_diagnostic/FigS1Q_fine_diagnostic_v01_20260917/04_FigS1Q_fine_diagnostic_v01_20260917.png",
-      "diagram_caption": "M1结构/应力、共享色标M0与M1局部J；真实1倍变形，非零载均FAILED。",
+      "diagram": "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/figures/FigS1R_pressure_failure/FigS1R_pressure_failure_v01_20260918/04_FigS1R_pressure_failure_v01_20260918.png",
+      "diagram_caption": "同一结构；应力/J来自明确标注的旧CG1平衡解；新DG2只显示未收敛残量。",
       "assumptions": [
-        "只有外轮廓来自图像",
-        "内腔/层界为同心缩放",
-        "无应力参考态及材料未标定",
+        "材料及参考态未标定",
         "二维平面应变不是自由三维心室",
-        "加载级不是生理时间"
+        "只有旧轮廓外边界来自图像",
+        "morphoHeart静态形态不是连续个体心动或生长轨迹"
       ],
       "methods": [
-        "同一材料及原20度/1%J门",
-        "独立NumPy重建力、F/J、应力和虚功",
-        "弱压力残量小不等于局部体积精度",
-        "保全两态；Notebook及两帧GIF，不补造状态"
+        "独立NumPy重算力、F/J及应力",
+        "旧CG1体积偏差L2投影分析，不是新平衡计算",
+        "Notebook保留源数据和代码快照",
+        "失败线性求解不能据此诊断体积锁死"
       ],
-      "scope_boundary": "几何与全局腔响应对照passed；局部体积failed；后续载荷、主动、生物验证not_run。",
+      "scope_boundary": "数值对照failed；轮廓新求解not_run；局部体积修复unknown；三维/FSI/生长not_run。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/verification.json",
-        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/hotspot_geometry.json"
+        "project_control/ventricle_fem_pressure_space_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/post_verification.json",
+        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/volume_projection.json",
+        "project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md"
       ]
     }
   },
   "roadmap": [
     {
-      "label": "理想圆环被动/主动",
+      "label": "理想圆环旧基准",
       "status": "passed",
-      "summary": "F6-S0原26个唯一态保持"
+      "summary": "F6-S0原26态保留，不因新压力空间失败改写。"
     },
     {
-      "label": "实测外轮廓网格",
-      "status": "passed",
-      "summary": "3541/14164单元；源形态与共享界面保持"
-    },
-    {
-      "label": "独立结果库",
-      "status": "passed",
-      "summary": "PRL-results主机/Docker I/O通过；新结果无固定体积限额，代码仓仍3 GiB"
-    },
-    {
-      "label": "M1两态对照",
+      "label": "压力空间有界对照",
       "status": "failed",
-      "summary": "局部峰值升高，超限区域缩小；整体面积门通过"
+      "summary": "圆环首个非零载线性求解失败，未进入原轮廓。"
     },
     {
-      "label": "边界/离散分离修复",
+      "label": "理想化三维+公开资料路线",
+      "status": "passed",
+      "summary": "用户决定已记录；采用路线不等于实现或生物学通过。"
+    },
+    {
+      "label": "三维→双向FSI→生长→ECM",
       "status": "not_run",
-      "summary": "待最小合同和科学裁决；不盲目加密或加压"
+      "summary": "先完成固体数值资格；形态和参数由公开资料逐步约束，后续替换自有实验。"
     }
   ],
   "active_work": [
     {
-      "title": "两态诊断交付完成",
+      "title": "失败保全与独立交付",
       "status": "passed",
-      "summary": "73测试+21子测试、可复算结构/应力/J图与两帧GIF；科学裁决仍failed。",
+      "summary": "原始状态、失败码、源快照、投影分析及Notebook图件保全；科学裁决failed。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md",
-        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/verification.json",
-        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/index.html"
+        "project_control/ventricle_fem_pressure_space_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/index.html",
+        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/post_verification.json"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "均匀加密未解决局部不可压精度",
+      "title": "新DG2受压平衡未得到",
       "status": "failed",
-      "summary": "峰值11.15%，加权超限体积分数0.141%；热点近外边界、远离固定点，根因尚未确定。",
+      "summary": "SNES=-3，0次Newton更新，残量0.008667；尚缺KSP/MUMPS详细错误，不判断奇异/锁死根因。",
       "evidence_refs": [
-        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/verification.json",
-        "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/hotspot_geometry.json"
+        "project_control/ventricle_fem_pressure_space_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/failure.json"
       ]
     },
     {
-      "title": "真实解剖与生理标定缺口",
-      "status": "not_run",
-      "summary": "内腔/壁厚/纤维、材料、参考应力、生理时间和自由3D均未标定。",
+      "title": "原轮廓局部体积精度仍未合格",
+      "status": "failed",
+      "summary": "旧CG1粗/细峰值6.71%/11.15%；不可将未收敛DG2初值J=1视为改善。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md"
+        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/volume_projection.json"
+      ]
+    },
+    {
+      "title": "无自有实验，三维与发育标定缺口",
+      "status": "not_run",
+      "summary": "以理想化理论研究起步；公开静态形态不提供全部心动、压力、材料或生长参数。",
+      "evidence_refs": [
+        "project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md"
       ]
     }
   ],
   "results": [
+    {
+      "title": "压力空间对照：圆环线性求解失败",
+      "status": "failed",
+      "summary": "结构与旧CG1应力/J保留对照，新DG2无受压平衡解；静态诊断，不制作伪心动动画。",
+      "image": "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/figures/FigS1R_pressure_failure/FigS1R_pressure_failure_v01_20260918/04_FigS1R_pressure_failure_v01_20260918.png",
+      "evidence_refs": [
+        "project_control/ventricle_fem_pressure_space_execution_v01.md",
+        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/post_verification.json",
+        "../PRL-results/ventricle_fem/f6s1r_pressure_space_v01_20260918/index.html"
+      ],
+      "result_group": "current"
+    },
     {
       "title": "粗细局部J与细网格结构/应力",
       "status": "failed",
@@ -131,7 +146,7 @@
         "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/verification.json",
         "../PRL-results/ventricle_fem/f6s1q_fine_diagnostic_v01_20260917/index.html"
       ],
-      "result_group": "current"
+      "result_group": "historical"
     },
     {
       "title": "保留：F6-S0理想圆环四工况",
@@ -147,22 +162,22 @@
   ],
   "next_actions": [
     {
-      "title": "制定边界拐角/体积离散分离对照（待确认）",
+      "title": "混合线性系统最小诊断（新求解待确认）",
       "status": "not_run",
-      "summary": "明确几何允许误差与离散选择；不改材料或放宽1%门，不继续加压或主动。",
+      "summary": "先获取KSP/MUMPS原因、切线矩阵与固定自由度信息；检查有限kappa压力块及消元等价性。保持几何、材料和1%门，不自动重跑。",
       "evidence_refs": [
-        "project_control/ventricle_fem_fenicsx_fine_diagnostic_execution_v01.md"
+        "project_control/ventricle_fem_pressure_space_execution_v01.md"
       ]
     }
   ],
   "evidence_boundaries": [
     "仅FEM，无DCM。",
-    "只有外轮廓实测，内部解剖及材料未标定。",
-    "局部J失败不能用收敛、力平衡或平均J替代。",
-    "2个保存态含1个失败；不补造五态，不称生理时间。",
-    "73开发测试+21子测试通过不等于科学通过。",
-    "375父文件、50无关改动不变；0GPU/安装/删除/拉取/粗网格重跑。",
-    "新结果外置PRL-results；预计输出+至少64 MiB保全+10 GiB磁盘余量准入，无固定阶段体积上限；旧结果不迁移。",
-    "本地main提交，不自动推送。"
+    "理想化三维+公开morphoHeart路线已记录，实现和自有实验验证未完成。",
+    "静态、横断面个体资料不能补造成同一个体连续生长。",
+    "两保存态只接受零载；非零载J=1是初始迭代，不是平衡响应。",
+    "局部J失败不能由总体残量或平均体积替代。",
+    "455父文件不变；单CPU、0GPU/安装/拉取/自动重跑/删除。",
+    "结果外置PRL-results；磁盘余量准入及仓库3GiB门保持，旧证据原位保留。",
+    "本地main阶段提交，不自动推送。"
   ]
 }
