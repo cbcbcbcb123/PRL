@@ -8,16 +8,16 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 31dd1ad
-current_lifecycle: fem_only_f6s2d2a_mesh_audit_complete_pressure_gate_failed
+verified_commit: 69d2d47
+current_lifecycle: fem_only_f6s2d2b_candidate_quality_failed_offline_delivery_passed
 documentation_updated_at: 2026-09-18
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_3d_mesh_quality_contract_v01.md
-last_completed_contract: project_control/ventricle_fem_3d_mesh_quality_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/f6s2d2a_mesh_quality_v01_20260918/delivery_audit.json
-next_stage_contract: project_control/ventricle_fem_3d_unstructured_comparison_contract_v01.md
-current_authorization: F6S2D2A_offline_audit_completed_D2B_pending_confirmation
+current_contract: project_control/ventricle_fem_3d_unstructured_comparison_contract_v01.md
+last_completed_contract: project_control/ventricle_fem_3d_unstructured_comparison_contract_v01.md
+current_render_contract: ../PRL-results/ventricle_fem/f6s2d2b_unstructured_v01_20260918/delivery_audit.json
+next_stage_contract: null
+current_authorization: F6S2D2B_one_candidate_consumed_no_retry_no_FEM
 development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -26,11 +26,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: none_remaining_after_F6S2D2A_offline_audit
-current_execution_log: project_control/ventricle_fem_3d_mesh_quality_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_3d_mesh_quality_execution_v01.md
+execution_authorized: none_remaining_after_F6S2D2B_candidate_failure
+current_execution_log: project_control/ventricle_fem_3d_unstructured_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_3d_unstructured_execution_v01.md
 latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
-latest_result_package: ../PRL-results/ventricle_fem/f6s2d2a_mesh_quality_v01_20260918/summary.json
+latest_result_package: ../PRL-results/ventricle_fem/f6s2d2b_unstructured_v01_20260918/summary.json
 latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,34 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 F6-S2-D2A网格形状审查完成，原因尚未分离
+## 当前：2026-09-18 F6-S2-D2B同边界候选质量未通过，FEM未运行
+
+用户明确确认后执行一个Gmsh 4.15.2候选，原M1边界及两层界面片完全保持。
+3960→2611单元，19119→13483预计混合DOF。内腔体积差0，各层相对差<=2.22e-16；
+独立拓扑、共享界面、几何及资源门passed。整体q05为0.238272→0.248857，
+仅提高4.442271%未达预设5%，质量门failed；最差q 0.2220→0.0292（少数ECM单元），
+最小二面角6.637914°→6.811118°。未降低或事后修改门限。
+
+原容器在网格生成后因节点重编号读取KeyError(726)停止；完整原始MSH已保存。
+原失败记录不变，仅用已有meshio精确坐标映射读取保存候选得到上述质量核验。
+适配器已修订并补回归；修订后完整容器not_run。新增候选0、新增FEM0、无重跑。
+原M0/M1压力局部体积偏差1.5227%/1.4496%仍failed；U1没有应力/形变结果。
+
+132项测试+21子测试、独立读回、真实结构与质量分布图及Notebook交付passed。
+本包94文件22,018,556 bytes、manifest93项；SHA-256：
+c6528c6a25ca3affdef4fe15a9af6288ad121fb79aef57873a0d3a4f1df23282。
+375内部+1760外部保护文件、50无关修改保持。单CPU/0GPU，无删除/安装/拉取/推送。
+本地main科学提交69d2d47；结果外置，不进入Git。
+
+[结构/质量图及候选原始文件](../../PRL-results/ventricle_fem/f6s2d2b_unstructured_v01_20260918/index.html) ·
+[执行记录](ventricle_fem_3d_unstructured_execution_v01.md) ·
+[采纳及固定选项](ventricle_fem_3d_unstructured_adoption_v01.md)。
+
+唯一下一步：先形成近不可压三维混合离散的小基准资格方案，审查稳定性、
+局部体积控制及夹持热点；不能直接把二维DG搬到三维。新计算需具体方案确认。
+本候选授权已消耗，不自动调网格选项，不更改材料/基底/1%门，不继续生长/FSI。
+
+## 历史：2026-09-18 F6-S2-D2A网格形状审查完成，原因尚未分离
 
 只读原M0/M1实存u/p进行离线重算，0新FEM求解；原生产/几何/协议/力学验证器哈希不变。
 最小二面角4.410972°→6.637914°，最小q=3r/R为0.151387→0.222035；形状改善。
