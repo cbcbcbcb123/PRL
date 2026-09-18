@@ -1,0 +1,19 @@
+{
+  "date": "2026-09-18",
+  "status": "passed",
+  "cockpit_render": "passed",
+  "cockpit_strict_links": {"status": "passed", "html_links": 26, "evidence_paths": 386, "missing": []},
+  "result_html_links": "passed",
+  "result_manifest_readback": "passed",
+  "result_manifest_sha256": "78a9542bd69d6373a4e25f4bec421f6ea5441a49e4d5334932811201cd85628b",
+  "repository_logical_bytes_before_commit": 2039994917,
+  "repository_files_before_commit": 11097,
+  "repository_scan_errors": [],
+  "old_reparse_points": "Skipped without following; none modified or newly created",
+  "repository_under_3_GiB": true,
+  "external_disk_free_bytes_at_check": 2185461776384,
+  "result_bytes": 1664438,
+  "new_scientific_solves": 0,
+  "deletions": 0,
+  "scope": "Navigation and offline delivery checks, not scientific qualification"
+}

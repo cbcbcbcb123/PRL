@@ -9,3 +9,5 @@
 *.xml text eol=lf
 *.bin -text
 *.log -text -whitespace
+# Received expert originals must survive Git checkout byte-for-byte.
+plan/active/EXP-20260918-FEM-review-v01/source/** -text

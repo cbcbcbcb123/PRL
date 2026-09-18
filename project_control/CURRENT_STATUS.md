@@ -8,16 +8,16 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 69d2d47
-current_lifecycle: fem_only_f6s2d2b_candidate_quality_failed_offline_delivery_passed
+verified_commit: 012f59d
+current_lifecycle: fem_only_saved_state_projection_audit_passed_original_pressure_failed
 documentation_updated_at: 2026-09-18
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_3d_unstructured_comparison_contract_v01.md
+current_contract: project_control/ventricle_volume_qualification_adoption_v01.md
 last_completed_contract: project_control/ventricle_fem_3d_unstructured_comparison_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/f6s2d2b_unstructured_v01_20260918/delivery_audit.json
-next_stage_contract: null
-current_authorization: F6S2D2B_one_candidate_consumed_no_retry_no_FEM
+current_render_contract: ../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/delivery_audit.json
+next_stage_contract: project_control/ventricle_volume_qualification_adoption_v01.md#B_pending_batch_confirmation
+current_authorization: offline_saved_state_analysis_completed_new_eight_case_FEM_batch_pending
 development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -26,11 +26,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: none_remaining_after_F6S2D2B_candidate_failure
-current_execution_log: project_control/ventricle_fem_3d_unstructured_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_3d_unstructured_execution_v01.md
+execution_authorized: no_new_FEM_until_one_confirmation_of_registered_eight_case_batch
+current_execution_log: project_control/ventricle_volume_qualification_adoption_v01.md
+latest_completed_execution_log: project_control/ventricle_volume_qualification_adoption_v01.md
 latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
-latest_result_package: ../PRL-results/ventricle_fem/f6s2d2b_unstructured_v01_20260918/summary.json
+latest_result_package: ../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/summary.json
 latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,32 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 F6-S2-D2B同边界候选质量未通过，FEM未运行
+## 当前：2026-09-18 专家意见采纳与保存态投影诊断完成，新基准待整批确认
+
+用户提供专家意见及八成员复核ZIP，原件/附件哈希验收并登记于plan/active。
+新代码仅独立分析已有M0/M1压力态，生产本构、原验证器、配置与原D1证据127文件未改。
+8项专家数字逐网格一致至1e-12，弱压力矩约1e-18，正交分解及保全源码复算passed。
+全域投影缺陷r=J−1−p_m/κ的RMS从0.165124%降至0.120037%（下降27.30%），
+max|p_m/κ|仅0.001722%/0.002044%，但原max|J−1|仍1.522743%/1.449560%，压力门failed。
+固定d≥0.30L仍含全域峰值，M1峰值位于d=0.301956L；“邻接基底”不能替代固定距离分析。
+一区RMS略升；结果不是纯h收敛、锁死或不稳定证明，因果根因unknown。
+
+交付一页真实结构/全部单元/固定分区诊断PNG+SVG、可重绘源码和全部派生数据。
+14项针对性测试passed；收口时首次测试子进程因未设PYTHONPATH而未收集测试，
+仅补显式src路径后通过，原收集失败记录保留；无新FEM、Gmsh或Docker调用。
+探索图160dpi例外已声明；投稿级600dpi检查failed保留，不声称投稿图验收passed。
+整包21文件1,664,438 bytes，manifest SHA-256
+`78a9542bd69d6373a4e25f4bec421f6ea5441a49e4d5334932811201cd85628b`。
+
+[结果及复算](../../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/index.html) ·
+[采纳与预注册八工况](ventricle_volume_qualification_adoption_v01.md) ·
+[专家原件](../plan/active/EXP-20260918-FEM-review-v01/README.md)。
+
+唯一下一步是一次确认后实施2非零patch+6制造解；单CPU/0GPU、0自动重跑，先当前P2/P1。
+新批次not_run，不运行薄层/原心室回归、主动、生长或FSI；旧1%门及失败全部保持。
+旧非结构化候选授权已消耗，不继续靠随机换网格争取通过。
+
+## 历史：2026-09-18 F6-S2-D2B同边界候选质量未通过，FEM未运行
 
 用户明确确认后执行一个Gmsh 4.15.2候选，原M1边界及两层界面片完全保持。
 3960→2611单元，19119→13483预计混合DOF。内腔体积差0，各层相对差<=2.22e-16；

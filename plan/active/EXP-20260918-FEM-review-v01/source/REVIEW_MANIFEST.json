@@ -1,0 +1,41 @@
+{
+  "review_date": "2026-09-18",
+  "source_zip_sha256": "d4874e773bfebc8ac2604249430431b943bee5ca68789bfe9503009296eed3ea",
+  "files": [
+    {
+      "path": "PRL_项目评审与提速建议_20260918.md",
+      "bytes": 25208,
+      "sha256": "759125257ea9cbbf7afdcc4a68cd46b3ddfff710855058e682710c197dd476df"
+    },
+    {
+      "path": "PRL_review_evidence.md",
+      "bytes": 43899,
+      "sha256": "9e3c3e9681fa5b143a24e64b889c3da4606ca22fbfcc8e811be8e301f8e4b765"
+    },
+    {
+      "path": "PRL_review_audit_20260918.json",
+      "bytes": 35945,
+      "sha256": "3c2d391c969ac0ee7971552af14663e60cd8037952e04746ad600efaed106c6e"
+    },
+    {
+      "path": "prl_independent_audit.py",
+      "bytes": 10511,
+      "sha256": "d0d30c13174f4e664cb90d121b6d24ece6ceedeca17c493e2cb10c2f1b51bec0"
+    },
+    {
+      "path": "PRL_review_shape_tests.txt",
+      "bytes": 98,
+      "sha256": "96fcb151eb8352c0df5b2190139c1dacaaa1f0b2055e76311d8cd3d3e9a78e71"
+    },
+    {
+      "path": "PRL_review_shape_tests.xml",
+      "bytes": 683,
+      "sha256": "180134ec7392e2dd3d7d0096ff46018f9051337af20c1bced84bfa6f0e74e025"
+    },
+    {
+      "path": "PRL_review_README.md",
+      "bytes": 1087,
+      "sha256": "1343c6e6ccbc527bd5a1c404757f2f5e82f04b8fe4f22cab2c3964f8d9750301"
+    }
+  ]
+}

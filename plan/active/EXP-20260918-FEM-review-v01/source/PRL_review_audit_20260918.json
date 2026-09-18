@@ -1,0 +1,980 @@
+{
+  "scope": "saved-evidence reanalysis using supplied independent NumPy verifier plus additional diagnostics; no independent FEM solve",
+  "not_run": [
+    "FEniCSx production solves",
+    "Gmsh",
+    "MSH parser",
+    "notebooks",
+    "complete regression suite"
+  ],
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5"
+  },
+  "integrity": {
+    "status": "passed",
+    "manifest_files_checked": 403,
+    "copied_source_files_checked": 392,
+    "core_python_syntax_checked": 30,
+    "portal_links_checked": 81,
+    "scientific_status_changed": false,
+    "notebook_execution": "not_run"
+  },
+  "states": {
+    "M0": {
+      "original_scope_audit": {
+        "status": "failed",
+        "checks": {
+          "p2_order": true,
+          "p1_order": true,
+          "volume_weights": true,
+          "surface_weights": true,
+          "mixed_map_consistency": true,
+          "snes": true,
+          "solver_free_residual": true,
+          "independent_free_force": true,
+          "weak_pressure": true,
+          "kinematics": true,
+          "stress": true,
+          "free_force_agreement": true,
+          "weak_agreement": true,
+          "positive_J": true,
+          "local_volume": false,
+          "cavity_volume_agreement": true,
+          "fixed_displacement": true,
+          "force_balance_with_support": true,
+          "moment_balance_with_support": true,
+          "pressure_virtual_work": true,
+          "active_virtual_work": true,
+          "active_energy": true,
+          "active_localization": true,
+          "linear_solver": true
+        },
+        "failed_checks": [
+          "local_volume"
+        ],
+        "pressure": 0.01,
+        "activation": 0.0,
+        "cavity_volume": 1.2099916611036874,
+        "reference_volume": 1.196950583481553,
+        "volume_change": 0.010895251484987822,
+        "max_abs_J_minus_one": 0.015227429672391546,
+        "J_min": 0.9847725703276085,
+        "quadrature_max_abs_J_minus_one": 0.013148126352111378,
+        "max_displacement": 0.004041971396290787,
+        "independent_free_force": 1.9551001292771658e-16,
+        "weak_pressure_norm": 1.8069563823631457e-18,
+        "force_assembly_error": 1.440633636690114e-17,
+        "field_errors": {
+          "F": 4.440892098500626e-16,
+          "J": 1.1102230246251565e-15,
+          "stress": 1.326196097384269e-15,
+          "active_stress": 0.0
+        },
+        "force_balance": 5.2922126507205224e-17,
+        "moment_balance": 2.065861913678575e-17,
+        "pressure_virtual_work_error": 1.5803569661677203e-12,
+        "active_virtual_work_error": 0.0,
+        "cavity_reconstruction_error": 1.1102230246251565e-15
+      },
+      "additional_diagnostics": {
+        "quadrature_points_per_cell": 24,
+        "extra_points_per_cell": 56,
+        "solid_reference_volume": 1.7479967083518906,
+        "max_abs_pressure_coefficient": 0.01722102649237061,
+        "max_abs_p_over_kappa_at_q_and_extra": 1.722102649237061e-05,
+        "rms_J_minus_one": 0.0016512482191155802,
+        "rms_p_over_kappa": 6.223555517153949e-06,
+        "rms_projection_defect": 0.001651236490781711,
+        "max_abs_projection_defect": 0.015227482995366585,
+        "weighted_mean_J_minus_one": 5.7699748156622845e-06,
+        "weighted_mean_defect": 6.360027670300772e-18,
+        "l2_projection_cross_term": 7.042667434064762e-23,
+        "bad_cells": 96,
+        "bad_cells_near_base": 96,
+        "bad_cells_by_layer": {
+          "1": 48,
+          "2": 48,
+          "3": 0
+        },
+        "fraction_solid_volume_in_bad_cells": 0.04526990550194592,
+        "bad_volume_caution": "Volume of cells containing a violating sample, not exact volume of the violating subset.",
+        "away_from_base_max_abs_J_minus_one": 0.005296146094192489,
+        "base_region_caution": "Vertex-based adjacency; physical width changes with mesh.",
+        "at_peak_extra_point": {
+          "cell": 144,
+          "point": 5,
+          "J_minus_one": -0.015227429672391546,
+          "p_over_kappa": 5.332297503825453e-08,
+          "projection_defect": -0.015227482995366585,
+          "layer": 1,
+          "reference_point": [
+            0.6638748593503238,
+            -0.2749859704614355,
+            -0.446464004425938
+          ]
+        },
+        "volumetric_energy_diagnostic": {
+          "isochoric_energy": 6.539400275008273e-05,
+          "projected_volumetric_energy": 3.385226647531909e-08,
+          "pointwise_penalty_energy": 0.0023830619877717907,
+          "projection_defect_penalty": 0.002383028135505315,
+          "orthogonal_split_error": 4.336808689942018e-19,
+          "caution": "Diagnostic decomposition, not continuum solution error or proof of instability."
+        },
+        "solver_elapsed_seconds_from_original_metadata": 2.227738010000003,
+        "original_snes_iterations": 3
+      }
+    },
+    "M1": {
+      "original_scope_audit": {
+        "status": "failed",
+        "checks": {
+          "p2_order": true,
+          "p1_order": true,
+          "volume_weights": true,
+          "surface_weights": true,
+          "mixed_map_consistency": true,
+          "snes": true,
+          "solver_free_residual": true,
+          "independent_free_force": true,
+          "weak_pressure": true,
+          "kinematics": true,
+          "stress": true,
+          "free_force_agreement": true,
+          "weak_agreement": true,
+          "positive_J": true,
+          "local_volume": false,
+          "cavity_volume_agreement": true,
+          "fixed_displacement": true,
+          "force_balance_with_support": true,
+          "moment_balance_with_support": true,
+          "pressure_virtual_work": true,
+          "active_virtual_work": true,
+          "active_energy": true,
+          "active_localization": true,
+          "linear_solver": true
+        },
+        "failed_checks": [
+          "local_volume"
+        ],
+        "pressure": 0.01,
+        "activation": 0.0,
+        "cavity_volume": 1.2545555131860973,
+        "reference_volume": 1.2408329098674236,
+        "volume_change": 0.01105918710694076,
+        "max_abs_J_minus_one": 0.014495602988764067,
+        "J_min": 0.9855043970112359,
+        "quadrature_max_abs_J_minus_one": 0.012553140364634507,
+        "max_displacement": 0.004139627167102452,
+        "independent_free_force": 1.5811656884223566e-16,
+        "weak_pressure_norm": 1.1611889855324537e-18,
+        "force_assembly_error": 1.1071355895324146e-17,
+        "field_errors": {
+          "F": 5.551115123125783e-16,
+          "J": 1.1102230246251565e-15,
+          "stress": 1.231653667943533e-15,
+          "active_stress": 0.0
+        },
+        "force_balance": 5.3737357082095445e-17,
+        "moment_balance": 1.9795684228331252e-17,
+        "pressure_virtual_work_error": 7.974794327507417e-13,
+        "active_virtual_work_error": 0.0,
+        "cavity_reconstruction_error": 4.440892098500626e-16
+      },
+      "additional_diagnostics": {
+        "quadrature_points_per_cell": 24,
+        "extra_points_per_cell": 56,
+        "solid_reference_volume": 1.8120813607476767,
+        "max_abs_pressure_coefficient": 0.020437342250169438,
+        "max_abs_p_over_kappa_at_q_and_extra": 2.043734225016944e-05,
+        "rms_J_minus_one": 0.0012003876206479404,
+        "rms_p_over_kappa": 6.335963302316577e-06,
+        "rms_projection_defect": 0.0012003708990865512,
+        "max_abs_projection_defect": 0.014495770955400472,
+        "weighted_mean_J_minus_one": 5.724687886295048e-06,
+        "weighted_mean_defect": 7.045436465514293e-18,
+        "l2_projection_cross_term": 7.959997808688999e-23,
+        "bad_cells": 120,
+        "bad_cells_near_base": 120,
+        "bad_cells_by_layer": {
+          "1": 72,
+          "2": 48,
+          "3": 0
+        },
+        "fraction_solid_volume_in_bad_cells": 0.024976916096860025,
+        "bad_volume_caution": "Volume of cells containing a violating sample, not exact volume of the violating subset.",
+        "away_from_base_max_abs_J_minus_one": 0.004597310583346337,
+        "base_region_caution": "Vertex-based adjacency; physical width changes with mesh.",
+        "at_peak_extra_point": {
+          "cell": 607,
+          "point": 5,
+          "J_minus_one": -0.014495602988764067,
+          "p_over_kappa": 1.6796663640568946e-07,
+          "projection_defect": -0.014495770955400472,
+          "layer": 1,
+          "reference_point": [
+            0.7256765459161706,
+            -0.1944444444444451,
+            -0.3019555526196074
+          ]
+        },
+        "volumetric_energy_diagnostic": {
+          "isochoric_energy": 6.881788333711832e-05,
+          "projected_volumetric_energy": 3.6372487547741276e-08,
+          "pointwise_penalty_energy": 0.0013055415960521364,
+          "projection_defect_penalty": 0.0013055052235645887,
+          "orthogonal_split_error": 0.0,
+          "caution": "Diagnostic decomposition, not continuum solution error or proof of instability."
+        },
+        "solver_elapsed_seconds_from_original_metadata": 7.3114360550000015,
+        "original_snes_iterations": 3
+      }
+    }
+  },
+  "source_sha256": {
+    "review_check.py": "c46953dfec3742bff311233d4c5c5ae0820feae4c151d9dbe0a60cf3bf5ec4da",
+    "PRL/src/prl/verification/ventricle_3d.py": "8229ab2bcca70adcc05dfe4beb984e2442f1aead396d7e035b9ff930f3e5fa78",
+    "PRL/src/prl/verification/mesh_equivalence.py": "425100fe67ff6fc2a725cec429bbf41005c4ac7222a4c8cf69c26ff45c25e255",
+    "PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/configuration.json": "a4c3a245d2779eace16c02e272357543f565d465a0913619eb7687f38a6f6b0a",
+    "PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/retained/M0_mesh.npz": "a38895a69ffe0d580872e89fba62ab1c60305ee4772ea0924f40d7f4982b627d",
+    "PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/retained/M0_state_pressure_1.npz": "89459664380140cb7abc78f6c4b85884d8c8aa6f537d430ae9d882afac2c9421",
+    "PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/retained/M0_state_pressure_1.json": "184a4b5e8d12eec9cfdcdd84cf9ce371a5f5e851999a4c8e7d7ca6e1ecce79d5",
+    "PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/raw/M1_mesh.npz": "530ccddcaccf6f18c2eed8d50bdde8aa88bc357758e2e8a23552c6b41a603ae2",
+    "PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/raw/M1_state_pressure_1.npz": "37f132791132004a5d1022f0152711f52de5e5220ddc5c79a785887315bef324",
+    "PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/raw/M1_state_pressure_1.json": "463bbfaac3bd49c6eeb043c0faebc28b646a22b014a8bb66e240ef184c2a99fb",
+    "PRL-results/ventricle_fem/f6s2d2b_unstructured_v01_20260918/input/M1_geometry.npz": "afaaee756d8560bad7b73c4cd3596d5f618aa1511bae9d9ba66e8393e2d785b6",
+    "PRL-results/ventricle_fem/f6s2d2b_unstructured_v01_20260918/offline/candidate_geometry.npz": "889a53a2a48b2be3eeb13b72b283ec0de33ab602eac841bffb4100a477334106",
+    "PRL-results/ventricle_fem/f6s2d2b_unstructured_v01_20260918/offline/mesh_comparison.json": "3d7490cbf7e259808478e51237438c410da8517dc5f98f4f334f6b0543cdc096"
+  },
+  "zip_sha256": "d4874e773bfebc8ac2604249430431b943bee5ca68789bfe9503009296eed3ea",
+  "zip_crc_bad_member": null,
+  "archive_sizes": {
+    "zip_bytes": 123117396,
+    "entries": 404,
+    "uncompressed_bytes": 247431103,
+    "figure_directory_bytes": 224084344,
+    "figure_directory_fraction": 0.905643394395732,
+    "caution": "Storage ratio, not labor-time ratio; figures include reproducibility data."
+  },
+  "candidate_offline_reaudit": {
+    "scope": "saved NPZ only; no MSH parser or new mesh/FEM run",
+    "report_matches_within_tolerance": true,
+    "comparison_rtol": 1e-12,
+    "comparison_atol": 1e-12,
+    "max_abs_numeric_difference": 1.0658141036401503e-14,
+    "mismatches": [],
+    "report": {
+      "status": "failed",
+      "checks": {
+        "original_topology": true,
+        "candidate_topology": true,
+        "identical_surface_coordinates_and_adjacency": true,
+        "tetrahedra_budget": true,
+        "mixed_dof_budget": true,
+        "same_volumes": true,
+        "global_q05_improves_5percent": false,
+        "thin_clamp_q05_not_worse": true,
+        "layer_1_clamp_q05_not_worse": true,
+        "layer_2_clamp_q05_not_worse": true,
+        "all_minimum_dihedral_not_worse": true,
+        "thin_clamp_minimum_dihedral_not_worse": true,
+        "layer_1_clamp_minimum_dihedral_not_worse": true,
+        "layer_2_clamp_minimum_dihedral_not_worse": true
+      },
+      "failed_checks": [
+        "global_q05_improves_5percent"
+      ],
+      "reference": {
+        "checks": {
+          "positive_volume": true,
+          "no_duplicate_cells": true,
+          "no_duplicate_coordinates": true,
+          "no_unused_vertices": true,
+          "manifold_faces": true,
+          "opposite_sides_shared_faces": true,
+          "all_boundary_facets_identified": true,
+          "boundary_labels_disjoint": true,
+          "surface_labels_unique": true,
+          "layer_labels": true,
+          "allowed_layer_adjacency": true,
+          "positive_cavity": true
+        },
+        "vertices": 870,
+        "tetrahedra": 3960,
+        "edges": 5213,
+        "mixed_dofs": 19119,
+        "regions": {
+          "all": {
+            "cells": 3960,
+            "q_radius": {
+              "min": 0.2220354377595928,
+              "p05": 0.2382721152435951,
+              "median": 0.3272215099133487,
+              "p95": 0.44813335115007186,
+              "max": 0.5117651120370144
+            },
+            "min_dihedral_deg": {
+              "min": 6.637913562316766,
+              "p05": 7.9191774742247905,
+              "median": 16.143629721779387,
+              "p95": 42.302500533421295,
+              "max": 47.93460463710437
+            },
+            "condition_regular": {
+              "min": 4.109544059059323,
+              "p05": 5.036303449425327,
+              "median": 7.210222460798727,
+              "p95": 11.755178786195579,
+              "max": 12.981100940348085
+            }
+          },
+          "clamp": {
+            "cells": 720,
+            "q_radius": {
+              "min": 0.22671000964799853,
+              "p05": 0.23163523565886257,
+              "median": 0.30173485633197117,
+              "p95": 0.35138735764863577,
+              "max": 0.36510912793297107
+            },
+            "min_dihedral_deg": {
+              "min": 6.637913562316766,
+              "p05": 6.637913562316932,
+              "median": 11.96134504425854,
+              "p95": 18.382559524244996,
+              "max": 19.01869645110817
+            },
+            "condition_regular": {
+              "min": 7.010158651720213,
+              "p05": 7.2678345327589335,
+              "median": 8.977631284395589,
+              "p95": 12.979611309648229,
+              "max": 12.981100940348085
+            }
+          },
+          "away": {
+            "cells": 3240,
+            "q_radius": {
+              "min": 0.2220354377595928,
+              "p05": 0.2428528023597135,
+              "median": 0.33459411579873233,
+              "p95": 0.4566964905456106,
+              "max": 0.5117651120370144
+            },
+            "min_dihedral_deg": {
+              "min": 6.9869146054693925,
+              "p05": 8.277429763871465,
+              "median": 17.846383731715548,
+              "p95": 44.08639455466252,
+              "max": 47.93460463710437
+            },
+            "condition_regular": {
+              "min": 4.109544059059323,
+              "p05": 4.983918195239299,
+              "median": 6.808700237197039,
+              "p95": 10.794926547674875,
+              "max": 12.302877896087601
+            }
+          },
+          "thin_clamp": {
+            "cells": 288,
+            "q_radius": {
+              "min": 0.22671000964799853,
+              "p05": 0.22671000964799895,
+              "median": 0.24128844492787369,
+              "p95": 0.259347323555454,
+              "max": 0.26356225610592426
+            },
+            "min_dihedral_deg": {
+              "min": 6.637913562316766,
+              "p05": 6.637913562316877,
+              "median": 10.341038862411912,
+              "p95": 12.91078687001068,
+              "max": 12.91078687001072
+            },
+            "condition_regular": {
+              "min": 10.379793006688036,
+              "p05": 10.514415963946892,
+              "median": 11.713359067822044,
+              "p95": 12.981100940348059,
+              "max": 12.981100940348085
+            }
+          },
+          "layer_1": {
+            "cells": 792,
+            "q_radius": {
+              "min": 0.22992166465844113,
+              "p05": 0.23538881069032533,
+              "median": 0.29098979277434955,
+              "p95": 0.4063704047732739,
+              "max": 0.4211849834102581
+            },
+            "min_dihedral_deg": {
+              "min": 6.954302247932628,
+              "p05": 6.954302247932734,
+              "median": 13.156210239311386,
+              "p95": 46.50420461279306,
+              "max": 47.93460463710437
+            },
+            "condition_regular": {
+              "min": 5.675590306509505,
+              "p05": 5.694176541497358,
+              "median": 8.942294522343964,
+              "p95": 12.386672134375646,
+              "max": 12.390949782066265
+            }
+          },
+          "layer_1_clamp": {
+            "cells": 144,
+            "q_radius": {
+              "min": 0.23538881069032475,
+              "p05": 0.23538881069032513,
+              "median": 0.24829524466754338,
+              "p95": 0.2593473235554542,
+              "max": 0.26356225610592426
+            },
+            "min_dihedral_deg": {
+              "min": 6.954302247932628,
+              "p05": 6.954302247932628,
+              "median": 10.474535746966952,
+              "p95": 12.910786870010691,
+              "max": 12.91078687001072
+            },
+            "condition_regular": {
+              "min": 10.379793006688036,
+              "p05": 10.514415963946877,
+              "median": 11.318979754442578,
+              "p95": 12.390949782066249,
+              "max": 12.390949782066265
+            }
+          },
+          "layer_1_away": {
+            "cells": 648,
+            "q_radius": {
+              "min": 0.22992166465844113,
+              "p05": 0.23827211524359526,
+              "median": 0.29757200805343825,
+              "p95": 0.4063704047732742,
+              "max": 0.4211849834102581
+            },
+            "min_dihedral_deg": {
+              "min": 7.311100975357753,
+              "p05": 7.311100975357854,
+              "median": 14.907414285824514,
+              "p95": 46.50420461279308,
+              "max": 47.93460463710437
+            },
+            "condition_regular": {
+              "min": 5.675590306509505,
+              "p05": 5.694176541497352,
+              "median": 8.374780740294732,
+              "p95": 11.705834747161052,
+              "max": 11.755178786195602
+            }
+          },
+          "layer_2": {
+            "cells": 792,
+            "q_radius": {
+              "min": 0.2220354377595928,
+              "p05": 0.22671000964799892,
+              "median": 0.28304113910787126,
+              "p95": 0.39902310717203193,
+              "max": 0.40972771102206856
+            },
+            "min_dihedral_deg": {
+              "min": 6.637913562316766,
+              "p05": 6.637913562316932,
+              "median": 12.565396877546824,
+              "p95": 45.518531620784636,
+              "max": 47.11414465806802
+            },
+            "condition_regular": {
+              "min": 5.683050102720781,
+              "p05": 5.817625560916838,
+              "median": 9.33086651829412,
+              "p95": 12.979611309648226,
+              "max": 12.981100940348085
+            }
+          },
+          "layer_2_clamp": {
+            "cells": 144,
+            "q_radius": {
+              "min": 0.22671000964799853,
+              "p05": 0.22671000964799873,
+              "median": 0.23880231785781897,
+              "p95": 0.24918698415004137,
+              "max": 0.2531123015074822
+            },
+            "min_dihedral_deg": {
+              "min": 6.637913562316766,
+              "p05": 6.637913562316822,
+              "median": 9.9982604124536,
+              "p95": 12.325128039292654,
+              "max": 12.325128039292743
+            },
+            "condition_regular": {
+              "min": 10.877010676042579,
+              "p05": 11.010057477355435,
+              "median": 11.860778865729396,
+              "p95": 12.981100940348067,
+              "max": 12.981100940348085
+            }
+          },
+          "layer_2_away": {
+            "cells": 648,
+            "q_radius": {
+              "min": 0.2220354377595928,
+              "p05": 0.22980540151970205,
+              "median": 0.28795498567588995,
+              "p95": 0.3990231071720322,
+              "max": 0.40972771102206856
+            },
+            "min_dihedral_deg": {
+              "min": 6.9869146054693925,
+              "p05": 6.986914605469496,
+              "median": 14.26157842661867,
+              "p95": 45.51853162078468,
+              "max": 47.11414465806802
+            },
+            "condition_regular": {
+              "min": 5.683050102720781,
+              "p05": 5.817625560916836,
+              "median": 8.739918278037884,
+              "p95": 12.246768824479785,
+              "max": 12.302877896087601
+            }
+          },
+          "layer_3": {
+            "cells": 2376,
+            "q_radius": {
+              "min": 0.27642721270196274,
+              "p05": 0.2942577892462445,
+              "median": 0.3413236637552584,
+              "p95": 0.45970630178914657,
+              "max": 0.5117651120370144
+            },
+            "min_dihedral_deg": {
+              "min": 9.012864861902885,
+              "p05": 9.603681404652276,
+              "median": 17.789180374698766,
+              "p95": 38.8886903554775,
+              "max": 44.08639455466266
+            },
+            "condition_regular": {
+              "min": 4.109544059059323,
+              "p05": 4.805792513751818,
+              "median": 6.638680082134684,
+              "p95": 8.97763128439559,
+              "max": 9.56448577192109
+            }
+          },
+          "layer_3_clamp": {
+            "cells": 432,
+            "q_radius": {
+              "min": 0.2878804293459735,
+              "p05": 0.28788042934597413,
+              "median": 0.31948890463476215,
+              "p95": 0.35782391541909314,
+              "max": 0.36510912793297107
+            },
+            "min_dihedral_deg": {
+              "min": 9.012864861902885,
+              "p05": 9.012864861902967,
+              "median": 14.438409988539608,
+              "p95": 19.01869645110811,
+              "max": 19.01869645110817
+            },
+            "condition_regular": {
+              "min": 7.010158651720213,
+              "p05": 7.169754945934045,
+              "median": 8.242203607243358,
+              "p95": 9.564485771921063,
+              "max": 9.56448577192109
+            }
+          },
+          "layer_3_away": {
+            "cells": 1944,
+            "q_radius": {
+              "min": 0.27642721270196274,
+              "p05": 0.29425778924624457,
+              "median": 0.35261803746006165,
+              "p95": 0.46810504740538056,
+              "max": 0.5117651120370144
+            },
+            "min_dihedral_deg": {
+              "min": 9.40112214376072,
+              "p05": 10.566862123599813,
+              "median": 19.5957738137379,
+              "p95": 39.59329385114183,
+              "max": 44.08639455466266
+            },
+            "condition_regular": {
+              "min": 4.109544059059323,
+              "p05": 4.7103423887783045,
+              "median": 6.282369972337989,
+              "p95": 8.541807057729432,
+              "max": 9.13187831347296
+            }
+          }
+        },
+        "cavity_volume": 1.2408329098674529,
+        "layer_volumes": {
+          "1": 0.19558628741785694,
+          "2": 0.21512940574826864,
+          "3": 1.4013656675815502
+        },
+        "surface_triangles": 1296
+      },
+      "candidate": {
+        "checks": {
+          "positive_volume": true,
+          "no_duplicate_cells": true,
+          "no_duplicate_coordinates": true,
+          "no_unused_vertices": true,
+          "manifold_faces": true,
+          "opposite_sides_shared_faces": true,
+          "all_boundary_facets_identified": true,
+          "boundary_labels_disjoint": true,
+          "surface_labels_unique": true,
+          "layer_labels": true,
+          "allowed_layer_adjacency": true,
+          "positive_cavity": true
+        },
+        "vertices": 643,
+        "tetrahedra": 2611,
+        "edges": 3637,
+        "mixed_dofs": 13483,
+        "regions": {
+          "all": {
+            "cells": 2611,
+            "q_radius": {
+              "min": 0.02923290526120169,
+              "p05": 0.24885680850759945,
+              "median": 0.3505278634967868,
+              "p95": 0.7395851513491982,
+              "max": 0.8324469503197733
+            },
+            "min_dihedral_deg": {
+              "min": 6.811117766085556,
+              "p05": 7.537713752534181,
+              "median": 16.640167226387018,
+              "p95": 45.80745618658973,
+              "max": 55.84691139218693
+            },
+            "condition_regular": {
+              "min": 1.861577302874184,
+              "p05": 2.3199055453558577,
+              "median": 6.676108904344573,
+              "p95": 11.669679653603108,
+              "max": 17.86269621910463
+            }
+          },
+          "clamp": {
+            "cells": 602,
+            "q_radius": {
+              "min": 0.02923290526120169,
+              "p05": 0.23975068311021222,
+              "median": 0.2594282966792857,
+              "p95": 0.6159047605715179,
+              "max": 0.6974066703096763
+            },
+            "min_dihedral_deg": {
+              "min": 6.811117766085556,
+              "p05": 6.811117766085664,
+              "median": 12.532210799498682,
+              "p95": 39.82921984410592,
+              "max": 49.35533640047659
+            },
+            "condition_regular": {
+              "min": 2.2635049443134627,
+              "p05": 3.026651136984545,
+              "median": 10.025387774173751,
+              "p95": 12.63943088096838,
+              "max": 17.86269621910463
+            }
+          },
+          "away": {
+            "cells": 2009,
+            "q_radius": {
+              "min": 0.034748556215374295,
+              "p05": 0.2629789104109899,
+              "median": 0.38182106153399725,
+              "p95": 0.7608124197092777,
+              "max": 0.8324469503197733
+            },
+            "min_dihedral_deg": {
+              "min": 7.537713752534084,
+              "p05": 8.927346133913057,
+              "median": 19.8240862720549,
+              "p95": 45.81380629811401,
+              "max": 55.84691139218693
+            },
+            "condition_regular": {
+              "min": 1.861577302874184,
+              "p05": 2.2794027254671243,
+              "median": 6.344034293179413,
+              "p95": 10.393140653077586,
+              "max": 16.37410134139326
+            }
+          },
+          "thin_clamp": {
+            "cells": 291,
+            "q_radius": {
+              "min": 0.02923290526120169,
+              "p05": 0.23975068311021214,
+              "median": 0.24933067631564318,
+              "p95": 0.25942829667928524,
+              "max": 0.26517279642422253
+            },
+            "min_dihedral_deg": {
+              "min": 6.811117766085556,
+              "p05": 6.81111776608561,
+              "median": 10.635530524029914,
+              "p95": 13.386688210440433,
+              "max": 21.67052986561748
+            },
+            "condition_regular": {
+              "min": 9.912944756146226,
+              "p05": 10.224933734933561,
+              "median": 11.669679653603044,
+              "p95": 12.700518322028675,
+              "max": 17.86269621910463
+            }
+          },
+          "layer_1": {
+            "cells": 792,
+            "q_radius": {
+              "min": 0.2496209082082238,
+              "p05": 0.251033763614786,
+              "median": 0.3325231783007545,
+              "p95": 0.4602808438789885,
+              "max": 0.4810554307108818
+            },
+            "min_dihedral_deg": {
+              "min": 7.144558946148571,
+              "p05": 7.144558946148725,
+              "median": 13.790474701114784,
+              "p95": 44.41612752409584,
+              "max": 45.80745618658983
+            },
+            "condition_regular": {
+              "min": 5.010665094486052,
+              "p05": 5.381056692729054,
+              "median": 7.900966412163641,
+              "p95": 12.04845069192489,
+              "max": 12.107818638750551
+            }
+          },
+          "layer_1_clamp": {
+            "cells": 144,
+            "q_radius": {
+              "min": 0.2496209082082238,
+              "p05": 0.2496209082082242,
+              "median": 0.25446224692038855,
+              "p95": 0.2594282966792855,
+              "max": 0.26517279642422253
+            },
+            "min_dihedral_deg": {
+              "min": 7.144558946148571,
+              "p05": 7.1445589461486225,
+              "median": 10.804743425503009,
+              "p95": 13.386688210440433,
+              "max": 13.386688210440488
+            },
+            "condition_regular": {
+              "min": 10.137830792201278,
+              "p05": 10.224933734933552,
+              "median": 11.149969410282297,
+              "p95": 12.107818638750526,
+              "max": 12.107818638750551
+            }
+          },
+          "layer_1_away": {
+            "cells": 648,
+            "q_radius": {
+              "min": 0.2629789104109892,
+              "p05": 0.2650635103369369,
+              "median": 0.34305685668674235,
+              "p95": 0.46639432521742363,
+              "max": 0.4810554307108818
+            },
+            "min_dihedral_deg": {
+              "min": 7.91606615120188,
+              "p05": 7.916066151202019,
+              "median": 15.739924338715221,
+              "p95": 44.41612752409587,
+              "max": 45.80745618658983
+            },
+            "condition_regular": {
+              "min": 5.010665094486052,
+              "p05": 5.226313278137887,
+              "median": 7.173165522060975,
+              "p95": 10.825846704344151,
+              "max": 10.932479443894442
+            }
+          },
+          "layer_2": {
+            "cells": 802,
+            "q_radius": {
+              "min": 0.02923290526120169,
+              "p05": 0.2415252737609575,
+              "median": 0.32259957932816724,
+              "p95": 0.4518779861017665,
+              "max": 0.46579025141117447
+            },
+            "min_dihedral_deg": {
+              "min": 6.811117766085556,
+              "p05": 6.8111177660857205,
+              "median": 13.161426777087975,
+              "p95": 45.695145800059166,
+              "max": 46.56194776879579
+            },
+            "condition_regular": {
+              "min": 5.2478712574955155,
+              "p05": 5.383240603645943,
+              "median": 8.293480882923731,
+              "p95": 12.639430880968375,
+              "max": 17.86269621910463
+            }
+          },
+          "layer_2_clamp": {
+            "cells": 147,
+            "q_radius": {
+              "min": 0.02923290526120169,
+              "p05": 0.23975068311021194,
+              "median": 0.24227200400249635,
+              "p95": 0.24933067631564268,
+              "max": 0.25460663662274874
+            },
+            "min_dihedral_deg": {
+              "min": 6.811117766085556,
+              "p05": 6.81111776608561,
+              "median": 10.635530524029914,
+              "p95": 12.761879750747735,
+              "max": 21.67052986561748
+            },
+            "condition_regular": {
+              "min": 9.912944756146226,
+              "p05": 10.723275402935046,
+              "median": 11.687592345241482,
+              "p95": 12.700518322028692,
+              "max": 17.86269621910463
+            }
+          },
+          "layer_2_away": {
+            "cells": 655,
+            "q_radius": {
+              "min": 0.034748556215374295,
+              "p05": 0.25457495956768217,
+              "median": 0.33234678624914404,
+              "p95": 0.45217053788357503,
+              "max": 0.46579025141117447
+            },
+            "min_dihedral_deg": {
+              "min": 7.537713752534084,
+              "p05": 7.537713752534181,
+              "median": 14.999999999999996,
+              "p95": 45.81380629811398,
+              "max": 46.56194776879579
+            },
+            "condition_regular": {
+              "min": 5.2478712574955155,
+              "p05": 5.383240603645939,
+              "median": 7.5415569050304745,
+              "p95": 11.368309485997388,
+              "max": 16.37410134139326
+            }
+          },
+          "layer_3": {
+            "cells": 1017,
+            "q_radius": {
+              "min": 0.19413115280753668,
+              "p05": 0.30065304027552364,
+              "median": 0.5773858238775761,
+              "p95": 0.8028494159643547,
+              "max": 0.8324469503197733
+            },
+            "min_dihedral_deg": {
+              "min": 9.012864861902885,
+              "p05": 11.314789279998754,
+              "median": 27.325806029062342,
+              "p95": 49.45258840741374,
+              "max": 55.84691139218693
+            },
+            "condition_regular": {
+              "min": 1.861577302874184,
+              "p05": 2.1278259393728756,
+              "median": 3.6105438754814427,
+              "p95": 8.768332354638718,
+              "max": 11.218955265268027
+            }
+          },
+          "layer_3_clamp": {
+            "cells": 311,
+            "q_radius": {
+              "min": 0.19413115280753668,
+              "p05": 0.2649212022218115,
+              "median": 0.34159707229767206,
+              "p95": 0.6486264148863092,
+              "max": 0.6974066703096763
+            },
+            "min_dihedral_deg": {
+              "min": 9.012864861902885,
+              "p05": 9.62969085414563,
+              "median": 16.14362972177941,
+              "p95": 45.51630101944616,
+              "max": 49.35533640047659
+            },
+            "condition_regular": {
+              "min": 2.2635049443134627,
+              "p05": 2.9004188667120667,
+              "median": 7.375434734416423,
+              "p95": 9.544437334001966,
+              "max": 11.218955265268027
+            }
+          },
+          "layer_3_away": {
+            "cells": 706,
+            "q_radius": {
+              "min": 0.2224414559499776,
+              "p05": 0.37412667395093246,
+              "median": 0.6362574729247921,
+              "p95": 0.8028494159643558,
+              "max": 0.8324469503197733
+            },
+            "min_dihedral_deg": {
+              "min": 11.741171567299881,
+              "p05": 13.131653482653821,
+              "median": 30.276754159941458,
+              "p95": 49.62177552099412,
+              "max": 55.84691139218693
+            },
+            "condition_regular": {
+              "min": 1.861577302874184,
+              "p05": 2.1087874375319005,
+              "median": 3.033899842581206,
+              "p95": 6.941666423653404,
+              "max": 8.021622973538145
+            }
+          }
+        },
+        "cavity_volume": 1.2408329098674529,
+        "layer_volumes": {
+          "1": 0.195586287417857,
+          "2": 0.21512940574826867,
+          "3": 1.4013656675815505
+        },
+        "surface_triangles": 1296
+      },
+      "relative_volume_differences": {
+        "cavity": 0.0,
+        "layer_1": 2.220446049250313e-16,
+        "layer_2": 2.220446049250313e-16,
+        "layer_3": 2.220446049250313e-16
+      },
+      "scientific_pressure_gate": "not_run",
+      "universal_FEM_quality_claim": false
+    }
+  }
+}
