@@ -8,16 +8,16 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 4927e5f
-current_lifecycle: fem_only_f6s1s8_contour_high_pressure_local_volume_failed_controlled_stop
+verified_commit: 7bb061b
+current_lifecycle: fem_only_f6s1s9_low_pressure_active_contour_two_mesh_passed
 documentation_updated_at: 2026-09-18
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_fem_contour_passive_contract_v01.md
-last_completed_contract: project_control/ventricle_fem_contour_passive_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/rendering.json
-next_stage_contract: pending_user_decision_active_comparison_at_already_qualified_pressure_002
-current_authorization: f6s1s8_stopped_after_first_failure_no_further_scientific_execution
+current_contract: project_control/ventricle_fem_contour_active_contract_v01.md
+last_completed_contract: project_control/ventricle_fem_contour_active_contract_v01.md
+current_render_contract: ../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/rendering.json
+next_stage_contract: pending_user_decision_idealized_3d_ventricular_solid
+current_authorization: f6s1s9_completed_no_further_scientific_execution
 development_route: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -26,11 +26,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: none_remaining_after_F6S1S8_first_failure_stop
-current_execution_log: project_control/ventricle_fem_contour_passive_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_fem_contour_passive_execution_v01.md
-latest_completed_scientific_gate: F6-S1-S8_original_contour_passive_sequence_failed_at_008
-latest_result_package: ../PRL-results/ventricle_fem/f6s1s8_contour_passive_v01_20260918/summary.json
+execution_authorized: none_remaining_after_F6S1S9_completed
+current_execution_log: project_control/ventricle_fem_contour_active_execution_v01.md
+latest_completed_execution_log: project_control/ventricle_fem_contour_active_execution_v01.md
+latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
+latest_result_package: ../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/summary.json
 latest_supervisor_decision: project_control/ventricle_development_fsg_idealized_public_data_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,31 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-18 F6-S1-S8中间压力通过，高压局部体积失败即停
+## 当前：2026-09-18 F6-S1-S9低压主动收缩对照通过
+
+固定p/mu=0.02，从原受压态增加Ta/mu=0.025/0.05/0.075/0.10，M0/M1共8个新平衡全部接受。
+相对同压力零张力基线，最高张力缩腔1.846775%/1.844892%；相对无载参考仍扩张17.839020%/17.889685%。
+主动张力使腔面积单调减少，但目前只是部分抵消压力扩张，不是实验幅度心跳。
+最高张力局部max|J−1|=0.342390%/0.330124%，全部状态保持原1%门；
+73项独立汇总检查与粗细总面积门passed，热点/渐近收敛不据此宣称通过。
+
+同一生产和独立力学内核、P2/DG2有限变形平面应变NH；mu=1/kappa=1000、三层同被动参数未标定。
+内壁随动压力、外壁自由，A固定ux/uy、B固定uy。外侧构造心肌层主动能量Ta/2(|Ff0|²−1)，
+f0=(-Y,X,0)/sqrt(X²+Y²)为原点环向假设，不是实测纤维或轮廓切向。
+只外轮廓来自图像，内腔和层界构造；加载级不是生理时间。
+
+一次201.218秒1CPU/8GiB/禁网/0GPU，32个新Newton向量，4旧态复用，0重跑。
+152测试+21子测试及两套Notebook/600dpi PNG/SVG验收passed；1518父文件、140调用文件、41副本、50无关修改保持。
+外置201文件350,554,617 bytes；manifest直接覆盖200文件，SHA-256：
+80b0ecbe6bd35e6d00479fbeb1e424c89969e862a01bdb0885bb43dab9734c2b。
+旧0.08高压失败仍failed；本轮没有再次修补物理/门限/跨平台比较。
+
+唯一下一步待确认：理想化三维心室固体的几何、网格和纤维方向，再验证低压与主动载荷。
+不直接继承二维DG2资格，不自动执行三维、FSI、生长或实验验证。
+见[执行与边界](ventricle_fem_contour_active_execution_v01.md)及
+[结构、场量、五个真实张力态与Notebook](../../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/index.html)。
+
+## 历史：2026-09-18 F6-S1-S8中间压力通过，高压局部体积失败即停
 
 从原两网格0.02已接受态续算上限6态，实际M0尝试3态、接受2态；0.08失败后M1后续3态全部not_run。
 M0的0.04/0.06/0.08腔面积变化分别+32.807874%/+48.055961%/+68.266151%，
