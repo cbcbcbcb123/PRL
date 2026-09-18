@@ -141,6 +141,8 @@ def passive_state_audit(mesh,state,metadata,config,name,old):
     solver=metadata.get('linear_solver',{})
     if metadata['iterations']==0 and float(state['load'])==0:
         report['factorization_status']='not_run'
+        if 'status' in solver:
+            report['checks']['zero_newton_no_stale_factor']=solver['status']=='not_run' and all(solver.get(k) is None for k in ['ksp_reason','pc_failed_reason','mumps_infog_1','mumps_infog_2','mumps_icntl_14'])
     else:
         report['checks']['actual_MUMPS_factor']=solver.get('ksp_reason',0)>0 and solver.get('pc_failed_reason')==0 and solver.get('mumps_infog_1')==0 and solver.get('mumps_icntl_14')==100
         report['factorization_status']='passed' if report['checks']['actual_MUMPS_factor'] else 'failed'
@@ -177,13 +179,22 @@ def verify_complete_passive_ring(root):
     old_config=json.loads((comparison/'configuration.json').read_text())
     parent_config=json.loads((retained/'configuration.json').read_text())
     parent=json.loads((retained/'verification.json').read_text())
-    expected_plan={'M0':[2,3,4],'M1':[0,1,2,3,4]}
-    checks={'first_pressure_prerequisite':parent['status']=='passed' and parent['runtime_interface']['status']=='passed',
-            'scope':config['execution_plan']==expected_plan and config['maximum_equilibrium_solves']==8 and config['objects']==['ring'],
+    fine_only=config.get('fine_passive_only',False)
+    expected_plan={'M0':[] if fine_only else [2,3,4],'M1':[0,1,2,3,4]}
+    maximum=5 if fine_only else 8
+    prerequisite=(len(parent['cases']['M0'])==5 and all(record['status']=='passed' for record in parent['cases']['M0'].values()) and all(value for key,value in parent['checks'].items() if key.startswith('M0_'))) if fine_only else (parent['status']=='passed' and parent['runtime_interface']['status']=='passed')
+    checks={'retained_prerequisite':prerequisite,
+            'scope':config['execution_plan']==expected_plan and config['maximum_equilibrium_solves']==maximum and config['objects']==['ring'],
             'same_physics_and_meshes':all(config[k]==old_config[k] for k in ['mu','kappa','radii','quadrature_degree','meshes','passive_loads']),
             'same_qualified_solver':config['solver']==parent_config['solver'],
             'DG2_passive_only':config['pressure_space']=='DG2' and config['active_peak']==0.,
             'no_contour':not (root/'contour').exists()}
+    if fine_only:
+        runtime=root/'runtime_zero_newton/verification.json'
+        native=json.loads((root/'native_diagnosis_review.json').read_text())
+        checks['native_call_site_confirmed']=native['status']=='passed' and all(native['checks'].values())
+        interface=json.loads(runtime.read_text()) if runtime.exists() else {}
+        checks['zero_newton_runtime_interface']=interface.get('status')=='passed' and len(interface.get('cases',[]))==3 and all(all(r['checks'].values()) for r in interface.get('cases',[]))
     cases={}; geometry={}; iterations={}; controls={}; accepted_new=0
     for case in config['meshes']:
         name=case['name']; cases[name]={}; iterations[name]={}; controls[name]={}
@@ -192,6 +203,9 @@ def verify_complete_passive_ring(root):
             checks[name+'_mesh_created']=False
             continue
         mesh=load_arrays(mesh_path); old_mesh=load_arrays(comparison/f'{name}_mesh.npz')
+        if fine_only and name=='M1':
+            reference=load_arrays(root/'retained_M1_mesh.npz')
+            checks['exact_original_fine_mesh_and_maps']=set(mesh)==set(reference) and all(np.array_equal(mesh[k],reference[k]) for k in reference)
         checks[name+'_same_displacement_mesh']=same_displacement_mesh(mesh,old_mesh)
         pressure_basis(mesh)
         local=mesh['coordinates'][mesh['cells']]
@@ -245,7 +259,7 @@ def verify_complete_passive_ring(root):
             comparisons[label]={'absolute':absolute,'relative':relative}
     peak=comparisons.get('passive_4',{})
     checks['original_peak_mesh_response']=peak.get('absolute',np.inf)<=.002 and peak.get('relative',np.inf)<=.05
-    checks['eight_new_accepted']=accepted_new==8
+    checks['five_new_accepted' if fine_only else 'eight_new_accepted']=accepted_new==maximum
     progress=json.loads((root/'progress.json').read_text()) if (root/'progress.json').exists() else {}
     return {'status':'passed' if all(checks.values()) else 'failed','checks':checks,
             'failed_checks':[key for key,value in checks.items() if not value],

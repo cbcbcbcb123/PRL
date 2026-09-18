@@ -16,14 +16,29 @@ from prl.verification.fenicsx_pressure import diagnostic_state,verify_pressure,s
 def complete_passive_ring(root,config):
     """Complete only the eight approved states using the existing production Ring."""
     from prl.verification.fenicsx_pressure import passive_state_audit,saved_iterates_audit
-    child=root/'ring'; (child/'raw').mkdir(parents=True,exist_ok=False)
+    fine_only=config.get('fine_passive_only',False)
+    child=root/'ring'
+    if not fine_only:
+        (child/'raw').mkdir(parents=True,exist_ok=False)
     started=time.monotonic(); attempted=0; accepted=0; current=None; label=None
     original=json.loads((root/'comparison/configuration.json').read_text())
     try:
-        if config['execution_plan']!={'M0':[2,3,4],'M1':[0,1,2,3,4]} or config['maximum_equilibrium_solves']!=8:
+        expected_plan={'M0':[] if fine_only else [2,3,4],'M1':[0,1,2,3,4]}
+        maximum=5 if fine_only else 8
+        if config['execution_plan']!=expected_plan or config['maximum_equilibrium_solves']!=maximum:
             raise ValueError('Unapproved passive execution plan')
+        if fine_only:
+            from prl.fem.fenicsx_zero_newton import fixture
+            fixture(root/'runtime_zero_newton',config)
         for case in config['meshes']:
-            name=case['name']; current=Ring(case,config,child)
+            name=case['name']
+            if fine_only and name=='M0':
+                continue
+            current=Ring(case,config,child)
+            if fine_only:
+                reference=load_arrays(root/'retained_M1_mesh.npz')
+                if set(reference)!=set(current.mesh_data) or not all(np.array_equal(reference[k],current.mesh_data[k]) for k in reference):
+                    raise ValueError('Original fine mesh or mixed mapping changed')
             pressure_basis(current.mesh_data)
             old_mesh=load_arrays(root/'comparison'/f'{name}_mesh.npz')
             if not same_displacement_mesh(current.mesh_data,old_mesh):
@@ -50,8 +65,8 @@ def complete_passive_ring(root,config):
             for index in config['execution_plan'][name]:
                 if time.monotonic()-started>1140 or shutil.disk_usage(root).free<10*1024**3+64*1024**2:
                     raise RuntimeError('Time or disk headroom reached before next state')
-                if attempted>=8:
-                    raise RuntimeError('Eight-state authorization exhausted')
+                if attempted>=maximum:
+                    raise RuntimeError('Bounded passive authorization exhausted')
                 pressure=config['passive_loads'][index]; label=f'passive_{index}'
                 attempted+=1
                 write_json(root/'progress.json',{'status':'unknown','mesh':name,'state':label,'attempted_states':attempted,'accepted_states':accepted})

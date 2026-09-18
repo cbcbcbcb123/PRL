@@ -124,7 +124,11 @@ def draw(data_path,png_path,svg_path,style_module,mechanics,mode,axis_box_size_i
         axes[3].yaxis.set_minor_formatter(NullFormatter())
         outcome='two-mesh qualification PASSED' if report['status']=='passed' else 'M0 sequence PASSED; M1 incomplete after native signal 11'
         figure.text(.08,.963,f'Passive ring: {outcome}',fontsize=14)
-        figure.text(.08,.515,'Five real accepted M0 pressure states; no active contraction or physiological time.',fontsize=14)
+        note='Five real accepted M0 pressure states; no active contraction or physiological time.'
+        if len(cases['M1'])==5:
+            difference=report['mesh_comparisons']['passive_4']['absolute']*100
+            note=f'Ten accepted states; peak area difference {difference:.5f} percentage points. No cardiac time.'
+        figure.text(.08,.515,note,fontsize=14)
         figure.text(.08,.035,'Green / yellow / blue: assumed endo / ECM / myo (same passive law). Displacement magnitude is not strain.',fontsize=12)
     elif mode=='pressure_states':
         maximum=max(float(frame['equivalent'].max()) for frame in frames)
@@ -140,7 +144,10 @@ def draw(data_path,png_path,svg_path,style_module,mechanics,mode,axis_box_size_i
         colorbar(volume_map,15.55,1.3,'Element max |J - 1| (%)')
         figure.text(.062,.965,f'{selected}: five accepted pressure states | same stress scale and actual 1x deformation',fontsize=14)
         figure.text(.062,.493,'Pressure continuation is NOT heartbeat time. Gray outlines: reference mesh. No interpolated frames.',fontsize=14)
-        figure.text(.062,.035,'M0 zero / 0.02 reused; 0.04 / 0.06 / 0.08 newly accepted. Fine-mesh qualification remains incomplete.',fontsize=13)
+        note='M0 zero / 0.02 reused; 0.04 / 0.06 / 0.08 newly accepted. Fine-mesh qualification remains incomplete.'
+        if selected=='M1':
+            note='All five M1 states newly accepted; all M0 states retained. Two levels do not prove asymptotic convergence.'
+        figure.text(.062,.035,note,fontsize=13)
     else:
         raise ValueError('Unknown passive figure mode')
     exported=style_module.export_figure(figure,axes,Path(png_path).with_suffix(''),style=style,overrides=overrides)
@@ -155,7 +162,7 @@ def draw(data_path,png_path,svg_path,style_module,mechanics,mode,axis_box_size_i
             'peak_volume_percent':float(peak['volume'].max())}
 
 
-def prepare(workspace,skill_root):
+def prepare(workspace,skill_root,result_relative=None,figure_main='S1S5'):
     import re
     import subprocess
     import sys
@@ -166,7 +173,7 @@ def prepare(workspace,skill_root):
     from prl.result_store import result_path,result_admission
     from prl.verification.fenicsx_pressure import verify_pressure
     from prl.verification import fenicsx_ring as mechanics
-    workspace=Path(workspace).resolve(strict=True); root=result_path(workspace,PASSIVE_RESULT); skills=Path(skill_root)
+    workspace=Path(workspace).resolve(strict=True); root=result_path(workspace,result_relative or PASSIVE_RESULT); skills=Path(skill_root)
     if (root/'post_verification.json').exists() or (root/'figures').exists():
         raise FileExistsError('Passive delivery preparation is create-only')
     if not result_admission(workspace,128*1024**2)['can_start']:
@@ -176,6 +183,7 @@ def prepare(workspace,skill_root):
         raise ValueError('Original scientific invocation changed')
     report=verify_pressure(root); save_json(root/'post_verification.json',report)
     config=json.loads((root/'configuration.json').read_text())
+    fine_only=config.get('fine_passive_only',False)
     data={'verification':np.array(json.dumps(report)),'mu':np.array(config['mu']),'kappa':np.array(config['kappa'])}
     for name in ['M0','M1']:
         mesh_path=root/'ring/raw'/f'{name}_mesh.npz'
@@ -194,16 +202,17 @@ def prepare(workspace,skill_root):
     revisions=[]
     for mode in ['qualification','pressure_states']:
         subprocess.run([sys.executable,'-B','-X','utf8',str(skills/'cb-paper-figure-workflow/scripts/init_figure_revision.py'),
-            str(root/'figures'),'--main','S1S5','--analysis-key',mode,'--data',str(root/'figure_data.npz'),
+            str(root/'figures'),'--main',figure_main,'--analysis-key',mode,'--data',str(root/'figure_data.npz'),
             '--python','helper='+str(Path(__file__).resolve()),
             '--python','mechanics='+str(workspace/'src/prl/verification/fenicsx_ring.py'),
             '--python','style='+str(skills/'cb-plot-unified-style/assets/cb_plot_unified_style.py'),
             '--model','config='+str(root/'configuration.json'),'--model','verification='+str(root/'post_verification.json')],check=True)
-        revision=next((root/f'figures/FigS1S5_{mode}').glob('FigS1S5_*')); prefix=revision.name
+        revision=next((root/f'figures/Fig{figure_main}_{mode}').glob(f'Fig{figure_main}_*')); prefix=revision.name
         snapshots={key:next(revision.glob(f'*_{key}.py')).name for key in ['helper','mechanics','style']}
         side,canvas=(3.7,(13.8,12.)) if mode=='qualification' else (3.2,(17.8,11.3))
+        narrative=('粗网格5态全部复用，细网格5态本轮新增；两级被动压力资格按独立核验裁决。' if fine_only else '粗网格5态真实保存，其中2态复用、3态本轮新增；细网格原生段错误退出，未接受零载态。')
         notebook=nbformat.v4.new_notebook(cells=[
-            nbformat.v4.new_markdown_cell('# 圆环被动压力：实有接受态与未完成边界\n粗网格5态真实保存，其中2态复用、3态本轮新增；细网格原生段错误退出，未接受零载态。\n所有场量从u/p独立重算，1倍形变；压力延拓不是生理时间。'),
+            nbformat.v4.new_markdown_cell('# 圆环被动压力：实际接受状态\n'+narrative+'\n所有场量从u/p独立重算，1倍形变；压力延拓不是生理时间。'),
             nbformat.v4.new_code_cell(f'''from pathlib import Path
 import importlib.util
 import sys
@@ -237,7 +246,7 @@ helper.draw(DATA_PATH,OUTPUT_PNG,OUTPUT_SVG,style,mechanics,{mode!r},axis_box_si
             '用户提供的期刊规格':'未指定；内部数值资格图，不是排版后的投稿成图。',
             '03_材料方法来源':'稳定方法src/prl/verification/fenicsx_ring.py的物理快照mechanics，版本内helper/style，配置和独立核验同包保存；不依赖工作区重算、不调用FEM。',
             '数据/模型变换':'输入包含原始网格及全部已接受u/p；独立重算F/J/Cauchy应力。位移为单元六节点模长均值，应力为积分点von Mises均值，J为单元积分点最大绝对偏差百分数；六节点三角形拆四个显示子三角，不平滑。验收仍用全部积分点，不以展示均值替代。面积由二次内边界积分重算。解析参照使用原不可压NH公式，不是有限bulk精确解。',
-            '统计方法与不确定性':'确定性压力加载，无生物样本/误差棒。仅粗网格完成；细网格未接受零载态，不能声称粗细通过或热点收敛。零载J=0偏差未放在对数图，原始状态保留。5个实际压力状态不是生理时间，2态复用/3态新增均明示。',
+            '统计方法与不确定性':('确定性压力加载，无生物样本/误差棒。M0五态复用/M1五态新增；两级通过不等于多级渐近或热点收敛。零载J=0偏差不放在对数图，原始状态保留。载荷延拓不是生理时间。' if fine_only else '确定性压力加载，无生物样本/误差棒。仅粗网格完成；细网格未接受零载态，不能声称粗细通过或热点收敛。零载J=0偏差未放在对数图，原始状态保留。5个实际压力状态不是生理时间，2态复用/3态新增均明示。'),
             '生物学分组颜色':'不适用。绿/黄/蓝为假设心内膜/ECM/心肌材料域，当前被动参数相同；蓝色曲线/空心圈为M0数值结果，黑线为解析参照。'}
         for key,value in values.items():
             content=re.sub(r'(?m)^- '+re.escape(key)+r':.*$',lambda match:'- '+key+': '+value,content)
@@ -314,6 +323,78 @@ def finalize(workspace):
 <p>一次23.705秒单CPU容器，0GPU；826父文件、98正式调用文件及50项无关修改保持。68测试+21子测试通过不代表原生零次更新路径已验证。</p>
 <p><a href="post_verification.json">独立验证</a> · <a href="failure_diagnosis.json">故障事实与假设</a> · <a href="stderr.log">原始stderr</a> · <a href="failed_initial_audit.json">保存初猜复核</a> · <a href="{figures['qualification']['notebook']}">资格图Notebook</a> · <a href="{figures['pressure_states']['notebook']}">压力态Notebook</a></p>
 <p>当前是未标定二维理想圆环，三层同被动材料、主动关闭；原轮廓/三维/FSI/生长未运行，也不构成生物学验证。</p></html>'''
+    (root/'index.html').write_text(page,encoding='utf-8')
+    save_json(root/'manifest.json',package_manifest(root))
+    register_result(workspace,root,summary['status'],digest(root/'manifest.json'))
+    return summary
+
+
+def finalize_fine(workspace):
+    """Freeze F6-S1-S6 without rewriting its negative control or its failed parent."""
+    import shutil
+    from prl.result_store import result_path,register_result,result_admission
+    from prl.runs.fenicsx_fine_ring import RESULT,unchanged,SOURCES
+    from prl.runs.fenicsx_ring import digest,package_manifest
+    from prl.runs.fenicsx_runtime import save_json
+    workspace=Path(workspace).resolve(strict=True); root=result_path(workspace,RESULT)
+    if (root/'manifest.json').exists() or (root/'summary.json').exists():
+        raise FileExistsError('Fine recovery delivery is create-only')
+    formal=json.loads((root/'formal_invocation_manifest.json').read_text())
+    if not unchanged(workspace,root) or not all(digest(root/item['path'])==item['sha256'] for item in formal['files']):
+        raise ValueError('Protected input or original invocation changed')
+    report=json.loads((root/'post_verification.json').read_text())
+    runtime=json.loads((root/'execution.json').read_text())
+    native=json.loads((root/'native_diagnosis_review.json').read_text())
+    figures={}
+    for mode in ['qualification','pressure_states']:
+        revision=next((root/f'figures/FigS1S6_{mode}').glob('FigS1S6_*')); prefix=revision.name
+        if '- 包状态: 最终包' not in (revision/f'02_{prefix}_methods.txt').read_text(encoding='utf-8'):
+            raise ValueError('Notebook/style/visual final QA required')
+        figures[mode]={kind:(revision/f'{number}_{prefix}{suffix}').relative_to(root).as_posix()
+                       for kind,number,suffix in [('notebook','03','_plot.ipynb'),('png','04','.png'),('svg','05','.svg')]}
+    if report['status']!='passed' or runtime['status']!='passed' or native['status']!='passed':
+        raise ValueError('Full fine qualification not passed; requires a partial-failure delivery instead')
+    peak=report['cases']['M1']['passive_4']; comparison=report['mesh_comparisons']['passive_4']
+    summary={'status':'passed','native_diagnosis':'passed','negative_control_execution':'failed','negative_control_expected':True,
+             'initial_null_wrapper_classifier':'failed','corrected_call_site_review':'passed',
+             'runtime_interface':'passed','engineering_execution':runtime['status'],'fine_passive_sequence':'passed',
+             'original_two_mesh_passive_qualification':'passed','new_accepted_equilibria':5,'retained_equilibria':5,
+             'coarse_equilibrium_reruns':0,'scientific_invocations':1,'native_negative_control_invocations':1,'gpu':0,
+             'automatic_retries':0,'fine_peak':peak,'peak_mesh_comparison':comparison,
+             'original_failed_parent_unchanged':True,'evidence_delivery':'passed','biological_validation':'not_run',
+             'contour':'not_run','active_contraction':'not_run','three_dimensional_model':'not_run','fsi':'not_run','growth':'not_run',
+             'next_action':'Pending approval: original image-derived outer contour with constructed inner/layer boundaries, two meshes, zero and first p/mu=0.02, at most four passive states. Original gates unchanged.'}
+    internal=json.loads((root/'protected_preflight.json').read_text()); external=json.loads((root/'external_protected_preflight.json').read_text())
+    tests=json.loads((root/'regression_green.json').read_text())
+    rendering={'status':'passed','visual_qa':'passed','style_validation':'passed','figures':figures,
+               'accepted_states':10,'fine_states_shown':5,'fine_Newton_vectors_retained':17,'deformation_scale':1,
+               'new_FEM_solves':0,'time':'pressure continuation, not physiological time',
+               'source':'physical-copy u/p and independent mechanics snapshot; no invented or interpolated states'}
+    audit={'status':'passed','formal_invocation_files_unchanged':len(formal['files']),
+           'protected_parent_files_unchanged':len(internal)+len(external),'unrelated_dirty_files_unchanged':50,
+           'independent_scope_and_state_checks':len(report['checks']),'tests':tests['tests'],'subtests':tests['subtests'],
+           'postprocess_new_FEM_solves':0,'temporary_cleanup':'not_authorized; registered figure_runtime retained'}
+    for filename,value in [('summary.json',summary),('rendering.json',rendering),('delivery_audit.json',audit),
+                           ('delivery_storage.json',result_admission(workspace))]:
+        save_json(root/filename,value)
+    sources=set(SOURCES+['src/prl/cli.py','src/prl/rendering/fenicsx_passive_ring.py','tests/prl/test_fenicsx_fine_ring.py',
+                        'project_control/ventricle_fem_fine_ring_recovery_execution_v01.md'])
+    for relative in sorted(sources):
+        target=root/'sources_at_delivery'/relative; target.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copyfile(workspace/relative,target)
+    page=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>F6-S1-S6 两网格被动资格通过</title>
+<style>body{{max-width:1200px;margin:32px auto;padding:0 20px;color:#173e2e;font:16px/1.7 'Microsoft YaHei',sans-serif}}img{{width:100%}}a{{color:#176b4d}}</style>
+<h1>零载诊断崩溃修复；原两网格被动圆环资格通过</h1>
+<p>5个M1新接受态、5个M0只读复用态。最高压力p/mu=0.08：腔面积+{peak['cavity_area_change']*100:.6f}%，局部壁体积偏差最大{peak['max_abs_J_minus_one']*100:.8f}%，低于原1%门。</p>
+<p>粗细峰值面积响应差{comparison['absolute']*100:.9f}个百分点，相对差{comparison['relative']*100:.8f}%，通过原门；两级资格不等于多级渐近或热点收敛。</p>
+<img src="{figures['qualification']['png']}" alt="真实结构、1倍位移、解析与两网格局部J响应">
+<h2>五个真实细网格压力态</h2><p>统一应力色标、实际1倍形变；载荷延拓不是心动时刻，不插值补帧。</p>
+<img src="{figures['pressure_states']['png']}" alt="五个M1接受态的等效应力及峰值局部J">
+<h2>已证实的工程故障</h2><p>6自由度负例中SNES正常零次更新返回，随后MUMPS INFOG读取原生崩溃。Mat对象不为空，因此原空句柄假设被否定；初次failed分类与原日志仍保存。</p>
+<p>修复只在本次无Newton更新时跳过当前或陈旧因子读取，报告not_run/null。真实零载/非零载/重复收敛解接口检查通过，随后完整M1五态通过。材料、方程、门限不变。</p>
+<p>负例6.407秒、修复后接口与科学调用51.511秒，单CPU/8GiB/禁网/0GPU。980父文件及50项无关修改保持，76测试+21子测试；没有重算粗网格或自动重试。</p>
+<p><a href="post_verification.json">独立核验</a> · <a href="native_diagnosis_review.json">故障复核与被否定假设</a> · <a href="native_probe/stderr.log">负例原生回溯</a> · <a href="runtime_zero_newton/verification.json">修复后真实接口</a> · <a href="{figures['qualification']['notebook']}">资格图Notebook</a> · <a href="{figures['pressure_states']['notebook']}">压力态Notebook</a></p>
+<p>目前仍是未标定二维平面应变NH理想圆环，三层同被动参数、主动关闭；没有三维/FSI/生长或生物学验证。下一步待确认：回原图像外轮廓，只检验两网格的零载及首个压力态，最多4态，原1%门不变。</p></html>'''
     (root/'index.html').write_text(page,encoding='utf-8')
     save_json(root/'manifest.json',package_manifest(root))
     register_result(workspace,root,summary['status'],digest(root/'manifest.json'))

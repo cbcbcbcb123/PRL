@@ -25,7 +25,7 @@ from .workspace import find_workspace
 FEM_RUN_COMMANDS = frozenset({
     "fem-active-ellipse", "fem-synthetic-orientation", "fem-measured-contour",
     "fem-fixed-mesh", "fem-finite-strain", "fem-rotation", "fem-curved-pressure", "fem-contour-pressure",
-    "fem-fenicsx-ring", "fem-fenicsx-contour", "fem-fenicsx-pressure",
+    "fem-fenicsx-ring", "fem-fenicsx-contour", "fem-fenicsx-pressure", "fem-fenicsx-fine-ring",
 })
 FEM_ONLY_DECISION = "project_control/ventricle_fem_only_measured_contour_decision_v01.md"
 
@@ -385,6 +385,10 @@ def _parser() -> argparse.ArgumentParser:
         pressure_mode.add_argument('--resume-first-ring',action='store_true',help='one original pressured ring state from retained zero, ICNTL(14)=100')
         pressure_mode.add_argument('--complete-passive-ring',action='store_true',help='at most eight new states to complete original passive two-mesh qualification')
         pressure.add_argument('--resume-revision',type=int,choices=[1,2],default=1,help='approved resume revision; v2 requires a real runtime interface gate')
+    for group in [run_commands,verify_commands]:
+        fine=group.add_parser('fem-fenicsx-fine-ring',help='bounded native diagnosis then only five original fine passive states')
+        fine.add_argument('--workspace',type=Path)
+        fine.add_argument('--phase',choices=['diagnose','complete'],default='complete')
     return parser
 
 
@@ -494,6 +498,18 @@ def main(arguments: Sequence[str] | None = None) -> int:
             from .verification.fenicsx_pressure import verify_pressure
             target,_=pressure_target(parsed.resume_first_ring,parsed.resume_revision,parsed.complete_passive_ring)
             report=verify_pressure(result_path(workspace,target))
+        exit_code=0 if report['status']=='passed' else 1
+    elif ((parsed.command=='run' and parsed.run_command=='fem-fenicsx-fine-ring') or
+          (parsed.command=='verify' and parsed.verify_command=='fem-fenicsx-fine-ring')):
+        from .runs.fenicsx_fine_ring import run_fine_ring,assess_native,RESULT
+        from .result_store import result_path
+        if parsed.command=='run':
+            report=run_fine_ring(workspace,parsed.phase)
+        elif parsed.phase=='diagnose':
+            report=assess_native(result_path(workspace,RESULT))
+        else:
+            from .verification.fenicsx_pressure import verify_pressure
+            report=verify_pressure(result_path(workspace,RESULT))
         exit_code=0 if report['status']=='passed' else 1
     elif parsed.command == 'run' and parsed.run_command == 'fem-fenicsx-ring':
         from .runs.fenicsx_ring import run_fenicsx_ring, run_active_completion

@@ -231,6 +231,33 @@ class Ring:
         if not all(results[k]<=v for k,v in [('pressure',2e-6),('active',2e-6),('total',2e-5)]):
             raise ValueError('Jacobian directional check failed: '+str(results))
 
+    def trace(self,event,**details):
+        if self.config.get('diagnostic_trace',False):
+            with (self.root/'solver_trace.jsonl').open('a',encoding='utf-8') as handle:
+                handle.write(json.dumps({'event':event,'mesh':self.name,**details},allow_nan=False)+'\n')
+                handle.flush()
+
+    def linear_solver_report(self,iterations):
+        # SNES may converge before KSP runs. A returned Mat object does not imply
+        # initialized MUMPS statistics; a reused KSP can also report stale data.
+        report={key:None for key in ['ksp_reason','pc_failed_reason','mumps_infog_1','mumps_infog_2','mumps_icntl_14']}
+        if iterations==0:
+            return {**report,'status':'not_run','reason':'No Newton update in this solve; do not query current or stale factors'}
+        ksp=self.problem.solver.getKSP(); pc=ksp.getPC()
+        report.update(status='failed',ksp_reason=int(ksp.getConvergedReason()),pc_failed_reason=int(pc.getFailedReason()))
+        if report['ksp_reason']<=0 or report['pc_failed_reason']!=0:
+            return report
+        try:
+            factor=pc.getFactorMatrix()
+            if not factor:
+                raise ValueError('No factor matrix after reported KSP completion')
+            report.update(mumps_infog_1=int(factor.getMumpsInfog(1)),mumps_infog_2=int(factor.getMumpsInfog(2)),
+                          mumps_icntl_14=int(factor.getMumpsIcntl(14)))
+            report['status']='passed' if report['mumps_infog_1']==0 else 'failed'
+        except Exception as error:
+            report['diagnostic_error']=str(error)
+        return report
+
     def solve(self,label,pressure,activation,initial):
         self.w.x.array[:]=initial
         self.w.x.scatter_forward()
@@ -245,7 +272,10 @@ class Ring:
         write_json(self.root/'progress.json',{'status':'unknown','mesh':self.name,'state':label,'load':pressure,'activation':activation})
         print(f'{self.name} {label}: p={pressure:.3f} Ta={activation:.3f}',flush=True)
         started=time.monotonic()
+        self.trace('solve_enter',state=label)
         self.problem.solve()
+        self.trace('solve_return',state=label,snes_reason=int(self.problem.solver.getConvergedReason()),
+                   iterations=int(self.problem.solver.getIterationNumber()))
         self.w.x.scatter_forward()
         reason=int(self.problem.solver.getConvergedReason())
         residual=self.vector(self.residual_form)
@@ -255,15 +285,9 @@ class Ring:
                   'active_energy':float(fem.assemble_scalar(self.active_energy_form)),
                   'elapsed_seconds':time.monotonic()-started}
         if self.config.get('retain_solver_iterates',False):
-            ksp=self.problem.solver.getKSP(); pc=ksp.getPC()
-            metadata['linear_solver']={'ksp_reason':int(ksp.getConvergedReason()),
-                                       'pc_failed_reason':int(pc.getFailedReason())}
-            try:
-                factor=pc.getFactorMatrix()
-                metadata['linear_solver'].update(mumps_infog_1=int(factor.getMumpsInfog(1)),
-                    mumps_infog_2=int(factor.getMumpsInfog(2)),mumps_icntl_14=int(factor.getMumpsIcntl(14)))
-            except Exception as error:
-                metadata['linear_solver']['diagnostic_error']=str(error)
+            self.trace('linear_report_enter',state=label,iterations=metadata['iterations'])
+            metadata['linear_solver']=self.linear_solver_report(metadata['iterations'])
+            self.trace('linear_report_return',state=label,report=metadata['linear_solver'])
         state={'u':self.w.x.array[self.vmap].reshape(-1,2).copy(),
                'pressure':self.w.x.array[self.pmap].copy(),
                'mixed_state':self.w.x.array.copy(),'initial_mixed':initial.copy(),
@@ -275,6 +299,7 @@ class Ring:
         path=self.root/'raw'/f'{self.name}_state_{label}'
         np.savez_compressed(path.with_suffix('.npz'),**state)
         write_json(path.with_suffix('.json'),metadata)
+        self.trace('state_saved',state=label)
         if reason<=0 or metadata['free_residual_norm']>1e-9 or not all(np.all(np.isfinite(v)) for v in state.values()):
             raise ValueError('SNES failed or invalid state: '+str(metadata))
         if np.min(state['J'])<=0:
