@@ -10,6 +10,9 @@ allowed_ref: refs/heads/main
 
 # 阶段完成后同步远端
 
+2026-09-19后续补充：用户明确默认只同步、不需要评审包。
+按[最新决定](main_branch_sync_without_review_package_decision_v01.md)执行；下文关于每次另建审阅包的默认要求已被取代，历史交付保留。
+
 用户原话：“每次完成你都要同步到远端，这样专家才能查看”。
 
 ## 长期工作规则

@@ -38,6 +38,7 @@ def analyze(root):
     root=Path(root)
     config=json.loads((root/'configuration.json').read_text())
     summary=json.loads((root/'summary.json').read_text())
+    controls=config['schema']=='prl.mixed_cube_controls.v1'
     failure=json.loads((root/'failure.json').read_text()) if (root/'failure.json').exists() else None
     readback=verify(root)
     if readback['status']!='passed':
@@ -47,10 +48,13 @@ def analyze(root):
         name=case['name']; result=summary['cases'].get(name)
         row={**case,'equilibrium':'not_run','qualification':'not_run'}
         if result:
+            group=('isochoric' if case['kind']=='isochoric_mms' else str(int(case['kappa'])))
+            qualification=(summary['convergence']['groups'][group]['status']
+                if case['kind'] in {'mms','isochoric_mms'} else result['status'])
             row.update(equilibrium=result['status'],metrics=result['metrics'],
                 DOF=result['cost']['mixed_dofs'],tetrahedra=result['cost']['tetrahedra'],
                 solver_seconds=result['cost']['elapsed_seconds'],iterations=result['cost']['iterations'],
-                qualification=result['status'] if case['kind']!='mms' else summary['convergence']['groups'][str(int(case['kappa']))]['status'])
+                qualification=qualification)
         elif failure and failure['case']==name:
             row.update(equilibrium='failed',reason='safety-stop; no valid terminal equilibrium')
         mesh_path=root/'raw'/f'{name}_mesh.npz'
@@ -69,16 +73,22 @@ def analyze(root):
                     derived.update({f'{name}_{index}_{key}':value for key,value in arrays.items()})
             iterates[name]=states
         rows.append(row)
-    report={'status':summary['status'],'scope':'benchmark qualification, not ventricular or biological validation',
+    limits=['Sampled positive J is not proof of global injectivity.',
+        'kappa-dependent manufactured loads are not a fixed-load locking test.',
+        'Ordinary equilibrium/weak residual pass does not establish field accuracy.']
+    if controls:
+        limits += ['Zero exact pressure has no defined relative pressure error or order.',
+            'The controls change the exact displacement field too; they are not a pressure-only matched causal test.',
+            'Original eight-case and ventricular failures remain unchanged.']
+    elif failure:
+        limits.append('The interrupted case is not a qualified equilibrium; unattempted cases remain not_run.')
+    report={'status':summary['status'],'scope':('four-control defined gates' if controls else 'benchmark qualification')+', not ventricular or biological validation',
         'cases':rows,'convergence':summary['convergence'],'completed_equilibria':len(summary['cases']),
         'SNES_calls':summary['attempted_solves'],'container_invocations':1,'automatic_retries':0,
         'failed_case':failure['case'] if failure else None,'iterate_diagnostics':iterates,
         'completed_state_readback':readback['status'],'original_ventricular_gate':'failed_unchanged',
         'native_interface_retest':'passed' if all(row['equilibrium']=='passed' for row in rows[:2]) else 'unknown',
-        'limits':['Sampled positive J is not proof of global injectivity.',
-            'kappa-dependent manufactured loads are not a fixed-load locking test.',
-            'Ordinary equilibrium/weak residual pass does not establish field accuracy.',
-            'The failed k1000 n2 state is not a physical equilibrium; later two cases were not run.']}
+        'limits':limits}
     return report,derived,readback
 
 

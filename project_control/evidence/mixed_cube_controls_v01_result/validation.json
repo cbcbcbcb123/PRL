@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "checks": {
+    "668_protected_files": true,
+    "25_execution_sources_unchanged": true,
+    "execution_snapshots_unchanged": true,
+    "original_path_failure_preserved": true,
+    "endpoint_certificate": true,
+    "four_control_gates": true,
+    "independent_state_readback": true,
+    "one_invocation": true
+  },
+  "host_tests": "....................................................................     [100%]\n68 passed in 3.94s",
+  "original_path_audit": "failed_preserved",
+  "endpoint_certificate": "passed",
+  "controls": "passed",
+  "original_eight_cases": "failed",
+  "original_ventricle": "failed",
+  "figure_workflow": "passed",
+  "publication_style": "failed",
+  "package": {
+    "files_including_manifest": 148,
+    "logical_bytes": 17168179
+  },
+  "manifest_sha256": "a153c50b2ff8c221db62f650cdaf8f2c149ab4a484263af8a685c75818eede0c",
+  "deletion_count": 0,
+  "online_excerpt_hashes": {
+    "diagnostic.png": "c958d16e7b06740930f8e558e23c034d47d7727c5bf85f8ca6890463da317570",
+    "summary.json": "82495c891a5a57abf89d53f07dbb3c8df6651c6864e84e76de147e402a436fa6",
+    "readback.json": "3ce117e72e1943a3f0f93aa4c210fec56c9e37c326319967a2ce3685f8a92906",
+    "path_readback.json": "85232f18e7f6d34d6bdc0a5b61fd4e473b44177fefca8de62650e84fe2ea501c",
+    "endpoint_certificate.json": "c5f7a4affd96d78c6a50bad76beae61cc67f1038ee41dfb6c944fb6e811aeea0",
+    "configuration.json": "4fdce08b22b4dbe86d0273ab42682d71bbba06286799a4d0e227ecdc1d3a8e27",
+    "execution.json": "f0df6fc27c8f830afa41fd047d667c2ff7955e8f3cb69c9e03c5a11a9dbc2034"
+  }
+}

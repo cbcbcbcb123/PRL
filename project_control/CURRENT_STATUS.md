@@ -7,20 +7,20 @@ git_workflow_decision: project_control/main_branch_stage_commit_decision_v01.md
 git_stage_push_decision: project_control/main_branch_stage_push_decision_v01.md
 git_integration_decision: project_control/remote_history_integration_decision_v01.md
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
-git_remote_push: passed
+git_remote_push: not_run
 git_remote_push_record: project_control/evidence/mixed_cube_controls_v01_preflight/publication_readback.json
 git_published_science_commit: a468bc11385d3e330665114381581b284698055f
 git_published_review_commit: a468bc11385d3e330665114381581b284698055f
 verified_commit: a468bc11385d3e330665114381581b284698055f
-current_lifecycle: fem_only_four_controls_ready_after_runtime_recovery
+current_lifecycle: fem_only_four_controls_passed_pressure_representation_review
 documentation_updated_at: 2026-09-19
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
 current_contract: project_control/ventricle_mixed_cube_control_batch_v01.md
-last_completed_contract: project_control/ventricle_fem_3d_unstructured_comparison_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/mixed_cube_load_diagnosis_v01_20260919/visual_review.json
-next_stage_contract: project_control/ventricle_mixed_cube_control_batch_v01.md
-current_authorization: user_confirmed_four_control_cases_20260919_once
+last_completed_contract: project_control/ventricle_mixed_cube_control_batch_v01.md
+current_render_contract: ../PRL-results/ventricle_fem/mixed_cube_controls_v01_20260919/visual_review.json
+next_stage_contract: null
+current_authorization: four_control_cases_consumed_4_of_4_no_retry
 development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -29,15 +29,15 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: four_control_cases_one_container_no_retry_only
+execution_authorized: no_new_scientific_invocation
 runtime_start_authority: consumed_one_recovery_start_api_and_pinned_image_passed_no_retry
 runtime_repair_scope: project_control/docker_recovery_20260919_v01.md
 runtime_repair_authority: exact_manifest_9f281fab_user_approved_two_moves_one_start_completed
 runtime_repair_execution: project_control/docker_recovery_20260919_v01_execution.md
-current_execution_log: project_control/ventricle_mixed_cube_control_execution_v01.md
-latest_completed_execution_log: project_control/ventricle_mixed_cube_load_diagnosis_v01.md
-latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
-latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_load_diagnosis_v01_20260919/summary.json
+current_execution_log: project_control/ventricle_mixed_cube_controls_result_v01.md
+latest_completed_execution_log: project_control/ventricle_mixed_cube_controls_result_v01.md
+latest_completed_scientific_gate: four_control_defined_gates_passed_original_ventricle_failed
+latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_controls_v01_20260919/summary.json
 latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -57,7 +57,19 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 阶段远端同步（2026-09-19新增长期规则）
+## 当前：四工况已通过，原心室资格仍failed
+
+[执行与裁决](ventricle_mixed_cube_controls_result_v01.md)；按[用户最新决定](main_branch_sync_without_review_package_decision_v01.md)仅正常同步，不另发评审包。
+1容器、4求解、50.211秒、0GPU、0重跑；非均匀压力patch及三网格等体积剪切均满足原门。
+最细位移L2/H1误差0.1033%/1.4294%，J误差RMS 0.00057023%；末两级阶次2.9166/1.8914。
+原八工况和心室1%门failed不变；没有运行主动、生长、FSI。
+4终态、14接受态及10路径独立复核。原比例审计1项failed保留，逐位相同端点补证通过；不放宽误差门。
+68项宿主测试通过，668保护文件和50旧改动保持；原25份执行源码未变。
+结果148文件/17,168,179 bytes，含可执行Notebook及结构/状态图；图件与原始结果留本地，正常同步代码/导航/必要验证记录。
+唯一下一步为同载原制造解的离散表示对照方案，待整批确认；本批4/4授权已消耗，不能自动再算。
+以下段落为此前阶段历史，不再代表当前四工况not_run。
+
+## 历史：首次阶段远端同步（2026-09-19长期规则继续有效）
 
 用户要求每次完成后同步远端供专家查看。阶段交付经必要检查后，直接提交main并普通推送origin/main，
 不再逐次请求推送确认；不强推、不更新其他分支或标签，不纳入50项无关旧改动。
@@ -68,7 +80,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 其他分支/标签引用未变。见[远端回读记录](evidence/stage_main_sync_v01/publication_readback.json)。
 此passed仅指发布验收；下述数值资格仍failed，不能因同步成功改写科学结论。
 
-## 当前：2026-09-19 Docker恢复，原四工况仍0/4求解
+## 历史：2026-09-19 Docker恢复，修复阶段四工况0/4求解
 
 本次精确授权已执行：[恢复验收](docker_recovery_20260919_v01_execution.md)。
 两个runtime根通过Directory.Move隔离，原4+1对象保留；一次启动后Engine API/info/WSL及固定镜像通过。

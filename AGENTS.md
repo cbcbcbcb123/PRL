@@ -52,7 +52,7 @@
 - 推送前核验远端地址、分支、快进关系和待发布内容；推送后读取远端 `refs/heads/main`，确认与本地提交一致。网络、认证或非快进失败时保留本地成果，明确报告未同步；不得自行强推、改写历史、删除分支或丢弃工作区改动。
 - 任何已获授权的远端推送都只允许更新 `origin` 的 `refs/heads/main`；不得推送其他本地分支、远端分支、标签或使用 `--all`、`--mirror`。除非用户以后另行明确决定，推送采用普通非强制方式，且不得借此删除或改写其他远端引用。
 - 当前决定及本次远端核查见 `project_control/main_branch_stage_commit_decision_v01.md`。
-- 长期阶段同步及专家在线审阅规则见 `project_control/main_branch_stage_push_decision_v01.md`。同步代码、合同、小型验证摘要和必要预览图；完整原始数组、大型结果及缓存仍留在批准的结果库，不使用本机绝对路径作为专家唯一审阅入口。
+- 长期阶段同步规则见 `project_control/main_branch_stage_push_decision_v01.md`，按用户最新补充 `project_control/main_branch_sync_without_review_package_decision_v01.md` 执行：默认仅提交并同步本阶段代码、导航及必要验证记录，不为每次同步额外建立评审包、审阅目录、ZIP或桌面交付。只有用户明确要求评审/打包时才另做；不因此省略科学验证或删除既有证据。完整原始数组、大型结果、图件版本包及缓存仍留在批准的结果库。
 - 用户已核验本项目远端为 `https://github.com/cbcbcbcb123/PRL.git`；本次新旧历史衔接及保留FEM内容的方式见 `project_control/remote_history_integration_decision_v01.md`，不得据此恢复DCM前向路线。
 
 ## 项目导航仓维护规则
