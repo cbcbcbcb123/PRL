@@ -12,15 +12,15 @@ git_remote_push_record: project_control/evidence/mixed_cube_controls_v01_result/
 git_published_science_commit: 5683354ea142dd6dfe5a6533b341f5584ea9b49a
 git_published_review_commit: null
 verified_commit: 5683354ea142dd6dfe5a6533b341f5584ea9b49a
-current_lifecycle: fem_only_four_controls_passed_pressure_representation_review
+current_lifecycle: fem_only_representation_export_failed_offline_fix_native_not_run
 documentation_updated_at: 2026-09-19
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_mixed_cube_control_batch_v01.md
+current_contract: project_control/ventricle_mixed_cube_representation_batch_v01.md
 last_completed_contract: project_control/ventricle_mixed_cube_control_batch_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/mixed_cube_controls_v01_20260919/visual_review.json
+current_render_contract: ../PRL-results/ventricle_fem/mixed_cube_representation_v01_20260919/visual_review.json
 next_stage_contract: null
-current_authorization: four_control_cases_consumed_4_of_4_no_retry
+current_authorization: representation_one_container_consumed_zero_of_eight_solves_no_retry
 development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -34,10 +34,10 @@ runtime_start_authority: consumed_one_recovery_start_api_and_pinned_image_passed
 runtime_repair_scope: project_control/docker_recovery_20260919_v01.md
 runtime_repair_authority: exact_manifest_9f281fab_user_approved_two_moves_one_start_completed
 runtime_repair_execution: project_control/docker_recovery_20260919_v01_execution.md
-current_execution_log: project_control/ventricle_mixed_cube_controls_result_v01.md
-latest_completed_execution_log: project_control/ventricle_mixed_cube_controls_result_v01.md
+current_execution_log: project_control/ventricle_mixed_cube_representation_result_v01.md
+latest_completed_execution_log: project_control/ventricle_mixed_cube_representation_result_v01.md
 latest_completed_scientific_gate: four_control_defined_gates_passed_original_ventricle_failed
-latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_controls_v01_20260919/summary.json
+latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_representation_v01_20260919/summary.json
 latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -57,7 +57,19 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：四工况已通过，原心室资格仍failed
+## 当前：八工况在P3导出检查停止，离线接口修正通过，原生复验not_run
+
+[本次执行、根因与边界](ventricle_mixed_cube_representation_result_v01.md)。
+一次容器15.93085秒，SNES 0次；P3边方向导致48单元中22个节点映射失配，按冻结前置门停止。
+实际失败网格回放：仅重排导出索引，最大坐标差0.1667 L降至3.33e−16 L；92项宿主回归通过。
+原生求解器、本构、载荷和误差门未因修正改变；修正后原生装配/切线及八例求解均not_run。
+817保护文件、50旧改动和31执行源码快照保持，原失败与修正代码分开保留。
+实际结构/映射图及可执行Notebook在结果库；没有新压力/形变状态，不生成伪结果。
+当前唯一下一步：需另行批准一次同八工况续行，先检验修正的原生接口；容器额度已用尽，不能自动重跑。
+原四控制passed及原MMS/心室failed保持；原1%门不放宽，无主动/生长/FSI。
+本次正常main同步，不另做评审包；既有未跟踪评审文件不删、不提交。
+
+## 历史：四工况已通过，原心室资格仍failed
 
 [执行与裁决](ventricle_mixed_cube_controls_result_v01.md)；按[用户最新决定](main_branch_sync_without_review_package_decision_v01.md)仅正常同步，不另发评审包。
 1容器、4求解、50.211秒、0GPU、0重跑；非均匀压力patch及三网格等体积剪切均满足原门。

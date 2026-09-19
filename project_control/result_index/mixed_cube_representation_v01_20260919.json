@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "store_relative_path": "ventricle_fem/mixed_cube_representation_v01_20260919",
+  "manifest_sha256": "c2bc233520d23cf6337396e36589b0ab49556c15702124e84f608c06475f66ab",
+  "raw_data_in_git": false,
+  "small_native_export_regression_fixture_in_git": true
+}

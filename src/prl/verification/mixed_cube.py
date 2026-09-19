@@ -2,7 +2,9 @@
 from collections import defaultdict
 import math
 import numpy as np
-from .ventricle_3d import EDGES, tetra_shape, triangle_shape, kinematics, extra_points, mapping_checks
+from .ventricle_3d import EDGES, tetra_shape, triangle_shape, extra_points
+from .mixed_cube_space import (kinematics, mapping_checks, u_shape, pressure_shape,
+                               face_shape, sample_points)
 
 
 def quadrature(dimension, order=6):
@@ -37,6 +39,10 @@ def exact_kinematics(points, kind):
         displacement[...,0] = .002*points[...,0]**2
         gradient[...,0,0] = .004*points[...,0]
         hessian[...,0,0,0] = .004
+    elif kind == 'cubic_volume':
+        displacement[...,0] = .002*points[...,0]**3
+        gradient[...,0,0] = .006*points[...,0]**2
+        hessian[...,0,0,0] = .012*points[...,0]
     elif kind == 'isochoric_mms':
         sine,cosine=np.sin(np.pi*points),np.cos(np.pi*points)
         value=.002*sine[...,1]*sine[...,2]
@@ -92,7 +98,7 @@ def exact_fields(points, kind, kappa, mu=1.):
     return {'u':u,'grad':grad,'F':F,'J':J,'pressure':pressure,'P':piola(F,pressure,mu),'body':body}
 
 
-def boundary_data(coordinates, cells):
+def boundary_data(coordinates, cells, u_degree=2):
     """Independent boundary extraction from tetra incidence; tags 1..6 are x0,x1,y0,y1,z0,z1."""
     incidence = defaultdict(list)
     for cell_id, cell in enumerate(cells):
@@ -100,6 +106,14 @@ def boundary_data(coordinates, cells):
             face = tuple(sorted(int(cell[i]) for i in range(4) if i != opposite))
             incidence[face].append(cell_id)
     lookup = {tuple(np.round(point,13)):i for i,point in enumerate(coordinates)}
+    if u_degree == 3:
+        from .simplex_lagrange import equispaced_nodes
+        corner = np.array([[0.,0.],[1.,0.],[0.,1.]])
+        lattice = equispaced_nodes(2,3)
+        rest = [point for point in lattice if not any(np.array_equal(point,v) for v in corner)]
+        face_nodes = np.vstack((corner,rest))
+    elif u_degree != 2:
+        raise ValueError('Unsupported cube displacement degree')
     faces, tags, owners = [], [], []
     for face, owner in sorted(incidence.items()):
         if len(owner) == 2:
@@ -111,16 +125,25 @@ def boundary_data(coordinates, cells):
                        if np.all(np.abs(vertex[:,axis]-side)<1e-12)]
         if len(identifiers) != 1:
             raise ValueError('Boundary not on a unit-cube face')
-        mids = [lookup[tuple(np.round((vertex[i]+vertex[j])/2,13))] for i,j in [(1,2),(0,2),(0,1)]]
-        faces.append(list(face)+mids); tags.append(identifiers[0]); owners.append(owner[0])
-    return {'boundary_faces':np.asarray(faces,dtype=np.int64), 'boundary_tags':np.asarray(tags),
+        if u_degree == 2:
+            mids = [lookup[tuple(np.round((vertex[i]+vertex[j])/2,13))] for i,j in [(1,2),(0,2),(0,1)]]
+            faces.append(list(face)+mids)
+        else:
+            bary = np.column_stack((1-face_nodes.sum(axis=1),face_nodes))
+            face_xyz = bary @ vertex
+            faces.append([lookup[tuple(np.round(point,13))] for point in face_xyz])
+        tags.append(identifiers[0]); owners.append(owner[0])
+    result={'boundary_faces':np.asarray(faces,dtype=np.int64), 'boundary_tags':np.asarray(tags),
             'boundary_owners':np.asarray(owners)}
+    if u_degree == 3:
+        result['face_reference_nodes']=face_nodes
+    return result
 
 
 def surface_load(data, case, points=None, weights=None):
     points = data['facet_qpoints'] if points is None else points
     weights = data['facet_qweights'] if weights is None else weights
-    basis,_ = triangle_shape(points)
+    basis,_ = face_shape(data,points)
     vertices = data['coordinates'][data['boundary_faces'][:,:3]]
     bary = np.column_stack((1-points.sum(axis=1),points))
     xyz = np.einsum('qa,fai->fqi',bary,vertices)
@@ -140,9 +163,10 @@ def surface_load(data, case, points=None, weights=None):
 
 def assembled(data,state,case):
     F,J,gradients,detmap,bary,vertices = kinematics(data,state['u'],data['qpoints'])
-    basis = tetra_shape(data['qpoints'])[0]; mass = detmap[:,None]*data['qweights']
+    basis = u_shape(data,data['qpoints'])[0]; mass = detmap[:,None]*data['qweights']
+    pressure_basis = pressure_shape(data,data['qpoints'])
     xyz = np.einsum('qa,cai->cqi',bary,vertices)
-    pressure = np.einsum('qa,ca->cq',bary,state['pressure'][data['pressure_cells']])
+    pressure = np.einsum('qa,ca->cq',pressure_basis,state['pressure'][data['pressure_cells']])
     P = piola(F,pressure)
     exact = exact_fields(xyz,case['kind'],case['kappa'])
     nodal = np.einsum('cqij,cqaj,cq->cai',P,gradients,mass)
@@ -151,7 +175,7 @@ def assembled(data,state,case):
     traction,totals,_,_,_ = surface_load(data,case)
     force -= traction
     weak = np.zeros_like(state['pressure'])
-    np.add.at(weak,data['pressure_cells'].ravel(),np.einsum('qa,cq,cq->ca',bary,J-1-pressure/case['kappa'],mass).ravel())
+    np.add.at(weak,data['pressure_cells'].ravel(),np.einsum('qa,cq,cq->ca',pressure_basis,J-1-pressure/case['kappa'],mass).ravel())
     body_nodal = np.zeros_like(state['u'])
     np.add.at(body_nodal,data['cells'].ravel(),np.einsum('qa,cqi,cq->cai',basis,exact['body'],mass).reshape(-1,3))
     return {'force':force,'weak':weak,'F':F,'J':J,'P':P,'body':exact['body'],
@@ -166,19 +190,24 @@ def numerical_face_forces(data,state,case):
     mapping=np.stack([vertices[:,i]-vertices[:,0] for i in [1,2,3]],axis=-1)
     inverse=np.linalg.inv(mapping)
     reference=np.einsum('fij,fqj->fqi',inverse,xyz-vertices[:,None,0])
-    _,derivative,bary=tetra_shape(reference.reshape(-1,3))
-    derivative=derivative.reshape(len(cells),-1,10,3); bary=bary.reshape(len(cells),-1,4)
+    _,derivative=u_shape(data,reference.reshape(-1,3))
+    pressure_basis=pressure_shape(data,reference.reshape(-1,3))
+    derivative=derivative.reshape(len(cells),-1,cells.shape[1],3)
+    pressure_basis=pressure_basis.reshape(len(cells),-1,data['pressure_cells'].shape[1])
     gradients=np.einsum('fqai,fij->fqaj',derivative,inverse)
     F=np.eye(3)+np.einsum('fai,fqaj->fqij',state['u'][cells],gradients)
-    pressure=np.einsum('fqa,fa->fq',bary,state['pressure'][data['pressure_cells'][owners]])
+    pressure=np.einsum('fqa,fa->fq',pressure_basis,state['pressure'][data['pressure_cells'][owners]])
     traction=np.einsum('fqij,fj->fqi',piola(F,pressure),normals)
     return np.array([np.sum(traction[data['boundary_tags']==tag]*mass[data['boundary_tags']==tag,:,None],axis=(0,1))
                      for tag in range(1,7)])
 
 
-def error_metrics(data,state,case):
-    points, weights = quadrature(3)
-    basis,_,bary = tetra_shape(points)
+def error_metrics(data,state,case,order=6):
+    points, weights = quadrature(3,order)
+    basis,_ = u_shape(data,points)
+    bary=np.column_stack((1-points.sum(axis=1),points))
+    pressure_basis=pressure_shape(data,points)
+    extra=sample_points(data); extra_pressure_basis=pressure_shape(data,extra)
     sums = {key:0. for key in ['u','u_ref','grad','grad_ref','p','p_ref','J','r','volume']}
     cell_jmax=[]; cell_rms=[]; maximum=0.; min_J=float('inf'); rmax=0.; gmax=0.
     for first in range(0,len(data['cells']),128):
@@ -188,7 +217,7 @@ def error_metrics(data,state,case):
         xyz = np.einsum('qa,cai->cqi',bary,vertices); mass = detmap[:,None]*weights
         reference = exact_fields(xyz,case['kind'],case['kappa'])
         u = np.einsum('qa,cai->cqi',basis,state['u'][local['cells']])
-        pressure = np.einsum('qa,ca->cq',bary,state['pressure'][local['pressure_cells']])
+        pressure = np.einsum('qa,ca->cq',pressure_basis,state['pressure'][local['pressure_cells']])
         terms = {'u':np.sum((u-reference['u'])**2,axis=-1),'u_ref':np.sum(reference['u']**2,axis=-1),
             'grad':np.sum((F-reference['F'])**2,axis=(-1,-2)),
             'grad_ref':np.sum(reference['grad']**2,axis=(-1,-2)),
@@ -196,10 +225,10 @@ def error_metrics(data,state,case):
             'J':(J-reference['J'])**2,'r':(J-1-pressure/case['kappa'])**2,'volume':np.ones_like(J)}
         for key, values in terms.items():
             sums[key] += float(np.sum(mass*values))
-        _,extra_J,_,_,extra_bary,_ = kinematics(local,state['u'],extra_points())
+        _,extra_J,_,_,extra_bary,_ = kinematics(local,state['u'],extra)
         extra_xyz = np.einsum('qa,cai->cqi',extra_bary,vertices)
         extra_true = exact_fields(extra_xyz,case['kind'],case['kappa'])['J']
-        extra_pressure=np.einsum('qa,ca->cq',extra_bary,state['pressure'][local['pressure_cells']])
+        extra_pressure=np.einsum('qa,ca->cq',extra_pressure_basis,state['pressure'][local['pressure_cells']])
         rmax=max(rmax,float(np.sqrt(terms['r']).max()),float(np.max(np.abs(extra_J-1-extra_pressure/case['kappa']))))
         gmax=max(gmax,float(np.max(np.abs(J-1))),float(np.max(np.abs(extra_J-1))))
         local_max = np.maximum(np.max(np.abs(J-reference['J']),axis=1),np.max(np.abs(extra_J-extra_true),axis=1))
@@ -250,7 +279,7 @@ def audit(data,state,metadata,case,config):
         reaction_error=float(np.linalg.norm(reaction.sum(axis=0)-values['face_exact'][0]))
         metrics['face_force_scaled_error']=max(max(face_errors),reaction_error) # force scale mu L^2 = 1
         checks.update({key:metrics[key]<=limit for key,limit in config['patch_gates'].items()})
-    hard_keys=['p2_order','p1_order','volume_weights','surface_weights','mixed_map',
+    hard_keys=[*mapping_checks(data),'mixed_map',
                'assembly_and_load_agreement','kinematics_agreement','fixed_value','positive_J','initial_zero']
     hard=[key for key in hard_keys if not checks[key]]
     return {'status':'passed' if all(checks.values()) else 'failed','checks':checks,
@@ -290,7 +319,7 @@ def verify(root):
         checks[name+'_final_iterate']=bool(paths and np.allclose(load_arrays(paths[-1])['mixed_state'],state['mixed_state'],rtol=0,atol=1e-12))
         for path in paths:
             iterate=load_arrays(path)
-            _,J,_,_,_,_=kinematics(data,iterate['u'],extra_points())
+            _,J,_,_,_,_=kinematics(data,iterate['u'],sample_points(data))
             checks[name+'_'+path.stem]=bool(np.isfinite(J).all() and np.min(J)>0
                 and np.array_equal(iterate['u'].ravel(),iterate['mixed_state'][data['mixed_u_map']])
                 and np.array_equal(iterate['pressure'],iterate['mixed_state'][data['mixed_p_map']]))
@@ -306,6 +335,9 @@ def verify(root):
 
 
 def convergence(cases,config):
+    if config['schema']=='prl.mixed_cube_representation_proposal.v1':
+        from .mixed_cube_representation import convergence as representation_convergence
+        return representation_convergence(cases,config)
     if config['schema']=='prl.mixed_cube_controls.v1':
         return control_convergence(cases,config)
     groups={}

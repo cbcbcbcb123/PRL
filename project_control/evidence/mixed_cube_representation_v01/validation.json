@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "scope": "offline correction and failure-preservation delivery only",
+  "checks": {
+    "original_output_unchanged": true,
+    "protected_unchanged": true,
+    "execution_snapshots_unchanged": true,
+    "offline_sources_match": true,
+    "repository_bytes": 2046256316,
+    "repository_scan_errors": [],
+    "layout": {
+      "passed": true,
+      "issues": [],
+      "warnings": [],
+      "measured_axes_in": [
+        {
+          "axis_index": 1,
+          "width_in": 5,
+          "height_in": 5,
+          "expected_width_in": 5,
+          "expected_height_in": 5
+        },
+        {
+          "axis_index": 2,
+          "width_in": 5,
+          "height_in": 5,
+          "expected_width_in": 5,
+          "expected_height_in": 5
+        }
+      ],
+      "selected_font": "Calibri",
+      "required_canvas_clearance_pt": 12,
+      "measured_minimum_canvas_clearance_pt": 31.96
+    }
+  },
+  "host_tests": "92 passed in 5.80s",
+  "native_interface_before_fix": "failed",
+  "native_interface_after_fix": "not_run",
+  "cases_not_run": 8,
+  "container_invocations": 1,
+  "equilibrium_solves": 0,
+  "gpu": 0,
+  "retries": 0,
+  "protected_files": 817,
+  "preexisting_dirty_files": 50,
+  "execution_source_snapshots": 31,
+  "old_run_sources_unchanged": true,
+  "current_sources_changed_only_after_exit": true,
+  "old_four_controls": "passed",
+  "original_eight_cases": "failed",
+  "original_ventricle": "failed",
+  "publication_style": "failed",
+  "figure_workflow": "passed",
+  "package": {
+    "files_including_manifest": 78,
+    "logical_bytes": 1386306
+  },
+  "manifest_sha256": "c2bc233520d23cf6337396e36589b0ab49556c15702124e84f608c06475f66ab",
+  "deletion_count": 0
+}

@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "scope": "read-only readiness before the one batch, not a runtime repair",
+  "initial_doctor_status": "blocked",
+  "initial_failure": "image inspect exceeded 15-second timeout",
+  "observations": {
+    "existing_backend_transition": "starting -> running",
+    "automatic_resource_saver_wake_seconds": 16.413,
+    "context": "desktop-linux",
+    "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+    "image_id": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+    "image_identity_match": true,
+    "server": "29.7.2",
+    "os": "linux",
+    "containers_running": 0
+  },
+  "desktop_start_calls": 0,
+  "repair_calls": 0,
+  "subsequent_batch_container_invocations": 1
+}

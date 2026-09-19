@@ -18,7 +18,9 @@ from prl.fem.fenicsx_ring import Ring, write_json
 from prl.fem.mixed_material import passive_energy
 from prl.fem.mixed_cube_spec import disposition
 from prl.fem.positive_j import admissible_scale
-from prl.verification.ventricle_3d import load_arrays, mapping_checks, kinematics, extra_points
+from prl.fem.nodal_export import canonical_nodal_cells
+from prl.verification.ventricle_3d import load_arrays, extra_points
+from prl.verification.mixed_cube_space import mapping_checks, kinematics, sample_points
 from prl.verification.mixed_cube import boundary_data, assembled, audit, convergence
 
 
@@ -32,6 +34,8 @@ def exact_displacement_numpy(x,kind):
         values[0]=.002*np.sin(np.pi*x[0])*np.sin(np.pi*x[1])*np.sin(np.pi*x[2])
     elif kind=='quadratic_volume':
         values[0]=.002*x[0]**2
+    elif kind=='cubic_volume':
+        values[0]=.002*x[0]**3
     elif kind=='isochoric_mms':
         values[0]=.002*np.sin(np.pi*x[1])*np.sin(np.pi*x[2])
     else:
@@ -48,6 +52,8 @@ def exact_displacement_ufl(x,kind):
         return ufl.as_vector((.002*ufl.sin(np.pi*x[0])*ufl.sin(np.pi*x[1])*ufl.sin(np.pi*x[2]),0.,0.))
     if kind=='quadratic_volume':
         return ufl.as_vector((.002*x[0]**2,0.,0.))
+    if kind=='cubic_volume':
+        return ufl.as_vector((.002*x[0]**3,0.,0.))
     if kind=='isochoric_mms':
         return ufl.as_vector((.002*ufl.sin(np.pi*x[1])*ufl.sin(np.pi*x[2]),0.,0.))
     raise ValueError('Unknown registered case')
@@ -77,8 +83,12 @@ class Cube(Ring):
             raise ValueError('Cube boundary tags missing')
         order=np.argsort(exterior)
         facet_tags=mesh.meshtags(domain,2,exterior[order],labels[order])
-        ue=basix.ufl.element('Lagrange','tetrahedron',2,shape=(3,))
-        pe=basix.ufl.element('Lagrange','tetrahedron',1)
+        u_degree=case.get('u_degree',2); p_degree=case.get('p_degree',1)
+        if (u_degree,p_degree) not in {(2,1),(3,1),(3,2)}:
+            raise ValueError('Unregistered displacement/pressure pair')
+        variant={'lagrange_variant':basix.LagrangeVariant.equispaced} if u_degree==3 else {}
+        ue=basix.ufl.element('Lagrange','tetrahedron',u_degree,shape=(3,),**variant)
+        pe=basix.ufl.element('Lagrange','tetrahedron',p_degree,**variant)
         self.space=fem.functionspace(domain,basix.ufl.mixed_element([ue,pe]))
         self.w=fem.Function(self.space)
         self.vspace,self.vmap=self.space.sub(0).collapse(); self.pspace,self.pmap=self.space.sub(1).collapse()
@@ -112,8 +122,9 @@ class Cube(Ring):
         body=(fem.Constant(domain,np.zeros(3,dtype=PETSc.ScalarType))
               if case['kind'] in {'affine','shear'} else -ufl.div(exact_P))
         traction=exact_P*ufl.FacetNormal(domain)
-        dx=ufl.Measure('dx',domain=domain,metadata={'quadrature_degree':6})
-        ds=ufl.Measure('ds',domain=domain,subdomain_data=facet_tags,metadata={'quadrature_degree':6})
+        quadrature_degree=config['quadrature_degree']
+        dx=ufl.Measure('dx',domain=domain,metadata={'quadrature_degree':quadrature_degree})
+        ds=ufl.Measure('ds',domain=domain,subdomain_data=facet_tags,metadata={'quadrature_degree':quadrature_degree})
         test=ufl.TestFunction(self.space); v,_=ufl.split(test)
         residual=ufl.derivative(energy*dx,self.w,test)-ufl.dot(body,v)*dx
         for tag in range(2,7):
@@ -122,8 +133,8 @@ class Cube(Ring):
         self.problem=petsc.NonlinearProblem(residual,self.w,bcs=bcs,petsc_options_prefix='Cube_'+self.name+'_',
             petsc_options={k:value for k,value in config['solver'].items() if k!='mat_mumps_icntl_14'})
         self.factor_options=self.bind_factor_options()
-        self.qpoints,self.qweights=basix.make_quadrature(basix.CellType.tetrahedron,6)
-        fq,fw=basix.make_quadrature(basix.CellType.triangle,6)
+        self.qpoints,self.qweights=basix.make_quadrature(basix.CellType.tetrahedron,quadrature_degree)
+        fq,fw=basix.make_quadrature(basix.CellType.triangle,quadrature_degree)
         self.expressions={key:fem.Expression(value,self.qpoints) for key,value in
             {'F':F,'J':J,'P':P,'body':body}.items()}
         write_json(self.iterate_root/'expression_metadata.json',{
@@ -136,14 +147,29 @@ class Cube(Ring):
             'pressure_coordinates':self.pspace.tabulate_dof_coordinates(),'pressure_cells':self.pcells,
             'fixed':self.fixed,'qpoints':self.qpoints,'qweights':self.qweights,
             'facet_qpoints':fq,'facet_qweights':fw,'mixed_u_map':self.vmap,'mixed_p_map':self.pmap,
-            **boundary_data(self.coords,self.cells)}
+            **boundary_data(self.coords,self.cells,u_degree)}
+        if 'u_degree' in case:
+            self.mesh_data.update(u_degree=np.array(u_degree),p_degree=np.array(p_degree),
+                lagrange_variant=np.array('equispaced'))
+            for field,degree in [('u',u_degree),('p',p_degree)]:
+                self.mesh_data[field+'_reference_nodes']=basix.create_element(
+                    basix.ElementFamily.P,basix.CellType.tetrahedron,degree,
+                    basix.LagrangeVariant.equispaced).points
+            if u_degree == 3:
+                # P3 edge-node order depends on cell orientation. Preserve the
+                # raw native map and reorder ONLY the independent export map.
+                self.mesh_data['native_cells'] = self.cells.copy()
+                canonical, slots = canonical_nodal_cells(
+                    self.coords, self.cells, self.mesh_data['u_reference_nodes'])
+                self.mesh_data['cells'] = canonical
+                self.mesh_data['u_canonical_to_native_slots'] = slots
+        np.savez_compressed(root/'raw'/f'{self.name}_mesh.npz',**self.mesh_data)
         if not all(mapping_checks(self.mesh_data).values()):
             raise ValueError('Independent ordering/weights mismatch')
-        np.savez_compressed(root/'raw'/f'{self.name}_mesh.npz',**self.mesh_data)
         write_json(self.iterate_root/'factor_option_binding.json',self.factor_options)
         self.guard_history=[]
         if config.get('trial_guard'):
-            self.guard_points=np.concatenate((self.qpoints,extra_points()))
+            self.guard_points=np.concatenate((self.qpoints,sample_points(self.mesh_data)))
             self.guard_expression=fem.Expression(F,self.guard_points)
             self.problem.solver.setLineSearchPreCheck(self.guard_direction)
             write_json(self.iterate_root/'guard_binding.json',{
@@ -227,7 +253,7 @@ class Cube(Ring):
     def monitor(self,solver,iteration,norm):
         mixed=solver.getSolution().getArray(readonly=True).copy()
         u=mixed[self.vmap].reshape(-1,3)
-        _,J,_,_,_,_=kinematics(self.mesh_data,u,extra_points())
+        _,J,_,_,_,_=kinematics(self.mesh_data,u,sample_points(self.mesh_data))
         _,quadrature_J,_,_,_,_=kinematics(self.mesh_data,u,self.qpoints)
         minimum=min(float(J.min()),float(quadrature_J.min()))
         self.history.append({'iteration':int(iteration),'residual':float(norm),'minimum_sampled_J':minimum})
@@ -254,6 +280,12 @@ class Cube(Ring):
             'linear_solver':self.linear_solver_report(iterations),'history':self.history,
             'elapsed_seconds':time.monotonic()-started,'mixed_dofs':len(self.w.x.array),
             'tetrahedra':len(self.cells),'initial_state':'all-zero mixed vector, exact Dirichlet imposed by solver'}
+        if 'u_degree' in self.case:
+            import resource
+            metadata.update(u_degree=self.case['u_degree'],p_degree=self.case['p_degree'],
+                process_peak_rss_bytes=int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)*1024,
+                memory_scope='Linux process high-water RSS through this case, not isolated per-case maximum',
+                quadrature_degree=self.config['quadrature_degree'])
         np.savez_compressed(self.root/'raw'/f'{self.name}_state.npz',**state)
         write_json(self.root/'raw'/f'{self.name}_state.json',metadata)
         report,derived=audit(self.mesh_data,state,metadata,self.case,self.config)

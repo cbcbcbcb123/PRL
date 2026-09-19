@@ -2,7 +2,8 @@
 import json
 from pathlib import Path
 import numpy as np
-from .ventricle_3d import kinematics,extra_points,load_arrays
+from .ventricle_3d import extra_points,load_arrays
+from .mixed_cube_space import kinematics,sample_points
 
 
 def path_minimum(base,increment):
@@ -51,7 +52,7 @@ def audit_paths(root):
         if not (folder/'guard_history.json').exists():
             continue
         data=load_arrays(root/'raw'/f'{name}_mesh.npz')
-        points=np.concatenate((data['qpoints'],extra_points()))
+        points=np.concatenate((data['qpoints'],sample_points(data)))
         for entry in json.loads((folder/'guard_history.json').read_text()):
             sequence=entry['sequence']; saved=load_arrays(folder/f'candidate_{sequence:03d}.npz')
             current=saved['current_mixed']; direction=saved['direction_mixed']; scale=entry['scale']

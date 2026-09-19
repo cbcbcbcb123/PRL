@@ -1,0 +1,13 @@
+{
+  "schema": "prl.native_export_regression_fixture.v1",
+  "source": "E:/Temp-Projects/PRL-results/ventricle_fem/mixed_cube_representation_v01_20260919/raw/patch_cubic_volume_p3p2_mesh.npz",
+  "sha256": "40ef6fdd009342fab48690514624d62ea0fb1d38c2767bc8a48783b70ab60d65",
+  "bytes": 11263,
+  "provenance": "Byte-identical native FEniCSx 0.11.0.post0 export before the first SNES call, 2026-09-19.",
+  "purpose": "Retain actual P3 edge-orientation failure for offline regression; not scientific solution data.",
+  "tetrahedra": 48,
+  "affected_cells": 22,
+  "solution_states": 0,
+  "status": "failed",
+  "old_raw_data_modified": false
+}

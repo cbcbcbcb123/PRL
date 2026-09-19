@@ -408,7 +408,7 @@ def _parser() -> argparse.ArgumentParser:
         unstructured.add_argument('--workspace',type=Path)
         mixed_cube=group.add_parser('fem-mixed-cube',help='registered bounded cube benchmark or control batch; no retries')
         mixed_cube.add_argument('--workspace',type=Path)
-        mixed_cube.add_argument('--batch',choices=['v01','v02','v03','controls_v01'],default='v01')
+        mixed_cube.add_argument('--batch',choices=['v01','v02','v03','controls_v01','representation_v01'],default='v01')
     return parser
 
 

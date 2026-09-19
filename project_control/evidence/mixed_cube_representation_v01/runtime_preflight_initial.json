@@ -1,0 +1,206 @@
+{
+  "snapshot": {
+    "schema_version": "cb.docker.windows.preflight.v1",
+    "observed_at_utc": "2026-09-19T12:00:49.743843+00:00",
+    "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+    "actions_performed": {
+      "desktop_starts": 0,
+      "repairs": 0,
+      "moves": 0,
+      "deletions": 0,
+      "acl_changes": 0,
+      "pulls": 0,
+      "installs": 0,
+      "containers": 0,
+      "jit_tests": 0,
+      "solves": 0,
+      "gpu_tasks": 0
+    },
+    "host": {
+      "roots": [
+        {
+          "path": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run",
+          "status": "passed",
+          "entries": [
+            {
+              "path": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\dockerEthernetVfkit",
+              "attributes": "Archive, ReparsePoint",
+              "bytes": 0,
+              "modified_utc": "2026-09-19T10:53:34.5863993Z",
+              "acl_error": "Method failed with unexpected error code 1920."
+            },
+            {
+              "path": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\dockerInference",
+              "attributes": "Archive, ReparsePoint",
+              "bytes": 0,
+              "modified_utc": "2026-09-19T10:53:34.5679098Z",
+              "acl_error": "Method failed with unexpected error code 1920."
+            },
+            {
+              "path": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\sailor-ingest.sock",
+              "attributes": "Archive, ReparsePoint",
+              "bytes": 0,
+              "modified_utc": "2026-09-19T10:53:34.5284373Z",
+              "acl_error": "Method failed with unexpected error code 1920."
+            },
+            {
+              "path": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\userAnalyticsOtlpHttp.sock",
+              "attributes": "Archive, ReparsePoint",
+              "bytes": 0,
+              "modified_utc": "2026-09-19T10:53:53.6868912Z",
+              "acl_error": "Method failed with unexpected error code 1920."
+            }
+          ],
+          "error": null
+        },
+        {
+          "path": "C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine",
+          "status": "passed",
+          "entries": [
+            {
+              "path": "C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine\\engine.sock",
+              "attributes": "Archive, ReparsePoint",
+              "bytes": 0,
+              "modified_utc": "2026-09-19T10:53:34.5815274Z",
+              "acl_error": "Method failed with unexpected error code 1920."
+            }
+          ],
+          "error": null
+        }
+      ],
+      "processes": [
+        {
+          "name": "com.docker.backend",
+          "pid": 27604
+        },
+        {
+          "name": "com.docker.backend",
+          "pid": 39132
+        },
+        {
+          "name": "com.docker.build",
+          "pid": 52824
+        },
+        {
+          "name": "Docker Desktop",
+          "pid": 7788
+        },
+        {
+          "name": "Docker Desktop",
+          "pid": 7912
+        },
+        {
+          "name": "Docker Desktop",
+          "pid": 13520
+        },
+        {
+          "name": "Docker Desktop",
+          "pid": 36820
+        },
+        {
+          "name": "Docker Desktop",
+          "pid": 42136
+        }
+      ],
+      "service_status": "Stopped"
+    },
+    "probe_errors": [],
+    "image": {
+      "status": "failed",
+      "tag": "dolfinx/dolfinx:v0.11.0",
+      "expected_id": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+      "actual_id": null,
+      "error": "Command '['docker.exe', '--host', 'npipe:////./pipe/dockerDesktopLinuxEngine', 'image', 'inspect', 'dolfinx/dolfinx:v0.11.0', '--format', '{{.Id}}']' timed out after 15 seconds"
+    },
+    "engine": {
+      "server": {
+        "Platform": {
+          "Name": "Docker Desktop 4.89.0 (238018)"
+        },
+        "Version": "29.7.2",
+        "ApiVersion": "1.55",
+        "MinAPIVersion": "1.40",
+        "Os": "linux",
+        "Arch": "amd64",
+        "Components": [
+          {
+            "Name": "Engine",
+            "Version": "29.7.2",
+            "Details": {
+              "ApiVersion": "1.55",
+              "Arch": "amd64",
+              "BuildTime": "Wed Aug  5 18:28:36 2026",
+              "Experimental": "false",
+              "GitCommit": "6a43e3d",
+              "GoVersion": "go1.26.5",
+              "KernelVersion": "6.6.87.2-microsoft-standard-WSL2",
+              "MinAPIVersion": "1.40",
+              "Module": "github.com/moby/moby/v2",
+              "ModuleVersion": "v2.0.0+unknown",
+              "Os": "linux"
+            }
+          },
+          {
+            "Name": "containerd",
+            "Version": "v2.3.3",
+            "Details": {
+              "GitCommit": "aad11006b869517fcd3009450b6f82da282e1a9b"
+            }
+          },
+          {
+            "Name": "runc",
+            "Version": "1.4.3",
+            "Details": {
+              "GitCommit": "v1.4.3-0-gbb14dabe"
+            }
+          },
+          {
+            "Name": "docker-init",
+            "Version": "0.19.0",
+            "Details": {
+              "GitCommit": "de40ad0"
+            }
+          }
+        ],
+        "GitCommit": "6a43e3d",
+        "GoVersion": "go1.26.5",
+        "KernelVersion": "6.6.87.2-microsoft-standard-WSL2",
+        "BuildTime": "2026-08-05T18:28:36.000000000+00:00"
+      },
+      "returncode": 0,
+      "error": null
+    },
+    "wsl": {
+      "returncode": 0,
+      "listing": "NAME              STATE           VERSION\r\n* docker-desktop    Stopped         2",
+      "error": null
+    },
+    "backend_log": {
+      "path": "C:\\Users\\chenb\\AppData\\Local\\Docker\\log\\host\\com.docker.backend.exe.log",
+      "bytes": 554503,
+      "scope": "bounded tail; timestamps require correlation; not used for classification",
+      "socket_lines": []
+    }
+  },
+  "assessment": {
+    "runtime_api_status": "passed",
+    "preflight_status": "blocked",
+    "local_image_status": "failed",
+    "science_status": "not_run",
+    "startup_decision": "not_needed_review_anomalies",
+    "reason_codes": [
+      "runtime_object_access_error",
+      "runtime_acl_error_1920",
+      "local_image_not_qualified"
+    ],
+    "error_1920_paths": [
+      "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\dockerEthernetVfkit",
+      "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\dockerInference",
+      "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\sailor-ingest.sock",
+      "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\userAnalyticsOtlpHttp.sock",
+      "C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine\\engine.sock"
+    ],
+    "deep_recurrence_cause": "unknown",
+    "repair_authorized_by_this_tool": false
+  }
+}
