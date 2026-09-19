@@ -1,0 +1,11 @@
+{"time_utc":"2026-09-19T10:49:46.1443879Z","event":"authorized_attempt_registered","data":{"scientific_execution":"not_run","manifest_sha256":"9f281fabde61c7fa2f7a3d0fee90e92303f3297983fbbb58cce2806b68439cd7"}}
+{"time_utc":"2026-09-19T10:53:24.8393063Z","event":"approved_fallback_after_cli_timeout","data":{"no_extra_process_scope":true,"graceful_stop_invocations":1}}
+{"time_utc":"2026-09-19T10:53:25.5966034Z","event":"listed_process_stopped","data":{"process_id":22412,"executable":"C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe"}}
+{"time_utc":"2026-09-19T10:53:30.2570521Z","event":"before_authorized_directory_move","data":{"source":"C:\\Users\\chenb\\AppData\\Local\\Docker\\run","destination":"C:\\Users\\chenb\\AppData\\Local\\Docker\\run.quarantine-20260919-repair-v01"}}
+{"time_utc":"2026-09-19T10:53:30.2640594Z","event":"directory_move_returned","data":{"source":"C:\\Users\\chenb\\AppData\\Local\\Docker\\run","destination":"C:\\Users\\chenb\\AppData\\Local\\Docker\\run.quarantine-20260919-repair-v01"}}
+{"time_utc":"2026-09-19T10:53:30.2896685Z","event":"directory_move_verified","data":{"objects":4,"source_absent":true,"destination":"C:\\Users\\chenb\\AppData\\Local\\Docker\\run.quarantine-20260919-repair-v01"}}
+{"time_utc":"2026-09-19T10:53:30.3096415Z","event":"before_authorized_directory_move","data":{"source":"C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine","destination":"C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine.quarantine-20260919-repair-v01"}}
+{"time_utc":"2026-09-19T10:53:30.3134182Z","event":"directory_move_returned","data":{"source":"C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine","destination":"C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine.quarantine-20260919-repair-v01"}}
+{"time_utc":"2026-09-19T10:53:30.3334163Z","event":"directory_move_verified","data":{"objects":1,"source_absent":true,"destination":"C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine.quarantine-20260919-repair-v01"}}
+{"time_utc":"2026-09-19T10:53:31.6167252Z","event":"one_start_authority_consumed","data":{"maximum_starts":1,"executable":"C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe"}}
+{"time_utc":"2026-09-19T10:53:31.8867944Z","event":"desktop_start_returned","data":{"startup_count":1,"process_id":7788,"validation_status":"not_run"}}

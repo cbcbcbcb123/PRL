@@ -1,0 +1,251 @@
+{
+  "document_id": "PRL-DOCKER-RECOVERY-20260919-V01",
+  "status": "blocked",
+  "authorization": "exact_path_operation_pending_user_confirmation",
+  "user_request": "继续，修复Docker",
+  "observations_at_utc": "2026-09-19T10:42:18.9625403Z",
+  "purpose": "One explicitly approved, reversible recovery attempt; not a proven long-term fix or automatic quarantine loop.",
+  "targets": [
+    {
+      "source": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run",
+      "destination": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run.quarantine-20260919-repair-v01",
+      "interface": "System.IO.Directory.Move",
+      "source_attributes": "Directory",
+      "source_created_utc": "2026-09-17T09:59:26.4525389Z",
+      "source_modified_utc": "2026-09-17T09:59:45.5948602Z",
+      "destination_must_not_exist": true,
+      "destination_exists_at_audit": false,
+      "ordinary_file_count": 0,
+      "reparse_object_count": 4,
+      "child_directory_count": 0,
+      "logical_bytes_reported_by_metadata": 0,
+      "git_tracking": "outside PRL repository; not tracked by PRL",
+      "entry_content_hashes": "unknown; inaccessible runtime sockets, never read or followed",
+      "entries": [
+        {
+          "FullName": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\dockerEthernetVfkit",
+          "Length": 0,
+          "Attributes": 1056,
+          "PSIsContainer": false,
+          "CreationTimeUtc": "2026-09-17T09:59:26.5141907Z",
+          "LastWriteTimeUtc": "2026-09-17T09:59:26.5141907Z"
+        },
+        {
+          "FullName": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\dockerInference",
+          "Length": 0,
+          "Attributes": 1056,
+          "PSIsContainer": false,
+          "CreationTimeUtc": "2026-09-17T09:59:26.4992923Z",
+          "LastWriteTimeUtc": "2026-09-17T09:59:26.4992923Z"
+        },
+        {
+          "FullName": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\sailor-ingest.sock",
+          "Length": 0,
+          "Attributes": 1056,
+          "PSIsContainer": false,
+          "CreationTimeUtc": "2026-09-17T09:59:26.4562316Z",
+          "LastWriteTimeUtc": "2026-09-17T09:59:26.4562316Z"
+        },
+        {
+          "FullName": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\userAnalyticsOtlpHttp.sock",
+          "Length": 0,
+          "Attributes": 1056,
+          "PSIsContainer": false,
+          "CreationTimeUtc": "2026-09-17T09:59:45.5943227Z",
+          "LastWriteTimeUtc": "2026-09-17T09:59:45.5943227Z"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine",
+      "destination": "C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine.quarantine-20260919-repair-v01",
+      "interface": "System.IO.Directory.Move",
+      "source_attributes": "Directory",
+      "source_created_utc": "2026-09-17T09:59:26.5066641Z",
+      "source_modified_utc": "2026-09-17T09:59:26.5097766Z",
+      "destination_must_not_exist": true,
+      "destination_exists_at_audit": false,
+      "ordinary_file_count": 0,
+      "reparse_object_count": 1,
+      "child_directory_count": 0,
+      "logical_bytes_reported_by_metadata": 0,
+      "git_tracking": "outside PRL repository; not tracked by PRL",
+      "entry_content_hashes": "unknown; inaccessible runtime sockets, never read or followed",
+      "entries": [
+        {
+          "FullName": "C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine\\engine.sock",
+          "Length": 0,
+          "Attributes": 1056,
+          "PSIsContainer": false,
+          "CreationTimeUtc": "2026-09-17T09:59:26.5091869Z",
+          "LastWriteTimeUtc": "2026-09-17T09:59:26.5091869Z"
+        }
+      ]
+    }
+  ],
+  "stopped_processes_if_needed": [
+    {
+      "ProcessId": 22412,
+      "ParentProcessId": 29860,
+      "ExecutablePath": "C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe",
+      "CreationDate": "2026-09-19T18:06:25.753951+08:00"
+    },
+    {
+      "ProcessId": 51316,
+      "ParentProcessId": 22412,
+      "ExecutablePath": "C:\\Program Files\\Docker\\Docker\\resources\\com.docker.backend.exe",
+      "CreationDate": "2026-09-19T18:06:25.971453+08:00"
+    },
+    {
+      "ProcessId": 8604,
+      "ParentProcessId": 51316,
+      "ExecutablePath": "C:\\Program Files\\Docker\\Docker\\resources\\com.docker.backend.exe",
+      "CreationDate": "2026-09-19T18:06:26.342662+08:00"
+    },
+    {
+      "ProcessId": 35180,
+      "ParentProcessId": 8604,
+      "ExecutablePath": "C:\\Program Files\\Docker\\Docker\\frontend\\Docker Desktop.exe",
+      "CreationDate": "2026-09-19T18:06:59.428998+08:00"
+    },
+    {
+      "ProcessId": 33872,
+      "ParentProcessId": 35180,
+      "ExecutablePath": "C:\\Program Files\\Docker\\Docker\\frontend\\Docker Desktop.exe",
+      "CreationDate": "2026-09-19T18:07:00.310522+08:00"
+    },
+    {
+      "ProcessId": 48576,
+      "ParentProcessId": 35180,
+      "ExecutablePath": "C:\\Program Files\\Docker\\Docker\\frontend\\Docker Desktop.exe",
+      "CreationDate": "2026-09-19T18:07:00.32064+08:00"
+    }
+  ],
+  "process_identity_rule": "Match PID, executable path and creation time immediately before stopping; skip already-exited identities; stop on reused PID or any unexpected Docker process.",
+  "graceful_stop": {
+    "command": [
+      "docker",
+      "desktop",
+      "stop",
+      "--timeout",
+      "30"
+    ],
+    "maximum_invocations": 1
+  },
+  "forced_stop_fallback": {
+    "interface": "PowerShell Stop-Process -Id <verified listed PID> -Force",
+    "maximum_per_listed_process": 1,
+    "condition": "Only if listed identities remain after the single graceful stop; no new PIDs or name wildcard targeting."
+  },
+  "restart": {
+    "executable": "C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe",
+    "executable_sha256": "f3100322884b025ead78c49b512ece5e8c1f444ea91c57a4e045cc409386a3de",
+    "interface": "Start-Process -WindowStyle Hidden",
+    "maximum_invocations": 1,
+    "engine_wait_seconds_maximum": 180
+  },
+  "post_start": {
+    "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+    "read_only_checks": [
+      "version",
+      "info",
+      "image inspect"
+    ],
+    "image_tag": "dolfinx/dolfinx:v0.11.0",
+    "expected_image_id": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+    "image_identity_source": "src/prl/runs/fenicsx_runtime.py IMAGE/TAG"
+  },
+  "preserve_paths": [
+    "C:\\Users\\chenb\\AppData\\Local\\Docker\\wsl",
+    "C:\\Users\\chenb\\AppData\\Roaming\\Docker\\settings-store.json",
+    "C:\\Program Files\\Docker\\Docker",
+    "all previously existing quarantine/stale directories",
+    "all VHDX files, images, volumes and project evidence"
+  ],
+  "scope_guards": [
+    "Both source roots and all existing ancestors checked without directory links; child sockets are not followed.",
+    "Reaudit both roots before each move; exact entry metadata and root identity must match; destinations must remain absent.",
+    "If source disappeared after graceful stop, or objects changed/appeared, stop and request direction; do not silently reinterpret this frozen manifest.",
+    "Verify source absence and quarantine metadata after each move; any partial completion, reappearing root or newly exposed older object stops the batch.",
+    "No overwriting destinations, socket content edits, permanent deletion, permission changes, installs, updates, downloads, image pulls, settings edits, WSL shutdown/unregister, mounts, GPU or containers.",
+    "Retain quarantines until separate approval; failure does not authorize another isolation or startup.",
+    "No literal rollback over a newly populated source directory; returning old names would require a fresh safe plan."
+  ],
+  "inspected_settings": [
+    {
+      "name": "EnableDockerAI",
+      "present": true,
+      "value": false
+    },
+    {
+      "name": "EnableInference",
+      "present": true,
+      "value": false
+    },
+    {
+      "name": "EnableInferenceTCP",
+      "present": false,
+      "value": null
+    },
+    {
+      "name": "EnableInferenceGPUVariant",
+      "present": false,
+      "value": null
+    },
+    {
+      "name": "AutoStart",
+      "present": true,
+      "value": false
+    },
+    {
+      "name": "AutoDownloadUpdates",
+      "present": false,
+      "value": null
+    },
+    {
+      "name": "AutoPause",
+      "present": false,
+      "value": null
+    },
+    {
+      "name": "AutoPauseTimeoutSeconds",
+      "present": false,
+      "value": null
+    },
+    {
+      "name": "UseWslEngine",
+      "present": false,
+      "value": null
+    }
+  ],
+  "protected_file_facts": [
+    {
+      "path": "C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe",
+      "bytes": 15281584,
+      "version": "4.89.0.238018",
+      "sha256": "f3100322884b025ead78c49b512ece5e8c1f444ea91c57a4e045cc409386a3de",
+      "attributes": "Archive"
+    },
+    {
+      "path": "C:\\Program Files\\Docker\\Docker\\resources\\com.docker.backend.exe",
+      "bytes": 154714544,
+      "version": "4.89.0.238018",
+      "sha256": "3f5c0a3df8a29dfc171aa8c67f31fdb09d50b20f98653d46577952096c7e561a",
+      "attributes": "Archive"
+    },
+    {
+      "path": "C:\\Users\\chenb\\AppData\\Roaming\\Docker\\settings-store.json",
+      "bytes": 286,
+      "version": null,
+      "sha256": "9ce75426cd05d355b285a9db35b6f287e095e562c032941684604644c6a3e5e0",
+      "attributes": "Archive"
+    }
+  ],
+  "protected_wsl_metadata": {
+    "path": "C:\\Users\\chenb\\AppData\\Local\\Docker\\wsl",
+    "attributes": "Directory",
+    "created_utc": "2026-01-07T11:38:55.3110289Z",
+    "modified_utc": "2026-09-09T13:55:10.1079297Z"
+  },
+  "scientific_execution": "not_run"
+}

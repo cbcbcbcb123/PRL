@@ -1,0 +1,20 @@
+{
+  "status": "failed",
+  "scope": "single graceful stop CLI, not directory isolation or Desktop startup",
+  "command": "docker desktop stop --timeout 30",
+  "started_utc": "2026-09-19T10:49:46.1443879Z",
+  "still_hung_at_utc": "2026-09-19T10:50:43Z",
+  "declared_timeout_seconds": 30,
+  "observed_elapsed_at_least_seconds": 57,
+  "action": "Interrupted this task's exec session 96217 using tool Ctrl-C; did not manually target additional Docker PIDs",
+  "session_exit_code": 1,
+  "postcheck": {
+    "task_cli_pids_46884_5752": "absent",
+    "original_six_docker_identities": "unchanged",
+    "both_source_roots": "present",
+    "both_quarantine_destinations": "absent",
+    "directory_moves": 0,
+    "desktop_starts": 0
+  },
+  "continuation": "Use already approved six-process fallback within this same recovery attempt; do not repeat graceful stop or expand process/path scope"
+}

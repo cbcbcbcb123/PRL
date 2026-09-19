@@ -16,3 +16,6 @@ project_control/evidence/mixed_cube_benchmark_v01/native_runtime/** -text
 project_control/evidence/mixed_cube_benchmark_v01/native_runtime/source_manifest.json text eol=lf
 # Keep the reviewed skill package byte-identical to its approved local installation.
 tools/skills/cb-docker-windows-runtime/agents/openai.yaml text eol=lf
+# Preserve the executed recovery script and original Windows event-ledger bytes.
+project_control/evidence/docker_recovery_20260919_v01/execute_recovery.ps1 text eol=lf
+project_control/evidence/docker_recovery_20260919_v01/execution.jsonl -text whitespace=cr-at-eol

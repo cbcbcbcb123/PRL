@@ -67,7 +67,7 @@
 
 - 删除任何文件或目录前，必须列出绝对路径、确认不含原始材料或唯一成果，并取得用户明确确认。
 - 启动 GPU worker、安装或升级软件、改变权限、连接外部服务、创建持久服务，均须单独取得用户确认。
-- Windows Docker Desktop 启动前或同类故障复发时，先使用 `cb-docker-windows-runtime` 技能；项目可审阅源为 `tools/skills/cb-docker-windows-runtime/SKILL.md`。命中当前 error1920 时停止普通启动尝试，旧隔离授权不可复用。技能工程通过不代表运行时修复或科学通过。
+- Windows Docker Desktop 启动前或同类故障复发时，先使用 `cb-docker-windows-runtime` 技能；项目可审阅源为 `tools/skills/cb-docker-windows-runtime/SKILL.md`。引擎不可用且命中当前1920/套接字处理失败时停止普通启动尝试，旧隔离授权不可复用。活跃新socket的ACL也可报1920，不能单凭ACL告警重启或修复正常API；2026-09-19实测见 `project_control/docker_recovery_20260919_v01_execution.md`。技能工程通过不代表运行时修复或科学通过。
 - 默认禁止在项目工作区外新建文件或文件夹。用户已长期授权将与本项目有关的公开科研大型数据包及其必要来源元数据，按 `E:\Data\<project>\public\<provider>\<stable_record_id>\` 分类下载和保存；该例外不覆盖其他外部路径、软件安装包、临时计算输出、删除/覆盖、虚拟盘、持久服务或 GPU 任务。每次获取仍须登记来源、许可、版本、字节数和哈希，先审计归档再按需解包，PRL 仓库只保留小型清单、预览和验证结果。
 - 默认禁止创建或挂载虚拟盘符、目录映射或网络驱动器。
 - 修改或生成答辩 PPT 图片时，依次使用内容结构、科研绘图提示词、Image Gen 三阶段流程。

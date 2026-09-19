@@ -38,19 +38,18 @@ updated_at: 2026-09-19
 [实际执行记录](project_control/ventricle_mixed_cube_load_diagnosis_v01.md) ·
 [原v03失败与正J保护](docs/review/mixed_cube_benchmark_v03_20260919/README.md)
 
-## 当前阻断与唯一下一步
+## 唯一下一步：执行原已批准四工况
 
 **一次四工况控制批次：一个可精确表示的非均匀体积patch，以及三个网格的非均匀等体积剪切。**
 
 固定κ/μ=1000、当前P2/P1、本构与正J保护。它能区分压力载荷表示问题与更广泛的实现问题。
 [完整范围与停止规则](project_control/ventricle_mixed_cube_control_batch_v01.md)已获用户整批确认。
-两个解析控制场已实现、65项宿主测试passed。用户另行批准的一次Docker正常启动已失败：
-Ingest初始化时旧`sailor-ingest.sock`不可访问，backend报告崩溃；五个套接字ACL读取error1920。
-0容器、0求解，四工况仍not_run；不是本次FEM或材料失败。详见[执行记录](project_control/ventricle_mixed_cube_control_execution_v01.md)。
-正常启动权限已用完；下一步需单独裁决运行环境恢复方式。本次未修复、隔离、删除或改权限。
-已将启动前1920检查固化为[可复用技能](project_control/docker_windows_runtime_skill_delivery_v01.md)，
-16项测试及安装核验通过；实机仍blocked，未新增启动或求解。
-原四工况配置不变，待运行环境就绪后续行；
+两个解析控制场已实现、65项宿主测试passed。Docker已按本次精确授权恢复：
+仅隔离两个runtime目录、启动一次，Engine API/info/WSL和固定本地镜像通过只读验收。
+[修复执行与安全边界](project_control/docker_recovery_20260919_v01_execution.md)；
+原[启动失败证据](project_control/ventricle_mixed_cube_control_execution_v01.md)仍保留。
+活跃新套接字ACL也报1920，不能单凭该警告判定引擎损坏；长期不复发仍unknown。
+本次修复明确不运行容器/FEM，四工况仍0/4、not_run；原配置与授权保留，下一阶段续行。
 不逐个工况拆审批，不自动重跑、换单元或跳到原心室主动/生长/FSI。
 新控制不能替代原八工况失败，也不能将原心室改判通过。
 
@@ -59,7 +58,7 @@ Ingest初始化时旧`sailor-ingest.sock`不可访问，backend报告崩溃；�
 结果在已批准PRL-results；仓内仅源码、摘要和必要原样PNG。完整原始状态不上传，在线摘要不能替代复算。
 本次包29文件、1104018 bytes；[小型清单](project_control/result_index/mixed_cube_load_diagnosis_v01_20260919.json)。
 160dpi探索图布局/目检passed，600dpi投稿检查失败照录；首次log刻度显示失败与原绘图源码保留。
-50项既有未提交改动保持；无删除、安装或全局记忆更新。
+50项既有未提交改动保持；本次无删除、软件安装/升级或全局记忆更新。
 阶段交付检查后提交main并普通推送origin/main，见[长期规则](project_control/main_branch_stage_push_decision_v01.md)。
 
 [专家原件](plan/active/EXP-20260918-FEM-review-v01/README.md) ·

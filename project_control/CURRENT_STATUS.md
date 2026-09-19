@@ -12,7 +12,7 @@ git_remote_push_record: project_control/evidence/mixed_cube_controls_v01_preflig
 git_published_science_commit: a468bc11385d3e330665114381581b284698055f
 git_published_review_commit: a468bc11385d3e330665114381581b284698055f
 verified_commit: a468bc11385d3e330665114381581b284698055f
-current_lifecycle: fem_only_four_controls_blocked_after_one_failed_docker_start
+current_lifecycle: fem_only_four_controls_ready_after_runtime_recovery
 documentation_updated_at: 2026-09-19
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
@@ -30,7 +30,10 @@ external_results_storage_execution: project_control/external_result_store_execut
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
 execution_authorized: four_control_cases_one_container_no_retry_only
-runtime_start_authority: consumed_one_normal_start_failed_no_retry_or_repair
+runtime_start_authority: consumed_one_recovery_start_api_and_pinned_image_passed_no_retry
+runtime_repair_scope: project_control/docker_recovery_20260919_v01.md
+runtime_repair_authority: exact_manifest_9f281fab_user_approved_two_moves_one_start_completed
+runtime_repair_execution: project_control/docker_recovery_20260919_v01_execution.md
 current_execution_log: project_control/ventricle_mixed_cube_control_execution_v01.md
 latest_completed_execution_log: project_control/ventricle_mixed_cube_load_diagnosis_v01.md
 latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
@@ -65,7 +68,22 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 其他分支/标签引用未变。见[远端回读记录](evidence/stage_main_sync_v01/publication_readback.json)。
 此passed仅指发布验收；下述数值资格仍failed，不能因同步成功改写科学结论。
 
-## 当前：2026-09-19 一次获准Docker启动失败，四工况仍0新求解
+## 当前：2026-09-19 Docker恢复，原四工况仍0/4求解
+
+本次精确授权已执行：[恢复验收](docker_recovery_20260919_v01_execution.md)。
+两个runtime根通过Directory.Move隔离，原4+1对象保留；一次启动后Engine API/info/WSL及固定镜像通过。
+正常退出CLI未遵守30秒timeout，其失败与中断记录保留；使用原已授权的6进程范围fallback，
+仅显式结束主进程22412，其余退出，未扩大PID范围。
+Docker二进制/设置哈希一致、Docker\wsl和旧隔离包存在，208保护文件含50旧改动保持。
+全新活跃socket的ACL仍返回1920，doctor保守blocked原样保留；不能单凭ACL警告否定正常API。
+仅运行时恢复passed，长期不复发unknown；本次0容器/JIT/FEM/GPU，原数值门failed未变。
+下一步为原已批准四工况，不再阻塞于缺失Engine API；不放宽原误差门，不扩张科学矩阵。
+
+## 历史：本次恢复前的失败与清单冻结
+
+用户随后要求“继续，修复Docker”。18:41只读复核仍为相同5个1920套接字；
+AI/Inference已关闭，不改设置。已冻结[本次恢复清单](docker_recovery_20260919_v01.md)，
+等待精确外部路径/进程处置确认；本轮0停止、0启动、0移动/删除、0容器/求解。
 
 后续工程交付：[Windows Docker 技能已安装](docker_windows_runtime_skill_delivery_v01.md)。
 16项行为测试、格式与安装哈希通过；18:32只读复核仍为五套接字1920。

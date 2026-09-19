@@ -1,0 +1,23 @@
+{
+  "command": [
+    "docker",
+    "--host",
+    "npipe:////./pipe/dockerDesktopLinuxEngine",
+    "info",
+    "--format",
+    "{{json .}}"
+  ],
+  "exit_code": 0,
+  "info": {
+    "ServerVersion": "29.7.2",
+    "OSType": "linux",
+    "Architecture": "x86_64",
+    "OperatingSystem": "Docker Desktop",
+    "Containers": 307,
+    "ContainersRunning": 0,
+    "ContainersPaused": 0,
+    "Images": 10,
+    "DockerRootDir": "/var/lib/docker"
+  },
+  "stderr": ""
+}

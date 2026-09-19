@@ -1,0 +1,183 @@
+{
+  "checked_at": "2026-09-19T10:54:53.1071439Z",
+  "targets": [
+    {
+      "source": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run",
+      "source_created_utc": "2026-09-19T10:53:34.5213154Z",
+      "source_entries": [
+        {
+          "Name": "dockerEthernetVfkit",
+          "Length": 0,
+          "Attributes": 1056,
+          "CreationTimeUtc": "2026-09-19T10:53:34.5863993Z",
+          "LastWriteTimeUtc": "2026-09-19T10:53:34.5863993Z"
+        },
+        {
+          "Name": "dockerInference",
+          "Length": 0,
+          "Attributes": 1056,
+          "CreationTimeUtc": "2026-09-19T10:53:34.5679098Z",
+          "LastWriteTimeUtc": "2026-09-19T10:53:34.5679098Z"
+        },
+        {
+          "Name": "sailor-ingest.sock",
+          "Length": 0,
+          "Attributes": 1056,
+          "CreationTimeUtc": "2026-09-19T10:53:34.5284373Z",
+          "LastWriteTimeUtc": "2026-09-19T10:53:34.5284373Z"
+        },
+        {
+          "Name": "userAnalyticsOtlpHttp.sock",
+          "Length": 0,
+          "Attributes": 1056,
+          "CreationTimeUtc": "2026-09-19T10:53:53.6868912Z",
+          "LastWriteTimeUtc": "2026-09-19T10:53:53.6868912Z"
+        }
+      ],
+      "quarantine": "C:\\Users\\chenb\\AppData\\Local\\Docker\\run.quarantine-20260919-repair-v01",
+      "quarantine_created_utc": "2026-09-17T09:59:26.4525389Z",
+      "quarantine_entries": [
+        {
+          "Name": "dockerEthernetVfkit",
+          "Length": 0,
+          "Attributes": 1056,
+          "CreationTimeUtc": "2026-09-17T09:59:26.5141907Z",
+          "LastWriteTimeUtc": "2026-09-17T09:59:26.5141907Z"
+        },
+        {
+          "Name": "dockerInference",
+          "Length": 0,
+          "Attributes": 1056,
+          "CreationTimeUtc": "2026-09-17T09:59:26.4992923Z",
+          "LastWriteTimeUtc": "2026-09-17T09:59:26.4992923Z"
+        },
+        {
+          "Name": "sailor-ingest.sock",
+          "Length": 0,
+          "Attributes": 1056,
+          "CreationTimeUtc": "2026-09-17T09:59:26.4562316Z",
+          "LastWriteTimeUtc": "2026-09-17T09:59:26.4562316Z"
+        },
+        {
+          "Name": "userAnalyticsOtlpHttp.sock",
+          "Length": 0,
+          "Attributes": 1056,
+          "CreationTimeUtc": "2026-09-17T09:59:45.5943227Z",
+          "LastWriteTimeUtc": "2026-09-17T09:59:45.5943227Z"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine",
+      "source_created_utc": "2026-09-19T10:53:34.578568Z",
+      "source_entries": [
+        {
+          "Name": "engine.sock",
+          "Length": 0,
+          "Attributes": 1056,
+          "CreationTimeUtc": "2026-09-19T10:53:34.5815274Z",
+          "LastWriteTimeUtc": "2026-09-19T10:53:34.5815274Z"
+        }
+      ],
+      "quarantine": "C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine.quarantine-20260919-repair-v01",
+      "quarantine_created_utc": "2026-09-17T09:59:26.5066641Z",
+      "quarantine_entries": [
+        {
+          "Name": "engine.sock",
+          "Length": 0,
+          "Attributes": 1056,
+          "CreationTimeUtc": "2026-09-17T09:59:26.5091869Z",
+          "LastWriteTimeUtc": "2026-09-17T09:59:26.5091869Z"
+        }
+      ]
+    }
+  ],
+  "protected_files": [
+    {
+      "path": "C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe",
+      "sha256": "f3100322884b025ead78c49b512ece5e8c1f444ea91c57a4e045cc409386a3de",
+      "matches_before": true
+    },
+    {
+      "path": "C:\\Program Files\\Docker\\Docker\\resources\\com.docker.backend.exe",
+      "sha256": "3f5c0a3df8a29dfc171aa8c67f31fdb09d50b20f98653d46577952096c7e561a",
+      "matches_before": true
+    },
+    {
+      "path": "C:\\Users\\chenb\\AppData\\Roaming\\Docker\\settings-store.json",
+      "sha256": "9ce75426cd05d355b285a9db35b6f287e095e562c032941684604644c6a3e5e0",
+      "matches_before": true
+    }
+  ],
+  "protected_wsl": {
+    "path": "C:\\Users\\chenb\\AppData\\Local\\Docker\\wsl",
+    "attributes": "Directory",
+    "created_utc": "2026-01-07T11:38:55.3110289Z",
+    "modified_utc": "2026-09-09T13:55:10.1079297Z"
+  },
+  "old_runtime_quarantines": [
+    {
+      "Name": "run.quarantine-20260917-f6s0-v01",
+      "Attributes": 16
+    },
+    {
+      "Name": "run.quarantine-20260917-f6s0-v02",
+      "Attributes": 16
+    },
+    {
+      "Name": "run.stale-20260901-1608",
+      "Attributes": 16
+    },
+    {
+      "Name": "run.stale-20260901-1614",
+      "Attributes": 16
+    },
+    {
+      "Name": "run.stale-20260903-1500",
+      "Attributes": 16
+    },
+    {
+      "Name": "run.stale-20260903-1506-ai-disabled",
+      "Attributes": 16
+    },
+    {
+      "Name": "run.stale-20260907-2012",
+      "Attributes": 16
+    },
+    {
+      "Name": "run.stale-20260908-0930",
+      "Attributes": 16
+    }
+  ],
+  "old_secrets_quarantines": [
+    {
+      "Name": "docker-secrets-engine.quarantine-20260917-f6s0-v01",
+      "Attributes": 16
+    },
+    {
+      "Name": "docker-secrets-engine.quarantine-20260917-f6s0-v02",
+      "Attributes": 16
+    },
+    {
+      "Name": "docker-secrets-engine.stale-20260901-1614",
+      "Attributes": 16
+    },
+    {
+      "Name": "docker-secrets-engine.stale-20260903-1502",
+      "Attributes": 16
+    },
+    {
+      "Name": "docker-secrets-engine.stale-20260903-1506-ai-disabled",
+      "Attributes": 16
+    },
+    {
+      "Name": "docker-secrets-engine.stale-20260907-2032",
+      "Attributes": 16
+    },
+    {
+      "Name": "docker-secrets-engine.stale-20260908-0930",
+      "Attributes": 16
+    }
+  ],
+  "scope_note": "Read-only metadata and selected hashes; no VHDX content hash, no socket-content readability claim. Current secrets runtime root is not counted as an old quarantine."
+}
