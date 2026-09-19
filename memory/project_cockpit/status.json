@@ -9,11 +9,11 @@
     "scope": "FEM唯一主线；当前标准立方体资格仍failed，原心室1%门failed不变；主动/生长/FSI not_run。",
     "current_stage": "Positive-J trial admission verified; high-kappa equilibrium and field qualification failed",
     "current_location": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919",
-    "evidence_basis_commit": "7c2949f",
+    "evidence_basis_commit": "80a2236e2a144a77f201a7def1e1c7d316ee898b",
     "evidence_checked_at": "2026-09-19",
     "git_workflow": {
       "branch": "main",
-      "stage_commits": "direct_local_commits_no_new_branches",
+      "stage_commits": "direct_main_commits_then_ordinary_origin_main_push",
       "configured_remotes": 1,
       "remote_url": "https://github.com/cbcbcbcb123/PRL.git",
       "remote_branch_merge": "passed",
@@ -23,11 +23,13 @@
       "evidence_refs": [
         "project_control/main_branch_stage_commit_decision_v01.md",
         "project_control/remote_history_integration_execution_v01.md",
-        "project_control/evidence/git_main_integration_v01/push_execution_v01.json"
+        "project_control/evidence/git_main_integration_v01/push_execution_v01.json",
+        "project_control/main_branch_stage_push_decision_v01.md"
       ],
-      "current_stage_push": "not_run"
+      "current_stage_push": "not_run",
+      "stage_push_policy": "standing_user_authorization_2026_09_19"
     },
-    "freshness_note": "一次v03容器72.038秒，6次SNES、5终态、37监测态、31获准候选及1拒绝候选独立核验。54宿主测试passed；434保护文件与50旧改动保持。不重跑、不推送、不新增全局记忆。",
+    "freshness_note": "科学证据基于80a2236：一次v03容器72.038秒，6次SNES、5终态、37监测态、31获准候选及1拒绝候选独立核验。54宿主测试passed；434保护文件与50旧改动保持。2026-09-19新增长期阶段普通推送规则；本次仅发布既有成果与小型审阅包，不重跑、不新增全局记忆。",
     "model_overview": {
       "model_type": "FEniCSx三维有限变形NH，P2位移/P1压力四面体",
       "simulated_object": "当前资格基准：单位立方体P2/P1；主研究对象仍为理想化三层心室",
@@ -39,7 +41,7 @@
         "κ=1000粗网格14个接受步均正J，但接近退化；下一候选20次减半仍不安全，停止。",
         "独立驻点核验31获准路径及1拒绝方向；下一步转向制造载荷积分/混合压力约束误差鉴别。"
       ],
-      "diagram": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/diagnostic.png",
+      "diagram": "docs/review/mixed_cube_benchmark_v03_20260919/diagnostic.png",
       "diagram_caption": "真实参考结构、κ=100原误差门、15个真实高κNewton状态及同网格解析插值对照；不是生理时间。",
       "assumptions": [
         "标准立方体制造解用于数值资格，不是心室或实验标定",
@@ -55,6 +57,7 @@
       ],
       "scope_boundary": "工程保护passed，κ=100精度failed，高κ粗网格平衡failed，余2例not_run。空间采样不是全域保证；原心室失败不变，无主动/生长/FSI。",
       "evidence_refs": [
+        "docs/review/mixed_cube_benchmark_v03_20260919/README.md",
         "project_control/ventricle_mixed_cube_benchmark_v03.md",
         "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_analysis.json",
         "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/path_readback.json",
@@ -120,8 +123,9 @@
       "title": "接受前安全保护通过，精度和高κ平衡仍失败",
       "status": "failed",
       "summary": "6次尝试/5终态/2未运行；37实存状态和31接受路径独立读回。两patch再次通过，不是心室或生物模型通过。",
-      "image": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/diagnostic.png",
+      "image": "docs/review/mixed_cube_benchmark_v03_20260919/diagnostic.png",
       "evidence_refs": [
+        "docs/review/mixed_cube_benchmark_v03_20260919/README.md",
         "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/index.html",
         "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_analysis.json",
         "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_integrity.json"

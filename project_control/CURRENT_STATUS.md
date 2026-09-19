@@ -4,11 +4,12 @@ status: current
 last_verified: 2026-09-19
 branch: main
 git_workflow_decision: project_control/main_branch_stage_commit_decision_v01.md
+git_stage_push_decision: project_control/main_branch_stage_push_decision_v01.md
 git_integration_decision: project_control/remote_history_integration_decision_v01.md
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 7c2949f
+verified_commit: 80a2236e2a144a77f201a7def1e1c7d316ee898b
 current_lifecycle: fem_only_guard_verified_accuracy_and_high_kappa_equilibrium_failed
 documentation_updated_at: 2026-09-19
 current_repository_cleanup: closure_v01_passed
@@ -49,6 +50,14 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 # PRL 项目当前状态（单一入口）
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
+
+## 阶段远端同步（2026-09-19新增长期规则）
+
+用户要求每次完成后同步远端供专家查看。阶段交付经必要检查后，直接提交main并普通推送origin/main，
+不再逐次请求推送确认；不强推、不更新其他分支或标签，不纳入50项无关旧改动。
+见[长期规则](main_branch_stage_push_decision_v01.md)。
+[最新在线审阅包](../docs/review/mixed_cube_benchmark_v03_20260919/README.md)含原样PNG与小型摘要；
+完整原始状态仍在本机PRL-results，仅Git克隆不能完成保存态复算。本次不新增科学计算。
 
 ## 当前：2026-09-19 v03候选正J保护passed，场精度与高κ粗网格平衡仍failed
 

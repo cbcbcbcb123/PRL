@@ -49,3 +49,10 @@ remote_branch_merge: blocked
 要求继续衔接；当前已完成六个旧分支历史到本地main的合并，FEM文件树保持不变。
 见[衔接决定](remote_history_integration_decision_v01.md)及[执行验收](remote_history_integration_execution_v01.md)。
 后续直接提交main的长期规则保持有效；普通推送状态以新执行记录为准。
+
+## 后续取代关系（2026-09-19）
+
+用户新增长期决定：“每次完成你都要同步到远端，这样专家才能查看”。
+本文件第5条中的“不自动推送”由[阶段远端同步决定](main_branch_stage_push_decision_v01.md)取代：
+阶段交付完成必要检查后，本地提交main并普通推送origin/main，无需逐次请示。
+不强推、不删除分支、不改写历史、不丢弃既有改动等边界保持；上述旧记录仍是当时事实。

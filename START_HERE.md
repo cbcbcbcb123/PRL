@@ -28,9 +28,10 @@ updated_at: 2026-09-19
 - 同n=8网格，精确位移P2插值的H1误差2.38%，平衡解43.65%；表示能力不是唯一问题，根因仍需分离。
 - 旧接口故障未复现，31条接受路径独立核验通过；安全实现passed不等于平衡或场精度passed。
 
-![实际基准结构与误差、安全诊断](../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/diagnostic.png)
+![实际基准结构与误差、安全诊断](docs/review/mixed_cube_benchmark_v03_20260919/diagnostic.png)
 
-[八工况表与原始状态](../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/index.html) ·
+[专家在线审阅：摘要、结构与结果图](docs/review/mixed_cube_benchmark_v03_20260919/README.md) ·
+[完整八工况与原始状态（仅本机）](../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/index.html) ·
 [执行裁决及下一步](project_control/ventricle_mixed_cube_benchmark_v03.md)
 
 ## 主要问题与唯一下一步
@@ -45,12 +46,13 @@ v03一次容器权限已消耗；不增加减半次数，剩余两例不能凭�
 ## 证据与存储
 
 5个终态、37个监测状态及31个接受步的候选路径独立复算通过；54项宿主测试通过，原科学失败保留。
-结果在已批准PRL-results，不进GitHub；434保护文件与50项旧改动未变，原v01/v02包完整保留。
-代码仓3GiB和磁盘余量保护保持；本地main阶段提交，不自动推送。0GPU、无删除、安装或Docker修复。
+完整结果在已批准PRL-results，不进GitHub；小型审阅摘要和原样预览图随源码同步。
+434保护文件与50项旧改动未变，原v01/v02包完整保留；在线摘要不能代替原始数据复算。
+代码仓3GiB和磁盘余量保护保持；阶段交付检查后提交main并普通推送origin/main，见[长期同步决定](project_control/main_branch_stage_push_decision_v01.md)。0GPU、无删除、安装或Docker修复。
 统一风格160dpi探索图，非投稿终稿；算法迭代不是生理时间。本轮未追加全局记忆。
 
 - [原v01接口失败](project_control/ventricle_mixed_cube_benchmark_execution_v01.md)：完整保留，不重写旧现场。
-- [心室保存态投影诊断](../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/index.html)：r的RMS下降27.3%，最大偏差仍超门。
+- [心室保存态投影诊断（仅本机）](../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/index.html)：r的RMS下降27.3%，最大偏差仍超门。
 - [专家原件](plan/active/EXP-20260918-FEM-review-v01/README.md)：身份unknown，采纳与执行权限分开。
-- [二维低压主动passed](../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/index.html)：缩腔约1.85%，不是三维或实验心跳。
-- [权威状态及历史](project_control/CURRENT_STATUS.md) · [驾驶舱](memory/project_cockpit/index.html)
+- [二维低压主动passed（仅本机）](../PRL-results/ventricle_fem/f6s1s9_contour_active_v01_20260918/index.html)：缩腔约1.85%，不是三维或实验心跳。
+- [权威状态及历史](project_control/CURRENT_STATUS.md) · [驾驶舱（本机渲染）](memory/project_cockpit/index.html)

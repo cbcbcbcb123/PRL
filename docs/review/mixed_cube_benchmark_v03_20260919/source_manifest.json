@@ -1,0 +1,22 @@
+{
+  "schema_version": "prl_online_review.v1",
+  "created_at": "2026-09-19",
+  "stage_id": "mixed_cube_benchmark_v03_20260919",
+  "science_commit": "80a2236e2a144a77f201a7def1e1c7d316ee898b",
+  "scope": "small online review excerpt; no new computation; not a complete raw-data package",
+  "source_package_local_path": "E:/Temp-Projects/PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919",
+  "source_manifest_sha256": "084a675f13501added2e056f5bc3cca125a2298f09d290240282fc2b570b77b0",
+  "source_package_files_including_manifest": 205,
+  "source_package_bytes": 17568141,
+  "copied_files": [
+    {
+      "path": "diagnostic.png",
+      "source_relative_path": "diagnostic.png",
+      "bytes": 373656,
+      "sha256": "8963f5948696a357b86b25e7cfcdbbc63e11abe77126fe1e60800457bfc188f0",
+      "operation": "unchanged binary copy; no re-rendering"
+    }
+  ],
+  "raw_data_uploaded": false,
+  "scientific_qualification": "failed"
+}
