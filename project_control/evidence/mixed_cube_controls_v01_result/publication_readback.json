@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "observed_date": "2026-09-19",
+  "remote": "https://github.com/cbcbcbcb123/PRL.git",
+  "allowed_ref": "refs/heads/main",
+  "previous_main": "24e78f7874476b6faf520e85948fd775bb0f597c",
+  "published_stage_commit": "5683354ea142dd6dfe5a6533b341f5584ea9b49a",
+  "remote_main_readback": "5683354ea142dd6dfe5a6533b341f5584ea9b49a",
+  "mode": "ordinary fast-forward push, --no-follow-tags",
+  "other_refs_unchanged": true,
+  "review_package_published": false,
+  "full_raw_data_published": false,
+  "published_stage_files": 16,
+  "science": {
+    "four_defined_control_gates": "passed",
+    "original_eight_cases": "failed",
+    "original_ventricular_gate": "failed",
+    "growth_and_fsi": "not_run"
+  },
+  "scope": "This is the observed stage-commit publication. A subsequent metadata-only commit may record this observation; it is not another science run."
+}

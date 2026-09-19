@@ -9,7 +9,7 @@
     "scope": "FEM唯一主线；本四控制定义门passed，原八工况及心室1%门failed不变；主动/生长/FSI not_run。",
     "current_stage": "Four defined controls PASSED; original ventricular gate FAILED",
     "current_location": "../PRL-results/ventricle_fem/mixed_cube_controls_v01_20260919",
-    "evidence_basis_commit": "24e78f7874476b6faf520e85948fd775bb0f597c",
+    "evidence_basis_commit": "5683354ea142dd6dfe5a6533b341f5584ea9b49a",
     "evidence_checked_at": "2026-09-19",
     "git_workflow": {
       "branch": "main",
@@ -27,11 +27,11 @@
         "project_control/main_branch_stage_push_decision_v01.md",
         "project_control/evidence/stage_main_sync_v01/publication_readback.json"
       ],
-      "current_stage_push": "not_run",
+      "current_stage_push": "passed",
       "stage_push_policy": "standing_user_authorization_2026_09_19",
-      "published_science_commit": "a468bc11385d3e330665114381581b284698055f",
-      "published_review_commit": "a468bc11385d3e330665114381581b284698055f",
-      "publication_readback": "project_control/evidence/mixed_cube_controls_v01_preflight/publication_readback.json",
+      "published_science_commit": "5683354ea142dd6dfe5a6533b341f5584ea9b49a",
+      "published_review_commit": null,
+      "publication_readback": "project_control/evidence/mixed_cube_controls_v01_result/publication_readback.json",
       "remote_verified_at": "2026-09-19",
       "default_review_package": false,
       "sync_scope_decision": "project_control/main_branch_sync_without_review_package_decision_v01.md"
