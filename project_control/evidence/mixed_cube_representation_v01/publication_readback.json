@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "remote": "https://github.com/cbcbcbcb123/PRL.git",
+  "updated_ref": "refs/heads/main",
+  "mode": "ordinary_non_force",
+  "previous_remote_commit": "4653bebcd1de2133ea04215f213c0e384304450a",
+  "published_stage_commit": "9eb74fcb1218c4c795348b51a3bde337f1d0e7a7",
+  "readback_remote_commit": "9eb74fcb1218c4c795348b51a3bde337f1d0e7a7",
+  "local_matches_remote": true,
+  "scientific_batch_status": "failed",
+  "equilibrium_solves": 0,
+  "corrected_native_interface": "not_run",
+  "offline_fix_tests": "92 passed",
+  "new_review_package": false,
+  "prior_local_review_files_unchanged": 9,
+  "scope": "Confirms publication of stage code and failure record, not scientific qualification. A following metadata-only commit records this readback."
+}

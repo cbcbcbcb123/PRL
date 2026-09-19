@@ -9,7 +9,7 @@
     "scope": "FEM唯一主线；八工况接口failed、科学对照not_run；旧四控制passed和原心室failed均保持。",
     "current_stage": "P3 export failed before solve; offline correction passed; native qualification NOT RUN",
     "current_location": "../PRL-results/ventricle_fem/mixed_cube_representation_v01_20260919",
-    "evidence_basis_commit": "4653bebcd1de2133ea04215f213c0e384304450a",
+    "evidence_basis_commit": "9eb74fcb1218c4c795348b51a3bde337f1d0e7a7",
     "evidence_checked_at": "2026-09-19",
     "git_workflow": {
       "branch": "main",
@@ -27,11 +27,11 @@
         "project_control/main_branch_stage_push_decision_v01.md",
         "project_control/evidence/stage_main_sync_v01/publication_readback.json"
       ],
-      "current_stage_push": "not_run",
+      "current_stage_push": "passed",
       "stage_push_policy": "standing_user_authorization_2026_09_19",
-      "published_science_commit": "5683354ea142dd6dfe5a6533b341f5584ea9b49a",
+      "published_science_commit": "9eb74fcb1218c4c795348b51a3bde337f1d0e7a7",
       "published_review_commit": null,
-      "publication_readback": "project_control/evidence/mixed_cube_controls_v01_result/publication_readback.json",
+      "publication_readback": "project_control/evidence/mixed_cube_representation_v01/publication_readback.json",
       "remote_verified_at": "2026-09-19",
       "default_review_package": false,
       "sync_scope_decision": "project_control/main_branch_sync_without_review_package_decision_v01.md"
