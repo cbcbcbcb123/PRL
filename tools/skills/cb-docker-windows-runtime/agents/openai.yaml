@@ -1,0 +1,6 @@
+interface:
+  display_name: "Windows Docker 运行时守门"
+  short_description: "启动前识别套接字 error 1920，停止重复尝试并隔离修复授权"
+  default_prompt: "使用 $cb-docker-windows-runtime 先只读检查 Windows Docker 运行时，核对历史故障并给出当前阻断与下一步，不自动重启或修复。"
+policy:
+  allow_implicit_invocation: true

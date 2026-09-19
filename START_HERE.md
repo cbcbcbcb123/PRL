@@ -48,6 +48,8 @@ updated_at: 2026-09-19
 Ingest初始化时旧`sailor-ingest.sock`不可访问，backend报告崩溃；五个套接字ACL读取error1920。
 0容器、0求解，四工况仍not_run；不是本次FEM或材料失败。详见[执行记录](project_control/ventricle_mixed_cube_control_execution_v01.md)。
 正常启动权限已用完；下一步需单独裁决运行环境恢复方式。本次未修复、隔离、删除或改权限。
+已将启动前1920检查固化为[可复用技能](project_control/docker_windows_runtime_skill_delivery_v01.md)，
+16项测试及安装核验通过；实机仍blocked，未新增启动或求解。
 原四工况配置不变，待运行环境就绪后续行；
 不逐个工况拆审批，不自动重跑、换单元或跳到原心室主动/生长/FSI。
 新控制不能替代原八工况失败，也不能将原心室改判通过。

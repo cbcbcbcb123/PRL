@@ -1,0 +1,18 @@
+{
+  "render": {
+    "schema_version": "prl.cockpit.render.v1",
+    "status": "passed",
+    "output": "E:\\Temp-Projects\\PRL\\memory\\project_cockpit\\index.html"
+  },
+  "links": {
+    "schema_version": "prl.cockpit.links.v1",
+    "status": "passed",
+    "html_links": 32,
+    "evidence_paths": 419,
+    "missing": []
+  },
+  "protected_files": 208,
+  "preexisting_changes": 50,
+  "ui_metadata": "passed",
+  "status": "passed"
+}

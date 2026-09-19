@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "source": "E:\\Temp-Projects\\PRL\\tools\\skills\\cb-docker-windows-runtime",
+  "installed": "C:\\Users\\chenb\\.codex\\skills\\cb-docker-windows-runtime",
+  "file_count": 5,
+  "bytes": 31025,
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "8dd8cb354b6b4114dcf31c0a0135e2d1b38d3e4a7ff549695439aa1ef52fd1b3",
+      "bytes": 6674
+    },
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "d6685ed47dca97442d5c143053543629b6ef4b3298124d26222dac8f365c41e0",
+      "bytes": 382
+    },
+    {
+      "path": "references/prl-case.md",
+      "sha256": "df09ffa3228df9e0f3a45fac9004c870403e3ec803d941dd0a4c89c9e75e3b9d",
+      "bytes": 3633
+    },
+    {
+      "path": "scripts/runtime_doctor.py",
+      "sha256": "4f977f093f2b3c1a8f39afecf5a16aead00f18d50ee4be01a0f5310c84cd4c03",
+      "bytes": 12538
+    },
+    {
+      "path": "scripts/test_runtime_doctor.py",
+      "sha256": "0e30bb27cc2feaa3867325362a8d5806dba40d7609882f8ceaaf7adf950c451f",
+      "bytes": 7798
+    }
+  ],
+  "authorization": "User explicitly approved only C:\\Users\\chenb\\.codex\\skills\\cb-docker-windows-runtime; directory was absent before create-only installation.",
+  "global_config_modified": false,
+  "ui_discovery_status": "not_run",
+  "validation": {
+    "unit_tests": 16,
+    "status": "passed",
+    "output": "test_cli_replays_its_own_report_without_live_access (test_runtime_doctor.Collection.test_cli_replays_its_own_report_without_live_access) ... ok\r\ntest_image_inputs_are_paired (test_runtime_doctor.Collection.test_image_inputs_are_paired) ... ok\r\ntest_only_readonly_commands_and_local_pipe_despite_remote_environment (test_runtime_doctor.Collection.test_only_readonly_commands_and_local_pipe_despite_remote_environment) ... ok\r\ntest_timeout_is_reported_without_retry (test_runtime_doctor.Collection.test_timeout_is_reported_without_retry) ... ok\r\ntest_1920_blocks_before_start (test_runtime_doctor.Decisions.test_1920_blocks_before_start) ... ok\r\ntest_acl_probe_failure_is_not_diagnosed_as_1920_or_allowed_to_start (test_runtime_doctor.Decisions.test_acl_probe_failure_is_not_diagnosed_as_1920_or_allowed_to_start) ... ok\r\ntest_healthy_api_anomaly_is_not_permission_to_restart (test_runtime_doctor.Decisions.test_healthy_api_anomaly_is_not_permission_to_restart) ... ok\r\ntest_incomplete_inspection_blocks (test_runtime_doctor.Decisions.test_incomplete_inspection_blocks) ... ok\r\ntest_missing_pipe_does_not_prove_corruption (test_runtime_doctor.Decisions.test_missing_pipe_does_not_prove_corruption) ... ok\r\ntest_process_is_not_readiness (test_runtime_doctor.Decisions.test_process_is_not_readiness) ... ok\r\ntest_recurrence_stops_rotation (test_runtime_doctor.Decisions.test_recurrence_stops_rotation) ... ok\r\ntest_remote_snapshot_cannot_pass (test_runtime_doctor.Decisions.test_remote_snapshot_cannot_pass) ... ok\r\ntest_unknown_image_status_blocks (test_runtime_doctor.Decisions.test_unknown_image_status_blocks) ... ok\r\ntest_windows_engine_cannot_pass (test_runtime_doctor.Decisions.test_windows_engine_cannot_pass) ... ok\r\ntest_wrong_image_blocks (test_runtime_doctor.Decisions.test_wrong_image_blocks) ... ok\r\ntest_zero_byte_reparse_object_and_old_log_do_not_fail_healthy_engine (test_runtime_doctor.Decisions.test_zero_byte_reparse_object_and_old_log_do_not_fail_healthy_engine) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 16 tests in 0.004s\r\n\r\nOK\r\n",
+    "format_validation": "Skill is valid!\r\n"
+  },
+  "snapshot_replay": {
+    "exit_code": 2,
+    "assessment": {
+      "runtime_api_status": "blocked",
+      "preflight_status": "blocked",
+      "local_image_status": "not_run",
+      "science_status": "not_run",
+      "startup_decision": "stop_recurrence_no_directory_rotation",
+      "reason_codes": [
+        "linux_engine_api_unavailable",
+        "runtime_object_access_error",
+        "runtime_acl_error_1920"
+      ],
+      "error_1920_paths": [
+        "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\dockerEthernetVfkit",
+        "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\dockerInference",
+        "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\sailor-ingest.sock",
+        "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\userAnalyticsOtlpHttp.sock",
+        "C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine\\engine.sock"
+      ],
+      "deep_recurrence_cause": "unknown",
+      "repair_authorized_by_this_tool": false
+    }
+  }
+}

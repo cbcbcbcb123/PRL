@@ -67,6 +67,10 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 ## 当前：2026-09-19 一次获准Docker启动失败，四工况仍0新求解
 
+后续工程交付：[Windows Docker 技能已安装](docker_windows_runtime_skill_delivery_v01.md)。
+16项行为测试、格式与安装哈希通过；18:32只读复核仍为五套接字1920。
+0新增启动/修复/容器/求解；这项交付不改变下述科学阻断。
+
 用户批准仅正常启动现有Docker一次；18:06:25实际启动，18:06:59 backend报告崩溃。
 新日志直接指向Ingest初始化：`sailor-ingest.sock`重命名失败，文件不可访问；
 启动前五个套接字ACL读取error1920。原生引擎仍Server=null，故未创建容器或运行任何FEM。

@@ -2,7 +2,7 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-19",
   "overall_status": "failed",
-  "summary": "四工况已实现；获准的一次Docker正常启动因Ingest旧套接字访问异常失败（ACL error1920）。0容器/求解，科学代码未改；需单独裁决运行环境恢复，不再自动重启。",
+  "summary": "四工况仍因Docker套接字1920而blocked。启动前检查已固化为技能并安装，16项测试通过；实机仍阻断，0新增启动/修复/求解，需单独裁决环境恢复。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
@@ -34,7 +34,7 @@
       "publication_readback": "project_control/evidence/mixed_cube_controls_v01_preflight/publication_readback.json",
       "remote_verified_at": "2026-09-19"
     },
-    "freshness_note": "18:06:25一次正常启动，18:06:59新日志报告Ingest套接字不可访问、backend崩溃。668保护文件/50旧改动/9源码哈希保持。启动权限已用完，原四工况0容器/求解；不自行修复或再启动。",
+    "freshness_note": "18:32只读检查仍检出五套接字1920。技能已按用户批准安装，16项测试及源码/副本哈希通过；208保护文件含50旧改动保持。0新增启动/修复/求解；不是Docker恢复或科学通过。",
     "model_overview": {
       "model_type": "FEniCSx三维有限变形NH，P2位移/P1压力四面体",
       "simulated_object": "当前资格基准：单位立方体P2/P1；主研究对象仍为理想化三层心室",
@@ -112,8 +112,8 @@
     {
       "title": "一次Docker启动复现Ingest套接字访问故障",
       "status": "blocked",
-      "summary": "旧sailor-ingest.sock处理失败导致backend报告崩溃；五套接字ACL error1920。引擎未就绪，UI/错误报告进程存在不等于可运行；没有再启动、修复或改目录。",
-      "evidence_refs": ["project_control/evidence/mixed_cube_controls_v01_startup/startup.json"]
+      "summary": "18:32只读复核五套接字仍为1920，Server=null。新技能阻断重复启动和目录轮换；技能测试通过不是Docker修复，未再启动或改目录。",
+      "evidence_refs": ["project_control/evidence/mixed_cube_controls_v01_startup/startup.json", "project_control/docker_windows_runtime_skill_delivery_v01.md"]
     },
     {
       "title": "压力力表示缺陷已检出，但因果控制尚未执行",
