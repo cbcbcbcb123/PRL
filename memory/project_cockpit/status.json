@@ -9,7 +9,7 @@
     "scope": "FEM唯一主线；P3/P2 κ100固定加密资格passed，旧粗网格资格及原心室failed不改写。",
     "current_stage": "P3/P2 kappa100 fixed n4/8/12 refinement passed; original ventricle remains failed",
     "current_location": "../PRL-results/ventricle_fem/mixed_cube_refinement_v01_20260919",
-    "evidence_basis_commit": "d49697eb495de7721150318fff287f9dffd46b78",
+    "evidence_basis_commit": "3d5fd77bdd73b3ab5f8ff954ed80bf3b5269efcd",
     "evidence_checked_at": "2026-09-19",
     "git_workflow": {
       "branch": "main",
@@ -27,16 +27,16 @@
         "project_control/main_branch_stage_push_decision_v01.md",
         "project_control/evidence/stage_main_sync_v01/publication_readback.json"
       ],
-      "current_stage_push": "not_run",
+      "current_stage_push": "passed",
       "stage_push_policy": "standing_user_authorization_2026_09_19",
-      "published_science_commit": "7688969af1c537b4aa3f4375f55573183efa1cf0",
+      "published_science_commit": "3d5fd77bdd73b3ab5f8ff954ed80bf3b5269efcd",
       "published_review_commit": null,
-      "publication_readback": "project_control/evidence/mixed_cube_representation_milestone_v01/publication_readback.json",
+      "publication_readback": "project_control/evidence/mixed_cube_refinement_v01/publication_readback.json",
       "remote_verified_at": "2026-09-19",
       "default_review_package": false,
       "sync_scope_decision": "project_control/main_branch_sync_without_review_package_decision_v01.md"
     },
-    "freshness_note": "新加密资格、图件和保全已完成；当前为提交前d49697e上的工作区，待普通main推送。上方旧发布回读不代表本阶段已同步。",
+    "freshness_note": "新加密资格、图件、保全及173项工程回归已完成；科学提交3d5fd77已普通推送main并远端回读一致。随后发布登记提交可正常推进main；原心室失败保持。",
     "model_overview": {
       "model_type": "FEniCSx三维有限变形NH；P3位移/P2压力，κ100同载加密资格",
       "simulated_object": "单位立方体，不是心室；X=0解析位移，另五面解析牵引及体力",

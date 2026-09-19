@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "remote": "https://github.com/cbcbcbcb123/PRL.git",
+  "allowed_ref": "refs/heads/main",
+  "branch": "main",
+  "prepublication_remote_main": "d49697eb495de7721150318fff287f9dffd46b78",
+  "published_science_commit": "3d5fd77bdd73b3ab5f8ff954ed80bf3b5269efcd",
+  "remote_main_readback": "3d5fd77bdd73b3ab5f8ff954ed80bf3b5269efcd",
+  "local_equals_remote": true,
+  "ordinary_fast_forward": true,
+  "push_command": ["git", "push", "origin", "HEAD:refs/heads/main"],
+  "readback_command": ["git", "ls-remote", "--heads", "origin", "refs/heads/main"],
+  "published_paths": 26,
+  "full_arrays_published": false,
+  "scope": "Observed publication of the science commit; the following bookkeeping commit may advance main normally",
+  "force": false,
+  "review_package": false,
+  "scientific_qualification": "passed",
+  "qualification_scope": "original MMS, kappa/mu 100, P3/P2, Q8, preregistered n4/8/12 window with primary n8 to n12",
+  "original_ventricular_qualification": "failed_unchanged"
+}
