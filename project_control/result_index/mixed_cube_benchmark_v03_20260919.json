@@ -1,0 +1,9 @@
+{
+  "status": "failed",
+  "guard_verification": "passed",
+  "store_relative_path": "ventricle_fem/mixed_cube_benchmark_v03_20260919",
+  "manifest_sha256": "084a675f13501added2e056f5bc3cca125a2298f09d290240282fc2b570b77b0",
+  "files": 205,
+  "bytes": 17568141,
+  "raw_data_in_git": false
+}

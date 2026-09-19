@@ -152,7 +152,7 @@ def test_v02_is_explicit_and_does_not_reuse_v01_container_or_directory():
     assert batch_spec('v02')['container']!=batch_spec('v01')['container']
     assert _parser().parse_args(['run','fem-mixed-cube','--batch','v02']).batch=='v02'
     with pytest.raises(ValueError,match='explicitly authorized'):
-        batch_spec('v03')
+        batch_spec('v04')
     with patch('prl.runs.mixed_cube.result_path',side_effect=FileExistsError),patch('prl.runs.mixed_cube.read_docker') as runtime:
         with pytest.raises(FileExistsError):
             run(Path(__file__).resolve().parents[2],'v02')

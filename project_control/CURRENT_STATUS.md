@@ -8,16 +8,16 @@ git_integration_decision: project_control/remote_history_integration_decision_v0
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
 git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
-verified_commit: 7c5c931
-current_lifecycle: fem_only_mixed_cube_patches_passed_field_accuracy_and_high_kappa_safety_failed
+verified_commit: 7c2949f
+current_lifecycle: fem_only_guard_verified_accuracy_and_high_kappa_equilibrium_failed
 documentation_updated_at: 2026-09-19
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_mixed_cube_benchmark_v02.md
+current_contract: project_control/ventricle_mixed_cube_benchmark_v03.md
 last_completed_contract: project_control/ventricle_fem_3d_unstructured_comparison_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_audit.json
-next_stage_contract: project_control/ventricle_mixed_cube_benchmark_v02.md
-current_authorization: v02_one_container_consumed_no_native_retry
+current_render_contract: ../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_integrity.json
+next_stage_contract: project_control/ventricle_mixed_cube_benchmark_v03.md
+current_authorization: v03_one_container_consumed_no_native_retry
 development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -27,10 +27,10 @@ external_results_storage_execution: project_control/external_result_store_execut
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
 execution_authorized: no_further_native_runs_without_new_confirmation
-current_execution_log: project_control/ventricle_mixed_cube_benchmark_v02.md
-latest_completed_execution_log: project_control/ventricle_mixed_cube_benchmark_v02.md
+current_execution_log: project_control/ventricle_mixed_cube_benchmark_v03.md
+latest_completed_execution_log: project_control/ventricle_mixed_cube_benchmark_v03.md
 latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
-latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_analysis.json
+latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_analysis.json
 latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -50,7 +50,29 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：2026-09-19 v02非零patch通过；场精度和高κ变形安全failed
+## 当前：2026-09-19 v03候选正J保护passed，场精度与高κ粗网格平衡仍failed
+
+按用户“同意，继续”实施接受前保护及同八工况一次复验。唯一修改为候选方向正J区间准入，
+保持全部材料/网格/载荷/原误差门及30次Newton上限。单CPU/0GPU/禁网，一次72.0377秒；
+6次SNES尝试、5个有效终态，第6例候选减半20次耗尽，余两例not_run；无自动重跑。
+
+两patch再次passed。原生precheck保存32个X/Y候选，31条获准并成为接受步、14次缩短；
+独立驻点法证实采样路径正性及接受步落在该方向段内；37个保存态均独立读回。
+高κ粗网格最后min J=1.62e−7、最大节点位移0.28016L、残差0.41464，未取得平衡；
+下一候选2^-20仍有路径负J=−2.32e−8，安全拒绝而不接受，不继续增加减半次数。
+
+κ=100误差与v02逐值相同，最细u L2/H1/J RMS 4.3239%/43.6485%/0.15618%仍超原门。
+同网格解析场P2插值H1误差2.3785%，提示表示能力不是唯一问题；插值不是平衡/最佳逼近下界，
+不据此断言锁死、inf-sup失稳或材料错误。下一诊断应转向制造载荷积分/混合压力约束的误差放大。
+
+54宿主测试passed，434保护文件与50旧改动保持；全部v01/v02失败不改写。
+原心室1%门仍failed、未重算；薄层/三维主动/生长/FSI not_run。无删除/安装/拉取/推送/新全局记忆。
+探索图160dpi布局/目检passed，通用600dpi检查failed照录；算法迭代不是生理时间。
+[本批执行裁决](ventricle_mixed_cube_benchmark_v03.md) ·
+[结构及诊断结果](../../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/index.html)。
+唯一下一步建议是保存态误差机制鉴别；新原生计算尚未授权，不能自动续跑后两例。
+
+## 历史：2026-09-19 v02非零patch通过；场精度和高κ变形安全failed
 
 按用户“同意，记忆”批准的一次v02执行完成。64.026秒，6次SNES尝试、5个有效终态、1个安全失败、2例未运行。
 两个非零patch passed，原表达式接口症状未复现。κ=100三网格误差下降、阶次达门，但n=8

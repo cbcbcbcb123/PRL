@@ -22,6 +22,14 @@ def configuration():
         'scope': 'verification cube, not ventricular load, inf-sup proof, biology, growth or FSI'}
 
 
+def guarded_configuration():
+    result=configuration()
+    result['trial_guard']={'method':'sampled_path_bernstein_cubic','floor':1e-12,'max_halvings':20,
+        'sampling':'original production quadrature plus original 56 extra points',
+        'scope':'trial admission only; accepted-state safety and accuracy gates unchanged'}
+    return result
+
+
 def cube(n):
     """Six Freudenthal tetrahedra per voxel, identical unit-cube boundary for all n."""
     if n not in [2, 4, 8]:

@@ -67,6 +67,7 @@ def draw_batch(root,style_module):
     root=Path(root)
     report=json.loads((root/'delivery_analysis.json').read_text())
     config=json.loads((root/'configuration.json').read_text())
+    guarded='path_audit_status' in report
     with np.load(root/'raw/patch_affine_mesh.npz',allow_pickle=False) as data:
         coordinates=data['coordinates']; faces=data['boundary_faces']; tags=data['boundary_tags']
     with np.load(root/'delivery_arrays.npz',allow_pickle=False) as data:
@@ -105,27 +106,50 @@ def draw_batch(root,style_module):
     axes[1].set(xscale='log',yscale='log',xlim=(1.7,9.5),ylim=(.07,2000),
         xlabel='Grid divisions n (2, 4, 8)',ylabel='Error / fine-grid limit')
     axes[1].set_xticks([2,4,8],['2','4','8']); axes[1].legend(loc='upper right')
-    history=report['iterate_diagnostics']['mms_k100_n8']
-    axes[2].plot([x['iteration'] for x in history],[x['residual'] for x in history],'o-',color='#207052',lw=1.5)
-    axes[2].set(yscale='log',xlim=(-.2,3.2),ylim=(1e-16,1),xticks=[0,1,2,3],
-        xlabel='Newton iteration (not time)',ylabel='Native SNES residual norm')
-    for label,color,marker in [('production','#397DA6','o'),('extra','#A44850','x')]:
-        value=arrays[f'mms_k1000_n2_1_{label}_cell_minimum_J']
-        axes[3].plot(np.arange(len(value)),value,marker=marker,ls='none',color=color,ms=4,label=label)
-    axes[3].axhline(0,color='#555555',ls='--',lw=1.)
-    axes[3].set(xlim=(-2,49),ylim=(-.3,1.35),xticks=[0,12,24,36,48],yticks=[-.25,0,.25,.5,.75,1.,1.25],
-        xlabel='Tetrahedron index',ylabel='Cell minimum sampled J')
-    axes[3].legend(loc='upper center')
-    for axis,title in zip(axes,['A  Actual n=2 cube, 48 tetrahedra','B  kappa=100: fine-grid limit = 1',
-                               'C  kappa=100, n=8: saved states','D  kappa=1000, n=2: STOP at step 1']):
+    if guarded:
+        history=report['iterate_diagnostics']['mms_k1000_n2']
+        axes[2].plot([x['iteration'] for x in history],[x['minimum_sampled_J'] for x in history],'o-',color='#207052',lw=1.5)
+        last=history[-1]['iteration']
+        axes[2].set(yscale='log',xlim=(-.4,last+.4),ylim=(1e-8,2),xticks=[0,last//2,last],
+            xlabel='Newton iteration (not time)',ylabel='Accepted minimum sampled J')
+        precision=[item for item in report['precision'] if item['kappa']==100]
+        for key,label,color,marker in [('finite_element','FEM equilibrium','#A44850','o'),
+                ('interpolated_exact_field','Exact-field interpolant','#397DA6','s')]:
+            axes[3].plot([item['n'] for item in precision],[item[key]['relative_u_H1'] for item in precision],
+                marker=marker,color=color,ms=5,lw=1.5,label=label)
+        axes[3].axhline(config['mms_gates']['fine_relative_u_H1'],color='#555555',ls='--',lw=1.)
+        axes[3].set(xscale='log',yscale='log',xlim=(1.7,9.5),ylim=(.005,30),
+            xlabel='Grid divisions n (2, 4, 8)',ylabel='Relative displacement H1 error')
+        axes[3].set_xticks([2,4,8],['2','4','8']); axes[3].legend(loc='upper right')
+        final_titles=['C  kappa=1000: positive, but collapsing','D  kappa=100: interpolation comparison']
+    else:
+        history=report['iterate_diagnostics']['mms_k100_n8']
+        axes[2].plot([x['iteration'] for x in history],[x['residual'] for x in history],'o-',color='#207052',lw=1.5)
+        axes[2].set(yscale='log',xlim=(-.2,3.2),ylim=(1e-16,1),xticks=[0,1,2,3],
+            xlabel='Newton iteration (not time)',ylabel='Native SNES residual norm')
+        for label,color,marker in [('production','#397DA6','o'),('extra','#A44850','x')]:
+            value=arrays[f'mms_k1000_n2_1_{label}_cell_minimum_J']
+            axes[3].plot(np.arange(len(value)),value,marker=marker,ls='none',color=color,ms=4,label=label)
+        axes[3].axhline(0,color='#555555',ls='--',lw=1.)
+        axes[3].set(xlim=(-2,49),ylim=(-.3,1.35),xticks=[0,12,24,36,48],yticks=[-.25,0,.25,.5,.75,1.,1.25],
+            xlabel='Tetrahedron index',ylabel='Cell minimum sampled J')
+        axes[3].legend(loc='upper center')
+        final_titles=['C  kappa=100, n=8: saved states','D  kappa=1000, n=2: STOP at step 1']
+    for axis,title in zip(axes,['A  Actual n=2 cube, 48 tetrahedra','B  kappa=100: fine-grid limit = 1',*final_titles]):
         style_module.apply_axes_style(axis,style=style); style_module.add_top_information(axis,title,style=style)
     # Sixteen residual decades make Matplotlib's default minor locator empty.
     axes[2].yaxis.set_minor_locator(matplotlib.ticker.LogLocator(base=10,subs=[2,5],numticks=100))
-    figure.text(.075,.963,'Two patches pass; field accuracy and high-kappa safety do not. No automatic retries.',fontsize=14)
+    heading=('Positive-J admission works; high-kappa equilibrium and field accuracy still fail.' if guarded
+        else 'Two patches pass; field accuracy and high-kappa safety do not. No automatic retries.')
+    figure.text(.075,.963,heading,fontsize=14)
     figure.text(.075,.930,'Six attempted solves / five equilibria / two cases not run. Engineering consistency is not field qualification.',fontsize=12)
     figure.text(.075,.110,'A: red X=0 exact displacement; other faces exact reference traction. MMS also uses compatible body force.',fontsize=11)
-    figure.text(.075,.078,'B: errors decrease, but three n=8 metrics remain above their gates. C: four real saved Newton states.',fontsize=11)
-    figure.text(.075,.046,'D: production-point min J is positive; extra points detect six inverted cells. Failed iterate is not equilibrium.',fontsize=11)
+    if guarded:
+        figure.text(.075,.078,'B: v02 errors are unchanged. C: all 15 accepted states stay positive; next candidate is refused after 20 halvings.',fontsize=11)
+        figure.text(.075,.046,'D: interpolation is neither equilibrium nor a best-error bound. No new mesh, relaxed gate, or ventricular solve.',fontsize=11)
+    else:
+        figure.text(.075,.078,'B: errors decrease, but three n=8 metrics remain above their gates. C: four real saved Newton states.',fontsize=11)
+        figure.text(.075,.046,'D: production-point min J is positive; extra points detect six inverted cells. Failed iterate is not equilibrium.',fontsize=11)
     outputs=style_module.export_figure(figure,axes,root/'diagnostic',style=style,overrides=overrides)
     plt.close(figure)
     return {'png':str(outputs.png),'svg':str(outputs.svg),'manifest':str(outputs.manifest)}

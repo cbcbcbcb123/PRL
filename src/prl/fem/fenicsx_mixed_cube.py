@@ -17,6 +17,7 @@ import ufl
 from prl.fem.fenicsx_ring import Ring, write_json
 from prl.fem.mixed_material import passive_energy
 from prl.fem.mixed_cube_spec import disposition
+from prl.fem.positive_j import admissible_scale
 from prl.verification.ventricle_3d import load_arrays, mapping_checks, kinematics, extra_points
 from prl.verification.mixed_cube import boundary_data, assembled, audit, convergence
 
@@ -132,7 +133,48 @@ class Cube(Ring):
             raise ValueError('Independent ordering/weights mismatch')
         np.savez_compressed(root/'raw'/f'{self.name}_mesh.npz',**self.mesh_data)
         write_json(self.iterate_root/'factor_option_binding.json',self.factor_options)
+        self.guard_history=[]
+        if config.get('trial_guard'):
+            self.guard_points=np.concatenate((self.qpoints,extra_points()))
+            self.guard_expression=fem.Expression(F,self.guard_points)
+            self.problem.solver.setLineSearchPreCheck(self.guard_direction)
+            write_json(self.iterate_root/'guard_binding.json',{
+                'status':'passed','petsc_version':list(PETSc.Sys.getVersion()),
+                'callback':'SNES.setLineSearchPreCheck(X,Y) -> changed_direction',
+                'update_sign':'X - lambda Y','spatial_points':len(self.guard_points),
+                'scope':'callback bound; actual invocation and path verification still required'})
         self.problem.solver.setMonitor(self.monitor)
+
+    def guard_direction(self,current_vector,direction_vector):
+        """PETSc BT precheck: scale Y before ANY trial residual evaluation."""
+        if time.monotonic()>self.deadline:
+            raise TimeoutError('Reached preservation reserve before candidate check')
+        current=current_vector.getArray(readonly=True).copy()
+        direction=direction_vector.getArray(readonly=True).copy()
+        sequence=len(self.guard_history)
+        target=self.iterate_root/f'candidate_{sequence:03d}.npz'
+        if target.exists():
+            raise FileExistsError('Repeated precheck sequence; no overwrite')
+        np.savez_compressed(target,current_mixed=current,direction_mixed=direction)
+        saved=self.w.x.array.copy()
+        try:
+            self.w.x.array[:]=current; self.w.x.scatter_forward()
+            base=np.asarray(self.guard_expression.eval(self.domain,self.cell_ids)).copy()
+            self.w.x.array[:]=current-direction; self.w.x.scatter_forward()
+            trial=np.asarray(self.guard_expression.eval(self.domain,self.cell_ids)).copy()
+        finally:
+            self.w.x.array[:]=saved; self.w.x.scatter_forward()
+        settings=self.config['trial_guard']
+        try:
+            report=admissible_scale(base,trial-base,floor=settings['floor'],max_halvings=settings['max_halvings'])
+        except Exception as error:
+            write_json(self.iterate_root/'guard_failure.json',{'status':'failed','sequence':sequence,'reason':repr(error)})
+            raise
+        report.update(sequence=sequence,newton_iteration=int(self.problem.solver.getIterationNumber()))
+        self.guard_history.append(report)
+        write_json(self.iterate_root/'guard_history.json',self.guard_history)
+        direction_vector.scale(report['scale'])
+        return report['scale']!=1.
 
     def state(self):
         residual=self.vector(self.residual_form)

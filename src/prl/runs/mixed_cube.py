@@ -7,7 +7,7 @@ import subprocess
 import sys
 import os
 import numpy as np
-from prl.fem.mixed_cube_spec import configuration,cube
+from prl.fem.mixed_cube_spec import configuration,guarded_configuration,cube
 from prl.result_store import result_path,result_admission
 from prl.runs.fenicsx_runtime import read_docker,IMAGE,TAG,save_json,invoke_bounded
 from prl.runs.fenicsx_ring import digest
@@ -23,7 +23,11 @@ BATCHES={
     'v02':{'result':Path('results/ventricle_fem/mixed_cube_benchmark_v02_20260918'),
         'contract':'project_control/ventricle_mixed_cube_benchmark_v02.md',
         'authorization':'new_FEM_authorization: user_confirmed_same_eight_case_v02_20260919',
-        'container':'prl-mixed-cube-benchmark-v02-20260919'}}
+        'container':'prl-mixed-cube-benchmark-v02-20260919'},
+    'v03':{'result':Path('results/ventricle_fem/mixed_cube_benchmark_v03_20260919'),
+        'contract':'project_control/ventricle_mixed_cube_benchmark_v03.md',
+        'authorization':'new_FEM_authorization: user_confirmed_positive_J_same_eight_case_v03_20260919',
+        'container':'prl-mixed-cube-benchmark-v03-20260919'}}
 V01_MANIFEST='5d3c7d623c4cb80404946a7bd04f1be104296b48ab0f213bb1a5b240c4b575fb'
 PREREQUISITES={
     'results/ventricle_fem/volume_projection_audit_v01_20260918':'78a9542bd69d6373a4e25f4bec421f6ea5441a49e4d5334932811201cd85628b',
@@ -80,19 +84,27 @@ def run(workspace,batch='v01'):
         raise ValueError('Explicit eight-case authorization missing')
     references,dirty_count=protection(workspace)
     config=configuration()
-    if batch=='v02':
-        previous=result_path(workspace,RESULT)
-        if digest(previous/'manifest.json')!=V01_MANIFEST:
-            raise ValueError('v01 frozen manifest drift')
-        for item in json.loads((previous/'manifest.json').read_text(encoding='utf-8'))['files']:
-            path=previous/item['path']
-            if digest(path)!=item['sha256']:
-                raise ValueError('v01 frozen evidence drift: '+str(path))
-            references[str(path)]=item['sha256']
-        references[str(previous/'manifest.json')]=V01_MANIFEST
-        if config!=json.loads((previous/'configuration.json').read_text(encoding='utf-8')):
-            raise ValueError('v02 must retain every v01 physical/numerical configuration field')
+    if batch in {'v02','v03'}:
+        ancestors=[(RESULT,V01_MANIFEST)]
+        if batch=='v03':
+            ancestors.append((BATCHES['v02']['result'],'c59044955f3609509f8b8c61d620384ae800f9e2cebfa469d005cd61a9aaedda'))
+        for identifier,expected in ancestors:
+            previous=result_path(workspace,identifier)
+            if digest(previous/'manifest.json')!=expected:
+                raise ValueError('Frozen parent manifest drift')
+            for item in json.loads((previous/'manifest.json').read_text(encoding='utf-8'))['files']:
+                path=previous/item['path']
+                if digest(path)!=item['sha256']:
+                    raise ValueError('Frozen parent evidence drift: '+str(path))
+                references[str(path)]=item['sha256']
+            references[str(previous/'manifest.json')]=expected
+            if config!=json.loads((previous/'configuration.json').read_text(encoding='utf-8')):
+                raise ValueError('Physical/numerical configuration drift from frozen parent')
+    if batch=='v03':
+        config=guarded_configuration()
     sources=list(dict.fromkeys([selected['contract'],*SOURCES]))
+    if batch=='v03':
+        sources+=['src/prl/fem/positive_j.py','tests/prl/test_positive_j.py','src/prl/verification/positive_j.py']
     for name in sources:
         if name.endswith('.py'):
             ast.parse((workspace/name).read_text(encoding='utf-8'))
@@ -120,6 +132,8 @@ def run(workspace,batch='v01'):
         PYTEST_DISABLE_PLUGIN_AUTOLOAD='1',OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1')
     command=[sys.executable,'-B','-X','utf8','-m','pytest','-q','-p','no:cacheprovider',
              'tests/prl/test_mixed_cube.py','tests/prl/test_ventricle_3d.py','tests/prl/test_volume_projection.py']
+    if batch=='v03':
+        command.append('tests/prl/test_positive_j.py')
     tests=subprocess.run(command,cwd=workspace,env=environment,capture_output=True,text=True,encoding='utf-8',timeout=60)
     save_json(root/'tests.json',{'command':command,'stdout':tests.stdout,'stderr':tests.stderr,'exit_code':tests.returncode})
     if tests.returncode:

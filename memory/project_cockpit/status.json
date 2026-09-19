@@ -2,14 +2,14 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-19",
   "overall_status": "failed",
-  "summary": "v02两个非零patch passed；κ=100误差随细化下降但最细位移/J精度未达门；κ=1000粗网格第1Newton步额外点出现负J而安全停止。6次尝试、5个有效终态、2例未运行，无自动重跑。",
+  "summary": "v03正J候选保护原生/独立核验passed，31接受步均在安全采样区间；高κ粗网格仍逼近退化，20次减半耗尽停止。κ=100场误差与v02相同，整体资格failed。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
     "scope": "FEM唯一主线；当前标准立方体资格仍failed，原心室1%门failed不变；主动/生长/FSI not_run。",
-    "current_stage": "Nonzero patches passed; manufactured-field accuracy and high-kappa safety failed",
-    "current_location": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918",
-    "evidence_basis_commit": "7c5c931",
+    "current_stage": "Positive-J trial admission verified; high-kappa equilibrium and field qualification failed",
+    "current_location": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919",
+    "evidence_basis_commit": "7c2949f",
     "evidence_checked_at": "2026-09-19",
     "git_workflow": {
       "branch": "main",
@@ -27,20 +27,20 @@
       ],
       "current_stage_push": "not_run"
     },
-    "freshness_note": "一次v02容器64.026秒，6次SNES；5终态/24监测态离线复算一致；49宿主测试passed。289保护文件含v01完整包/50旧改动未变。145文件16,593,908 bytes，已保存用户要求的记忆更新。本地main阶段提交不推送。",
+    "freshness_note": "一次v03容器72.038秒，6次SNES、5终态、37监测态、31获准候选及1拒绝候选独立核验。54宿主测试passed；434保护文件与50旧改动保持。不重跑、不推送、不新增全局记忆。",
     "model_overview": {
       "model_type": "FEniCSx三维有限变形NH，P2位移/P1压力四面体",
       "simulated_object": "当前资格基准：单位立方体P2/P1；主研究对象仍为理想化三层心室",
       "theory": "基准μ=1，κ=100/1000；X=0解析位移，其余五面解析参考牵引与配套体力。两个非零patch及六MMS已预注册；没有收缩、生长或流体。",
-      "current_question": "基础非零实现门通过，但精度和变形安全未通过：不能用残差或积分点正J代替场资格。",
+      "current_question": "安全准入已生效，但受保护Newton仍可逼近几何退化；同网格插值比平衡位移精确，离散误差放大原因未分离。",
       "pipeline": [
-        "按新确认执行一次v02；表达式hash匹配，两个非零patch passed。",
-        "κ=100三网格完成，末段阶次达门，最细位移及J绝对精度未过门。",
-        "κ=1000 n=2首Newton步在6个单元检出额外点负J，监测器停止；剩余两例not_run。",
-        "保全并独立复算全部状态；下一步只建议有界试探步保护/精度复验，未获新授权。"
+        "原2patch及相同三网格×两κ矩阵；只新增接受前整段正J采样保护。",
+        "两个patch通过；κ=100误差与v02逐值一致，最细位移/J精度仍failed。",
+        "κ=1000粗网格14个接受步均正J，但接近退化；下一候选20次减半仍不安全，停止。",
+        "独立驻点核验31获准路径及1拒绝方向；下一步转向制造载荷积分/混合压力约束误差鉴别。"
       ],
-      "diagram": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/diagnostic.png",
-      "diagram_caption": "实际参考结构、κ=100误差/门限比、4个真实Newton状态、κ=1000失败迭代两套J采样；不是生理时间。",
+      "diagram": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/diagnostic.png",
+      "diagram_caption": "真实参考结构、κ=100原误差门、15个真实高κNewton状态及同网格解析插值对照；不是生理时间。",
       "assumptions": [
         "标准立方体制造解用于数值资格，不是心室或实验标定",
         "κ变化同时改变制造压力/体力/牵引，不是固定载荷锁死试验",
@@ -48,17 +48,17 @@
         "原心室理想化材料与几何未标定，1%局部体积门failed不变"
       ],
       "methods": [
-        "2patch完整passed，旧表达式故障未复现；原旧key缺失的证据边界仍保留。",
-        "κ=100 n=8位移L2/H1为4.3239%/43.6485%，J误差RMS=0.15618%，超过2%/15%/0.1%门。",
-        "κ=1000 n=2：积分点min J=+0.023899；额外min J=−0.176372，6个单元检出负J。",
-        "5个终态/24个监测态独立复算，派生数组逐值一致；47运行前/49交付时宿主测试通过。"
+        "PETSc原生precheck缩放方向，以三次行列式的Bernstein系数保证采样点整个候选区间；原BT/接受态监测保持。",
+        "31接受步独立驻点核验passed；高κ粗网格最后min J=1.62e-7，下一方向2^-20仍有负J，保护耗尽而非收敛。",
+        "κ=100 n=8 u L2/H1及J RMS=4.3239%/43.6485%/0.15618%，仍超原门；与v02逐值相同。",
+        "同网格解析位移P2插值H1=2.3785%，不是平衡或最佳逼近下界，不能据此断言锁死/inf-sup。"
       ],
-      "scope_boundary": "基础实现passed不等于精度passed；κ=100序列failed，高κ粗网格安全failed，后2例not_run。不继续心室/主动/生长/FSI，不自动重跑。",
+      "scope_boundary": "工程保护passed，κ=100精度failed，高κ粗网格平衡failed，余2例not_run。空间采样不是全域保证；原心室失败不变，无主动/生长/FSI。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_benchmark_v02.md",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_analysis.json",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_audit.json",
-        "project_control/ventricle_volume_qualification_adoption_v01.md"
+        "project_control/ventricle_mixed_cube_benchmark_v03.md",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_analysis.json",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/path_readback.json",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_integrity.json"
       ]
     }
   },
@@ -86,45 +86,45 @@
   ],
   "active_work": [
     {
-      "title": "v02有界执行与失败/精度证据已交付",
+      "title": "v03保护核验及失败保全已完成",
       "status": "failed",
-      "summary": "整体资格failed。试探步保护尚未实现或授权；后两个工况未追加求解。",
+      "summary": "保护机制passed，但整体资格failed；一次容器已消耗，不自动继续。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_benchmark_v02.md",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/index.html"
+        "project_control/ventricle_mixed_cube_benchmark_v03.md",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/index.html"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "κ=100的最细场精度仍不足",
+      "title": "场误差不由步长保护解决",
       "status": "failed",
-      "summary": "误差下降、阶次达门，但位移L2/H1及J RMS仍超门；压力误差达门不能替代其他场。",
+      "summary": "κ=100误差与v02相同；n=8位移H1误差43.65%，同网格插值2.38%。需分离载荷积分/混合约束误差，不能直接宣判锁死。",
       "evidence_refs": [
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_analysis.json",
-        "project_control/ventricle_mixed_cube_benchmark_v02.md"
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_analysis.json",
+        "project_control/ventricle_mixed_cube_benchmark_v03.md"
       ]
     },
     {
-      "title": "高κ粗网格的试探步几何失效",
+      "title": "高κ粗网格的受保护路径仍无法收敛",
       "status": "failed",
-      "summary": "残差下降且所有生产积分点J>0，但额外点检出6个单元负J；安全停止。不能放宽或删除该检查。",
+      "summary": "14个接受步后min J=1.62e-7，下一方向减半20次仍不安全；保持有效基态后停止，不增加上限。",
       "evidence_refs": [
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/failure.json",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_analysis.json"
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/iterates/mms_k1000_n2/guard_failure.json",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/path_readback.json"
       ]
     }
   ],
   "results": [
     {
-      "title": "基准已产生实测结果：两个patch通过，整体资格未通过",
+      "title": "接受前安全保护通过，精度和高κ平衡仍失败",
       "status": "failed",
-      "summary": "6次SNES、5有效终态、1安全失败、2not_run。原生接口修订验证通过；小几何本身尚未满足精度/安全，不进入复杂心室。",
-      "image": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/diagnostic.png",
+      "summary": "6次尝试/5终态/2未运行；37实存状态和31接受路径独立读回。两patch再次通过，不是心室或生物模型通过。",
+      "image": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/diagnostic.png",
       "evidence_refs": [
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/index.html",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_analysis.json",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v02_20260918/delivery_audit.json"
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/index.html",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_analysis.json",
+        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_integrity.json"
       ],
       "result_group": "current"
     },
@@ -153,20 +153,20 @@
   ],
   "next_actions": [
     {
-      "title": "制定并确认有界正J试探步保护及精度复验",
+      "title": "保存态的载荷积分与混合压力误差鉴别",
       "status": "not_run",
-      "summary": "将几何准入前移到试探步接受前，再独立验证精度；保持材料/P2/P1/原门。不保证步长保护会解决精度问题，新的运行需要一次确认。",
+      "summary": "不再盲目增加减半次数。先分离误差来源，再预注册必要的新网格/混合形式对照；新原生求解未授权。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_benchmark_v02.md"
+        "project_control/ventricle_mixed_cube_benchmark_v03.md"
       ]
     }
   ],
   "evidence_boundaries": [
-    "FEM唯一主线；数值资格不等于心室或生物验证。",
-    "本轮两个非零patch passed；κ=100序列精度failed；κ=1000 n2安全failed、n4/n8 not_run。",
-    "额外点负J不能由积分点正J或残差下降掩盖；保留无效迭代但不称平衡态。",
-    "原心室1%门和全部历史失败不变；不自动执行薄层/主动/生长/FSI。",
-    "160dpi探索图，投稿600dpi检查failed照录；四个Newton状态不是四个生理时间点。",
-    "145文件约15.83MiB外置；289保护文件与50旧改动不变；已写用户要求的Codex记忆。"
+    "FEM唯一主线；候选保护工程通过不等于数值场或生物验证。",
+    "同矩阵6次SNES，5有效终态；高κ粗网格无平衡，余两例未运行。",
+    "37个监测态采样J均正，但近退化状态不等于可用形变；采样正性非全域/全局单射证明。",
+    "解析场插值不是平衡解或最佳逼近误差下界；κ变化同时改变制造载荷，不是固定载荷锁死试验。",
+    "原心室1%门failed未变；无薄层、三维主动、生长、FSI或自动重跑。",
+    "160dpi探索图非投稿；434保护文件/50旧改动保持，本轮无新增全局记忆。"
   ]
 }
