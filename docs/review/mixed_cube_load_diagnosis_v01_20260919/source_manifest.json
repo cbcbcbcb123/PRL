@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "source_package": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_load_diagnosis_v01_20260919",
+  "source_manifest_sha256": "fae715c181ee24be5ca384e6a43c0257fa52ffcad1d34c5a6a0a58e85652fac1",
+  "original_v03_manifest_sha256": "084a675f13501added2e056f5bc3cca125a2298f09d290240282fc2b570b77b0",
+  "files": [
+    {
+      "path": "diagnostic.png",
+      "bytes": 239195,
+      "sha256": "08677d1183ebc9cb010c0261fa08a916f60649a93ed3a1cd60af233027449565"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 7054,
+      "sha256": "31ead956ab0e8f0c35f6f39228ead4c74f5cd2c567ca6890bca8aa7c65a6db7b"
+    }
+  ],
+  "raw_data_uploaded": false,
+  "new_equilibrium_solves": 0,
+  "scientific_qualification": "failed"
+}

@@ -6,25 +6,26 @@
 
 ## 最新进展（2026-09-19）
 
-**v03正J候选步保护核验通过，但场精度和高κ平衡仍未通过。**
+**已找到明确的压力载荷表示缺陷；保存态诊断通过，原场精度和高κ平衡仍未通过。**
 
 - 当前是三维P2位移/P1压力四面体的单位立方体制造解基准，不是心室收缩计算。
-- 6次求解尝试、5个有效平衡终态、2例未运行；31条接受路径独立安全核验通过。
-- κ=100最细网格位移H1误差43.65%仍超15%门；κ=1000粗网格接近退化，保护拒绝不安全候选后停止。
+- 本轮只复用3个已保存终态，没有新FEM求解；原v03的正J保护核验通过但整体资格失败。
+- 最细网格仍有3.27%的精确压力力向量无法由当前P1压力平衡，其节点力范数为等容力的1.49倍，约为生产积分差的32万倍。它是具体诊断线索，不是inf-sup或原心室根因的最终证明。
+- κ=100最细网格位移H1误差43.65%仍超15%门；κ=1000粗网格仍未取得平衡。
 - 原三域半椭球心室局部体积最大偏差1.4496%仍超1%门。三维主动、生长、FSI未运行。
-- 唯一下一步：先用保存态区分制造载荷积分与混合压力约束的误差放大，再决定新对照；不放宽原门。
+- 唯一下一步：已授权一次四工况控制批次（可表示的非均匀体积patch＋三网格等体积剪切），尚未运行；不放宽原门，不逐例拆审批。
 
-[专家在线审阅：模型、结果表、图件与代码入口](docs/review/mixed_cube_benchmark_v03_20260919/README.md)
+[专家在线审阅：模型、实际诊断数据、图件与代码入口](docs/review/mixed_cube_load_diagnosis_v01_20260919/README.md)
 
-![当前基准结构、误差与安全诊断](docs/review/mixed_cube_benchmark_v03_20260919/diagnostic.png)
+![当前基准结构与压力载荷诊断](docs/review/mixed_cube_load_diagnosis_v01_20260919/diagnostic.png)
 
-图为冻结计算的真实结果，Newton迭代不是生理时间。安全实现passed不等于整体数值或生物学资格passed。
+图为保存态与解析制造解的离线分析，不是新心室形变。诊断passed不等于整体数值或生物学资格passed。
 
 ## 导航与复核
 
 - [项目目标、当前模型及唯一下一步](START_HERE.md)
 - [当前权威状态与历史证据](project_control/CURRENT_STATUS.md)
-- [本阶段执行裁决](project_control/ventricle_mixed_cube_benchmark_v03.md)
+- [本阶段执行裁决](project_control/ventricle_mixed_cube_load_diagnosis_v01.md) / [下一批已授权范围](project_control/ventricle_mixed_cube_control_batch_v01.md)
 - [外部专家材料索引](plan/INDEX.md) / [工作约定](AGENTS.md)
 - [阶段提交与普通远端同步规则](project_control/main_branch_stage_push_decision_v01.md)
 

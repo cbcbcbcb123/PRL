@@ -2,14 +2,14 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-19",
   "overall_status": "failed",
-  "summary": "v03正J候选保护原生/独立核验passed，31接受步均在安全采样区间；高κ粗网格仍逼近退化，20次减半耗尽停止。κ=100场误差与v02相同，整体资格failed。",
+  "summary": "保存态分析检出P1无法平衡的制造压力力分量：最细网格仍为等容力的1.49倍，远大于积分差。诊断passed，原数值资格failed；用户已批准四工况控制，尚未运行。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
     "scope": "FEM唯一主线；当前标准立方体资格仍failed，原心室1%门failed不变；主动/生长/FSI not_run。",
-    "current_stage": "Positive-J trial admission verified; high-kappa equilibrium and field qualification failed",
-    "current_location": "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919",
-    "evidence_basis_commit": "80a2236e2a144a77f201a7def1e1c7d316ee898b",
+    "current_stage": "Pressure-load representation diagnosis completed; four-control batch authorized",
+    "current_location": "../PRL-results/ventricle_fem/mixed_cube_load_diagnosis_v01_20260919",
+    "evidence_basis_commit": "d800a4f",
     "evidence_checked_at": "2026-09-19",
     "git_workflow": {
       "branch": "main",
@@ -27,26 +27,26 @@
         "project_control/main_branch_stage_push_decision_v01.md",
         "project_control/evidence/stage_main_sync_v01/publication_readback.json"
       ],
-      "current_stage_push": "passed",
+      "current_stage_push": "not_run",
       "stage_push_policy": "standing_user_authorization_2026_09_19",
       "published_science_commit": "80a2236e2a144a77f201a7def1e1c7d316ee898b",
       "published_review_commit": "fd6090de19e51c22155b80d2bb51ee0da6b37986",
       "remote_verified_at": "2026-09-19"
     },
-    "freshness_note": "科学证据基于80a2236：一次v03容器72.038秒，6次SNES、5终态、37监测态、31获准候选及1拒绝候选独立核验。54宿主测试passed，科学资格仍failed。2026-09-19已补发4个科学阶段提交及小型在线审阅包；远端main回读为fd6090d，其他引用未变。发布前204原包载荷文件和50旧改动哈希核验通过；本次仅同步既有成果，不重跑、不新增全局记忆。",
+    "freshness_note": "本轮80.126秒离线分析，3旧终态，42项针对性测试、数组读回及639源/保护文件哈希通过。新平衡0；用户已批准一次4工况容器，尚未消耗。原场精度/原心室1%门failed未改。",
     "model_overview": {
       "model_type": "FEniCSx三维有限变形NH，P2位移/P1压力四面体",
       "simulated_object": "当前资格基准：单位立方体P2/P1；主研究对象仍为理想化三层心室",
       "theory": "基准μ=1，κ=100/1000；X=0解析位移，其余五面解析参考牵引与配套体力。两个非零patch及六MMS已预注册；没有收缩、生长或流体。",
-      "current_question": "安全准入已生效，但受保护Newton仍可逼近几何退化；同网格插值比平衡位移精确，离散误差放大原因未分离。",
+      "current_question": "固定解析F*下压力力余量占比29.13%/12.04%/3.27%，大于载荷积分差；需用可表示压力/等体积控制判别，不直接归咎原心室。",
       "pipeline": [
-        "原2patch及相同三网格×两κ矩阵；只新增接受前整段正J采样保护。",
-        "两个patch通过；κ=100误差与v02逐值一致，最细位移/J精度仍failed。",
-        "κ=1000粗网格14个接受步均正J，但接近退化；下一候选20次减半仍不安全，停止。",
-        "独立驻点核验31获准路径及1拒绝方向；下一步转向制造载荷积分/混合压力约束误差鉴别。"
+        "重用3个κ100旧终态，生产与两档高阶积分一致性检查。",
+        "固定F*下对精确压力力向量做P1可表示力空间投影。",
+        "最细压力力余量约等容力1.49倍、约积分差32万倍；原精度failed不变。",
+        "用户已批准四工况：一个非均匀可表示patch、三网格等体积剪切，尚未运行。"
       ],
-      "diagram": "docs/review/mixed_cube_benchmark_v03_20260919/diagnostic.png",
-      "diagram_caption": "真实参考结构、κ=100原误差门、15个真实高κNewton状态及同网格解析插值对照；不是生理时间。",
+      "diagram": "docs/review/mixed_cube_load_diagnosis_v01_20260919/diagnostic.png",
+      "diagram_caption": "保存网格、压力力余量与积分差；0新平衡，固定网格节点力欧氏范数，不是生理时间。",
       "assumptions": [
         "标准立方体制造解用于数值资格，不是心室或实验标定",
         "κ变化同时改变制造压力/体力/牵引，不是固定载荷锁死试验",
@@ -54,18 +54,17 @@
         "原心室理想化材料与几何未标定，1%局部体积门failed不变"
       ],
       "methods": [
-        "PETSc原生precheck缩放方向，以三次行列式的Bernstein系数保证采样点整个候选区间；原BT/接受态监测保持。",
-        "31接受步独立驻点核验passed；高κ粗网格最后min J=1.62e-7，下一方向2^-20仍有负J，保护耗尽而非收敛。",
-        "κ=100 n=8 u L2/H1及J RMS=4.3239%/43.6485%/0.15618%，仍超原门；与v02逐值相同。",
-        "同网格解析位移P2插值H1=2.3785%，不是平衡或最佳逼近下界，不能据此断言锁死/inf-sup。"
+        "分块NumPy复算原生产及Gauss-Duffy每轴6/8点载荷和内力。",
+        "精确F*下B[q,v]=∫q cof(F*):Grad(v)，最小化||f_p−B^T c||²。",
+        "余量z满足Bz≈0及f_p·z=||z||²，缩放证书残差≤8.62e-17。",
+        "最细积分差3.44e-9，压力力余量1.09e-3；不据此证明全部位移误差的单一原因。"
       ],
-      "scope_boundary": "工程保护passed，κ=100精度failed，高κ粗网格平衡failed，余2例not_run。空间采样不是全域保证；原心室失败不变，无主动/生长/FSI。",
+      "scope_boundary": "离线诊断passed；原八工况/心室数值门failed。不是inf-sup或原心室根因证明。下一4工况已授权但not_run，无主动/生长/FSI。",
       "evidence_refs": [
-        "docs/review/mixed_cube_benchmark_v03_20260919/README.md",
-        "project_control/ventricle_mixed_cube_benchmark_v03.md",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_analysis.json",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/path_readback.json",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_integrity.json"
+        "project_control/ventricle_mixed_cube_load_diagnosis_v01.md",
+        "docs/review/mixed_cube_load_diagnosis_v01_20260919/README.md",
+        "docs/review/mixed_cube_load_diagnosis_v01_20260919/summary.json",
+        "docs/review/mixed_cube_load_diagnosis_v01_20260919/source_manifest.json"
       ]
     }
   },
@@ -93,36 +92,39 @@
   ],
   "active_work": [
     {
-      "title": "v03保护核验及失败保全已完成",
-      "status": "failed",
-      "summary": "保护机制passed，但整体资格failed；一次容器已消耗，不自动继续。",
+      "title": "保存态载荷机制诊断完成",
+      "status": "passed",
+      "summary": "80.126秒，3旧终态，0新FEM；压力表示成为直接候选机制。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_benchmark_v03.md",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/index.html"
+        "project_control/ventricle_mixed_cube_load_diagnosis_v01.md",
+        "docs/review/mixed_cube_load_diagnosis_v01_20260919/summary.json"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "场误差不由步长保护解决",
+      "title": "压力力表示缺陷已检出，但因果控制尚未执行",
       "status": "failed",
-      "summary": "κ=100误差与v02相同；n=8位移H1误差43.65%，同网格插值2.38%。需分离载荷积分/混合约束误差，不能直接宣判锁死。",
+      "summary": "原数值场精度仍未合格，不能仅凭力范数就认定原心室根因。",
       "evidence_refs": [
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_analysis.json",
-        "project_control/ventricle_mixed_cube_benchmark_v03.md"
-      ]
-    },
-    {
-      "title": "高κ粗网格的受保护路径仍无法收敛",
-      "status": "failed",
-      "summary": "14个接受步后min J=1.62e-7，下一方向减半20次仍不安全；保持有效基态后停止，不增加上限。",
-      "evidence_refs": [
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/iterates/mms_k1000_n2/guard_failure.json",
-        "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/path_readback.json"
+        "project_control/ventricle_mixed_cube_load_diagnosis_v01.md",
+        "project_control/ventricle_mixed_cube_control_batch_v01.md"
       ]
     }
   ],
   "results": [
+    {
+      "title": "压力力余量远大于积分差",
+      "status": "passed",
+      "summary": "n2/4/8压力力余量/等容力=13.05/5.50/1.49；passed仅指离线诊断交付。",
+      "image": "docs/review/mixed_cube_load_diagnosis_v01_20260919/diagnostic.png",
+      "evidence_refs": [
+        "project_control/ventricle_mixed_cube_load_diagnosis_v01.md",
+        "docs/review/mixed_cube_load_diagnosis_v01_20260919/summary.json",
+        "docs/review/mixed_cube_load_diagnosis_v01_20260919/source_manifest.json"
+      ],
+      "result_group": "current"
+    },
     {
       "title": "接受前安全保护通过，精度和高κ平衡仍失败",
       "status": "failed",
@@ -134,7 +136,7 @@
         "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_analysis.json",
         "../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_integrity.json"
       ],
-      "result_group": "current"
+      "result_group": "historical"
     },
     {
       "title": "已有压力态诊断完成：平均改善，局部仍超限",
@@ -147,34 +149,23 @@
         "../PRL-results/ventricle_fem/volume_projection_audit_v01_20260918/delivery_audit.json"
       ],
       "result_group": "historical"
-    },
-    {
-      "title": "原三维压力失败保留",
-      "status": "failed",
-      "summary": "粗细压力态局部体积均超原1%门；非结构化U1候选亦未获质量资格，不自动重跑。",
-      "evidence_refs": [
-        "../PRL-results/ventricle_fem/f6s2d1_3d_fine_pressure_v01_20260918/index.html",
-        "project_control/ventricle_fem_3d_unstructured_execution_v01.md"
-      ],
-      "result_group": "historical"
     }
   ],
   "next_actions": [
     {
-      "title": "保存态的载荷积分与混合压力误差鉴别",
+      "title": "一次四工况控制批次",
       "status": "not_run",
-      "summary": "不再盲目增加减半次数。先分离误差来源，再预注册必要的新网格/混合形式对照；新原生求解未授权。",
+      "summary": "用户已确认：可表示非均匀体积patch n2＋等体积剪切n2/4/8，κ1000；一次1CPU/0GPU容器、最多4求解/1800秒。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_benchmark_v03.md"
+        "project_control/ventricle_mixed_cube_control_batch_v01.md"
       ]
     }
   ],
   "evidence_boundaries": [
-    "FEM唯一主线；候选保护工程通过不等于数值场或生物验证。",
-    "同矩阵6次SNES，5有效终态；高κ粗网格无平衡，余两例未运行。",
-    "37个监测态采样J均正，但近退化状态不等于可用形变；采样正性非全域/全局单射证明。",
-    "解析场插值不是平衡解或最佳逼近误差下界；κ变化同时改变制造载荷，不是固定载荷锁死试验。",
-    "原心室1%门failed未变；无薄层、三维主动、生长、FSI或自动重跑。",
-    "160dpi探索图非投稿；434保护文件/50旧改动保持，本轮无新增全局记忆。"
+    "FEM唯一主线；诊断交付passed不等于数值场或生物验证。",
+    "本轮3旧终态、0新平衡，原八工况和原心室失败保持。",
+    "力空间投影使用固定解析F*与节点系数欧氏范数，不是inf-sup或连续投影证明。",
+    "42项测试/派生数组读回/639源文件哈希通过；160dpi探索图非投稿终稿。",
+    "四工况已批准但not_run；没有原心室/主动/生长/FSI或自动重跑。"
   ]
 }

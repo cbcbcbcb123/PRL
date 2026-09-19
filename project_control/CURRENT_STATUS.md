@@ -12,15 +12,15 @@ git_remote_push_record: project_control/evidence/stage_main_sync_v01/publication
 git_published_science_commit: 80a2236e2a144a77f201a7def1e1c7d316ee898b
 git_published_review_commit: fd6090de19e51c22155b80d2bb51ee0da6b37986
 verified_commit: 80a2236e2a144a77f201a7def1e1c7d316ee898b
-current_lifecycle: fem_only_guard_verified_accuracy_and_high_kappa_equilibrium_failed
+current_lifecycle: fem_only_pressure_load_remainder_identified_control_batch_authorized
 documentation_updated_at: 2026-09-19
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_mixed_cube_benchmark_v03.md
+current_contract: project_control/ventricle_mixed_cube_load_diagnosis_v01.md
 last_completed_contract: project_control/ventricle_fem_3d_unstructured_comparison_contract_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_integrity.json
-next_stage_contract: project_control/ventricle_mixed_cube_benchmark_v03.md
-current_authorization: v03_one_container_consumed_no_native_retry
+current_render_contract: ../PRL-results/ventricle_fem/mixed_cube_load_diagnosis_v01_20260919/visual_review.json
+next_stage_contract: project_control/ventricle_mixed_cube_control_batch_v01.md
+current_authorization: user_confirmed_four_control_cases_20260919_once
 development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -29,11 +29,11 @@ external_results_storage_decision: project_control/external_result_store_decisio
 external_results_storage_execution: project_control/external_result_store_execution_v01.md
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
-execution_authorized: no_further_native_runs_without_new_confirmation
-current_execution_log: project_control/ventricle_mixed_cube_benchmark_v03.md
-latest_completed_execution_log: project_control/ventricle_mixed_cube_benchmark_v03.md
+execution_authorized: four_control_cases_one_container_no_retry_only
+current_execution_log: project_control/ventricle_mixed_cube_load_diagnosis_v01.md
+latest_completed_execution_log: project_control/ventricle_mixed_cube_load_diagnosis_v01.md
 latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
-latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_benchmark_v03_20260919/delivery_analysis.json
+latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_load_diagnosis_v01_20260919/summary.json
 latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -64,7 +64,25 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 其他分支/标签引用未变。见[远端回读记录](evidence/stage_main_sync_v01/publication_readback.json)。
 此passed仅指发布验收；下述数值资格仍failed，不能因同步成功改写科学结论。
 
-## 当前：2026-09-19 v03候选正J保护passed，场精度与高κ粗网格平衡仍failed
+## 当前：2026-09-19 保存态压力载荷表示诊断passed，原科学资格仍failed
+
+本轮响应“继续项目、科学进展较慢”，将当前问题一次诊断到可区分的候选机制；不增加新平衡求解。
+3个κ100旧终态，高阶积分及精确虚功核对；固定解析F*下构造压力—虚位移矩阵，
+识别P1压力不能平衡的精确压力力分量：n2/4/8占比29.13%/12.04%/3.27%，
+其节点力范数为等容力的13.05/5.50/1.49倍。最细网格该分量约1.09e−3，积分差仅3.44e−9。
+载荷积分误差不足以作为目前优先解释，压力载荷表示/位移污染成为最直接待验证机制。
+这些是固定基底上的离散力欧氏投影指标，不是压力场百分比、inf-sup定理或原心室根因证明。
+
+80.126秒离线分析，42项针对性测试、派生数组读回与639个源/保护文件哈希passed。
+29文件1104018 bytes；manifest `fae715c181ee24be5ca384e6a43c0257fa52ffcad1d34c5a6a0a58e85652fac1`。
+首次log域外刻度导出失败保留，纯布局修正后160dpi探索图/目检passed；投稿600dpi检查不冒充通过。
+0新FEM、0 Docker、0 GPU；原科学门failed不变，无删除/安装/全局记忆更新。
+见[在线审阅与数据](../docs/review/mixed_cube_load_diagnosis_v01_20260919/README.md)和
+[本次执行](ventricle_mixed_cube_load_diagnosis_v01.md)。
+唯一下一步为[四工况控制批次](ventricle_mixed_cube_control_batch_v01.md)，用户已明确整批确认，当前not_run。
+授权一次容器及最多四次求解；不重开旧八工况或直接进入心室/主动/生长/FSI。
+
+## 历史：2026-09-19 v03候选正J保护passed，场精度与高κ粗网格平衡仍failed
 
 按用户“同意，继续”实施接受前保护及同八工况一次复验。唯一修改为候选方向正J区间准入，
 保持全部材料/网格/载荷/原误差门及30次Newton上限。单CPU/0GPU/禁网，一次72.0377秒；

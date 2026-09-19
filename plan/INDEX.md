@@ -13,6 +13,9 @@ updated_at: 2026-09-19
 | `EXP-20260802-scientific-review-v01` | Hybrid X1-H 以后科学与软件主张约束 | `retired_evidence_only` | `unknown`，当前工作区未定位到 | Hybrid已退出前向主线；原约束仅用于解释精选历史证据，不再授予执行权限 | `project_control/external_guidance_adoption_EXP-20260802_v01.md`；`project_control/external_scientific_review_constraints_v01.md`；`project_control/repository_cleanup_retired_path_map_v01.md` |
 | `EXP-20260909-001-paper2-lineage-ecm` | Paper 2 分裂可见性、有限心内膜细胞层与 ECM 选择性记忆 | `retired_evidence_only` | `plan/active/EXP-20260909-001-paper2-lineage-ecm/source/review-and-execution-plan.html` | 专家原件保留但Paper2前向执行已被用户当前主线决定取代；仅保留谱系奇模态精选结果和治理记录 | `project_control/external_guidance_adoption_EXP-20260909-001-paper2-lineage-ecm_v01.md`；`project_control/paper2_lineage_ecm_active_execution_plan_v01.md`；`project_control/repository_cleanup_retired_path_map_v01.md` |
 
+当前采纳执行补充（2026-09-19）：保存态压力载荷诊断已完成；用户另行批准一次四工况控制批次，
+见 `project_control/ventricle_mixed_cube_control_batch_v01.md`。该授权不重开v03，不改变专家原件或旧失败结论。
+
 ## 使用规则
 
 1. 先检查方案状态和适用范围；
