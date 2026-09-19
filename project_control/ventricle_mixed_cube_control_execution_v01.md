@@ -40,3 +40,5 @@ automatic_retries: 0
 科学：原八工况与原心室1%门failed不变；新四工况及其结果图not_run。
 没有用解析场或插值图伪装成新平衡结果。现有保存态诊断图仍可查看。
 前一阶段已普通推送main至`a887f3ce19314b4257e5602605066eb933948e9f`，远端回读一致，既有标签不变。
+本次代码与blocked记录随后普通推送至`a468bc11385d3e330665114381581b284698055f`并回读一致，
+详见[发布快照核验](evidence/mixed_cube_controls_v01_preflight/publication_readback.json)。发布passed不代表四工况已运行。

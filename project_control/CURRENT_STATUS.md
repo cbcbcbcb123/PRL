@@ -8,10 +8,10 @@ git_stage_push_decision: project_control/main_branch_stage_push_decision_v01.md
 git_integration_decision: project_control/remote_history_integration_decision_v01.md
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
-git_remote_push_record: project_control/evidence/stage_main_sync_v01/publication_readback.json
-git_published_science_commit: a887f3ce19314b4257e5602605066eb933948e9f
-git_published_review_commit: a887f3ce19314b4257e5602605066eb933948e9f
-verified_commit: a887f3ce19314b4257e5602605066eb933948e9f
+git_remote_push_record: project_control/evidence/mixed_cube_controls_v01_preflight/publication_readback.json
+git_published_science_commit: a468bc11385d3e330665114381581b284698055f
+git_published_review_commit: a468bc11385d3e330665114381581b284698055f
+verified_commit: a468bc11385d3e330665114381581b284698055f
 current_lifecycle: fem_only_four_controls_ready_runtime_preflight_blocked
 documentation_updated_at: 2026-09-19
 current_repository_cleanup: closure_v01_passed
@@ -67,6 +67,7 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 ## 当前：2026-09-19 四工况实现就绪，Docker预检blocked，尚无新求解
 
 用户已整批批准四工况；同一求解器增加两个解析场、独立验证与配置入口，65项宿主测试passed。
+代码及blocked记录已普通推送main，远端回读a468bc1一致；[发布核验](evidence/mixed_cube_controls_v01_preflight/publication_readback.json)仅证明同步，不代表原生计算通过。
 原材料/积分/单元/保护/误差门未改。启动前Docker Server=null且引擎管道不存在，
 Desktop/backend进程均不在；日志有idle graceful shutdown，但此前error1920是否复发unknown。
 0容器、0求解、0重试、0GPU，结果目录未创建；不把宿主测试当原生或科学通过。

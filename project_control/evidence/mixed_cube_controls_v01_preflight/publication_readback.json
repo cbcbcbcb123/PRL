@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "date": "2026-09-19",
+  "scope": "Verified publication of the prepared-code and blocked-preflight snapshot, not scientific validation",
+  "remote": "https://github.com/cbcbcbcb123/PRL.git",
+  "ref": "refs/heads/main",
+  "previous_remote_main": "a887f3ce19314b4257e5602605066eb933948e9f",
+  "local_snapshot_commit": "a468bc11385d3e330665114381581b284698055f",
+  "remote_main_readback": "a468bc11385d3e330665114381581b284698055f",
+  "ordinary_fast_forward": true,
+  "other_refs_unchanged": {
+    "refs/tags/prl-cell-engine-import-20260829": "874c1a273281ccd92f89d7f71b5e5dec5e33b66a",
+    "refs/tags/prl-cell-engine-import-20260829^{}": "5864a63d5b77943812ddfeb2b44442dab4f8a068",
+    "refs/tags/prl-monorepo-integration-20260829": "2c2050d38dfb7d971d5c15d386bf8bb457be87d5",
+    "refs/tags/prl-monorepo-integration-20260829^{}": "57733e86b3a60563c293e0860a76cbe72980344c"
+  },
+  "new_four_case_science": "not_run",
+  "native_execution": "blocked",
+  "host_tests": "passed",
+  "raw_arrays_uploaded": false,
+  "unrelated_preexisting_changes_committed": false
+}

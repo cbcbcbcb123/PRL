@@ -9,7 +9,7 @@
     "scope": "FEM唯一主线；当前标准立方体资格仍failed，原心室1%门failed不变；主动/生长/FSI not_run。",
     "current_stage": "Four controls implemented; native runtime preflight blocked before any solve",
     "current_location": "../PRL-results/ventricle_fem/mixed_cube_load_diagnosis_v01_20260919",
-    "evidence_basis_commit": "a887f3c",
+    "evidence_basis_commit": "a468bc1",
     "evidence_checked_at": "2026-09-19",
     "git_workflow": {
       "branch": "main",
@@ -27,10 +27,11 @@
         "project_control/main_branch_stage_push_decision_v01.md",
         "project_control/evidence/stage_main_sync_v01/publication_readback.json"
       ],
-      "current_stage_push": "not_run",
+      "current_stage_push": "passed",
       "stage_push_policy": "standing_user_authorization_2026_09_19",
-      "published_science_commit": "a887f3ce19314b4257e5602605066eb933948e9f",
-      "published_review_commit": "a887f3ce19314b4257e5602605066eb933948e9f",
+      "published_science_commit": "a468bc11385d3e330665114381581b284698055f",
+      "published_review_commit": "a468bc11385d3e330665114381581b284698055f",
+      "publication_readback": "project_control/evidence/mixed_cube_controls_v01_preflight/publication_readback.json",
       "remote_verified_at": "2026-09-19"
     },
     "freshness_note": "此前离线诊断已发布a887f3c。四工况代码通过65项宿主测试；Docker Server=null，未创建结果目录或容器，4工况授权尚未消耗。需一次现有Docker启动许可，不自行修复。原数值/心室failed。",
