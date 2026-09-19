@@ -13,7 +13,7 @@
 - 最细网格仍有3.27%的精确压力力向量无法由当前P1压力平衡，其节点力范数为等容力的1.49倍，约为生产积分差的32万倍。它是具体诊断线索，不是inf-sup或原心室根因的最终证明。
 - κ=100最细网格位移H1误差43.65%仍超15%门；κ=1000粗网格仍未取得平衡。
 - 原三域半椭球心室局部体积最大偏差1.4496%仍超1%门。三维主动、生长、FSI未运行。
-- 唯一下一步：四工况代码及65项宿主测试就绪；Docker引擎停止，预检blocked，0新容器/求解。待允许启动现有Docker一次后执行原批次，见[阻断记录](project_control/ventricle_mixed_cube_control_execution_v01.md)；不放宽原门。
+- 唯一下一步：四工况代码就绪，但获准的一次Docker正常启动因Ingest套接字访问异常失败，0新容器/求解。需单独裁决运行环境恢复，见[新鲜日志与阻断记录](project_control/ventricle_mixed_cube_control_execution_v01.md)；不再自动重启或隔离目录，不改科学门。
 
 [专家在线审阅：模型、实际诊断数据、图件与代码入口](docs/review/mixed_cube_load_diagnosis_v01_20260919/README.md)
 

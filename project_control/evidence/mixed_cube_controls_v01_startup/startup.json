@@ -1,0 +1,106 @@
+{
+  "status": "failed",
+  "scope": "one authorized normal Docker startup, not an FEM solve",
+  "authorization": "User agreed to start installed Docker Desktop once; no repair/install/pull; continue original controls only if ready.",
+  "start_invocations": 1,
+  "start_recorded_at": "2026-09-19T18:06:25.9411325+08:00",
+  "executable": "C:/Program Files/Docker/Docker/Docker Desktop.exe",
+  "launch_process_id": 22412,
+  "startup_method": "PowerShell Start-Process -WindowStyle Hidden -PassThru",
+  "pre_start_processes": [],
+  "pre_start_wsl": "docker-desktop Stopped, version 2",
+  "socket_inventory": [
+    {
+      "path": "C:/Users/chenb/AppData/Local/Docker/run/dockerEthernetVfkit",
+      "bytes": 0,
+      "attributes": "Archive, ReparsePoint",
+      "pre_start_acl_error": "Method failed with unexpected error code 1920."
+    },
+    {
+      "path": "C:/Users/chenb/AppData/Local/Docker/run/dockerInference",
+      "bytes": 0,
+      "attributes": "Archive, ReparsePoint",
+      "pre_start_acl_error": "Method failed with unexpected error code 1920."
+    },
+    {
+      "path": "C:/Users/chenb/AppData/Local/Docker/run/sailor-ingest.sock",
+      "bytes": 0,
+      "attributes": "Archive, ReparsePoint",
+      "pre_start_acl_error": "Method failed with unexpected error code 1920."
+    },
+    {
+      "path": "C:/Users/chenb/AppData/Local/Docker/run/userAnalyticsOtlpHttp.sock",
+      "bytes": 0,
+      "attributes": "Archive, ReparsePoint",
+      "pre_start_acl_error": "Method failed with unexpected error code 1920."
+    },
+    {
+      "path": "C:/Users/chenb/AppData/Local/docker-secrets-engine/engine.sock",
+      "bytes": 0,
+      "attributes": "Archive, ReparsePoint",
+      "pre_start_acl_error": "Method failed with unexpected error code 1920."
+    }
+  ],
+  "backend_log_path": "C:\\Users\\chenb\\AppData\\Local\\Docker\\log\\host\\com.docker.backend.exe.log",
+  "backend_log_snapshot_bytes": 43464,
+  "backend_log_snapshot_sha256": "64d5ac49aa182ca03459b23f880865b6b8ba1e7d6498045f1678835d3e6b6493",
+  "excerpt_source_lines": [
+    193,
+    275,
+    276
+  ],
+  "excerpt_sha256": "cae385be43568861ffbe34efea120ed8fc3f905d0bf20504418a520a20e62128",
+  "confirmed_failure": "Ingest socket startup/rename failed; backend reported crash before Linux engine became ready.",
+  "fundamental_socket_corruption_cause": "unknown",
+  "read_only_version_probe": {
+    "exit_code": 1,
+    "stdout": {
+      "Client": {
+        "Version": "29.7.2",
+        "ApiVersion": "1.55",
+        "DefaultAPIVersion": "1.55",
+        "GitCommit": "a7dcaa6",
+        "GoVersion": "go1.26.5",
+        "Os": "windows",
+        "Arch": "amd64",
+        "BuildTime": "Wed Aug  5 18:31:33 2026",
+        "Context": "desktop-linux"
+      },
+      "Server": null
+    },
+    "stderr": "failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.\n"
+  },
+  "post_failure_ui_backend_processes_observed": true,
+  "processes_terminated_by_agent": 0,
+  "runtime_repairs": 0,
+  "path_moves": 0,
+  "deletions": 0,
+  "installs_updates_pulls_by_agent": 0,
+  "automatic_retries": 0,
+  "GPU": 0,
+  "container_invocations": 0,
+  "equilibrium_solves": 0,
+  "result_created": false,
+  "four_cases": "not_run",
+  "four_case_compute_authority_consumed": false,
+  "one_start_authority_consumed": true,
+  "next_boundary": "Stop startup/repair attempts. A separate runtime-recovery decision is required; no more directory rotation automatically.",
+  "integrity": {
+    "status": "passed",
+    "protected_files": 668,
+    "unrelated_dirty_files": 50,
+    "original_control_configuration_unchanged": true,
+    "source_checks": {
+      "src/prl/fem/mixed_cube_spec.py": true,
+      "src/prl/fem/fenicsx_mixed_cube.py": true,
+      "src/prl/verification/mixed_cube.py": true,
+      "src/prl/runs/mixed_cube.py": true,
+      "src/prl/cli.py": true,
+      "src/prl/fem/mixed_material.py": true,
+      "src/prl/fem/positive_j.py": true,
+      "tests/prl/test_mixed_cube.py": true,
+      "tests/prl/test_mixed_cube_controls.py": true
+    }
+  },
+  "copied_entire_docker_log": false
+}

@@ -44,9 +44,11 @@ updated_at: 2026-09-19
 
 固定κ/μ=1000、当前P2/P1、本构与正J保护。它能区分压力载荷表示问题与更广泛的实现问题。
 [完整范围与停止规则](project_control/ventricle_mixed_cube_control_batch_v01.md)已获用户整批确认。
-两个解析控制场已实现、65项宿主测试passed，但Docker引擎停止导致启动预检blocked；
-0容器、0求解，四工况仍not_run。详见[执行记录](project_control/ventricle_mixed_cube_control_execution_v01.md)。
-已询问只启动现有Docker一次；引擎就绪后继续原批次，不修复或改动运行时目录；
+两个解析控制场已实现、65项宿主测试passed。用户另行批准的一次Docker正常启动已失败：
+Ingest初始化时旧`sailor-ingest.sock`不可访问，backend报告崩溃；五个套接字ACL读取error1920。
+0容器、0求解，四工况仍not_run；不是本次FEM或材料失败。详见[执行记录](project_control/ventricle_mixed_cube_control_execution_v01.md)。
+正常启动权限已用完；下一步需单独裁决运行环境恢复方式。本次未修复、隔离、删除或改权限。
+原四工况配置不变，待运行环境就绪后续行；
 不逐个工况拆审批，不自动重跑、换单元或跳到原心室主动/生长/FSI。
 新控制不能替代原八工况失败，也不能将原心室改判通过。
 

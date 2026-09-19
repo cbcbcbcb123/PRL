@@ -2,14 +2,14 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-19",
   "overall_status": "failed",
-  "summary": "压力载荷诊断已同步远端。四工况控制已获准并实现，65项宿主测试passed；Docker引擎停止使启动预检blocked，0新容器/求解。原数值资格failed，四工况not_run。",
+  "summary": "四工况已实现；获准的一次Docker正常启动因Ingest旧套接字访问异常失败（ACL error1920）。0容器/求解，科学代码未改；需单独裁决运行环境恢复，不再自动重启。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
     "scope": "FEM唯一主线；当前标准立方体资格仍failed，原心室1%门failed不变；主动/生长/FSI not_run。",
-    "current_stage": "Four controls implemented; native runtime preflight blocked before any solve",
+    "current_stage": "One authorized Docker start failed at Ingest socket; four controls remain NOT_RUN",
     "current_location": "../PRL-results/ventricle_fem/mixed_cube_load_diagnosis_v01_20260919",
-    "evidence_basis_commit": "a468bc1",
+    "evidence_basis_commit": "aa237b5",
     "evidence_checked_at": "2026-09-19",
     "git_workflow": {
       "branch": "main",
@@ -34,7 +34,7 @@
       "publication_readback": "project_control/evidence/mixed_cube_controls_v01_preflight/publication_readback.json",
       "remote_verified_at": "2026-09-19"
     },
-    "freshness_note": "此前离线诊断已发布a887f3c。四工况代码通过65项宿主测试；Docker Server=null，未创建结果目录或容器，4工况授权尚未消耗。需一次现有Docker启动许可，不自行修复。原数值/心室failed。",
+    "freshness_note": "18:06:25一次正常启动，18:06:59新日志报告Ingest套接字不可访问、backend崩溃。668保护文件/50旧改动/9源码哈希保持。启动权限已用完，原四工况0容器/求解；不自行修复或再启动。",
     "model_overview": {
       "model_type": "FEniCSx三维有限变形NH，P2位移/P1压力四面体",
       "simulated_object": "当前资格基准：单位立方体P2/P1；主研究对象仍为理想化三层心室",
@@ -44,7 +44,7 @@
         "重用3个κ100旧终态，生产与两档高阶积分一致性检查。",
         "固定F*下对精确压力力向量做P1可表示力空间投影。",
         "最细压力力余量约等容力1.49倍、约积分差32万倍；原精度failed不变。",
-        "四工况代码已就绪，Docker启动前预检blocked；无新容器或平衡，等待一次启动许可。"
+        "一次获准Docker启动失败；新鲜Ingest错误已保全，四工况仍未执行，待运行环境恢复决策。"
       ],
       "diagram": "docs/review/mixed_cube_load_diagnosis_v01_20260919/diagnostic.png",
       "diagram_caption": "保存网格、压力力余量与积分差；0新平衡，固定网格节点力欧氏范数，不是生理时间。",
@@ -95,7 +95,7 @@
     {
       "title": "四工况控制代码完成，原生运行尚未开始",
       "status": "blocked",
-      "summary": "65项宿主测试通过；引擎管道不存在，0容器/求解。不是材料或FEM收敛失败。",
+      "summary": "此前65项宿主测试通过、代码未改；一次获准Docker启动失败，0容器/求解，不是材料或FEM收敛失败。",
       "evidence_refs": ["project_control/ventricle_mixed_cube_control_execution_v01.md"]
     },
     {
@@ -110,10 +110,10 @@
   ],
   "blockers": [
     {
-      "title": "现有Docker运行时未就绪",
+      "title": "一次Docker启动复现Ingest套接字访问故障",
       "status": "blocked",
-      "summary": "Desktop/backend进程不存在；日志有idle graceful shutdown，旧1920故障复发未确认。已请求只启动一次，不修复或改目录。",
-      "evidence_refs": ["project_control/evidence/mixed_cube_controls_v01_preflight/preflight.json"]
+      "summary": "旧sailor-ingest.sock处理失败导致backend报告崩溃；五套接字ACL error1920。引擎未就绪，UI/错误报告进程存在不等于可运行；没有再启动、修复或改目录。",
+      "evidence_refs": ["project_control/evidence/mixed_cube_controls_v01_startup/startup.json"]
     },
     {
       "title": "压力力表示缺陷已检出，但因果控制尚未执行",
@@ -166,9 +166,9 @@
   ],
   "next_actions": [
     {
-      "title": "一次Docker启动许可后执行原四工况",
+      "title": "单独裁决运行环境恢复方式",
       "status": "blocked",
-      "summary": "科学矩阵已批准，尚未消耗。待用户允许启动现有Docker一次或手动启动，再执行1CPU/0GPU、最多4求解/1800秒；不修复/自动重试。",
+      "summary": "一次正常启动权限已用完；停止反复重启/目录隔离。需另行选择受控修复或替代运行环境；环境可用后续跑原四工况，不放宽门、不扩大矩阵。",
       "evidence_refs": [
         "project_control/ventricle_mixed_cube_control_batch_v01.md"
       ]

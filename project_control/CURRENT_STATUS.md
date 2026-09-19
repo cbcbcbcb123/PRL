@@ -12,7 +12,7 @@ git_remote_push_record: project_control/evidence/mixed_cube_controls_v01_preflig
 git_published_science_commit: a468bc11385d3e330665114381581b284698055f
 git_published_review_commit: a468bc11385d3e330665114381581b284698055f
 verified_commit: a468bc11385d3e330665114381581b284698055f
-current_lifecycle: fem_only_four_controls_ready_runtime_preflight_blocked
+current_lifecycle: fem_only_four_controls_blocked_after_one_failed_docker_start
 documentation_updated_at: 2026-09-19
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
@@ -30,6 +30,7 @@ external_results_storage_execution: project_control/external_result_store_execut
 current_clarification: results/ventricle_z0/v01_20260911/data_gaps.md
 current_geometry_decision: project_control/ventricle_fem_only_measured_contour_decision_v01.md
 execution_authorized: four_control_cases_one_container_no_retry_only
+runtime_start_authority: consumed_one_normal_start_failed_no_retry_or_repair
 current_execution_log: project_control/ventricle_mixed_cube_control_execution_v01.md
 latest_completed_execution_log: project_control/ventricle_mixed_cube_load_diagnosis_v01.md
 latest_completed_scientific_gate: F6-S1-S9_low_pressure_active_contour_two_mesh_passed
@@ -64,7 +65,19 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 其他分支/标签引用未变。见[远端回读记录](evidence/stage_main_sync_v01/publication_readback.json)。
 此passed仅指发布验收；下述数值资格仍failed，不能因同步成功改写科学结论。
 
-## 当前：2026-09-19 四工况实现就绪，Docker预检blocked，尚无新求解
+## 当前：2026-09-19 一次获准Docker启动失败，四工况仍0新求解
+
+用户批准仅正常启动现有Docker一次；18:06:25实际启动，18:06:59 backend报告崩溃。
+新日志直接指向Ingest初始化：`sailor-ingest.sock`重命名失败，文件不可访问；
+启动前五个套接字ACL读取error1920。原生引擎仍Server=null，故未创建容器或运行任何FEM。
+这是宿主运行时直接故障，不是科学模型失败；套接字异常反复出现的深层原因unknown。
+1启动、0重试、0修复/删除/隔离/安装/更新/拉取、0容器/求解/GPU。
+668保护文件、50旧改动、控制源码和配置核验未变。原四工况授权未消耗，但启动权限已用完。
+见[本次执行记录](ventricle_mixed_cube_control_execution_v01.md)及[启动失败证据](evidence/mixed_cube_controls_v01_startup/startup.json)。
+唯一下一步是单独裁决运行环境恢复方式，不能继续自动重启或轮换套接字目录。
+待环境就绪后原批次续行，不改本构、单元、误差门或原八工况/心室失败。
+
+## 上一步：四工况实现就绪，初次Docker预检blocked
 
 用户已整批批准四工况；同一求解器增加两个解析场、独立验证与配置入口，65项宿主测试passed。
 代码及blocked记录已普通推送main，远端回读a468bc1一致；[发布核验](evidence/mixed_cube_controls_v01_preflight/publication_readback.json)仅证明同步，不代表原生计算通过。
