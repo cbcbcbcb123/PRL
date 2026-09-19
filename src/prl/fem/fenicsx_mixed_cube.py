@@ -1,4 +1,4 @@
-"""One approved eight-case FEniCSx batch; no retry, continuation, or ventricular solve."""
+"""One registered FEniCSx cube batch; no retry, continuation, or ventricular solve."""
 import gc
 import json
 from pathlib import Path
@@ -30,6 +30,10 @@ def exact_displacement_numpy(x,kind):
         values[0]=.1*x[1]
     elif kind=='mms':
         values[0]=.002*np.sin(np.pi*x[0])*np.sin(np.pi*x[1])*np.sin(np.pi*x[2])
+    elif kind=='quadratic_volume':
+        values[0]=.002*x[0]**2
+    elif kind=='isochoric_mms':
+        values[0]=.002*np.sin(np.pi*x[1])*np.sin(np.pi*x[2])
     else:
         raise ValueError('Unknown registered case')
     return values
@@ -42,6 +46,10 @@ def exact_displacement_ufl(x,kind):
         return ufl.as_vector((.1*x[1],0.,0.))
     if kind=='mms':
         return ufl.as_vector((.002*ufl.sin(np.pi*x[0])*ufl.sin(np.pi*x[1])*ufl.sin(np.pi*x[2]),0.,0.))
+    if kind=='quadratic_volume':
+        return ufl.as_vector((.002*x[0]**2,0.,0.))
+    if kind=='isochoric_mms':
+        return ufl.as_vector((.002*ufl.sin(np.pi*x[1])*ufl.sin(np.pi*x[2]),0.,0.))
     raise ValueError('Unknown registered case')
 
 

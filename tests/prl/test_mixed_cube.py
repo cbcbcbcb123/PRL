@@ -51,7 +51,7 @@ def test_independent_quadrature_all_tetra_monomials_through_degree_eight():
             assert np.sum(w*q[:,0]**i*q[:,1]**j*q[:,2]**k)==pytest.approx(exact,rel=3e-13,abs=1e-15)
 
 
-@pytest.mark.parametrize('kind',['affine','shear','mms'])
+@pytest.mark.parametrize('kind',['affine','shear','mms','quadratic_volume','isochoric_mms'])
 def test_analytic_reference_gradient_and_body_against_independent_differences(kind):
     points=np.random.default_rng(19).uniform(.1,.9,(13,3)); h=1e-5
     reference=exact_fields(points,kind,1000.)
@@ -66,7 +66,7 @@ def test_analytic_reference_gradient_and_body_against_independent_differences(ki
     assert reference['J'].min()>1-.002*np.pi-1e-12
 
 
-@pytest.mark.parametrize('kind',['affine','shear'])
+@pytest.mark.parametrize('kind',['affine','shear','quadratic_volume'])
 def test_nonzero_analytical_patch_reconstructs_volume_force_and_every_face(kind):
     data=fixture(); case={'kind':kind,'kappa':1000.}
     exact=exact_fields(data['coordinates'],kind,1000.)

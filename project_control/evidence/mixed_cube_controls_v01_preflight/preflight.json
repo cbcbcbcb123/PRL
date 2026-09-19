@@ -1,0 +1,47 @@
+{
+  "schema": "prl.mixed_cube_controls.preflight.v1",
+  "date": "2026-09-19",
+  "status": "blocked",
+  "phase": "read_only_docker_version_before_result_creation",
+  "entry_command": "python -B -X utf8 -m prl run fem-mixed-cube --batch controls_v01",
+  "docker_version_exit_code": 1,
+  "client_version": "29.7.2",
+  "context": "desktop-linux",
+  "server": null,
+  "error": "failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.",
+  "observed_processes": {"Docker Desktop": [], "com.docker.backend": [], "vmmemWSL": []},
+  "service": {"name": "com.docker.service", "status": "Stopped", "start_type": "Manual"},
+  "backend_log_evidence": {
+    "path": "C:\\Users\\chenb\\AppData\\Local\\Docker\\log\\host\\com.docker.backend.exe.log",
+    "last_modified_local": "2026-09-19 15:59:38",
+    "engine_event_utc": "2026-09-19T02:02:11.450669400Z",
+    "engine_event": "engine linux/wsl shutdown requested (cancel cause: context canceled)",
+    "related_events": ["idle mode activated", "starting graceful shutdown", "Idle:shutdown State:stopped"],
+    "interpretation": "Log establishes idle-mode engine shutdown; it does not establish why the later Desktop/backend processes exited.",
+    "previous_socket_error_1920_recurrence": "unknown"
+  },
+  "runtime_socket_inventory": {
+    "scope": "metadata only, not an ACL or link-target validation",
+    "common_attributes": "Archive, ReparsePoint",
+    "common_bytes": 0,
+    "paths": [
+      "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\dockerEthernetVfkit",
+      "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\dockerInference",
+      "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\sailor-ingest.sock",
+      "C:\\Users\\chenb\\AppData\\Local\\Docker\\run\\userAnalyticsOtlpHttp.sock",
+      "C:\\Users\\chenb\\AppData\\Local\\docker-secrets-engine\\engine.sock"
+    ]
+  },
+  "result_path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_controls_v01_20260919",
+  "result_path_exists_after_preflight": false,
+  "container_invocations": 0,
+  "equilibrium_solves": 0,
+  "automatic_retries": 0,
+  "runtime_start_attempts": 0,
+  "GPU": 0,
+  "all_four_cases": "not_run",
+  "host_implementation_tests": "passed",
+  "native_implementation_validation": "not_run",
+  "next_authority_needed": "Start existing Docker Desktop once only, without repair, moves, deletions, install, update or pull; await user decision.",
+  "original_four_case_authorization_consumed": false
+}

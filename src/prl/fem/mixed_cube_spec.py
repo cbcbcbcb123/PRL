@@ -30,6 +30,17 @@ def guarded_configuration():
     return result
 
 
+def control_configuration():
+    """Four separately authorized controls; never replaces the original MMS gates."""
+    result=guarded_configuration()
+    result.update(schema='prl.mixed_cube_controls.v1',maximum_equilibrium_solves=4,
+        cases=[{'name':'patch_quadratic_volume','kind':'quadratic_volume','n':2,'kappa':1000.}]
+            +[{'name':f'isochoric_k1000_n{n}','kind':'isochoric_mms','n':n,'kappa':1000.} for n in [2,4,8]],
+        pressure_relative_gate='unknown: exact pressure is zero in isochoric controls',
+        scope='four diagnostic controls only; original eight-case and ventricular failures unchanged')
+    return result
+
+
 def cube(n):
     """Six Freudenthal tetrahedra per voxel, identical unit-cube boundary for all n."""
     if n not in [2, 4, 8]:
@@ -59,6 +70,6 @@ def disposition(kind, audit):
     """Precision/nonconvergence failures may continue only in the independent MMS set."""
     if audit['hard_failures']:
         return 'stop_batch'
-    if kind != 'mms' and audit['status'] != 'passed':
+    if kind not in {'mms','isochoric_mms'} and audit['status'] != 'passed':
         return 'stop_batch'
     return 'continue_registered_cases'

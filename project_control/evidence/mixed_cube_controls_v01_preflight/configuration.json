@@ -1,0 +1,78 @@
+{
+  "schema": "prl.mixed_cube_controls.v1",
+  "mu": 1.0,
+  "cases": [
+    {
+      "name": "patch_quadratic_volume",
+      "kind": "quadratic_volume",
+      "n": 2,
+      "kappa": 1000.0
+    },
+    {
+      "name": "isochoric_k1000_n2",
+      "kind": "isochoric_mms",
+      "n": 2,
+      "kappa": 1000.0
+    },
+    {
+      "name": "isochoric_k1000_n4",
+      "kind": "isochoric_mms",
+      "n": 4,
+      "kappa": 1000.0
+    },
+    {
+      "name": "isochoric_k1000_n8",
+      "kind": "isochoric_mms",
+      "n": 8,
+      "kappa": 1000.0
+    }
+  ],
+  "solver": {
+    "snes_type": "newtonls",
+    "snes_linesearch_type": "bt",
+    "snes_atol": 1e-11,
+    "snes_rtol": 1e-10,
+    "snes_stol": 0.0,
+    "snes_max_it": 30,
+    "ksp_type": "preonly",
+    "pc_type": "lu",
+    "pc_factor_mat_solver_type": "mumps",
+    "mat_mumps_icntl_14": 100
+  },
+  "quadrature_degree": 6,
+  "independent_quadrature": "six-point-per-axis Gauss-Duffy; total polynomial degree >= 8",
+  "maximum_equilibrium_solves": 4,
+  "diagnostic_trace": true,
+  "resources": {
+    "seconds": 1800,
+    "stop_reserve_seconds": 120,
+    "threads": 1,
+    "gpu": 0,
+    "automatic_retries": 0
+  },
+  "patch_gates": {
+    "relative_u_L2": 1e-08,
+    "relative_u_H1": 1e-08,
+    "scaled_pressure_L2": 1e-07,
+    "max_abs_J_error": 1e-09,
+    "face_force_scaled_error": 1e-07
+  },
+  "mms_gates": {
+    "EOC_u_L2": 2.5,
+    "EOC_u_H1": 1.5,
+    "EOC_pressure_L2": 1.5,
+    "fine_relative_u_L2": 0.02,
+    "fine_relative_u_H1": 0.15,
+    "fine_relative_pressure_L2": 0.15,
+    "fine_J_error_RMS": 0.001
+  },
+  "scope": "four diagnostic controls only; original eight-case and ventricular failures unchanged",
+  "trial_guard": {
+    "method": "sampled_path_bernstein_cubic",
+    "floor": 1e-12,
+    "max_halvings": 20,
+    "sampling": "original production quadrature plus original 56 extra points",
+    "scope": "trial admission only; accepted-state safety and accuracy gates unchanged"
+  },
+  "pressure_relative_gate": "unknown: exact pressure is zero in isochoric controls"
+}

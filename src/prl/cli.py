@@ -406,9 +406,9 @@ def _parser() -> argparse.ArgumentParser:
         quality.add_argument('--workspace',type=Path)
         unstructured=group.add_parser('fem-unstructured-3d',help='one fixed-boundary candidate; quality gate before two conditional FEM states')
         unstructured.add_argument('--workspace',type=Path)
-        mixed_cube=group.add_parser('fem-mixed-cube',help='approved two patches and six 3D MMS cases; no retries')
+        mixed_cube=group.add_parser('fem-mixed-cube',help='registered bounded cube benchmark or control batch; no retries')
         mixed_cube.add_argument('--workspace',type=Path)
-        mixed_cube.add_argument('--batch',choices=['v01','v02','v03'],default='v01')
+        mixed_cube.add_argument('--batch',choices=['v01','v02','v03','controls_v01'],default='v01')
     return parser
 
 

@@ -33,6 +33,18 @@ def exact_kinematics(points, kind):
     elif kind == 'shear':
         gradient[...,0,1] = .1
         displacement[...,0] = .1*points[...,1]
+    elif kind == 'quadratic_volume':
+        displacement[...,0] = .002*points[...,0]**2
+        gradient[...,0,0] = .004*points[...,0]
+        hessian[...,0,0,0] = .004
+    elif kind == 'isochoric_mms':
+        sine,cosine=np.sin(np.pi*points),np.cos(np.pi*points)
+        value=.002*sine[...,1]*sine[...,2]
+        displacement[...,0]=value
+        gradient[...,0,1]=.002*np.pi*cosine[...,1]*sine[...,2]
+        gradient[...,0,2]=.002*np.pi*sine[...,1]*cosine[...,2]
+        hessian[...,0,1,1]=hessian[...,0,2,2]=-np.pi**2*value
+        hessian[...,0,1,2]=hessian[...,0,2,1]=.002*np.pi**2*cosine[...,1]*cosine[...,2]
     elif kind == 'mms':
         sine, cosine = np.sin(np.pi*points), np.cos(np.pi*points)
         value = .002*np.prod(sine, axis=-1)
@@ -230,9 +242,9 @@ def audit(data,state,metadata,case,config):
         'positive_J':metrics['minimum_sampled_J']>0,
         'linear_solver':metadata['linear_solver']['status']=='passed',
         'initial_zero':bool(np.all(state['initial_mixed']==0))}
-    # For affine patches, constant Piola is exactly representable on every face.
+    # Integrate actual (possibly nonconstant) numerical Piola on every patch face.
     face_errors=[]
-    if case['kind']!='mms':
+    if case['kind'] not in {'mms','isochoric_mms'}:
         computed=numerical_face_forces(data,state,case)
         face_errors=np.linalg.norm(computed-values['face_exact'],axis=1).tolist()
         reaction_error=float(np.linalg.norm(reaction.sum(axis=0)-values['face_exact'][0]))
@@ -286,7 +298,7 @@ def verify(root):
     checks['metrics_readback']=maximum_metric_delta<=1e-10
     checks['convergence_verdict']=outcome['status']==summary['convergence']['status']
     checks['no_unregistered_cases']=set(reports).issubset({case['name'] for case in config['cases']})
-    checks['invocation_limit']=summary['attempted_solves']<=8 and summary['automatic_retries']==0
+    checks['invocation_limit']=summary['attempted_solves']<=config['maximum_equilibrium_solves'] and summary['automatic_retries']==0
     return {'status':('not_run' if not reports else 'passed') if all(checks.values()) else 'failed','checks':checks,
         'qualification':outcome['status'],'cases':reports,'convergence':outcome,
         'evaluated_states':len(reports),'maximum_metric_delta':maximum_metric_delta,
@@ -294,6 +306,8 @@ def verify(root):
 
 
 def convergence(cases,config):
+    if config['schema']=='prl.mixed_cube_controls.v1':
+        return control_convergence(cases,config)
     groups={}
     for kappa in [100,1000]:
         names=[f'mms_k{kappa}_n{n}' for n in [2,4,8]]
@@ -321,4 +335,41 @@ def convergence(cases,config):
     status=('passed' if statuses=={'passed'} else 'not_run' if statuses=={'not_run'}
             else 'failed' if 'failed' in statuses else 'blocked')
     return {'status':status,'groups':groups,
+        'does_not_qualify_original_ventricle':True,'inf_sup_or_locking_proof':False}
+
+
+def control_convergence(cases,config):
+    """Evaluate only the approved, defined control gates; zero-p relative error is unknown."""
+    patch=cases.get('patch_quadratic_volume')
+    patch_status=patch['status'] if patch else 'not_run'
+    names=[f'isochoric_k1000_n{n}' for n in [2,4,8]]
+    present=[name for name in names if name in cases]
+    checks={}; orders={}
+    if not present:
+        shear_status='not_run'
+    elif len(present)!=3:
+        shear_status='blocked'
+    elif any(cases[name]['status']!='passed' for name in names):
+        shear_status='failed'
+    else:
+        metrics=[cases[name]['metrics'] for name in names]
+        for label,key in [('u_L2','relative_u_L2'),('u_H1','relative_u_H1')]:
+            errors=[item[key] for item in metrics]
+            finite=all(math.isfinite(value) and value>0 for value in errors)
+            orders[label]=[math.log(errors[i]/errors[i+1],2) for i in range(2)] if finite else [None,None]
+            checks[label+'_decreases']=finite and all(errors[i+1]<errors[i] for i in range(2))
+            checks[label+'_order']=finite and orders[label][-1]>=config['mms_gates']['EOC_'+label]
+            checks[label+'_fine']=finite and errors[-1]<=config['mms_gates']['fine_relative_'+label]
+        checks['fine_J_error']=metrics[-1]['J_error_RMS']<=config['mms_gates']['fine_J_error_RMS']
+        checks['zero_pressure_relative_undefined']=all(item['relative_pressure_L2'] is None for item in metrics)
+        shear_status='passed' if all(checks.values()) else 'failed'
+    statuses={patch_status,shear_status}
+    status=('passed' if statuses=={'passed'} else 'failed' if 'failed' in statuses
+            else 'not_run' if statuses=={'not_run'} else 'blocked')
+    return {'status':status,'groups':{'quadratic_volume':{'status':patch_status},
+        'isochoric':{'status':shear_status,'checks':checks,'EOC':orders,
+            'relative_pressure_qualification':'unknown','relative_pressure_error':None,
+            'reason':'Exact p*=0; relative pressure norm and convergence order undefined'}},
+        'scope':'only the defined four-control gates; no original benchmark qualification',
+        'original_eight_case_qualification':'failed_unchanged',
         'does_not_qualify_original_ventricle':True,'inf_sup_or_locking_proof':False}

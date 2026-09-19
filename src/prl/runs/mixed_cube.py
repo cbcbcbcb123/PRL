@@ -1,4 +1,4 @@
-"""Single approved, create-only eight-case batch using the existing bounded runtime."""
+"""Registered create-only cube batches using one existing bounded runtime."""
 import ast
 import json
 from pathlib import Path
@@ -7,7 +7,7 @@ import subprocess
 import sys
 import os
 import numpy as np
-from prl.fem.mixed_cube_spec import configuration,guarded_configuration,cube
+from prl.fem.mixed_cube_spec import configuration,guarded_configuration,control_configuration,cube
 from prl.result_store import result_path,result_admission
 from prl.runs.fenicsx_runtime import read_docker,IMAGE,TAG,save_json,invoke_bounded
 from prl.runs.fenicsx_ring import digest
@@ -27,7 +27,11 @@ BATCHES={
     'v03':{'result':Path('results/ventricle_fem/mixed_cube_benchmark_v03_20260919'),
         'contract':'project_control/ventricle_mixed_cube_benchmark_v03.md',
         'authorization':'new_FEM_authorization: user_confirmed_positive_J_same_eight_case_v03_20260919',
-        'container':'prl-mixed-cube-benchmark-v03-20260919'}}
+        'container':'prl-mixed-cube-benchmark-v03-20260919'},
+    'controls_v01':{'result':Path('results/ventricle_fem/mixed_cube_controls_v01_20260919'),
+        'contract':'project_control/ventricle_mixed_cube_control_batch_v01.md',
+        'authorization':'authorization: user_confirmed_four_control_cases_20260919',
+        'container':'prl-mixed-cube-controls-v01-20260919'}}
 V01_MANIFEST='5d3c7d623c4cb80404946a7bd04f1be104296b48ab0f213bb1a5b240c4b575fb'
 PREREQUISITES={
     'results/ventricle_fem/volume_projection_audit_v01_20260918':'78a9542bd69d6373a4e25f4bec421f6ea5441a49e4d5334932811201cd85628b',
@@ -81,7 +85,7 @@ def run(workspace,batch='v01'):
     selected=batch_spec(batch)
     root=result_path(workspace,selected['result'],new=True)
     if selected['authorization'] not in (workspace/selected['contract']).read_text(encoding='utf-8'):
-        raise ValueError('Explicit eight-case authorization missing')
+        raise ValueError('Explicit registered batch authorization missing')
     references,dirty_count=protection(workspace)
     config=configuration()
     if batch in {'v02','v03'}:
@@ -102,13 +106,32 @@ def run(workspace,batch='v01'):
                 raise ValueError('Physical/numerical configuration drift from frozen parent')
     if batch=='v03':
         config=guarded_configuration()
+    if batch=='controls_v01':
+        config=control_configuration()
+        ancestors=[(RESULT,V01_MANIFEST),
+            (BATCHES['v02']['result'],'c59044955f3609509f8b8c61d620384ae800f9e2cebfa469d005cd61a9aaedda'),
+            (BATCHES['v03']['result'],'084a675f13501added2e056f5bc3cca125a2298f09d290240282fc2b570b77b0'),
+            ('results/ventricle_fem/mixed_cube_load_diagnosis_v01_20260919',
+             'fae715c181ee24be5ca384e6a43c0257fa52ffcad1d34c5a6a0a58e85652fac1')]
+        for identifier,expected in ancestors:
+            previous=result_path(workspace,identifier)
+            if digest(previous/'manifest.json')!=expected:
+                raise ValueError('Frozen control prerequisite manifest drift')
+            for item in json.loads((previous/'manifest.json').read_text(encoding='utf-8'))['files']:
+                path=previous/item['path']
+                if digest(path)!=item['sha256']:
+                    raise ValueError('Frozen control prerequisite drift: '+str(path))
+                references[str(path)]=item['sha256']
+            references[str(previous/'manifest.json')]=expected
     sources=list(dict.fromkeys([selected['contract'],*SOURCES]))
-    if batch=='v03':
+    if batch in {'v03','controls_v01'}:
         sources+=['src/prl/fem/positive_j.py','tests/prl/test_positive_j.py','src/prl/verification/positive_j.py']
+    if batch=='controls_v01':
+        sources.append('tests/prl/test_mixed_cube_controls.py')
     for name in sources:
         if name.endswith('.py'):
             ast.parse((workspace/name).read_text(encoding='utf-8'))
-    admission=result_admission(workspace,256*1024**2,64*1024**2)
+    admission=result_admission(workspace,(128 if batch=='controls_v01' else 256)*1024**2,64*1024**2)
     if not admission['can_start']:
         raise RuntimeError('Storage admission blocked')
     version=json.loads(read_docker('version','--format','{{json .}}'))
@@ -132,8 +155,10 @@ def run(workspace,batch='v01'):
         PYTEST_DISABLE_PLUGIN_AUTOLOAD='1',OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1')
     command=[sys.executable,'-B','-X','utf8','-m','pytest','-q','-p','no:cacheprovider',
              'tests/prl/test_mixed_cube.py','tests/prl/test_ventricle_3d.py','tests/prl/test_volume_projection.py']
-    if batch=='v03':
+    if batch in {'v03','controls_v01'}:
         command.append('tests/prl/test_positive_j.py')
+    if batch=='controls_v01':
+        command.append('tests/prl/test_mixed_cube_controls.py')
     tests=subprocess.run(command,cwd=workspace,env=environment,capture_output=True,text=True,encoding='utf-8',timeout=60)
     save_json(root/'tests.json',{'command':command,'stdout':tests.stdout,'stderr':tests.stderr,'exit_code':tests.returncode})
     if tests.returncode:

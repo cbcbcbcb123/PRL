@@ -47,3 +47,11 @@ X=0施加准确位移，其他五面准确参考牵引；体力为−Div(P*)，�
 
 用户对完整四工况/一次容器/资源和停止范围回复：“同意该四工况批次”。
 上述方案由待确认转为已授权；当前尚未启动，最多4次求解与一次容器，不扩大范围。
+
+## 执行入口冻结
+
+结果ID：`mixed_cube_controls_v01_20260919`，仅在已批准的
+`E:\Temp-Projects\PRL-results\ventricle_fem\mixed_cube_controls_v01_20260919`创建新包。
+入口：`python -B -X utf8 -m prl run fem-mixed-cube --batch controls_v01`。
+复用唯一`fenicsx_mixed_cube.py`，只增两种解析控制场和有界配置，不替换求解算法。
+启动前65项宿主测试passed；原始八工况的配置和原门保持，原失败包先验哈希核验后运行。
