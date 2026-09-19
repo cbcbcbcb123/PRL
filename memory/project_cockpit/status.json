@@ -24,12 +24,16 @@
         "project_control/main_branch_stage_commit_decision_v01.md",
         "project_control/remote_history_integration_execution_v01.md",
         "project_control/evidence/git_main_integration_v01/push_execution_v01.json",
-        "project_control/main_branch_stage_push_decision_v01.md"
+        "project_control/main_branch_stage_push_decision_v01.md",
+        "project_control/evidence/stage_main_sync_v01/publication_readback.json"
       ],
-      "current_stage_push": "not_run",
-      "stage_push_policy": "standing_user_authorization_2026_09_19"
+      "current_stage_push": "passed",
+      "stage_push_policy": "standing_user_authorization_2026_09_19",
+      "published_science_commit": "80a2236e2a144a77f201a7def1e1c7d316ee898b",
+      "published_review_commit": "fd6090de19e51c22155b80d2bb51ee0da6b37986",
+      "remote_verified_at": "2026-09-19"
     },
-    "freshness_note": "科学证据基于80a2236：一次v03容器72.038秒，6次SNES、5终态、37监测态、31获准候选及1拒绝候选独立核验。54宿主测试passed；434保护文件与50旧改动保持。2026-09-19新增长期阶段普通推送规则；本次仅发布既有成果与小型审阅包，不重跑、不新增全局记忆。",
+    "freshness_note": "科学证据基于80a2236：一次v03容器72.038秒，6次SNES、5终态、37监测态、31获准候选及1拒绝候选独立核验。54宿主测试passed，科学资格仍failed。2026-09-19已补发4个科学阶段提交及小型在线审阅包；远端main回读为fd6090d，其他引用未变。发布前204原包载荷文件和50旧改动哈希核验通过；本次仅同步既有成果，不重跑、不新增全局记忆。",
     "model_overview": {
       "model_type": "FEniCSx三维有限变形NH，P2位移/P1压力四面体",
       "simulated_object": "当前资格基准：单位立方体P2/P1；主研究对象仍为理想化三层心室",

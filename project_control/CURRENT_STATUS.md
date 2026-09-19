@@ -8,7 +8,9 @@ git_stage_push_decision: project_control/main_branch_stage_push_decision_v01.md
 git_integration_decision: project_control/remote_history_integration_decision_v01.md
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
 git_remote_push: passed
-git_remote_push_record: project_control/evidence/git_main_integration_v01/push_execution_v01.json
+git_remote_push_record: project_control/evidence/stage_main_sync_v01/publication_readback.json
+git_published_science_commit: 80a2236e2a144a77f201a7def1e1c7d316ee898b
+git_published_review_commit: fd6090de19e51c22155b80d2bb51ee0da6b37986
 verified_commit: 80a2236e2a144a77f201a7def1e1c7d316ee898b
 current_lifecycle: fem_only_guard_verified_accuracy_and_high_kappa_equilibrium_failed
 documentation_updated_at: 2026-09-19
@@ -58,6 +60,9 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 见[长期规则](main_branch_stage_push_decision_v01.md)。
 [最新在线审阅包](../docs/review/mixed_cube_benchmark_v03_20260919/README.md)含原样PNG与小型摘要；
 完整原始状态仍在本机PRL-results，仅Git克隆不能完成保存态复算。本次不新增科学计算。
+已普通推送4个未同步科学阶段提交及审阅页；远端main回读为fd6090d，与该次发布的本地HEAD一致，
+其他分支/标签引用未变。见[远端回读记录](evidence/stage_main_sync_v01/publication_readback.json)。
+此passed仅指发布验收；下述数值资格仍failed，不能因同步成功改写科学结论。
 
 ## 当前：2026-09-19 v03候选正J保护passed，场精度与高κ粗网格平衡仍failed
 

@@ -1,0 +1,59 @@
+{
+  "schema_version": "prl.stage_main_publication.v1",
+  "status": "passed",
+  "verified_at": "2026-09-19",
+  "scope": "publication of completed stages and small expert review; no new scientific run",
+  "authorization": "project_control/main_branch_stage_push_decision_v01.md",
+  "remote": "origin",
+  "remote_url": "https://github.com/cbcbcbcb123/PRL.git",
+  "allowed_ref": "refs/heads/main",
+  "command": "git -c push.followTags=false -c gc.auto=0 -c maintenance.auto=false push --no-follow-tags origin refs/heads/main:refs/heads/main",
+  "remote_before": {
+    "refs/heads/main": "9c57be76f13d5a678363d4d9791017610a279dad",
+    "refs/tags/prl-cell-engine-import-20260829": "874c1a273281ccd92f89d7f71b5e5dec5e33b66a",
+    "refs/tags/prl-cell-engine-import-20260829^{}": "5864a63d5b77943812ddfeb2b44442dab4f8a068",
+    "refs/tags/prl-monorepo-integration-20260829": "2c2050d38dfb7d971d5c15d386bf8bb457be87d5",
+    "refs/tags/prl-monorepo-integration-20260829^{}": "57733e86b3a60563c293e0860a76cbe72980344c"
+  },
+  "remote_after": {
+    "refs/heads/main": "fd6090de19e51c22155b80d2bb51ee0da6b37986",
+    "refs/tags/prl-cell-engine-import-20260829": "874c1a273281ccd92f89d7f71b5e5dec5e33b66a",
+    "refs/tags/prl-cell-engine-import-20260829^{}": "5864a63d5b77943812ddfeb2b44442dab4f8a068",
+    "refs/tags/prl-monorepo-integration-20260829": "2c2050d38dfb7d971d5c15d386bf8bb457be87d5",
+    "refs/tags/prl-monorepo-integration-20260829^{}": "57733e86b3a60563c293e0860a76cbe72980344c"
+  },
+  "push_exit_code": 0,
+  "remote_main_matched_local_head_at_readback": true,
+  "fast_forward": true,
+  "other_remote_refs_unchanged": true,
+  "completed_stage_commits_published": [
+    "8d17942",
+    "7c5c931",
+    "7c2949f",
+    "80a2236"
+  ],
+  "publication_commit": "fd6090de19e51c22155b80d2bb51ee0da6b37986",
+  "scientific_qualification": "failed",
+  "scientific_result_manifest_sha256": "084a675f13501added2e056f5bc3cca125a2298f09d290240282fc2b570b77b0",
+  "preflight": {
+    "source_payload_files_hash_verified": 204,
+    "preexisting_worktree_files_hash_verified": 50,
+    "preexisting_files_staged": 0,
+    "online_review_links_verified": 20,
+    "cockpit_html_links_verified": 32,
+    "cockpit_evidence_paths_verified": 404,
+    "copied_preview_bytes": 373656,
+    "copied_preview_sha256": "8963f5948696a357b86b25e7cfcdbbc63e11abe77126fe1e60800457bfc188f0",
+    "stage_commit_new_blobs_before_review": 78,
+    "stage_commit_new_blob_bytes_before_review": 2012798,
+    "staged_publication_files": 11,
+    "staged_whitespace_check": "passed"
+  },
+  "expert_entry": "docs/review/mixed_cube_benchmark_v03_20260919/README.md",
+  "raw_result_arrays_uploaded": false,
+  "new_scientific_runs": 0,
+  "gpu_runs": 0,
+  "deletion_operations": 0,
+  "global_memory_updates": 0,
+  "record_boundary": "This record verifies the fd6090d publication snapshot. The later commit containing this record must itself be ordinarily pushed and checked; this record does not claim its own future commit hash."
+}
