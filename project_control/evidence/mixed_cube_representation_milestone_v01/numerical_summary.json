@@ -1,0 +1,248 @@
+{
+  "delivery_integrity": "failed",
+  "all_matrix_equation_status": "failed",
+  "candidate_k100_qualification": {
+    "status": "failed",
+    "checks": {
+      "u_L2_decreases": true,
+      "u_L2_order": false,
+      "u_L2_fine": true,
+      "u_H1_decreases": true,
+      "u_H1_order": true,
+      "u_H1_fine": true,
+      "pressure_L2_decreases": true,
+      "pressure_L2_order": true,
+      "pressure_L2_fine": true,
+      "fine_J_error": true
+    },
+    "EOC": {
+      "u_L2": [
+        3.3877388209903825,
+        3.372741604862359
+      ],
+      "u_H1": [
+        2.3543714715141677,
+        2.520980100234828
+      ],
+      "pressure_L2": [
+        2.634997794733544,
+        2.704074418588603
+      ]
+    },
+    "registered_gate_status": "failed"
+  },
+  "paired_pressure_contribution": "unknown",
+  "completed_equilibria": 6,
+  "accepted_states_checked": 81,
+  "accepted_paths_checked": 73,
+  "saved_candidate_vectors": 75,
+  "SNES_calls": 8,
+  "container_invocations": 2,
+  "automatic_retries": 0,
+  "quadrature_control": {
+    "status": "passed",
+    "norm_scope": "coordinate-aligned nodal Euclidean norms; not field L2",
+    "u": {
+      "relative_nodal_l2": 2.878673415380482e-07,
+      "absolute_nodal_l2": 1.3222197278809247e-08,
+      "maximum_absolute_component": 1.2496070344659212e-09,
+      "maximum_nodal_magnitude": 1.736403214359037e-09,
+      "maximum_coordinate_difference": 0.0,
+      "nodes": 4913
+    },
+    "pressure": {
+      "relative_nodal_l2": 1.2058244792045512e-08,
+      "absolute_nodal_l2": 7.044299404346417e-08,
+      "maximum_absolute_component": 1.3098551077117548e-08,
+      "maximum_nodal_magnitude": 1.3098551077117548e-08,
+      "maximum_coordinate_difference": 0.0,
+      "nodes": 729
+    },
+    "reference_root": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_benchmark_v03_20260919",
+    "reference_case": "mms_k100_n8",
+    "current_case": "mms_p2p1_q8_n8",
+    "reference_quadrature_degree": 6,
+    "current_quadrature_degree": 8,
+    "equation_qualified_pair": true,
+    "interpretation": "Only n8 is a matched integration control; old n2/n4 remain historical."
+  },
+  "cases": [
+    {
+      "name": "patch_cubic_volume_p3p2",
+      "n": 2,
+      "role": "prerequisite",
+      "equilibrium": "passed",
+      "case_path_status": "passed",
+      "metrics": {
+        "relative_u_L2": 6.100202713570015e-11,
+        "relative_u_H1": 2.278017024498656e-10,
+        "scaled_pressure_L2": 8.003436298185642e-14,
+        "relative_pressure_L2": 8.003436298185642e-14,
+        "J_error_RMS": 2.543903031798516e-13,
+        "max_abs_J_error": 3.815614491031738e-12,
+        "projection_defect_RMS": 2.5439330047149424e-13,
+        "max_abs_projection_defect": 3.814834949669721e-12,
+        "max_abs_J_minus_one": 0.006000000002616357,
+        "minimum_sampled_J": 0.9999999999998922,
+        "reference_volume": 1.0000000000000002,
+        "evaluation_points_per_cell": 216,
+        "face_force_scaled_error": 1.785279073886849e-13
+      },
+      "DOF": 1154,
+      "solver_seconds": 0.9315113490000044,
+      "process_peak_rss_bytes": 240685056,
+      "independent_comparison_eligible": true
+    },
+    {
+      "name": "mms_p2p1_q8_n8",
+      "n": 8,
+      "role": "quadrature_control",
+      "equilibrium": "passed",
+      "case_path_status": "passed",
+      "metrics": {
+        "relative_u_L2": 0.0432387485891505,
+        "relative_u_H1": 0.4364849010003371,
+        "scaled_pressure_L2": 0.004605717893671462,
+        "relative_pressure_L2": 0.02073301483644578,
+        "J_error_RMS": 0.0015618142236131609,
+        "max_abs_J_error": 0.013781721081391751,
+        "projection_defect_RMS": 0.0015835035119244353,
+        "max_abs_projection_defect": 0.013673306853584985,
+        "max_abs_J_minus_one": 0.014206659523513743,
+        "minimum_sampled_J": 0.9857933404764863,
+        "reference_volume": 0.9999999999999997,
+        "evaluation_points_per_cell": 216
+      },
+      "DOF": 15468,
+      "solver_seconds": 12.58698966,
+      "process_peak_rss_bytes": 550969344,
+      "independent_comparison_eligible": true
+    },
+    {
+      "name": "mms_p3p1_n2",
+      "n": 2,
+      "role": "displacement_control",
+      "equilibrium": "passed",
+      "case_path_status": "passed",
+      "metrics": {
+        "relative_u_L2": 33.68943312851552,
+        "relative_u_H1": 71.1480259519514,
+        "scaled_pressure_L2": 0.07521740259264405,
+        "relative_pressure_L2": 0.3385972740655761,
+        "J_error_RMS": 0.23930303254993526,
+        "max_abs_J_error": 2.6748144951572983,
+        "projection_defect_RMS": 0.2395199320577662,
+        "max_abs_projection_defect": 2.676772132147715,
+        "max_abs_J_minus_one": 2.6748144951572983,
+        "minimum_sampled_J": 0.13653669978635605,
+        "reference_volume": 1.0000000000000002,
+        "evaluation_points_per_cell": 216
+      },
+      "DOF": 1056,
+      "solver_seconds": 3.268899272999988,
+      "process_peak_rss_bytes": 636538880,
+      "independent_comparison_eligible": true
+    },
+    {
+      "name": "mms_p3p2_n2",
+      "n": 2,
+      "role": "candidate",
+      "equilibrium": "passed",
+      "case_path_status": "passed",
+      "metrics": {
+        "relative_u_L2": 0.5193579937879554,
+        "relative_u_H1": 1.7572311510552143,
+        "scaled_pressure_L2": 0.014727568843754636,
+        "relative_pressure_L2": 0.06629735263679669,
+        "J_error_RMS": 0.006049358543358931,
+        "max_abs_J_error": 0.06699029747103702,
+        "projection_defect_RMS": 0.0061227956144661875,
+        "max_abs_projection_defect": 0.0682262307829101,
+        "max_abs_J_minus_one": 0.06654337711720282,
+        "minimum_sampled_J": 0.9361593138915415,
+        "reference_volume": 1.0000000000000002,
+        "evaluation_points_per_cell": 216
+      },
+      "DOF": 1154,
+      "solver_seconds": 0.7664613949999648,
+      "process_peak_rss_bytes": 636538880,
+      "independent_comparison_eligible": true
+    },
+    {
+      "name": "mms_p3p1_n4",
+      "n": 4,
+      "role": "displacement_control",
+      "equilibrium": "failed",
+      "case_path_status": "failed",
+      "metrics": null,
+      "DOF": 6716,
+      "solver_seconds": null,
+      "process_peak_rss_bytes": null,
+      "independent_comparison_eligible": null
+    },
+    {
+      "name": "mms_p3p2_n4",
+      "n": 4,
+      "role": "candidate",
+      "equilibrium": "passed",
+      "case_path_status": "passed",
+      "metrics": {
+        "relative_u_L2": 0.04961989237224205,
+        "relative_u_H1": 0.34363109790465435,
+        "scaled_pressure_L2": 0.002370924294282605,
+        "relative_pressure_L2": 0.010672909132579506,
+        "J_error_RMS": 0.0012409764820047735,
+        "max_abs_J_error": 0.019534913783224583,
+        "projection_defect_RMS": 0.0012555243460069482,
+        "max_abs_projection_defect": 0.019675615355237274,
+        "max_abs_J_minus_one": 0.01883609654858387,
+        "minimum_sampled_J": 0.9811639034514161,
+        "reference_volume": 1.0,
+        "evaluation_points_per_cell": 216
+      },
+      "DOF": 7320,
+      "solver_seconds": 4.580638512,
+      "process_peak_rss_bytes": 337588224,
+      "independent_comparison_eligible": true
+    },
+    {
+      "name": "mms_p3p1_n8",
+      "n": 8,
+      "role": "displacement_control",
+      "equilibrium": "failed",
+      "case_path_status": "failed",
+      "metrics": null,
+      "DOF": 47604,
+      "solver_seconds": null,
+      "process_peak_rss_bytes": null,
+      "independent_comparison_eligible": null
+    },
+    {
+      "name": "mms_p3p2_n8",
+      "n": 8,
+      "role": "candidate",
+      "equilibrium": "passed",
+      "case_path_status": "passed",
+      "metrics": {
+        "relative_u_L2": 0.0047902637620545,
+        "relative_u_H1": 0.05986897614058546,
+        "scaled_pressure_L2": 0.00036383977655004185,
+        "relative_pressure_L2": 0.0016378544364747914,
+        "J_error_RMS": 0.00022080699125027887,
+        "max_abs_J_error": 0.004199806473406009,
+        "projection_defect_RMS": 0.00022351526499650275,
+        "max_abs_projection_defect": 0.004222234432124131,
+        "max_abs_J_minus_one": 0.00807182758094449,
+        "minimum_sampled_J": 0.9919281724190555,
+        "reference_volume": 1.000000000000001,
+        "evaluation_points_per_cell": 216
+      },
+      "DOF": 51788,
+      "solver_seconds": 46.842511876,
+      "process_peak_rss_bytes": 1397129216,
+      "independent_comparison_eligible": true
+    }
+  ],
+  "original_ventricle": "failed",
+  "full_report_sha256": "c92d82e5ef273e3539da183be0f2f0d0c325667231c6bfa69a64e206c748acbd"
+}

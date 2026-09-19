@@ -1,4 +1,4 @@
-"""Pending eight-case proposal, deliberately not registered in a runtime entrypoint."""
+"""Frozen eight-case specification; runtime authority is checked separately."""
 from itertools import combinations
 
 from .mixed_cube_spec import cube, guarded_configuration
@@ -26,6 +26,19 @@ def configuration():
                   scope='pending same-load representation comparison; no ventricular qualification')
     result['trial_guard']['sampling'] = (
         'production quadrature plus original 56 extra points plus candidate reference nodes')
+    return result
+
+
+def continuation_configuration():
+    """Only the three unattempted cases after v02; no retry of its failed n4."""
+    result = configuration()
+    matrix = result['cases']
+    names = ('mms_p3p2_n4', 'mms_p3p2_n8', 'mms_p3p1_n8')
+    result['full_matrix_cases'] = matrix
+    result['cases'] = [next(case for case in matrix if case['name'] == name) for name in names]
+    result['maximum_equilibrium_solves'] = len(names)
+    result['continuation_of'] = 'representation_v02'
+    result['scope'] = 'unattempted registered cases only; aggregate qualification requires v02'
     return result
 
 

@@ -2,14 +2,14 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-19",
   "overall_status": "failed",
-  "summary": "八工况在求解前P3节点方向导出检查失败：1容器、0求解。真实网格离线修正及92测试通过；修正后原生资格not_run，原心室仍failed。",
+  "summary": "P3原生接口修好，八工况完成尝试：6终态、2个P3/P1安全停止。P3/P2 n8四项绝对误差门通过，完整资格因L2阶3.37274<3.5仍failed。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
-    "scope": "FEM唯一主线；八工况接口failed、科学对照not_run；旧四控制passed和原心室failed均保持。",
-    "current_stage": "P3 export failed before solve; offline correction passed; native qualification NOT RUN",
-    "current_location": "../PRL-results/ventricle_fem/mixed_cube_representation_v01_20260919",
-    "evidence_basis_commit": "9eb74fcb1218c4c795348b51a3bde337f1d0e7a7",
+    "scope": "FEM唯一主线；同载离散比较完成，P3/P2完整收敛资格failed，原心室仍failed。",
+    "current_stage": "P3 native interface passed; same-load comparison completed; L2 convergence-order gate failed",
+    "current_location": "../PRL-results/ventricle_fem/mixed_cube_representation_v03_20260919",
+    "evidence_basis_commit": "62f086d7ff3562400383219f860b887702492292",
     "evidence_checked_at": "2026-09-19",
     "git_workflow": {
       "branch": "main",
@@ -27,7 +27,7 @@
         "project_control/main_branch_stage_push_decision_v01.md",
         "project_control/evidence/stage_main_sync_v01/publication_readback.json"
       ],
-      "current_stage_push": "passed",
+      "current_stage_push": "not_run",
       "stage_push_policy": "standing_user_authorization_2026_09_19",
       "published_science_commit": "9eb74fcb1218c4c795348b51a3bde337f1d0e7a7",
       "published_review_commit": null,
@@ -36,37 +36,37 @@
       "default_review_package": false,
       "sync_scope_decision": "project_control/main_branch_sync_without_review_package_decision_v01.md"
     },
-    "freshness_note": "本次1容器/0求解/0重跑，导出方向故障已离线复现修正；817保护文件和31执行源码快照未变。修正源码另存。",
+    "freshness_note": "本轮2容器8求解，无自动重跑；原生P3及patch通过。失败保全与完整读回分开裁决，不改原门。",
     "model_overview": {
-      "model_type": "主线FEniCSx三维有限变形NH；当前为P3导出资格检查",
-      "simulated_object": "本次单位立方体P3/P2 patch，原生检查前置停止；不是心室",
-      "theory": "预注册：一个P3/P2可表示patch、一个P2/P1积分控制、同载P3/P1与P3/P2三网格配对；仿射四面体、八阶积分。实际尚无求解态。",
-      "current_question": "原生P3边方向未在独立导出中重排，导致22/48单元错配；先完成修正后的原生接口资格再执行同载对照。",
+      "model_type": "FEniCSx三维有限变形NH；当前验证同载混合位移/压力离散",
+      "simulated_object": "单位立方体，不是心室；X=0解析位移，另五面解析牵引及体力",
+      "theory": "P3/P2可表示patch、P2/P1 Q8积分控制、同MMS P3/P1与P3/P2 n2/4/8；生产积分8阶。",
+      "current_question": "P3/P2最细绝对误差过门，但L2末两级收敛阶3.37274未到3.5。",
       "pipeline": [
-        "真实网格映射检查拦截，SNES 0次，八例全部not_run。",
-        "仅重排导出索引，保留原生顺序；不改坐标、材料、载荷和门限。",
-        "真实夹具离线回放及92宿主测试通过；原生装配/切线not_run。",
-        "一次容器额度已用尽；等待同矩阵续行批准，不自动重跑。"
+        "原生P3映射/装配/切线及非零patch通过。",
+        "八例均尝试：6终态，P3/P1 n4/n8正J方向保护停止。",
+        "P3/P2最细L2/H1误差0.4790%/5.9869%，压力L2 0.1638%，J误差RMS 0.02208%。",
+        "完整候选资格failed；原心室κ1000未重算，主动/生长/FSI not_run。"
       ],
-      "diagram": "../PRL-results/ventricle_fem/mixed_cube_representation_v01_20260919/Figures/FigR1_export_orientation/FigR1_export_orientation_v01_20260919/04_FigR1_export_orientation_v01_20260919.png",
-      "diagram_caption": "实际初始网格和逐单元导出错配，不是压力/变形结果，无生理时间。",
+      "diagram": "project_control/evidence/mixed_cube_representation_milestone_v01/diagnostic.png",
+      "diagram_caption": "真实初始结构、误差—自由度及实际初/中/末Newton状态；不是生理时间，形变显示×30，颜色未放大。",
       "assumptions": [
-        "标准立方体制造解用于数值资格，不是心室或实验标定",
-        "κ变化同时改变制造压力/体力/牵引，不是固定载荷锁死试验",
-        "生产点正J不能保证其他位置正J；采样全正也不是全域单射证明",
-        "原心室理想化材料与几何未标定，1%局部体积门failed不变"
+        "标准立方体制造解仅用于数值资格，不是生物标定。",
+        "同载同网格但不是等DOF效率比较。",
+        "P3/P1 n4/n8无合格终态，完整三网格压力归因unknown。",
+        "有限采样正J不证明全域单射；原心室1%门不变。"
       ],
       "methods": [
-        "1容器15.93085秒，0次求解、0重跑、0GPU；没有修复/启动Docker。",
-        "映射最大差0.1666667 L降至3.33e−16 L；1e−12原门不变。",
-        "保留真实失败网格、原生及规范索引；独立坐标/排列校验。",
-        "图仅为实际网格与接口误差；160dpi探索规格，不是600dpi投稿终稿。"
+        "2个现有容器合计469.50秒，8次SNES、0重跑、0GPU。",
+        "候选u L2/H1/p末阶3.37274/2.52098/2.70407，首项failed。",
+        "保存全部接受态和拒绝方向，独立路径及6/8点积分复核。",
+        "160dpi探索图与可执行Notebook保留，非投稿终稿。"
       ],
-      "scope_boundary": "离线修正passed不代表修正后原生或科学资格；原八工况/心室failed，主动/生长/FSI not_run。",
+      "scope_boundary": "原生接口/绝对误差passed不等于完整收敛资格或心室通过。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_representation_result_v01.md",
-        "../PRL-results/ventricle_fem/mixed_cube_representation_v01_20260919/export_diagnosis.json",
-        "../PRL-results/ventricle_fem/mixed_cube_representation_v01_20260919/manifest.json"
+        "project_control/ventricle_mixed_cube_representation_milestone_result_v01.md",
+        "project_control/evidence/mixed_cube_representation_milestone_v01/guard_failure_diagnosis.json",
+        "project_control/evidence/mixed_cube_representation_milestone_v01/guard_failure_diagnosis_v03.json"
       ]
     }
   },
@@ -94,41 +94,40 @@
   ],
   "active_work": [
     {
-      "title": "接口失败保全与离线修正",
-      "status": "passed",
-      "summary": "全部原始失败保留，92宿主测试通过；只是离线工程交付。",
+      "title": "同载离散问题里程碑",
+      "status": "failed",
+      "summary": "接口修复、八例尝试和证据收口完成；候选完整科学资格仍缺L2阶次。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_representation_result_v01.md"
+        "project_control/ventricle_mixed_cube_representation_milestone_result_v01.md"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "修正后的原生P3接口尚未验证",
-      "status": "not_run",
-      "summary": "一次容器在映射前置门失败，0求解；不能由离线回放推断原生装配或八例通过。",
+      "title": "P3/P2位移L2阶次未过原门",
+      "status": "failed",
+      "summary": "绝对误差全过；末两级L2阶3.37274<3.5，不事后降低阈值。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_representation_result_v01.md"
+        "project_control/ventricle_mixed_cube_representation_milestone_result_v01.md"
       ]
     },
     {
-      "title": "原制造解/心室尚未达到原门",
+      "title": "原心室κ1000尚未重新资格",
       "status": "failed",
-      "summary": "原MMS H1 43.65%及原心室max|J−1|=1.4496%仍失败；不同控制的通过不能替代原问题回归。",
+      "summary": "κ100制造解不能替代原心室；局部体积1.4496%仍超1%门。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_controls_result_v01.md",
-        "project_control/ventricle_mixed_cube_load_diagnosis_v01.md"
+        "project_control/ventricle_mixed_cube_controls_result_v01.md"
       ]
     }
   ],
   "results": [
     {
-      "title": "P3导出方向失败，离线修正通过",
+      "title": "P3/P2精度改善，完整资格仍failed",
       "status": "failed",
-      "summary": "22/48单元错配；重排导出后最大差3.33e−16 L。此图不是平衡求解结果。",
-      "image": "../PRL-results/ventricle_fem/mixed_cube_representation_v01_20260919/Figures/FigR1_export_orientation/FigR1_export_orientation_v01_20260919/04_FigR1_export_orientation_v01_20260919.png",
+      "summary": "最细H1 5.9869%，J误差RMS 0.02208%；P3/P1两细网格保护停止，全部失败保留。",
+      "image": "project_control/evidence/mixed_cube_representation_milestone_v01/diagnostic.png",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_representation_result_v01.md"
+        "project_control/ventricle_mixed_cube_representation_milestone_result_v01.md"
       ],
       "result_group": "current"
     },
@@ -147,20 +146,19 @@
   ],
   "next_actions": [
     {
-      "title": "批准一次同八工况续行，再验原生接口",
+      "title": "解决剩余L2收敛阶缺口",
       "status": "not_run",
-      "summary": "先检查修正后的P3映射/装配/切线，过门才继续原矩阵；1CPU/8GiB、1800秒、0GPU/重跑，不运行心室主动生长FSI。",
+      "summary": "结合保存态空间误差分析，登记必要的渐近加密及资源方案；不改门、材料或直接运行心室。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_representation_result_v01.md",
-        "project_control/ventricle_mixed_cube_representation_batch_v01.md"
+        "project_control/ventricle_mixed_cube_representation_milestone_result_v01.md"
       ]
     }
   ],
   "evidence_boundaries": [
-    "1容器额度已消耗，0求解不等于可以自动再开容器。",
-    "离线工程passed；修正后原生装配与科学对照not_run。",
-    "原失败执行源码保留，修正源码另存；不改写原失败包。",
-    "四控制passed不等于原心室通过；原1%门failed不变。",
-    "160dpi探索图执行/目检通过；600dpi投稿检查failed。"
+    "P3原生接口及patch通过；候选完整收敛资格failed。",
+    "八例均已尝试，六终态；失败不是not_run或通过。",
+    "P3/P1 n4/n8不能参与合格三网格压力归因。",
+    "原失败和执行源码快照不覆盖，50项无关改动保持。",
+    "完整数据在批准结果库；仅正常main同步，无额外评审包。"
   ]
 }

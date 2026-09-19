@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "command": [
+    "F:\\python\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/prl/test_nodal_export.py",
+    "tests/prl/test_mixed_cube_representation.py",
+    "tests/prl/test_mixed_cube.py",
+    "tests/prl/test_mixed_cube_controls.py",
+    "tests/prl/test_saved_segment.py",
+    "tests/prl/test_positive_j.py",
+    "tests/prl/test_ventricle_3d.py",
+    "tests/prl/test_volume_projection.py",
+    "tests/prl/test_mixed_cube_representation_delivery.py",
+    "tests/prl/test_mixed_cube_representation_render.py",
+    "tests/prl/test_mixed_cube_representation_figure.py",
+    "tests/prl/test_representation_guard_diagnosis.py"
+  ],
+  "exit_code": 0,
+  "stdout": "........................................................................ [ 53%]\n...............................................................          [100%]\n135 passed in 7.68s\n",
+  "stderr": ""
+}

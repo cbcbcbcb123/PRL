@@ -7,20 +7,20 @@ git_workflow_decision: project_control/main_branch_stage_commit_decision_v01.md
 git_stage_push_decision: project_control/main_branch_stage_push_decision_v01.md
 git_integration_decision: project_control/remote_history_integration_decision_v01.md
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
-git_remote_push: passed
-git_remote_push_record: project_control/evidence/mixed_cube_representation_v01/publication_readback.json
+git_remote_push: not_run
+git_remote_push_record: project_control/evidence/mixed_cube_representation_milestone_v01/publication_readback.json
 git_published_science_commit: 9eb74fcb1218c4c795348b51a3bde337f1d0e7a7
 git_published_review_commit: null
 verified_commit: 9eb74fcb1218c4c795348b51a3bde337f1d0e7a7
-current_lifecycle: fem_only_representation_export_failed_offline_fix_native_not_run
+current_lifecycle: fem_only_P3_native_fixed_same_load_comparison_complete_L2_order_failed
 documentation_updated_at: 2026-09-19
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_mixed_cube_representation_batch_v01.md
-last_completed_contract: project_control/ventricle_mixed_cube_control_batch_v01.md
-current_render_contract: ../PRL-results/ventricle_fem/mixed_cube_representation_v01_20260919/visual_review.json
+current_contract: project_control/ventricle_mixed_cube_representation_milestone_v01.md
+last_completed_contract: project_control/ventricle_mixed_cube_representation_batch_v01.md
+current_render_contract: project_control/ventricle_mixed_cube_representation_milestone_result_v01.md
 next_stage_contract: null
-current_authorization: representation_one_container_consumed_zero_of_eight_solves_no_retry
+current_authorization: same_load_milestone_completed_eight_solves_no_changed_physics_or_gates
 development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -34,10 +34,10 @@ runtime_start_authority: consumed_one_recovery_start_api_and_pinned_image_passed
 runtime_repair_scope: project_control/docker_recovery_20260919_v01.md
 runtime_repair_authority: exact_manifest_9f281fab_user_approved_two_moves_one_start_completed
 runtime_repair_execution: project_control/docker_recovery_20260919_v01_execution.md
-current_execution_log: project_control/ventricle_mixed_cube_representation_result_v01.md
-latest_completed_execution_log: project_control/ventricle_mixed_cube_representation_result_v01.md
-latest_completed_scientific_gate: four_control_defined_gates_passed_original_ventricle_failed
-latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_representation_v01_20260919/summary.json
+current_execution_log: project_control/ventricle_mixed_cube_representation_milestone_result_v01.md
+latest_completed_execution_log: project_control/ventricle_mixed_cube_representation_milestone_result_v01.md
+latest_completed_scientific_gate: P3_patch_and_fine_absolute_errors_passed_full_L2_order_failed
+latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_representation_v03_20260919/delivery_analysis.json
 latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -57,7 +57,18 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：八工况在P3导出检查停止，离线接口修正通过，原生复验not_run
+## 当前：原生P3修复验证通过，同载对照完成，剩余L2收敛阶未过
+
+[里程碑完整裁决](ventricle_mixed_cube_representation_milestone_result_v01.md)。
+用户连续授权下2个容器、8次SNES：6终态，P3/P1 n4/n8两例安全停止；0自动重跑、0GPU。
+P3映射/装配/切线及非零patch原生复验passed；原P2/P1提高积分后H1误差仍43.6485%。
+同载P3/P2 n8位移L2/H1误差0.4790%/5.9869%，压力L2 0.1638%，J误差RMS 0.02208%，绝对门均passed。
+完整候选资格failed：L2末阶3.37274<3.5；H1/p阶2.52098/2.70407满足原门。不能把“接近”写成通过。
+P3/P1缺两个合格终态，三网格压力归因unknown；原κ1000心室1%门failed保持，主动/生长/FSI not_run。
+唯一下一步：解析保存态误差空间分布，明确必要的加密资格检验；不无条件扩大网格/改材料或门限。
+原失败、无关工作区改动和专家资料保持；小型证据随main正常同步，不另建评审包。
+
+## 历史：八工况在P3导出检查停止，离线接口修正通过，原生复验not_run
 
 [本次执行、根因与边界](ventricle_mixed_cube_representation_result_v01.md)。
 一次容器15.93085秒，SNES 0次；P3边方向导致48单元中22个节点映射失配，按冻结前置门停止。

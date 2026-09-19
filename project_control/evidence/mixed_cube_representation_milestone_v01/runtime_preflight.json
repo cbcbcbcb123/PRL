@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "scope": "engine and pinned local image only; not scientific qualification",
+  "observed_at_utc": "2026-09-19T12:28:16Z",
+  "first_doctor": {
+    "observed_at_utc": "2026-09-19T12:27:57.832760Z",
+    "runtime_api_status": "passed",
+    "preflight_status": "blocked",
+    "image_status": "failed",
+    "reason": "15-second image-inspect timeout during existing resource-saver wake; active runtime socket ACL 1920 warnings retained"
+  },
+  "fresh_resolution": {
+    "backend_log": "engine linux/wsl is running after 16.591s; starting -> running",
+    "context": "desktop-linux",
+    "local_image_matches": true,
+    "image_id": "sha256:2ae4bfbc0d9077268880faf04c72750528bee986c94ab223a2c159969bd56fa8",
+    "server": "29.7.2",
+    "containers_running": 0
+  },
+  "desktop_start_calls": 0,
+  "repair_calls": 0,
+  "pulls_installs_updates": 0,
+  "interpretation": "Fresh engine/image checks succeeded after the existing backend woke itself. Initial blocked report is not rewritten into passed. No runtime repair is inferred or performed."
+}

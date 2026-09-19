@@ -1,0 +1,10 @@
+{
+  "status": "not_run",
+  "remote": "https://github.com/cbcbcbcb123/PRL.git",
+  "allowed_ref": "refs/heads/main",
+  "branch": "main",
+  "prepublication_remote_main": "62f086d7ff3562400383219f860b887702492292",
+  "force": false,
+  "review_package": false,
+  "scientific_qualification": "failed"
+}

@@ -1,0 +1,285 @@
+{
+  "schema": "prl.representation_guard_failure_diagnosis.v1",
+  "status": "passed",
+  "meaning_of_passed": "Independent confirmation of the safety refusal, not solver qualification",
+  "source_result": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919",
+  "case": "mms_p3p1_n4",
+  "sequence": 28,
+  "equilibrium_qualification": "failed",
+  "checks": {
+    "export_mapping": true,
+    "candidate_current_is_last_accepted": true,
+    "failure_state_is_last_accepted": true,
+    "last_accepted_u_map": true,
+    "last_accepted_p_map": true,
+    "next_accepted_iterate_absent": true,
+    "all_21_registered_endpoints_inadmissible": true,
+    "minimum_registered_path_has_nonpositive_J": true,
+    "history_current_J_agrees": true,
+    "inputs_unchanged": true,
+    "verification_sources_unchanged": true,
+    "native_source_snapshots_match_execution": true
+  },
+  "input_sha256": {
+    "configuration": {
+      "path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\configuration.json",
+      "sha256": "2f075cc4635ef4b40edbeb1519f41601610c7afc9b1500a6c6370e60b98f8b9d"
+    },
+    "mesh": {
+      "path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\raw\\mms_p3p1_n4_mesh.npz",
+      "sha256": "e1ba350bd0ea93c516dd514ddfa6bc273ec19accbbc78c243646c16f3730171f"
+    },
+    "candidate": {
+      "path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\iterates\\mms_p3p1_n4\\candidate_028.npz",
+      "sha256": "f8d35eddc58655b6b1e87fe890401a23401a6e08ab90bccbb58cb3c2528338bd"
+    },
+    "last_accepted": {
+      "path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\iterates\\mms_p3p1_n4\\iterate_028.npz",
+      "sha256": "c45794eaca452ef884fa80c023833d4a9663be2b63bc10268c48c13a18e29880"
+    },
+    "failure_state": {
+      "path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\failure_state.npz",
+      "sha256": "cea8dccaa9b30237834899f0723b05152b9526a825e86793d11629437c075650"
+    },
+    "guard_failure": {
+      "path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\iterates\\mms_p3p1_n4\\guard_failure.json",
+      "sha256": "b6fdd1a7ab675e5529daf8c532920be9f3cb4955ba037af16bc5eb7a4174245f"
+    },
+    "history": {
+      "path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\iterates\\mms_p3p1_n4\\history.json",
+      "sha256": "bcb811e697378a91c28caa51527cada1ea93c0e2c625a049eba90af60eb7772c"
+    },
+    "failure": {
+      "path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\failure.json",
+      "sha256": "c37718fe9bb31c416edfb10a3c46a23fc0e248f08aa8c8e7e9ae6ea92b0a366d"
+    },
+    "execution_source_hashes": {
+      "path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\source_hashes.json",
+      "sha256": "171934c43e071946b275d2392f7d9f6b6eff9be18f269ca28af31d53bb076039"
+    }
+  },
+  "verification_source_sha256": {
+    "E:\\Temp-Projects\\PRL\\src\\prl\\verification\\representation_guard_diagnosis.py": "aec94b4eaaeefe6f9f2383fe0a1cd6f3a1b0a859f8f5642c363f78cab1aa73f0",
+    "E:\\Temp-Projects\\PRL\\src\\prl\\verification\\mixed_cube_space.py": "8a230825879c85497b242fe6df83fee1390d59e7d4e7ddaa90915a6e5ab18d47",
+    "E:\\Temp-Projects\\PRL\\src\\prl\\verification\\simplex_lagrange.py": "336c10a315ecb053359555a8384cc0f7f19b8f3f09b64a548c79cc6a5f4ae5bb",
+    "E:\\Temp-Projects\\PRL\\src\\prl\\verification\\positive_j.py": "dd69ef26cbdc71d21526795cfd7af9d7acfb769a263f898b87147dfde53c76c5",
+    "E:\\Temp-Projects\\PRL\\src\\prl\\verification\\ventricle_3d.py": "8229ab2bcca70adcc05dfe4beb984e2442f1aead396d7e035b9ff930f3e5fa78"
+  },
+  "native_execution_source_sha256": {
+    "src/prl/fem/positive_j.py": {
+      "path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\sources_at_execution\\src\\prl\\fem\\positive_j.py",
+      "sha256": "c54a9c9885ae83e5c430eb7db9ab85efc6b667420ea646d0cfb85e937fa60d8b",
+      "matches_execution_hash": true
+    },
+    "src/prl/fem/fenicsx_mixed_cube.py": {
+      "path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\sources_at_execution\\src\\prl\\fem\\fenicsx_mixed_cube.py",
+      "sha256": "575bb296e717e2751accd29e9eeb0dea7b072f15fcf8fdd5c3ec0423a0d33612",
+      "matches_execution_hash": true
+    },
+    "src/prl/fem/nodal_export.py": {
+      "path": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\sources_at_execution\\src\\prl\\fem\\nodal_export.py",
+      "sha256": "9c8911d978fa3b77e3ab6c0829595ae6993dc5ca948133228f726bf28bf54e05",
+      "matches_execution_hash": true
+    }
+  },
+  "sample_shape": [
+    384,
+    117
+  ],
+  "current_minimum_J": 0.4204802300772048,
+  "current_residual_norm": 0.00017846474693802535,
+  "current_mixed_norm": 2.527252133620528,
+  "direction_mixed_norm": 1024539.75159269,
+  "direction_displacement_norm": 737475.9616763985,
+  "direction_pressure_norm": 711203.8445783894,
+  "maximum_absolute_gradient_increment": 2145399.662548678,
+  "registered_endpoint_scan": [
+    {
+      "halvings": 0,
+      "scale": 1.0,
+      "minimum_J": -1.9479022596678963e+18,
+      "nonpositive_samples": 17432,
+      "samples_at_or_below_floor": 17432
+    },
+    {
+      "halvings": 1,
+      "scale": 0.5,
+      "minimum_J": -2.4348736049838986e+17,
+      "nonpositive_samples": 17436,
+      "samples_at_or_below_floor": 17436
+    },
+    {
+      "halvings": 2,
+      "scale": 0.25,
+      "minimum_J": -3.0435814572463188e+16,
+      "nonpositive_samples": 17446,
+      "samples_at_or_below_floor": 17446
+    },
+    {
+      "halvings": 3,
+      "scale": 0.125,
+      "minimum_J": -3804450449193161.5,
+      "nonpositive_samples": 17454,
+      "samples_at_or_below_floor": 17454
+    },
+    {
+      "halvings": 4,
+      "scale": 0.0625,
+      "minimum_J": -475549713105017.25,
+      "nonpositive_samples": 17472,
+      "samples_at_or_below_floor": 17472
+    },
+    {
+      "halvings": 5,
+      "scale": 0.03125,
+      "minimum_J": -59442065900627.34,
+      "nonpositive_samples": 17520,
+      "samples_at_or_below_floor": 17520
+    },
+    {
+      "halvings": 6,
+      "scale": 0.015625,
+      "minimum_J": -7429846189969.03,
+      "nonpositive_samples": 17578,
+      "samples_at_or_below_floor": 17578
+    },
+    {
+      "halvings": 7,
+      "scale": 0.0078125,
+      "minimum_J": -928627767726.0568,
+      "nonpositive_samples": 17630,
+      "samples_at_or_below_floor": 17630
+    },
+    {
+      "halvings": 8,
+      "scale": 0.00390625,
+      "minimum_J": -116052722401.38858,
+      "nonpositive_samples": 17694,
+      "samples_at_or_below_floor": 17694
+    },
+    {
+      "halvings": 9,
+      "scale": 0.001953125,
+      "minimum_J": -14500154628.92147,
+      "nonpositive_samples": 17792,
+      "samples_at_or_below_floor": 17792
+    },
+    {
+      "halvings": 10,
+      "scale": 0.0009765625,
+      "minimum_J": -1810911145.2371025,
+      "nonpositive_samples": 17490,
+      "samples_at_or_below_floor": 17490
+    },
+    {
+      "halvings": 11,
+      "scale": 0.00048828125,
+      "minimum_J": -225962214.04247302,
+      "nonpositive_samples": 15804,
+      "samples_at_or_below_floor": 15804
+    },
+    {
+      "halvings": 12,
+      "scale": 0.000244140625,
+      "minimum_J": -28145039.858333685,
+      "nonpositive_samples": 13148,
+      "samples_at_or_below_floor": 13148
+    },
+    {
+      "halvings": 13,
+      "scale": 0.0001220703125,
+      "minimum_J": -3493161.713468659,
+      "nonpositive_samples": 9586,
+      "samples_at_or_below_floor": 9586
+    },
+    {
+      "halvings": 14,
+      "scale": 6.103515625e-05,
+      "minimum_J": -430448.13957620686,
+      "nonpositive_samples": 6632,
+      "samples_at_or_below_floor": 6632
+    },
+    {
+      "halvings": 15,
+      "scale": 3.0517578125e-05,
+      "minimum_J": -52278.75998234306,
+      "nonpositive_samples": 3788,
+      "samples_at_or_below_floor": 3788
+    },
+    {
+      "halvings": 16,
+      "scale": 1.52587890625e-05,
+      "minimum_J": -6163.551113171766,
+      "nonpositive_samples": 2106,
+      "samples_at_or_below_floor": 2106
+    },
+    {
+      "halvings": 17,
+      "scale": 7.62939453125e-06,
+      "minimum_J": -682.3955467349247,
+      "nonpositive_samples": 892,
+      "samples_at_or_below_floor": 892
+    },
+    {
+      "halvings": 18,
+      "scale": 3.814697265625e-06,
+      "minimum_J": -65.18981007980302,
+      "nonpositive_samples": 296,
+      "samples_at_or_below_floor": 296
+    },
+    {
+      "halvings": 19,
+      "scale": 1.9073486328125e-06,
+      "minimum_J": -4.711039471965429,
+      "nonpositive_samples": 74,
+      "samples_at_or_below_floor": 74
+    },
+    {
+      "halvings": 20,
+      "scale": 9.5367431640625e-07,
+      "minimum_J": -0.2698889903849782,
+      "nonpositive_samples": 16,
+      "samples_at_or_below_floor": 16
+    }
+  ],
+  "minimum_registered_step_path": {
+    "halvings": 20,
+    "scale": 9.5367431640625e-07,
+    "minimum_path_J": -0.2698889903849782,
+    "minimum_endpoint_J": -0.2698889903849782,
+    "polynomial_fit_absolute_error": 5.329070518200751e-15
+  },
+  "out_of_budget_readonly_probe": {
+    "halvings": 21,
+    "scale": 4.76837158203125e-07,
+    "minimum_path_J": 0.16790855504780358,
+    "minimum_endpoint_J": 0.16790855504780358,
+    "polynomial_fit_absolute_error": 1.7763568394002505e-15,
+    "accepted": false,
+    "scope": "Not authorized for this frozen solve; no residual convergence claim"
+  },
+  "worst_minimum_step_sample": {
+    "cell": 327,
+    "sample": 87,
+    "production_quadrature_sample": false,
+    "reference_coordinates": [
+      0.2,
+      0.8,
+      0.0
+    ],
+    "physical_coordinates": [
+      0.9999999999999999,
+      0.49999999999999994,
+      0.3
+    ]
+  },
+  "conclusion": "The refused direction has no admissible registered endpoint; the last accepted state is preserved. Continuing distinct unattempted registered cases from zero does not retry or qualify this failed case.",
+  "limitations": [
+    "Finite spatial samples do not establish global injectivity.",
+    "Direction growth and residual stagnation do not prove a particular inf-sup defect or Jacobian rank deficiency.",
+    "The positive out-of-budget probe does not justify changing the gate."
+  ],
+  "additional_FEM_solves": 0,
+  "container_invocations": 0,
+  "reproduction": "Set PYTHONPATH=src, PYTHONDONTWRITEBYTECODE=1, OMP_NUM_THREADS=1 and OPENBLAS_NUM_THREADS=1; run python -B -X utf8 -m prl.verification.representation_guard_diagnosis \"E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\""
+}

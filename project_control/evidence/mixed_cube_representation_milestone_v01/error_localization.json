@@ -1,0 +1,256 @@
+{
+  "schema": "prl.mixed_cube_representation.error_localization.v1",
+  "status": "passed",
+  "status_scope": "read-only reconstruction, total reproduction and input/code integrity; not scientific qualification",
+  "generated_at_utc": "2026-09-19T12:56:21.238857+00:00",
+  "method": {
+    "case_scope": "Existing P3/P2 original MMS, kappa=100; n2 from v02, n4/n8 from v03",
+    "integration": "6-point-per-axis Gauss-Duffy, 216 points per tetrahedron",
+    "cell_chunk_size": 128,
+    "region_assignment": "Pointwise fixed reference-coordinate mask, not geometrically cut tetrahedra",
+    "fixed_band_width_over_L": 0.125,
+    "outer_band": "min(X,Y,Z,1-X,1-Y,1-Z) < 0.125",
+    "dirichlet_band": "X < 0.125",
+    "complements": "Logical complements of the respective masks, not complements of their union",
+    "absolute_L2": "sqrt(integral_region ||u_h-u_exact||^2 dV); dimensionless unit cube",
+    "error_squared_fraction": "regional squared L2 / whole-domain squared L2",
+    "orders": "log2(previous absolute L2 / next absolute L2), in order n2->n4 and n4->n8",
+    "total_reproduction_absolute_tolerance": 1e-12
+  },
+  "rows": [
+    {
+      "case": "mms_p3p2_n2",
+      "n": 2,
+      "source_root": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919",
+      "reference_L2": 0.0007071067811865476,
+      "relative_u_L2": 0.5193579937879554,
+      "retained_relative_u_L2": 0.5193579937879559,
+      "absolute_difference": 4.440892098500626e-16,
+      "total_reproduction": "passed",
+      "regions": {
+        "all": {
+          "volume": 1.0000000000000002,
+          "error_squared": 1.3486636285572507e-07,
+          "absolute_L2": 0.00036724155927090425,
+          "volume_fraction": 1.0,
+          "error_squared_fraction": 1.0,
+          "exact_region_volume": 1.0,
+          "volume_estimate_minus_exact": 2.220446049250313e-16
+        },
+        "outer_band": {
+          "volume": 0.5731343835660083,
+          "error_squared": 9.997832815108358e-08,
+          "absolute_L2": 0.0003161934979582654,
+          "volume_fraction": 0.5731343835660082,
+          "error_squared_fraction": 0.7413140388314365,
+          "exact_region_volume": 0.578125,
+          "volume_estimate_minus_exact": -0.004990616433991679
+        },
+        "outer_complement": {
+          "volume": 0.42686561643399185,
+          "error_squared": 3.488803470464148e-08,
+          "absolute_L2": 0.0001867833897985618,
+          "volume_fraction": 0.42686561643399173,
+          "error_squared_fraction": 0.2586859611685634,
+          "exact_region_volume": 0.421875,
+          "volume_estimate_minus_exact": 0.004990616433991846
+        },
+        "dirichlet_band": {
+          "volume": 0.12428444545085553,
+          "error_squared": 5.859790339015461e-09,
+          "absolute_L2": 7.654926739698729e-05,
+          "volume_fraction": 0.1242844454508555,
+          "error_squared_fraction": 0.04344886460150218,
+          "exact_region_volume": 0.125,
+          "volume_estimate_minus_exact": -0.0007155545491444731
+        },
+        "dirichlet_complement": {
+          "volume": 0.8757155545491447,
+          "error_squared": 1.290065725167096e-07,
+          "absolute_L2": 0.0003591748495046801,
+          "volume_fraction": 0.8757155545491445,
+          "error_squared_fraction": 0.9565511353984978,
+          "exact_region_volume": 0.875,
+          "volume_estimate_minus_exact": 0.0007155545491447368
+        }
+      }
+    },
+    {
+      "case": "mms_p3p2_n4",
+      "n": 4,
+      "source_root": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v03_20260919",
+      "reference_L2": 0.0007071067811865476,
+      "relative_u_L2": 0.04961989237224205,
+      "retained_relative_u_L2": 0.04961989237224211,
+      "absolute_difference": 6.245004513516506e-17,
+      "total_reproduction": "passed",
+      "regions": {
+        "all": {
+          "volume": 1.0,
+          "error_squared": 1.2310668595164427e-09,
+          "absolute_L2": 3.5086562378159004e-05,
+          "volume_fraction": 1.0,
+          "error_squared_fraction": 1.0,
+          "exact_region_volume": 1.0,
+          "volume_estimate_minus_exact": 0.0
+        },
+        "outer_band": {
+          "volume": 0.5781250000000001,
+          "error_squared": 7.184769494198562e-10,
+          "absolute_L2": 2.680442033359155e-05,
+          "volume_fraction": 0.5781250000000001,
+          "error_squared_fraction": 0.5836213881202769,
+          "exact_region_volume": 0.578125,
+          "volume_estimate_minus_exact": 1.1102230246251565e-16
+        },
+        "outer_complement": {
+          "volume": 0.4218750000000001,
+          "error_squared": 5.125899100965864e-10,
+          "absolute_L2": 2.2640448540092716e-05,
+          "volume_fraction": 0.4218750000000001,
+          "error_squared_fraction": 0.416378611879723,
+          "exact_region_volume": 0.421875,
+          "volume_estimate_minus_exact": 1.1102230246251565e-16
+        },
+        "dirichlet_band": {
+          "volume": 0.1250000000000001,
+          "error_squared": 4.336719103871633e-11,
+          "absolute_L2": 6.585377061240786e-06,
+          "volume_fraction": 0.1250000000000001,
+          "error_squared_fraction": 0.03522732392922247,
+          "exact_region_volume": 0.125,
+          "volume_estimate_minus_exact": 1.1102230246251565e-16
+        },
+        "dirichlet_complement": {
+          "volume": 0.8750000000000002,
+          "error_squared": 1.1876996684777262e-09,
+          "absolute_L2": 3.446301885322477e-05,
+          "volume_fraction": 0.8750000000000002,
+          "error_squared_fraction": 0.9647726760707774,
+          "exact_region_volume": 0.875,
+          "volume_estimate_minus_exact": 2.220446049250313e-16
+        }
+      }
+    },
+    {
+      "case": "mms_p3p2_n8",
+      "n": 8,
+      "source_root": "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v03_20260919",
+      "reference_L2": 0.0007071067811865478,
+      "relative_u_L2": 0.0047902637620545,
+      "retained_relative_u_L2": 0.00479026376205454,
+      "absolute_difference": 3.9898639947466563e-17,
+      "total_reproduction": "passed",
+      "regions": {
+        "all": {
+          "volume": 1.000000000000001,
+          "error_squared": 1.1473313455026273e-11,
+          "absolute_L2": 3.3872279898209203e-06,
+          "volume_fraction": 1.0,
+          "error_squared_fraction": 1.0,
+          "exact_region_volume": 1.0,
+          "volume_estimate_minus_exact": 1.1102230246251565e-15
+        },
+        "outer_band": {
+          "volume": 0.5781250000000003,
+          "error_squared": 5.63184726428359e-12,
+          "absolute_L2": 2.3731513361527515e-06,
+          "volume_fraction": 0.5781249999999997,
+          "error_squared_fraction": 0.4908649350825824,
+          "exact_region_volume": 0.578125,
+          "volume_estimate_minus_exact": 3.3306690738754696e-16
+        },
+        "outer_complement": {
+          "volume": 0.4218750000000004,
+          "error_squared": 5.841466190742687e-12,
+          "absolute_L2": 2.4169125327042116e-06,
+          "volume_fraction": 0.42187499999999994,
+          "error_squared_fraction": 0.509135064917418,
+          "exact_region_volume": 0.421875,
+          "volume_estimate_minus_exact": 3.885780586188048e-16
+        },
+        "dirichlet_band": {
+          "volume": 0.1250000000000001,
+          "error_squared": 7.369566581879316e-13,
+          "absolute_L2": 8.584617977452064e-07,
+          "volume_fraction": 0.12499999999999997,
+          "error_squared_fraction": 0.06423224302872008,
+          "exact_region_volume": 0.125,
+          "volume_estimate_minus_exact": 1.1102230246251565e-16
+        },
+        "dirichlet_complement": {
+          "volume": 0.8750000000000007,
+          "error_squared": 1.0736356796838345e-11,
+          "absolute_L2": 3.276638032624041e-06,
+          "volume_fraction": 0.8749999999999997,
+          "error_squared_fraction": 0.9357677569712802,
+          "exact_region_volume": 0.875,
+          "volume_estimate_minus_exact": 6.661338147750939e-16
+        }
+      }
+    }
+  ],
+  "orders_2to4_4to8": {
+    "all": [
+      3.387738820990383,
+      3.3727416048623584
+    ],
+    "outer_band": [
+      3.5602648600069493,
+      3.49759492661875
+    ],
+    "outer_complement": [
+      3.0443917198772463,
+      3.227665371846004
+    ],
+    "dirichlet_band": [
+      3.539050617845092,
+      2.9394402080872397
+    ],
+    "dirichlet_complement": [
+      3.3815653439940068,
+      3.3947608691757285
+    ]
+  },
+  "regional_quadrature_limits": {
+    "status": "approximate",
+    "n2_outer_band_volume_bias": -0.004990616433991679,
+    "n2_outer_band_volume_bias_percentage_points": -0.4990616433991679,
+    "statement": "The fixed-region indicator is discontinuous where it cuts a tetrahedron. No cut-cell integration was performed. n2 outer-band volume is underestimated by about 0.4991 percentage points; exact-looking n4 volume does not certify the regional error integral. Regional rates are descriptive localization evidence, not exact regional convergence certificates."
+  },
+  "interpretation": {
+    "outer_band_dominates_finest_error": false,
+    "dirichlet_band_dominates_finest_error": false,
+    "evidence": "At n8 the outer band contains 49.0865% of squared error in 57.8125% of volume; the Dirichlet band contains 6.4232% of squared error in 12.5% of volume. The outer-band complement has the slower final observed rate, 3.2277, and 50.9135% of squared error.",
+    "boundary_singularity_proved": false,
+    "sole_error_mechanism_identified": false,
+    "qualification_thresholds_changed": false,
+    "scientific_limit": "These fixed-region diagnostics do not explain the asymptotic regime by themselves and cannot turn the original whole-domain L2-order failure into a pass."
+  },
+  "integrity": {
+    "status": "passed",
+    "inputs_sha256": {
+      "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\raw\\mms_p3p2_n2_mesh.npz": "1854d58836f66dff832c64b900ae17f0df8ca68c2e3ed0e41a4e14dd811898c2",
+      "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\raw\\mms_p3p2_n2_state.npz": "dc87240cabbfa3a501be0535222f3374c3e92d0ad30eaae9c88651541b0c5ba5",
+      "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v02_20260919\\raw\\mms_p3p2_n2_audit.json": "d5d3d489b3067e8930105ce04b6866f92ffbdd32e36047821ab671d212a597b8",
+      "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v03_20260919\\raw\\mms_p3p2_n4_mesh.npz": "fc46053ad339199c742bfc69c5af58d6404af9f47430852966f39b3197f1ec7a",
+      "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v03_20260919\\raw\\mms_p3p2_n4_state.npz": "3c0d1c81e2106313a74e19c968a44249904b63014247f289a2998f2f83284737",
+      "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v03_20260919\\raw\\mms_p3p2_n4_audit.json": "29bdc829383a8467836ccb16ad56a53b7aa103b002a8e276f365be9d3c02b638",
+      "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v03_20260919\\raw\\mms_p3p2_n8_mesh.npz": "3d1fc084d5eaf734833ae59d01f10ea43b2017dd5d097160b4bca7d2de153526",
+      "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v03_20260919\\raw\\mms_p3p2_n8_state.npz": "c58da32a8c023ceafdbc59b56c78a8634b424761387404b19c9e11c8dd7a62f8",
+      "E:\\Temp-Projects\\PRL-results\\ventricle_fem\\mixed_cube_representation_v03_20260919\\raw\\mms_p3p2_n8_audit.json": "39b7fa166771e64c680ac193ef4305ab0be3594048691bf8da8e0c238f4d3f2f"
+    },
+    "code_sha256": {
+      "E:\\Temp-Projects\\PRL\\project_control\\evidence\\mixed_cube_representation_milestone_v01\\error_localization.py": "7bd6490bcbdb0bcbfb813c169ee1bfed629247ffc5679dd192fcb68cfc0919a6",
+      "E:\\Temp-Projects\\PRL\\src\\prl\\verification\\mixed_cube.py": "b9af6e72e74f0d8cae90ac6286d41aef08dc2120c8c3a89dfe131f2834da685c",
+      "E:\\Temp-Projects\\PRL\\src\\prl\\verification\\mixed_cube_space.py": "8a230825879c85497b242fe6df83fee1390d59e7d4e7ddaa90915a6e5ab18d47",
+      "E:\\Temp-Projects\\PRL\\src\\prl\\verification\\simplex_lagrange.py": "336c10a315ecb053359555a8384cc0f7f19b8f3f09b64a548c79cc6a5f4ae5bb",
+      "E:\\Temp-Projects\\PRL\\src\\prl\\verification\\ventricle_3d.py": "8229ab2bcca70adcc05dfe4beb984e2442f1aead396d7e035b9ff930f3e5fa78"
+    },
+    "hashes_verified_unchanged_after_analysis": true
+  },
+  "additional_FEM_solves": 0,
+  "GPU_workers": 0,
+  "source_files_written": 0,
+  "result_write_policy": "stdout by default; at most one explicitly requested JSON opened with exclusive creation"
+}

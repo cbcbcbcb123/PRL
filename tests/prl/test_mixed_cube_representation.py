@@ -41,6 +41,22 @@ def test_runtime_requires_separate_explicit_authorization_and_create_only_output
     assert spec['contract'].endswith('representation_authorization_v01.md')
     assert spec['result'] != batch_spec('controls_v01')['result']
     assert configuration()['authorization']=='pending_exact_eight_case_confirmation'
+    milestone=batch_spec('representation_v02')
+    assert milestone['authorization']=='authorization: user_authorized_resolve_representation_milestone_20260919'
+    assert milestone['result']!=spec['result']
+
+
+def test_continuation_only_changes_case_selection_and_not_physics_or_gates():
+    from prl.fem.mixed_cube_representation_spec import continuation_configuration
+    from prl.runs.mixed_cube import batch_spec
+    full=configuration(); continued=continuation_configuration()
+    assert [case['name'] for case in continued['cases']]==['mms_p3p2_n4','mms_p3p2_n8','mms_p3p1_n8']
+    assert continued['full_matrix_cases']==full['cases']
+    assert continued['maximum_equilibrium_solves']==3
+    assert all(case in full['cases'] for case in continued['cases'])
+    excluded={'cases','maximum_equilibrium_solves','scope'}
+    assert all(continued[key]==value for key,value in full.items() if key not in excluded)
+    assert batch_spec('representation_v03')['result']!=batch_spec('representation_v02')['result']
 
 
 @pytest.mark.parametrize('n,expected', [

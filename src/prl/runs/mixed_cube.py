@@ -35,7 +35,15 @@ BATCHES={
     'representation_v01':{'result':Path('results/ventricle_fem/mixed_cube_representation_v01_20260919'),
         'contract':'project_control/ventricle_mixed_cube_representation_authorization_v01.md',
         'authorization':'authorization: user_confirmed_representation_eight_cases_20260919',
-        'container':'prl-mixed-cube-representation-v01-20260919'}}
+        'container':'prl-mixed-cube-representation-v01-20260919'},
+    'representation_v02':{'result':Path('results/ventricle_fem/mixed_cube_representation_v02_20260919'),
+        'contract':'project_control/ventricle_mixed_cube_representation_milestone_v01.md',
+        'authorization':'authorization: user_authorized_resolve_representation_milestone_20260919',
+        'container':'prl-mixed-cube-representation-v02-20260919'},
+    'representation_v03':{'result':Path('results/ventricle_fem/mixed_cube_representation_v03_20260919'),
+        'contract':'project_control/ventricle_mixed_cube_representation_milestone_v01.md',
+        'authorization':'authorization: user_authorized_resolve_representation_milestone_20260919',
+        'container':'prl-mixed-cube-representation-v03-20260919'}}
 V01_MANIFEST='5d3c7d623c4cb80404946a7bd04f1be104296b48ab0f213bb1a5b240c4b575fb'
 PREREQUISITES={
     'results/ventricle_fem/volume_projection_audit_v01_20260918':'78a9542bd69d6373a4e25f4bec421f6ea5441a49e4d5334932811201cd85628b',
@@ -87,6 +95,7 @@ def batch_spec(batch):
 def run(workspace,batch='v01'):
     workspace=Path(workspace).resolve(strict=True)
     selected=batch_spec(batch)
+    representation_batch=batch.startswith('representation_')
     root=result_path(workspace,selected['result'],new=True)
     if selected['authorization'] not in (workspace/selected['contract']).read_text(encoding='utf-8'):
         raise ValueError('Explicit registered batch authorization missing')
@@ -110,7 +119,7 @@ def run(workspace,batch='v01'):
                 raise ValueError('Physical/numerical configuration drift from frozen parent')
     if batch=='v03':
         config=guarded_configuration()
-    if batch in {'controls_v01','representation_v01'}:
+    if batch=='controls_v01' or representation_batch:
         config=control_configuration()
         ancestors=[(RESULT,V01_MANIFEST),
             (BATCHES['v02']['result'],'c59044955f3609509f8b8c61d620384ae800f9e2cebfa469d005cd61a9aaedda'),
@@ -127,7 +136,7 @@ def run(workspace,batch='v01'):
                     raise ValueError('Frozen control prerequisite drift: '+str(path))
                 references[str(path)]=item['sha256']
             references[str(previous/'manifest.json')]=expected
-    if batch=='representation_v01':
+    if representation_batch:
         from prl.fem.mixed_cube_representation_spec import configuration as representation_configuration
         frozen=workspace/'project_control/ventricle_mixed_cube_representation_batch_v01.md'
         if digest(frozen)!='9a13d99182bb003bf0f944d4b2df92cb3530f30cc3bfb17533b074fba4a3fb0d':
@@ -144,25 +153,62 @@ def run(workspace,batch='v01'):
             references[str(path)]=item['sha256']
         references[str(previous/'manifest.json')]=expected
         config=representation_configuration()
-        config['authorization']='user_confirmed_representation_eight_cases_20260919'
+        config['authorization']=selected['authorization'].split(': ',1)[1]
+        if batch!='representation_v01':
+            previous=result_path(workspace,BATCHES['representation_v01']['result'])
+            expected='c2bc233520d23cf6337396e36589b0ab49556c15702124e84f608c06475f66ab'
+            if digest(previous/'manifest.json')!=expected:
+                raise ValueError('Frozen representation failure manifest drift')
+            for item in json.loads((previous/'manifest.json').read_text(encoding='utf-8'))['files']:
+                path=previous/item['path']
+                if digest(path)!=item['sha256']:
+                    raise ValueError('Frozen representation failure drift: '+str(path))
+                references[str(path)]=item['sha256']
+            references[str(previous/'manifest.json')]=expected
+    if batch=='representation_v03':
+        previous=result_path(workspace,BATCHES['representation_v02']['result'])
+        manifest=previous/'execution_manifest.json'
+        expected='843e537ca1a31e19688146ecdfba4957bb4d87868fc7e80778ca6bb6f2bc44aa'
+        if digest(manifest)!=expected:
+            raise ValueError('Frozen v02 execution manifest drift')
+        for item in json.loads(manifest.read_text(encoding='utf-8'))['files']:
+            path=previous/item['path']
+            if digest(path)!=item['sha256']:
+                raise ValueError('Frozen v02 execution evidence drift: '+str(path))
+            references[str(path)]=item['sha256']
+        references[str(manifest)]=expected
+        from prl.fem.mixed_cube_representation_spec import continuation_configuration
+        config=continuation_configuration()
+        config['authorization']=selected['authorization'].split(': ',1)[1]
+        parent=json.loads((previous/'summary.json').read_text(encoding='utf-8'))
+        if set(parent['cases'])!={'patch_cubic_volume_p3p2','mms_p2p1_q8_n8','mms_p3p1_n2','mms_p3p2_n2'}:
+            raise ValueError('Continuation parent completion set drift')
+        failure=json.loads((previous/'failure.json').read_text(encoding='utf-8'))
+        if failure['case']!='mms_p3p1_n4' or parent['attempted_solves']!=5:
+            raise ValueError('Continuation parent failure identity drift')
+        for case in config['cases']:
+            if (previous/'raw'/f"{case['name']}_mesh.npz").exists():
+                raise ValueError('Continuation would repeat an attempted case')
     sources=list(dict.fromkeys([selected['contract'],*SOURCES]))
-    if batch in {'v03','controls_v01','representation_v01'}:
+    if batch in {'v03','controls_v01'} or representation_batch:
         sources+=['src/prl/fem/positive_j.py','tests/prl/test_positive_j.py','src/prl/verification/positive_j.py']
     sources+=['src/prl/verification/mixed_cube_space.py','src/prl/verification/simplex_lagrange.py',
               'src/prl/fem/nodal_export.py']
     if batch=='controls_v01':
         sources.append('tests/prl/test_mixed_cube_controls.py')
-    if batch=='representation_v01':
+    if representation_batch:
         sources+=['project_control/ventricle_mixed_cube_representation_batch_v01.md',
             'src/prl/fem/mixed_cube_representation_spec.py','src/prl/verification/mixed_cube_representation.py',
             'src/prl/verification/saved_segment.py','tests/prl/test_mixed_cube_representation.py',
             'tests/prl/test_nodal_export.py','tests/prl/fixtures/p3_native_orientation_v01.npz',
             'tests/prl/fixtures/p3_native_orientation_v01.json']
+        if batch=='representation_v03':
+            sources.append('project_control/ventricle_mixed_cube_representation_v03_continuation.md')
     for name in sources:
         if name.endswith('.py'):
             ast.parse((workspace/name).read_text(encoding='utf-8'))
-    estimated=512 if batch=='representation_v01' else 128 if batch=='controls_v01' else 256
-    reserve=128 if batch=='representation_v01' else 64
+    estimated=512 if representation_batch else 128 if batch=='controls_v01' else 256
+    reserve=128 if representation_batch else 64
     admission=result_admission(workspace,estimated*1024**2,reserve*1024**2)
     if not admission['can_start']:
         raise RuntimeError('Storage admission blocked')
@@ -187,11 +233,11 @@ def run(workspace,batch='v01'):
         PYTEST_DISABLE_PLUGIN_AUTOLOAD='1',OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1')
     command=[sys.executable,'-B','-X','utf8','-m','pytest','-q','-p','no:cacheprovider',
              'tests/prl/test_mixed_cube.py','tests/prl/test_ventricle_3d.py','tests/prl/test_volume_projection.py']
-    if batch in {'v03','controls_v01','representation_v01'}:
+    if batch in {'v03','controls_v01'} or representation_batch:
         command.append('tests/prl/test_positive_j.py')
     if batch=='controls_v01':
         command.append('tests/prl/test_mixed_cube_controls.py')
-    if batch=='representation_v01':
+    if representation_batch:
         command+=['tests/prl/test_mixed_cube_representation.py','tests/prl/test_mixed_cube_controls.py',
                   'tests/prl/test_saved_segment.py','tests/prl/test_nodal_export.py']
     tests=subprocess.run(command,cwd=workspace,env=environment,capture_output=True,text=True,encoding='utf-8',timeout=60)
