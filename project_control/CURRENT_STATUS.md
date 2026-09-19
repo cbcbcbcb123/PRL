@@ -7,20 +7,20 @@ git_workflow_decision: project_control/main_branch_stage_commit_decision_v01.md
 git_stage_push_decision: project_control/main_branch_stage_push_decision_v01.md
 git_integration_decision: project_control/remote_history_integration_decision_v01.md
 git_integration_execution: project_control/remote_history_integration_execution_v01.md
-git_remote_push: passed
-git_remote_push_record: project_control/evidence/mixed_cube_representation_milestone_v01/publication_readback.json
+git_remote_push: not_run
+git_remote_push_record: project_control/evidence/mixed_cube_refinement_v01/publication_readback.json
 git_published_science_commit: 7688969af1c537b4aa3f4375f55573183efa1cf0
 git_published_review_commit: null
 verified_commit: 7688969af1c537b4aa3f4375f55573183efa1cf0
-current_lifecycle: fem_only_P3_native_fixed_same_load_comparison_complete_L2_order_failed
+current_lifecycle: fem_only_P3P2_k100_fixed_4_8_12_refinement_passed_original_ventricle_failed
 documentation_updated_at: 2026-09-19
 current_repository_cleanup: closure_v01_passed
 current_repository_cleanup_contract: project_control/repository_cleanup_master_contract_v01.md
-current_contract: project_control/ventricle_mixed_cube_representation_milestone_v01.md
-last_completed_contract: project_control/ventricle_mixed_cube_representation_batch_v01.md
-current_render_contract: project_control/ventricle_mixed_cube_representation_milestone_result_v01.md
+current_contract: project_control/ventricle_mixed_cube_refinement_v01.md
+last_completed_contract: project_control/ventricle_mixed_cube_refinement_v01.md
+current_render_contract: project_control/ventricle_mixed_cube_refinement_result_v01.md
 next_stage_contract: null
-current_authorization: same_load_milestone_completed_eight_solves_no_changed_physics_or_gates
+current_authorization: next_L2_refinement_milestone_one_n12_solve_completed_no_changed_physics_or_gates
 development_route: project_control/ventricle_3d_before_growth_decision_v01.md
 default_new_external_stage_budget_mib: null
 project_hard_limit_gib: 3
@@ -34,10 +34,10 @@ runtime_start_authority: consumed_one_recovery_start_api_and_pinned_image_passed
 runtime_repair_scope: project_control/docker_recovery_20260919_v01.md
 runtime_repair_authority: exact_manifest_9f281fab_user_approved_two_moves_one_start_completed
 runtime_repair_execution: project_control/docker_recovery_20260919_v01_execution.md
-current_execution_log: project_control/ventricle_mixed_cube_representation_milestone_result_v01.md
-latest_completed_execution_log: project_control/ventricle_mixed_cube_representation_milestone_result_v01.md
-latest_completed_scientific_gate: P3_patch_and_fine_absolute_errors_passed_full_L2_order_failed
-latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_representation_v03_20260919/delivery_analysis.json
+current_execution_log: project_control/ventricle_mixed_cube_refinement_result_v01.md
+latest_completed_execution_log: project_control/ventricle_mixed_cube_refinement_result_v01.md
+latest_completed_scientific_gate: P3P2_k100_fixed_4_8_12_all_absolute_and_primary_order_gates_passed
+latest_result_package: ../PRL-results/ventricle_fem/mixed_cube_refinement_v01_20260919/delivery_analysis.json
 latest_supervisor_decision: project_control/ventricle_3d_before_growth_decision_v01.md
 current_theory_contract: project_control/ventricle_fem_finite_strain_contract_v01.md
 preserved_ncs_contract: project_control/ncs_m1_all_fem_baseline_plan_v01.md
@@ -57,7 +57,19 @@ executor_thread_id: 019fc73d-393d-71a3-98cb-d3c0cd0c8eda
 
 本页是项目的**当前状态索引**。合同、决定、执行记录和失败记录仍各自保留为不可替代的证据；若旧文档中的“当前状态”与本页冲突，应先核对本页列出的最新决定，而不是改写历史记录。
 
-## 当前：原生P3修复验证通过，同载对照完成，剩余L2收敛阶未过
+## 当前：同载加密补上L2缺阶，κ100固定窗口资格passed
+
+[完整裁决](ventricle_mixed_cube_refinement_result_v01.md)。
+只新增P3/P2 n12一次原MMS求解，复用冻结n4/n8；材料、载荷、边界、Q8及求解设置不变。
+预注册主对8→12的L2/H1/p阶3.65707/2.76388/2.81628，满足原3.5/2.5/2.5门；全部绝对门passed。
+n12 L2/H1/p误差0.108738%/1.952119%/0.052282%，J误差RMS0.007234%。
+1容器1SNES、3次更新、4接受态/3路径独立通过；更密误差积分一致，0自动重试/0GPU。
+607保护文件、50旧改动、38执行源码保持；历史2/4/8失败及原κ1000心室1%门failed不改写。
+本次支持较粗网格尚未达到经验阶次门，不证明普遍四阶、无锁死或生物有效性。
+唯一下一步：同一候选的κ1000近不可压资格，之后再考虑薄层鉴别及原同载心室；本轮未运行后续阶段。
+阶段保存验收后仅正常main同步，不制作额外评审包。
+
+## 历史：原生P3修复验证通过，同载对照完成，剩余L2收敛阶未过
 
 [里程碑完整裁决](ventricle_mixed_cube_representation_milestone_result_v01.md)。
 用户连续授权下2个容器、8次SNES：6终态，P3/P1 n4/n8两例安全停止；0自动重跑、0GPU。

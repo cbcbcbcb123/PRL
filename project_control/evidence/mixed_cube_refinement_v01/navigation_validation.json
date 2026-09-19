@@ -1,0 +1,14 @@
+{
+  "render": {
+    "schema_version": "prl.cockpit.render.v1",
+    "status": "passed",
+    "output": "E:\\Temp-Projects\\PRL\\memory\\project_cockpit\\index.html"
+  },
+  "links": {
+    "schema_version": "prl.cockpit.links.v1",
+    "status": "passed",
+    "html_links": 25,
+    "evidence_paths": 438,
+    "missing": []
+  }
+}

@@ -43,7 +43,11 @@ BATCHES={
     'representation_v03':{'result':Path('results/ventricle_fem/mixed_cube_representation_v03_20260919'),
         'contract':'project_control/ventricle_mixed_cube_representation_milestone_v01.md',
         'authorization':'authorization: user_authorized_resolve_representation_milestone_20260919',
-        'container':'prl-mixed-cube-representation-v03-20260919'}}
+        'container':'prl-mixed-cube-representation-v03-20260919'},
+    'refinement_v01':{'result':Path('results/ventricle_fem/mixed_cube_refinement_v01_20260919'),
+        'contract':'project_control/ventricle_mixed_cube_refinement_v01.md',
+        'authorization':'authorization: user_authorized_next_L2_refinement_milestone_20260919',
+        'container':'prl-mixed-cube-refinement-v01-20260919'}}
 V01_MANIFEST='5d3c7d623c4cb80404946a7bd04f1be104296b48ab0f213bb1a5b240c4b575fb'
 PREREQUISITES={
     'results/ventricle_fem/volume_projection_audit_v01_20260918':'78a9542bd69d6373a4e25f4bec421f6ea5441a49e4d5334932811201cd85628b',
@@ -96,6 +100,7 @@ def run(workspace,batch='v01'):
     workspace=Path(workspace).resolve(strict=True)
     selected=batch_spec(batch)
     representation_batch=batch.startswith('representation_')
+    refinement_batch=batch=='refinement_v01'
     root=result_path(workspace,selected['result'],new=True)
     if selected['authorization'] not in (workspace/selected['contract']).read_text(encoding='utf-8'):
         raise ValueError('Explicit registered batch authorization missing')
@@ -189,14 +194,44 @@ def run(workspace,batch='v01'):
         for case in config['cases']:
             if (previous/'raw'/f"{case['name']}_mesh.npz").exists():
                 raise ValueError('Continuation would repeat an attempted case')
+    if refinement_batch:
+        from prl.fem.mixed_cube_refinement_spec import configuration as refinement_configuration
+        config=refinement_configuration()
+        config['authorization']=selected['authorization'].split(': ',1)[1]
+        for version,expected in [('representation_v02','152416a7709b0f485b97e94a53ff4598f4b00b4d66339b7f84bdd9c41abb2a5f'),
+                                 ('representation_v03','61550554e2534bcfaadfe8ac9ec3e3218e33275a5a81d5ab110758b53c28de28')]:
+            previous=result_path(workspace,BATCHES[version]['result'])
+            if digest(previous/'manifest.json')!=expected:
+                raise ValueError('Frozen refinement prerequisite manifest drift')
+            for item in json.loads((previous/'manifest.json').read_text(encoding='utf-8'))['files']:
+                path=previous/item['path']
+                if digest(path)!=item['sha256']:
+                    raise ValueError('Frozen refinement prerequisite data drift: '+str(path))
+                references[str(path)]=item['sha256']
+            references[str(previous/'manifest.json')]=expected
+        previous=result_path(workspace,BATCHES['representation_v03']['result'])
+        frozen_config=json.loads((previous/'configuration.json').read_text(encoding='utf-8'))
+        for key in ('mu','solver','quadrature_degree','trial_guard','resources',
+                    'patch_gates','mms_gates','candidate_orders'):
+            if config[key]!=frozen_config[key]:
+                raise ValueError('Refinement physical/numerical setting drift: '+key)
+        if len(config['cases'])!=1 or config['maximum_equilibrium_solves']!=1:
+            raise ValueError('Only one new refinement solve is registered')
+        config['reference_reports']={f'mms_p3p2_n{n}':json.loads(
+            (previous/'raw'/f'mms_p3p2_n{n}_audit.json').read_text(encoding='utf-8')) for n in (4,8)}
+        config['reference_source_root']=str(previous)
+        frozen=workspace/'project_control/ventricle_mixed_cube_representation_batch_v01.md'
+        if digest(frozen)!='9a13d99182bb003bf0f944d4b2df92cb3530f30cc3bfb17533b074fba4a3fb0d':
+            raise ValueError('Original contract drift')
+        references[str(frozen)]=digest(frozen)
     sources=list(dict.fromkeys([selected['contract'],*SOURCES]))
-    if batch in {'v03','controls_v01'} or representation_batch:
+    if batch in {'v03','controls_v01'} or representation_batch or refinement_batch:
         sources+=['src/prl/fem/positive_j.py','tests/prl/test_positive_j.py','src/prl/verification/positive_j.py']
     sources+=['src/prl/verification/mixed_cube_space.py','src/prl/verification/simplex_lagrange.py',
               'src/prl/fem/nodal_export.py']
     if batch=='controls_v01':
         sources.append('tests/prl/test_mixed_cube_controls.py')
-    if representation_batch:
+    if representation_batch or refinement_batch:
         sources+=['project_control/ventricle_mixed_cube_representation_batch_v01.md',
             'src/prl/fem/mixed_cube_representation_spec.py','src/prl/verification/mixed_cube_representation.py',
             'src/prl/verification/saved_segment.py','tests/prl/test_mixed_cube_representation.py',
@@ -204,11 +239,14 @@ def run(workspace,batch='v01'):
             'tests/prl/fixtures/p3_native_orientation_v01.json']
         if batch=='representation_v03':
             sources.append('project_control/ventricle_mixed_cube_representation_v03_continuation.md')
+    if refinement_batch:
+        sources+=['src/prl/fem/mixed_cube_refinement_spec.py','src/prl/verification/mixed_cube_refinement.py',
+                  'tests/prl/test_mixed_cube_refinement.py']
     for name in sources:
         if name.endswith('.py'):
             ast.parse((workspace/name).read_text(encoding='utf-8'))
-    estimated=512 if representation_batch else 128 if batch=='controls_v01' else 256
-    reserve=128 if representation_batch else 64
+    estimated=512 if representation_batch or refinement_batch else 128 if batch=='controls_v01' else 256
+    reserve=128 if representation_batch or refinement_batch else 64
     admission=result_admission(workspace,estimated*1024**2,reserve*1024**2)
     if not admission['can_start']:
         raise RuntimeError('Storage admission blocked')
@@ -221,7 +259,7 @@ def run(workspace,batch='v01'):
     save_json(root/'configuration.json',config); save_json(root/'docker_preflight.json',version)
     save_json(root/'storage_preflight.json',admission)
     save_json(root/'protected_inputs.json',{'files':references,'preexisting_dirty_files':dirty_count})
-    for n in [2,4,8]:
+    for n in sorted({case['n'] for case in config['cases']}):
         np.savez_compressed(root/'input'/f'n{n}.npz',**cube(n))
     hashes={}
     for name in sources:
@@ -233,13 +271,15 @@ def run(workspace,batch='v01'):
         PYTEST_DISABLE_PLUGIN_AUTOLOAD='1',OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1')
     command=[sys.executable,'-B','-X','utf8','-m','pytest','-q','-p','no:cacheprovider',
              'tests/prl/test_mixed_cube.py','tests/prl/test_ventricle_3d.py','tests/prl/test_volume_projection.py']
-    if batch in {'v03','controls_v01'} or representation_batch:
+    if batch in {'v03','controls_v01'} or representation_batch or refinement_batch:
         command.append('tests/prl/test_positive_j.py')
     if batch=='controls_v01':
         command.append('tests/prl/test_mixed_cube_controls.py')
-    if representation_batch:
+    if representation_batch or refinement_batch:
         command+=['tests/prl/test_mixed_cube_representation.py','tests/prl/test_mixed_cube_controls.py',
                   'tests/prl/test_saved_segment.py','tests/prl/test_nodal_export.py']
+    if refinement_batch:
+        command.append('tests/prl/test_mixed_cube_refinement.py')
     tests=subprocess.run(command,cwd=workspace,env=environment,capture_output=True,text=True,encoding='utf-8',timeout=60)
     save_json(root/'tests.json',{'command':command,'stdout':tests.stdout,'stderr':tests.stderr,'exit_code':tests.returncode})
     if tests.returncode:

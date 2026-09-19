@@ -43,8 +43,8 @@ def control_configuration():
 
 def cube(n):
     """Six Freudenthal tetrahedra per voxel, identical unit-cube boundary for all n."""
-    if n not in [2, 4, 8]:
-        raise ValueError('Only the three frozen mesh levels are authorized')
+    if n not in [2, 4, 8, 12]:
+        raise ValueError('Only registered mesh levels are implemented; runtime authority is separate')
     xyz = np.array([[i,j,k] for i in range(n+1) for j in range(n+1) for k in range(n+1)], float)/n
     def node(index):
         i,j,k = index

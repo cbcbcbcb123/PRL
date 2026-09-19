@@ -2,14 +2,14 @@
   "schema_version": "scientific_project_cockpit.v1",
   "updated_at": "2026-09-19",
   "overall_status": "failed",
-  "summary": "P3原生接口修好，八工况完成尝试：6终态、2个P3/P1安全停止。P3/P2 n8四项绝对误差门通过，完整资格因L2阶3.37274<3.5仍failed。",
+  "summary": "P3/P2 κ100固定n4/8/12加密资格passed：n12绝对误差及主区间8→12三项阶次均通过。独立状态/路径、图件和173项工程回归通过；旧4→8及原心室failed保持。",
   "project": {
     "name": "PRL｜斑马鱼心室 FEM",
     "goal": "以FEM研究斑马鱼心室发育与心动/双向流固耦合，分离基础生长、力学反馈和ECM重塑。先理想化三维及公开资料，后续自有实验替换。",
-    "scope": "FEM唯一主线；同载离散比较完成，P3/P2完整收敛资格failed，原心室仍failed。",
-    "current_stage": "P3 native interface passed; same-load comparison completed; L2 convergence-order gate failed",
-    "current_location": "../PRL-results/ventricle_fem/mixed_cube_representation_v03_20260919",
-    "evidence_basis_commit": "7688969af1c537b4aa3f4375f55573183efa1cf0",
+    "scope": "FEM唯一主线；P3/P2 κ100固定加密资格passed，旧粗网格资格及原心室failed不改写。",
+    "current_stage": "P3/P2 kappa100 fixed n4/8/12 refinement passed; original ventricle remains failed",
+    "current_location": "../PRL-results/ventricle_fem/mixed_cube_refinement_v01_20260919",
+    "evidence_basis_commit": "d49697eb495de7721150318fff287f9dffd46b78",
     "evidence_checked_at": "2026-09-19",
     "git_workflow": {
       "branch": "main",
@@ -27,7 +27,7 @@
         "project_control/main_branch_stage_push_decision_v01.md",
         "project_control/evidence/stage_main_sync_v01/publication_readback.json"
       ],
-      "current_stage_push": "passed",
+      "current_stage_push": "not_run",
       "stage_push_policy": "standing_user_authorization_2026_09_19",
       "published_science_commit": "7688969af1c537b4aa3f4375f55573183efa1cf0",
       "published_review_commit": null,
@@ -36,37 +36,38 @@
       "default_review_package": false,
       "sync_scope_decision": "project_control/main_branch_sync_without_review_package_decision_v01.md"
     },
-    "freshness_note": "本轮2容器8求解，无自动重跑；原生P3及patch通过。失败保全与完整读回分开裁决，不改原门。",
+    "freshness_note": "新加密资格、图件和保全已完成；当前为提交前d49697e上的工作区，待普通main推送。上方旧发布回读不代表本阶段已同步。",
     "model_overview": {
-      "model_type": "FEniCSx三维有限变形NH；当前验证同载混合位移/压力离散",
+      "model_type": "FEniCSx三维有限变形NH；P3位移/P2压力，κ100同载加密资格",
       "simulated_object": "单位立方体，不是心室；X=0解析位移，另五面解析牵引及体力",
-      "theory": "P3/P2可表示patch、P2/P1 Q8积分控制、同MMS P3/P1与P3/P2 n2/4/8；生产积分8阶。",
-      "current_question": "P3/P2最细绝对误差过门，但L2末两级收敛阶3.37274未到3.5。",
+      "theory": "复用已冻结n4/n8，仅新增n12；原MMS、μ1/κ100、边界及生产Q8不变。主判据预先固定8→12，按实际网格比1.5计算阶次。",
+      "current_question": "剩余L2阶缺口已在固定8→12区间通过；下一步补同候选κ1000资格，尚不能替代原心室。",
       "pipeline": [
-        "原生P3映射/装配/切线及非零patch通过。",
-        "八例均尝试：6终态，P3/P1 n4/n8正J方向保护停止。",
-        "P3/P2最细L2/H1误差0.4790%/5.9869%，压力L2 0.1638%，J误差RMS 0.02208%。",
-        "完整候选资格failed；原心室κ1000未重算，主动/生长/FSI not_run。"
+        "资源准入前固定n4/8/12；n16预估超8GiB，未启动，不事后择优区间。",
+        "n12位移L2/H1误差0.108738%/1.952119%，压力L2 0.052282%，J误差RMS 0.007234%。",
+        "主区间u L2/H1/p阶3.6570675/2.7638826/2.8162828通过原3.5/2.5/2.5门。",
+        "κ100固定加密资格passed；旧4→8及原心室failed，主动/生长/FSI not_run。"
       ],
-      "diagram": "project_control/evidence/mixed_cube_representation_milestone_v01/diagnostic.png",
-      "diagram_caption": "真实初始结构、误差—自由度及实际初/中/末Newton状态；不是生理时间，形变显示×30，颜色未放大。",
+      "diagram": "project_control/evidence/mixed_cube_refinement_v01/diagnostic.png",
+      "diagram_status": "passed",
+      "diagram_caption": "真实n12结构、固定加密误差、主阶次与Newton 0/2/3态；算法迭代不是生理时间。图件已执行、目检及冻结。",
       "assumptions": [
         "标准立方体制造解仅用于数值资格，不是生物标定。",
-        "同载同网格但不是等DOF效率比较。",
-        "P3/P1 n4/n8无合格终态，完整三网格压力归因unknown。",
+        "通过只适用于原MMS的κ100固定n4/8/12窗口；不追溯改判旧4→8。",
+        "下一κ1000制造压力、体力与牵引须兼容变化，不称固定载荷锁死试验。",
         "有限采样正J不证明全域单射；原心室1%门不变。"
       ],
       "methods": [
-        "2个现有容器合计469.50秒，8次SNES、0重跑、0GPU。",
-        "候选u L2/H1/p末阶3.37274/2.52098/2.70407，首项failed。",
-        "保存全部接受态和拒绝方向，独立路径及6/8点积分复核。",
-        "160dpi探索图与可执行Notebook保留，非投稿终稿。"
+        "1容器/1次SNES，执行329.8416214秒、求解234.1545秒，0重跑/0GPU。",
+        "3次Newton更新、4个保存态、3条路径及6/8点独立积分复核通过。",
+        "Linux进程累计峰值RSS约5.18677GiB，不是隔离单例峰值。",
+        "607保护文件、50项既有改动和38份执行源码保全通过；图件及173工程回归通过。"
       ],
-      "scope_boundary": "原生接口/绝对误差passed不等于完整收敛资格或心室通过。",
+      "scope_boundary": "本次κ100加密资格passed不等于κ1000、心室或生物验证；旧失败原样保留。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_representation_milestone_result_v01.md",
-        "project_control/evidence/mixed_cube_representation_milestone_v01/guard_failure_diagnosis.json",
-        "project_control/evidence/mixed_cube_representation_milestone_v01/guard_failure_diagnosis_v03.json"
+        "project_control/ventricle_mixed_cube_refinement_result_v01.md",
+        "project_control/result_index/mixed_cube_refinement_v01_20260919.json",
+        "../PRL-results/ventricle_fem/mixed_cube_refinement_v01_20260919/delivery_analysis.json"
       ]
     }
   },
@@ -94,21 +95,21 @@
   ],
   "active_work": [
     {
-      "title": "同载离散问题里程碑",
-      "status": "failed",
-      "summary": "接口修复、八例尝试和证据收口完成；候选完整科学资格仍缺L2阶次。",
+      "title": "κ100固定加密资格里程碑",
+      "status": "passed",
+      "summary": "n4/8/12固定窗口过原绝对误差和阶次门，独立状态/路径及图件冻结完成；不追认旧失败。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_representation_milestone_result_v01.md"
+        "project_control/ventricle_mixed_cube_refinement_result_v01.md"
       ]
     }
   ],
   "blockers": [
     {
-      "title": "P3/P2位移L2阶次未过原门",
-      "status": "failed",
-      "summary": "绝对误差全过；末两级L2阶3.37274<3.5，不事后降低阈值。",
+      "title": "P3/P2的κ1000资格尚未运行",
+      "status": "not_run",
+      "summary": "本次仅κ100；下一步先补高κ同候选制造解资格，尚无心室应用通过证据。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_representation_milestone_result_v01.md"
+        "project_control/ventricle_mixed_cube_refinement_result_v01.md"
       ]
     },
     {
@@ -122,14 +123,25 @@
   ],
   "results": [
     {
-      "title": "P3/P2精度改善，完整资格仍failed",
+      "title": "P3/P2 κ100固定n4/8/12资格passed",
+      "status": "passed",
+      "summary": "n12 H1误差1.952119%，J误差RMS 0.007234%；主区间L2阶3.6570675通过3.5门。图件最终验收待完成。",
+      "image": "project_control/evidence/mixed_cube_refinement_v01/diagnostic.png",
+      "evidence_refs": [
+        "project_control/ventricle_mixed_cube_refinement_result_v01.md",
+        "project_control/result_index/mixed_cube_refinement_v01_20260919.json"
+      ],
+      "result_group": "current"
+    },
+    {
+      "title": "旧P3/P2 n2/4/8资格failed保留",
       "status": "failed",
       "summary": "最细H1 5.9869%，J误差RMS 0.02208%；P3/P1两细网格保护停止，全部失败保留。",
       "image": "project_control/evidence/mixed_cube_representation_milestone_v01/diagnostic.png",
       "evidence_refs": [
         "project_control/ventricle_mixed_cube_representation_milestone_result_v01.md"
       ],
-      "result_group": "current"
+      "result_group": "historical"
     },
     {
       "title": "四控制门通过，n8位移H1误差1.4294%",
@@ -146,19 +158,19 @@
   ],
   "next_actions": [
     {
-      "title": "解决剩余L2收敛阶缺口",
+      "title": "补P3/P2 κ1000制造解资格",
       "status": "not_run",
-      "summary": "结合保存态空间误差分析，登记必要的渐近加密及资源方案；不改门、材料或直接运行心室。",
+      "summary": "登记同候选高κ资格矩阵及资源门；制造载荷随κ兼容变化，不称固定载荷锁死验证，尚不进入心室/主动/生长/FSI。",
       "evidence_refs": [
-        "project_control/ventricle_mixed_cube_representation_milestone_result_v01.md"
+        "project_control/ventricle_mixed_cube_refinement_result_v01.md"
       ]
     }
   ],
   "evidence_boundaries": [
-    "P3原生接口及patch通过；候选完整收敛资格failed。",
-    "八例均已尝试，六终态；失败不是not_run或通过。",
-    "P3/P1 n4/n8不能参与合格三网格压力归因。",
+    "本次κ100固定n4/8/12资格passed；旧4→8 L2及原心室failed不变。",
+    "唯一新工况n12，1次求解；未启动超资源预估的n16。",
+    "κ1000、心室、主动、生长和FSI未由本次放行；完整压力归因仍unknown。",
     "原失败和执行源码快照不覆盖，50项无关改动保持。",
-    "完整数据在批准结果库；仅正常main同步，无额外评审包。"
+    "图件终验和本阶段远端同步待完成；完整数据留批准结果库，不另建评审包。"
   ]
 }

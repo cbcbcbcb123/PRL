@@ -335,6 +335,9 @@ def verify(root):
 
 
 def convergence(cases,config):
+    if config['schema']=='prl.mixed_cube_refinement.v1':
+        from .mixed_cube_refinement import convergence as refinement_convergence
+        return refinement_convergence(cases,config,config.get('reference_reports'))
     if config['schema']=='prl.mixed_cube_representation_proposal.v1':
         from .mixed_cube_representation import convergence as representation_convergence
         return representation_convergence(cases,config)
